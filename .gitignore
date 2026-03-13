@@ -1,0 +1,8 @@
+node_modules/
+.next/
+.env
+.env.local
+*.log
+
+# Exclude large video files from git (will use CDN)
+public/videos/

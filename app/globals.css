@@ -1,0 +1,154 @@
+@import "tailwindcss";
+
+/*
+ * DDip AI — Design Tokens (from Figma inspection)
+ * Source: design/design-tokens.md
+ *
+ * Tailwind v4 uses CSS-based configuration via @theme
+ */
+
+@theme {
+  /* ─── Font Families ─── */
+  --font-heading: "Bricolage Grotesque", sans-serif;
+  --font-body: -apple-system, BlinkMacSystemFont, "SF Pro Display", system-ui,
+    "Segoe UI", sans-serif;
+
+  /* ─── Font Sizes (from Figma) ─── */
+  --font-size-hero: 184.32px;
+  --font-size-hero--line-height: 1.2;
+  --font-size-statement: 146px;
+  --font-size-statement--line-height: 1.05;
+  --font-size-section: 80px;
+  --font-size-section--line-height: 0.99;
+  --font-size-subsection: 42px;
+  --font-size-subsection--line-height: 1.2;
+  --font-size-body-lg: 34px;
+  --font-size-body-lg--line-height: 1.2;
+  --font-size-cta: 32px;
+  --font-size-cta--line-height: 1.2;
+  --font-size-body-md: 26px;
+  --font-size-body-md--line-height: 1.2;
+  --font-size-body-sm: 18px;
+  --font-size-body-sm--line-height: 1.5;
+  --font-size-small: 14px;
+  --font-size-small--line-height: 1.5;
+
+  /* ─── Teal/Cyan Color Scale ─── */
+  --color-teal-50: #e8fffe;
+  --color-teal-100: #ccfff9;
+  --color-teal-200: #99ffef;
+  --color-teal-300: #66ffe6;
+  --color-teal-400: #33ffe0;
+  --color-teal-500: #00ffd9;
+  --color-teal-600: #00d4b5;
+  --color-teal-700: #00aa90;
+  --color-teal-800: #007a6b;
+  --color-teal-900: #005044;
+  --color-teal-950: #063746;
+  --color-teal-960: #0a1e30;
+
+  /* ─── Semantic Colors ─── */
+  --color-dark-bg: #0a0e1a;
+  --color-dark-surface: #141824;
+  --color-light-bg: #f6f9f2;
+  --color-light-text: #063746;
+  --color-light-body: #4d5347;
+  --color-border-light: #c3c3c3;
+  --color-border-dark: rgba(255, 255, 255, 0.1);
+  --color-whatsapp: #25d366;
+
+  /* ─── Spacing (custom large values) ─── */
+  --spacing-18: 4.5rem;
+  --spacing-22: 5.5rem;
+  --spacing-26: 6.5rem;
+  --spacing-30: 7.5rem;
+
+  /* ─── Max Widths ─── */
+  --container-max: 1608px;
+
+  /* ─── Border Radius ─── */
+  --radius-card: 14px;
+  --radius-button: 8px;
+  --radius-input: 8px;
+  --radius-pill: 9999px;
+
+  /* ─── Transitions ─── */
+  --transition-fast: 150ms ease;
+  --transition-normal: 250ms ease;
+  --transition-slow: 400ms ease;
+}
+
+/* ─── Base Styles ─── */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--color-light-text);
+  background-color: var(--color-light-bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ─── Heading defaults ─── */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+}
+
+/* ─── Selection ─── */
+::selection {
+  background-color: var(--color-teal-500);
+  color: var(--color-dark-bg);
+}
+
+/* ─── Focus ring for accessibility ─── */
+:focus-visible {
+  outline: 2px solid var(--color-teal-500);
+  outline-offset: 2px;
+}
+
+/* ─── Scrollbar styling ─── */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-dark-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-teal-950);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-teal-900);
+}
+
+/* ─── Dark section utility ─── */
+.dark-section {
+  background-color: var(--color-dark-bg);
+  color: #ffffff;
+}
+
+.dark-section p,
+.dark-section span {
+  color: #b0b0b0;
+}
+
+/* ─── Light section utility ─── */
+.light-section {
+  background-color: var(--color-light-bg);
+  color: var(--color-light-text);
+}
+
+.light-section p,
+.light-section span {
+  color: var(--color-light-body);
+}
