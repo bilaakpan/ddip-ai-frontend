@@ -335,7 +335,7 @@ export default function LetsConnectPage() {
             {/* DDiP - ISTANBUL */}
             <div>
               <h3 className="font-heading text-sm font-semibold uppercase tracking-wider text-light-text">
-                DDiP - PARIS
+                DDiP - ISTANBUL
               </h3>
               <p className="mt-3 text-sm leading-[1.6] text-light-body">
                 Gayrettepe Mah. Ayazma Deresi Sk.
