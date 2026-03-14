@@ -127,8 +127,8 @@ const faqLeft = [
 const faqRight = [
   "How do you ensure the human element remains part of your AI-driven work?",
   "Can non-creative or technical companies benefit from your workflow solutions?",
-  "Can non-creative or technical companies benefit from your workflow solutions?",
   "How does DDIP stay up to date with evolving AI technologies?",
+  "What industries do you serve?",
 ];
 
 const partners = [
