@@ -132,11 +132,11 @@ const faqRight = [
 ];
 
 const partners = [
-  { name: "AWS", image: "/images/partners/partners-row.jpg" },
-  { name: "Google Cloud", image: "/images/partners/partners-row.jpg" },
-  { name: "Google Partner", image: "/images/partners/partners-row.jpg" },
-  { name: "Microsoft", image: "/images/partners/partners-row.jpg" },
-  { name: "Salesforce", image: "/images/partners/partners-row.jpg" },
+  { name: "AWS", image: "/images/partners/aws.png" },
+  { name: "Google Cloud", image: "/images/partners/google.png" },
+  { name: "Google Partner", image: "/images/partners/google.png" },
+  { name: "Microsoft", image: null },
+  { name: "Salesforce", image: null },
 ];
 
 /**
@@ -913,11 +913,17 @@ export default function HomePage() {
                 key={partner.name}
                 className="flex h-[240px] items-center justify-center border border-[#C3C3C3]"
               >
-                <img
-                  src={partner.image}
-                  alt={partner.name}
-                  className="max-h-[175px] max-w-[204px] object-contain opacity-60 grayscale transition-all hover:opacity-100 hover:grayscale-0"
-                />
+                {partner.image ? (
+                  <img
+                    src={partner.image}
+                    alt={partner.name}
+                    className="max-h-[175px] max-w-[204px] object-contain opacity-60 grayscale transition-all hover:opacity-100 hover:grayscale-0"
+                  />
+                ) : (
+                  <span className="font-heading text-2xl font-semibold tracking-wide text-[#063746]/40 transition-colors hover:text-[#063746]">
+                    {partner.name}
+                  </span>
+                )}
               </div>
             ))}
           </div>
