@@ -151,8 +151,13 @@ export default function InsightDetailPage() {
       {article.imageUrl && (
         <section className="bg-dark-bg pb-16">
           <Container>
-            <div className="aspect-[21/9] w-full overflow-hidden rounded-[var(--radius-card)]">
-              <img src={article.imageUrl} alt={article.title} className="h-full w-full object-cover" />
+            <div className="aspect-[21/9] w-full overflow-hidden rounded-[var(--radius-card)] bg-gradient-to-br from-[#002834] to-[#063746]">
+              <img
+                src={article.imageUrl}
+                alt={article.title}
+                className="h-full w-full object-cover"
+                onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }}
+              />
             </div>
           </Container>
         </section>
