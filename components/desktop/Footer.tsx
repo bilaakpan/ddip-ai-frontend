@@ -27,17 +27,17 @@ const aiSolutionLinks = [
  */
 export function Footer() {
   return (
-    <footer className="bg-[#002834]" style={{ padding: "45px 60px" }}>
+    <footer className="bg-[#002834] px-5 py-8 md:px-[60px] md:py-[45px]">
       <div className="mx-auto max-w-[1608px]">
         {/* ─── Top: CTA + Logo ─── */}
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col items-start gap-8 md:flex-row md:items-center md:justify-between">
           {/* Left: CTA text + buttons */}
           <div>
-            <p className="font-heading text-[40px] font-medium leading-[1.2] text-white">
+            <p className="font-heading text-[24px] font-medium leading-[1.2] text-white md:text-[40px]">
               Got a project?
             </p>
             <h2
-              className="mt-[31px] text-[100px] font-bold uppercase leading-[0.92]"
+              className="mt-4 text-[48px] font-bold uppercase leading-[0.92] md:mt-[31px] md:text-[100px]"
               style={{
                 fontFamily: "var(--font-body)",
                 background: "linear-gradient(196deg, #FFFFFF 0%, #77F3FF 100%)",
@@ -50,7 +50,7 @@ export function Footer() {
             </h2>
 
             {/* Buttons */}
-            <div className="mt-[53px] flex items-center gap-[22px]">
+            <div className="mt-6 flex flex-wrap items-center gap-3 md:mt-[53px] md:gap-[22px]">
               <Link
                 href="/start-project"
                 className="inline-flex h-[54px] items-center justify-center rounded-full bg-[#1CE3F4] px-[22px] transition-opacity hover:opacity-90"
@@ -79,34 +79,34 @@ export function Footer() {
           </div>
 
           {/* Right: ddip.AI logo — large SVG-style text */}
-          <div className="text-right">
-            <span className="text-[120px] font-bold leading-none text-[#90E5F3]" style={{ fontFamily: "var(--font-body)" }}>
+          <div className="text-left md:text-right">
+            <span className="text-[60px] font-bold leading-none text-[#90E5F3] md:text-[120px]" style={{ fontFamily: "var(--font-body)" }}>
               ddip
             </span>
-            <span className="text-[60px] font-bold leading-none text-[#90E5F3]" style={{ fontFamily: "var(--font-body)" }}>
+            <span className="text-[30px] font-bold leading-none text-[#90E5F3] md:text-[60px]" style={{ fontFamily: "var(--font-body)" }}>
               .AI
             </span>
           </div>
         </div>
 
         {/* ─── Divider ─── */}
-        <div className="mt-[97px] h-px bg-[#186279]" />
+        <div className="mt-12 h-px bg-[#186279] md:mt-[97px]" />
 
         {/* ─── Middle: Navigation columns + social/video ─── */}
-        <div className="mt-[90px] flex justify-between">
+        <div className="mt-10 flex flex-col gap-10 md:mt-[90px] md:flex-row md:justify-between">
           {/* Left: two link columns */}
-          <div className="flex gap-[200px]">
+          <div className="flex flex-col gap-10 sm:flex-row sm:gap-16 md:gap-[200px]">
             {/* Company */}
             <div>
-              <h4 className="font-heading text-[40px] font-medium leading-[1.2] text-white">
+              <h4 className="font-heading text-[24px] font-medium leading-[1.2] text-white md:text-[40px]">
                 Company
               </h4>
-              <ul className="mt-[70px] space-y-0">
+              <ul className="mt-4 space-y-0 md:mt-[70px]">
                 {companyLinks.map((link) => (
                   <li key={link.label}>
                     <Link
                       href={link.href}
-                      className="block text-[28px] leading-[45.9px] text-[#6AADBE] transition-colors hover:text-white"
+                      className="block text-[16px] leading-[32px] text-[#6AADBE] transition-colors hover:text-white md:text-[28px] md:leading-[45.9px]"
                       style={{ fontFamily: "var(--font-body)" }}
                     >
                       {link.label}
@@ -118,15 +118,15 @@ export function Footer() {
 
             {/* AI Solutions */}
             <div>
-              <h4 className="font-heading text-[40px] font-medium leading-[1.2] text-white">
+              <h4 className="font-heading text-[24px] font-medium leading-[1.2] text-white md:text-[40px]">
                 AI Solutions
               </h4>
-              <ul className="mt-[70px] space-y-0">
+              <ul className="mt-4 space-y-0 md:mt-[70px]">
                 {aiSolutionLinks.map((link) => (
                   <li key={link.label}>
                     <Link
                       href={link.href}
-                      className="block text-[28px] leading-[45.9px] text-[#6AADBE] transition-colors hover:text-white"
+                      className="block text-[16px] leading-[32px] text-[#6AADBE] transition-colors hover:text-white md:text-[28px] md:leading-[45.9px]"
                       style={{ fontFamily: "var(--font-body)" }}
                     >
                       {link.label}
@@ -138,7 +138,7 @@ export function Footer() {
           </div>
 
           {/* Right: Social icons + video thumbnail */}
-          <div className="flex flex-col items-end">
+          <div className="flex flex-col items-start md:items-end">
             {/* Social icons row */}
             <div className="flex items-center gap-[48px]">
               {/* Instagram */}
@@ -164,7 +164,7 @@ export function Footer() {
             </div>
 
             {/* Video thumbnail */}
-            <div className="mt-[70px] h-[304px] w-[612px] overflow-hidden rounded-none bg-[#D9D9D9]">
+            <div className="mt-8 h-[180px] w-full overflow-hidden rounded-none bg-[#D9D9D9] md:mt-[70px] md:h-[304px] md:w-[612px]">
               <video
                 autoPlay
                 muted
@@ -179,7 +179,7 @@ export function Footer() {
         </div>
 
         {/* ─── Bottom bar ─── */}
-        <div className="mt-[70px] flex items-end justify-between">
+        <div className="mt-8 flex flex-col gap-4 md:mt-[70px] md:flex-row md:items-end md:justify-between">
           <p
             className="text-[20px] leading-[1.2] text-white"
             style={{ fontFamily: "var(--font-body)" }}
@@ -188,7 +188,7 @@ export function Footer() {
           </p>
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            className="text-[40px] leading-[1.2] text-white transition-colors hover:text-[#1CE3F4]"
+            className="text-[24px] leading-[1.2] text-white transition-colors hover:text-[#1CE3F4] md:text-[40px]"
             style={{ fontFamily: "var(--font-body)" }}
           >
             Back to top ↑

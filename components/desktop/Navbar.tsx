@@ -115,7 +115,7 @@ export function Navbar() {
         </button>
 
         {/* Center Nav Links — hidden on mobile */}
-        <div className="flex items-center gap-[20px] max-md:hidden xl:gap-[40px]">
+        <div className="flex items-center gap-[20px] max-md:hidden xl:gap-[40px] shrink-0">
           {navLinks.map((link) => (
             <div
               key={link.label}
@@ -209,7 +209,7 @@ export function Navbar() {
         </div>
 
         {/* CTA Buttons — hidden on mobile */}
-        <div className="flex items-center gap-[20px] max-md:hidden xl:gap-[40px]">
+        <div className="flex items-center gap-[20px] max-md:hidden xl:gap-[40px] shrink-0">
           <Link
             href="/start-project"
             className="whitespace-nowrap font-body text-[16px] font-medium leading-[1.2] text-white transition-colors hover:text-teal-500 xl:text-[18px]"

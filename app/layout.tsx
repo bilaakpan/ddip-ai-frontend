@@ -25,6 +25,10 @@ export const metadata: Metadata = {
     "creative production",
     "DDip AI",
   ],
+  icons: {
+    icon: "/favicon.png",
+    apple: "/apple-icon.png",
+  },
 };
 
 export default function RootLayout({
