@@ -85,7 +85,7 @@ export default function LetsConnectPage() {
       {/* ════════════════════════════════════════════════════════
           HERO — Dark bg with marquee-style heading
           ════════════════════════════════════════════════════════ */}
-      <section className="overflow-hidden bg-dark-bg pt-20 pb-12">
+      <section className="overflow-hidden bg-dark-bg pt-[140px] pb-12">
         <Container>
           {/* Marquee heading */}
           <div className="overflow-hidden">

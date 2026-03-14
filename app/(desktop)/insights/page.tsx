@@ -51,7 +51,7 @@ export default function InsightsPage() {
       {/* ════════════════════════════════════════════════════════
           HERO — Dark bg with marquee-style heading
           ════════════════════════════════════════════════════════ */}
-      <section className="overflow-hidden bg-dark-bg pt-20 pb-12">
+      <section className="overflow-hidden bg-dark-bg pt-[140px] pb-12">
         <Container>
           <div className="overflow-hidden">
             <h1 className="whitespace-nowrap font-heading text-[clamp(36px,8vw,140px)] font-medium uppercase leading-[1.05] text-white max-md:whitespace-normal">
