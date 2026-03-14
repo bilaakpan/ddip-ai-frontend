@@ -73,12 +73,12 @@ export function Navbar() {
     <>
     <nav
       className={cn(
-        "fixed inset-x-0 top-[30px] z-50 mx-auto w-[calc(100%-238px)] max-w-[1490px] rounded-[58px] bg-[#545454]/80 shadow-[0px_4px_11.5px_rgba(0,0,0,0.1)] backdrop-blur-xl transition-all duration-300 max-md:top-0 max-md:w-full max-md:max-w-none max-md:rounded-none max-md:bg-[#002834]/95",
+        "fixed inset-x-0 top-[30px] z-50 mx-auto w-[calc(100%-40px)] max-w-[1490px] rounded-[58px] bg-[#545454]/80 shadow-[0px_4px_11.5px_rgba(0,0,0,0.1)] backdrop-blur-xl transition-all duration-300 lg:w-[calc(100%-238px)] max-md:top-0 max-md:w-full max-md:max-w-none max-md:rounded-none max-md:bg-[#002834]/95",
         scrolled && "shadow-lg",
         mobileMenuOpen && "max-md:z-[1001]"
       )}
     >
-      <div className="flex h-[79px] items-center justify-between px-[30px] max-md:h-[60px] max-md:px-5">
+      <div className="flex h-[79px] items-center justify-between gap-4 px-[30px] max-md:h-[60px] max-md:px-5">
         {/* Logo */}
         <Link href="/" className="flex items-center" onClick={() => setMobileMenuOpen(false)}>
           <Image
@@ -129,7 +129,7 @@ export function Navbar() {
             >
               <Link
                 href={link.href}
-                className="whitespace-nowrap font-heading text-[16px] font-medium leading-[1.2] text-white transition-colors hover:text-teal-500 xl:text-[18px]"
+                className="whitespace-nowrap font-heading text-[14px] font-medium leading-[1.2] text-white transition-colors hover:text-teal-500 lg:text-[16px] xl:text-[18px]"
               >
                 {link.label}
                 {link.hasDropdown && (
@@ -212,7 +212,7 @@ export function Navbar() {
         <div className="flex items-center gap-[20px] max-md:hidden xl:gap-[40px] shrink-0">
           <Link
             href="/start-project"
-            className="whitespace-nowrap font-body text-[16px] font-medium leading-[1.2] text-white transition-colors hover:text-teal-500 xl:text-[18px]"
+            className="whitespace-nowrap font-body text-[14px] font-medium leading-[1.2] text-white transition-colors hover:text-teal-500 lg:text-[16px] xl:text-[18px]"
           >
             Start a Project
           </Link>
