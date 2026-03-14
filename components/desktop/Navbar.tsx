@@ -49,6 +49,7 @@ const megaMenuCards = [
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -58,29 +59,62 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => { document.body.style.overflow = ""; };
+  }, [mobileMenuOpen]);
+
   return (
+    <>
     <nav
       className={cn(
-        "fixed inset-x-0 top-[30px] z-50 mx-auto max-w-[1490px] rounded-[58px] bg-[#545454]/80 shadow-[0px_4px_11.5px_rgba(0,0,0,0.1)] backdrop-blur-xl transition-all duration-300",
+        "fixed inset-x-0 top-[30px] z-50 mx-auto w-[calc(100%-238px)] max-w-[1490px] rounded-[58px] bg-[#545454]/80 shadow-[0px_4px_11.5px_rgba(0,0,0,0.1)] backdrop-blur-xl transition-all duration-300 max-md:top-0 max-md:w-full max-md:max-w-none max-md:rounded-none max-md:bg-[#002834]/95",
         scrolled && "shadow-lg"
       )}
-      style={{ width: "calc(100% - 238px)" }}
     >
-      <div className="flex h-[79px] items-center justify-between px-[30px]">
+      <div className="flex h-[79px] items-center justify-between px-[30px] max-md:h-[60px] max-md:px-5">
         {/* Logo */}
-        <Link href="/" className="flex items-center">
+        <Link href="/" className="flex items-center" onClick={() => setMobileMenuOpen(false)}>
           <Image
             src="/images/common/ddip-ai-logo.png"
             alt="DDiP AI"
             width={90}
             height={32}
-            className="h-8 w-auto"
+            className="h-8 w-auto max-md:h-7"
             priority
           />
         </Link>
 
-        {/* Center Nav Links — Bricolage Grotesque, 500, 18px */}
-        <div className="flex items-center gap-[20px] xl:gap-[40px]">
+        {/* Hamburger button — visible only on mobile */}
+        <button
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          className="relative z-[1001] hidden h-11 w-11 flex-col items-center justify-center gap-[5px] max-md:flex"
+          aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+        >
+          <span
+            className={`h-[2px] w-5 bg-white transition-all duration-300 ${
+              mobileMenuOpen ? "translate-y-[7px] rotate-45" : ""
+            }`}
+          />
+          <span
+            className={`h-[2px] w-5 bg-white transition-all duration-300 ${
+              mobileMenuOpen ? "opacity-0" : ""
+            }`}
+          />
+          <span
+            className={`h-[2px] w-5 bg-white transition-all duration-300 ${
+              mobileMenuOpen ? "-translate-y-[7px] -rotate-45" : ""
+            }`}
+          />
+        </button>
+
+        {/* Center Nav Links — hidden on mobile */}
+        <div className="flex items-center gap-[20px] max-md:hidden xl:gap-[40px]">
           {navLinks.map((link) => (
             <div
               key={link.label}
@@ -173,8 +207,8 @@ export function Navbar() {
           ))}
         </div>
 
-        {/* CTA Buttons */}
-        <div className="flex items-center gap-[20px] xl:gap-[40px]">
+        {/* CTA Buttons — hidden on mobile */}
+        <div className="flex items-center gap-[20px] max-md:hidden xl:gap-[40px]">
           <Link
             href="/start-project"
             className="whitespace-nowrap font-body text-[16px] font-medium leading-[1.2] text-white transition-colors hover:text-teal-500 xl:text-[18px]"
@@ -205,5 +239,43 @@ export function Navbar() {
         </div>
       </div>
     </nav>
+
+    {/* Mobile menu overlay */}
+    <div
+      className={cn(
+        "fixed inset-0 z-[1000] bg-[#002834] transition-transform duration-300 md:hidden",
+        mobileMenuOpen ? "translate-x-0" : "translate-x-full"
+      )}
+    >
+      <nav className="flex h-full flex-col overflow-y-auto px-6 pt-[80px] pb-10">
+        {navLinks.map((link) => (
+          <Link
+            key={link.label}
+            href={link.href}
+            onClick={() => setMobileMenuOpen(false)}
+            className="block border-b border-white/10 py-5 font-heading text-[22px] font-medium text-white"
+            style={{ minHeight: "44px" }}
+          >
+            {link.label}
+          </Link>
+        ))}
+        <Link
+          href="/start-project"
+          onClick={() => setMobileMenuOpen(false)}
+          className="block border-b border-white/10 py-5 font-heading text-[22px] font-medium text-white"
+          style={{ minHeight: "44px" }}
+        >
+          Start a Project
+        </Link>
+        <Link
+          href="/lets-connect"
+          onClick={() => setMobileMenuOpen(false)}
+          className="mt-8 flex h-[53px] items-center justify-center rounded-[56px] bg-white font-body text-[18px] font-medium text-[#063746]"
+        >
+          Let&apos;s Connect
+        </Link>
+      </nav>
+    </div>
+    </>
   );
 }
