@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { Container } from "@/components/layout";
 import { cmsApi, type AiSolution, type Work, type Influencer, type Faq } from "@/lib/api";
 
@@ -147,6 +147,32 @@ export default function HomePage() {
   const [openFaqLeft, setOpenFaqLeft] = useState<number | null>(null);
   const [openFaqRight, setOpenFaqRight] = useState<number | null>(null);
 
+  // Hero carousel
+  const heroImages = [
+    "/images/homepage/hero-ai-influencer.png",
+    "/images/homepage/hero-banner.png",
+    "/images/homepage/hero-bg.jpg",
+  ];
+  const [heroSlide, setHeroSlide] = useState(0);
+  const [heroPlaying, setHeroPlaying] = useState(true);
+  const heroTimer = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  const startHeroTimer = useCallback(() => {
+    if (heroTimer.current) clearInterval(heroTimer.current);
+    heroTimer.current = setInterval(() => {
+      setHeroSlide((prev) => (prev + 1) % 3);
+    }, 6000);
+  }, []);
+
+  useEffect(() => {
+    if (heroPlaying) {
+      startHeroTimer();
+    } else if (heroTimer.current) {
+      clearInterval(heroTimer.current);
+    }
+    return () => { if (heroTimer.current) clearInterval(heroTimer.current); };
+  }, [heroPlaying, startHeroTimer]);
+
   // CMS data state — initialized with fallback data, replaced when API responds
   const [cmsSolutions, setCmsSolutions] = useState(aiSolutions);
   const [cmsWorks, setCmsWorks] = useState(selectedWork);
@@ -216,16 +242,19 @@ export default function HomePage() {
           1. HERO SECTION
           ════════════════════════════════════════════════════════ */}
       <section className="relative min-h-screen overflow-hidden bg-dark-bg">
-        {/* Background image */}
+        {/* Background image carousel */}
         <div className="absolute inset-0 z-0">
-          <Image
-            src="/images/homepage/hero-ai-influencer.png"
-            alt="AI-generated influencer face with dramatic lighting — DDiP AI virtual influencer creation"
-            fill
-            priority
-            className="object-cover object-center"
-            sizes="100vw"
-          />
+          {heroImages.map((src, i) => (
+            <Image
+              key={src}
+              src={src}
+              alt="DDiP AI hero"
+              fill
+              priority={i === 0}
+              className={`object-cover object-center transition-opacity duration-1000 ${i === heroSlide ? "opacity-100" : "opacity-0"}`}
+              sizes="100vw"
+            />
+          ))}
           <div className="absolute inset-0 bg-gradient-to-t from-dark-bg/70 via-transparent to-dark-bg/30" />
         </div>
 
@@ -250,7 +279,7 @@ export default function HomePage() {
           </div>
 
           {/* Problem text */}
-          <div className="absolute bottom-[320px] right-[60px] max-w-[280px] text-right">
+          <div className="absolute bottom-[200px] right-[60px] max-w-[280px] text-right">
             <p className="flex items-center justify-end gap-2 text-sm font-semibold text-white">
               <svg className="inline h-3 w-3" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="2">
                 <line x1="24" y1="2" x2="24" y2="46" />
@@ -283,14 +312,30 @@ export default function HomePage() {
               </a>
               <div className="flex items-center gap-3">
                 <div className="flex items-center gap-2">
-                  <span className="h-2 w-6 rounded-full bg-white" />
-                  <span className="h-2 w-2 rounded-full bg-white/30" />
-                  <span className="h-2 w-2 rounded-full bg-white/30" />
+                  {heroImages.map((_, i) => (
+                    <button
+                      key={i}
+                      aria-label={`Go to slide ${i + 1}`}
+                      onClick={() => setHeroSlide(i)}
+                      className={`h-2 rounded-full transition-all ${i === heroSlide ? "w-6 bg-white" : "w-2 bg-white/30"}`}
+                    />
+                  ))}
                 </div>
-                <button aria-label="Play carousel" className="ml-1 flex h-6 w-6 items-center justify-center text-white/60 transition-colors hover:text-white">
-                  <svg className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M8 5v14l11-7z" />
-                  </svg>
+                <button
+                  aria-label={heroPlaying ? "Pause carousel" : "Play carousel"}
+                  onClick={() => setHeroPlaying((p) => !p)}
+                  className="ml-1 flex h-6 w-6 items-center justify-center text-white/60 transition-colors hover:text-white"
+                >
+                  {heroPlaying ? (
+                    <svg className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
+                      <rect x="6" y="5" width="4" height="14" />
+                      <rect x="14" y="5" width="4" height="14" />
+                    </svg>
+                  ) : (
+                    <svg className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M8 5v14l11-7z" />
+                    </svg>
+                  )}
                 </button>
               </div>
             </div>

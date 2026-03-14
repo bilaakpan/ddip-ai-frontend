@@ -195,8 +195,8 @@ export default function StartProjectPage() {
           </h1>
         </div>
         <p className="mt-6 max-w-2xl text-body-sm leading-[1.7] text-white/50">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          Tell us about your project and we&apos;ll match you with the right AI
+          solution. From concept to launch, our team is ready to build with you.
         </p>
       </Container>
     </section>

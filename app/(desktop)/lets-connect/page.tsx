@@ -89,7 +89,7 @@ export default function LetsConnectPage() {
         <Container>
           {/* Marquee heading */}
           <div className="overflow-hidden">
-            <h1 className="whitespace-nowrap font-heading text-[clamp(36px,8vw,140px)] font-medium uppercase leading-[1.05] text-white max-md:whitespace-normal">
+            <h1 className="whitespace-nowrap font-heading text-[clamp(36px,8vw,138px)] font-medium uppercase leading-[1.05] text-white max-md:whitespace-normal">
               LET&apos;S CONNECT{" "}
               <span className="mx-4 inline-block text-teal-500">✻</span>{" "}
               LET&apos;S CONNECT{" "}
@@ -292,10 +292,10 @@ export default function LetsConnectPage() {
                           d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
                         />
                       </svg>
-                      Saving...
+                      Sending...
                     </>
                   ) : (
-                    "Save"
+                    "Send Message"
                   )}
                 </button>
               </div>
