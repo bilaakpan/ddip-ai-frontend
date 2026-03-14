@@ -37,30 +37,46 @@ export default function TheMindBehindPage() {
           </h1>
         </div>
 
-        <div className="mt-10 px-[60px]">
-          <h2 className="max-w-lg font-heading text-[24px] font-medium leading-[1.3] text-white">
-            Intelligence is powerful.
-            <br />
-            Humanity makes it meaningful.
-          </h2>
-          <p className="mt-4 max-w-lg text-[14px] leading-[1.6] text-white/70" style={{ fontFamily: "var(--font-body)" }}>
-            At ddip.ai, we believe the future of brands is not built by AI alone — and not by humans alone either. It is built in between.
-          </p>
+        <div className="mt-10 grid grid-cols-2 gap-12 px-[60px]">
+          <div>
+            <h2 className="max-w-lg font-heading text-[24px] font-medium leading-[1.3] text-white">
+              Intelligence is powerful.
+              <br />
+              Humanity makes it meaningful.
+            </h2>
+            <p className="mt-4 max-w-lg text-[14px] leading-[1.6] text-white/70" style={{ fontFamily: "var(--font-body)" }}>
+              At ddip.ai, we believe the future of brands is not built by AI alone — and not by humans alone either. It is built in between.
+            </p>
 
-          <div className="mt-8 flex items-center gap-4">
-            <div className="flex h-[50px] w-[50px] items-center justify-center rounded-full border border-white/20">
-              <svg className="h-5 w-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M12 5v14M5 12l7 7 7-7" />
-              </svg>
+            <div className="mt-8 flex items-center gap-4">
+              <div className="flex h-[50px] w-[50px] items-center justify-center rounded-full border border-white/20">
+                <svg className="h-5 w-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M12 5v14M5 12l7 7 7-7" />
+                </svg>
+              </div>
+              <span className="font-heading text-[14px] font-medium text-white underline decoration-white/30 underline-offset-8">
+                Discover The Mind Behind
+              </span>
             </div>
-            <span className="font-heading text-[14px] font-medium text-white underline decoration-white/30 underline-offset-8">
-              Discover The Mind Behind
-            </span>
+
+            <div className="mt-8 flex items-center gap-2">
+              <span className="h-2 w-6 rounded-full bg-white" />
+              <span className="h-2 w-2 rounded-full bg-white/30" />
+            </div>
           </div>
 
-          <div className="mt-8 flex items-center gap-2">
-            <span className="h-2 w-6 rounded-full bg-white" />
-            <span className="h-2 w-2 rounded-full bg-white/30" />
+          {/* Founder portrait */}
+          <div className="flex items-center justify-center">
+            <div className="relative aspect-[3/4] w-full max-w-[400px] overflow-hidden rounded-[20px]">
+              <Image
+                src="/images/mind-behind/bb-01.png"
+                alt="Founder portrait"
+                fill
+                className="object-cover"
+                sizes="400px"
+                priority
+              />
+            </div>
           </div>
         </div>
 
