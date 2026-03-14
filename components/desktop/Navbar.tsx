@@ -74,7 +74,8 @@ export function Navbar() {
     <nav
       className={cn(
         "fixed inset-x-0 top-[30px] z-50 mx-auto w-[calc(100%-238px)] max-w-[1490px] rounded-[58px] bg-[#545454]/80 shadow-[0px_4px_11.5px_rgba(0,0,0,0.1)] backdrop-blur-xl transition-all duration-300 max-md:top-0 max-md:w-full max-md:max-w-none max-md:rounded-none max-md:bg-[#002834]/95",
-        scrolled && "shadow-lg"
+        scrolled && "shadow-lg",
+        mobileMenuOpen && "max-md:z-[1001]"
       )}
     >
       <div className="flex h-[79px] items-center justify-between px-[30px] max-md:h-[60px] max-md:px-5">
