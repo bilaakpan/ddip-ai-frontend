@@ -6,3 +6,5 @@ node_modules/
 
 # Exclude large video files from git (will use CDN)
 public/videos/
+
+.vercel

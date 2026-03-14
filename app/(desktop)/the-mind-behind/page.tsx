@@ -30,7 +30,7 @@ export default function TheMindBehindPage() {
         <div className="whitespace-nowrap overflow-hidden px-[60px]">
           <h1
             className="inline-block font-heading font-normal uppercase text-white"
-            style={{ fontSize: "clamp(64px, 8vw, 130px)", lineHeight: "1" }}
+            style={{ fontSize: "clamp(36px, 8vw, 130px)", lineHeight: "1" }}
           >
             THE MIND BEHIND{" "}
             <span className="mx-3 text-[#1CE3F4]">✻</span>

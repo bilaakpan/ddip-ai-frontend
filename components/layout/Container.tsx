@@ -18,7 +18,7 @@ export function Container({
 }: ContainerProps) {
   return (
     <Tag
-      className={cn("mx-auto w-full max-w-[1608px] px-[60px]", className)}
+      className={cn("mx-auto w-full max-w-[1608px] px-[60px] max-md:px-5", className)}
     >
       {children}
     </Tag>

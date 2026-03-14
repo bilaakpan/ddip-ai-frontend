@@ -102,7 +102,7 @@ export default function AutomationPage() {
         <div className="relative z-10 whitespace-nowrap overflow-hidden px-[60px]">
           <h1
             className="inline-block font-heading font-normal uppercase text-white"
-            style={{ fontSize: "clamp(64px, 8vw, 130px)", lineHeight: "1" }}
+            style={{ fontSize: "clamp(36px, 8vw, 130px)", lineHeight: "1" }}
           >
             AUTOMATION WITH A
             <span className="text-white/20">I</span>

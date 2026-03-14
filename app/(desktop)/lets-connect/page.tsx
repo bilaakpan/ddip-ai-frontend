@@ -89,7 +89,7 @@ export default function LetsConnectPage() {
         <Container>
           {/* Marquee heading */}
           <div className="overflow-hidden">
-            <h1 className="whitespace-nowrap font-heading text-[clamp(60px,8vw,140px)] font-medium uppercase leading-[1.05] text-white">
+            <h1 className="whitespace-nowrap font-heading text-[clamp(36px,8vw,140px)] font-medium uppercase leading-[1.05] text-white max-md:whitespace-normal">
               LET&apos;S CONNECT{" "}
               <span className="mx-4 inline-block text-teal-500">✻</span>{" "}
               LET&apos;S CONNECT{" "}

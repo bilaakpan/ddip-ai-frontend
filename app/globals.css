@@ -78,6 +78,20 @@
   --transition-slow: 400ms ease;
 }
 
+/* ─── Global Mobile Responsive Rules ─── */
+h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+  word-break: break-word;
+  max-width: 100%;
+}
+
+@media (max-width: 768px) {
+  /* Prevent horizontal overflow on mobile by capping body */
+  html, body {
+    overflow-x: hidden;
+  }
+}
+
 /* ─── Base Styles ─── */
 html {
   scroll-behavior: smooth;
