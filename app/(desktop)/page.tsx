@@ -448,7 +448,7 @@ export default function HomePage() {
                 {/* Description + Tags */}
                 <div className="px-[50px] pb-[50px] pt-[42px]">
                   <p
-                    className="text-[27px] font-medium leading-[37px] text-[#063746]"
+                    className="line-clamp-3 text-[27px] font-medium leading-[37px] text-[#063746]"
                     style={{ fontFamily: "var(--font-body)" }}
                   >
                     {solution.description}
