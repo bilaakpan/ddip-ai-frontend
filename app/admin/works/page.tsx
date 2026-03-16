@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { worksApi, tagsApi, type Work, type Tag } from "@/lib/api";
+import FileUpload from "@/components/admin/FileUpload";
 
 export default function WorksPage() {
   const [works, setWorks] = useState<Work[]>([]);
@@ -282,20 +283,12 @@ function WorkForm({
           </div>
 
           <div className="grid grid-cols-2 gap-4">
-            <div>
-              <label className="mb-1 block text-sm font-medium text-white/60">
-                Media URL
-              </label>
-              <input
-                type="text"
-                value={form.mediaUrl}
-                onChange={(e) =>
-                  setForm({ ...form, mediaUrl: e.target.value })
-                }
-                className="w-full rounded-lg border border-border-dark bg-dark-bg px-3 py-2 text-sm text-white placeholder-white/30 focus:border-teal-500 focus:outline-none"
-                placeholder="URL to image or video"
-              />
-            </div>
+            <FileUpload
+              value={form.mediaUrl}
+              onChange={(url) => setForm({ ...form, mediaUrl: url })}
+              label="Media File"
+              placeholder="Upload or paste URL"
+            />
             <div>
               <label className="mb-1 block text-sm font-medium text-white/60">
                 Media Type

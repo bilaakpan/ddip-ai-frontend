@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { influencersApi, type Influencer } from "@/lib/api";
+import FileUpload from "@/components/admin/FileUpload";
 
 export default function InfluencersPage() {
   const [influencers, setInfluencers] = useState<Influencer[]>([]);
@@ -178,7 +179,6 @@ function InfluencerForm({
     name: influencer?.name ?? "",
     surname: influencer?.surname ?? "",
     country: influencer?.country ?? "",
-    countryCode: influencer?.countryCode ?? "",
     region: influencer?.region ?? "",
     language: influencer?.language ?? "",
     category: influencer?.category ?? "Influencer",
@@ -238,14 +238,10 @@ function InfluencerForm({
             </div>
           </div>
 
-          <div className="grid grid-cols-3 gap-4">
+          <div className="grid grid-cols-2 gap-4">
             <div>
               <label className="mb-1 block text-sm font-medium text-white/60">Country</label>
               <input type="text" value={form.country} onChange={(e) => setForm({ ...form, country: e.target.value })} className={inputClass} />
-            </div>
-            <div>
-              <label className="mb-1 block text-sm font-medium text-white/60">Country Code</label>
-              <input type="text" value={form.countryCode} onChange={(e) => setForm({ ...form, countryCode: e.target.value })} className={inputClass} placeholder="e.g., TR" />
             </div>
             <div>
               <label className="mb-1 block text-sm font-medium text-white/60">Region</label>
@@ -321,14 +317,20 @@ function InfluencerForm({
           </div>
 
           <div className="grid grid-cols-2 gap-4">
-            <div>
-              <label className="mb-1 block text-sm font-medium text-white/60">Image URL</label>
-              <input type="text" value={form.imageUrl} onChange={(e) => setForm({ ...form, imageUrl: e.target.value })} className={inputClass} />
-            </div>
-            <div>
-              <label className="mb-1 block text-sm font-medium text-white/60">Video URL</label>
-              <input type="text" value={form.videoUrl} onChange={(e) => setForm({ ...form, videoUrl: e.target.value })} className={inputClass} />
-            </div>
+            <FileUpload
+              value={form.imageUrl}
+              onChange={(url) => setForm({ ...form, imageUrl: url })}
+              accept="image/*"
+              label="Profile Image"
+              placeholder="Upload image or paste URL"
+            />
+            <FileUpload
+              value={form.videoUrl}
+              onChange={(url) => setForm({ ...form, videoUrl: url })}
+              accept="video/*"
+              label="Video"
+              placeholder="Upload video or paste URL"
+            />
           </div>
 
           <div>

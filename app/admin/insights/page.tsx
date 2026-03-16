@@ -1,7 +1,19 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { insightsApi, type Insight } from "@/lib/api";
+import FileUpload from "@/components/admin/FileUpload";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+
+const INSIGHT_CATEGORIES = [
+  "AI",
+  "Technology",
+  "Marketing",
+  "Business",
+  "Innovation",
+  "Industry Trends",
+];
 
 export default function InsightsPage() {
   const [insights, setInsights] = useState<Insight[]>([]);
@@ -177,6 +189,8 @@ function InsightForm({
     seoOgImage: insight?.seoOgImage ?? "",
   });
   const [saving, setSaving] = useState(false);
+  const [bodyTab, setBodyTab] = useState<"write" | "preview">("write");
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -204,6 +218,24 @@ function InsightForm({
         .replace(/[^a-z0-9]+/g, "-")
         .replace(/^-|-$/g, ""),
     });
+  };
+
+  const insertMarkdown = (prefix: string, suffix: string = "", placeholder: string = "") => {
+    const textarea = textareaRef.current;
+    if (!textarea) return;
+    const start = textarea.selectionStart;
+    const end = textarea.selectionEnd;
+    const selectedText = form.body.substring(start, end);
+    const insertion = selectedText || placeholder;
+    const newBody =
+      form.body.substring(0, start) + prefix + insertion + suffix + form.body.substring(end);
+    setForm({ ...form, body: newBody });
+    // Restore focus and selection after state update
+    setTimeout(() => {
+      textarea.focus();
+      const newCursorPos = start + prefix.length + insertion.length + suffix.length;
+      textarea.setSelectionRange(newCursorPos, newCursorPos);
+    }, 0);
   };
 
   const inputClass =
@@ -235,24 +267,112 @@ function InsightForm({
           <div className="grid grid-cols-2 gap-4">
             <div>
               <label className="mb-1 block text-sm font-medium text-white/60">Category</label>
-              <input type="text" value={form.category} onChange={(e) => setForm({ ...form, category: e.target.value })} className={inputClass} placeholder="e.g., AI, Technology" />
+              <select value={form.category} onChange={(e) => setForm({ ...form, category: e.target.value })} className={inputClass}>
+                <option value="">Select category...</option>
+                {INSIGHT_CATEGORIES.map((cat) => (
+                  <option key={cat} value={cat}>{cat}</option>
+                ))}
+              </select>
             </div>
-            <div>
-              <label className="mb-1 block text-sm font-medium text-white/60">Image URL</label>
-              <input type="text" value={form.imageUrl} onChange={(e) => setForm({ ...form, imageUrl: e.target.value })} className={inputClass} />
-            </div>
+            <FileUpload
+              value={form.imageUrl}
+              onChange={(url) => setForm({ ...form, imageUrl: url })}
+              accept="image/*"
+              label="Featured Image"
+              placeholder="Upload image or paste URL"
+            />
           </div>
 
+          {/* Markdown Editor */}
           <div>
             <label className="mb-1 block text-sm font-medium text-white/60">Body (Markdown) *</label>
-            <textarea
-              value={form.body}
-              onChange={(e) => setForm({ ...form, body: e.target.value })}
-              required
-              rows={12}
-              className={inputClass + " font-mono"}
-              placeholder="Write your article content in markdown..."
-            />
+
+            {/* Tab Toggle */}
+            <div className="mb-2 flex gap-1 rounded-lg bg-dark-bg p-1">
+              <button
+                type="button"
+                onClick={() => setBodyTab("write")}
+                className={`rounded-md px-3 py-1 text-xs font-medium transition-colors ${
+                  bodyTab === "write"
+                    ? "bg-white/10 text-white"
+                    : "text-white/40 hover:text-white"
+                }`}
+              >
+                Write
+              </button>
+              <button
+                type="button"
+                onClick={() => setBodyTab("preview")}
+                className={`rounded-md px-3 py-1 text-xs font-medium transition-colors ${
+                  bodyTab === "preview"
+                    ? "bg-white/10 text-white"
+                    : "text-white/40 hover:text-white"
+                }`}
+              >
+                Preview
+              </button>
+            </div>
+
+            {bodyTab === "write" ? (
+              <>
+                {/* Toolbar */}
+                <div className="mb-1 flex gap-1 rounded-t-lg border border-b-0 border-border-dark bg-dark-bg px-2 py-1">
+                  <button type="button" onClick={() => insertMarkdown("**", "**", "bold")} className="rounded px-2 py-1 text-xs font-bold text-white/50 hover:bg-white/10 hover:text-white" title="Bold">B</button>
+                  <button type="button" onClick={() => insertMarkdown("*", "*", "italic")} className="rounded px-2 py-1 text-xs italic text-white/50 hover:bg-white/10 hover:text-white" title="Italic">I</button>
+                  <button type="button" onClick={() => insertMarkdown("## ", "", "Heading")} className="rounded px-2 py-1 text-xs text-white/50 hover:bg-white/10 hover:text-white" title="Heading 2">H2</button>
+                  <span className="mx-1 border-l border-border-dark" />
+                  <button type="button" onClick={() => insertMarkdown("[", "](url)", "text")} className="rounded px-2 py-1 text-xs text-white/50 hover:bg-white/10 hover:text-white" title="Link">Link</button>
+                  <button type="button" onClick={() => insertMarkdown("![", "](url)", "alt")} className="rounded px-2 py-1 text-xs text-white/50 hover:bg-white/10 hover:text-white" title="Image">Image</button>
+                  <span className="mx-1 border-l border-border-dark" />
+                  <button type="button" onClick={() => insertMarkdown("- ", "", "item")} className="rounded px-2 py-1 text-xs text-white/50 hover:bg-white/10 hover:text-white" title="List">List</button>
+                  <button type="button" onClick={() => insertMarkdown("> ", "", "quote")} className="rounded px-2 py-1 text-xs text-white/50 hover:bg-white/10 hover:text-white" title="Quote">Quote</button>
+                </div>
+                <textarea
+                  ref={textareaRef}
+                  value={form.body}
+                  onChange={(e) => setForm({ ...form, body: e.target.value })}
+                  required
+                  rows={12}
+                  className={inputClass + " rounded-t-none font-mono"}
+                  placeholder="Write your article content in markdown..."
+                />
+              </>
+            ) : (
+              <div
+                className="min-h-[288px] rounded-lg border border-border-dark bg-dark-bg p-4 text-sm text-white"
+              >
+                {form.body ? (
+                  <div className="markdown-preview">
+                    <style>{`
+                      .markdown-preview h1 { font-size: 1.5rem; font-weight: 700; margin: 1rem 0 0.5rem; color: #fff; }
+                      .markdown-preview h2 { font-size: 1.25rem; font-weight: 700; margin: 1rem 0 0.5rem; color: #fff; }
+                      .markdown-preview h3 { font-size: 1.1rem; font-weight: 600; margin: 0.75rem 0 0.375rem; color: #fff; }
+                      .markdown-preview p { margin-bottom: 0.75rem; color: rgba(255,255,255,0.85); line-height: 1.6; }
+                      .markdown-preview ul, .markdown-preview ol { padding-left: 1.5rem; margin-bottom: 0.75rem; color: rgba(255,255,255,0.85); }
+                      .markdown-preview ul { list-style-type: disc; }
+                      .markdown-preview ol { list-style-type: decimal; }
+                      .markdown-preview li { margin-bottom: 0.25rem; }
+                      .markdown-preview a { color: #2dd4bf; text-decoration: underline; }
+                      .markdown-preview a:hover { color: #5eead4; }
+                      .markdown-preview blockquote { border-left: 3px solid rgba(255,255,255,0.2); padding-left: 1rem; margin: 0.75rem 0; font-style: italic; color: rgba(255,255,255,0.6); }
+                      .markdown-preview code { font-family: monospace; background: rgba(255,255,255,0.1); padding: 0.125rem 0.375rem; border-radius: 0.25rem; font-size: 0.85em; }
+                      .markdown-preview pre { background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 0.5rem; overflow-x: auto; margin-bottom: 0.75rem; }
+                      .markdown-preview pre code { background: transparent; padding: 0; }
+                      .markdown-preview img { max-width: 100%; border-radius: 0.5rem; margin: 0.5rem 0; }
+                      .markdown-preview hr { border-color: rgba(255,255,255,0.1); margin: 1rem 0; }
+                      .markdown-preview table { width: 100%; border-collapse: collapse; margin-bottom: 0.75rem; }
+                      .markdown-preview th, .markdown-preview td { border: 1px solid rgba(255,255,255,0.1); padding: 0.5rem; text-align: left; }
+                      .markdown-preview th { background: rgba(255,255,255,0.05); font-weight: 600; }
+                    `}</style>
+                    <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                      {form.body}
+                    </ReactMarkdown>
+                  </div>
+                ) : (
+                  <p className="text-white/30">Nothing to preview yet...</p>
+                )}
+              </div>
+            )}
           </div>
 
           {/* SEO Fields */}

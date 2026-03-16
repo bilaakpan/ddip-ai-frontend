@@ -715,6 +715,40 @@ export const insightsApi = {
     }),
 };
 
+// ─── File Upload API ───
+
+export interface UploadResult {
+  url: string;
+  originalName: string;
+  mimeType: string;
+  size: number;
+}
+
+export async function uploadFile(file: File): Promise<ApiResponse<UploadResult>> {
+  const token = getStoredToken();
+  const formData = new FormData();
+  formData.append("file", file);
+
+  const response = await fetch(`${API_BASE_URL}/admin/upload`, {
+    method: "POST",
+    headers: {
+      ...(token ? { Authorization: `Bearer ${token}` } : {}),
+    },
+    body: formData,
+  });
+
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => null);
+    throw new ApiError(
+      response.status,
+      errorData?.error || `Upload failed: ${response.status}`,
+      errorData
+    );
+  }
+
+  return response.json();
+}
+
 // ─── Public CMS API (no auth required) ───
 
 export const cmsApi = {

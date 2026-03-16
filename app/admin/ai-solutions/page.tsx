@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { aiSolutionsApi, tagsApi, type AiSolution, type Tag } from "@/lib/api";
+import FileUpload from "@/components/admin/FileUpload";
 
 export default function AiSolutionsPage() {
   const [solutions, setSolutions] = useState<AiSolution[]>([]);
@@ -146,11 +147,16 @@ function SolutionForm({
     solution?.tags?.map((t) => t.tag.id) ?? []
   );
   const [availableTags, setAvailableTags] = useState<Tag[]>([]);
+  const [newTagName, setNewTagName] = useState("");
   const [saving, setSaving] = useState(false);
 
-  useEffect(() => {
+  const fetchTags = useCallback(() => {
     tagsApi.list("ai-solution").then((res) => setAvailableTags(res.data)).catch(() => {});
   }, []);
+
+  useEffect(() => {
+    fetchTags();
+  }, [fetchTags]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -166,6 +172,18 @@ function SolutionForm({
       alert("Failed to save AI solution");
     } finally {
       setSaving(false);
+    }
+  };
+
+  const handleCreateTag = async () => {
+    if (!newTagName.trim()) return;
+    try {
+      const res = await tagsApi.create({ name: newTagName.trim(), category: "ai-solution" });
+      setSelectedTagIds([...selectedTagIds, res.data.id]);
+      setNewTagName("");
+      fetchTags();
+    } catch {
+      alert("Failed to create tag");
     }
   };
 
@@ -196,10 +214,12 @@ function SolutionForm({
           </div>
 
           <div className="grid grid-cols-2 gap-4">
-            <div>
-              <label className="mb-1 block text-sm font-medium text-white/60">Media URL</label>
-              <input type="text" value={form.mediaUrl} onChange={(e) => setForm({ ...form, mediaUrl: e.target.value })} className={inputClass} />
-            </div>
+            <FileUpload
+              value={form.mediaUrl}
+              onChange={(url) => setForm({ ...form, mediaUrl: url })}
+              label="Media File"
+              placeholder="Upload or paste URL"
+            />
             <div>
               <label className="mb-1 block text-sm font-medium text-white/60">Media Type</label>
               <select value={form.mediaType} onChange={(e) => setForm({ ...form, mediaType: e.target.value })} className={inputClass}>
@@ -209,33 +229,54 @@ function SolutionForm({
             </div>
           </div>
 
-          {availableTags.length > 0 && (
-            <div>
-              <label className="mb-1 block text-sm font-medium text-white/60">Tags</label>
-              <div className="flex flex-wrap gap-2">
-                {availableTags.map((tag) => (
-                  <button
-                    key={tag.id}
-                    type="button"
-                    onClick={() =>
-                      setSelectedTagIds((prev) =>
-                        prev.includes(tag.id)
-                          ? prev.filter((id) => id !== tag.id)
-                          : [...prev, tag.id]
-                      )
-                    }
-                    className={`rounded-full px-3 py-1 text-xs font-medium transition-colors ${
-                      selectedTagIds.includes(tag.id)
-                        ? "bg-teal-500/20 text-teal-400"
-                        : "bg-white/5 text-white/40 hover:bg-white/10"
-                    }`}
-                  >
-                    {tag.name}
-                  </button>
-                ))}
-              </div>
+          {/* Tags */}
+          <div>
+            <label className="mb-1 block text-sm font-medium text-white/60">Tags</label>
+            <div className="flex flex-wrap gap-2">
+              {availableTags.map((tag) => (
+                <button
+                  key={tag.id}
+                  type="button"
+                  onClick={() =>
+                    setSelectedTagIds((prev) =>
+                      prev.includes(tag.id)
+                        ? prev.filter((id) => id !== tag.id)
+                        : [...prev, tag.id]
+                    )
+                  }
+                  className={`rounded-full px-3 py-1 text-xs font-medium transition-colors ${
+                    selectedTagIds.includes(tag.id)
+                      ? "bg-teal-500/20 text-teal-400"
+                      : "bg-white/5 text-white/40 hover:bg-white/10"
+                  }`}
+                >
+                  {tag.name}
+                </button>
+              ))}
             </div>
-          )}
+            <div className="mt-2 flex gap-2">
+              <input
+                type="text"
+                value={newTagName}
+                onChange={(e) => setNewTagName(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    e.preventDefault();
+                    handleCreateTag();
+                  }
+                }}
+                placeholder="Add new tag..."
+                className="flex-1 rounded-lg border border-border-dark bg-dark-bg px-3 py-1.5 text-xs text-white placeholder-white/30 focus:border-teal-500 focus:outline-none"
+              />
+              <button
+                type="button"
+                onClick={handleCreateTag}
+                className="rounded-lg bg-white/5 px-3 py-1.5 text-xs text-white/60 hover:text-white"
+              >
+                Add
+              </button>
+            </div>
+          </div>
 
           <div className="flex justify-end gap-3 pt-2">
             <button type="button" onClick={onClose} className="rounded-lg px-4 py-2 text-sm font-medium text-white/60 transition-colors hover:text-white">

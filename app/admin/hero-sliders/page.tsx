@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { heroSlidersApi, type HeroSlider } from "@/lib/api";
+import FileUpload from "@/components/admin/FileUpload";
 
 export default function HeroSlidersPage() {
   const [sliders, setSliders] = useState<HeroSlider[]>([]);
@@ -276,21 +277,13 @@ function SliderForm({
             />
           </div>
 
-          <div>
-            <label className="mb-1 block text-sm font-medium text-white/60">
-              Video URL
-            </label>
-            <input
-              type="text"
-              value={form.videoUrl}
-              onChange={(e) => setForm({ ...form, videoUrl: e.target.value })}
-              className="w-full rounded-lg border border-border-dark bg-dark-bg px-3 py-2 text-sm text-white placeholder-white/30 focus:border-teal-500 focus:outline-none"
-              placeholder="URL to background video"
-            />
-            <p className="mt-1 text-xs text-white/30">
-              Recommended: 1728 x 900px, MP4, max 100MB
-            </p>
-          </div>
+          <FileUpload
+            value={form.videoUrl}
+            onChange={(url) => setForm({ ...form, videoUrl: url })}
+            accept="video/*"
+            label="Background Video"
+            placeholder="Upload video or paste URL"
+          />
 
           <div className="grid grid-cols-2 gap-4">
             <div>

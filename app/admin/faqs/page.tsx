@@ -54,6 +54,36 @@ export default function FaqsPage() {
   const getPageLabel = (slug: string) =>
     PAGE_OPTIONS.find((p) => p.value === slug)?.label ?? slug;
 
+  const handleMoveUp = async (pageSlug: string, index: number) => {
+    const items = groupedFaqs[pageSlug];
+    if (!items || index === 0) return;
+    const reorderItems = items.map((faq, i) => ({
+      id: faq.id,
+      sortOrder: i === index ? index - 1 : i === index - 1 ? index : i,
+    }));
+    try {
+      await faqsApi.reorder(reorderItems);
+      fetchFaqs();
+    } catch {
+      alert("Failed to reorder");
+    }
+  };
+
+  const handleMoveDown = async (pageSlug: string, index: number) => {
+    const items = groupedFaqs[pageSlug];
+    if (!items || index === items.length - 1) return;
+    const reorderItems = items.map((faq, i) => ({
+      id: faq.id,
+      sortOrder: i === index ? index + 1 : i === index + 1 ? index : i,
+    }));
+    try {
+      await faqsApi.reorder(reorderItems);
+      fetchFaqs();
+    } catch {
+      alert("Failed to reorder");
+    }
+  };
+
   return (
     <div>
       <div className="flex items-center justify-between">
@@ -118,11 +148,33 @@ export default function FaqsPage() {
                 {getPageLabel(pageSlug)} ({items.length})
               </h3>
               <div className="space-y-2">
-                {items.map((faq) => (
+                {items.map((faq, index) => (
                   <div
                     key={faq.id}
                     className="flex items-start gap-4 rounded-xl border border-border-dark bg-dark-surface p-4"
                   >
+                    {/* Order controls */}
+                    <div className="flex flex-col gap-1">
+                      <button
+                        onClick={() => handleMoveUp(pageSlug, index)}
+                        disabled={index === 0}
+                        className="rounded p-1 text-white/40 transition-colors hover:bg-white/10 hover:text-white disabled:opacity-20"
+                      >
+                        <svg className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                          <path fillRule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z" clipRule="evenodd" />
+                        </svg>
+                      </button>
+                      <button
+                        onClick={() => handleMoveDown(pageSlug, index)}
+                        disabled={index === items.length - 1}
+                        className="rounded p-1 text-white/40 transition-colors hover:bg-white/10 hover:text-white disabled:opacity-20"
+                      >
+                        <svg className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                          <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                        </svg>
+                      </button>
+                    </div>
+
                     <div className="flex-1 min-w-0">
                       <p className="text-sm font-medium text-white">
                         {faq.question}
