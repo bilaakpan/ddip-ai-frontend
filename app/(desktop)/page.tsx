@@ -896,7 +896,7 @@ export default function HomePage() {
                   <img
                     src={partner.image}
                     alt={partner.name}
-                    className="max-h-[60px] max-w-[140px] object-contain opacity-60 grayscale transition-all hover:opacity-100 hover:grayscale-0"
+                    className="max-h-[60px] max-w-[140px] object-contain"
                   />
                 ) : (
                   <span className="font-heading text-2xl font-semibold tracking-wide text-[#063746]/40 transition-colors hover:text-[#063746]">
