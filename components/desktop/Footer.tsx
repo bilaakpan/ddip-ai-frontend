@@ -106,7 +106,7 @@ export function Footer() {
                   <li key={link.label}>
                     <Link
                       href={link.href}
-                      className="block text-[16px] leading-[32px] text-[#6AADBE] transition-colors hover:text-white md:text-[28px] md:leading-[45.9px]"
+                      className="block whitespace-nowrap text-[16px] leading-[32px] text-[#6AADBE] transition-colors hover:text-white md:text-[28px] md:leading-[45.9px]"
                       style={{ fontFamily: "var(--font-body)" }}
                     >
                       {link.label}
@@ -126,7 +126,7 @@ export function Footer() {
                   <li key={link.label}>
                     <Link
                       href={link.href}
-                      className="block text-[16px] leading-[32px] text-[#6AADBE] transition-colors hover:text-white md:text-[28px] md:leading-[45.9px]"
+                      className="block whitespace-nowrap text-[16px] leading-[32px] text-[#6AADBE] transition-colors hover:text-white md:text-[28px] md:leading-[45.9px]"
                       style={{ fontFamily: "var(--font-body)" }}
                     >
                       {link.label}
@@ -145,12 +145,6 @@ export function Footer() {
               <a href="#" aria-label="Instagram" className="text-white transition-colors hover:text-[#1CE3F4]">
                 <svg className="h-[29px] w-[15px]" viewBox="0 0 15 29" fill="currentColor">
                   <path d="M9.5 9.5V6.5C9.5 5.4 10.4 4.5 11.5 4.5H13.5V0H9.5C6.7 0 4.5 2.2 4.5 5V9.5H0V14H4.5V29H9.5V14H13.5L15 9.5H9.5Z" />
-                </svg>
-              </a>
-              {/* X/Twitter */}
-              <a href="#" aria-label="Twitter" className="text-white transition-colors hover:text-[#1CE3F4]">
-                <svg className="h-[29px] w-[28px]" viewBox="0 0 28 29" fill="currentColor">
-                  <path d="M22.1 0H26.4L17 12.3L28 29H19.4L12.6 18.9L4.8 29H0.5L10.5 15.8L0 0H8.8L14.9 9.2L22.1 0ZM20.6 26.1H23L7.6 2.9H5.3L20.6 26.1Z" />
                 </svg>
               </a>
               {/* LinkedIn */}

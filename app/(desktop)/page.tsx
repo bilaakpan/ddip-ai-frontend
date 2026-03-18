@@ -132,11 +132,11 @@ const faqRight = [
 ];
 
 const partners = [
-  { name: "AWS", image: "/images/partners/aws.png" },
-  { name: "Google Cloud", image: "/images/partners/google.png" },
-  { name: "Google Partner", image: "/images/partners/google.png" },
-  { name: "Microsoft", image: null },
-  { name: "Salesforce", image: null },
+  { name: "AWS", image: "/images/partners/aws.svg" },
+  { name: "Google", image: "/images/partners/google.svg" },
+  { name: "Google AI", image: "/images/partners/google-ai.svg" },
+  { name: "Microsoft", image: "/images/partners/microsoft.svg" },
+  { name: "Salesforce", image: "/images/partners/salesforce.svg" },
 ];
 
 /**
@@ -260,8 +260,8 @@ export default function HomePage() {
 
         {/* Hero content */}
         <div className="relative z-10 flex min-h-screen flex-col px-[60px] pb-10 pt-40 max-md:px-5 max-md:pt-24">
-          <div className="flex flex-1 items-center justify-center">
-            <h1 className="text-center font-heading text-[clamp(36px,8.5vw,140px)] font-normal uppercase leading-[0.95] text-white">
+          <div className="mt-auto mb-[180px]">
+            <h1 className="text-center font-heading text-[clamp(36px,8.5vw,140px)] font-normal uppercase leading-[0.95] text-white" lang="en">
               <span className="relative -top-[0.05em] mr-2 inline-block align-baseline text-[0.6em]">
                 <svg className="inline h-[0.9em] w-[0.9em]" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="2">
                   <line x1="24" y1="2" x2="24" y2="46" />
@@ -279,8 +279,8 @@ export default function HomePage() {
           </div>
 
           {/* Problem text */}
-          <div className="absolute bottom-[200px] right-[60px] max-w-[280px] text-right">
-            <p className="flex items-center justify-end gap-2 text-sm font-semibold text-white">
+          <div className="absolute bottom-[200px] left-[60px] max-w-[280px] text-left">
+            <p className="flex items-center gap-2 text-sm font-semibold text-white">
               <svg className="inline h-3 w-3" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="2">
                 <line x1="24" y1="2" x2="24" y2="46" />
                 <line x1="2" y1="24" x2="46" y2="24" />
@@ -401,7 +401,7 @@ export default function HomePage() {
           {/* Top row: tagline left + description right */}
           <div className="flex gap-16">
             <div className="w-1/2">
-              <p className="font-heading text-[24px] font-normal uppercase leading-[1.2] text-[#063746]">
+              <p className="font-heading text-[24px] font-normal leading-[1.2] text-[#063746]">
                 From Insight to Intelligence
               </p>
             </div>
@@ -419,8 +419,8 @@ export default function HomePage() {
           {/* 4 Capability Cards — 2x2 grid */}
           <div className="mt-20 grid grid-cols-2 gap-x-16 gap-y-12">
             {capabilities.map((cap) => (
-              <div key={cap.title} className="max-w-[424px]">
-                <h3 className="font-heading text-[24px] font-normal uppercase leading-[1.2] text-[#063746]">
+              <div key={cap.title}>
+                <h3 className="font-heading text-[24px] font-semibold uppercase leading-[1.2] text-[#063746]" lang="en">
                   {cap.title}
                 </h3>
                 <p
@@ -442,8 +442,9 @@ export default function HomePage() {
       <section id="discover" className="bg-light-bg py-24 lg:py-32">
         <div className="px-[60px]">
           <h2
-            className="font-heading text-section font-medium uppercase text-[#063746]"
+            className="font-heading text-[clamp(60px,7vw,120px)] font-medium uppercase text-[#063746]"
             style={{ lineHeight: "0.99" }}
+            lang="en"
           >
             Our AI
             <br />
@@ -451,14 +452,14 @@ export default function HomePage() {
           </h2>
         </div>
 
-        {/* Horizontal scrolling card row */}
+        {/* Horizontal scrolling card row — wide landscape cards */}
         <div className="mt-16 flex gap-[33px] overflow-x-auto px-[60px] pb-4" style={{ scrollbarWidth: "none" }}>
           {cmsSolutions.map((solution) => (
             <Link
               key={solution.title}
               href={solution.href}
               className="group flex-shrink-0"
-              style={{ width: "clamp(400px, 30vw, 1074px)" }}
+              style={{ width: "clamp(600px, 48vw, 1074px)" }}
             >
               <div className="overflow-hidden rounded-[33px] bg-white">
                 {/* Media area (video or image) */}
@@ -593,23 +594,6 @@ export default function HomePage() {
             ))}
           </div>
 
-          {/* Carousel dots + play */}
-          <div className="mt-12 flex items-center justify-center gap-4">
-            <div className="flex items-center rounded-full bg-white px-[35px] py-[22px]">
-              <div className="flex items-center gap-[15px]">
-                <span className="h-[9px] w-[9px] rounded-full bg-[#D2D2D2]" />
-                <div className="relative h-[9px] w-[61px] rounded-full bg-[#D2D2D2]">
-                  <div className="absolute left-0 top-0 h-full w-[48px] rounded-full bg-[#A1A1A1]" />
-                </div>
-                <span className="h-[9px] w-[9px] rounded-full bg-[#D2D2D2]" />
-              </div>
-            </div>
-            <div className="flex h-[53px] w-[53px] items-center justify-center rounded-full bg-white">
-              <svg className="h-[22px] w-[22px] text-[#D2D2D2]" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M8 5v14l11-7z" />
-              </svg>
-            </div>
-          </div>
         </div>
       </section>
 
@@ -619,11 +603,11 @@ export default function HomePage() {
           ════════════════════════════════════════════════════════ */}
       <section className="bg-light-bg py-24 lg:py-32">
         <div className="px-[60px]">
-          <p className="font-heading text-[24px] font-normal uppercase tracking-wider text-[#039EB7]">
+          <p className="text-center font-heading text-[24px] font-normal uppercase tracking-wider text-[#039EB7]">
             The DDIP Approach
           </p>
           <h2
-            className="mt-6 max-w-[1493px] text-[80px] font-medium uppercase leading-[1.01]"
+            className="mt-6 text-center text-[80px] font-bold uppercase leading-[1.01]"
             style={{
               fontFamily: "var(--font-body)",
               background: "linear-gradient(199deg, #063746 0%, #00BCCF 100%)",
@@ -691,13 +675,13 @@ export default function HomePage() {
             The Future Face of Brands
           </h2>
 
-          {/* Subtitle */}
+          {/* Subtitle — only highlighted words in white */}
           <p
-            className="mx-auto mt-8 max-w-[977px] text-center text-[34px] leading-[1.19] text-white"
+            className="mx-auto mt-8 max-w-[977px] text-center text-[34px] leading-[1.19] text-[#90B2BD]"
             style={{ fontFamily: "var(--font-body)" }}
           >
-            Our AI influencers represent the next step in brand communication,
-            combining expressiveness, adaptability, and visual intelligence.
+            Our AI influencers represent <span className="text-white">the next step in brand communication</span>,
+            combining <span className="text-white">expressiveness, adaptability, and visual intelligence</span>.
           </p>
 
           {/* Filter tabs + Discover More */}
@@ -747,14 +731,14 @@ export default function HomePage() {
             >
               {row.map((inf) => (
                 <div key={`${rowIdx}-${inf.name}`} className="w-[376px] flex-shrink-0">
-                  {/* Card image */}
+                  {/* Card image with overlays */}
                   <div className="relative h-[518px] w-full overflow-hidden rounded-[20px] bg-[#EFEFEF]">
                     <img
                       src={inf.image}
                       alt={inf.name}
                       className="absolute inset-0 h-full w-full object-cover"
                     />
-                    {/* Industry badge */}
+                    {/* Industry badge — top right */}
                     <div
                       className="absolute right-[20px] top-[20px] rounded-full px-[18px] py-[9px]"
                       style={{ backgroundColor: inf.color }}
@@ -766,29 +750,28 @@ export default function HomePage() {
                         {inf.industry}
                       </span>
                     </div>
-                  </div>
-
-                  {/* Name + arrow button */}
-                  <div className="mt-4 flex items-center justify-between">
-                    <div className="rounded-full bg-[#063746B2] px-[22px] py-[12px]">
-                      <span
-                        className="text-[18px] leading-[1.2] text-white"
-                        style={{ fontFamily: "var(--font-body)" }}
-                      >
-                        {inf.name}
-                      </span>
-                    </div>
-                    <div className="flex h-[48px] w-[48px] items-center justify-center rounded-full bg-white/80">
-                      <svg className="h-[30px] w-[30px] text-[#012F3B]" viewBox="0 0 30 30" fill="none" stroke="currentColor" strokeWidth="4">
-                        <line x1="15" y1="0" x2="15" y2="30" />
-                        <line x1="0" y1="15" x2="30" y2="15" />
-                      </svg>
+                    {/* Name + arrow — bottom inside card */}
+                    <div className="absolute bottom-[20px] left-[20px] right-[20px] flex items-center justify-between">
+                      <div className="rounded-full bg-[#063746B2] px-[22px] py-[12px]">
+                        <span
+                          className="text-[18px] leading-[1.2] text-white"
+                          style={{ fontFamily: "var(--font-body)" }}
+                        >
+                          {inf.name}
+                        </span>
+                      </div>
+                      <div className="flex h-[48px] w-[48px] items-center justify-center rounded-full bg-white/80">
+                        <svg className="h-[20px] w-[20px] text-[#012F3B]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M7 17L17 7" />
+                          <path d="M7 7h10v10" />
+                        </svg>
+                      </div>
                     </div>
                   </div>
 
                   {/* Archetype */}
                   <p
-                    className="mt-2 text-[20px] leading-[1.2] text-[#90B2BD]"
+                    className="mt-4 text-[20px] leading-[1.2] text-[#90B2BD]"
                     style={{ fontFamily: "var(--font-body)" }}
                   >
                     &ldquo;{inf.archetype}&rdquo;
@@ -808,7 +791,7 @@ export default function HomePage() {
         <div className="px-[60px]">
           {/* Gradient headline */}
           <h2
-            className="max-w-[1493px] text-[80px] font-medium uppercase leading-[1.01]"
+            className="text-center text-[80px] font-bold uppercase leading-[1.01]"
             style={{
               fontFamily: "var(--font-body)",
               background: "linear-gradient(199deg, #063746 0%, #00BCCF 100%)",
@@ -824,7 +807,7 @@ export default function HomePage() {
 
           {/* Description */}
           <p
-            className="mt-10 max-w-[1380px] text-[26px] leading-[1.5] text-[#4D5347]"
+            className="mx-auto mt-10 max-w-[1380px] text-center text-[26px] leading-[1.5] text-[#4D5347]"
             style={{ fontFamily: "var(--font-body)" }}
           >
             Our AI automation systems accelerate processes across every layer of
@@ -868,7 +851,7 @@ export default function HomePage() {
           </div>
 
           {/* CTA Button */}
-          <div className="mt-12">
+          <div className="mt-6">
             <Link
               href="/ai-solutions"
               className="inline-flex items-center gap-[30px] rounded-full bg-[#063746] py-[8px] pl-[18px] pr-[12px] transition-opacity hover:opacity-90"
@@ -891,56 +874,7 @@ export default function HomePage() {
       </section>
 
       {/* ════════════════════════════════════════════════════════
-          9. +45 AI TOOLS
-          Figma section 59: Scattered tool logos with center text
-          ════════════════════════════════════════════════════════ */}
-      <section className="bg-light-bg py-20">
-        <div className="px-[60px]">
-          <div className="relative mx-auto h-[586px] max-w-[1600px]">
-            {/* Center text */}
-            <div className="absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2 text-center">
-              <p className="whitespace-nowrap font-heading text-[80px] font-normal leading-[1] text-[#063746]">
-                +45
-              </p>
-              <p className="font-heading text-[40px] font-normal leading-[1.2] text-[#063746]">
-                Ai Tools
-              </p>
-            </div>
-            {/* Scattered AI tool logos */}
-            {[
-              { src: "/images/ai-tools/openai.png", name: "OpenAI", top: "5%", left: "12%", size: 72 },
-              { src: "/images/ai-tools/midjourney.png", name: "Midjourney", top: "8%", left: "42%", size: 64 },
-              { src: "/images/ai-tools/runway.png", name: "Runway", top: "3%", left: "72%", size: 60 },
-              { src: "/images/ai-tools/gemini.png", name: "Gemini", top: "25%", left: "2%", size: 68 },
-              { src: "/images/ai-tools/heygen.png", name: "HeyGen", top: "30%", left: "82%", size: 64 },
-              { src: "/images/ai-tools/flux.png", name: "Flux", top: "55%", left: "5%", size: 56 },
-              { src: "/images/ai-tools/kling.png", name: "Kling", top: "60%", left: "85%", size: 60 },
-              { src: "/images/ai-tools/freepik.png", name: "Freepik", top: "75%", left: "18%", size: 68 },
-              { src: "/images/ai-tools/minimax.png", name: "Minimax", top: "80%", left: "48%", size: 64 },
-              { src: "/images/ai-tools/veo.png", name: "Veo", top: "78%", left: "75%", size: 60 },
-              { src: "/images/ai-tools/seedream.png", name: "Seedream", top: "15%", left: "88%", size: 56 },
-              { src: "/images/ai-tools/mystic.png", name: "Mystic", top: "48%", left: "90%", size: 52 },
-            ].map((tool) => (
-              <img
-                key={tool.name}
-                src={tool.src}
-                alt={tool.name}
-                className="absolute opacity-80 transition-opacity duration-300 hover:opacity-100"
-                style={{
-                  top: tool.top,
-                  left: tool.left,
-                  width: tool.size,
-                  height: tool.size,
-                  objectFit: "contain",
-                }}
-              />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ════════════════════════════════════════════════════════
-          10. PARTNERS
+          9. PARTNERS (moved before FAQ per client feedback)
           Figma sections 47-57: 5 bordered logo boxes
           ════════════════════════════════════════════════════════ */}
       <section className="bg-light-bg py-20">
@@ -962,7 +896,7 @@ export default function HomePage() {
                   <img
                     src={partner.image}
                     alt={partner.name}
-                    className="max-h-[175px] max-w-[204px] object-contain opacity-60 grayscale transition-all hover:opacity-100 hover:grayscale-0"
+                    className="max-h-[60px] max-w-[140px] object-contain opacity-60 grayscale transition-all hover:opacity-100 hover:grayscale-0"
                   />
                 ) : (
                   <span className="font-heading text-2xl font-semibold tracking-wide text-[#063746]/40 transition-colors hover:text-[#063746]">
@@ -1117,7 +1051,55 @@ export default function HomePage() {
       </section>
 
       {/* ════════════════════════════════════════════════════════
-          12. CTA BAR — "Let's design what's next together."
+          +45 AI TOOLS (moved after FAQ per client feedback)
+          ════════════════════════════════════════════════════════ */}
+      <section className="bg-light-bg py-20">
+        <div className="px-[60px]">
+          <div className="relative mx-auto h-[586px] max-w-[1600px]">
+            {/* Center text */}
+            <div className="absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2 text-center">
+              <p className="whitespace-nowrap font-heading text-[80px] font-normal leading-[1] text-[#063746]">
+                +45
+              </p>
+              <p className="font-heading text-[40px] font-normal leading-[1.2] text-[#063746]">
+                Ai Tools
+              </p>
+            </div>
+            {/* Scattered AI tool logos */}
+            {[
+              { src: "/images/ai-tools/openai.png", name: "OpenAI", top: "5%", left: "12%", size: 72 },
+              { src: "/images/ai-tools/midjourney.png", name: "Midjourney", top: "8%", left: "42%", size: 64 },
+              { src: "/images/ai-tools/runway.png", name: "Runway", top: "3%", left: "72%", size: 60 },
+              { src: "/images/ai-tools/gemini.png", name: "Gemini", top: "25%", left: "2%", size: 68 },
+              { src: "/images/ai-tools/heygen.png", name: "HeyGen", top: "30%", left: "82%", size: 64 },
+              { src: "/images/ai-tools/flux.png", name: "Flux", top: "55%", left: "5%", size: 56 },
+              { src: "/images/ai-tools/kling.png", name: "Kling", top: "60%", left: "85%", size: 60 },
+              { src: "/images/ai-tools/freepik.png", name: "Freepik", top: "75%", left: "18%", size: 68 },
+              { src: "/images/ai-tools/minimax.png", name: "Minimax", top: "80%", left: "48%", size: 64 },
+              { src: "/images/ai-tools/veo.png", name: "Veo", top: "78%", left: "75%", size: 60 },
+              { src: "/images/ai-tools/seedream.png", name: "Seedream", top: "15%", left: "88%", size: 56 },
+              { src: "/images/ai-tools/mystic.png", name: "Mystic", top: "48%", left: "90%", size: 52 },
+            ].map((tool) => (
+              <img
+                key={tool.name}
+                src={tool.src}
+                alt={tool.name}
+                className="absolute opacity-80 transition-opacity duration-300 hover:opacity-100"
+                style={{
+                  top: tool.top,
+                  left: tool.left,
+                  width: tool.size,
+                  height: tool.size,
+                  objectFit: "contain",
+                }}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ════════════════════════════════════════════════════════
+          CTA BAR — "Let's design what's next together."
           Figma section 60: Gradient bar
           ════════════════════════════════════════════════════════ */}
       <section className="bg-light-bg pb-24">

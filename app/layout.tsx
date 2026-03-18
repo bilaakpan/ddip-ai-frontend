@@ -37,7 +37,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="tr" className={bricolageGrotesque.variable}>
+    <html lang="en" className={bricolageGrotesque.variable}>
       <body>{children}</body>
     </html>
   );
