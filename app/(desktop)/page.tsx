@@ -260,8 +260,8 @@ export default function HomePage() {
 
         {/* Hero content */}
         <div className="relative z-10 flex min-h-screen flex-col px-[60px] pb-10 pt-40 max-md:px-5 max-md:pt-24">
-          <div className="mt-auto mb-[180px]">
-            <h1 className="text-center font-heading text-[clamp(36px,8.5vw,140px)] font-normal uppercase leading-[0.95] text-white" lang="en">
+          <div className="flex flex-1 items-end pb-[15vh]">
+            <h1 className="w-full text-center font-heading text-[clamp(36px,8.5vw,140px)] font-normal uppercase leading-[0.95] text-white" lang="en">
               <span className="relative -top-[0.05em] mr-2 inline-block align-baseline text-[0.6em]">
                 <svg className="inline h-[0.9em] w-[0.9em]" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="2">
                   <line x1="24" y1="2" x2="24" y2="46" />
@@ -278,9 +278,9 @@ export default function HomePage() {
             </h1>
           </div>
 
-          {/* Problem text */}
-          <div className="absolute bottom-[200px] left-[60px] max-w-[280px] text-left">
-            <p className="flex items-center gap-2 text-sm font-semibold text-white">
+          {/* Problem text — right side, vertically centered in hero */}
+          <div className="absolute right-[60px] top-1/2 -translate-y-1/2 max-w-[280px] text-right">
+            <p className="flex items-center justify-end gap-2 text-sm font-semibold text-white">
               <svg className="inline h-3 w-3" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="2">
                 <line x1="24" y1="2" x2="24" y2="46" />
                 <line x1="2" y1="24" x2="46" y2="24" />
