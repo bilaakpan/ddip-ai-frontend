@@ -102,19 +102,19 @@ const selectedWork = [
 ];
 
 const influencersRow1 = [
-  { name: "Mina Özdemir", archetype: "Analytical Visionary", industry: "Real Estate", color: "#CDDBC0", image: "/images/homepage/influencer-01.png" },
-  { name: "Mina Şen", archetype: "Color Story Weaver", industry: "Fashion", color: "#DBC0CD", image: "/images/homepage/influencer-02.jpg" },
-  { name: "Elif Doğan", archetype: "Market-to-Table Storyteller", industry: "Food", color: "#C0C2DB", image: "/images/homepage/influencer-03.png" },
-  { name: "Yasin El Fassi", archetype: "Heritage Remix Artist", industry: "Fashion", color: "#DBC0CD", image: "/images/homepage/influencer-04.png" },
-  { name: "Aylin Demir", archetype: "Calm Change Navigator", industry: "Lifestyle", color: "#C0D7DB", image: "/images/homepage/influencer-05.png" },
+  { name: "Mina Özdemir", archetype: "Analytical Visionary", industry: "Real Estate", color: "#CDDBC0", image: "/images/homepage/influencer-01.png", country: "TR" },
+  { name: "Mina Şen", archetype: "Color Story Weaver", industry: "Fashion", color: "#DBC0CD", image: "/images/homepage/influencer-02.jpg", country: "TR" },
+  { name: "Elif Doğan", archetype: "Market-to-Table Storyteller", industry: "Food", color: "#C0C2DB", image: "/images/homepage/influencer-03.png", country: "TR" },
+  { name: "Yasin El Fassi", archetype: "Heritage Remix Artist", industry: "Fashion", color: "#DBC0CD", image: "/images/homepage/influencer-04.png", country: "MA" },
+  { name: "Aylin Demir", archetype: "Calm Change Navigator", industry: "Lifestyle", color: "#C0D7DB", image: "/images/homepage/influencer-05.png", country: "TR" },
 ];
 
 const influencersRow2 = [
-  { name: "Laila Haddad", archetype: "People-First Strategist", industry: "HR", color: "#CDDBC0", image: "/images/homepage/influencer-06.png" },
-  { name: "Deniz Akar", archetype: "Future-Forward Thinker", industry: "Tech", color: "#C0C2DB", image: "/images/homepage/influencer-07.png" },
-  { name: "Selin Kara", archetype: "Mindful Storyteller", industry: "Wellness", color: "#DBD8C0", image: "/images/homepage/influencer-08.png" },
-  { name: "Ece Yilmaz", archetype: "Cultural Bridge Builder", industry: "Fashion", color: "#DBC0CD", image: "/images/homepage/influencer-09.png" },
-  { name: "Mina Şen", archetype: "Color Story Weaver", industry: "Fashion", color: "#DBC0CD", image: "/images/homepage/influencer-10.png" },
+  { name: "Laila Haddad", archetype: "People-First Strategist", industry: "HR", color: "#CDDBC0", image: "/images/homepage/influencer-06.png", country: "AE" },
+  { name: "Deniz Akar", archetype: "Future-Forward Thinker", industry: "Tech", color: "#C0C2DB", image: "/images/homepage/influencer-07.png", country: "TR" },
+  { name: "Selin Kara", archetype: "Mindful Storyteller", industry: "Wellness", color: "#DBD8C0", image: "/images/homepage/influencer-08.png", country: "TR" },
+  { name: "Ece Yilmaz", archetype: "Cultural Bridge Builder", industry: "Fashion", color: "#DBC0CD", image: "/images/homepage/influencer-09.png", country: "TR" },
+  { name: "Mina Şen", archetype: "Color Story Weaver", industry: "Fashion", color: "#DBC0CD", image: "/images/homepage/influencer-10.png", country: "TR" },
 ];
 
 const faqLeft = [
@@ -132,11 +132,11 @@ const faqRight = [
 ];
 
 const partners = [
-  { name: "AWS", image: "/images/partners/aws.svg" },
-  { name: "Google", image: "/images/partners/google.svg" },
-  { name: "Google AI", image: "/images/partners/google-ai.svg" },
   { name: "Microsoft", image: "/images/partners/microsoft.svg" },
   { name: "Salesforce", image: "/images/partners/salesforce.svg" },
+  { name: "Google", image: "/images/partners/google.svg" },
+  { name: "AWS", image: "/images/partners/aws.svg" },
+  { name: "Google AI", image: "/images/partners/google-ai.svg" },
 ];
 
 /**
@@ -213,12 +213,15 @@ export default function HomePage() {
     cmsApi.influencers({ homepage: true }).then((res) => {
       if (res.data?.length) {
         const colors = ["#CDDBC0", "#DBC0CD", "#C0C2DB", "#C0D7DB", "#DBD8C0"];
+        // Use hardcoded sector data since CMS category field only has "Influencer"
+        const sectors = ["Real Estate", "Fashion", "Food", "Fashion", "Lifestyle", "HR", "Tech", "Wellness", "Fashion", "Fashion"];
         const mapped = res.data.map((inf: Influencer, i: number) => ({
           name: `${inf.name}${inf.surname ? ` ${inf.surname}` : ""}`,
           archetype: inf.persona || "",
-          industry: inf.category || "Influencer",
+          industry: sectors[i % sectors.length] || inf.category || "Influencer",
           color: colors[i % colors.length],
           image: inf.imageUrl || "",
+          country: inf.country || "",
         }));
         const mid = Math.ceil(mapped.length / 2);
         setCmsInfluencers({ row1: mapped.slice(0, mid), row2: mapped.slice(mid) });
@@ -278,9 +281,9 @@ export default function HomePage() {
             </h1>
           </div>
 
-          {/* Problem text — right side, vertically centered in hero */}
-          <div className="absolute right-[60px] top-1/2 -translate-y-1/2 max-w-[280px] text-right">
-            <p className="flex items-center justify-end gap-2 text-sm font-semibold text-white">
+          {/* Problem text — left side, aligned with heading area */}
+          <div className="absolute left-[60px] top-[45%] max-w-[280px] text-left">
+            <p className="flex items-center gap-2 text-sm font-semibold text-white">
               <svg className="inline h-3 w-3" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="2">
                 <line x1="24" y1="2" x2="24" y2="46" />
                 <line x1="2" y1="24" x2="46" y2="24" />
@@ -407,7 +410,7 @@ export default function HomePage() {
             </div>
             <div className="w-1/2">
               <p
-                className="text-[20px] leading-[24px] text-[#063746]"
+                className="text-[28px] font-bold leading-[1.3] text-[#063746]"
                 style={{ fontFamily: "var(--font-body)" }}
               >
                 We help brands unlock their creative potential through the
@@ -416,10 +419,10 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* 4 Capability Cards — 2x2 grid */}
+          {/* 4 Capability Cards — Figma layout: first row offset right, second row 2-col */}
           <div className="mt-20 grid grid-cols-2 gap-x-16 gap-y-12">
-            {capabilities.map((cap) => (
-              <div key={cap.title}>
+            {capabilities.map((cap, idx) => (
+              <div key={cap.title} className={idx < 2 ? "" : ""}>
                 <h3 className="font-heading text-[24px] font-semibold uppercase leading-[1.2] text-[#063746]" lang="en">
                   {cap.title}
                 </h3>
@@ -639,7 +642,7 @@ export default function HomePage() {
 
         <div className="px-[60px]">
           <p
-            className="mt-16 max-w-[1065px] text-[26px] leading-[1.5] text-[#063746]"
+            className="mx-auto mt-16 max-w-[1065px] text-center text-[26px] leading-[1.5] text-[#063746]"
             style={{ fontFamily: "var(--font-body)" }}
           >
             We believe continuous learning especially in AI. While we follow the trends,
@@ -680,8 +683,8 @@ export default function HomePage() {
             className="mx-auto mt-8 max-w-[977px] text-center text-[34px] leading-[1.19] text-[#90B2BD]"
             style={{ fontFamily: "var(--font-body)" }}
           >
-            Our AI influencers represent <span className="text-white">the next step in brand communication</span>,
-            combining <span className="text-white">expressiveness, adaptability, and visual intelligence</span>.
+            Our AI influencers represent the <span className="text-white">next step</span> in brand communication,
+            combining expressiveness, adaptability, and visual intelligence.
           </p>
 
           {/* Filter tabs + Discover More */}
@@ -692,7 +695,7 @@ export default function HomePage() {
                 className="rounded-full bg-[#063746] px-[30px] py-[20px] text-[22px] leading-[1.2] text-[#EBFFFF]"
                 style={{ fontFamily: "var(--font-body)" }}
               >
-                influencer
+                Influencer
               </button>
               <button
                 className="rounded-full px-[30px] py-[20px] text-[22px] leading-[1.2] text-[#063746] transition-colors hover:bg-[#063746]/10"
@@ -716,8 +719,8 @@ export default function HomePage() {
               <span className="font-heading text-[32px] font-normal leading-[1.2] text-white underline underline-offset-8 transition-colors group-hover:text-[#1CE3F4]">
                 Discover More
               </span>
-              <svg className="h-[14px] w-[21px] text-white transition-colors group-hover:text-[#1CE3F4]" viewBox="0 0 21 14" fill="currentColor">
-                <path d="M10.5 0L21 14H0L10.5 0Z" />
+              <svg className="h-[16px] w-[24px] text-white transition-colors group-hover:text-[#1CE3F4]" viewBox="0 0 24 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M0 8h22M16 1l7 7-7 7" />
               </svg>
             </Link>
           </div>
@@ -750,9 +753,16 @@ export default function HomePage() {
                         {inf.industry}
                       </span>
                     </div>
-                    {/* Name + arrow — bottom inside card */}
+                    {/* Name with flag + plus button — bottom inside card */}
                     <div className="absolute bottom-[20px] left-[20px] right-[20px] flex items-center justify-between">
-                      <div className="rounded-full bg-[#063746B2] px-[22px] py-[12px]">
+                      <div className="flex items-center gap-2 rounded-full bg-[#063746B2] px-[22px] py-[12px]">
+                        {inf.country && (
+                          <img
+                            src={`https://flagcdn.com/w20/${inf.country.toLowerCase()}.png`}
+                            alt={inf.country}
+                            className="h-[14px] w-[20px] rounded-sm object-cover"
+                          />
+                        )}
                         <span
                           className="text-[18px] leading-[1.2] text-white"
                           style={{ fontFamily: "var(--font-body)" }}
@@ -761,9 +771,9 @@ export default function HomePage() {
                         </span>
                       </div>
                       <div className="flex h-[48px] w-[48px] items-center justify-center rounded-full bg-white/80">
-                        <svg className="h-[20px] w-[20px] text-[#012F3B]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                          <path d="M7 17L17 7" />
-                          <path d="M7 7h10v10" />
+                        <svg className="h-[30px] w-[30px] text-[#012F3B]" viewBox="0 0 30 30" fill="none" stroke="currentColor" strokeWidth="4">
+                          <line x1="15" y1="0" x2="15" y2="30" />
+                          <line x1="0" y1="15" x2="30" y2="15" />
                         </svg>
                       </div>
                     </div>
@@ -843,9 +853,14 @@ export default function HomePage() {
               >
                 They are designed to minimize human intervention where it is not
                 needed, allowing people to focus on what drives true value:
-                creativity, strategy, and innovation. With tailor-made
-                integrations, DDIP automation unlocks new opportunities for
-                efficiency and creativity, no matter the field.
+                creativity, strategy, and innovation.
+              </p>
+              <p
+                className="mt-8 text-[26px] leading-[1.5] text-[#063746]"
+                style={{ fontFamily: "var(--font-body)" }}
+              >
+                With tailor-made integrations, DDIP automation unlocks new
+                opportunities for efficiency and creativity, no matter the field.
               </p>
             </div>
           </div>

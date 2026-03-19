@@ -141,10 +141,18 @@ export function Footer() {
           <div className="flex flex-col items-start md:items-end">
             {/* Social icons row */}
             <div className="flex items-center gap-[48px]">
-              {/* Instagram */}
-              <a href="#" aria-label="Instagram" className="text-white transition-colors hover:text-[#1CE3F4]">
+              {/* Facebook */}
+              <a href="#" aria-label="Facebook" className="text-white transition-colors hover:text-[#1CE3F4]">
                 <svg className="h-[29px] w-[15px]" viewBox="0 0 15 29" fill="currentColor">
                   <path d="M9.5 9.5V6.5C9.5 5.4 10.4 4.5 11.5 4.5H13.5V0H9.5C6.7 0 4.5 2.2 4.5 5V9.5H0V14H4.5V29H9.5V14H13.5L15 9.5H9.5Z" />
+                </svg>
+              </a>
+              {/* Instagram */}
+              <a href="#" aria-label="Instagram" className="text-white transition-colors hover:text-[#1CE3F4]">
+                <svg className="h-[29px] w-[29px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="2" y="2" width="20" height="20" rx="5" />
+                  <circle cx="12" cy="12" r="5" />
+                  <circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none" />
                 </svg>
               </a>
               {/* LinkedIn */}
