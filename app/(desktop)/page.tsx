@@ -117,18 +117,17 @@ const influencersRow2 = [
   { name: "Mina Şen", archetype: "Color Story Weaver", industry: "Fashion", color: "#DBC0CD", image: "/images/homepage/influencer-10.png", country: "TR" },
 ];
 
-const faqLeft = [
-  "What makes DDIP AI different from other AI agencies?",
-  "Do you develop your own AI tools?",
-  "How do your AI workflows improve efficiency?",
-  "What are AI Influencers, and how do they work?",
+const faqLeft: { question: string; answer: string }[] = [
+  { question: "What makes DDIP AI different from other AI agencies?", answer: "We blend advanced AI capabilities with human creative direction, ensuring every output maintains the nuance, emotion, and strategic intent that only human expertise can provide. Our team combines deep tech knowledge with real creative talent." },
+  { question: "Do you develop your own AI tools?", answer: "Yes. We build custom AI pipelines tailored to each project — from generative models for visual content to NLP systems for copy and automation workflows. We leverage cutting-edge open-source and commercial models, fine-tuned for your brand." },
+  { question: "How do your AI workflows improve efficiency?", answer: "Our AI workflows automate repetitive tasks like content generation, scheduling, and data processing, freeing your team to focus on strategy and creativity. Clients typically see 50-70% time savings on production tasks." },
+  { question: "What are AI Influencers, and how do they work?", answer: "AI influencers are photorealistic digital personas powered by generative AI. They can represent your brand across social platforms with perfect consistency, unlimited availability, and complete creative control — at a fraction of the cost of human influencers." },
 ];
 
-const faqRight = [
-  "How do you ensure the human element remains part of your AI-driven work?",
-  "Can non-creative or technical companies benefit from your workflow solutions?",
-  "How does DDIP stay up to date with evolving AI technologies?",
-  "What industries do you serve?",
+const faqRight: { question: string; answer: string }[] = [
+  { question: "How do you ensure the human element remains part of your AI-driven work?", answer: "Every project starts and ends with human oversight. Our creative directors guide AI outputs, our strategists set the brief, and our editors refine the final product. AI amplifies human creativity — it never replaces it." },
+  { question: "Can non-creative or technical companies benefit from your workflow solutions?", answer: "Absolutely. Our workflow automation and AI solutions are designed for any industry — from finance and logistics to healthcare and education. If you have repetitive processes, we can automate them intelligently." },
+  { question: "How does DDIP stay up to date with evolving AI technologies?", answer: "Our team continuously evaluates new models, frameworks, and techniques. We maintain partnerships with leading AI providers and invest in R&D to ensure our clients always benefit from the latest advancements." },
 ];
 
 const partners = [
@@ -177,21 +176,25 @@ export default function HomePage() {
   const [cmsSolutions, setCmsSolutions] = useState(aiSolutions);
   const [cmsWorks, setCmsWorks] = useState(selectedWork);
   const [cmsInfluencers, setCmsInfluencers] = useState({ row1: influencersRow1, row2: influencersRow2 });
-  const [cmsFaqs, setCmsFaqs] = useState({ left: faqLeft, right: faqRight });
+  const [cmsFaqs, setCmsFaqs] = useState<{ left: { question: string; answer: string }[]; right: { question: string; answer: string }[] }>({ left: faqLeft, right: faqRight });
 
   useEffect(() => {
     // Fetch CMS data in parallel — silent fallback to hardcoded on error
     cmsApi.aiSolutions().then((res) => {
       if (res.data?.length) {
         setCmsSolutions(
-          res.data.map((s: AiSolution) => ({
-            title: s.title,
-            href: `/ai-solutions/${s.slug}`,
-            media: s.mediaUrl || "",
-            mediaType: (s.mediaType as "video" | "image") || "image",
-            description: s.body || "",
-            tags: s.tags?.map((t) => t.tag.name) || [],
-          }))
+          res.data.map((s: AiSolution) => {
+            // Find matching hardcoded item to use as fallback for missing media
+            const fallback = aiSolutions.find((h) => h.title === s.title);
+            return {
+              title: s.title,
+              href: `/ai-solutions/${s.slug}`,
+              media: s.mediaUrl || fallback?.media || "",
+              mediaType: (s.mediaType as "video" | "image") || fallback?.mediaType || "image",
+              description: s.body || fallback?.description || "",
+              tags: s.tags?.map((t) => t.tag.name) || fallback?.tags || [],
+            };
+          })
         );
       }
     }).catch(() => {});
@@ -199,13 +202,18 @@ export default function HomePage() {
     cmsApi.works(true).then((res) => {
       if (res.data?.length) {
         setCmsWorks(
-          res.data.map((w: Work) => ({
-            title: w.title,
-            subtitle: w.body || "",
-            category: w.field || "",
-            video: w.mediaUrl || "",
-            tags: w.tags?.map((t) => t.tag.name) || [],
-          }))
+          res.data.map((w: Work) => {
+            // Find matching hardcoded item to use as fallback for missing media/text
+            const fallback = selectedWork.find((h) => h.title === w.title);
+            const subtitle = w.body && !w.body.startsWith("Lorem Ipsum") ? w.body : (fallback?.subtitle || "");
+            return {
+              title: w.title,
+              subtitle,
+              category: w.field || fallback?.category || "",
+              video: w.mediaUrl || fallback?.video || "",
+              tags: w.tags?.map((t) => t.tag.name) || fallback?.tags || [],
+            };
+          })
         );
       }
     }).catch(() => {});
@@ -221,7 +229,7 @@ export default function HomePage() {
           industry: sectors[i % sectors.length] || inf.category || "Influencer",
           color: colors[i % colors.length],
           image: inf.imageUrl || "",
-          country: inf.country || "",
+          country: inf.countryCode || inf.country || "",
         }));
         const mid = Math.ceil(mapped.length / 2);
         setCmsInfluencers({ row1: mapped.slice(0, mid), row2: mapped.slice(mid) });
@@ -230,10 +238,17 @@ export default function HomePage() {
 
     cmsApi.faqs("main").then((res) => {
       if (res.data?.length) {
-        const mid = Math.ceil(res.data.length / 2);
+        // Deduplicate by question text (seed script may have been run multiple times)
+        const seen = new Set<string>();
+        const unique = res.data.filter((f: Faq) => {
+          if (seen.has(f.question)) return false;
+          seen.add(f.question);
+          return true;
+        });
+        const mid = Math.ceil(unique.length / 2);
         setCmsFaqs({
-          left: res.data.slice(0, mid).map((f: Faq) => f.question),
-          right: res.data.slice(mid).map((f: Faq) => f.question),
+          left: unique.slice(0, mid).map((f: Faq) => ({ question: f.question, answer: f.answer })),
+          right: unique.slice(mid).map((f: Faq) => ({ question: f.question, answer: f.answer })),
         });
       }
     }).catch(() => {});
@@ -626,18 +641,21 @@ export default function HomePage() {
           </h2>
         </div>
 
-        {/* Full-width video (1920x1091 in Figma) */}
-        <div className="mt-16 w-full overflow-hidden">
-          <div className="aspect-[1920/1091]">
-            <video
-              autoPlay
-              muted
-              loop
-              playsInline
-              className="h-full w-full object-cover"
-            >
-              <source src="/videos/main-slider.mp4" type="video/mp4" />
-            </video>
+        {/* Two-column approach visuals (square illustrated cards from Figma) */}
+        <div className="mt-16 flex gap-8 px-[60px]">
+          <div className="w-1/2">
+            <img
+              src="/images/homepage/approach-left.jpg"
+              alt="DDIP creative approach — illustrated design materials"
+              className="h-full w-full rounded-[16px] object-cover"
+            />
+          </div>
+          <div className="w-1/2">
+            <img
+              src="/images/homepage/approach-right.jpg"
+              alt="DDIP AI framework — creative tools and methodology"
+              className="h-full w-full rounded-[16px] object-cover"
+            />
           </div>
         </div>
 
@@ -912,7 +930,7 @@ export default function HomePage() {
                   <img
                     src={partner.image}
                     alt={partner.name}
-                    className="max-h-[60px] max-w-[140px] object-contain"
+                    className={`object-contain ${partner.name === "Google" ? "max-h-[80px] max-w-[80px]" : "max-h-[60px] max-w-[140px]"}`}
                   />
                 ) : (
                   <span className="font-heading text-2xl font-semibold tracking-wide text-[#063746]/40 transition-colors hover:text-[#063746]">
@@ -942,7 +960,7 @@ export default function HomePage() {
           <div className="mt-12 grid grid-cols-2 gap-0 px-[59px]">
             {/* Left column */}
             <div>
-              {cmsFaqs.left.map((question, i) => (
+              {cmsFaqs.left.map((faq, i) => (
                 <div key={i} className="border-b border-[#EBFFFF33]">
                   <button
                     className="flex w-full items-center justify-between py-[45px] text-left"
@@ -952,7 +970,7 @@ export default function HomePage() {
                       className="pr-8 text-[26px] leading-[1.2] text-white"
                       style={{ fontFamily: "var(--font-body)" }}
                     >
-                      {question}
+                      {faq.question}
                     </span>
                     <span
                       className={`shrink-0 text-[30px] leading-none text-white transition-transform duration-300 ${
@@ -974,9 +992,7 @@ export default function HomePage() {
                         className="pb-6 text-[18px] leading-relaxed text-[#90B2BD]"
                         style={{ fontFamily: "var(--font-body)" }}
                       >
-                        Our approach blends advanced AI capabilities with human creative direction,
-                        ensuring every output maintains the nuance, emotion, and strategic intent
-                        that only human expertise can provide.
+                        {faq.answer}
                       </p>
                     </div>
                   </div>
@@ -986,7 +1002,7 @@ export default function HomePage() {
 
             {/* Right column */}
             <div className="pl-[50px]">
-              {cmsFaqs.right.map((question, i) => (
+              {cmsFaqs.right.map((faq, i) => (
                 <div key={i} className="border-b border-[#EBFFFF33]">
                   <button
                     className="flex w-full items-center justify-between py-[45px] text-left"
@@ -996,7 +1012,7 @@ export default function HomePage() {
                       className="pr-8 text-[26px] leading-[1.2] text-white"
                       style={{ fontFamily: "var(--font-body)" }}
                     >
-                      {question}
+                      {faq.question}
                     </span>
                     <span
                       className={`shrink-0 text-[30px] leading-none text-white transition-transform duration-300 ${
@@ -1018,9 +1034,7 @@ export default function HomePage() {
                         className="pb-6 text-[18px] leading-relaxed text-[#90B2BD]"
                         style={{ fontFamily: "var(--font-body)" }}
                       >
-                        Absolutely. Our workflow automation and AI solutions are designed
-                        for any industry that wants to streamline operations, improve
-                        efficiency, and scale intelligent processes.
+                        {faq.answer}
                       </p>
                     </div>
                   </div>
