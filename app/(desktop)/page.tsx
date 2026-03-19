@@ -528,8 +528,9 @@ export default function HomePage() {
         <div className="px-[60px]">
           <div className="flex items-end justify-between">
             <h2
-              className="font-heading text-section font-medium uppercase text-[#063746]"
+              className="font-heading text-[clamp(60px,7vw,120px)] font-bold uppercase text-[#063746]"
               style={{ lineHeight: "0.99" }}
+              lang="en"
             >
               Selected
               <br />
