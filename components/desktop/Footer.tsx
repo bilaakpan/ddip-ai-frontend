@@ -27,7 +27,7 @@ const aiSolutionLinks = [
  */
 export function Footer() {
   return (
-    <footer className="overflow-hidden bg-[#002834] px-5 py-8 md:px-[60px] md:py-[45px]">
+    <footer className="bg-[#002834] px-5 py-8 md:px-[60px] md:py-[45px]">
       <div className="mx-auto max-w-[1608px]">
         {/* ─── Top: CTA + Logo ─── */}
         <div className="flex flex-col items-start gap-8 md:flex-row md:items-center md:justify-between">
@@ -138,26 +138,26 @@ export function Footer() {
           </div>
 
           {/* Right: Social icons + video thumbnail */}
-          <div className="flex min-w-0 shrink flex-col items-start md:items-end">
+          <div className="flex flex-col items-start md:items-end">
             {/* Social icons row */}
             <div className="flex items-center gap-[48px]">
               {/* Facebook */}
-              <a href="#" aria-label="Facebook" className="text-[#90E5F3] transition-colors hover:text-[#1CE3F4]">
-                <svg className="h-[36px] w-[18px]" viewBox="0 0 15 29" fill="currentColor">
+              <a href="#" aria-label="Facebook" className="text-white transition-colors hover:text-[#1CE3F4]">
+                <svg className="h-[29px] w-[15px]" viewBox="0 0 15 29" fill="currentColor">
                   <path d="M9.5 9.5V6.5C9.5 5.4 10.4 4.5 11.5 4.5H13.5V0H9.5C6.7 0 4.5 2.2 4.5 5V9.5H0V14H4.5V29H9.5V14H13.5L15 9.5H9.5Z" />
                 </svg>
               </a>
               {/* Instagram */}
-              <a href="#" aria-label="Instagram" className="text-[#90E5F3] transition-colors hover:text-[#1CE3F4]">
-                <svg className="h-[36px] w-[36px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <a href="#" aria-label="Instagram" className="text-white transition-colors hover:text-[#1CE3F4]">
+                <svg className="h-[29px] w-[29px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <rect x="2" y="2" width="20" height="20" rx="5" />
                   <circle cx="12" cy="12" r="5" />
                   <circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none" />
                 </svg>
               </a>
               {/* LinkedIn */}
-              <a href="#" aria-label="LinkedIn" className="text-[#90E5F3] transition-colors hover:text-[#1CE3F4]">
-                <svg className="h-[36px] w-[34px]" viewBox="0 0 28 29" fill="currentColor">
+              <a href="#" aria-label="LinkedIn" className="text-white transition-colors hover:text-[#1CE3F4]">
+                <svg className="h-[29px] w-[28px]" viewBox="0 0 28 29" fill="currentColor">
                   <circle cx="4" cy="4" r="3.5" />
                   <rect x="0.5" y="10" width="7" height="19" />
                   <path d="M10.5 10H17V13C18.5 10.5 21 9.5 24 10C27 10.5 28 13 28 16V29H21V18C21 15.5 20 14 17.5 14C15 14 13.5 15.5 13.5 18V29H10.5V10Z" />
@@ -166,7 +166,7 @@ export function Footer() {
             </div>
 
             {/* Video thumbnail */}
-            <div className="mt-8 h-[180px] w-full overflow-hidden rounded-none bg-[#D9D9D9] md:mt-[70px] md:h-[304px] md:max-w-[612px]">
+            <div className="mt-8 h-[180px] w-full overflow-hidden rounded-none bg-[#D9D9D9] md:mt-[70px] md:h-[304px] md:w-[612px]">
               <video
                 autoPlay
                 muted
