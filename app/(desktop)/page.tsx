@@ -459,7 +459,7 @@ export default function HomePage() {
           4. OUR AI SOLUTIONS — 4 horizontal cards (scrollable)
           Figma sections 25-26: White cards, rounded 33px, image+title+desc+tags
           ════════════════════════════════════════════════════════ */}
-      <section id="discover" className="bg-light-bg py-24 lg:py-32">
+      <section id="discover" className="overflow-hidden bg-light-bg py-24 lg:py-32">
         <div className="px-[60px]">
           <h2
             className="font-heading text-[clamp(60px,7vw,120px)] font-medium uppercase text-[#063746]"
