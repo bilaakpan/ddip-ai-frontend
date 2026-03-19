@@ -37,6 +37,7 @@ const aiSolutions = [
     href: "/ai-solutions/ai-content",
     media: "/videos/solutions/ai-content-gen.mp4",
     mediaType: "video" as const,
+    poster: "/images/ai-solutions/card-content-gen.jpg",
     description:
       "Design meets intelligence as we use specialized AI tools to transform moodboards into refined, design-driven campaigns.",
     tags: ["Text Generation", "Visual Generation", "Video & Animation Generation", "Personalized Content"],
@@ -46,6 +47,7 @@ const aiSolutions = [
     href: "/ai-solutions/ai-influencer",
     media: "/images/homepage/solution-influencer.jpg",
     mediaType: "image" as const,
+    poster: "",
     description:
       "AI influencers bring your brand to life with smart storytelling and real-time multilingual engagement.",
     tags: ["AI Persona Creation", "Investment Promotion", "Brand Storytelling", "Explainer & Training Videos"],
@@ -55,6 +57,7 @@ const aiSolutions = [
     href: "/ai-solutions",
     media: "/videos/solutions/automation.mp4",
     mediaType: "video" as const,
+    poster: "/images/ai-solutions/card-automation.jpg",
     description:
       "We design intelligent workflows that eliminate repetitive tasks, allowing your teams to focus on what truly drives value, creativity and strategy.",
     tags: ["Automated Video Creator", "Automated LinkedIn Posts", "Amazon Stock & Price Tracker", "Personal Assistant"],
@@ -64,6 +67,7 @@ const aiSolutions = [
     href: "/ai-solutions",
     media: "/images/homepage/solution-geo.jpg",
     mediaType: "image" as const,
+    poster: "",
     description:
       "Traditional SEO isn't enough; it must be supported with GEO. At ddip, we optimize for generative engines.",
     tags: ["Featured Snippets Optimization", "Voice Search Optimization", "FAQ & Q&A Content Strategy", "NAP Consistency"],
@@ -76,6 +80,7 @@ const selectedWork = [
     subtitle: "AI-powered real estate branding and visual identity",
     category: "Real Estate",
     video: "/videos/works/vesta-global.mp4",
+    poster: "/images/works/grid-r1-c1.jpg",
     tags: ["Visual Style Definition", "AI Model Selection & Optimization", "Use-Case Development", "Prompt Crafting"],
   },
   {
@@ -83,6 +88,7 @@ const selectedWork = [
     subtitle: "Interior design showcase with AI-generated visuals",
     category: "Interior Design",
     video: "/videos/works/cesi-design.mp4",
+    poster: "/images/works/grid-r1-c2.jpg",
     tags: ["Enhanced Storytelling", "High-Impact Brand Moment", "Dynamic Interior Visuals"],
   },
   {
@@ -90,6 +96,7 @@ const selectedWork = [
     subtitle: "Premium real estate marketing with creative AI",
     category: "Real Estate",
     video: "/videos/works/mediterra.mp4",
+    poster: "/images/works/grid-r1-c3.jpg",
     tags: ["Refined Visual Storytelling", "Consistent Brand Identity", "Impactful Presentation Experience"],
   },
   {
@@ -97,6 +104,7 @@ const selectedWork = [
     subtitle: "Product campaign powered by AI production",
     category: "Printer Solutions",
     video: "/videos/works/brother.mp4",
+    poster: "/images/works/grid-r1-c4.jpg",
     tags: ["Creative AI Integration", "Custom Character Creation", "Enhanced Campaign Impact"],
   },
 ];
@@ -191,6 +199,7 @@ export default function HomePage() {
               href: `/ai-solutions/${s.slug}`,
               media: s.mediaUrl || fallback?.media || "",
               mediaType: (s.mediaType as "video" | "image") || fallback?.mediaType || "image",
+              poster: fallback?.poster || "",
               description: s.body || fallback?.description || "",
               tags: s.tags?.map((t) => t.tag.name) || fallback?.tags || [],
             };
@@ -210,6 +219,7 @@ export default function HomePage() {
               subtitle,
               category: w.field || fallback?.category || "",
               video: w.mediaUrl || fallback?.video || "",
+              poster: fallback?.poster || "",
               tags: w.tags?.map((t) => t.tag.name) || fallback?.tags || [],
             };
           })
@@ -480,6 +490,7 @@ export default function HomePage() {
                       muted
                       loop
                       playsInline
+                      poster={solution.poster || undefined}
                       className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                     >
                       <source src={solution.media} type="video/mp4" />
@@ -563,6 +574,7 @@ export default function HomePage() {
                     muted
                     loop
                     playsInline
+                    poster={item.poster || undefined}
                     className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                   >
                     <source src={item.video} type="video/mp4" />
@@ -633,18 +645,16 @@ export default function HomePage() {
           </h2>
         </div>
 
-        {/* Full-width video (1920x1091 in Figma) */}
-        <div className="mt-16 w-full overflow-hidden">
-          <div className="aspect-[1920/1091]">
-            <video
-              autoPlay
-              muted
-              loop
-              playsInline
-              className="h-full w-full object-cover"
-            >
-              <source src="/videos/main-slider.mp4" type="video/mp4" />
-            </video>
+        {/* Approach visual — square illustrated book image from Figma */}
+        <div className="mt-16 flex justify-center px-[60px]">
+          <div className="max-w-[900px]">
+            <div className="aspect-square overflow-hidden rounded-[16px]">
+              <img
+                src="/images/homepage/approach-visual.jpg"
+                alt="DDIP creative approach — illustrated design materials"
+                className="h-full w-full object-cover"
+              />
+            </div>
           </div>
         </div>
 
