@@ -184,14 +184,17 @@ export default function HomePage() {
     cmsApi.aiSolutions().then((res) => {
       if (res.data?.length) {
         setCmsSolutions(
-          res.data.map((s: AiSolution) => ({
-            title: s.title,
-            href: `/ai-solutions/${s.slug}`,
-            media: s.mediaUrl || "",
-            mediaType: (s.mediaType as "video" | "image") || "image",
-            description: s.body || "",
-            tags: s.tags?.map((t) => t.tag.name) || [],
-          }))
+          res.data.map((s: AiSolution) => {
+            const fallback = aiSolutions.find((h) => h.title === s.title);
+            return {
+              title: s.title,
+              href: `/ai-solutions/${s.slug}`,
+              media: s.mediaUrl || fallback?.media || "",
+              mediaType: (s.mediaType as "video" | "image") || fallback?.mediaType || "image",
+              description: s.body || fallback?.description || "",
+              tags: s.tags?.map((t) => t.tag.name) || fallback?.tags || [],
+            };
+          })
         );
       }
     }).catch(() => {});
@@ -199,13 +202,17 @@ export default function HomePage() {
     cmsApi.works(true).then((res) => {
       if (res.data?.length) {
         setCmsWorks(
-          res.data.map((w: Work) => ({
-            title: w.title,
-            subtitle: w.body || "",
-            category: w.field || "",
-            video: w.mediaUrl || "",
-            tags: w.tags?.map((t) => t.tag.name) || [],
-          }))
+          res.data.map((w: Work) => {
+            const fallback = selectedWork.find((h) => h.title === w.title);
+            const subtitle = w.body && !w.body.startsWith("Lorem Ipsum") ? w.body : (fallback?.subtitle || "");
+            return {
+              title: w.title,
+              subtitle,
+              category: w.field || fallback?.category || "",
+              video: w.mediaUrl || fallback?.video || "",
+              tags: w.tags?.map((t) => t.tag.name) || fallback?.tags || [],
+            };
+          })
         );
       }
     }).catch(() => {});
