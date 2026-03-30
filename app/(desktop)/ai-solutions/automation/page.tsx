@@ -4,16 +4,21 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { cmsApi, type Faq } from "@/lib/api";
+import HeroPartnersSection from "@/components/desktop/HeroPartnersSection";
+import FourDMethodSection from "@/components/desktop/FourDMethodSection";
+import FaqSection from "@/components/desktop/FaqSection";
+import ContactFormSection from "@/components/desktop/ContactFormSection";
+import AccordionWithImage from "@/components/desktop/AccordionWithImage";
 
 /* ─── Data ─── */
 
 const heroPartners = ["VG", "brother", "Vestine", "OPTIMUM", "ColaSel"];
 
 const accordionItems = [
-  { title: "Content Automation", description: "Automate your content pipeline and manage custom flows — from social posts and email to blog, video, and visual generation at scale." },
-  { title: "Analytics & Insights", description: "Real-time dashboards and AI-driven reporting that turn raw data into actionable business intelligence." },
-  { title: "Conversational Systems", description: "Intelligent chatbots and virtual assistants that handle customer interactions with natural language understanding." },
-  { title: "Lead Solutions", description: "Automated lead capture, scoring, and nurturing workflows that convert prospects into customers." },
+  { title: "Content Automation", description: "Automate the way your brand creates and manages content. From social posts and short videos to trend analyses and scheduling, these workflows save time and keep creativity flowing.", image: "/images/automation/content-automation.png" },
+  { title: "Analytics & Insights", description: "Real-time dashboards and AI-driven reporting that turn raw data into actionable business intelligence.", image: "/images/ai-content/showcase-01.png" },
+  { title: "Conversational Systems", description: "Intelligent chatbots and virtual assistants that handle customer interactions with natural language understanding.", image: "/images/ai-content/showcase-02.png" },
+  { title: "Lead Solutions", description: "Automated lead capture, scoring, and nurturing workflows that convert prospects into customers.", image: "/images/ai-content/showcase-03.png" },
 ];
 
 const featuredAutomations = [
@@ -59,9 +64,6 @@ const faqRight2 = [
 ];
 
 export default function AutomationPage() {
-  const [openAccordion, setOpenAccordion] = useState<number | null>(0);
-  const [openFaqLeft, setOpenFaqLeft] = useState<number | null>(null);
-  const [openFaqRight, setOpenFaqRight] = useState<number | null>(null);
   const [cmsFaqLeft, setCmsFaqLeft] = useState(faqLeft);
   const [cmsFaqRight, setCmsFaqRight] = useState(faqRight);
 
@@ -99,173 +101,162 @@ export default function AutomationPage() {
           <div className="absolute inset-0 bg-gradient-to-r from-dark-bg via-dark-bg/60 to-transparent" />
         </div>
 
-        <div className="relative z-10 whitespace-nowrap overflow-hidden px-[60px]">
-          <h1
-            className="inline-block font-heading font-normal uppercase text-white"
-            style={{ fontSize: "clamp(36px, 8vw, 130px)", lineHeight: "1" }}
-          >
-            AUTOMATION WITH A
-            <span className="text-white/20">I</span>
-          </h1>
-        </div>
+        
+
+        <div className="overflow-hidden whitespace-nowrap">
+  <div className="flex animate-marquee">
+      <h1 className="text-[140px] text-white whitespace-nowrap">
+        Automation with a Creative Touch
+      </h1>
+  </div>
+</div>
 
         <div className="relative z-10 mt-8 px-[60px]">
-          <h2 className="max-w-lg font-heading text-[24px] font-medium leading-[1.3] text-white">
+          <h2 className="max-w-lg font-heading text-[40px] font-medium leading-[1.3] text-white">
             Automation Designed for Intelligence and Impact
           </h2>
-          <p className="mt-4 max-w-lg text-[14px] leading-[1.6] text-white/70" style={{ fontFamily: "var(--font-body)" }}>
+          <p className="mt-4  text-[26px] w-[640px] leading-[1.6] text-white/70" style={{ fontFamily: "var(--font-body)" }}>
             Each custom is designed to automate, learn, and optimize — giving your team more time to think, create, and lead.
           </p>
 
           <div className="mt-8 flex items-center gap-6">
-            <Link href="/start-project" className="font-heading text-[14px] font-medium text-white underline decoration-white/30 underline-offset-8 hover:decoration-[#1CE3F4]">
+            <Link href="/start-project" className="font-heading text-[30px] font-medium text-white underline decoration-white/30 underline-offset-8 hover:decoration-[#1CE3F4]">
               Request a Custom Solution →
             </Link>
           </div>
 
-          <div className="mt-8 flex items-center gap-4">
-            <div className="flex h-[50px] w-[50px] items-center justify-center rounded-full border border-white/20">
-              <svg className="h-5 w-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M12 5v14M5 12l7 7 7-7" />
+          <div className="mt-[60px] flex items-start  flex-col gap-4">
+            <div className="flex  items-center justify-center ">
+              <svg width="99" height="122" viewBox="0 0 99 122" fill="none" className="h-[90px] w-auto" aria-label="Scroll down">
+                <g clipPath="url(#arrow-clip)">
+                  <path d="M56.9199 0L56.9199 95.9621L89.1853 66.0555L98.7897 75.9435L98.9811 76.9205L49.6919 122L0 76.9205L0.198028 75.9435L9.61097 66.2194L42.0612 95.9621L42.0612 0L56.9199 0Z" fill="white" />
+                </g>
+                <defs>
+                  <clipPath id="arrow-clip">
+                    <rect width="98.9811" height="122" fill="white" />
+                  </clipPath>
+                </defs>
               </svg>
             </div>
-            <Link href="#discover" className="font-heading text-[14px] font-medium text-white underline decoration-white/30 underline-offset-8 hover:decoration-[#1CE3F4]">
+            <Link href="#discover" className="font-heading text-[30px] font-medium text-white underline decoration-white/30 underline-offset-8 hover:decoration-[#1CE3F4]">
               View Workflow Templates
             </Link>
           </div>
 
-          <div className="mt-8 flex items-center gap-2">
-            <span className="h-2 w-6 rounded-full bg-white" />
-            <span className="h-2 w-2 rounded-full bg-white/30" />
-            <span className="h-2 w-2 rounded-full bg-white/30" />
-          </div>
+         
         </div>
 
         <div className="absolute bottom-10 right-[60px] z-10">
-          <p className="text-[11px] tracking-wider text-white/30" style={{ fontFamily: "var(--font-body)" }}>[SCROLL]</p>
+          <p className="text-[16px] tracking-wider text-white" style={{ fontFamily: "var(--font-body)" }}>[SCROLL]</p>
         </div>
       </section>
 
       {/* Partners Row */}
-      <section className="border-b border-white/10 bg-dark-bg py-8">
-        <div className="flex items-center justify-center gap-14 px-[60px]">
-          <span className="text-[13px] font-medium uppercase tracking-wider text-white/40">Partners</span>
-          {heroPartners.map((name) => (
-            <span key={name} className="font-heading text-[15px] font-medium text-white/50">{name}</span>
-          ))}
-        </div>
-      </section>
+     <HeroPartnersSection />
 
       {/* ════════════════════════════════════════════════════════
           2. AUTOMATION MADE SIMPLE — Accordion
           ════════════════════════════════════════════════════════ */}
-      <section id="discover" className="bg-light-bg py-24">
-        <div className="px-[60px]">
-          <div className="grid grid-cols-2 gap-16">
-            <div>
-              <h2 className="font-heading text-[40px] font-medium uppercase leading-[1.1] text-[#063746]">
-                Automation Made
-                <br />
-                Simple, Scalable,
-                <br />
-                And Smart
-              </h2>
-            </div>
-            <div>
-              <p className="text-[15px] leading-[1.6] text-[#063746]/60" style={{ fontFamily: "var(--font-body)" }}>
-                A library of intelligent, pre-built workflows to automate what matters most. From content scheduling to customer engagement, each template is designed to connect, perform, and evolve with your business.
-              </p>
-            </div>
-          </div>
-
-          {/* Accordion */}
-          <div className="mt-16 space-y-0">
-            {accordionItems.map((item, i) => (
-              <div key={item.title} className="border-b border-[#063746]/10">
-                <button
-                  className="flex w-full items-center justify-between py-5 text-left"
-                  onClick={() => setOpenAccordion(openAccordion === i ? null : i)}
-                >
-                  <span className="font-heading text-[18px] font-medium text-[#063746]">{item.title}</span>
-                  <svg className={`h-4 w-4 text-[#063746]/40 transition-transform ${openAccordion === i ? "rotate-180" : ""}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M6 9l6 6 6-6" />
-                  </svg>
-                </button>
-                {openAccordion === i && (
-                  <div className="pb-5">
-                    <p className="max-w-xl text-[14px] leading-[1.6] text-[#063746]/50" style={{ fontFamily: "var(--font-body)" }}>
-                      {item.description}
-                    </p>
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <AccordionWithImage
+        heading={"Automation Made\nSimple, Scalable, And\nSmart"}
+        subheading="A library of intelligent, pre-built workflows to automate what matters most. From content scheduling to customer engagement, each template is designed to connect, perform, and evolve with your business."
+        items={accordionItems}
+        defaultImage="/images/automation/content-automation.png"
+      />
 
       {/* ════════════════════════════════════════════════════════
           3. FEATURED AUTOMATIONS — Grid of cards
           ════════════════════════════════════════════════════════ */}
-      <section className="bg-light-bg py-24">
-        <div className="px-[60px]">
-          <h2 className="font-heading text-[36px] font-medium leading-[1.1] text-[#063746]">
-            Featured Automations,
-            <br />
-            Designed for Impact
-          </h2>
-          <p className="mt-4 max-w-xl text-[14px] leading-[1.6] text-[#063746]/60" style={{ fontFamily: "var(--font-body)" }}>
-            Choose a template that fits your goals. From content generation to data analysis, automation starts here.
-          </p>
-
-          <div className="mt-12 grid grid-cols-5 gap-5">
-            {featuredAutomations.map((item) => (
-              <div key={item.title} className="group rounded-[16px] border border-[#063746]/10 bg-white p-5 transition-all hover:shadow-md hover:border-[#1CE3F4]/30">
-                <div className="flex h-[56px] w-[56px] items-center justify-center rounded-[12px] bg-[#063746]/5 text-[28px]">
-                  {item.icon}
-                </div>
-                <p className="mt-4 font-heading text-[14px] font-medium leading-[1.3] text-[#063746]">{item.title}</p>
-              </div>
-            ))}
+      <section className="py-24 px-[60px]" style={{ backgroundColor: "#063746" }}>
+        <div className="flex items-start justify-between mb-12">
+          <div>
+            <h2 className="font-heading text-[36px] font-medium leading-[1.1] text-white">
+              Featured Automations,
+              <br />
+              Designed for Impact
+            </h2>
+            <p className="mt-4 max-w-sm text-[14px] leading-[1.6] text-white/50" style={{ fontFamily: "var(--font-body)" }}>
+              Choose a workflow that fits your goals. From content generation to data analysis, automation starts here.
+            </p>
           </div>
+          <button onClick={() => window.location.href = '/ai-solutions/automation/templates'} className="flex items-center gap-2 rounded-full bg-white px-5 py-3 text-[13px] font-medium text-[#063746] shadow-md hover:bg-white/90">
+           
+            See More Templates
+          </button>
+        </div>
+
+        <div className="grid grid-cols-4 gap-5">
+          {featuredAutomations.slice(0,8).map((item) => (
+            <div key={item.title} className="rounded-[16px] p-5 flex flex-col justify-between" style={{ backgroundColor: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.12)", boxShadow: "0 4px 24px rgba(0,0,0,0.2)" }}>
+              {/* Top — social icons + +5 */}
+              <div className="flex items-center gap-2">
+                {/* Globe */}
+                <div className="w-8 h-8 rounded-lg flex items-center justify-center bg-white/10">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg>
+                </div>
+                {/* Telegram */}
+                <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ backgroundColor: "#229ED9" }}>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.248l-2.04 9.613c-.15.67-.54.835-1.094.52l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L7.48 14.49l-2.95-.924c-.64-.2-.653-.64.136-.948l11.527-4.445c.533-.194 1.002.13.37.075z"/></svg>
+                </div>
+                {/* YouTube */}
+                <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ backgroundColor: "#FF0000" }}>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M23.495 6.205a3.007 3.007 0 00-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 00.527 6.205a31.247 31.247 0 00-.522 5.805 31.247 31.247 0 00.522 5.783 3.007 3.007 0 002.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 002.088-2.088 31.247 31.247 0 00.5-5.783 31.247 31.247 0 00-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>
+                </div>
+                {/* +5 badge */}
+                <div className="w-8 h-8 rounded-lg flex items-center justify-center bg-white/10">
+                  <span className="text-[11px] font-semibold text-white">+5</span>
+                </div>
+              </div>
+
+              {/* Bottom — title */}
+              <p className="mt-10 text-[14px] font-medium text-white leading-[1.4]" style={{ fontFamily: "var(--font-body)" }}>
+                {item.title}
+              </p>
+            </div>
+          ))}
         </div>
       </section>
 
       {/* ════════════════════════════════════════════════════════
           4. TAILORED WORKFLOWS — Dark card
           ════════════════════════════════════════════════════════ */}
-      <section className="bg-light-bg py-12">
-        <div className="px-[60px]">
-          <div className="overflow-hidden rounded-[24px] bg-dark-bg px-16 py-20">
-            <h2 className="font-heading text-[48px] font-medium uppercase leading-[1.05] text-white">
-              Tailored
-              <br />
-              Workflows
+      <section className="bg-light-bg py-20 px-[60px]">
+        <div className="flex items-center gap-16">
+
+          {/* Left — Text */}
+          <div className="w-[40%] shrink-0">
+            <h2 className="font-heading text-[64px] font-bold uppercase leading-[1.0]" style={{ background: "linear-gradient(266.43deg, #063746 1.48%, #00BCCF 117.86%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
+              Tailored<br />Workflows
             </h2>
-            <div className="mt-8 grid grid-cols-2 gap-16">
-              <div>
-                <h3 className="font-heading text-[20px] font-medium text-white">
-                  Custom Automation,
-                  <br />
-                  Designed For Your Business
-                </h3>
-                <p className="mt-4 text-[14px] leading-[1.6] text-white/70" style={{ fontFamily: "var(--font-body)" }}>
-                  When every process demands its own logic, our team designs AI workflows that align with your systems and scale with your ambitions. From CRM to content, every integration is built to enhance efficiency and understanding.
-                </p>
-                <div className="mt-6 flex items-center gap-4">
-                  <Link href="/start-project" className="rounded-full border border-white/20 px-6 py-2.5 font-heading text-[14px] font-medium text-white transition hover:bg-white/5">
-                    Request Custom Workflow
-                  </Link>
-                  <Link href="/lets-connect" className="font-heading text-[14px] font-medium text-white/60 transition hover:text-white">
-                    Book Consultation
-                  </Link>
-                </div>
-              </div>
-              <div className="relative">
-                <Image src="/images/automation/content-automation.png" alt="Tailored Workflows" fill className="object-contain" sizes="40vw" />
-              </div>
+            <h3 className="mt-8 font-heading text-[22px] font-semibold leading-[1.3] text-[#063746]">
+              Custom Automation,<br />Designed For Your Business
+            </h3>
+            <p className="mt-4 text-[15px] leading-[1.7] text-[#063746]/60" style={{ fontFamily: "var(--font-body)" }}>
+              When every process demands its own logic, our team designs AI workflows that align with your systems and goals. From creative operations to enterprise data flows, every integration is built to enhance efficiency and understanding.
+            </p>
+            <div className="mt-8 flex items-center gap-4">
+              <Link href="/start-project" className="rounded-full bg-[#063746] px-6 py-3 font-heading text-[14px] font-medium text-white transition hover:bg-[#063746]/80">
+                Request Custom Workflow
+              </Link>
+              <Link href="/lets-connect" className="rounded-full border border-[#063746]/30 px-6 py-3 font-heading text-[14px] font-medium text-[#063746] transition hover:bg-[#063746]/5">
+                Book Consultation
+              </Link>
             </div>
           </div>
+
+          {/* Right — Dark image card */}
+          <div className="flex-1 overflow-hidden rounded-[24px]">
+          <video
+  autoPlay
+  muted
+  loop
+  playsInline
+  className="w-full h-auto object-cover"
+>
+  <source src="/videos/automation11.mp4" type="video/mp4" />
+</video>
+          </div>
+
         </div>
       </section>
 
@@ -274,17 +265,17 @@ export default function AutomationPage() {
           ════════════════════════════════════════════════════════ */}
       <section className="bg-light-bg py-24">
         <div className="px-[60px] text-center">
-          <h2 className="font-heading text-[40px] font-medium leading-[1.1] text-[#063746]">
+          <h2 className="font-heading text-[40px] font-medium leading-[1.1] text-[#126478]">
             Let&apos;s Build Intelligent Systems Together.
           </h2>
-          <p className="mx-auto mt-4 max-w-xl text-[14px] leading-[1.6] text-[#063746]/60" style={{ fontFamily: "var(--font-body)" }}>
+          <p className="mx-auto mt-4  text-[14px] leading-[1.6] text-[#063746]" style={{ fontFamily: "var(--font-body)" }}>
             Whether you start from our 50+ templates or request a custom setup, your automation journey begins here.
           </p>
           <div className="mt-8 flex items-center justify-center gap-4">
-            <Link href="#" className="rounded-full border border-[#063746]/20 px-6 py-2.5 font-heading text-[14px] font-medium text-[#063746] transition hover:bg-[#063746]/5">
+            <Link href="#" className="rounded-full border border-[#063746]/20 px-6 py-2.5 font-heading text-[14px] font-medium bg-[#0E4252] text-white transition">
               Browse Templates
             </Link>
-            <Link href="/start-project" className="rounded-full bg-[#1CE3F4] px-6 py-2.5 font-heading text-[14px] font-medium text-[#063746] transition hover:bg-[#1CE3F4]/80">
+            <Link href="/start-project" className="rounded-full border border-[#063746] px-6 py-2.5 font-heading text-[14px] font-medium text-[#063746] transition ">
               Request Setup Help
             </Link>
           </div>
@@ -294,36 +285,25 @@ export default function AutomationPage() {
       {/* ════════════════════════════════════════════════════════
           6. OUR 4D METHOD
           ════════════════════════════════════════════════════════ */}
-      <section className="bg-light-bg py-24">
-        <div className="px-[60px]">
-          <h2 className="text-center font-heading text-[48px] font-medium uppercase leading-[1.05] text-[#063746]">
-            Our 4D Method
-          </h2>
-          <div className="mx-auto mt-16 flex max-w-5xl items-end justify-between">
-            {methodSteps.map((step) => (
-              <div key={step.title} className="text-center">
-                <div
-                  className="mx-auto flex h-[160px] w-[200px] items-center justify-center rounded-[20px] border border-[#063746]/10 bg-white shadow-sm"
-                  style={{ transform: `rotate(${step.rotate})` }}
-                >
-                  <Image src={step.icon} alt={step.title} width={70} height={70} className="opacity-80" />
-                </div>
-                <p className="mt-6 font-heading text-[16px] font-medium text-[#063746]">{step.title}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <FourDMethodSection />
 
       {/* ════════════════════════════════════════════════════════
           7. BUILT ON TOP OF
           ════════════════════════════════════════════════════════ */}
-      <section className="bg-light-bg py-24">
+      <section className="bg-light-bg py-16">
         <div className="px-[60px]">
-          <p className="text-[14px] text-[#063746]/50" style={{ fontFamily: "var(--font-body)" }}>Built on top of:</p>
-          <div className="mt-8 flex items-center gap-12">
-            {builtOnTools.map((tool) => (
-              <span key={tool} className="font-heading text-[24px] font-medium text-[#063746]/30">{tool}</span>
+          <p className="font-heading text-[28px] font-semibold text-[#063746] mb-8">Built on top of:</p>
+          <div className="grid grid-cols-5">
+            {[
+              { name: "zapier", color: "#FF4A00", render: () => <span style={{ fontFamily: "sans-serif", fontWeight: 700, fontSize: "28px", color: "#FF4A00" }}>&#10033; zapier</span> },
+              { name: "salesforce", color: "#00A1E0", render: () => <img src="/images/partners/salesforce.svg" alt="Salesforce" className="h-12 object-contain" /> },
+              { name: "HubSpot", color: "#FF7A59", render: () => <span style={{ fontFamily: "sans-serif", fontWeight: 700, fontSize: "28px", color: "#333" }}>Hub<span style={{ color: "#FF7A59" }}>Sp&#9900;t</span></span> },
+              { name: "n8n", color: "#EA4B71", render: () => <span style={{ fontFamily: "sans-serif", fontWeight: 700, fontSize: "28px", color: "#EA4B71" }}>&#9900;&#9900;&#9900; n8n</span> },
+              { name: "Claude", color: "#D4A574", render: () => <span style={{ fontFamily: "sans-serif", fontWeight: 700, fontSize: "28px", color: "#333" }}>&#10033; Claude</span> },
+            ].map((tool) => (
+              <div key={tool.name} className="flex h-[120px] items-center justify-center border border-[#063746]/10">
+                {tool.render()}
+              </div>
             ))}
           </div>
         </div>
@@ -332,99 +312,12 @@ export default function AutomationPage() {
       {/* ════════════════════════════════════════════════════════
           8. FAQ
           ════════════════════════════════════════════════════════ */}
-      <section className="bg-light-bg py-12">
-        <div className="px-[60px]">
-          <div className="overflow-hidden rounded-[24px] bg-dark-bg px-16 py-20">
-            <h2 className="font-heading text-[80px] font-medium leading-[1] text-white">
-              <span className="text-[#1CE3F4]">F</span>AQ
-            </h2>
-
-            <div className="mt-12 grid grid-cols-2 gap-0">
-              <div>
-                {allFaqLeft.map((question, i) => (
-                  <div key={i} className="border-b border-white/10">
-                    <button className="flex w-full items-center justify-between py-[28px] text-left" onClick={() => setOpenFaqLeft(openFaqLeft === i ? null : i)}>
-                      <span className="pr-8 text-[16px] font-medium text-white" style={{ fontFamily: "var(--font-body)" }}>{question}</span>
-                      <span className="shrink-0 text-[20px] text-white/50">{openFaqLeft === i ? "−" : "+"}</span>
-                    </button>
-                    {openFaqLeft === i && (
-                      <div className="pb-5 pr-12">
-                        <p className="text-[14px] leading-[1.6] text-white/60" style={{ fontFamily: "var(--font-body)" }}>Our team will provide detailed information about this topic. Contact us to learn more.</p>
-                      </div>
-                    )}
-                  </div>
-                ))}
-              </div>
-              <div className="pl-[50px]">
-                {allFaqRight.map((question, i) => (
-                  <div key={i} className="border-b border-white/10">
-                    <button className="flex w-full items-center justify-between py-[28px] text-left" onClick={() => setOpenFaqRight(openFaqRight === i ? null : i)}>
-                      <span className="pr-8 text-[16px] font-medium text-white" style={{ fontFamily: "var(--font-body)" }}>{question}</span>
-                      <span className="shrink-0 text-[20px] text-white/50">{openFaqRight === i ? "−" : "+"}</span>
-                    </button>
-                    {openFaqRight === i && (
-                      <div className="pb-5 pr-12">
-                        <p className="text-[14px] leading-[1.6] text-white/60" style={{ fontFamily: "var(--font-body)" }}>Our team will provide detailed information about this topic. Contact us to learn more.</p>
-                      </div>
-                    )}
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Live FAQ */}
-            <div className="mt-12 overflow-hidden rounded-[20px]">
-              <div className="relative h-[240px]">
-                <Image src="/images/automation/content-automation.png" alt="Live FAQ" fill className="object-cover" sizes="100vw" />
-                <div className="absolute inset-0 bg-dark-bg/60" />
-                <div className="relative z-10 flex h-full flex-col justify-center p-10">
-                  <p className="font-heading text-[20px] text-white/60">Live FAQ</p>
-                  <h3 className="mt-2 font-heading text-[36px] font-medium text-white">Didn&apos;t find your answer?</h3>
-                  <Link href="#" className="mt-5 inline-flex w-fit rounded-full bg-[#1CE3F4] px-8 py-3 font-heading text-[15px] font-medium text-[#063746] hover:bg-[#1CE3F4]/80">
-                    Talk to our AI
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <FaqSection leftQuestions={allFaqLeft} rightQuestions={allFaqRight} />
 
       {/* ════════════════════════════════════════════════════════
           9. LET'S BUILD + Contact Form
           ════════════════════════════════════════════════════════ */}
-      <section className="bg-light-bg py-24">
-        <div className="px-[60px]">
-          <div className="grid grid-cols-2 gap-16">
-            <div>
-              <h2 className="font-heading text-[48px] font-medium leading-[1.1] text-[#063746]">
-                Let&apos;s Build
-                <br />
-                What&apos;s Next,
-                <br />
-                Together.
-              </h2>
-              <p className="mt-6 max-w-md text-[14px] leading-[1.6] text-[#063746]/60" style={{ fontFamily: "var(--font-body)" }}>
-                Whether you&apos;re exploring AI solutions or ready to start a custom project, our team is here to help build systems that move your business forward.
-              </p>
-            </div>
-            <div className="space-y-5">
-              <div className="grid grid-cols-2 gap-5">
-                <input type="text" placeholder="Full Name *" className="rounded-[12px] border border-[#063746]/10 bg-white px-4 py-3 text-[14px] text-[#063746] placeholder:text-[#063746]/30 focus:border-[#1CE3F4] focus:outline-none" />
-                <input type="email" placeholder="Email Address *" className="rounded-[12px] border border-[#063746]/10 bg-white px-4 py-3 text-[14px] text-[#063746] placeholder:text-[#063746]/30 focus:border-[#1CE3F4] focus:outline-none" />
-              </div>
-              <div className="grid grid-cols-2 gap-5">
-                <input type="text" placeholder="Company Name" className="rounded-[12px] border border-[#063746]/10 bg-white px-4 py-3 text-[14px] text-[#063746] placeholder:text-[#063746]/30 focus:border-[#1CE3F4] focus:outline-none" />
-                <input type="text" placeholder="Industry" className="rounded-[12px] border border-[#063746]/10 bg-white px-4 py-3 text-[14px] text-[#063746] placeholder:text-[#063746]/30 focus:border-[#1CE3F4] focus:outline-none" />
-              </div>
-              <textarea placeholder="Details regarding your question, if any." rows={4} className="w-full rounded-[12px] border border-[#063746]/10 bg-white px-4 py-3 text-[14px] text-[#063746] placeholder:text-[#063746]/30 focus:border-[#1CE3F4] focus:outline-none" />
-              <button className="rounded-full bg-[#1CE3F4] px-8 py-3 font-heading text-[15px] font-medium text-[#063746] transition hover:bg-[#1CE3F4]/80">
-                Send
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
+      <ContactFormSection />
     </>
   );
 }

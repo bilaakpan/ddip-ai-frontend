@@ -1,7 +1,5 @@
 "use client";
-
 import Link from "next/link";
-
 const companyLinks = [
   { label: "Process", href: "/#discover" },
   { label: "Works", href: "/works" },
@@ -10,7 +8,6 @@ const companyLinks = [
   { label: "Insights", href: "/insights" },
   { label: "Contact", href: "/lets-connect" },
 ];
-
 const aiSolutionLinks = [
   { label: "AI Content Generation", href: "/ai-solutions/ai-content" },
   { label: "Create your influencer with AI", href: "/ai-solutions/ai-influencer" },
@@ -20,127 +17,107 @@ const aiSolutionLinks = [
   { label: "Automated Workflow with AI Agents", href: "/ai-solutions" },
   { label: "GEO for Websites", href: "/ai-solutions" },
 ];
-
 /**
  * Footer — Figma section 61 (node 367:1091)
  * #002834 bg, 1728x1077
  */
 export function Footer() {
   return (
-    <footer className="bg-[#002834] px-5 py-8 md:px-[60px] md:py-[45px]">
-      <div className="mx-auto max-w-[1608px]">
-        {/* ─── Top: CTA + Logo ─── */}
-        <div className="flex flex-col items-start gap-8 md:flex-row md:items-center md:justify-between">
-          {/* Left: CTA text + buttons */}
-          <div>
-            <p className="font-heading text-[24px] font-medium leading-[1.2] text-white md:text-[40px]">
-              Got a project?
-            </p>
-            <h2
-              className="mt-4 text-[48px] font-bold uppercase leading-[0.92] md:mt-[31px] md:text-[100px]"
-              style={{
-                fontFamily: "var(--font-body)",
-                background: "linear-gradient(196deg, #FFFFFF 0%, #77F3FF 100%)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
-              }}
-            >
-              Let&apos;s Connect
-            </h2>
-
-            {/* Buttons */}
-            <div className="mt-6 flex flex-wrap items-center gap-3 md:mt-[53px] md:gap-[22px]">
-              <Link
-                href="/start-project"
-                className="inline-flex h-[54px] items-center justify-center rounded-full bg-[#1CE3F4] px-[22px] transition-opacity hover:opacity-90"
-              >
-                <span
-                  className="text-[22px] font-medium leading-[1.2] text-[#002834]"
-                  style={{ fontFamily: "var(--font-body)" }}
-                >
-                  Start a Project
-                </span>
-              </Link>
-              <a
-                href="https://wa.me/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex h-[53px] items-center justify-center rounded-full border border-[#EBFFFF] px-[22px] transition-colors hover:bg-white/10"
-              >
-                <span
-                  className="text-[22px] font-medium leading-[1.2] text-[#EBFFFF]"
-                  style={{ fontFamily: "var(--font-body)" }}
-                >
-                  Chat on Whatsapp
-                </span>
-              </a>
-            </div>
-          </div>
-
-          {/* Right: ddip.AI logo — large SVG-style text */}
-          <div className="text-left md:text-right">
-            <span className="text-[60px] font-bold leading-none text-[#90E5F3] md:text-[120px]" style={{ fontFamily: "var(--font-body)" }}>
-              ddip
-            </span>
-            <span className="text-[30px] font-bold leading-none text-[#90E5F3] md:text-[60px]" style={{ fontFamily: "var(--font-body)" }}>
-              .AI
-            </span>
-          </div>
+ <footer className="bg-dark-bg px-6 py-12 md:px-10 lg:px-16 xl:px-20">
+  <div>
+    {/* ───────── TOP SECTION ───────── */}
+    <div className="flex flex-col gap-10 md:flex-row md:items-center md:justify-between">
+      {/* LEFT */}
+      <div className="max-w-[700px]">
+        <p className="text-white text-lg md:text-xl lg:text-2xl font-heading">
+          Got a project?
+        </p>
+        <h2
+          className="mt-2 font-bold uppercase leading-[1.1] 
+          text-[36px] sm:text-[48px] md:text-[72px] lg:text-[96px]"
+          style={{
+            background:
+              "linear-gradient(266.04deg, #FFFFFF -88.73%, #77F3FF 255.21%)",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+          }}
+        >
+          LET’S CONNECT
+        </h2>
+        {/* Buttons */}
+        <div className="mt-6 flex flex-wrap gap-4">
+          <Link
+            href="/start-project"
+            className="rounded-full bg-[#1CE3F4] px-6 py-3 text-sm md:text-base font-medium text-black transition hover:opacity-90"
+          >
+            Start a Project
+          </Link>
+          <a
+            href="#"
+            className="rounded-full border border-white/60 px-6 py-3 text-sm md:text-base font-medium text-white transition hover:bg-white/10"
+          >
+            Chat on Whatsapp
+          </a>
         </div>
-
-        {/* ─── Divider ─── */}
-        <div className="mt-12 h-px bg-[#186279] md:mt-[97px]" />
-
-        {/* ─── Middle: Navigation columns + social/video ─── */}
-        <div className="mt-10 flex flex-col gap-10 md:mt-[90px] md:flex-row md:justify-between">
-          {/* Left: two link columns */}
-          <div className="flex flex-col gap-10 sm:flex-row sm:gap-16 md:gap-[200px]">
-            {/* Company */}
-            <div>
-              <h4 className="font-heading text-[24px] font-medium leading-[1.2] text-white md:text-[40px]">
-                Company
-              </h4>
-              <ul className="mt-4 space-y-0 md:mt-[70px]">
-                {companyLinks.map((link) => (
-                  <li key={link.label}>
-                    <Link
-                      href={link.href}
-                      className="block whitespace-nowrap text-[16px] leading-[32px] text-[#6AADBE] transition-colors hover:text-white md:text-[28px] md:leading-[45.9px]"
-                      style={{ fontFamily: "var(--font-body)" }}
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* AI Solutions */}
-            <div>
-              <h4 className="font-heading text-[24px] font-medium leading-[1.2] text-white md:text-[40px]">
-                AI Solutions
-              </h4>
-              <ul className="mt-4 space-y-0 md:mt-[70px]">
-                {aiSolutionLinks.map((link) => (
-                  <li key={link.label}>
-                    <Link
-                      href={link.href}
-                      className="block whitespace-nowrap text-[16px] leading-[32px] text-[#6AADBE] transition-colors hover:text-white md:text-[28px] md:leading-[45.9px]"
-                      style={{ fontFamily: "var(--font-body)" }}
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-
-          {/* Right: Social icons + video thumbnail */}
-          <div className="flex flex-col items-start md:items-end">
-            {/* Social icons row */}
-            <div className="flex items-center gap-[48px]">
+      </div>
+      {/* RIGHT LOGO */}
+      <div className="flex justify-start md:justify-end">
+        <img
+          src="/images/common/ddip-ai-logo.svg"
+          alt="logo"
+          className="w-[160px] sm:w-[200px] md:w-[240px] lg:w-[300px]"
+        />
+      </div>
+    </div>
+    {/* DIVIDER */}
+    <div className="my-12 h-px bg-[#186279]" />
+    {/* ───────── MIDDLE SECTION ───────── */}
+    <div className="grid grid-cols-1 gap-12 md:grid-cols-[1.2fr_1fr_1.5fr]">
+      {/* LEFT LINKS */}
+      <div className="grid grid-cols-2 gap-10">
+        {/* Company */}
+        <div>
+          <h4 className="text-white text-xl md:text-2xl font-medium">
+            Company
+          </h4>
+          <ul className="mt-4 space-y-3">
+            {companyLinks.map((link) => (
+              <li key={link.label}>
+                <Link
+                  href={link.href}
+                  className="text-[#6AADBE] text-sm md:text-base hover:text-white transition"
+                >
+                  {link.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+        {/* AI Solutions */}
+        <div>
+          <h4 className="text-white text-xl md:text-2xl font-medium">
+            AI Solutions
+          </h4>
+          <ul className="mt-4 space-y-3">
+            {aiSolutionLinks.map((link) => (
+              <li key={link.label}>
+                <Link
+                  href={link.href}
+                  className="text-[#6AADBE] text-sm md:text-base hover:text-white transition"
+                >
+                  {link.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+      {/* EMPTY SPACER (matches design breathing room) */}
+      <div className="hidden md:block" />
+      {/* RIGHT SIDE */}
+      <div className="flex flex-col items-start md:items-end gap-8">
+        {/* SOCIALS */}
+      <div className="flex items-center gap-[48px]">
               {/* Facebook */}
               <a href="#" aria-label="Facebook" className="text-white transition-colors hover:text-[#1CE3F4]">
                 <svg className="h-[29px] w-[15px]" viewBox="0 0 15 29" fill="currentColor">
@@ -164,39 +141,35 @@ export function Footer() {
                 </svg>
               </a>
             </div>
-
-            {/* Video thumbnail */}
-            <div className="mt-8 h-[180px] w-full overflow-hidden rounded-none bg-[#D9D9D9] md:mt-[70px] md:h-[304px] md:w-[612px]">
-              <video
-                autoPlay
-                muted
-                loop
-                playsInline
-                className="h-full w-full object-cover"
-              >
-                <source src="/videos/statement-design-video.mp4" type="video/mp4" />
-              </video>
-            </div>
+        {/* VIDEO */}
+        <div className="w-full max-w-[420px] overflow-hidden rounded-md">
+          <div className="relative aspect-video">
+            <video
+              autoPlay
+              muted
+              loop
+              playsInline
+              className="absolute inset-0 w-full h-full object-cover"
+            >
+              <source src="/videos/statement-video.mp4" type="video/mp4" />
+            </video>
           </div>
         </div>
-
-        {/* ─── Bottom bar ─── */}
-        <div className="mt-8 flex flex-col gap-4 md:mt-[70px] md:flex-row md:items-end md:justify-between">
-          <p
-            className="text-[20px] leading-[1.2] text-white"
-            style={{ fontFamily: "var(--font-body)" }}
-          >
-            &copy; 2026 Ddip AI. All Rights Reserved
-          </p>
-          <button
-            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            className="text-[24px] leading-[1.2] text-white transition-colors hover:text-[#1CE3F4] md:text-[40px]"
-            style={{ fontFamily: "var(--font-body)" }}
-          >
-            Back to top ↑
-          </button>
-        </div>
       </div>
-    </footer>
+    </div>
+    {/* ───────── BOTTOM ───────── */}
+    <div className="mt-12 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+      <p className="text-white text-sm md:text-base">
+        © 2026 Ddip AI. All Rights Reserved
+      </p>
+      <button
+        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+        className="text-white text-lg hover:text-[#1CE3F4] transition"
+      >
+        Back to top ↑
+      </button>
+    </div>
+  </div>
+</footer>
   );
 }

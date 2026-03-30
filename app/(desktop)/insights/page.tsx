@@ -1,14 +1,12 @@
 "use client";
-
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { Container } from "@/components/layout";
 import { cn } from "@/lib/utils";
 import { cmsApi, type Insight } from "@/lib/api";
-
+import { h1 } from "framer-motion/client";
 /* ─── Constants ─── */
-
 const CATEGORIES = [
   { id: "all", label: "All" },
   { id: "topics", label: "Topics" },
@@ -17,16 +15,124 @@ const CATEGORIES = [
   { id: "influencer", label: "Influencer" },
   { id: "consulting", label: "Consulting" },
 ];
-
 /* ─── Page ─── */
-
 export default function InsightsPage() {
-  const [articles, setArticles] = useState<Insight[]>([]);
-  const [loading, setLoading] = useState(true);
+  // Mock data for testing
+  const mockArticles: Insight[] = [
+    {
+      id: "1",
+      title: "The Future of AI in Content Creation",
+      slug: "future-ai-content",
+      category: "Real Estate",
+      publishedAt: new Date().toISOString(),
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+      seoDescription: "10 Best AI Ad Creative Generators & Tools in 2026 (Tested)",
+      body: "Detailed article content about AI and content creation...",
+      imageUrl: "/images/insights/article1.svg"
+    },
+    {
+      id: "2",
+      title: "Building Influencer Brands with AI",
+      slug: "ai-influencer-brands",
+      category: "Food",
+      publishedAt: new Date().toISOString(),
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+      seoDescription: "12 AI Consulting Companies for Enterprises in 2026",
+      body: "Detailed article content about AI influencers...",
+      imageUrl: "/images/insights/article2.png"
+    },
+    {
+      id: "3",
+      title: "Automated Workflow Solutions",
+      slug: "automated-workflows",
+      category: "Wellness",
+      publishedAt: new Date().toISOString(),
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+      seoDescription: "15 Best AI Presentation Makers & Tools of 2026 (New Picks)",
+      body: "Detailed article content about workflow automation...",
+      imageUrl: "/images/insights/article3.svg"
+    },
+    {
+      id: "4",
+      title: "The Future of AI in Content Creation",
+      slug: "future-ai-content",
+      category: "Technology",
+      publishedAt: new Date().toISOString(),
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+      seoDescription: "10 Best AI Ad Creative Generators & Tools in 2026 (Tested)",
+      body: "Detailed article content about AI and content creation...",
+      imageUrl: "/images/insights/article1.svg"
+    },
+    {
+      id: "5",
+      title: "Building Influencer Brands with AI",
+      slug: "ai-influencer-brands",
+      category: "Finance",
+      publishedAt: new Date().toISOString(),
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+      seoDescription: "12 AI Consulting Companies for Enterprises in 2026",
+      body: "Detailed article content about AI influencers...",
+      imageUrl: "/images/insights/article2.png"
+    },
+    {
+      id: "6",
+      title: "Automated Workflow Solutions",
+      slug: "automated-workflows",
+      category: "Education",
+      publishedAt: new Date().toISOString(),
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+      seoDescription: "15 Best AI Presentation Makers & Tools of 2026 (New Picks)",
+      body: "Detailed article content about workflow automation...",
+      imageUrl: "/images/insights/article3.svg"
+    },
+    {
+      id: "7",
+      title: "The Future of AI in Content Creation",
+      slug: "future-ai-content",
+      category: "Healthcare",
+      publishedAt: new Date().toISOString(),
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+      seoDescription: "10 Best AI Ad Creative Generators & Tools in 2026 (Tested)",
+      body: "Detailed article content about AI and content creation...",
+      imageUrl: "/images/insights/article1.svg"
+    },
+    {
+      id: "8",
+      title: "Building Influencer Brands with AI",
+      slug: "ai-influencer-brands",
+      category: "Marketing",
+      publishedAt: new Date().toISOString(),
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+      seoDescription: "12 AI Consulting Companies for Enterprises in 2026",
+      body: "Detailed article content about AI influencers...",
+      imageUrl: "/images/insights/article2.png"
+    },
+    {
+      id: "9",
+      title: "Automated Workflow Solutions",
+      slug: "automated-workflows",
+      category: "E-commerce",
+      publishedAt: new Date().toISOString(),
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+      seoDescription: "15 Best AI Presentation Makers & Tools of 2026 (New Picks)",
+      body: "Detailed article content about workflow automation...",
+      imageUrl: "/images/insights/article3.svg"
+    }
+  ];
+  const [articles, setArticles] = useState<Insight[]>(mockArticles);
+  const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [activeCategory, setActiveCategory] = useState("all");
-
   useEffect(() => {
     setLoading(true);
     cmsApi
@@ -39,68 +145,72 @@ export default function InsightsPage() {
         }
         setTotalPages(res.pagination.totalPages);
       })
-      .catch(() => {})
+      .catch(() => { })
       .finally(() => setLoading(false));
   }, [page]);
-
   const featuredArticle = articles[0];
-  const gridArticles = articles.slice(1);
-
+  const gridArticles = articles; // Show all articles instead of slicing
   return (
     <>
       {/* ════════════════════════════════════════════════════════
           HERO — Dark bg with marquee-style heading
           ════════════════════════════════════════════════════════ */}
-      <section className="overflow-hidden bg-dark-bg pt-[140px] pb-12">
+      <section className="overflow-hidden bg-[#F6F9F2] pt-20 sm:pt-24 md:pt-35 pb-8 sm:pb-10 md:pb-12">
         <Container>
-          <div className="overflow-hidden">
-            <h1 className="whitespace-nowrap font-heading text-[clamp(36px,8vw,140px)] font-medium uppercase leading-[1.05] text-white max-md:whitespace-normal">
-              INSIGHTS{" "}
-              <span className="mx-4 inline-block text-[#1CE3F4]">✻</span>{" "}
-              INSIGHTS{" "}
-              <span className="mx-4 inline-block text-[#1CE3F4]">✻</span>{" "}
-              <span className="text-white/20">IN</span>
-            </h1>
+          {/* Marquee heading */}
+          <div className="overflow-hidden w-full">
+            <div className="flex w-max animate-marquee">
+              <h1 className="whitespace-nowrap text-[#063746] font-heading text-[clamp(32px,6vw,64px)] sm:text-[clamp(36px,7vw,80px)] md:text-[clamp(48px,8vw,120px)] uppercase leading-[1.05]">
+                INSIGHTS{" "}
+                <span className="mx-4 text-teal-500">✻</span>
+              </h1>
+              {/* duplicate for seamless scroll */}
+              <h1 className="whitespace-nowrap text-[#063746] font-heading text-[clamp(32px,6vw,64px)] sm:text-[clamp(36px,7vw,80px)] md:text-[clamp(48px,8vw,120px)] uppercase leading-[1.05] ml-10">
+                INSIGHTS{" "} <span className="mx-4 text-teal-500">✻</span>
+                INSIGHTS{" "} <span className="mx-4 text-teal-500">✻</span>
+              </h1>
+            </div>
           </div>
-          <p className="mt-6 max-w-2xl text-body-sm leading-[1.7] text-white/50">
-            Creative ideas, practical tips and insider info — the DDip.AI blog
+          <p className="mt-6 sm:mt-8 max-w-xs sm:max-w-md md:max-w-2xl text-left text-base sm:text-lg md:text-xl leading-[1.6] text-[#063746] px-4">
+            Creative ideas, practical tips and insider info—the Ddip.ai blog
             helps your team get great design done at scale.
           </p>
         </Container>
       </section>
-
       {/* ════════════════════════════════════════════════════════
           CATEGORY FILTERS + ARTICLE GRID — Light background
           ════════════════════════════════════════════════════════ */}
       <section className="bg-light-bg py-12">
         <Container>
           {/* Category filter tabs */}
-          <div className="flex flex-wrap items-center gap-2">
-            {CATEGORIES.map((cat) => (
-              <button
-                key={cat.id}
-                onClick={() => setActiveCategory(cat.id)}
-                className={cn(
-                  "rounded-full border px-5 py-2 text-[13px] font-medium transition-all",
-                  activeCategory === cat.id
-                    ? "border-[#002834] bg-[#002834] text-white"
-                    : "border-border-light bg-white text-light-body hover:border-light-text/30"
-                )}
-              >
-                {cat.label}
-              </button>
-            ))}
+          <div className="flex flex-wrap items-center gap-2 sm:gap-3 md:gap-4">
+            {CATEGORIES.map((cat) => {
+              const isActive = activeCategory === cat.id;
+              return (
+                <button
+                  key={cat.id}
+                  onClick={() => setActiveCategory(cat.id)}
+                  className={cn(
+                    "rounded-full px-3 sm:px-4 md:px-6 py-2 sm:py-2.5 md:py-3 text-sm sm:text-base md:text-[22px] font-medium transition-all duration-200 whitespace-nowrap",
+                    isActive
+                      ? "bg-dark-bg text-white"
+                      : "text-[#1F3F49] hover:bg-[#dcdcdc]"
+                  )}
+                >
+                  {cat.label}
+                </button>
+              );
+            })}
           </div>
-
           {/* Featured Article */}
-          {featuredArticle && (
+          {/* {featuredArticle && (
             <div className="mt-10">
               <Link
                 href={`/insights/${featuredArticle.slug}`}
                 className="group block overflow-hidden rounded-[20px] border border-border-light bg-white transition-all hover:shadow-lg"
               >
                 <div className="grid grid-cols-1 md:grid-cols-2">
-                  {/* Image */}
+                
                   <div className="relative aspect-[16/10] overflow-hidden">
                     {featuredArticle.imageUrl ? (
                       <Image
@@ -119,8 +229,7 @@ export default function InsightsPage() {
                       </span>
                     </div>
                   </div>
-
-                  {/* Content */}
+                 
                   <div className="flex flex-col justify-center p-10">
                     {featuredArticle.category && (
                       <span className="text-[12px] font-medium uppercase tracking-wider text-[#1CE3F4]">
@@ -163,26 +272,25 @@ export default function InsightsPage() {
                 </div>
               </Link>
             </div>
-          )}
-
+          )} */}
           {/* Article Grid — 3 columns */}
           {gridArticles.length > 0 && (
-            <div className="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="mt-8 sm:mt-10 lg:mt-12 grid grid-cols-1 gap-6 sm:gap-8 lg:grid-cols-2 xl:grid-cols-3">
               {gridArticles.map((article) => (
                 <Link
                   key={article.id}
                   href={`/insights/${article.slug}`}
                   className="group"
                 >
-                  <article className="overflow-hidden rounded-[14px] border border-border-light bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+                  <article className="overflow-hidden  bg-white">
                     {/* Image */}
-                    <div className="relative aspect-[16/10] overflow-hidden">
+                    <div className="relative aspect-[4/3] h-60 sm:h-72 md:h-80 lg:h-90 overflow-hidden">
                       {article.imageUrl ? (
                         <Image
                           src={article.imageUrl}
                           alt={article.title}
                           fill
-                          className="object-cover transition-transform duration-500 group-hover:scale-105"
+                          className="object-cover transition-transform duration-500 group-hover:scale-105 rounded-md"
                           sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
                         />
                       ) : (
@@ -190,114 +298,102 @@ export default function InsightsPage() {
                       )}
                       {article.category && (
                         <div className="absolute left-4 top-4">
-                          <span className="rounded-full bg-white/90 px-3 py-1 text-[11px] font-medium text-light-text backdrop-blur-sm">
+                          <span className={cn(
+                            "rounded-full px-2 py-1 text-xs sm:text-sm font-medium text-black backdrop-blur-sm",
+                            (article.category === "Food" || article.category === "Healthcare" || article.category === "Education" || article.category === "Wellness")
+                              ? "bg-[#D7DBC0]/90"
+                              : "bg-[#DBC0CD]/90"
+                          )}>
                             {article.category}
                           </span>
                         </div>
                       )}
                     </div>
-
                     {/* Card Body */}
-                    <div className="p-5">
-                      <h3 className="font-heading text-[16px] font-medium leading-snug text-light-text">
-                        {article.title}
+                    <div className="mt-6 sm:mt-8 md:mt-10 px-2 sm:px-4">
+                      <h3 className="font-heading text-xl sm:text-2xl md:text-3xl font-medium leading-snug text-light-text capitalize">
+                        {article.seoDescription}
                       </h3>
-                      <p className="mt-2 text-[13px] leading-[1.5] text-light-body line-clamp-2">
-                        {article.seoDescription || ""}
-                      </p>
-                      <div className="mt-4 text-[12px] text-light-body/60">
-                        {new Date(article.publishedAt).toLocaleDateString(
-                          "en-US",
-                          {
-                            year: "numeric",
-                            month: "short",
-                            day: "numeric",
-                          }
-                        )}
-                      </div>
                     </div>
                   </article>
                 </Link>
               ))}
             </div>
           )}
-
           {/* Loading state */}
           {loading && articles.length === 0 && (
             <div className="py-20 text-center text-light-body">
               Loading articles...
             </div>
           )}
-
           {/* Empty state */}
           {!loading && articles.length === 0 && (
             <div className="py-20 text-center text-light-body">
               No articles published yet. Check back soon.
             </div>
           )}
-
           {/* View More */}
-          {page < totalPages && (
-            <div className="mt-12 flex justify-center">
-              <button
-                onClick={() => setPage((p) => p + 1)}
-                disabled={loading}
-                className="flex items-center gap-2 text-[14px] font-medium text-[#1CE3F4] transition-colors hover:text-[#00b3c3] disabled:opacity-50"
+          <div className="mt-12 flex justify-center">
+            <button
+              onClick={() => setPage((p) => p + 1)}
+              disabled={loading}
+              className="flex items-center gap-2 text-xl sm:text-2xl lg:text-3xl font-medium text-dark-bg transition-colors hover:text-[#00b3c3] disabled:opacity-50 underline"
+            >
+              {loading ? "Loading..." : "View More Articles "}
+              <svg
+                className="h-5 w-5 sm:h-6 w-6 lg:h-7 w-7"
+                viewBox="0 0 16 16"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               >
-                {loading ? "Loading..." : "View More Articles"}
-                <svg
-                  className="h-4 w-4"
-                  viewBox="0 0 16 16"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M8 3v10M4 9l4 4 4-4" />
-                </svg>
-              </button>
-            </div>
-          )}
+                <path d="M8 3v10M4 9l4 4 4-4" />
+              </svg>
+            </button>
+          </div>
         </Container>
       </section>
-
       {/* ════════════════════════════════════════════════════════
           DISCOVER — Links to other pages
           ════════════════════════════════════════════════════════ */}
       <section className="bg-light-bg py-12">
         <Container>
-          <div className="flex flex-wrap items-center gap-6 text-[14px]">
-            <span className="font-medium text-light-body">Discover:</span>
+          <div className="flex flex-wrap items-center justify-between gap-6 text-[14px]">
             <Link
               href="/the-mind-behind"
-              className="font-medium text-light-text underline underline-offset-4 transition-colors hover:text-[#1CE3F4]"
+              className="font-medium text-3xl text-light-text underline underline-offset-4 transition-colors hover:text-[#1CE3F4]"
             >
-              The Mind Behind
+              Discover The Mind Behind
             </Link>
             <Link
               href="/#solutions"
-              className="font-medium text-light-text underline underline-offset-4 transition-colors hover:text-[#1CE3F4]"
+              className="font-medium text-3xl text-light-text underline underline-offset-4 transition-colors hover:text-[#1CE3F4]"
             >
               Explore Our AI Solutions
             </Link>
           </div>
         </Container>
       </section>
-
       {/* ════════════════════════════════════════════════════════
           THE MIND BEHIND — Dark marquee section
           ════════════════════════════════════════════════════════ */}
-      <section className="overflow-hidden bg-dark-bg py-16">
+      <section className="overflow-hidden bg-[#F6F9F2] py-16">
         <Container>
-          <div className="overflow-hidden">
-            <p className="whitespace-nowrap font-heading text-[clamp(48px,7vw,120px)] font-medium uppercase leading-[1.05] text-white">
-              THE MIND BEHIND{" "}
-              <span className="mx-4 inline-block text-[#1CE3F4]">✻</span>{" "}
-              THE MIND BEHIND{" "}
-              <span className="mx-4 inline-block text-[#1CE3F4]">✻</span>{" "}
-              <span className="text-white/20">TH</span>
-            </p>
+          <div className="w-full overflow-hidden">
+            <div className="flex w-max animate-marquee">
+              <h1 className="flex items-center whitespace-nowrap font-heading uppercase leading-none text-[#145365] text-[clamp(32px,6vw,64px)] sm:text-[clamp(36px,7vw,80px)] md:text-[clamp(48px,8vw,120px)]">
+                The Mind Behind
+                <img src="/images/common/star.svg" alt="*" className="mx-10 h-18 w-18 relative top-[0.08em]" />
+              </h1>
+              <h1 className="ml-10 flex items-center whitespace-nowrap font-heading uppercase leading-none text-[#145365] text-[clamp(32px,6vw,64px)] sm:text-[clamp(36px,7vw,80px)] md:text-[clamp(48px,8vw,120px)]">
+                The Mind Behind
+                <img src="/images/common/star.svg" alt="*" className="mx-10 w-18 h-18 relative top-[0.08em]" />
+                The Mind Behind
+                <img src="/images/common/star.svg" alt="*" className="mx-10 w-18 h-18 relative top-[0.08em]" />
+              </h1>
+            </div>
           </div>
         </Container>
       </section>

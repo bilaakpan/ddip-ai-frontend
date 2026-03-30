@@ -1,39 +1,30 @@
 "use client";
-
 import { useState, type FormEvent } from "react";
 import Image from "next/image";
 import { Container } from "@/components/layout";
 import { cn } from "@/lib/utils";
 import { publicApi } from "@/lib/api";
-
 /* ─── Types ─── */
-
 interface FormData {
   /* Step 1 — Service */
   service: string;
-
   /* Step 2 — Project Details */
   regions: string[];
   audience: string;
   purpose: string;
-
   /* Step 3 — Contact */
   companyName: string;
   fullName: string;
   email: string;
   phone: string;
-
   /* Step 4 — Brief */
   brief: string;
   referenceUrl: string;
 }
-
 interface StepErrors {
   [key: string]: string | undefined;
 }
-
 /* ─── Constants ─── */
-
 const SERVICES = [
   { id: "ai-influencer", label: "AI Influencer / Mascot / Ambassador / Blogger" },
   { id: "automation", label: "AI Workflow Automation" },
@@ -42,9 +33,7 @@ const SERVICES = [
   { id: "ai-content", label: "AI Content Generation" },
   { id: "other", label: "Other / Custom Project" },
 ];
-
 const REGIONS = ["Europe", "North America", "Middle East", "Asia", "Other"];
-
 const AUDIENCES = [
   "Young Adults (18-24)",
   "Adults (25-40)",
@@ -52,7 +41,6 @@ const AUDIENCES = [
   "Corporate",
   "Other",
 ];
-
 const PURPOSES = [
   "Organic Content",
   "Advertising",
@@ -60,9 +48,7 @@ const PURPOSES = [
   "Product Promotion",
   "Other",
 ];
-
 const STEP_LABELS = ["Service", "Details", "Contact", "Brief"];
-
 const INITIAL_FORM: FormData = {
   service: "",
   regions: [],
@@ -75,7 +61,6 @@ const INITIAL_FORM: FormData = {
   brief: "",
   referenceUrl: "",
 };
-
 /**
  * Start a Project — Multi-Step Wizard
  *
@@ -90,16 +75,13 @@ export default function StartProjectPage() {
   const [errors, setErrors] = useState<StepErrors>({});
   const [submitted, setSubmitted] = useState(false);
   const [sending, setSending] = useState(false);
-
   /* ─── Helpers ─── */
-
   function updateField<K extends keyof FormData>(field: K, value: FormData[K]) {
     setForm((prev) => ({ ...prev, [field]: value }));
     if (errors[field as string]) {
       setErrors((prev) => ({ ...prev, [field as string]: undefined }));
     }
   }
-
   function toggleRegion(region: string) {
     setForm((prev) => ({
       ...prev,
@@ -108,9 +90,7 @@ export default function StartProjectPage() {
         : [...prev.regions, region],
     }));
   }
-
   /* ─── Validation ─── */
-
   function validateStep(s: number): boolean {
     const newErrors: StepErrors = {};
     switch (s) {
@@ -141,20 +121,16 @@ export default function StartProjectPage() {
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   }
-
   function handleNext() {
     if (!validateStep(step)) return;
     if (step < 3) setStep((s) => s + 1);
   }
-
   function handleBack() {
     setStep((s) => Math.max(s - 1, 0));
   }
-
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
     if (!validateStep(step)) return;
-
     setSending(true);
     try {
       await publicApi.submitProject({
@@ -180,30 +156,32 @@ export default function StartProjectPage() {
       setSending(false);
     }
   }
-
   /* ─── Shared Hero ─── */
   const heroSection = (
-    <section className="overflow-hidden bg-dark-bg pt-[140px] pb-12">
+    <section className="overflow-hidden bg-[#F6F9F2] pt-20 sm:pt-24 md:pt-35 pb-8 sm:pb-10 md:pb-12">
       <Container>
-        <div className="overflow-hidden">
-          <h1 className="whitespace-nowrap font-heading text-[clamp(36px,8vw,140px)] font-medium uppercase leading-[1.05] text-white max-md:whitespace-normal">
-            START A PROJECT{" "}
-            <span className="mx-4 inline-block text-[#1CE3F4]">✻</span>{" "}
-            START A PROJECT{" "}
-            <span className="mx-4 inline-block text-[#1CE3F4]">✻</span>{" "}
-            <span className="text-white/20">ST</span>
-          </h1>
+        {/* Marquee heading */}
+        <div className="overflow-hidden w-full">
+          <div className="flex w-max animate-marquee">
+            <h1 className="whitespace-nowrap text-[#063746] font-heading text-[clamp(32px,6vw,64px)] sm:text-[clamp(36px,7vw,80px)] md:text-[clamp(48px,8vw,120px)] uppercase leading-[1.05]">
+              START A PROJECT{" "}
+              <span className="mx-4 text-teal-500">✻</span>
+            </h1>
+            {/* duplicate for seamless scroll */}
+            <h1 className="whitespace-nowrap text-[#063746] font-heading text-[clamp(32px,6vw,64px)] sm:text-[clamp(36px,7vw,80px)] md:text-[clamp(48px,8vw,120px)] uppercase leading-[1.05] ml-10">
+              START A PROJECT{" "} <span className="mx-4 text-teal-500">✻</span>
+              START A PROJECT{" "} <span className="mx-4 text-teal-500">✻</span>
+            </h1>
+          </div>
         </div>
-        <p className="mt-6 max-w-2xl text-body-sm leading-[1.7] text-white/50">
+        <p className="mt-6 sm:mt-8 max-w-xs sm:max-w-md md:max-w-2xl text-left text-base sm:text-lg md:text-xl leading-[1.6] text-[#063746] px-4">
           Tell us about your project and we&apos;ll match you with the right AI
           solution. From concept to launch, our team is ready to build with you.
         </p>
       </Container>
     </section>
   );
-
   /* ─── Success State ─── */
-
   if (submitted) {
     return (
       <>
@@ -246,31 +224,35 @@ export default function StartProjectPage() {
       </>
     );
   }
-
   return (
     <>
       {/* ════════════════════════════════════════════════════════
           HERO — Dark bg with marquee-style heading
           ════════════════════════════════════════════════════════ */}
       {heroSection}
-
       {/* ════════════════════════════════════════════════════════
           FORM CARD + PORTRAIT — Light background
           ════════════════════════════════════════════════════════ */}
       <section className="bg-light-bg py-16">
         <Container>
-          <div className="overflow-hidden rounded-[20px] border border-border-light shadow-sm">
-            {/* ── Card Header — Dark Bar ── */}
-            <div className="bg-[#002834] px-8 py-5 lg:px-10">
-              <h2 className="font-heading text-[20px] font-medium text-white">
-                Tell Us Your Project
-              </h2>
+          <div className="relative overflow-hidden rounded-[20px] min-h-[520px]">
+            {/* 🔥 BACKGROUND IMAGE */}
+            <div className="absolute inset-0">
+              <Image
+                src="/images/common/image1.png"
+                alt="AI-generated portrait"
+                fill
+                className="object-cover"
+                priority
+              />
+              {/* Gradient overlay like design */}
+              <div className="absolute inset-0 bg-gradient-to-r from-[#002834]/95 via-[#002834]/80 to-transparent" />
             </div>
-
-            {/* ── Two-Column Layout ── */}
-            <div className="flex min-h-[520px]">
-              {/* LEFT — Form Area */}
-              <div className="flex flex-1 flex-col bg-white px-8 py-8 lg:px-10">
+            {/* 🔥 CONTENT WRAPPER */}
+            <div className="relative z-10 flex min-h-130 flex-col items-start px-6 py-10 lg:px-10">
+              <p className="mb-4 text-center text-24 text-white w-full">Tell Us Your Project</p>
+              {/* 🧊 FLOATING FORM CARD */}
+              <div className="w-full max-w-130 rounded-[16px] bg-white p-6 shadow-xl lg:p-8">
                 {/* Step indicator */}
                 <div className="mb-6 flex items-center gap-4">
                   <span className="font-heading text-[12px] font-semibold uppercase tracking-wider text-[#1CE3F4]">
@@ -288,23 +270,18 @@ export default function StartProjectPage() {
                     ))}
                   </div>
                 </div>
-
+                {/* FORM */}
                 <form
                   onSubmit={handleSubmit}
                   noValidate
-                  className="flex flex-1 flex-col"
+                  className="flex flex-col"
                 >
-                  {/* ── Step 1: Service Selection ── */}
+                  {/* KEEP ALL YOUR STEPS EXACTLY SAME BELOW */}
                   {step === 0 && (
-                    <div className="flex-1">
+                    <div>
                       <h3 className="text-[15px] font-medium text-light-text">
                         Which service are you interested in?
                       </h3>
-                      {errors.service && (
-                        <p className="mt-2 text-xs text-red-500">
-                          {errors.service}
-                        </p>
-                      )}
                       <div className="mt-5 flex flex-col gap-2">
                         {SERVICES.map((svc) => (
                           <label
@@ -318,7 +295,7 @@ export default function StartProjectPage() {
                           >
                             <div
                               className={cn(
-                                "flex h-[18px] w-[18px] shrink-0 items-center justify-center rounded-full border-2 transition-colors",
+                                "flex h-[18px] w-[18px] items-center justify-center rounded-full border-2",
                                 form.service === svc.id
                                   ? "border-[#1CE3F4]"
                                   : "border-[#C3C3C3]"
@@ -330,11 +307,9 @@ export default function StartProjectPage() {
                             </div>
                             <input
                               type="radio"
-                              name="service"
-                              value={svc.id}
+                              className="sr-only"
                               checked={form.service === svc.id}
                               onChange={() => updateField("service", svc.id)}
-                              className="sr-only"
                             />
                             <span className="text-[14px] text-light-text">
                               {svc.label}
@@ -344,407 +319,39 @@ export default function StartProjectPage() {
                       </div>
                     </div>
                   )}
-
-                  {/* ── Step 2: Project Details ── */}
-                  {step === 1 && (
-                    <div className="flex-1">
-                      <h3 className="text-[15px] font-medium text-light-text">
-                        Tell us about your project needs
-                      </h3>
-
-                      {/* Target Regions — Multi-select chips */}
-                      <div className="mt-5">
-                        <p className="text-[13px] font-medium text-light-text">
-                          Target Regions{" "}
-                          <span className="text-red-500">*</span>
-                        </p>
-                        {errors.regions && (
-                          <p className="mt-1 text-xs text-red-500">
-                            {errors.regions}
-                          </p>
-                        )}
-                        <div className="mt-2 flex flex-wrap gap-2">
-                          {REGIONS.map((region) => (
-                            <button
-                              key={region}
-                              type="button"
-                              onClick={() => toggleRegion(region)}
-                              className={cn(
-                                "rounded-full border px-4 py-1.5 text-[13px] transition-all",
-                                form.regions.includes(region)
-                                  ? "border-[#1CE3F4] bg-[#1CE3F4]/10 text-[#002834]"
-                                  : "border-border-light text-light-body hover:border-light-text/30"
-                              )}
-                            >
-                              {form.regions.includes(region) && "✓ "}
-                              {region}
-                            </button>
-                          ))}
-                        </div>
-                      </div>
-
-                      {/* Target Audience — Radio */}
-                      <div className="mt-5">
-                        <p className="text-[13px] font-medium text-light-text">
-                          Target Audience{" "}
-                          <span className="text-red-500">*</span>
-                        </p>
-                        {errors.audience && (
-                          <p className="mt-1 text-xs text-red-500">
-                            {errors.audience}
-                          </p>
-                        )}
-                        <div className="mt-2 flex flex-col gap-1.5">
-                          {AUDIENCES.map((aud) => (
-                            <label
-                              key={aud}
-                              className="flex cursor-pointer items-center gap-2.5"
-                            >
-                              <div
-                                className={cn(
-                                  "flex h-[16px] w-[16px] shrink-0 items-center justify-center rounded-full border-2 transition-colors",
-                                  form.audience === aud
-                                    ? "border-[#1CE3F4]"
-                                    : "border-[#C3C3C3]"
-                                )}
-                              >
-                                {form.audience === aud && (
-                                  <div className="h-2 w-2 rounded-full bg-[#1CE3F4]" />
-                                )}
-                              </div>
-                              <input
-                                type="radio"
-                                name="audience"
-                                value={aud}
-                                checked={form.audience === aud}
-                                onChange={() => updateField("audience", aud)}
-                                className="sr-only"
-                              />
-                              <span className="text-[13px] text-light-body">
-                                {aud}
-                              </span>
-                            </label>
-                          ))}
-                        </div>
-                      </div>
-
-                      {/* Purpose — Radio */}
-                      <div className="mt-5">
-                        <p className="text-[13px] font-medium text-light-text">
-                          Purpose <span className="text-red-500">*</span>
-                        </p>
-                        {errors.purpose && (
-                          <p className="mt-1 text-xs text-red-500">
-                            {errors.purpose}
-                          </p>
-                        )}
-                        <div className="mt-2 flex flex-col gap-1.5">
-                          {PURPOSES.map((purpose) => (
-                            <label
-                              key={purpose}
-                              className="flex cursor-pointer items-center gap-2.5"
-                            >
-                              <div
-                                className={cn(
-                                  "flex h-[16px] w-[16px] shrink-0 items-center justify-center rounded-full border-2 transition-colors",
-                                  form.purpose === purpose
-                                    ? "border-[#1CE3F4]"
-                                    : "border-[#C3C3C3]"
-                                )}
-                              >
-                                {form.purpose === purpose && (
-                                  <div className="h-2 w-2 rounded-full bg-[#1CE3F4]" />
-                                )}
-                              </div>
-                              <input
-                                type="radio"
-                                name="purpose"
-                                value={purpose}
-                                checked={form.purpose === purpose}
-                                onChange={() => updateField("purpose", purpose)}
-                                className="sr-only"
-                              />
-                              <span className="text-[13px] text-light-body">
-                                {purpose}
-                              </span>
-                            </label>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  )}
-
-                  {/* ── Step 3: Contact Information ── */}
-                  {step === 2 && (
-                    <div className="flex-1">
-                      <h3 className="text-[15px] font-medium text-light-text">
-                        Your contact information
-                      </h3>
-
-                      <div className="mt-5 grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-2">
-                        {/* Full Name */}
-                        <div className="flex flex-col gap-1">
-                          <label
-                            htmlFor="fullName"
-                            className="text-[13px] font-medium text-light-text"
-                          >
-                            Full Name{" "}
-                            <span className="text-red-500">*</span>
-                          </label>
-                          <input
-                            id="fullName"
-                            type="text"
-                            placeholder="Your name and last name"
-                            value={form.fullName}
-                            onChange={(e) =>
-                              updateField("fullName", e.target.value)
-                            }
-                            className={cn(
-                              "h-10 rounded-lg border bg-white px-3 text-[14px] text-light-text placeholder:text-light-body/50 transition-colors focus:border-[#1CE3F4] focus:outline-none focus:ring-1 focus:ring-[#1CE3F4]",
-                              errors.fullName
-                                ? "border-red-500"
-                                : "border-border-light hover:border-light-text/30"
-                            )}
-                          />
-                          {errors.fullName && (
-                            <p className="text-xs text-red-500">
-                              {errors.fullName}
-                            </p>
-                          )}
-                        </div>
-
-                        {/* Company Name */}
-                        <div className="flex flex-col gap-1">
-                          <label
-                            htmlFor="companyName"
-                            className="text-[13px] font-medium text-light-text"
-                          >
-                            Company Name
-                          </label>
-                          <input
-                            id="companyName"
-                            type="text"
-                            placeholder="Your company"
-                            value={form.companyName}
-                            onChange={(e) =>
-                              updateField("companyName", e.target.value)
-                            }
-                            className="h-10 rounded-lg border border-border-light bg-white px-3 text-[14px] text-light-text placeholder:text-light-body/50 transition-colors hover:border-light-text/30 focus:border-[#1CE3F4] focus:outline-none focus:ring-1 focus:ring-[#1CE3F4]"
-                          />
-                        </div>
-
-                        {/* Email */}
-                        <div className="flex flex-col gap-1">
-                          <label
-                            htmlFor="email"
-                            className="text-[13px] font-medium text-light-text"
-                          >
-                            Email <span className="text-red-500">*</span>
-                          </label>
-                          <input
-                            id="email"
-                            type="email"
-                            placeholder="email@domain.com"
-                            value={form.email}
-                            onChange={(e) =>
-                              updateField("email", e.target.value)
-                            }
-                            className={cn(
-                              "h-10 rounded-lg border bg-white px-3 text-[14px] text-light-text placeholder:text-light-body/50 transition-colors focus:border-[#1CE3F4] focus:outline-none focus:ring-1 focus:ring-[#1CE3F4]",
-                              errors.email
-                                ? "border-red-500"
-                                : "border-border-light hover:border-light-text/30"
-                            )}
-                          />
-                          {errors.email && (
-                            <p className="text-xs text-red-500">
-                              {errors.email}
-                            </p>
-                          )}
-                        </div>
-
-                        {/* Phone */}
-                        <div className="flex flex-col gap-1">
-                          <label
-                            htmlFor="phone"
-                            className="text-[13px] font-medium text-light-text"
-                          >
-                            Phone <span className="text-red-500">*</span>
-                          </label>
-                          <input
-                            id="phone"
-                            type="tel"
-                            placeholder="+90 XXX XXX XXXX"
-                            value={form.phone}
-                            onChange={(e) =>
-                              updateField("phone", e.target.value)
-                            }
-                            className={cn(
-                              "h-10 rounded-lg border bg-white px-3 text-[14px] text-light-text placeholder:text-light-body/50 transition-colors focus:border-[#1CE3F4] focus:outline-none focus:ring-1 focus:ring-[#1CE3F4]",
-                              errors.phone
-                                ? "border-red-500"
-                                : "border-border-light hover:border-light-text/30"
-                            )}
-                          />
-                          {errors.phone && (
-                            <p className="text-xs text-red-500">
-                              {errors.phone}
-                            </p>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                  )}
-
-                  {/* ── Step 4: Brief + Submit ── */}
-                  {step === 3 && (
-                    <div className="flex-1">
-                      <h3 className="text-[15px] font-medium text-light-text">
-                        Share your project details
-                      </h3>
-
-                      <div className="mt-5 space-y-4">
-                        {/* Brief textarea */}
-                        <div className="grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-2">
-                          <div className="flex flex-col gap-1">
-                            <label
-                              htmlFor="brief"
-                              className="text-[13px] font-medium text-light-text"
-                            >
-                              Project Brief
-                            </label>
-                            <textarea
-                              id="brief"
-                              rows={4}
-                              placeholder="Describe your project goals, timeline, and requirements..."
-                              value={form.brief}
-                              onChange={(e) =>
-                                updateField("brief", e.target.value)
-                              }
-                              className="w-full resize-y rounded-lg border border-border-light bg-white px-3 py-2.5 text-[14px] text-light-text placeholder:text-light-body/50 transition-colors hover:border-light-text/30 focus:border-[#1CE3F4] focus:outline-none focus:ring-1 focus:ring-[#1CE3F4]"
-                            />
-                          </div>
-
-                          {/* Reference URL */}
-                          <div className="flex flex-col gap-1">
-                            <label
-                              htmlFor="referenceUrl"
-                              className="text-[13px] font-medium text-light-text"
-                            >
-                              Style Reference URL
-                            </label>
-                            <input
-                              id="referenceUrl"
-                              type="url"
-                              placeholder="https://example.com/inspiration"
-                              value={form.referenceUrl}
-                              onChange={(e) =>
-                                updateField("referenceUrl", e.target.value)
-                              }
-                              className="h-10 rounded-lg border border-border-light bg-white px-3 text-[14px] text-light-text placeholder:text-light-body/50 transition-colors hover:border-light-text/30 focus:border-[#1CE3F4] focus:outline-none focus:ring-1 focus:ring-[#1CE3F4]"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-
-                  {/* ── Navigation Buttons ── */}
+                  {/* KEEP REST OF YOUR STEPS UNCHANGED */}
+                  {/* Buttons */}
                   <div className="mt-8 flex items-center justify-between pt-4">
                     {step > 0 ? (
                       <button
                         type="button"
                         onClick={handleBack}
-                        className="text-[14px] font-medium text-light-body transition-colors hover:text-light-text"
+                        className="text-[14px] font-medium text-light-body hover:text-light-text"
                       >
                         Back
                       </button>
                     ) : (
                       <div />
                     )}
-
                     {step < 3 ? (
                       <button
                         type="button"
                         onClick={handleNext}
-                        className="inline-flex items-center gap-1.5 rounded-[var(--radius-button)] bg-[#1CE3F4] px-6 py-2.5 text-[14px] font-medium text-[#002834] transition-all hover:bg-[#00d4d4]"
+                        className="inline-flex items-center gap-1.5 rounded-full bg-[#1CE3F4] px-6 py-2.5 text-[14px] font-medium text-[#002834] hover:bg-[#00d4d4]"
                       >
-                        Next
-                        <svg
-                          className="h-3.5 w-3.5"
-                          viewBox="0 0 14 14"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        >
-                          <path d="M3 7h8M8 3l3 4-3 4" />
-                        </svg>
+                        Next →
                       </button>
                     ) : (
                       <button
                         type="submit"
                         disabled={sending}
-                        className="inline-flex items-center gap-1.5 rounded-[var(--radius-button)] bg-[#1CE3F4] px-6 py-2.5 text-[14px] font-medium text-[#002834] transition-all hover:bg-[#00d4d4] disabled:opacity-50"
+                        className="inline-flex items-center gap-1.5 rounded-full bg-[#1CE3F4] px-6 py-2.5 text-[14px] font-medium text-[#002834] hover:bg-[#00d4d4]"
                       >
-                        {sending ? (
-                          <>
-                            <svg
-                              className="h-4 w-4 animate-spin"
-                              viewBox="0 0 24 24"
-                              fill="none"
-                            >
-                              <circle
-                                className="opacity-25"
-                                cx="12"
-                                cy="12"
-                                r="10"
-                                stroke="currentColor"
-                                strokeWidth="4"
-                              />
-                              <path
-                                className="opacity-75"
-                                fill="currentColor"
-                                d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
-                              />
-                            </svg>
-                            Sending...
-                          </>
-                        ) : (
-                          <>
-                            Submit
-                            <svg
-                              className="h-3.5 w-3.5"
-                              viewBox="0 0 14 14"
-                              fill="none"
-                              stroke="currentColor"
-                              strokeWidth="2"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            >
-                              <path d="M3 7h8M8 3l3 4-3 4" />
-                            </svg>
-                          </>
-                        )}
+                        Submit →
                       </button>
                     )}
                   </div>
                 </form>
-              </div>
-
-              {/* RIGHT — Portrait Image */}
-              <div className="relative hidden w-[42%] lg:block">
-                <Image
-                  src="/images/ai-influencer/portrait-01.png"
-                  alt="AI-generated portrait"
-                  fill
-                  className="object-cover"
-                  sizes="(min-width: 1024px) 42vw, 0vw"
-                  priority
-                />
-                {/* Subtle overlay for depth */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#002834]/30 via-transparent to-transparent" />
               </div>
             </div>
           </div>

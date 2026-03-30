@@ -24,19 +24,72 @@ const aiSolutionLinks = [
 ];
 
 const megaMenuCards = [
-  {
-    title: "AI Content Generation",
-    href: "/ai-solutions/ai-content",
-  },
-  {
-    title: "Create Your Influencer with AI",
-    href: "/ai-solutions/ai-influencer",
-  },
-  {
-    title: "Automation with a Creative Touch",
-    href: "/ai-solutions/automation",
-  },
+  { title: "AI Content Generation",            href: "/ai-solutions/ai-content",    image: "/images/ai-content/showcase-01.png" },
+  { title: "Create Your Influencer with AI",   href: "/ai-solutions/ai-influencer", image: "/images/ai-content/showcase-02.png" },
+  { title: "AI Brand Ambassador Generation",   href: "/ai-solutions/ai-influencer", image: "/images/ai-content/showcase-03.png" },
+  { title: "AI Mascot Generation",             href: "/ai-solutions/ai-influencer", image: "/images/ai-content/showcase-04.png" },
+  { title: "AI Commercial Production",         href: "/ai-solutions/ai-commercial", image: "/images/ai-commercial/hero-slider.png" },
+  { title: "Automated Workflow with AI Agents",href: "/ai-solutions/automation",    image: "/images/automation/hero-slider.png" },
+  { title: "GEO for Websites",                 href: "/ai-solutions/geo",           image: "/images/ai-content/showcase-01.png" },
 ];
+
+/**
+ * Carousel for mega menu cards with prev/next arrows and dots
+ */
+function MegaMenuCarousel({ cards }: { cards: { title: string; href: string; image: string }[] }) {
+  const [current, setCurrent] = useState(0);
+  const visible = 3;
+  const total = cards.length;
+
+  const prev = () => setCurrent((c) => (c - 1 + total) % total);
+  const next = () => setCurrent((c) => (c + 1) % total);
+
+  const visibleCards = Array.from({ length: visible }, (_, i) => cards[(current + i) % total]);
+
+  return (
+    <div className="relative flex flex-col gap-3">
+      {/* Left arrow */}
+      <button onClick={prev} className="absolute -left-4 top-1/2 -translate-y-1/2 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-white/15 hover:bg-white/30 transition">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M8 2L4 6L8 10" stroke="white" strokeWidth="1.5" strokeLinecap="round"/></svg>
+      </button>
+
+      {/* Right arrow */}
+      <button onClick={next} className="absolute -right-4 top-1/2 -translate-y-1/2 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-white/15 hover:bg-white/30 transition">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M4 2L8 6L4 10" stroke="white" strokeWidth="1.5" strokeLinecap="round"/></svg>
+      </button>
+
+      {/* Cards row */}
+      <div className="flex gap-3">
+        {visibleCards.map((card, i) => (
+          <Link
+            key={i}
+            href={card.href}
+            className="group relative flex-1 overflow-hidden rounded-[16px]"
+            style={{ aspectRatio: "4/5" }}
+          >
+            <Image src={card.image} alt={card.title} fill className="object-cover transition-transform duration-300 group-hover:scale-105" sizes="200px" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
+            <div className="relative flex h-full flex-col justify-end p-3">
+              <p className="text-[13px] font-medium leading-snug text-white" style={{ fontFamily: "SF Pro Display" }}>
+                {card.title}
+              </p>
+            </div>
+          </Link>
+        ))}
+      </div>
+
+      {/* Dots */}
+      <div className="flex items-center justify-center gap-1.5 mt-1">
+        {cards.map((_, i) => (
+          <button key={i} onClick={() => setCurrent(i)}
+            className="rounded-full transition-all"
+            style={{ width: i === current ? "20px" : "6px", height: "6px", background: i === current ? "#002834" : "rgba(255,255,255,0.3)" }}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
 
 /**
  * Desktop navigation bar matching Figma design:
@@ -48,8 +101,19 @@ const megaMenuCards = [
  */
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
-  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState<string | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const closeTimer = useState<ReturnType<typeof setTimeout> | null>(null);
+
+  const handleMouseEnter = (label: string) => {
+    if (closeTimer[0]) clearTimeout(closeTimer[0]);
+    setDropdownOpen(label);
+  };
+
+  const handleMouseLeave = () => {
+    const t = setTimeout(() => setDropdownOpen(null), 200);
+    closeTimer[1](t);
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -115,28 +179,24 @@ export function Navbar() {
         </button>
 
         {/* Center Nav Links — hidden on mobile */}
-        <div className="flex items-center gap-[20px] max-md:hidden xl:gap-[40px] shrink-0">
+        <div className="flex items-center gap-[20px] max-md:hidden xl:gap-[40px] shrink-0 w-[60%]">
           {navLinks.map((link) => (
             <div
               key={link.label}
               className="relative"
-              onMouseEnter={() =>
-                link.hasDropdown && setDropdownOpen(true)
-              }
-              onMouseLeave={() =>
-                link.hasDropdown && setDropdownOpen(false)
-              }
+              onMouseEnter={() => link.hasDropdown && handleMouseEnter(link.label)}
+              onMouseLeave={() => link.hasDropdown && handleMouseLeave()}
             >
               <Link
                 href={link.href}
-                className="whitespace-nowrap font-heading text-[14px] font-medium leading-[1.2] text-white transition-colors hover:text-teal-500 lg:text-[16px] xl:text-[18px]"
+                className="whitespace-nowrap font-heading text-[14px] font-medium leading-[1.2] text-white transition-colors hover:text-teal-500"
               >
                 {link.label}
                 {link.hasDropdown && (
                   <svg
                     className={cn(
                       "ml-1 inline-block h-3 w-3 transition-transform duration-200",
-                      dropdownOpen && "rotate-180"
+                      dropdownOpen === link.label && "rotate-180"
                     )}
                     viewBox="0 0 12 12"
                     fill="none"
@@ -152,54 +212,34 @@ export function Navbar() {
                 )}
               </Link>
 
-              {/* Mega Menu Dropdown */}
-              {link.hasDropdown && dropdownOpen && (
-                <div className="absolute left-1/2 top-full -translate-x-1/2 pt-2">
-                  <div className="w-[800px] rounded-xl border border-border-dark bg-dark-bg/98 p-6 shadow-2xl backdrop-blur-xl">
-                    <div className="grid grid-cols-[240px_1fr] gap-8">
+              {/* Mega Menu Dropdown — only for Ai Solutions */}
+              {link.hasDropdown && link.label === "Ai Solutions" && dropdownOpen === link.label && (
+                <div className="fixed left-1/2 -translate-x-1/2 pt-4" style={{ top: "70px", width: "100%", maxWidth: "1490px" }}
+                  onMouseEnter={() => handleMouseEnter(link.label)}
+                  onMouseLeave={() => handleMouseLeave()}
+                >
+                  <div
+                    className="w-full p-6 shadow-2xl backdrop-blur-xl"
+                    style={{ background: "#424242", borderRadius: "40px" }}
+                  >
+                    <div className="grid grid-cols-[260px_1fr] gap-8 items-center">
+
                       {/* Left — text links */}
-                      <div className="space-y-1">
+                      <div className="space-y-2">
                         {aiSolutionLinks.map((subLink) => (
                           <Link
                             key={subLink.label}
                             href={subLink.href}
-                            className="block rounded-md px-3 py-2 text-sm text-white/70 transition-colors hover:bg-white/5 hover:text-teal-500"
+                            className="block px-2 py-1.5 text-[15px] text-white transition-colors hover:text-[#1CE3F4]"
+                            style={{ fontFamily: "SF Pro Display" }}
                           >
                             {subLink.label}
                           </Link>
                         ))}
                       </div>
 
-                      {/* Right — image cards */}
-                      <div className="grid grid-cols-3 gap-4">
-                        {megaMenuCards.map((card, i) => (
-                          <Link
-                            key={card.title}
-                            href={card.href}
-                            className="group relative aspect-[4/5] overflow-hidden rounded-lg"
-                          >
-                            <div
-                              className="absolute inset-0 transition-transform duration-300 group-hover:scale-105"
-                              style={{
-                                background: `linear-gradient(160deg, hsl(${185 + i * 15}, 50%, ${30 + i * 8}%), hsl(${200 + i * 20}, 40%, ${15 + i * 5}%))`,
-                              }}
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-t from-dark-bg/70 to-transparent" />
-                            <div className="relative flex h-full flex-col justify-end p-4">
-                              <p className="text-xs font-medium leading-snug text-white">
-                                {card.title}
-                              </p>
-                            </div>
-                          </Link>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* Carousel dots */}
-                    <div className="mt-4 flex justify-center gap-2">
-                      <span className="h-1.5 w-6 rounded-full bg-teal-500" />
-                      <span className="h-1.5 w-1.5 rounded-full bg-white/20" />
-                      <span className="h-1.5 w-1.5 rounded-full bg-white/20" />
+                      {/* Right — carousel */}
+                      <MegaMenuCarousel cards={megaMenuCards} />
                     </div>
                   </div>
                 </div>
@@ -212,13 +252,13 @@ export function Navbar() {
         <div className="flex items-center gap-[20px] max-md:hidden xl:gap-[40px] shrink-0">
           <Link
             href="/start-project"
-            className="whitespace-nowrap font-body text-[14px] font-medium leading-[1.2] text-white transition-colors hover:text-teal-500 lg:text-[16px] xl:text-[18px]"
+            className="whitespace-nowrap font-body text-[14px] font-medium leading-[1.2] text-white transition-colors hover:text-teal-500"
           >
             Start a Project
           </Link>
           <Link
             href="/lets-connect"
-            className="flex h-[53px] w-[167px] items-center justify-center gap-[14px] rounded-[56px] bg-white font-body text-[18px] font-medium leading-[1.2] text-[#063746] transition-colors hover:bg-white/90"
+            className="flex h-[50px] w-[167px] items-center justify-center gap-[14px] rounded-[56px] bg-white font-body text-[15px] font-medium leading-[1.2] text-[#063746] transition-colors hover:bg-white/90"
           >
             Let&apos;s Connect
             <svg

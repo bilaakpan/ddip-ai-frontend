@@ -124,7 +124,7 @@ async function main() {
   await crop("DDip AI.jpg", "partners/partners-row.jpg", 0, 24600, 3456, 600);
 
   // FAQ section images (right column) (~y26000, y27000)
-  await crop("DDip AI.jpg", "homepage/faq-image-1.jpg", 1800, 26200, 1600, 800);
+  await crop("DDip AI.jpg", "homepage/faq-image-1.svg", 1800, 26200, 1600, 800);
   await crop("DDip AI.jpg", "homepage/faq-image-2.jpg", 1800, 27100, 1600, 800);
 
   // Footer lava/fire image

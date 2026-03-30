@@ -2,9 +2,14 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { Play, Pause } from "lucide-react";
 import { useState, useEffect, useRef, useCallback } from "react";
 import { Container } from "@/components/layout";
 import { cmsApi, type AiSolution, type Work, type Influencer, type Faq } from "@/lib/api";
+import useEmblaCarousel from "embla-carousel-react";
+import Autoplay from "embla-carousel-autoplay";
+import FaqSection from "@/components/desktop/FaqSection";
+import PartnersSection from "@/components/desktop/PartnersSection";
 
 /* ─── Data ─── */
 
@@ -144,8 +149,6 @@ const partners = [
  * Pixel-perfect rebuild from Figma UI page (node 255:542, 1728x15709)
  */
 export default function HomePage() {
-  const [openFaqLeft, setOpenFaqLeft] = useState<number | null>(null);
-  const [openFaqRight, setOpenFaqRight] = useState<number | null>(null);
 
   // Hero carousel
   const heroImages = [
@@ -178,6 +181,38 @@ export default function HomePage() {
   const [cmsWorks, setCmsWorks] = useState(selectedWork);
   const [cmsInfluencers, setCmsInfluencers] = useState({ row1: influencersRow1, row2: influencersRow2 });
   const [cmsFaqs, setCmsFaqs] = useState({ left: faqLeft, right: faqRight });
+const autoplayRow1 = useRef(Autoplay({ delay: 2000, stopOnInteraction: false, stopOnMouseEnter: false }));
+const autoplayRow2 = useRef(Autoplay({ delay: 2500, stopOnInteraction: false, stopOnMouseEnter: false }));
+const [emblaRow1Ref] = useEmblaCarousel({ loop: true, align: "start", dragFree: true }, [autoplayRow1.current]);
+const [emblaRow2Ref] = useEmblaCarousel({ loop: true, align: "start", dragFree: true }, [autoplayRow2.current]);
+
+
+  const autoplayPlugin = useRef(Autoplay({ delay: 3000, stopOnInteraction: true }));
+const [emblaRef, emblaApi] = useEmblaCarousel(
+  { loop: true, align: "start", skipSnaps: false },
+  [autoplayPlugin.current]
+);
+const [solutionsIndex, setSolutionsIndex] = useState(0);
+const [solutionsPlaying, setSolutionsPlaying] = useState(true);
+
+useEffect(() => {
+  if (!emblaApi) return;
+  emblaApi.on("select", () => setSolutionsIndex(emblaApi.selectedScrollSnap()));
+}, [emblaApi]);
+
+const scrollSolutions = useCallback((i: number) => emblaApi?.scrollTo(i), [emblaApi]);
+
+const togglePlay = () => {
+  if (!emblaApi) return;
+  const ap = autoplayPlugin.current;
+  if (solutionsPlaying) {
+    ap.stop();
+  } else {
+    ap.play();
+  }
+  setSolutionsPlaying((p) => !p);
+};
+
 
   useEffect(() => {
     // Fetch CMS data in parallel — silent fallback to hardcoded on error
@@ -246,7 +281,7 @@ export default function HomePage() {
           ════════════════════════════════════════════════════════ */}
       <section className="relative min-h-screen overflow-hidden bg-dark-bg">
         {/* Background image carousel */}
-        <div className="absolute inset-0 z-0">
+         <div className="absolute inset-0 z-0">
           {heroImages.map((src, i) => (
             <Image
               key={src}
@@ -264,8 +299,18 @@ export default function HomePage() {
         {/* Hero content */}
         <div className="relative z-10 flex min-h-screen flex-col px-[60px] pb-10 pt-40 max-md:px-5 max-md:pt-24">
           <div className="flex flex-1 items-end pb-[15vh]">
-            <h1 className="w-full text-center font-heading text-[clamp(36px,8.5vw,140px)] font-normal uppercase leading-[0.95] text-white" lang="en">
-              <span className="relative -top-[0.05em] mr-2 inline-block align-baseline text-[0.6em]">
+           <h1 
+              className="w-full text-center uppercase text-white" 
+              lang="en"
+              style={{
+                fontFamily: 'Bricolage Grotesque, sans-serif',
+                fontWeight: 400,
+                fontSize: '110.32px',
+                lineHeight: '100px',
+                letterSpacing: '0%'
+              }}
+            >
+              <span className="relative -top-[0.05em] mr-4 inline-block align-baseline text-[0.6em]">
                 <svg className="inline h-[0.9em] w-[0.9em]" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="2">
                   <line x1="24" y1="2" x2="24" y2="46" />
                   <line x1="2" y1="24" x2="46" y2="24" />
@@ -275,16 +320,23 @@ export default function HomePage() {
               </span>
               CREATE YOUR
               <br />
-              OWN AI INFLUENCER
+              &nbsp;&nbsp;OWN AI INFLUENCER
               <br />
-              <span className="ml-[0.5em]">WITH US!</span>
+              <span className="mr-[170px]">WITH US!</span>
             </h1>
           </div>
 
           {/* Problem text — left side, aligned with heading area */}
-          <div className="absolute left-[60px] top-[45%] max-w-[280px] text-left">
-            <p className="flex items-center gap-2 text-sm font-semibold text-white">
-              <svg className="inline h-3 w-3" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="2">
+          <div className="absolute right-[200px] top-[45%] mt-[10px] max-w-[300px] text-left">
+            <p className="flex items-center gap-2 text-white"
+              style={{
+                fontFamily: 'SF Pro Display, sans-serif',
+                fontWeight: 400,
+                fontSize: '20.34px',
+                lineHeight: '120%'
+              }}
+            >
+              <svg className="inline h-4 w-4" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="2">
                 <line x1="24" y1="2" x2="24" y2="46" />
                 <line x1="2" y1="24" x2="46" y2="24" />
                 <line x1="7" y1="7" x2="41" y2="41" />
@@ -292,15 +344,23 @@ export default function HomePage() {
               </svg>
               Problem:
             </p>
-            <p className="mt-1 text-sm leading-relaxed text-white/80">
+            <p 
+              className="mt-2 text-white/90"
+              style={{
+                fontFamily: 'SF Pro Display, sans-serif',
+                fontWeight: 400,
+                fontSize: '18.34px',
+                lineHeight: '120%'
+              }}
+            >
               We need to promote our brand but the influencer prices are too high.
             </p>
           </div>
 
           {/* Bottom bar */}
-          <div className="flex items-end justify-between">
+          <div className="flex items-end justify-between" style={{position:"relative",top:"-190px",paddingLeft:"80px",paddingRight:'40px'}}>
             <div className="flex flex-col gap-4">
-              <svg width="99" height="122" viewBox="0 0 99 122" fill="none" className="h-[100px] w-auto" aria-label="Scroll down">
+              <svg width="99" height="122" viewBox="0 0 99 122" fill="none" className="h-[90px] w-auto" aria-label="Scroll down">
                 <g clipPath="url(#arrow-clip)">
                   <path d="M56.9199 0L56.9199 95.9621L89.1853 66.0555L98.7897 75.9435L98.9811 76.9205L49.6919 122L0 76.9205L0.198028 75.9435L9.61097 66.2194L42.0612 95.9621L42.0612 0L56.9199 0Z" fill="white" />
                 </g>
@@ -310,7 +370,16 @@ export default function HomePage() {
                   </clipPath>
                 </defs>
               </svg>
-              <a href="#discover" className="font-heading text-[32px] text-white underline decoration-white/40 underline-offset-8 transition-colors hover:decoration-teal-500">
+               <a 
+                href="#discover" 
+                className="text-white underline decoration-white/40 underline-offset-8 transition-colors hover:decoration-teal-500"
+                style={{
+                  fontFamily: 'Bricolage Grotesque, sans-serif',
+                  fontWeight: 400,
+                  fontSize: '25px',
+                  lineHeight: '120%'
+                }}
+              >
                 Discover AI Solutions
               </a>
               <div className="flex items-center gap-3">
@@ -360,14 +429,14 @@ export default function HomePage() {
       {/* ════════════════════════════════════════════════════════
           2. STATEMENT — "WE DON'T JUST USE AI WE DESIGN WITH IT."
           ════════════════════════════════════════════════════════ */}
-      <section className="bg-light-bg py-24 lg:py-32">
+     <section className="bg-light-bg py-24 lg:py-32">
         <div className="mx-auto mb-16 w-[1182px] max-w-full overflow-hidden" style={{ aspectRatio: "1182/525" }}>
           <video autoPlay muted loop playsInline className="h-full w-full object-cover">
             <source src="/videos/statement-video.mp4" type="video/mp4" />
           </video>
         </div>
 
-        <div className="px-[60px]">
+       <div className="px-[60px]">
           <p className="mb-6 font-heading text-[25.6px] font-semibold leading-[1.2] text-[#126478]">
             Why DDIP AI
           </p>
@@ -399,126 +468,147 @@ export default function HomePage() {
           3. ABOUT — "From Insight to Intelligence" + 4 Capability Cards
           Figma sections 19-24
           ════════════════════════════════════════════════════════ */}
-      <section className="bg-light-bg pb-24">
-        <div className="px-[60px]">
-          {/* Top row: tagline left + description right */}
-          <div className="flex gap-16">
-            <div className="w-1/2">
-              <p className="font-heading text-[24px] font-normal leading-[1.2] text-[#063746]">
-                From Insight to Intelligence
-              </p>
-            </div>
-            <div className="w-1/2">
-              <p
-                className="text-[28px] font-bold leading-[1.3] text-[#063746]"
-                style={{ fontFamily: "var(--font-body)" }}
-              >
-                We help brands unlock their creative potential through the
-                synergy of human insight and AI-driven precision.
-              </p>
-            </div>
-          </div>
+<section className="bg-light-bg py-16 pb-24">
+  <div className="px-[60px]">
+    {/* Top row: tagline left + description right */}
+    <div className="flex gap-16">
+      <div className="w-1/2">
+        <p className="font-heading text-[24px] font-normal leading-[1.2] text-[#063746]">
+          From Insight to Intelligence
+        </p>
+      </div>
+      <div className="w-1/2">
+        <p
+          className="text-[28px] font-bold leading-[1.3] text-[#063746]"
+          style={{ fontFamily: "var(--font-body)" }}
+        >
+          We help brands unlock their creative potential through the
+          synergy of human insight and AI-driven precision.
+        </p>
+      </div>
+    </div>
 
-          {/* 4 Capability Cards — Figma layout: first row offset right, second row 2-col */}
-          <div className="mt-20 grid grid-cols-2 gap-x-16 gap-y-12">
-            {capabilities.map((cap, idx) => (
-              <div key={cap.title} className={idx < 2 ? "" : ""}>
-                <h3 className="font-heading text-[24px] font-semibold uppercase leading-[1.2] text-[#063746]" lang="en">
-                  {cap.title}
-                </h3>
-                <p
-                  className="mt-5 text-[20px] leading-[24px] text-[#063746]"
-                  style={{ fontFamily: "var(--font-body)" }}
-                >
-                  {cap.description}
-                </p>
-              </div>
-            ))}
-          </div>
+    {/* 4 Capability Cards */}
+    <div className="mt-16 grid grid-cols-2 gap-x-12 gap-y-8 pl-[50%]">
+      {capabilities.map((cap) => (
+        <div key={cap.title}>
+          <h3 className="font-heading text-[24px] font-semibold uppercase leading-[1.2] text-[#063746]" lang="en">
+            {cap.title}
+          </h3>
+          <p
+            className="mt-5 text-[20px] leading-[24px] text-[#063746]"
+            style={{ fontFamily: "var(--font-body)" }}
+          >
+            {cap.description}
+          </p>
         </div>
-      </section>
+      ))}
+    </div>
+  </div>
+</section>
 
       {/* ════════════════════════════════════════════════════════
           4. OUR AI SOLUTIONS — 4 horizontal cards (scrollable)
           Figma sections 25-26: White cards, rounded 33px, image+title+desc+tags
           ════════════════════════════════════════════════════════ */}
-      <section id="discover" className="bg-light-bg py-24 lg:py-32">
-        <div className="px-[60px]">
-          <h2
-            className="font-heading text-[clamp(60px,7vw,120px)] font-medium uppercase text-[#063746]"
-            style={{ lineHeight: "0.99" }}
-            lang="en"
-          >
-            Our AI
-            <br />
-            Solutions
-          </h2>
-        </div>
-
-        {/* Horizontal scrolling card row — wide landscape cards */}
-        <div className="mt-16 flex gap-[33px] overflow-x-auto px-[60px] pb-4" style={{ scrollbarWidth: "none" }}>
-          {cmsSolutions.map((solution) => (
-            <Link
-              key={solution.title}
-              href={solution.href}
-              className="group flex-shrink-0"
-              style={{ width: "clamp(600px, 48vw, 1074px)" }}
+    <div className="mt-16 overflow-hidden px-[60px]" ref={emblaRef}>
+  <div className="flex gap-[33px]">
+    {cmsSolutions.map((solution) => (
+      <Link
+        key={solution.title}
+        href={solution.href}
+        className="group flex-shrink-0"
+        style={{ width: "clamp(600px, 48vw, 1074px)" }}
+      >
+        <div className="overflow-hidden rounded-[33px] bg-white">
+          {/* Media area */}
+          <div className="relative aspect-[974/536] overflow-hidden rounded-[17px] mx-[50px] mt-[50px]">
+            {solution.mediaType === "video" ? (
+              <video
+                autoPlay
+                muted
+                loop
+                playsInline
+                className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+              >
+                <source src={solution.media} type="video/mp4" />
+              </video>
+            ) : (
+              <img
+                src={solution.media}
+                alt={solution.title}
+                className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+            )}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+            <h3
+              className="absolute left-[42px] top-[34px] text-[27px] font-bold leading-[1.4] text-white"
+              style={{ fontFamily: "var(--font-body)" }}
             >
-              <div className="overflow-hidden rounded-[33px] bg-white">
-                {/* Media area (video or image) */}
-                <div className="relative aspect-[974/536] overflow-hidden rounded-[17px] mx-[50px] mt-[50px]">
-                  {solution.mediaType === "video" ? (
-                    <video
-                      autoPlay
-                      muted
-                      loop
-                      playsInline
-                      className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    >
-                      <source src={solution.media} type="video/mp4" />
-                    </video>
-                  ) : (
-                    <img
-                      src={solution.media}
-                      alt={solution.title}
-                      className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                  )}
-                  {/* Title overlay on media */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-                  <h3
-                    className="absolute left-[42px] top-[34px] text-[27px] font-bold leading-[1.4] text-white"
-                    style={{ fontFamily: "var(--font-body)" }}
-                  >
-                    {solution.title}
-                  </h3>
-                </div>
+              {solution.title}
+            </h3>
+          </div>
 
-                {/* Description + Tags */}
-                <div className="px-[50px] pb-[50px] pt-[42px]">
-                  <p
-                    className="line-clamp-3 text-[27px] font-medium leading-[37px] text-[#063746]"
-                    style={{ fontFamily: "var(--font-body)" }}
-                  >
-                    {solution.description}
-                  </p>
-                  {/* Tag pills */}
-                  <div className="mt-8 flex flex-wrap gap-2">
-                    {solution.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="rounded-full border border-[#063746] px-[13px] py-[8px] text-[10px] leading-[1.2] text-[#063746]"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </Link>
-          ))}
+          {/* Description + Tags */}
+          <div className="px-[50px] pb-[50px] pt-[42px]">
+            <p
+              className="line-clamp-3 text-[27px] font-medium leading-[37px] text-[#063746]"
+              style={{ fontFamily: "var(--font-body)" }}
+            >
+              {solution.description}
+            </p>
+            <div className="mt-8 flex flex-wrap gap-2">
+              {solution.tags.map((tag) => (
+                <span
+                  key={tag}
+                  className="rounded-full border border-[#063746] px-[13px] py-[8px] text-[10px] leading-[1.2] text-[#063746]"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </div>
         </div>
-      </section>
+      </Link>
+    ))}
+  </div>
+</div>
+
+{/* Controls — Play/Pause + Dots */}
+<div className="mt-6 flex items-center justify-center gap-4">
+
+
+  {/* Dots */}
+  <div className="flex items-center gap-[6px]">
+    {cmsSolutions.map((_, i) => (
+      <button
+        key={i}
+        onClick={() => { scrollSolutions(i); setSolutionsPlaying(false); autoplayPlugin.current.stop(); }}
+        aria-label={`Slide ${i + 1}`}
+        className="transition-all duration-300"
+        style={{
+          width: i === solutionsIndex ? 24 : 8,
+          height: 8,
+          borderRadius: 9999,
+          backgroundColor: "#A1A1A1",
+          opacity: i === solutionsIndex ? 1 : 0.25,
+        }}
+      />
+    ))}
+  </div>
+    {/* Play/Pause */}
+  <button
+    onClick={togglePlay}
+    aria-label={solutionsPlaying ? "Pause" : "Play"}
+  className="flex h-8 w-8 items-center justify-center rounded-full border border-[#A1A1A1] text-[#A1A1A1] transition hover:bg-[#A1A1A1] hover:text-white"
+  >
+   {solutionsPlaying ? (
+  <Pause className="h-4 w-4 fill-current" />
+) : (
+  <Play className="h-4 w-4 fill-current" />
+)}
+  </button>
+</div>
 
       {/* ════════════════════════════════════════════════════════
           5. SELECTED WORK — 2x2 portfolio grid
@@ -567,7 +657,7 @@ export default function HomePage() {
                     {item.tags.map((tag) => (
                       <span
                         key={tag}
-                        className="rounded-full border border-white/50 bg-white/70 px-4 py-[10px] text-[12px] leading-[1.2] text-[#063746]"
+                        className="rounded-full border border-white/50 bg-white/70 px-4 py-[10px] text-[10px] leading-[1.2] text-[#063746]"
                       >
                         {tag}
                       </span>
@@ -576,19 +666,19 @@ export default function HomePage() {
                 </div>
                 {/* Info below image */}
                 <div className="mt-5 flex items-baseline justify-between">
-                  <div>
-                    <h3 className="font-heading text-[32px] font-normal leading-[1.2] text-[#063746]">
+                  <div style={{width:'40%'}}>
+                    <h3 className="font-heading text-[25px] font-normal leading-[1.2] text-[#063746]">
                       {item.title}
                     </h3>
                     <p
-                      className="mt-1 text-[28px] leading-[1.2] text-[#063746]"
+                      className="mt-1 text-[18px] leading-[1.2] text-[#063746]"
                       style={{ fontFamily: "var(--font-body)" }}
                     >
                       {item.subtitle}
                     </p>
                   </div>
                   <span
-                    className="text-[32px] uppercase leading-[1.2] text-[#063746]"
+                    className="text-[25px] uppercase leading-[1.2] text-[#063746]"
                     style={{ fontFamily: "var(--font-body)" }}
                   >
                     ({item.category})
@@ -641,18 +731,23 @@ export default function HomePage() {
           </div>
         </div>
 
-        <div className="px-[60px]">
-          <p
-            className="mx-auto mt-16 max-w-[1065px] text-center text-[26px] leading-[1.5] text-[#063746]"
-            style={{ fontFamily: "var(--font-body)" }}
-          >
-            We believe continuous learning especially in AI. While we follow the trends,
-            also we track emerging AI tools, test their creative potential, and integrate
-            only the ones that meet our performance standards. Every DDIP project operates
-            through this evolving framework, combining precision, adaptability, and creative
-            control to deliver results that stay ahead of the curve.
-          </p>
-        </div>
+      <div className="px-[60px]">
+  <p
+    className="mx-auto mt-16 max-w-[1065px] text-center text-[26px] leading-[1.5] text-[#063746]"
+    style={{ fontFamily: "var(--font-body)" }}
+  >
+    We believe continuous learning especially in AI. While we follow the trends,
+    also we track emerging AI tools, test their creative potential, and integrate
+    only the ones that meet our performance standards.
+  </p>
+  <p
+    className="mx-auto mt-8 max-w-[1065px] text-center text-[26px] leading-[1.5] text-[#063746]"
+    style={{ fontFamily: "var(--font-body)" }}
+  >
+    Every DDIP project operates through this evolving framework,
+    combining precision, adaptability, and creative control to deliver results that stay ahead of the curve.
+  </p>
+</div>
       </section>
 
       {/* ════════════════════════════════════════════════════════
@@ -727,70 +822,118 @@ export default function HomePage() {
           </div>
 
           {/* Influencer Cards — 2 rows, horizontal scroll */}
-          {[cmsInfluencers.row1, cmsInfluencers.row2].map((row, rowIdx) => (
-            <div
-              key={rowIdx}
-              className={`${rowIdx === 0 ? "mt-10" : "mt-8"} flex gap-5 overflow-x-auto px-[60px] pb-4`}
-              style={{ scrollbarWidth: "none" }}
+         <div className="mt-10 overflow-hidden px-[60px]" ref={emblaRow1Ref}>
+  <div className="flex gap-5">
+    {[...cmsInfluencers.row1, ...cmsInfluencers.row1].map((inf, idx) => (
+      <div key={`row1-${idx}`} className="w-[376px] flex-shrink-0">
+        <div className="relative h-[518px] w-full overflow-hidden rounded-[20px] bg-[#EFEFEF]">
+          <img
+            src={inf.image}
+            alt={inf.name}
+            className="absolute inset-0 h-full w-full object-cover"
+          />
+          <div
+            className="absolute right-[20px] top-[20px] rounded-full px-[18px] py-[9px]"
+            style={{ backgroundColor: inf.color }}
+          >
+            <span
+              className="text-[18px] uppercase leading-[1.2] text-black"
+              style={{ fontFamily: "var(--font-body)" }}
             >
-              {row.map((inf) => (
-                <div key={`${rowIdx}-${inf.name}`} className="w-[376px] flex-shrink-0">
-                  {/* Card image with overlays */}
-                  <div className="relative h-[518px] w-full overflow-hidden rounded-[20px] bg-[#EFEFEF]">
-                    <img
-                      src={inf.image}
-                      alt={inf.name}
-                      className="absolute inset-0 h-full w-full object-cover"
-                    />
-                    {/* Industry badge — top right */}
-                    <div
-                      className="absolute right-[20px] top-[20px] rounded-full px-[18px] py-[9px]"
-                      style={{ backgroundColor: inf.color }}
-                    >
-                      <span
-                        className="text-[18px] uppercase leading-[1.2] text-black"
-                        style={{ fontFamily: "var(--font-body)" }}
-                      >
-                        {inf.industry}
-                      </span>
-                    </div>
-                    {/* Name with flag + plus button — bottom inside card */}
-                    <div className="absolute bottom-[20px] left-[20px] right-[20px] flex items-center justify-between">
-                      <div className="flex items-center gap-2 rounded-full bg-[#063746B2] px-[22px] py-[12px]">
-                        {inf.country && (
-                          <img
-                            src={`https://flagcdn.com/w20/${inf.country.toLowerCase()}.png`}
-                            alt={inf.country}
-                            className="h-[14px] w-[20px] rounded-sm object-cover"
-                          />
-                        )}
-                        <span
-                          className="text-[18px] leading-[1.2] text-white"
-                          style={{ fontFamily: "var(--font-body)" }}
-                        >
-                          {inf.name}
-                        </span>
-                      </div>
-                      <div className="flex h-[48px] w-[48px] items-center justify-center rounded-full bg-white/80">
-                        <svg className="h-[30px] w-[30px] text-[#012F3B]" viewBox="0 0 30 30" fill="none" stroke="currentColor" strokeWidth="4">
-                          <line x1="15" y1="0" x2="15" y2="30" />
-                          <line x1="0" y1="15" x2="30" y2="15" />
-                        </svg>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Archetype */}
-                  <p
-                    className="mt-4 text-[20px] leading-[1.2] text-[#90B2BD]"
-                    style={{ fontFamily: "var(--font-body)" }}
-                  >
-                    &ldquo;{inf.archetype}&rdquo;
-                  </p>
-                </div>
-              ))}
+              {inf.industry}
+            </span>
+          </div>
+          <div className="absolute bottom-[20px] left-[20px] right-[20px] flex items-center justify-between">
+            <div className="flex items-center gap-2 rounded-full bg-[#063746B2] px-[22px] py-[12px]">
+              {inf.country && (
+                <img
+                  src={`https://flagcdn.com/w20/${inf.country.toLowerCase()}.png`}
+                  alt={inf.country}
+                  className="h-[14px] w-[20px] rounded-sm object-cover"
+                />
+              )}
+              <span
+                className="text-[18px] leading-[1.2] text-white"
+                style={{ fontFamily: "var(--font-body)" }}
+              >
+                {inf.name}
+              </span>
             </div>
-          ))}
+            <div className="flex h-[48px] w-[48px] items-center justify-center rounded-full bg-white/80">
+              <svg className="h-[30px] w-[30px] text-[#012F3B]" viewBox="0 0 30 30" fill="none" stroke="currentColor" strokeWidth="4">
+                <line x1="15" y1="0" x2="15" y2="30" />
+                <line x1="0" y1="15" x2="30" y2="15" />
+              </svg>
+            </div>
+          </div>
+        </div>
+        <p
+          className="mt-4 text-[20px] leading-[1.2] text-[#90B2BD]"
+          style={{ fontFamily: "var(--font-body)" }}
+        >
+          &ldquo;{inf.archetype}&rdquo;
+        </p>
+      </div>
+    ))}
+  </div>
+</div>
+
+{/* Row 2 */}
+<div className="mt-8 overflow-hidden px-[60px]" ref={emblaRow2Ref}>
+  <div className="flex gap-5">
+    {[...cmsInfluencers.row2, ...cmsInfluencers.row2].map((inf, idx) => (
+      <div key={`row2-${idx}`} className="w-[376px] flex-shrink-0">
+        <div className="relative h-[518px] w-full overflow-hidden rounded-[20px] bg-[#EFEFEF]">
+          <img
+            src={inf.image}
+            alt={inf.name}
+            className="absolute inset-0 h-full w-full object-cover"
+          />
+          <div
+            className="absolute right-[20px] top-[20px] rounded-full px-[18px] py-[9px]"
+            style={{ backgroundColor: inf.color }}
+          >
+            <span
+              className="text-[18px] uppercase leading-[1.2] text-black"
+              style={{ fontFamily: "var(--font-body)" }}
+            >
+              {inf.industry}
+            </span>
+          </div>
+          <div className="absolute bottom-[20px] left-[20px] right-[20px] flex items-center justify-between">
+            <div className="flex items-center gap-2 rounded-full bg-[#063746B2] px-[22px] py-[12px]">
+              {inf.country && (
+                <img
+                  src={`https://flagcdn.com/w20/${inf.country.toLowerCase()}.png`}
+                  alt={inf.country}
+                  className="h-[14px] w-[20px] rounded-sm object-cover"
+                />
+              )}
+              <span
+                className="text-[18px] leading-[1.2] text-white"
+                style={{ fontFamily: "var(--font-body)" }}
+              >
+                {inf.name}
+              </span>
+            </div>
+            <div className="flex h-[48px] w-[48px] items-center justify-center rounded-full bg-white/80">
+              <svg className="h-[30px] w-[30px] text-[#012F3B]" viewBox="0 0 30 30" fill="none" stroke="currentColor" strokeWidth="4">
+                <line x1="15" y1="0" x2="15" y2="30" />
+                <line x1="0" y1="15" x2="30" y2="15" />
+              </svg>
+            </div>
+          </div>
+        </div>
+        <p
+          className="mt-4 text-[20px] leading-[1.2] text-[#90B2BD]"
+          style={{ fontFamily: "var(--font-body)" }}
+        >
+          &ldquo;{inf.archetype}&rdquo;
+        </p>
+      </div>
+    ))}
+  </div>
+</div>
         </div>
       </section>
 
@@ -818,7 +961,7 @@ export default function HomePage() {
 
           {/* Description */}
           <p
-            className="mx-auto mt-10 max-w-[1380px] text-center text-[26px] leading-[1.5] text-[#4D5347]"
+            className="mx-auto mt-10 max-w-[1380px] text-center text-[30px] leading-[1.5] text-[#4D5347]"
             style={{ fontFamily: "var(--font-body)" }}
           >
             Our AI automation systems accelerate processes across every layer of
@@ -827,12 +970,15 @@ export default function HomePage() {
           </p>
 
           {/* Workflow image */}
-          <div className="mt-12 aspect-[1608/905] max-w-[1608px] overflow-hidden">
-            <img
+          <div className="mt-12 aspect-[1608/905] overflow-hidden">
+            {/* <img
               src="/images/homepage/smarter-workflows-3d.jpg"
               alt="AI Workflow Builder interface — DDiP automation systems"
               className="h-full w-full object-cover"
-            />
+            /> */}
+               <video autoPlay muted loop playsInline className="h-full w-full object-cover">
+                  <source src="/videos/IntroducingaIworkflow.mp4" type="video/mp4" />
+                </video>
           </div>
 
           {/* Sub-section: Systems designed to move ideas faster */}
@@ -893,178 +1039,13 @@ export default function HomePage() {
           9. PARTNERS (moved before FAQ per client feedback)
           Figma sections 47-57: 5 bordered logo boxes
           ════════════════════════════════════════════════════════ */}
-      <section className="bg-light-bg py-20">
-        <div className="px-[60px]">
-          <h2
-            className="font-heading text-[80px] font-medium uppercase leading-[0.99] text-[#063746]"
-          >
-            Partners
-          </h2>
-
-          {/* 5 Partner logo boxes */}
-          <div className="mt-12 grid grid-cols-5">
-            {partners.map((partner) => (
-              <div
-                key={partner.name}
-                className="flex h-[240px] items-center justify-center border border-[#C3C3C3]"
-              >
-                {partner.image ? (
-                  <img
-                    src={partner.image}
-                    alt={partner.name}
-                    className="max-h-[60px] max-w-[140px] object-contain"
-                  />
-                ) : (
-                  <span className="font-heading text-2xl font-semibold tracking-wide text-[#063746]/40 transition-colors hover:text-[#063746]">
-                    {partner.name}
-                  </span>
-                )}
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <PartnersSection />
 
       {/* ════════════════════════════════════════════════════════
           11. FAQ
           Figma section 58: Dark card #002834, 2-column FAQ, bottom CTA
           ════════════════════════════════════════════════════════ */}
-      <section className="bg-light-bg py-24 lg:py-32">
-        <div className="mx-[60px] overflow-hidden rounded-[20px] bg-[#002834]">
-          {/* FAQ Title */}
-          <div className="px-[59px] pt-[85px]">
-            <h2 className="font-heading text-[80px] font-medium uppercase leading-[0.99] text-[#EBFFFF]">
-              FAQ
-            </h2>
-          </div>
-
-          {/* 2-column FAQ grid */}
-          <div className="mt-12 grid grid-cols-2 gap-0 px-[59px]">
-            {/* Left column */}
-            <div>
-              {cmsFaqs.left.map((question, i) => (
-                <div key={i} className="border-b border-[#EBFFFF33]">
-                  <button
-                    className="flex w-full items-center justify-between py-[45px] text-left"
-                    onClick={() => setOpenFaqLeft(openFaqLeft === i ? null : i)}
-                  >
-                    <span
-                      className="pr-8 text-[26px] leading-[1.2] text-white"
-                      style={{ fontFamily: "var(--font-body)" }}
-                    >
-                      {question}
-                    </span>
-                    <span
-                      className={`shrink-0 text-[30px] leading-none text-white transition-transform duration-300 ${
-                        openFaqLeft === i ? "rotate-45" : ""
-                      }`}
-                    >
-                      +
-                    </span>
-                  </button>
-                  <div
-                    className={`grid transition-all duration-300 ${
-                      openFaqLeft === i
-                        ? "grid-rows-[1fr] opacity-100"
-                        : "grid-rows-[0fr] opacity-0"
-                    }`}
-                  >
-                    <div className="overflow-hidden">
-                      <p
-                        className="pb-6 text-[18px] leading-relaxed text-[#90B2BD]"
-                        style={{ fontFamily: "var(--font-body)" }}
-                      >
-                        Our approach blends advanced AI capabilities with human creative direction,
-                        ensuring every output maintains the nuance, emotion, and strategic intent
-                        that only human expertise can provide.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* Right column */}
-            <div className="pl-[50px]">
-              {cmsFaqs.right.map((question, i) => (
-                <div key={i} className="border-b border-[#EBFFFF33]">
-                  <button
-                    className="flex w-full items-center justify-between py-[45px] text-left"
-                    onClick={() => setOpenFaqRight(openFaqRight === i ? null : i)}
-                  >
-                    <span
-                      className="pr-8 text-[26px] leading-[1.2] text-white"
-                      style={{ fontFamily: "var(--font-body)" }}
-                    >
-                      {question}
-                    </span>
-                    <span
-                      className={`shrink-0 text-[30px] leading-none text-white transition-transform duration-300 ${
-                        openFaqRight === i ? "rotate-45" : ""
-                      }`}
-                    >
-                      +
-                    </span>
-                  </button>
-                  <div
-                    className={`grid transition-all duration-300 ${
-                      openFaqRight === i
-                        ? "grid-rows-[1fr] opacity-100"
-                        : "grid-rows-[0fr] opacity-0"
-                    }`}
-                  >
-                    <div className="overflow-hidden">
-                      <p
-                        className="pb-6 text-[18px] leading-relaxed text-[#90B2BD]"
-                        style={{ fontFamily: "var(--font-body)" }}
-                      >
-                        Absolutely. Our workflow automation and AI solutions are designed
-                        for any industry that wants to streamline operations, improve
-                        efficiency, and scale intelligent processes.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Bottom CTA bar with background image */}
-          <div className="relative mx-[59px] mb-[65px] mt-16 overflow-hidden rounded-[10px]">
-            <div className="absolute inset-0">
-              <img
-                src="/images/homepage/faq-image-1.jpg"
-                alt=""
-                className="h-full w-full object-cover"
-              />
-              <div className="absolute inset-0 bg-black/40 backdrop-blur-[0px]" />
-            </div>
-            <div className="relative z-10 px-[60px] py-[56px]">
-              <p className="font-heading text-[41px] font-normal leading-[1.2] text-white">
-                Live FAQ
-              </p>
-              <h3
-                className="mt-6 text-[48px] font-bold leading-[1.2] text-white"
-                style={{ fontFamily: "var(--font-body)" }}
-              >
-                Didn&apos;t find your answer?
-              </h3>
-              <Link
-                href="/lets-connect"
-                className="mt-8 inline-flex items-center justify-center rounded-full bg-[#1CE3F4] px-[18px] py-[8px] transition-opacity hover:opacity-90"
-                style={{ height: "64px", minWidth: "221px" }}
-              >
-                <span
-                  className="text-[24px] font-medium leading-[1.2] text-[#002834]"
-                  style={{ fontFamily: "var(--font-body)" }}
-                >
-                  Talk to our AI
-                </span>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
+      <FaqSection leftQuestions={cmsFaqs.left} rightQuestions={cmsFaqs.right} />
 
       {/* ════════════════════════════════════════════════════════
           +45 AI TOOLS (moved after FAQ per client feedback)
@@ -1074,27 +1055,24 @@ export default function HomePage() {
           <div className="relative mx-auto h-[586px] max-w-[1600px]">
             {/* Center text */}
             <div className="absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2 text-center">
-              <p className="whitespace-nowrap font-heading text-[80px] font-normal leading-[1] text-[#063746]">
-                +45
-              </p>
-              <p className="font-heading text-[40px] font-normal leading-[1.2] text-[#063746]">
-                Ai Tools
+              <p className="whitespace-nowrap font-heading text-[40px] font-normal leading-[1] text-[#063746]">
+                +45 Ai Tools
               </p>
             </div>
             {/* Scattered AI tool logos */}
             {[
-              { src: "/images/ai-tools/openai.png", name: "OpenAI", top: "5%", left: "12%", size: 72 },
-              { src: "/images/ai-tools/midjourney.png", name: "Midjourney", top: "8%", left: "42%", size: 64 },
-              { src: "/images/ai-tools/runway.png", name: "Runway", top: "3%", left: "72%", size: 60 },
-              { src: "/images/ai-tools/gemini.png", name: "Gemini", top: "25%", left: "2%", size: 68 },
-              { src: "/images/ai-tools/heygen.png", name: "HeyGen", top: "30%", left: "82%", size: 64 },
-              { src: "/images/ai-tools/flux.png", name: "Flux", top: "55%", left: "5%", size: 56 },
-              { src: "/images/ai-tools/kling.png", name: "Kling", top: "60%", left: "85%", size: 60 },
-              { src: "/images/ai-tools/freepik.png", name: "Freepik", top: "75%", left: "18%", size: 68 },
-              { src: "/images/ai-tools/minimax.png", name: "Minimax", top: "80%", left: "48%", size: 64 },
-              { src: "/images/ai-tools/veo.png", name: "Veo", top: "78%", left: "75%", size: 60 },
-              { src: "/images/ai-tools/seedream.png", name: "Seedream", top: "15%", left: "88%", size: 56 },
-              { src: "/images/ai-tools/mystic.png", name: "Mystic", top: "48%", left: "90%", size: 52 },
+              { src: "/images/ai-tools/openai.png", name: "OpenAI", bottom: "30%", right: "30%", size: 90 },
+              { src: "/images/ai-tools/midjourney.png", name: "Midjourney", top: "30%", left: "67%", size: 64 },
+              { src: "/images/ai-tools/runway.png", name: "Runway", top: "20%", left: "40%", size: 70 },
+              { src: "/images/ai-tools/gemini.png", name: "Gemini", top: "60%", left: "7%", size: 77 },
+              { src: "/images/ai-tools/heygen.png", name: "HeyGen", top: "28%", left: "50%", size: 70 },
+              { src: "/images/ai-tools/flux.png", name: "Flux", top: "60%", left: "48%", size: 56 },
+              { src: "/images/ai-tools/kling.png", name: "Kling", top: "65%", left: "38%", size: 70 },
+              { src: "/images/ai-tools/freepik.png", name: "Freepik", top: "27%", right: "15%", size: 101 },
+              { src: "/images/ai-tools/minimax.png", name: "Minimax", top: "35%", left: "15%", size: 92 },
+              { src: "/images/ai-tools/veo.png", name: "Veo", top: "65%", left: "20%", size: 90 },
+              { src: "/images/ai-tools/seedream.png", name: "Seedream", top: "55%", left: "85%", size: 109 },
+              { src: "/images/ai-tools/mystic.png", name: "Mystic", top: "40%", left:"25%", size: 86 },
             ].map((tool) => (
               <img
                 key={tool.name}
@@ -1103,6 +1081,8 @@ export default function HomePage() {
                 className="absolute opacity-80 transition-opacity duration-300 hover:opacity-100"
                 style={{
                   top: tool.top,
+                  right:tool?.right,
+                  bottom:tool?.bottom,
                   left: tool.left,
                   width: tool.size,
                   height: tool.size,

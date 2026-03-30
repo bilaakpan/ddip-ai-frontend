@@ -3,7 +3,15 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
+import useEmblaCarousel from "embla-carousel-react";
+import AutoPlay from "embla-carousel-autoplay";
 import { cmsApi, type Faq } from "@/lib/api";
+import HeroPartnersSection from "@/components/desktop/HeroPartnersSection";
+import FourDMethodSection from "@/components/desktop/FourDMethodSection";
+import ContentAtScale from "@/components/desktop/ContentAtScale";
+import FaqSection from "@/components/desktop/FaqSection";
+import UseCaseCarousel from "@/components/desktop/UseCaseCarousel";
+import PartnersSection from "@/components/desktop/PartnersSection";
 
 /* ─── Data ─── */
 
@@ -51,6 +59,24 @@ const methodSteps = [
   },
 ];
 
+
+
+
+const generateItems = [
+  {
+    title: "Brand and campaign films",
+    image: "/images/ai-content/showcase-01.png",
+  },
+  {
+    title: "Digital commercials",
+    image: "/images/ai-content/showcase-02.png",
+  },
+  {
+    title: "Product and launch videos",
+    image: "/images/ai-content/showcase-03.png",
+  },
+];
+
 const useCaseCards = [
   { title: "Vesta Global", image: "/images/ai-commercial/frame-04.png" },
   { title: "Bizim Mutfak", image: "/images/ai-commercial/frame-05.png" },
@@ -83,6 +109,11 @@ export default function AICommercialPage() {
   const [cmsFaqLeft, setCmsFaqLeft] = useState(faqLeft);
   const [cmsFaqRight, setCmsFaqRight] = useState(faqRight);
 
+   const [emblaRef] = useEmblaCarousel({ loop: true, dragFree: true }, [
+    AutoPlay({ delay: 3000, stopOnInteraction: false, stopOnMouseEnter: true }),
+  ]);
+
+
   useEffect(() => {
     cmsApi
       .faqs("ai-commercial")
@@ -101,9 +132,9 @@ export default function AICommercialPage() {
       {/* ════════════════════════════════════════════════════════
           1. HERO — Marquee "AI COMMERCIAL PRO..."
           ════════════════════════════════════════════════════════ */}
-      <section className="relative overflow-hidden bg-dark-bg pb-16 pt-40">
+      <section className="relative overflow-hidden  pb-16 pt-40">
         {/* Hero image — right side */}
-        <div className="absolute right-0 top-0 h-full w-[55%]">
+        <div className="absolute right-0 top-0 h-full w-full">
           <Image
             src="/images/ai-commercial/hero-slider.png"
             alt="AI Commercial showcase"
@@ -112,184 +143,255 @@ export default function AICommercialPage() {
             sizes="55vw"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-dark-bg via-dark-bg/60 to-transparent" />
+          <div className="absolute inset-0  to-transparent" />
         </div>
 
         {/* Marquee heading */}
-        <div className="relative z-10 whitespace-nowrap overflow-hidden px-[60px]">
-          <h1
-            className="inline-block font-heading font-normal uppercase text-white"
-            style={{ fontSize: "clamp(36px, 8vw, 130px)", lineHeight: "1" }}
-          >
-            AI COMMERCIAL PRO
-            <span className="text-white/20">DUCTION</span>
-          </h1>
+        
+
+         <div className="overflow-hidden whitespace-nowrap mt-[-70px]">
+          <div className="flex animate-marquee">
+            <h1 className="text-[140px] text-white whitespace-nowrap">
+               AI COMMERCIAL PRODUCTION
+            </h1>
+          </div>
         </div>
 
         {/* Subtitle + CTAs */}
         <div className="relative z-10 mt-10 px-[60px]">
           <h2 className="max-w-lg font-heading text-[28px] font-medium leading-[1.2] text-white">
-            A New Kind of Film.
-            <br />
+           A New Approach To
+            <br /> 
             Commercial Production.
           </h2>
           <p
-            className="mt-4 max-w-lg text-[14px] leading-[1.6] text-white/70"
+            className="mt-4 max-w-lg text-[18px] leading-[1.6] text-white/70"
             style={{ fontFamily: "var(--font-body)" }}
           >
-            Produce cinematic video, photography, and motion graphics powered by
-            AI — faster turnarounds, lower costs, unlimited creative iterations.
+           AI supports production while creativity leads every decision.
           </p>
 
           {/* Down arrow + CTA */}
-          <div className="mt-10 flex items-center gap-4">
-            <div className="flex h-[50px] w-[50px] items-center justify-center rounded-full border border-white/20">
-              <svg
-                className="h-5 w-5 text-white"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-              >
-                <path d="M12 5v14M5 12l7 7 7-7" />
+           <div className="mt-[60px] flex items-start flex-col gap-4">
+            <div className="flex items-center justify-center">
+              <svg width="99" height="122" viewBox="0 0 99 122" fill="none" className="h-[90px] w-auto" aria-label="Scroll down">
+                <g clipPath="url(#arrow-clip)">
+                  <path d="M56.9199 0L56.9199 95.9621L89.1853 66.0555L98.7897 75.9435L98.9811 76.9205L49.6919 122L0 76.9205L0.198028 75.9435L9.61097 66.2194L42.0612 95.9621L42.0612 0L56.9199 0Z" fill="white" />
+                </g>
+                <defs>
+                  <clipPath id="arrow-clip">
+                    <rect width="98.9811" height="122" fill="white" />
+                  </clipPath>
+                </defs>
               </svg>
             </div>
-            <Link
-              href="#discover"
-              className="font-heading text-[14px] font-medium text-white underline decoration-white/30 underline-offset-8 transition-colors hover:decoration-[#1CE3F4]"
-            >
+            <Link href="#discover" className="font-heading text-[25px] font-medium text-white underline decoration-white/30 underline-offset-8 hover:decoration-[#1CE3F4]">
               Discover Our Creative Approach
             </Link>
           </div>
 
-          {/* Carousel dots */}
-          <div className="mt-8 flex items-center gap-2">
-            <span className="h-2 w-6 rounded-full bg-white" />
-            <span className="h-2 w-2 rounded-full bg-white/30" />
-            <span className="h-2 w-2 rounded-full bg-white/30" />
-          </div>
+          
         </div>
 
         {/* [SCROLL] text */}
-        <div className="absolute bottom-10 right-[60px] z-10 text-right">
-          <p
-            className="text-[11px] tracking-wider text-white/30"
-            style={{ fontFamily: "var(--font-body)" }}
-          >
-            [SCROLL]
-          </p>
+        <div className="absolute bottom-10 right-[60px] z-10">
+          <p className="text-[16px] tracking-wider text-white" style={{ fontFamily: "var(--font-body)" }}>[SCROLL]</p>
         </div>
       </section>
 
       {/* ════════════════════════════════════════════════════════
           2. PARTNERS ROW
           ════════════════════════════════════════════════════════ */}
-      <section className="border-b border-white/10 bg-dark-bg py-8">
-        <div className="flex items-center justify-center gap-14 px-[60px]">
-          <span className="text-[13px] font-medium uppercase tracking-wider text-white/40">
-            Partners
-          </span>
-          {heroPartners.map((name) => (
-            <span
-              key={name}
-              className="font-heading text-[15px] font-medium text-white/50"
-            >
-              {name}
-            </span>
-          ))}
-        </div>
-      </section>
+     <HeroPartnersSection />
 
       {/* ════════════════════════════════════════════════════════
           3. WHAT AI COMMERCIAL PRODUCTION MEANS AT DDIP.AI
           ════════════════════════════════════════════════════════ */}
-      <section id="discover" className="bg-light-bg py-24">
+      <section id="discover" className="relative bg-light-bg py-16">
         <div className="px-[60px]">
-          <div className="grid grid-cols-2 gap-16">
-            <div>
-              <h2 className="font-heading text-[40px] font-medium leading-[1.1] text-[#063746]">
-                What AI Commercial
-                <br />
-                Production Means
-                <br />
-                At Ddip.ai
-              </h2>
-            </div>
-            <div className="space-y-4">
-              <p
-                className="text-[15px] leading-[1.6] text-[#063746]/60"
-                style={{ fontFamily: "var(--font-body)" }}
-              >
-                AI commercial production means creating broadcast-quality video
-                and photography without traditional production overhead.
-              </p>
-              <p
-                className="text-[15px] leading-[1.6] text-[#063746]/60"
-                style={{ fontFamily: "var(--font-body)" }}
-              >
-                From storyboarding to final cut, we leverage generative AI to
-                deliver cinematic results at a fraction of the time and cost.
-              </p>
-            </div>
+
+          {/* Floating icon — left edge, half outside */}
+          <div className="absolute left-0 top-[45%] -translate-y-1/2 -translate-x-1/2 z-10">
+            <img src="/images/ai-commercial/layer-icon-02.png" className="w-[120px] h-[120px] object-contain" style={{ transform: "rotate(24.73deg)" }} />
           </div>
 
-          {/* 3 showcase images */}
-          <div className="mt-16 grid grid-cols-3 gap-6">
-            {meaningItems.map((item) => (
-              <div key={item.title}>
-                <div className="relative aspect-[4/3] overflow-hidden rounded-[16px] bg-[#D9D9D9]">
-                  <Image
-                    src={item.image}
-                    alt={item.title}
-                    fill
-                    className="object-cover"
-                    sizes="33vw"
-                  />
+          {/* Floating icon — bottom center */}
+          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 z-10">
+            <img src="/images/ai-commercial/layer-icon-04.png" className="w-[130px] h-[130px] object-contain" style={{ transform: "rotate(-29.82deg)" }} />
+          </div>
+
+          {/* Top heading row */}
+          <div className="flex items-start justify-between mb-12">
+            <div className="w-[60%]">
+              <h2 className="font-heading text-[60px] font-medium leading-[1.1] text-[#063746]">
+                What AI Commercial<br />Production Means At Ddip.ai
+              </h2>
+              <p className="mt-4 text-[16px] text-[#063746]/60" style={{ fontFamily: "var(--font-body)" }}>
+                AI commercial production at DDIP is not about replacing creativity.
+              </p>
+            </div>
+            <img src="/images/ai-commercial/layer-icon-02.png" className="w-[130px] h-[130px] object-contain" />
+          </div>
+
+          {/* Two-column layout */}
+          <div className="flex gap-12 items-start">
+
+            {/* Left — film strip rows */}
+            <div className="flex flex-col gap-3 w-[50%]">
+              {/* Row 1 — 3 images, small */}
+              <div className="flex gap-1.5 ml-[80px] justify-end">
+                
+                  <div className="relative h-[70px] w-[400px] overflow-hidden rounded-[6px] bg-[#D9D9D9]">
+                    <Image src={`/images/ai-commercial/frame-01.png`} alt="" fill className="object-cover" sizes="120px" />
+                  </div>
+              
+              </div>
+              {/* Row 2 — 4 images with thumb */}
+              <div className="flex gap-1.5 items-center ml-[40px] justify-start relative left-[-100px]">
+                <div className="relative h-[70px] w-[300px] overflow-hidden rounded-[6px] bg-[#D9D9D9]">
+                  <Image src="/images/ai-commercial/frame-04.png" alt="" fill className="object-cover" sizes="70px" />
                 </div>
-                <p
-                  className="mt-4 text-[13px] text-[#063746]/50"
-                  style={{ fontFamily: "var(--font-body)" }}
-                >
-                  {item.title}
+              
+                  <div  className="relative h-[70px] w-[300px] overflow-hidden rounded-[6px] bg-[#D9D9D9]">
+                    <Image src={`/images/ai-commercial/frame-02.png`} alt="" fill className="object-cover" sizes="100px" />
+                  </div>
+            
+              </div>
+              {/* Row 3 — 5 images */}
+              <div className="flex gap-1.5 justify-start">
+                
+                  <div className="relative h-[70px] w-[400px] overflow-hidden rounded-[6px] bg-[#D9D9D9]">
+                    <Image src={`/images/ai-commercial/frame-03.png`} alt="" fill className="object-cover" sizes="100px" />
+                  </div>
+               
+              </div>
+              {/* Row 4 — 6 images, dark strip */}
+              <div className="flex gap-1 rounded-[8px] overflow-hidden bg-[#1a1a1a] p-1.5">
+             
+                  <div className="relative h-[70px] flex-1 overflow-hidden rounded-[4px] bg-[#333]">
+                    <Image src={`/images/ai-commercial/frame-04.png`} alt="" fill className="object-cover" sizes="80px" />
+                  </div>
+               
+              </div>
+              {/* Row 5 — 7 images, dark strip */}
+              <div className="flex gap-1 rounded-[8px] overflow-hidden bg-[#1a1a1a] p-1.5 relative left-[-80px]">
+               
+                  <div className="relative h-[70px] flex-1 overflow-hidden rounded-[4px] bg-[#333]">
+                    <Image src={`/images/ai-commercial/frame-05.png`} alt="" fill className="object-cover" sizes="80px" />
+                  </div>
+               
+              </div>
+            </div>
+
+            {/* Right — video + description */}
+            <div className="flex flex-col gap-6 w-[50%] relative">
+              {/* Floating icon — top-left of video */}
+              <div className="absolute -top-[70px] -left-[60px] z-10">
+                <img src="/images/ai-commercial/layer-icon-03.png" className="w-[170px] h-[170px] object-contain" style={{ transform: "rotate(11.17deg)" }} />
+              </div>
+              {/* Video with dashed border */}
+              <div className="relative">
+                <div className="overflow-hidden rounded-[12px]" style={{ border: "1.5px dashed #063746/40" }}>
+                  <video autoPlay muted loop playsInline className="w-full h-[280px] object-cover rounded-[12px]">
+                    <source src="/videos/work1.mp4" type="video/mp4" />
+                  </video>
+                </div>
+                {/* Label badge */}
+                <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-2 rounded-full bg-[#063746] px-4 py-1.5">
+                  <span className="text-[12px] font-medium text-white" style={{ fontFamily: "var(--font-body)" }}>596 Fill × 335.25 · Video</span>
+                </div>
+              </div>
+
+              {/* Description */}
+              <div>
+                <h3 className="font-heading text-[28px] font-medium text-[#063746]">It's about expanding it.</h3>
+                <p className="mt-3 text-[14px] leading-[1.7] text-[#063746]/60" style={{ fontFamily: "var(--font-body)" }}>
+                  We use AI as a production layer to explore ideas faster, visualize concepts earlier, and produce digital-first commercials with greater creative freedom — without losing narrative clarity or visual quality.
                 </p>
               </div>
-            ))}
+            </div>
+
           </div>
         </div>
       </section>
+
+
+
+   {/* ════════════════════════════════════════════════════════
+          4. WHAT WE GENERATE
+          ════════════════════════════════════════════════════════ */}
+      <section className="bg-light-bg py-24">
+        <div className="px-[60px]">
+          <div className="grid grid-cols-2 gap-16">
+            <h2 className="font-heading text-[48px] font-medium leading-[1.05] text-[#063746]">
+              What We Produce
+            </h2>
+            <p
+              className="text-[20px] leading-[1.6] text-[#063746]/60"
+              style={{ fontFamily: "var(--font-body)" }}
+            >
+              We create AI-assisted commercial films designed for modern, digital-first campaigns.
+            </p>
+          </div>
+
+          {/* Showcase — auto-scrolling horizontal carousel */}
+          <div className="mt-12 overflow-hidden" ref={emblaRef}>
+            <div className="flex gap-6">
+              {[...generateItems, ...generateItems].map((item, i) => (
+                <div key={i} className="shrink-0 w-[320px]">
+                  <div className="relative aspect-[4/3] overflow-hidden rounded-[16px] bg-[#D9D9D9]">
+                    <Image
+                      src={item.image}
+                      alt={item.title}
+                      fill
+                      className="object-cover"
+                      sizes="320px"
+                    />
+                  </div>
+                  <p className="mt-4 text-[16px] text-[#063746]" style={{ fontFamily: "var(--font-body)" }}>
+                    {item.title}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Statement */}
+          <p
+            className="mt-12 text-[20px] w-[450px] leading-[1.6] text-[#145365]"
+            style={{ fontFamily: "var(--font-body)" }}
+          >
+            Each film is built around a clear message, visual language, and story.
+          </p>
+        </div>
+      </section>
+
+
 
       {/* ════════════════════════════════════════════════════════
           4. OUR 4D METHOD
           ════════════════════════════════════════════════════════ */}
-      <section className="bg-light-bg py-24">
-        <div className="px-[60px]">
-          <h2 className="text-center font-heading text-[48px] font-medium uppercase leading-[1.05] text-[#063746]">
-            Our 4D Method
-          </h2>
+     <FourDMethodSection />
 
-          <div className="mx-auto mt-16 flex max-w-5xl items-end justify-between">
-            {methodSteps.map((step) => (
-              <div key={step.num} className="text-center">
-                <div
-                  className="mx-auto flex h-[160px] w-[200px] items-center justify-center rounded-[20px] border border-[#063746]/10 bg-white shadow-sm"
-                  style={{ transform: `rotate(${step.rotate})` }}
-                >
-                  <Image
-                    src={step.icon}
-                    alt={step.title}
-                    width={70}
-                    height={70}
-                    className="opacity-80"
-                  />
-                </div>
-                <p className="mt-6 font-heading text-[16px] font-medium text-[#063746]">
-                  {step.title}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+
+      {/* ════════════════════════════════════════════════════════
+          4.5. CONTENT AT SCALE — dark card
+          ════════════════════════════════════════════════════════ */}
+      <ContentAtScale
+        heading="Expanding Creative Possibilities With Ai"
+        description1="AI allows us to push creative boundaries without increasing complexity."
+        description2=""
+        descriptionClassName="w-[300px]"
+        tagline="The result is not just an automation - it’s creative acceleration."
+        bgImage="/images/ai-commercial/commercialimage11.png"
+        bgOpacity="opacity-60"
+        features={[
+          { icon: "/images/ai-commercial/icon-01.svg", label: "Faster pre-production and visualization" },
+          { icon: "/images/ai-commercial/icon-02.svg", label: "Greater flexibility in creative exploration" },
+          { icon: "/images/ai-commercial/icon-03.svg", label: "Easier adaptation across formats and markets" },
+           { icon: "/images/ai-commercial/icon-03.svg", label: "More room for bold ideas with lower production risk" },
+        ]}
+      />
 
       {/* ════════════════════════════════════════════════════════
           5. USE CASES — Cards grid
@@ -307,26 +409,40 @@ export default function AICommercialPage() {
             delivers cinematic results across every format.
           </p>
 
-          <div className="mt-12 grid grid-cols-4 gap-6">
-            {useCaseCards.map((card) => (
-              <div key={card.title} className="group">
-                <div className="relative aspect-[3/4] overflow-hidden rounded-[16px] bg-[#D9D9D9]">
-                  <Image
-                    src={card.image}
-                    alt={card.title}
-                    fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-105"
-                    sizes="25vw"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#063746]/50 to-transparent" />
-                  <div className="absolute bottom-4 left-4">
-                    <span className="font-heading text-[16px] font-medium text-white">
-                      {card.title}
-                    </span>
-                  </div>
-                </div>
-              </div>
-            ))}
+          
+
+           <div className="mt-12 flex gap-4">
+                      {[
+                        { icon: "/images/ai-content/icon-05.svg", label: "Brand campaigns and product launches" },
+                        { icon: "/images/ai-content/icon-06.svg", label: "Social media content ecosystems" },
+                        { icon: "/images/ai-content/icon-07.svg", label: "Editorial and blog visuals" },
+                        { icon: "/images/ai-content/icon-08.svg", label: "Event and announcement assets" },
+                        { icon: "/images/ai-content/icon-09.svg", label: "E-commerce and catalog visuals" },
+                      ].map((item, i) => (
+                        <div key={i} className="flex flex-1 items-start gap-3 rounded-[12px] px-4 py-4"
+                          style={{ background: "#002834", backdropFilter: "blur(45.31px)" }}>
+                          <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-[8px] bg-white/10">
+                            <Image src={item.icon} alt={item.label} width={18} height={18} />
+                          </div>
+                          <span className="text-[12px] leading-[1.5]"
+                            style={{ fontFamily: "Bricolage Grotesque", color: "#FFFFFF" }}>
+                            {item.label}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+ <p className="mt-10 text-center text-[20px] font-medium"
+            style={{ fontFamily: "SF Pro Display", color: "#063746" }}>
+            At DDIP.AI, each project starts with a story.
+          </p>
+ <div className="mt-[100px]">
+            <UseCaseCarousel items={[
+              { title: "Vesta Global", image: "/images/ai-content/showcase-01.png", tags: ["Campaign Visuals", "Brand Identity"] },
+              { title: "Bizim Mutfak", image: "/images/ai-content/showcase-02.png", tags: ["Social Media", "Content Variations"] },
+              { title: "Realkom", image: "/images/ai-content/showcase-03.png", tags: ["Short-form Content", "Prompt Crafting"] },
+              { title: "Brother", image: "/images/ai-content/showcase-04.png", tags: ["Editorial Visuals", "Brand Campaigns"] },
+              { title: "Vesta Global", image: "/images/ai-content/showcase-01.png", tags: ["Campaign Visuals"] },
+            ]} />
           </div>
         </div>
       </section>
@@ -334,186 +450,59 @@ export default function AICommercialPage() {
       {/* ════════════════════════════════════════════════════════
           6. OUR TOOL ECOSYSTEM
           ════════════════════════════════════════════════════════ */}
-      <section className="bg-light-bg py-24">
-        <div className="px-[60px]">
-          <h2 className="text-center font-heading text-[36px] font-medium leading-[1.1] text-[#1CE3F4]">
+   
+
+
+ <section className="bg-light-bg py-10">
+        <div className="">
+          <h2 className="text-center font-heading text-[36px] font-bold leading-[1.1] text-[#126478]">
             Our Tool Ecosystem
           </h2>
           <p
-            className="mx-auto mt-4 max-w-2xl text-center text-[14px] leading-[1.6] text-[#063746]/60"
+            className="mx-auto mt-4 max-w-2xl text-center text-[14px] leading-[1.6] text-[#063746]"
             style={{ fontFamily: "var(--font-body)" }}
           >
-            We use best-in-class AI tools for video generation, motion graphics,
-            and post-production — orchestrated to deliver cinematic quality.
+          Our ecosystem is built around selecting the right AI tools for each creative challenge.
+The real value comes from how these tools are orchestrated to support storytelling and visual quality.
           </p>
 
-          <div className="mx-auto mt-12 flex max-w-md items-center justify-center gap-8">
-            {toolIcons.map((icon, i) => (
-              <div
-                key={i}
-                className="flex h-[60px] w-[60px] items-center justify-center rounded-[14px] border border-[#063746]/10 bg-white"
-              >
-                <Image
-                  src={icon}
-                  alt={`Tool ${i + 1}`}
-                  width={30}
-                  height={30}
-                />
-              </div>
-            ))}
-          </div>
         </div>
       </section>
+
+
 
       {/* ════════════════════════════════════════════════════════
           7. PARTNERS
           ════════════════════════════════════════════════════════ */}
-      <section className="bg-light-bg py-24">
-        <div className="px-[60px]">
-          <h2 className="font-heading text-[80px] font-medium uppercase leading-[1] text-[#063746]">
-            Partners
-          </h2>
-          <div className="mt-12 flex items-center justify-start gap-16">
-            {["Google", "Google Cloud", "AWS", "Microsoft", "Salesforce"].map(
-              (name) => (
-                <span
-                  key={name}
-                  className="text-[20px] font-medium text-[#063746]/40"
-                >
-                  {name}
-                </span>
-              )
-            )}
-          </div>
-        </div>
-      </section>
+    <PartnersSection />
 
       {/* ════════════════════════════════════════════════════════
           8. FAQ — Dark rounded card
           ════════════════════════════════════════════════════════ */}
-      <section className="bg-light-bg py-12">
-        <div className="px-[60px]">
-          <div className="overflow-hidden rounded-[24px] bg-dark-bg px-16 py-20">
-            <h2 className="font-heading text-[80px] font-medium leading-[1] text-white">
-              <span className="text-[#1CE3F4]">F</span>AQ
-            </h2>
-
-            <div className="mt-12 grid grid-cols-2 gap-0">
-              {/* Left column */}
-              <div>
-                {cmsFaqLeft.map((question, i) => (
-                  <div key={i} className="border-b border-white/10">
-                    <button
-                      className="flex w-full items-center justify-between py-[28px] text-left"
-                      onClick={() =>
-                        setOpenFaqLeft(openFaqLeft === i ? null : i)
-                      }
-                    >
-                      <span
-                        className="pr-8 text-[16px] font-medium text-white"
-                        style={{ fontFamily: "var(--font-body)" }}
-                      >
-                        {question}
-                      </span>
-                      <span className="shrink-0 text-[20px] text-white/50">
-                        {openFaqLeft === i ? "−" : "+"}
-                      </span>
-                    </button>
-                    {openFaqLeft === i && (
-                      <div className="pb-5 pr-12">
-                        <p
-                          className="text-[14px] leading-[1.6] text-white/60"
-                          style={{ fontFamily: "var(--font-body)" }}
-                        >
-                          Our team will provide detailed information about this
-                          topic. Contact us to learn more.
-                        </p>
-                      </div>
-                    )}
-                  </div>
-                ))}
-              </div>
-
-              {/* Right column */}
-              <div className="pl-[50px]">
-                {cmsFaqRight.map((question, i) => (
-                  <div key={i} className="border-b border-white/10">
-                    <button
-                      className="flex w-full items-center justify-between py-[28px] text-left"
-                      onClick={() =>
-                        setOpenFaqRight(openFaqRight === i ? null : i)
-                      }
-                    >
-                      <span
-                        className="pr-8 text-[16px] font-medium text-white"
-                        style={{ fontFamily: "var(--font-body)" }}
-                      >
-                        {question}
-                      </span>
-                      <span className="shrink-0 text-[20px] text-white/50">
-                        {openFaqRight === i ? "−" : "+"}
-                      </span>
-                    </button>
-                    {openFaqRight === i && (
-                      <div className="pb-5 pr-12">
-                        <p
-                          className="text-[14px] leading-[1.6] text-white/60"
-                          style={{ fontFamily: "var(--font-body)" }}
-                        >
-                          Our team will provide detailed information about this
-                          topic. Contact us to learn more.
-                        </p>
-                      </div>
-                    )}
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Live FAQ card */}
-            <div className="mt-12 overflow-hidden rounded-[20px]">
-              <div className="relative h-[240px]">
-                <Image
-                  src="/images/ai-commercial/photo.png"
-                  alt="Live FAQ"
-                  fill
-                  className="object-cover"
-                  sizes="100vw"
-                />
-                <div className="absolute inset-0 bg-dark-bg/50" />
-                <div className="relative z-10 flex h-full flex-col justify-center p-10">
-                  <p className="font-heading text-[20px] text-white/60">
-                    Live FAQ
-                  </p>
-                  <h3 className="mt-2 font-heading text-[36px] font-medium text-white">
-                    Didn&apos;t find your answer?
-                  </h3>
-                  <Link
-                    href="#"
-                    className="mt-5 inline-flex w-fit items-center gap-2 rounded-full bg-[#1CE3F4] px-8 py-3 font-heading text-[15px] font-medium text-[#063746] transition-colors hover:bg-[#1CE3F4]/80"
-                  >
-                    Talk to our AI
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <FaqSection leftQuestions={cmsFaqLeft} rightQuestions={cmsFaqRight} />
 
       {/* ════════════════════════════════════════════════════════
           9. CTA
           ════════════════════════════════════════════════════════ */}
-      <section className="bg-light-bg py-24">
-        <div className="flex items-center justify-between px-[60px]">
-          <h2 className="font-heading text-[48px] font-medium leading-[1.1] text-[#063746]">
+          <section className="bg-light-bg py-24">
+        <div
+          className="mx-[60px] flex items-center justify-between rounded-[20px] px-[60px] py-[60px]"
+          style={{ background: "linear-gradient(-90deg, #002834 0%, #129CAC 100%)" }}
+        >
+          <h2 className="font-heading text-[28px] font-bold leading-[1.2] text-[#EBFFFF]">
             Let&apos;s design what&apos;s next together.
           </h2>
           <Link
             href="/start-project"
-            className="inline-flex items-center gap-2 rounded-full bg-[#1CE3F4] px-8 py-4 font-heading text-[15px] font-medium text-[#063746] transition-colors hover:bg-[#1CE3F4]/80"
+            className="inline-flex items-center justify-center rounded-full bg-[#1CE3F4] px-[26px] transition-opacity hover:opacity-90"
+            style={{ height: "64px" }}
           >
-            Begin Your Transformation
+            <span
+              className="text-[24px] font-medium leading-[1.2] text-[#002834]"
+              style={{ fontFamily: "var(--font-body)" }}
+            >
+              Begin Your Transformation
+            </span>
           </Link>
         </div>
       </section>
