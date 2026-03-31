@@ -425,7 +425,7 @@ export default function AIInfluencerPage() {
           </p>
           <div className="mt-[90px] flex items-center gap-18">
             <Link
-              href="#discover"
+              href="/ai-solutions/ai-influencer/templates"
               className="flex items-center gap-2 font-heading text-[32px] font-medium text-white underline decoration-white/30 underline-offset-8 transition-colors hover:decoration-[#1CE3F4]"
             >
               Discover Influencers →
@@ -937,12 +937,10 @@ export default function AIInfluencerPage() {
 
           {/* Embla auto-scroll carousel — component */}
           <UseCaseCarousel items={[
-            { title: "Vesta Global", image: "/images/homepage/influencer-01.png", tags: ["Visual Style Definition", "AI Model Selection & Optimization", "Use-Case Development", "Prompt Crafting"] },
-            { title: "Nadlan Star", image: "/images/homepage/influencer-02.jpg", tags: ["Use-Case Development", "Prompt Crafting"] },
-            { title: "Vesta Global", image: "/images/homepage/influencer-03.png", tags: ["Use-Case Development", "Prompt Crafting"] },
-            { title: "Nadlan Star", image: "/images/homepage/influencer-04.png", tags: ["Visual Style Definition", "Prompt Crafting"] },
-            { title: "Vesta Global", image: "/images/homepage/influencer-05.png", tags: ["Use-Case Development"] },
-            { title: "Nadlan Star", image: "/images/homepage/influencer-01.png", tags: ["Use-Case Development", "Prompt Crafting"] },
+            { title: "Vesta Global", video: "/videos/contentgenerationusecases1.mp4", tags: ["Visual Style Definition", "AI Model Selection & Optimization", "Use-Case Development", "Prompt Crafting"] },
+            { title: "Nadlan Star", video: "/videos/influcener11.mp4", tags: ["Use-Case Development", "Prompt Crafting"] },
+            { title: "Vesta Global", video: "/videos/influcener22.mp4", tags: ["Use-Case Development", "Prompt Crafting"] },
+            { title: "Nadlan Star", video: "/videos/influcener33.mp4", tags: ["Visual Style Definition", "Prompt Crafting"] },
           ]} />
 
         </div>

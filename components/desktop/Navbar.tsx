@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 
 const navLinks = [
-  { label: "Process", href: "/#discover" },
+  { label: "Process", href: "/process" },
   { label: "Ai Solutions", href: "/ai-solutions", hasDropdown: true },
   { label: "Works", href: "/works", hasDropdown: true },
   { label: "The Mind Behind", href: "/the-mind-behind" },

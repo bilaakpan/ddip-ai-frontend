@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import { Container } from "@/components/layout";
 import { Button } from "@/components/ui";
 import { cmsApi, type Faq } from "@/lib/api";
+import FaqSection from "@/components/desktop/FaqSection";
 
 /* ── Data ─────────────────────────────────────────────── */
 
@@ -147,339 +148,353 @@ const faqItems = [
 export default function ProcessPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [cmsFaqs, setCmsFaqs] = useState(faqItems);
+  const cmsFaqLeft = cmsFaqs.slice(0, Math.ceil(cmsFaqs.length / 2)).map(f => f.question);
+  const cmsFaqRight = cmsFaqs.slice(Math.ceil(cmsFaqs.length / 2)).map(f => f.question);
 
   useEffect(() => {
     cmsApi.faqs("process").then((res) => {
       if (res.data?.length) setCmsFaqs(res.data.map((f: Faq) => ({ question: f.question, answer: f.answer })));
-    }).catch(() => {});
+    }).catch(() => { });
   }, []);
 
+  const insightSteps = [
+    "Understand",
+    "Define",
+    "Design",
+    "Train",
+    "Create & Automate",
+    "Optimize",
+    "Scale",
+  ];
   return (
     <>
       {/* ─── Hero ─── */}
-      <section className="relative overflow-hidden bg-dark-bg py-32 lg:py-40">
+      <section className="relative overflow-hidden py-32 lg:py-40">
         <Container>
-          <div className="relative z-10 max-w-2xl">
-            <p className="font-heading text-sm uppercase tracking-widest text-teal-500">
-              How We Work
-            </p>
-            <h1 className="mt-4 font-heading text-[clamp(48px,7vw,120px)] font-medium uppercase leading-[1.05] text-white">
-              OUR
-              <br />
-              PROCESS
-            </h1>
-            <p className="mt-8 max-w-2xl text-body-sm leading-[1.7] text-white/50">
-              A structured, transparent approach to delivering AI-powered
-              solutions. From discovery to deployment, every step is designed to
-              maximize impact and minimize risk.
+          <div className="relative z-10 w-full">
+
+            <div className="overflow-hidden whitespace-nowrap mt-[-50px]">
+              <div className="flex animate-marquee">
+                <h1 className="text-[140px] text-white whitespace-nowrap">
+                  OUR PROCESS <span className="inline-block">
+                    <img src="/images/homepage/nameStar.png" className="h-[70px]" />
+                  </span>  OUR PROCESS <span className="inline-block">
+                    <img src="/images/homepage/nameStar.png" className="h-[70px]" />
+                  </span>
+                </h1>
+              </div>
+            </div>
+            <p className="w-[500px] text-[40px] text-body-sm leading-[1.7] text-white" style={{ lineHeight: "normal" }}>
+              How We Turn Intelligence Into Impact Not a workflow. A designed system.
             </p>
             <div className="mt-10 flex items-center gap-6">
-              <Link href="/start-project">
-                <Button variant="primary" size="lg">
-                  Start a Project
-                </Button>
-              </Link>
-              <Link href="/lets-connect">
-                <Button variant="secondary" size="lg">
-                  Book a Call
-                </Button>
-              </Link>
+              <p className="text-white text-[18px] w-[500px]">At ddip.ai, every project follows a clear, intentional process - designed to transform brand challenges into intelligent, scalable systems.</p>
+            </div>
+            <div className="max-w-lg">
+              <h2 className="font-heading text-[40px] font-medium leading-[1.3] text-white">
+                Visibility No Longer Ends
+                <br />
+                With Search.
+              </h2>
+              <p className="mt-4 text-[18px] leading-[1.6] text-white/70" style={{ fontFamily: "var(--font-body)" }}>
+                GEO Optimization helps brands become visible in AI-powered search, discovery, and answer engines.
+              </p>
+
+              <div className="flex flex-col gap-4 mt-[60px]">
+                <svg width="99" height="122" viewBox="0 0 99 122" fill="none" className="h-[90px] w-[90px]" aria-label="Scroll down">
+                  <path d="M56.9199 0L56.9199 95.9621L89.1853 66.0555L98.7897 75.9435L98.9811 76.9205L49.6919 122L0 76.9205L0.198028 75.9435L9.61097 66.2194L42.0612 95.9621L42.0612 0L56.9199 0Z" fill="white" />
+                </svg>
+                <a
+                  href="#discover"
+                  className="text-white underline decoration-white/40 underline-offset-8 transition-colors hover:decoration-teal-500 text-[25px]"
+                  style={{ fontFamily: 'Bricolage Grotesque, sans-serif' }}
+                >
+                  Discover Our Process
+                </a>
+              </div>
             </div>
           </div>
         </Container>
 
-        {/* Hero image */}
-        <div className="absolute right-0 top-0 h-full w-1/2 overflow-hidden">
-          <Image
-            src="/images/process/hero.png"
-            alt="Our process"
-            fill
-            className="object-cover opacity-40"
-            priority
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-dark-bg to-transparent" />
+        {/* Hero video — full bg */}
+        <div className="absolute inset-0 z-0">
+          <video autoPlay muted loop playsInline className="h-full w-full object-cover" style={{ transform: "scaleX(-1)" }}>
+            <source src="/videos/ourprocessherovideo.mp4" type="video/mp4" />
+          </video>
         </div>
       </section>
 
-      {/* ─── Process Steps ─── */}
-      <section className="bg-light-bg py-24 lg:py-32">
-        <Container>
-          <p className="font-heading text-sm uppercase tracking-widest text-teal-700">
-            Step by Step
-          </p>
-          <h2 className="mt-4 font-heading text-[clamp(36px,4vw,64px)] font-medium uppercase leading-[1.1] text-light-text">
-            Our 5-Step Process
-          </h2>
-          <p className="mt-6 max-w-2xl text-body-sm leading-[1.7] text-light-body">
-            Every project follows a proven methodology that ensures clarity,
-            quality, and measurable outcomes at every stage.
-          </p>
+      {/* ─── We Start With Understanding ─── */}
+      <section className="bg-light-bg py-20">
+        <div className="px-[60px] flex items-center gap-16">
 
-          <div className="mt-20 space-y-24">
-            {processSteps.map((step, i) => (
-              <div
-                key={step.step}
-                className={`flex items-center gap-16 ${
-                  i % 2 === 1 ? "flex-row-reverse" : ""
-                }`}
-              >
-                {/* Image */}
-                <div className="w-1/2 overflow-hidden rounded-[var(--radius-card)]">
-                  <Image
-                    src={step.image}
-                    alt={step.title}
-                    width={720}
-                    height={480}
-                    className="h-full w-full object-cover"
-                  />
-                </div>
-
-                {/* Content */}
-                <div className="w-1/2">
-                  <span className="font-heading text-[80px] font-medium leading-none text-teal-500/15">
-                    {step.step}
-                  </span>
-                  <h3 className="mt-2 font-heading text-[32px] font-medium leading-[1.2] text-light-text">
-                    {step.title}
-                  </h3>
-                  <p className="mt-4 text-body-sm leading-[1.7] text-light-body">
-                    {step.description}
-                  </p>
-                  <ul className="mt-6 space-y-2">
-                    {step.deliverables.map((d) => (
-                      <li
-                        key={d}
-                        className="flex items-center gap-3 text-sm text-light-body"
-                      >
-                        <span className="flex h-5 w-5 items-center justify-center rounded-full bg-teal-500/10 text-teal-500">
-                          <svg
-                            className="h-3 w-3"
-                            viewBox="0 0 12 12"
-                            fill="none"
-                          >
-                            <path
-                              d="M2.5 6l2.5 2.5 4.5-5"
-                              stroke="currentColor"
-                              strokeWidth="1.5"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            />
-                          </svg>
-                        </span>
-                        {d}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            ))}
+          {/* Left — image with overlaid text labels */}
+          <div className="shrink-0 w-[60%] relative">
+            <img src="/images/process/firstprocess11.png" alt="Understanding" className="w-full h-auto object-contain" />
+            {/* strategy — top center */}
+            <span className="absolute top-[18%] left-[50%] -translate-x-1/2 z-10 text-[16px] font-medium text-[#226576]" style={{ fontFamily: "Bricolage Grotesque" }}>strategy</span>
+            {/* technology — bottom left */}
+            <span className="absolute bottom-[40%] left-[27%] z-10 text-[16px] font-medium text-[#226576]" style={{ fontFamily: "Bricolage Grotesque" }}>technology</span>
+            {/* human insight — bottom right */}
+            <span className="absolute bottom-[40%] right-[25%] z-10 text-[16px] font-medium text-[#226576]" style={{ fontFamily: "Bricolage Grotesque" }}>human insight</span>
           </div>
-        </Container>
-      </section>
 
-      {/* ─── How We Work ─── */}
-      <section className="bg-dark-bg py-24 lg:py-32">
-        <Container>
-          <p className="font-heading text-sm uppercase tracking-widest text-teal-500">
-            Our Approach
-          </p>
-          <h2 className="mt-4 font-heading text-[clamp(36px,4vw,64px)] font-medium uppercase leading-[1.1] text-white">
-            How We Work
-          </h2>
-
-          <div className="mt-16 grid grid-cols-2 gap-8">
-            {howWeWork.map((item) => (
-              <div
-                key={item.title}
-                className="overflow-hidden rounded-[var(--radius-card)] border border-border-dark bg-dark-surface"
-              >
-                <div className="aspect-video overflow-hidden">
-                  <Image
-                    src={item.image}
-                    alt={item.title}
-                    width={720}
-                    height={400}
-                    className="h-full w-full object-cover"
-                  />
-                </div>
-                <div className="p-10">
-                  <h3 className="font-heading text-2xl font-medium text-white">
-                    {item.title}
-                  </h3>
-                  <p className="mt-4 text-sm leading-relaxed text-white/50">
-                    {item.description}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </Container>
-      </section>
-
-      {/* ─── Partnership Overview ─── */}
-      <section className="bg-light-bg py-24">
-        <Container>
-          <div className="flex items-center gap-16">
-            <div className="w-1/2">
-              <p className="font-heading text-sm uppercase tracking-widest text-teal-700">
-                Partnership
-              </p>
-              <h2 className="mt-4 font-heading text-[clamp(36px,4vw,64px)] font-medium uppercase leading-[1.1] text-light-text">
-                Your AI Partner,
-                <br />
-                Not Just a Vendor
-              </h2>
-              <p className="mt-6 text-body-sm leading-[1.7] text-light-body">
-                We believe in long-term partnerships over one-off projects. When
-                you work with DDip AI, you get a dedicated team that understands
-                your business, anticipates your needs, and grows with you.
-              </p>
-              <div className="mt-10">
-                <Link href="/start-project">
-                  <Button variant="primary" size="lg">
-                    Start a Partnership
-                  </Button>
-                </Link>
-              </div>
+          {/* Right — text */}
+          <div className="flex-1">
+            <p style={{ fontFamily: "Bricolage Grotesque", fontSize: "16px", color: "#9C9C9C" }}>
+              We don't start with tools.<br />
+              We don't start with AI.
+            </p>
+            <div className="mt-4 flex items-baseline flex-wrap">
+              <span className="font-bold uppercase leading-[1.1]" style={{ fontFamily: "Bricolage Grotesque", fontSize: "40px", color: "#063746" }}>
+                We start with
+              </span>
+              <span className="font-bold uppercase leading-[1.1]" style={{ fontFamily: "Bricolage Grotesque", fontSize: "40px", color: "#00BCCF" }}>
+                understanding.
+              </span>
             </div>
-            <div className="w-1/2 overflow-hidden rounded-[var(--radius-card)]">
-              <Image
-                src="/images/process/partnership-overview.png"
-                alt="Partnership overview"
-                width={720}
-                height={480}
-                className="h-full w-full object-cover"
-              />
-            </div>
+            <p className="mt-6 leading-[1.7]" style={{ fontFamily: "SF Pro Display", fontSize: "16px", color: "#063746", width: "400px" }}>
+              Because meaningful automation, effective AI, and scalable creativity can only happen when <span style={{ color: "#00BCCF" }}>strategy, human insight, and technology</span> move together.
+            </p>
           </div>
-        </Container>
+
+        </div>
       </section>
 
       {/* ─── What We Deliver ─── */}
-      <section className="bg-dark-bg py-24 lg:py-32">
-        <Container>
-          <p className="font-heading text-sm uppercase tracking-widest text-teal-500">
-            Deliverables
-          </p>
-          <h2 className="mt-4 font-heading text-[clamp(36px,4vw,64px)] font-medium uppercase leading-[1.1] text-white">
-            What We Deliver
+      <section className="bg-light-bg py-20">
+        <div className="px-[60px]">
+          <h2 className="font-heading text-[40px] font-medium leading-[1.1] text-[#063746]">
+            What This<br />Process Delivers
           </h2>
 
-          <div className="mt-16 grid grid-cols-4 gap-8">
-            {whatWeDeliver.map((item) => (
-              <div
-                key={item.title}
-                className="group overflow-hidden rounded-[var(--radius-card)] border border-border-dark bg-dark-surface transition-all duration-300 hover:-translate-y-1 hover:border-teal-500/30"
-              >
-                <div className="aspect-[4/3] overflow-hidden">
-                  <Image
-                    src={item.image}
-                    alt={item.title}
-                    width={400}
-                    height={300}
-                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
+          <div className="mt-12 grid grid-cols-4 gap-6">
+            {[
+              { image: "/images/process/delivers-01.png", title: "Clarity before complexity", desc: "We define the right solution before building anything." },
+              { image: "/images/process/delivers-02.png", title: "Customization over templates", desc: "No generic AI setups. Every system is designed around the brand." },
+              { image: "/images/process/delivers-03.png", title: "Human-led intelligence", desc: "AI accelerates — people decide." },
+              { image: "/images/process/delivers-04.png", title: "Scalability with control", desc: "Systems that grow without losing consistency or quality." },
+            ].map((item, i) => (
+              <div key={i} className="flex flex-col">
+                {/* Image card */}
+                <div className="overflow-hidden rounded-[16px] bg-[#f0f2ef]" style={{ aspectRatio: "1/1" }}>
+                  <img src={item.image} alt={item.title} className="w-full h-full object-contain p-4" />
                 </div>
-                <div className="p-8">
-                  <h3 className="font-heading text-lg font-medium text-white">
-                    {item.title}
-                  </h3>
-                  <p className="mt-3 text-sm leading-relaxed text-white/50">
-                    {item.description}
+                {/* Text below */}
+                <h3 className="mt-4 font-heading text-[24px] w-[200px] font-medium leading-[1.3] text-[#063746]">
+                  {item.title}
+                </h3>
+                <p className="mt-2 text-[18px] leading-[1.6] text-[#063746]/60" style={{ fontFamily: "var(--font-body)" }}>
+                  {item.desc}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+
+      {/* ─── From First Contact to Long-Term Partnership ─── */}
+      <section className="relative overflow-hidden rounded-[24px] mx-[60px] my-12 mb-20" style={{ minHeight: "480px" }}>
+        {/* BG image */}
+        <img src="/images/process/partnership-overview.png" alt="Partnership" className="absolute inset-0 w-full h-full object-cover" />
+        {/* Dark overlay */}
+        <div className="absolute inset-0 bg-[#063746]/60" />
+
+        {/* Content */}
+        <div className="relative z-10 p-12 flex flex-col h-full" style={{ minHeight: "480px" }}>
+          <h2 className="font-heading text-[48px] font-medium leading-[1.1] text-white max-w-md">
+            From First Contact to<br />Long-Term Partnership
+          </h2>
+
+          <p className="mt-10 text-[14px] text-white/70" style={{ fontFamily: "var(--font-body)" }}>
+            This process applies whether you are:
+          </p>
+
+          {/* Cards — 2x2 grid left + 1 tall card right */}
+          <div className="mt-4 flex gap-3 w-[100%]">
+            {/* Left — 2x2 grid */}
+            <div className="grid grid-cols-2 gap-3">
+              {[
+                { image: "/images/process/step-01.png", label: "Launching an", bold: "AI influencer or brand ambassador" },
+                { image: "/images/process/step-02.png", label: "Building an", bold: "AI-driven content engine" },
+                { image: "/images/process/step-03.png", label: "Designing", bold: "automated workflows with AI agents" },
+                { image: "/images/process/step-04.png", label: "Creating a long-term", bold: "AI brand ecosystem" },
+              ].map((item, i) => (
+                <div key={i} className="flex items-center gap-3 rounded-[10px] p-3" style={{ width: "370px", height: "110px", background: "rgba(255,255,255,0.12)", backdropFilter: "blur(10px)" }}>
+                  <div className="shrink-0 w-[60px] h-[60px] overflow-hidden rounded-[8px]">
+                    <img src={item.image} alt={item.bold} className="w-full h-full object-cover" />
+                  </div>
+                  <div>
+                    <p className="text-[11px] text-white/60" style={{ fontFamily: "var(--font-body)" }}>{item.label}</p>
+                    <p className="text-[13px] font-medium text-white leading-[1.3]" style={{ fontFamily: "var(--font-body)" }}>{item.bold}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Right — 1 tall card */}
+            <div className="flex rounded-[10px] overflow-hidden" style={{ width: "370px", height: "240px", background: "rgba(255,255,255,0.12)", backdropFilter: "blur(10px)" }}>
+              {/* Image — left half */}
+              <div className="w-[55%] h-full overflow-hidden rounded-[8px]">
+                <img src="/images/process/step-05.png" alt="AI ad films" className="w-full h-full object-cover" />
+              </div>
+              {/* Text — right half */}
+              <div className="flex-1 flex flex-col justify-center px-4">
+                <p className="text-[12px] text-white/60" style={{ fontFamily: "var(--font-body)" }}>Producing</p>
+                <p className="mt-1 text-[16px] font-medium text-white leading-[1.3]" style={{ fontFamily: "var(--font-body)" }}>AI ad films or campaigns</p>
+              </div>
+            </div>
+          </div>
+
+          <p className="mt-6 text-[13px] text-white/70" style={{ fontFamily: "var(--font-body)" }}>
+            Each project may look different — but the <strong className="text-white">thinking behind it stays the same.</strong>
+          </p>
+        </div>
+      </section>
+
+      {/* ─── How We Work ─── */}
+      <section className="bg-light-bg py-20">
+        <div className="px-[60px]">
+
+          {/* Heading center */}
+          <div className="text-center mb-12">
+            <h2 className="font-bold" style={{ fontFamily: "SF Pro Display", fontSize: "40px", color: "#126478" }}>
+              How We Work
+            </h2>
+            <p className="mt-3 mx-auto max-w-xl" style={{ fontFamily: "Arial", fontSize: "17px", color: "#063746" }}>
+              Below is the core framework that guides every ddip.ai engagement.<br />
+              It shows how insight becomes structure, and how structure becomes impact.
+            </p>
+          </div>
+
+          {/* 3 images with arrows */}
+          <div className="flex items-center justify-center gap-0">
+            {[
+              { image: "/images/process/how-01.png", label: "Human intelligence leads." },
+              { image: "/images/process/how-02.png", label: "AI systems follow." },
+              { image: "/images/process/how-03.png", label: "Results scale." },
+            ].map((item, i) => (
+              <div key={i} className="flex items-center">
+                <div className="flex flex-col items-center">
+                  <img src={item.image} alt={item.label} style={{ width: "200px", height: "200px", objectFit: "contain" }} />
+                  <p className="mt-4 text-center max-w-[190px] text-left" style={{ fontFamily: "Bricolage Grotesque", fontSize: "20px", color: "#063746" }}>
+                    {item.label}
+                  </p>
+                </div>
+                {i < 2 && (
+                  <div className="flex items-center pb-12 px-2">
+                    <svg width="240" height="16" viewBox="0 0 240 16" fill="none">
+                      <line x1="0" y1="8" x2="228" y2="8" stroke="#039EB7" strokeWidth="1.5" />
+                      <path d="M228 3L238 8L228 13" stroke="#039EB7" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+                    </svg>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+
+        </div>
+      </section>
+
+      {/* From Insight to Intelligent Impact */}
+      <section className="bg-light-bg py-16 lg:py-24">
+       
+        <Container>
+           <h2 className="w-[300px] font-bold" style={{fontFamily:"Bricolage Grotesque",color:"#126478",fontSize:'30px'}}>From Insight to Intelligent Impact</h2>
+          <div className="rounded-[24px]  bg-[#f5f8f3] px-6 py-8 lg:px-14 lg:py-12">
+
+            <div className="grid gap-10 lg:grid-cols-[1fr_360px] lg:gap-16">
+              {/* LEFT SIDE */}
+              <div className="relative">
+                {/* IMAGE */}
+                <img
+                  src="/images/process/insight-Group 641.png"
+                  alt="Process insight visual"
+                  className="absolute w-[55%] -top-12 left-16 sm:w-[60%] md:w-[55%] lg:w-[50%] object-contain"
+                />
+                {/* CARD */}
+                <div className="absolute -bottom-6 left-[100px] t-[190px] w-full max-w-[480px] rounded-[16px] border border-[#dde2df] bg-[#E6F8FD33] p-5 backdrop-blur-md shadow-md">
+
+                  <div className="flex items-start gap-4">
+
+                    <span className="text-[48px] font-semibold text-[#002834] leading-none">
+                      01
+                    </span>
+                    <div>
+                      <h3 className="text-[32px] font-semibold text-[#002834] leading-tight">
+                        Understand
+                      </h3>
+                      <p className="text-[14px] font-bold text-[#002834]"
+                        style={{ fontFamily: 'var(--font-body)' }}
+                      >
+                        Brand. Business. Challenge.
+                      </p>
+                      <p className="text-[13px] text-[#002834] mt-1">
+                        We Start By Listening - Not Generating.
+                      </p>
+                    </div>
+                  </div>
+                  <div className="mt-4 text-[13px] text-[#002834]">
+                    <p>We analyze:</p>
+                    <ul className="mt-2 list-disc pl-5 space-y-1">
+                      <li>Brand DNA & tone of voice</li>
+                      <li>Business goals & growth challenges</li>
+                      <li>Target audience, market & culture</li>
+                      <li>Existing workflows, tools & bottlenecks</li>
+                    </ul>
+                  </div>
+                  <p className="mt-4 font-semibold text-[14px] text-[#002834]">
+                    AI doesn’t start here. Humans do.
                   </p>
                 </div>
               </div>
-            ))}
+              {/* RIGHT SIDE */}
+              <div className="hidden lg:block">
+                <ul className="space-y-6">
+                  {insightSteps.map((step, index) => (
+                    <li key={step} className="flex items-center gap-4">
+
+                      <div className="relative flex h-12 w-12 items-center justify-center rounded-full border border-[#063746]/40 text-[#063746] text-lg">
+                        {String(index + 1).padStart(2, "0")}
+                        {index < insightSteps.length - 1 && (
+                          <span className="absolute top-12 left-1/2 w-px h-6 -translate-x-1/2 bg-[#063746]/30" />
+                        )}
+                      </div>
+                      <span className="text-[22px] font-medium text-[#063746]">
+                        {step}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
           </div>
         </Container>
       </section>
 
       {/* ─── FAQ ─── */}
-      <section className="bg-light-bg py-24 lg:py-32">
-        <Container>
-          <div className="grid grid-cols-2 gap-16">
-            <div>
-              <h2 className="font-heading text-section font-medium uppercase text-light-text">
-                FAQ
-              </h2>
-              <p className="mt-6 text-body-sm text-light-body">
-                Common questions about working with DDip AI.
-              </p>
-              <div className="mt-10">
-                <Link href="/lets-connect">
-                  <Button variant="primary" size="md">
-                    Have More Questions?
-                  </Button>
-                </Link>
-              </div>
-            </div>
-
-            <div className="space-y-0">
-              {cmsFaqs.map((item, i) => (
-                <div key={i} className="border-b border-border-light">
-                  <button
-                    className="flex w-full items-center justify-between py-6 text-left"
-                    onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                  >
-                    <span className="pr-8 font-heading text-lg font-medium text-light-text">
-                      {item.question}
-                    </span>
-                    <svg
-                      className={`h-5 w-5 shrink-0 text-light-text transition-transform duration-300 ${
-                        openFaq === i ? "rotate-45" : ""
-                      }`}
-                      viewBox="0 0 20 20"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                    >
-                      <line x1="10" y1="4" x2="10" y2="16" />
-                      <line x1="4" y1="10" x2="16" y2="10" />
-                    </svg>
-                  </button>
-                  <div
-                    className={`grid transition-all duration-300 ${
-                      openFaq === i
-                        ? "grid-rows-[1fr] opacity-100"
-                        : "grid-rows-[0fr] opacity-0"
-                    }`}
-                  >
-                    <div className="overflow-hidden">
-                      <p className="pb-6 text-sm leading-relaxed text-light-body">
-                        {item.answer}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </Container>
-      </section>
+      <FaqSection leftQuestions={cmsFaqLeft} rightQuestions={cmsFaqRight} />
 
       {/* ─── CTA ─── */}
-      <section className="bg-dark-bg py-24 lg:py-32">
-        <Container className="text-center">
-          <h2 className="font-heading text-[clamp(36px,5vw,80px)] font-medium uppercase text-white">
-            Let&apos;s Build Together
+      <section className="bg-light-bg py-24">
+        <div
+          className="mx-[60px] flex items-center justify-between rounded-[20px] px-[25px] py-[60px]"
+          style={{ background: "linear-gradient(-90deg, #002834 0%, #129CAC 100%)" }}
+        >
+
+          <h2 className="font-heading text-[20px] font-bold leading-[1.2] text-[#EBFFFF]">
+            Ready to start your process?
           </h2>
-          <p className="mx-auto mt-6 max-w-xl text-body-sm text-white/50">
-            Ready to start your AI journey? Our process is designed to get you
-            from idea to impact as efficiently as possible.
-          </p>
-          <div className="mt-10 flex items-center justify-center gap-6">
-            <Link href="/start-project">
-              <Button variant="primary" size="lg">
-                Start a Project
-              </Button>
+          <div className="flex items-center gap-4">
+            <Link href="/start-project" className="rounded-full border border-[#063746]/20 px-6 py-2.5 font-heading text-[14px] font-medium text-[#063746] transition bg-[#1CE3F4]">
+              Start a Project
             </Link>
-            <Link href="/lets-connect">
-              <Button variant="secondary" size="lg">
-                Get in Touch
-              </Button>
+            <Link href="/lets-connect" className="rounded-full border border-white px-6 py-2.5 font-heading text-[14px] font-medium text-white transition ">
+              Talk to Our AI
             </Link>
           </div>
-        </Container>
+        </div>
       </section>
     </>
   );

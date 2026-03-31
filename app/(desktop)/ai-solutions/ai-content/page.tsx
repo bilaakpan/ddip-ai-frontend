@@ -545,11 +545,10 @@ export default function AIContentPage() {
           {/* Use Case Carousel */}
           <div className="mt-[100px]">
             <UseCaseCarousel items={[
-              { title: "Vesta Global", image: "/images/ai-content/showcase-01.png", tags: ["Campaign Visuals", "Brand Identity"] },
-              { title: "Bizim Mutfak", image: "/images/ai-content/showcase-02.png", tags: ["Social Media", "Content Variations"] },
-              { title: "Realkom", image: "/images/ai-content/showcase-03.png", tags: ["Short-form Content", "Prompt Crafting"] },
-              { title: "Brother", image: "/images/ai-content/showcase-04.png", tags: ["Editorial Visuals", "Brand Campaigns"] },
-              { title: "Vesta Global", image: "/images/ai-content/showcase-01.png", tags: ["Campaign Visuals"] },
+              { title: "Vesta Global", video: "/videos/contentgenerationusecases1.mp4", tags: ["Campaign Visuals", "Brand Identity"] },
+              { title: "Bizim Mutfak", video: "/videos/ai-content-video-first.mp4", tags: ["Social Media", "Content Variations"] },
+              { title: "Realkom", video: "/videos/contentgenerationusecases3.mp4", tags: ["Short-form Content", "Prompt Crafting"] },
+              { title: "Brother", video: "/videos/contentgenerationusecases4.mp4", tags: ["Editorial Visuals", "Brand Campaigns"] },
             ]} />
           </div>
 
