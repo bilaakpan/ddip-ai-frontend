@@ -218,9 +218,10 @@ export default function ProcessPage() {
 
         {/* Hero video — full bg */}
         <div className="absolute inset-0 z-0">
-          <video autoPlay muted loop playsInline className="h-full w-full object-cover" style={{ transform: "scaleX(-1)" }}>
+          {/* <video autoPlay muted loop playsInline className="h-full w-full object-cover" style={{ transform: "scaleX(-1)" }}>
             <source src="/videos/ourprocessherovideo.mp4" type="video/mp4" />
-          </video>
+          </video> */}
+          <img src="/images/process/placeholdervideoimageofprocess.png" className="h-full w-full object-cover"/>
         </div>
       </section>
 
