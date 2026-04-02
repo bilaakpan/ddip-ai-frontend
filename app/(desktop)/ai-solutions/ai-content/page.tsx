@@ -18,10 +18,10 @@ import PartnersSection from "@/components/desktop/PartnersSection";
 const heroPartners = ["VG", "brother", "Vestine", "OPTIMUM", "ColaSel", "Colorful"];
 
 const dreamSteps = [
-  { label: "Dream it.", image: "/images/ai-content/create-01.png" },
-  { label: "Create it.", image: "/images/ai-content/create-02.png" },
-  { label: "Animate it.", image: "/images/ai-content/create-03.png" },
-  { label: "Finish it.", image: "/images/ai-content/create-04.png" },
+  { label: "Dream it.", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/bb102694-2ca6-44a5-9037-4865b1e41400/public" },
+  { label: "Create it.", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/2bf2b49d-9a2e-4878-032e-7cbb7687ae00/public" },
+  { label: "Animate it.", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/a50f1f9d-c362-407b-d72b-277705a61000/public" },
+  { label: "Finish it.", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/4eb7734a-2629-45b5-a3ae-22c14598ac00/public" },
 ];
 
 const generateItems = [
@@ -67,18 +67,18 @@ const methodSteps = [
 ];
 
 const useCaseImages = [
-  "/images/homepage/influencer-01.png",
-  "/images/homepage/influencer-02.jpg",
-  "/images/homepage/influencer-03.png",
-  "/images/homepage/influencer-04.png",
-  "/images/homepage/influencer-05.png",
+  "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/81d25d40-2890-403e-93d7-49e36b06cd00/public",
+  "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/56d8bb08-9c7d-49ca-e1ec-aa074fdf1600/public",
+  "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/e1fe1be8-8ca5-4eef-cf2a-925bae6f7300/public",
+  "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/259023e7-e8b0-4214-ee42-9f2b02a1a800/public",
+  "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/57fe254b-21d7-4443-1476-6eccc458df00/public",
 ];
 
 const useCaseCards = [
-  { title: "Vesta Global", image: "/images/ai-content/showcase-01.png" },
-  { title: "Bizim Mutfak", image: "/images/ai-content/showcase-02.png" },
-  { title: "Realkom", image: "/images/ai-content/showcase-03.png" },
-  { title: "Brother", image: "/images/ai-content/showcase-04.png" },
+  { title: "Vesta Global", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/35a5d56e-da6e-42ce-4072-9b24938c1a00/public" },
+  { title: "Bizim Mutfak", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/ce65649d-7f6d-4497-8d8a-697ee865d800/public" },
+  { title: "Realkom", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/0156ebdc-189b-4bce-808d-49f28c020200/public" },
+  { title: "Brother", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/2d7cdb27-97bb-4e13-a6c3-c294744bab00/public" },
 ];
 
 const toolIcons = [
@@ -139,7 +139,7 @@ export default function AIContentPage() {
             <div className="relative h-[250px] w-[250px]">
               {/* Icon — outside top-left */}
               <div className="absolute -left-3 -top-3 z-20 flex items-center justify-center rounded-md bg-[#063746] shadow-md">
-                <img src="/images/ai-content/icon44.png" alt="icon" className="h-[50px] w-[50px] object-contain" />
+                <img src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/1e1a01b7-cad6-4218-de1f-d23f5d27d400/public" alt="icon" className="h-[50px] w-[50px] object-contain" />
               </div>
               <div className="h-full w-full overflow-hidden rounded-[16px] ">
                 <video autoPlay muted loop playsInline className="h-[350px] w-full object-cover">
@@ -154,11 +154,11 @@ export default function AIContentPage() {
             {/* Image with icon outside top-left */}
             <div className="relative h-[200px] w-[250px]">
               <div className="absolute -left-3 -top-3 z-20 flex  items-center justify-center rounded-md bg-[#063746] shadow-md">
-                <img src="/images/ai-content/icon33.png" alt="icon" className="h-[50px] w-[50px] object-contain" />
+                <img src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/9999da12-fa45-44d3-19da-67228a63c400/public" alt="icon" className="h-[50px] w-[50px] object-contain" />
               </div>
               <div className="h-full w-full overflow-hidden rounded-[16px]">
                 <Image
-                  src="/images/ai-content/ai-content-image.jpg"
+                  src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/5f60c571-4d22-40bb-6b52-d8948a9b4000/public"
                   alt="Content showcase"
                   fill
                   className="object-cover"
@@ -169,7 +169,7 @@ export default function AIContentPage() {
             {/* Video with icon outside top-left */}
             <div className="relative h-[205px] w-[250px]">
               <div className="absolute -left-3 -top-3 z-20 flex items-center justify-center rounded-md bg-[#063746] shadow-md">
-                <img src="/images/ai-content/icon11.png" alt="icon" className="h-[50px] w-[50px] object-contain" />
+                <img src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/6d7c5e48-3eaa-4a0f-4092-7e4094da7f00/public" alt="icon" className="h-[50px] w-[50px] object-contain" />
               </div>
               <div className="h-full w-full overflow-hidden rounded-[16px]">
                 <video autoPlay muted loop playsInline className="h-full w-full object-cover">
@@ -182,7 +182,7 @@ export default function AIContentPage() {
           {/* Col 3 — tall woman video with icon outside top-left */}
           <div className="relative h-[513px] w-[250px]">
             <div className="absolute -left-3 -top-3 z-20 flex items-center justify-center rounded-md bg-[#063746] shadow-md">
-              <img src="/images/ai-content/icon22.png" alt="icon" className="h-[50px] w-[50px] object-contain" />
+              <img src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/24b4e848-2873-476b-c343-3350ac28bc00/publicng" alt="icon" className="h-[50px] w-[50px] object-contain" />
             </div>
             <div className="h-full w-full overflow-hidden rounded-[16px] h-[430px]">
               <video autoPlay muted loop playsInline className="h-[430px] w-full object-cover">
@@ -315,7 +315,7 @@ export default function AIContentPage() {
                 <path d="M0 105 C40 105 40 60 75 60"  stroke="rgba(255,255,255,0.5)" strokeWidth="1.5" fill="none"/>
                 <line x1="75" y1="60" x2="100" y2="60" stroke="rgba(255,255,255,0.5)" strokeWidth="1.5"/>
               </svg>
-              <Image src="/images/ai-content/ddipicon1.png" alt="node" width={26} height={26}
+              <Image src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/73eb47b0-8e72-4f36-60a2-fc3530f58200/public" alt="node" width={26} height={26}
                 className="absolute" style={{ left: "87px", top: "50%", transform: "translate(-50%, -50%)" }} />
             </div>
 
@@ -325,10 +325,10 @@ export default function AIContentPage() {
               <div className="flex-1 flex items-center">
                 <div className="grid grid-cols-2 gap-1.5">
                 {[
-                  "/images/ai-content/create-01.png",
-                  "/images/ai-content/create-02.png",
-                  "/images/ai-content/create-03.png",
-                  "/images/ai-content/create-04.png",
+                  "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/bb102694-2ca6-44a5-9037-4865b1e41400/public",
+                  "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/2bf2b49d-9a2e-4878-032e-7cbb7687ae00/public",
+                  "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/a50f1f9d-c362-407b-d72b-277705a61000/public",
+                  "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/4eb7734a-2629-45b5-a3ae-22c14598ac00/public",
                 ].map((src, i) => (
                   <div key={i} className="relative h-[95px] w-[80px] overflow-hidden rounded-[8px]">
                     <Image src={src} alt={`create-${i}`} fill className="object-cover" sizes="80px" />
@@ -343,9 +343,9 @@ export default function AIContentPage() {
               <svg width="100" height="4" viewBox="0 0 100 4" fill="none">
                 <line x1="10" y1="2" x2="90" y2="2" stroke="rgba(255,255,255,0.5)" strokeWidth="1.5"/>
               </svg>
-              <Image src="/images/ai-content/ddipicon1.png" alt="node" width={26} height={26}
+              <Image src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/73eb47b0-8e72-4f36-60a2-fc3530f58200/public" alt="node" width={26} height={26}
                 className="absolute" style={{ left: "0px", top: "50%", transform: "translateY(-50%)" }} />
-              <Image src="/images/ai-content/ddipicon2.png" alt="node" width={26} height={26}
+              <Image src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/fdf3d272-410d-4ef4-260a-63f4ea52cc00/public" alt="node" width={26} height={26}
                 className="absolute" style={{ left: "74px", top: "50%", transform: "translateY(-50%)" }} />
             </div>
 
@@ -397,7 +397,7 @@ export default function AIContentPage() {
                 <path d="M0 176 C40 176 40 98 65 98"  stroke="rgba(255,255,255,0.5)" strokeWidth="1.5" fill="none"/>
                 <line x1="65" y1="98" x2="90" y2="98" stroke="rgba(255,255,255,0.5)" strokeWidth="1.5"/>
               </svg>
-              <Image src="/images/ai-content/ddipicon3.png" alt="node" width={26} height={26}
+              <Image src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/248292a1-8078-42b6-a7f1-cc34d064ef00/public" alt="node" width={26} height={26}
                 className="absolute" style={{ right: "0px", top: "50%", transform: "translateY(-50%)" }} />
             </div>
 
@@ -490,7 +490,7 @@ export default function AIContentPage() {
         description1="AI allows us to scale without losing consistency."
         description2="We produce content across multiple formats, platforms, and languages while maintaining a strong visual core."
         tagline={"Scale is built into the system, not\nadded later."}
-        bgImage="/images/ai-content/showcase-04.png"
+        bgImage="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/233c554f-70bb-4ffb-7036-64224285bd00/public"
         features={[
           { icon: "/images/ai-content/icon-05.svg", label: "Instagram, TikTok, LinkedIn, YouTube" },
           { icon: "/images/ai-content/icon-06.svg", label: "Multi-language adaptations" },

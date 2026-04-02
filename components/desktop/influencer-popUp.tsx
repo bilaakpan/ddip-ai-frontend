@@ -23,7 +23,7 @@ export function InfluencerPopupModal({
         name: "Hana Al Sabah",
         archetype: "Gentle Routine Architect",
         industry: "Wellness",
-        image: "/images/homepage/influencer-08.png",
+        image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/ae712d05-13a0-46d1-c9e5-6f92fdeda700/public",
         country: "Kuwait",
     };
     const profile = influencer ?? fallback;
@@ -43,7 +43,7 @@ export function InfluencerPopupModal({
                 {/* Popup-level bottom glow image */}
                 <div className="pointer-events-none absolute inset-x-0 bottom-0 z-[1]">
                     <Image
-                        src="/images/homepage/image.png"
+                        src="/https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/8c6dfd82-c580-49a7-be40-a53090c65400/public"
                         alt=""
                         width={10883}
                         height={500}
@@ -56,7 +56,7 @@ export function InfluencerPopupModal({
                     <div className="relative  w-full overflow-hidden">
                         <div className="absolute -left-[32%] top-[5%] h-[80%] w-[630px]">
                             <Image
-                                src="/images/homepage/popUp.png"
+                                src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/5ffaf3b0-1c81-4f18-6dba-9b2acaa77000/public"
                                 alt={profile.name}
                                 fill
                                 priority
@@ -65,7 +65,7 @@ export function InfluencerPopupModal({
                         </div>
                         {/* IMAGE */}
                         <Image
-                            src="/images/homepage/image.png"
+                            src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/8c6dfd82-c580-49a7-be40-a53090c65400/public"
                             alt=""
                             fill
                             priority

@@ -41,7 +41,7 @@ const aiSolutions = [
   {
     title: "AI Content Generation",
     href: "/ai-solutions/ai-content",
-    media: "/videos/solutions/ai-content-gen.mp4",
+    media: "/videos/ai1.mp4",
     mediaType: "video" as const,
     description:
       "Design meets intelligence as we use specialized AI tools to transform moodboards into refined, design-driven campaigns.",
@@ -50,7 +50,7 @@ const aiSolutions = [
   {
     title: "Create Your Influencer with AI",
     href: "/ai-solutions/ai-influencer",
-    media: "/images/homepage/solution-influencer.jpg",
+    media: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/846771a3-24bb-46b7-f265-45d58b267900/public",
     mediaType: "image" as const,
     description:
       "AI influencers bring your brand to life with smart storytelling and real-time multilingual engagement.",
@@ -59,7 +59,7 @@ const aiSolutions = [
   {
     title: "Automation with a Creative Touch",
     href: "/ai-solutions",
-    media: "/videos/solutions/automation.mp4",
+    media: "/videos/IntroducingaIworkflow.mp4",
     mediaType: "video" as const,
     description:
       "We design intelligent workflows that eliminate repetitive tasks, allowing your teams to focus on what truly drives value, creativity and strategy.",
@@ -68,7 +68,7 @@ const aiSolutions = [
   {
     title: "GEO Solutions",
     href: "/ai-solutions",
-    media: "/images/homepage/solution-geo.jpg",
+    media: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/173463a6-4e3f-44fc-6fd4-61697f25d700/public",
     mediaType: "image" as const,
     description:
       "Traditional SEO isn't enough; it must be supported with GEO. At ddip, we optimize for generative engines.",
@@ -81,46 +81,46 @@ const selectedWork = [
     title: "Vesta Global",
     subtitle: "AI-powered real estate branding and visual identity",
     category: "Real Estate",
-    video: "/videos/works/vesta-global.mp4",
+    video: "/videos/work1.mp4",
     tags: ["Visual Style Definition", "AI Model Selection & Optimization", "Use-Case Development", "Prompt Crafting"],
   },
   {
     title: "Cesi Design",
     subtitle: "Interior design showcase with AI-generated visuals",
     category: "Interior Design",
-    video: "/videos/works/cesi-design.mp4",
+    video: "/videos/work2.mp4",
     tags: ["Enhanced Storytelling", "High-Impact Brand Moment", "Dynamic Interior Visuals"],
   },
   {
     title: "Mediterra Group",
     subtitle: "Premium real estate marketing with creative AI",
     category: "Real Estate",
-    video: "/videos/works/mediterra.mp4",
+    video: "/videos/work3.mp4",
     tags: ["Refined Visual Storytelling", "Consistent Brand Identity", "Impactful Presentation Experience"],
   },
   {
     title: "Brother",
     subtitle: "Product campaign powered by AI production",
     category: "Printer Solutions",
-    video: "/videos/works/brother.mp4",
+    video: "/videos/work4.mp4",
     tags: ["Creative AI Integration", "Custom Character Creation", "Enhanced Campaign Impact"],
   },
 ];
 
 const influencersRow1 = [
-  { name: "Mina Özdemir", archetype: "Analytical Visionary", industry: "Real Estate", color: "#CDDBC0", image: "/images/homepage/influencer-01.png", country: "TR" },
-  { name: "Mina Şen", archetype: "Color Story Weaver", industry: "Fashion", color: "#DBC0CD", image: "/images/homepage/influencer-02.jpg", country: "TR" },
-  { name: "Elif Doğan", archetype: "Market-to-Table Storyteller", industry: "Food", color: "#C0C2DB", image: "/images/homepage/influencer-03.png", country: "TR" },
-  { name: "Yasin El Fassi", archetype: "Heritage Remix Artist", industry: "Fashion", color: "#DBC0CD", image: "/images/homepage/influencer-04.png", country: "MA" },
-  { name: "Aylin Demir", archetype: "Calm Change Navigator", industry: "Lifestyle", color: "#C0D7DB", image: "/images/homepage/influencer-05.png", country: "TR" },
+  { name: "Mina Özdemir", archetype: "Analytical Visionary", industry: "Real Estate", color: "#CDDBC0", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/81d25d40-2890-403e-93d7-49e36b06cd00/public", country: "TR" },
+  { name: "Mina Şen", archetype: "Color Story Weaver", industry: "Fashion", color: "#DBC0CD", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/56d8bb08-9c7d-49ca-e1ec-aa074fdf1600/public", country: "TR" },
+  { name: "Elif Doğan", archetype: "Market-to-Table Storyteller", industry: "Food", color: "#C0C2DB", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/e1fe1be8-8ca5-4eef-cf2a-925bae6f7300/public", country: "TR" },
+  { name: "Yasin El Fassi", archetype: "Heritage Remix Artist", industry: "Fashion", color: "#DBC0CD", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/259023e7-e8b0-4214-ee42-9f2b02a1a800/public", country: "MA" },
+  { name: "Aylin Demir", archetype: "Calm Change Navigator", industry: "Lifestyle", color: "#C0D7DB", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/57fe254b-21d7-4443-1476-6eccc458df00/public", country: "TR" },
 ];
 
 const influencersRow2 = [
-  { name: "Laila Haddad", archetype: "People-First Strategist", industry: "HR", color: "#CDDBC0", image: "/images/homepage/influencer-06.png", country: "AE" },
-  { name: "Deniz Akar", archetype: "Future-Forward Thinker", industry: "Tech", color: "#C0C2DB", image: "/images/homepage/influencer-07.png", country: "TR" },
-  { name: "Selin Kara", archetype: "Mindful Storyteller", industry: "Wellness", color: "#DBD8C0", image: "/images/homepage/influencer-08.png", country: "TR" },
-  { name: "Ece Yilmaz", archetype: "Cultural Bridge Builder", industry: "Fashion", color: "#DBC0CD", image: "/images/homepage/influencer-09.png", country: "TR" },
-  { name: "Mina Şen", archetype: "Color Story Weaver", industry: "Fashion", color: "#DBC0CD", image: "/images/homepage/influencer-10.png", country: "TR" },
+  { name: "Laila Haddad", archetype: "People-First Strategist", industry: "HR", color: "#CDDBC0", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/8ebaf72d-1931-4412-d1ef-55f1feb9dd00/public", country: "AE" },
+  { name: "Deniz Akar", archetype: "Future-Forward Thinker", industry: "Tech", color: "#C0C2DB", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/923ba48c-8d17-4f6f-a974-09eae19dc300/public", country: "TR" },
+  { name: "Selin Kara", archetype: "Mindful Storyteller", industry: "Wellness", color: "#DBD8C0", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/ae712d05-13a0-46d1-c9e5-6f92fdeda700/public", country: "TR" },
+  { name: "Ece Yilmaz", archetype: "Cultural Bridge Builder", industry: "Fashion", color: "#DBC0CD", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/0c4bfad2-2109-4bbb-d78b-dcc73c1def00/public", country: "TR" },
+  { name: "Mina Şen", archetype: "Color Story Weaver", industry: "Fashion", color: "#DBC0CD", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/5dfe3b6d-e750-4279-3815-6dd960b62e00/public", country: "TR" },
 ];
 
 const faqLeft = [
@@ -153,9 +153,9 @@ export default function HomePage() {
 
   // Hero carousel
   const heroImages = [
-    "/images/homepage/hero-ai-influencer.png",
-    "/images/homepage/hero-banner.png",
-    "/images/homepage/hero-bg.jpg",
+    "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/668d2dbe-1430-43f2-d9d4-43fdd6b55f00/public",
+    "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/ca026e67-6810-45b1-4bf2-f1e8aeacd800/public",
+    "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/a14a9b12-bd23-450e-1009-79149e9d7f00/public",
   ];
   const [heroSlide, setHeroSlide] = useState(0);
   const [heroPlaying, setHeroPlaying] = useState(true);
@@ -417,7 +417,7 @@ export default function HomePage() {
             {/* Talk to AI widget */}
             <div className="relative h-[250px] w-[253px]">
               <Image
-                src="/images/homepage/hero-talk-ai-widget.png"
+                src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/893c48e8-59f1-400e-9cb8-0d36b752db00/public"
                 alt="Talk to our AI assistant — DDiP AI virtual chat"
                 fill
                 className="object-contain object-right-bottom"
@@ -533,7 +533,7 @@ export default function HomePage() {
                       playsInline
                       className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                     >
-                      <source src={solution.media} type="video/mp4" />
+                      <source src={solution.media} type="video/mp4"  />
                     </video>
                   ) : (
                     <img
@@ -973,11 +973,6 @@ export default function HomePage() {
 
           {/* Workflow image */}
           <div className="mt-12 aspect-[1608/905] overflow-hidden">
-            {/* <img
-              src="/images/homepage/smarter-workflows-3d.jpg"
-              alt="AI Workflow Builder interface — DDiP automation systems"
-              className="h-full w-full object-cover"
-            /> */}
             <video autoPlay muted loop playsInline className="h-full w-full object-cover">
               <source src="/videos/IntroducingaIworkflow.mp4" type="video/mp4" />
             </video>
@@ -1063,18 +1058,18 @@ export default function HomePage() {
             </div>
             {/* Scattered AI tool logos */}
             {[
-              { src: "/images/ai-tools/openai.png", name: "OpenAI", bottom: "30%", right: "30%", size: 90 },
-              { src: "/images/ai-tools/midjourney.png", name: "Midjourney", top: "30%", left: "67%", size: 64 },
-              { src: "/images/ai-tools/runway.png", name: "Runway", top: "20%", left: "40%", size: 70 },
-              { src: "/images/ai-tools/gemini.png", name: "Gemini", top: "60%", left: "7%", size: 77 },
-              { src: "/images/ai-tools/heygen.png", name: "HeyGen", top: "28%", left: "50%", size: 70 },
-              { src: "/images/ai-tools/flux.png", name: "Flux", top: "60%", left: "48%", size: 56 },
-              { src: "/images/ai-tools/kling.png", name: "Kling", top: "65%", left: "38%", size: 70 },
-              { src: "/images/ai-tools/freepik.png", name: "Freepik", top: "27%", right: "15%", size: 101 },
-              { src: "/images/ai-tools/minimax.png", name: "Minimax", top: "35%", left: "15%", size: 92 },
-              { src: "/images/ai-tools/veo.png", name: "Veo", top: "65%", left: "20%", size: 90 },
-              { src: "/images/ai-tools/seedream.png", name: "Seedream", top: "55%", left: "85%", size: 109 },
-              { src: "/images/ai-tools/mystic.png", name: "Mystic", top: "40%", left: "25%", size: 86 },
+              { src: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/5043405a-6e5f-4c14-6aaf-9ebf92610000/public", name: "OpenAI", bottom: "30%", right: "30%", size: 90 },
+              { src: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/cd8329ab-0c6e-4af4-6359-0f0b61658d00/public", name: "Midjourney", top: "30%", left: "67%", size: 64 },
+              { src: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/df711488-1e63-475f-dee3-decf21bf1b00/public", name: "Runway", top: "20%", left: "40%", size: 70 },
+              { src: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/43af238f-dd9a-4972-0cec-30c1574b5c00/public", name: "Gemini", top: "60%", left: "7%", size: 77 },
+              { src: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/18e03f8f-d739-4565-e211-e1cb4e564d00/public", name: "HeyGen", top: "28%", left: "50%", size: 70 },
+              { src: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/2ee2e61a-e270-4996-3f0c-1b6fa0b1b000/public", name: "Flux", top: "60%", left: "48%", size: 56 },
+              { src: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/3aacf09f-82e4-4124-2813-12e031176900/public", name: "Kling", top: "65%", left: "38%", size: 70 },
+              { src: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/26273e24-6117-4535-de64-3f1168a8b300/public", name: "Freepik", top: "27%", right: "15%", size: 101 },
+              { src: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/3e2eb0ae-118a-4733-e1cf-812e90934200/public", name: "Minimax", top: "35%", left: "15%", size: 92 },
+              { src: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/b00ee700-e432-4bc1-bde0-93196a4f2900/public", name: "Veo", top: "65%", left: "20%", size: 90 },
+              { src: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/50fb6339-c64b-468a-f30b-525f4ec61000/public", name: "Seedream", top: "55%", left: "85%", size: 109 },
+              { src: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/99fe4e74-0843-449e-9b8d-ead7ca7f3e00/public", name: "Mystic", top: "40%", left: "25%", size: 86 },
             ].map((tool) => (
               <img
                 key={tool.name}

@@ -24,13 +24,13 @@ const aiSolutionLinks = [
 ];
 
 const megaMenuCards = [
-  { title: "AI Content Generation",            href: "/ai-solutions/ai-content",    image: "/images/ai-content/showcase-01.png" },
-  { title: "Create Your Influencer with AI",   href: "/ai-solutions/ai-influencer", image: "/images/ai-content/showcase-02.png" },
-  { title: "AI Brand Ambassador Generation",   href: "/ai-solutions/ai-influencer", image: "/images/ai-content/showcase-03.png" },
-  { title: "AI Mascot Generation",             href: "/ai-solutions/ai-influencer", image: "/images/ai-content/showcase-04.png" },
-  { title: "AI Commercial Production",         href: "/ai-solutions/ai-commercial", image: "/images/ai-commercial/hero-slider.png" },
-  { title: "Automated Workflow with AI Agents",href: "/ai-solutions/automation",    image: "/images/automation/hero-slider.png" },
-  { title: "GEO for Websites",                 href: "/ai-solutions/geo",           image: "/images/ai-content/showcase-01.png" },
+  { title: "AI Content Generation",            href: "/ai-solutions/ai-content",    image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/35a5d56e-da6e-42ce-4072-9b24938c1a00/public" },
+  { title: "Create Your Influencer with AI",   href: "/ai-solutions/ai-influencer", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/ce65649d-7f6d-4497-8d8a-697ee865d800/public" },
+  { title: "AI Brand Ambassador Generation",   href: "/ai-solutions/ai-influencer", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/0156ebdc-189b-4bce-808d-49f28c020200/public" },
+  { title: "AI Mascot Generation",             href: "/ai-solutions/ai-influencer", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/2d7cdb27-97bb-4e13-a6c3-c294744bab00/public" },
+  { title: "AI Commercial Production",         href: "/ai-solutions/ai-commercial", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/c8f04ee1-15bf-4166-fe3d-d8435e01d400/public" },
+  { title: "Automated Workflow with AI Agents",href: "/ai-solutions/automation",    image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/88a98018-ccae-4069-42c9-17f68a346e00/public" },
+  { title: "GEO for Websites",                 href: "/ai-solutions/geo",           image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/35a5d56e-da6e-42ce-4072-9b24938c1a00/public" },
 ];
 
 /**
@@ -146,7 +146,7 @@ export function Navbar() {
         {/* Logo */}
         <Link href="/" className="flex items-center" onClick={() => setMobileMenuOpen(false)}>
           <Image
-            src="/images/common/ddip-ai-logo.png"
+            src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/1c4902c6-da41-4213-c084-5181a2316b00/public"
             alt="DDiP AI"
             width={90}
             height={32}

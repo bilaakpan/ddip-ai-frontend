@@ -32,7 +32,7 @@ export default function MobileNavbar() {
       <header className="fixed top-0 left-0 right-0 z-50 flex h-[60px] items-center justify-between bg-[#002834]/95 px-5 backdrop-blur-md">
         <Link href="/" onClick={() => setIsOpen(false)}>
           <Image
-            src="/images/common/ddip-ai-logo.png"
+            src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/1c4902c6-da41-4213-c084-5181a2316b00/public"
             alt="DDip AI"
             width={90}
             height={32}

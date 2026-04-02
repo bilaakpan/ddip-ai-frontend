@@ -23,7 +23,7 @@ const topInfluencer = [
     archetype: "Analytical Visionary",
     description:
       "A fully digital persona designed to create content, engage audiences, and represent brands across social media with complete consistency.",
-    image: "/images/homepage/influencer-01.png",
+    image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/81d25d40-2890-403e-93d7-49e36b06cd00/public",
   },
   {
     type: "Fashion",
@@ -32,7 +32,7 @@ const topInfluencer = [
     archetype: "Color Story Weaver",
     description:
       "A virtual brand representative that embodies your company's values and maintains a consistent presence across all touchpoints.",
-    image: "/images/homepage/influencer-02.jpg",
+    image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/56d8bb08-9c7d-49ca-e1ec-aa074fdf1600/public",
   },
   {
     type: "Food",
@@ -41,7 +41,7 @@ const topInfluencer = [
     archetype: "Market-to-Table Storyteller",
     description:
       "An AI-powered content creator that produces written and visual blog content, driving SEO and organic engagement.",
-    image: "/images/homepage/influencer-10.png",
+    image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/5dfe3b6d-e750-4279-3815-6dd960b62e00/public",
   },
   {
     type: "Fashion",
@@ -50,7 +50,7 @@ const topInfluencer = [
     archetype: "Heritage Remix Artist",
     description:
       "A stylized character that represents your brand personality, designed for marketing campaigns and community engagement.",
-    image: "/images/homepage/influencer-03.png",
+    image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/e1fe1be8-8ca5-4eef-cf2a-925bae6f7300/public",
   },
   {
     type: "Lifestyle",
@@ -59,7 +59,7 @@ const topInfluencer = [
     archetype: "Calm Change Navigator",
     description:
       "A stylized character that represents your brand personality, designed for marketing campaigns and community engagement.",
-    image: "/images/homepage/influencer-04.png",
+    image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/259023e7-e8b0-4214-ee42-9f2b02a1a800/public",
   },
   {
     type: "Real Estate",
@@ -68,7 +68,7 @@ const topInfluencer = [
     archetype: "Gentle Routine Architect",
     description:
       "A fully digital persona designed to create content, engage audiences, and represent brands across social media with complete consistency.",
-    image: "/images/homepage/influencer-07.png",
+    image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/923ba48c-8d17-4f6f-a974-09eae19dc300/public",
   },
   {
     type: "Real Estate",
@@ -77,7 +77,7 @@ const topInfluencer = [
     archetype: "People-First Strategist",
     description:
       "A fully digital persona designed to create content, engage audiences, and represent brands across social media with complete consistency.",
-    image: "/images/ai-influencer/portrait-01.png",
+    image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/a6335ebb-a94d-49fe-f728-6034821b4500/public",
   },
   {
     type: "Real Estate",
@@ -86,7 +86,7 @@ const topInfluencer = [
     archetype: "Digital Community Builder",
     description:
       "A fully digital persona designed to create content, engage audiences, and represent brands across social media with complete consistency.",
-    image: "/images/homepage/influencer-06.png",
+    image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/8ebaf72d-1931-4412-d1ef-55f1feb9dd00/public",
   },
 ];
 
@@ -96,21 +96,21 @@ const influencerTypes = [
     type: "Creation",
     description:
       "A fully digital persona designed to create content, engage audiences, and represent brands across social media with complete consistency.",
-    image: "/images/ai-influencer/portrait-01.png",
+    image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/a6335ebb-a94d-49fe-f728-6034821b4500/public",
   },
   {
     title: "Investment",
     type: "Promotion",
     description:
       "A virtual brand representative that embodies your company's values and maintains a consistent presence across all touchpoints.",
-    image: "/images/ai-influencer/portrait-02.png",
+    image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/3bb85d3d-0153-4afa-2959-adafcc4f1900/public",
   },
   {
     title: "Brand",
     type: "Storytelling",
     description:
       "An AI-powered content creator that produces written and visual blog content, driving SEO and organic engagement.",
-    image: "/images/ai-influencer/portrait-03.png",
+    image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/995b7c78-e5e9-4a39-412f-9f183bbd0500/public",
   },
 ];
 
@@ -139,12 +139,12 @@ const spectrumItems = [
 ];
 
 const industries = [
-  { name: "Fashion", image: "/images/ai-influencer/portrait-05.png" },
-  { name: "Real Estate", image: "/images/ai-influencer/portrait-06.png" },
-  { name: "Tourism", image: "/images/ai-influencer/portrait-07.png" },
-  { name: "Food & Hospitality", image: "/images/ai-influencer/portrait-08.png" },
-  { name: "Tech", image: "/images/ai-influencer/portrait-09.png" },
-  { name: "Finance", image: "/images/ai-influencer/portrait-10.png" },
+  { name: "Fashion", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/c836b07d-e84a-4f01-5f1c-03b54afafd00/public" },
+  { name: "Real Estate", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/66628ee4-c1a8-4cfe-8165-f5ec3209dd00/public" },
+  { name: "Tourism", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/b3c0fadf-104a-4925-1844-274debec0d00/public" },
+  { name: "Food & Hospitality", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/32cb06d2-ccf5-4bf6-9375-05d314eba300/public" },
+  { name: "Tech", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/8c177aad-f63e-4b18-1303-733154b08400/public" },
+  { name: "Finance", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/9f102a3c-11b1-46fc-6a64-1e2fad0e3000/public" },
 ];
 
 const processSteps = [
@@ -173,16 +173,16 @@ const processSteps = [
 ];
 
 const useCases = [
-  { title: "Vesta Global", image: "/images/homepage/influencer-01.png" },
-  { title: "Fashion Style", image: "/images/homepage/influencer-02.jpg" },
-  { title: "Tech Expert", image: "/images/homepage/influencer-03.png" },
-  { title: "Vesta Global", image: "/images/homepage/influencer-04.png" },
-  { title: "Brand Story", image: "/images/homepage/influencer-05.png" },
-  { title: "Community", image: "/images/homepage/influencer-06.png" },
-  { title: "Lifestyle", image: "/images/homepage/influencer-07.png" },
-  { title: "Wellness", image: "/images/homepage/influencer-08.png" },
-  { title: "Education", image: "/images/homepage/influencer-09.png" },
-  { title: "Innovation", image: "/images/homepage/influencer-10.png" },
+  { title: "Vesta Global", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/81d25d40-2890-403e-93d7-49e36b06cd00/public" },
+  { title: "Fashion Style", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/56d8bb08-9c7d-49ca-e1ec-aa074fdf1600/public" },
+  { title: "Tech Expert", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/e1fe1be8-8ca5-4eef-cf2a-925bae6f7300/public" },
+  { title: "Vesta Global", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/259023e7-e8b0-4214-ee42-9f2b02a1a800/public" },
+  { title: "Brand Story", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/57fe254b-21d7-4443-1476-6eccc458df00/public" },
+  { title: "Community", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/8ebaf72d-1931-4412-d1ef-55f1feb9dd00/public" },
+  { title: "Lifestyle", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/923ba48c-8d17-4f6f-a974-09eae19dc300/public" },
+  { title: "Wellness", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/ae712d05-13a0-46d1-c9e5-6f92fdeda700/public" },
+  { title: "Education", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/0c4bfad2-2109-4bbb-d78b-dcc73c1def00/public" },
+  { title: "Innovation", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/5dfe3b6d-e750-4279-3815-6dd960b62e00/public" },
 ];
 
 const faqLeft = [
@@ -524,12 +524,12 @@ export default function AIInfluencerPage() {
       <AccordionWithImage
         heading={"The Spectrum of\nAI Influencers"}
         subheading="AI influencers serve different purposes. Understanding the spectrum helps choose the right fit for your brand."
-        defaultImage="/images/ai-influencer/portrait-01.png"
+        defaultImage="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/a6335ebb-a94d-49fe-f728-6034821b4500/public"
         items={[
-          { title: "AI Brand Ambassador", description: "A virtual representative that communicates your brand identity with purpose and precision across every channel.", image: "/images/ai-influencer/portrait-02.png" },
-          { title: "AI Influencer", description: "A digital persona designed to engage, create, and influence — powered by AI, shaped by your strategy.", image: "/images/ai-influencer/portrait-03.png" },
-          { title: "AI Blogger", description: "An AI-driven writer that produces consistent, SEO-optimized content to fuel your brand narrative.", image: "/images/ai-influencer/portrait-04.png" },
-          { title: "AI Mascot", description: "A stylized character built for relatability, recognition, and emotional resonance with audiences.", image: "/images/ai-influencer/portrait-05.png" },
+          { title: "AI Brand Ambassador", description: "A virtual representative that communicates your brand identity with purpose and precision across every channel.", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/3bb85d3d-0153-4afa-2959-adafcc4f1900/public" },
+          { title: "AI Influencer", description: "A digital persona designed to engage, create, and influence — powered by AI, shaped by your strategy.", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/995b7c78-e5e9-4a39-412f-9f183bbd0500/public" },
+          { title: "AI Blogger", description: "An AI-driven writer that produces consistent, SEO-optimized content to fuel your brand narrative.", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/e302e17b-3d7a-4e23-5779-603178dedd00/public" },
+          { title: "AI Mascot", description: "A stylized character built for relatability, recognition, and emotional resonance with audiences.", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/c836b07d-e84a-4f01-5f1c-03b54afafd00/public" },
         ]}
       />
 
@@ -658,7 +658,7 @@ export default function AIInfluencerPage() {
                       <div className="flex items-center gap-2 rounded-full bg-[#063746B2]/80 px-3 py-1.5 backdrop-blur-md sm:gap-3 sm:px-4 sm:py-2">
                         <span className="text-sm text-white sm:text-[16px]">{item.name}</span>
                         <img
-                          src="/images/ai-influencer/image.png"
+                          src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/8c6dfd82-c580-49a7-be40-a53090c65400/public"
                           alt="flag"
                           className="h-4 w-4 rounded-sm object-cover sm:h-5 sm:w-5"
                         />

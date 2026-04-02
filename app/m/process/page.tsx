@@ -167,7 +167,7 @@ export default function MobileProcessPage() {
       <section className="relative min-h-[60vh] overflow-hidden bg-dark-bg">
         <div className="absolute inset-0 z-0">
           <Image
-            src="/images/process/hero.png"
+            src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/452077aa-059a-48c3-ed11-d3b4caa08a00/public"
             alt="Our process"
             fill
             priority
@@ -331,7 +331,7 @@ export default function MobileProcessPage() {
         </p>
         <div className="mt-6 overflow-hidden rounded-[14px]">
           <Image
-            src="/images/process/partnership-overview.png"
+            src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/25844904-2b50-4f1d-92f7-52e43227df00/public"
             alt="Partnership overview"
             width={720}
             height={480}

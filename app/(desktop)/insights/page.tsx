@@ -41,7 +41,7 @@ export default function InsightsPage() {
       updatedAt: new Date().toISOString(),
       seoDescription: "12 AI Consulting Companies for Enterprises in 2026",
       body: "Detailed article content about AI influencers...",
-      imageUrl: "/images/insights/article2.png"
+      imageUrl: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/046c3680-7356-4294-690d-482d7d1c5700/public"
     },
     {
       id: "3",
@@ -77,7 +77,7 @@ export default function InsightsPage() {
       updatedAt: new Date().toISOString(),
       seoDescription: "12 AI Consulting Companies for Enterprises in 2026",
       body: "Detailed article content about AI influencers...",
-      imageUrl: "/images/insights/article2.png"
+      imageUrl: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/046c3680-7356-4294-690d-482d7d1c5700/public"
     },
     {
       id: "6",
@@ -113,7 +113,7 @@ export default function InsightsPage() {
       updatedAt: new Date().toISOString(),
       seoDescription: "12 AI Consulting Companies for Enterprises in 2026",
       body: "Detailed article content about AI influencers...",
-      imageUrl: "/images/insights/article2.png"
+      imageUrl: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/046c3680-7356-4294-690d-482d7d1c5700/public"
     },
     {
       id: "9",

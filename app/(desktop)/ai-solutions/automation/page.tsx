@@ -16,22 +16,22 @@ const heroPartners = ["VG", "brother", "Vestine", "OPTIMUM", "ColaSel"];
 
 const accordionItems = [
   { title: "Content Automation", description: "Automate the way your brand creates and manages content. From social posts and short videos to trend analyses and scheduling, these workflows save time and keep creativity flowing.", image: "/images/automation/content-automation.png" },
-  { title: "Analytics & Insights", description: "Real-time dashboards and AI-driven reporting that turn raw data into actionable business intelligence.", image: "/images/ai-content/showcase-01.png" },
-  { title: "Conversational Systems", description: "Intelligent chatbots and virtual assistants that handle customer interactions with natural language understanding.", image: "/images/ai-content/showcase-02.png" },
-  { title: "Lead Solutions", description: "Automated lead capture, scoring, and nurturing workflows that convert prospects into customers.", image: "/images/ai-content/showcase-03.png" },
+  { title: "Analytics & Insights", description: "Real-time dashboards and AI-driven reporting that turn raw data into actionable business intelligence.", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/35a5d56e-da6e-42ce-4072-9b24938c1a00/public" },
+  { title: "Conversational Systems", description: "Intelligent chatbots and virtual assistants that handle customer interactions with natural language understanding.", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/ce65649d-7f6d-4497-8d8a-697ee865d800/public" },
+  { title: "Lead Solutions", description: "Automated lead capture, scoring, and nurturing workflows that convert prospects into customers.", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/0156ebdc-189b-4bce-808d-49f28c020200/public" },
 ];
 
 const featuredAutomations = [
-  { title: "Automated Video Creator", image: "/images/automation/content-automation.png", icon: "🎬" },
-  { title: "Automated LinkedIn Posts", image: "/images/automation/content-automation.png", icon: "💼" },
-  { title: "Trend Analyzer for Instagram", image: "/images/automation/content-automation.png", icon: "📊" },
-  { title: "Trend Analyzer for YouTube", image: "/images/automation/content-automation.png", icon: "📈" },
-  { title: "Lead Generation Bot", image: "/images/automation/content-automation.png", icon: "🤖" },
-  { title: "Amazon Stock & Prize Tracker", image: "/images/automation/content-automation.png", icon: "📦" },
-  { title: "Personal Assistant", image: "/images/automation/content-automation.png", icon: "🧠" },
-  { title: "Meeting Assistant", image: "/images/automation/content-automation.png", icon: "📅" },
-  { title: "Meta Ads Analyzer", image: "/images/automation/content-automation.png", icon: "📱" },
-  { title: "WhatsApp Chatbot for Customer Support", image: "/images/automation/content-automation.png", icon: "💬" },
+  { title: "Automated Video Creator", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/68b2a656-a342-4c0b-9d44-d5c5ed4f4700/public", icon: "🎬" },
+  { title: "Automated LinkedIn Posts", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/68b2a656-a342-4c0b-9d44-d5c5ed4f4700/public", icon: "💼" },
+  { title: "Trend Analyzer for Instagram", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/68b2a656-a342-4c0b-9d44-d5c5ed4f4700/public", icon: "📊" },
+  { title: "Trend Analyzer for YouTube", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/68b2a656-a342-4c0b-9d44-d5c5ed4f4700/public", icon: "📈" },
+  { title: "Lead Generation Bot", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/68b2a656-a342-4c0b-9d44-d5c5ed4f4700/public", icon: "🤖" },
+  { title: "Amazon Stock & Prize Tracker", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/68b2a656-a342-4c0b-9d44-d5c5ed4f4700/public", icon: "📦" },
+  { title: "Personal Assistant", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/68b2a656-a342-4c0b-9d44-d5c5ed4f4700/public", icon: "🧠" },
+  { title: "Meeting Assistant", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/68b2a656-a342-4c0b-9d44-d5c5ed4f4700/public", icon: "📅" },
+  { title: "Meta Ads Analyzer", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/68b2a656-a342-4c0b-9d44-d5c5ed4f4700/public", icon: "📱" },
+  { title: "WhatsApp Chatbot for Customer Support", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/68b2a656-a342-4c0b-9d44-d5c5ed4f4700/public", icon: "💬" },
 ];
 
 const methodSteps = [
@@ -91,7 +91,7 @@ export default function AutomationPage() {
       <section className="relative overflow-hidden bg-dark-bg pb-16 pt-40">
         <div className="absolute right-0 top-0 h-full w-[55%]">
           <Image
-            src="/images/automation/hero-slider.png"
+            src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/fbfb2d0f-627c-45ac-b654-b317ce6df500/public"
             alt="Automation showcase"
             fill
             className="object-cover object-left"
@@ -161,7 +161,7 @@ export default function AutomationPage() {
         heading={"Automation Made\nSimple, Scalable, And\nSmart"}
         subheading="A library of intelligent, pre-built workflows to automate what matters most. From content scheduling to customer engagement, each template is designed to connect, perform, and evolve with your business."
         items={accordionItems}
-        defaultImage="/images/automation/content-automation.png"
+        defaultImage="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/68b2a656-a342-4c0b-9d44-d5c5ed4f4700/public"
       />
 
       {/* ════════════════════════════════════════════════════════

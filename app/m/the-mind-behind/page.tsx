@@ -85,7 +85,7 @@ export default function MobileTheMindBehindPage() {
       <section className="relative min-h-[60vh] overflow-hidden bg-dark-bg">
         <div className="absolute inset-0 z-0">
           <Image
-            src="/images/mind-behind/human-ai-hero.png"
+            src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/7f2a29db-5a3f-446b-b83d-12fc58c51b00/public"
             alt="Human + AI"
             fill
             className="object-cover opacity-30"

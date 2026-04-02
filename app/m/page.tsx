@@ -199,7 +199,7 @@ export default function MobileHomePage() {
       <section className="relative min-h-[100svh] overflow-hidden bg-dark-bg">
         <div className="absolute inset-0 z-0">
           <Image
-            src="/images/mobile/backgrounds/hero-woman-portrait.png"
+            src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/d609bc26-f583-4bee-da4b-8cd9255a3400/public"
             alt="AI-generated influencer — DDiP AI"
             fill
             priority
@@ -561,7 +561,7 @@ export default function MobileHomePage() {
 
         <div className="mt-6 overflow-hidden rounded-[14px]">
           <Image
-            src="/images/homepage/smarter-workflows-3d.jpg"
+            src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/bbe8dab9-ddbc-436c-b0ab-94be60b86200/public"
             alt="3D workflow visualization"
             width={670}
             height={460}

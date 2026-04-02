@@ -13,27 +13,27 @@ import PartnersSection from "@/components/desktop/PartnersSection";
 
 
 const heroPartners = [
-    { name: 'Vesta Global', logo: '/images/partners/partner_vg.png' },
-    { name: 'Brother', logo: '/images/partners/partner_brother.png' },
-    { name: 'Mediterra', logo: '/images/partners/partner_meditera.png' },
-    { name: 'Bizim Mutfak', logo: '/images/partners/partner_bizim.png' },
-    { name: 'Optimum', logo: '/images/partners/partner_optimum.png' },
-    { name: 'CollaSel', logo: '/images/partners/partner_collasel.png' },
-    { name: 'SelJel', logo: '/images/partners/partner_seljel.png' },
+    { name: 'Vesta Global', logo: 'https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/df6e0710-2d50-486d-5f59-5e751559e900/public' },
+    { name: 'Brother', logo: 'https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/86b61c21-9a9c-439a-317a-85b52a8e1200/public' },
+    { name: 'Mediterra', logo: 'https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/c4b8d5eb-29a6-4b39-cf0e-bcb6da555800/public' },
+    { name: 'Bizim Mutfak', logo: 'https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/fd4760d4-1dac-4f11-1800-7c8f7e1dfa00/public' },
+    { name: 'Optimum', logo: 'https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/4b22ddb7-f87d-499e-df17-ae9efd2e5200/public' },
+    { name: 'CollaSel', logo: 'https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/e47e5b16-132e-40ee-537a-2d44a3283d00/public' },
+    { name: 'SelJel', logo: 'https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/4c453b6d-12e2-4fb3-f7d3-75d85e1a5200/public' },
   ];
 
 const whatGeoItems = [
-  { title: "Content structure and format", image: "/images/geo/what-geo-01.png" },
-  { title: "Semantic clarity and depth", image: "/images/geo/what-geo-02.png" },
-  { title: "Multi-engine presence", image: "/images/geo/what-geo-03.png" },
-  { title: "Topic authority signals", image: "/images/geo/what-geo-04.png" },
+  { title: "Content structure and format", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/1c2df9e6-58f9-4e83-fc29-0819fcd45e00/public" },
+  { title: "Semantic clarity and depth", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/23654e2b-dd79-4cca-114e-e32316b23100/public" },
+  { title: "Multi-engine presence", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/b99e4b63-4401-4b60-7310-47c6a8bc6500/public" },
+  { title: "Topic authority signals", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/08c1fef4-298a-49cb-aaff-63067d39a100/public" },
 ];
 
 const optimizeItems = [
-  { title: "Content Architecture and Hierarchy", image: "/images/geo/optimize-01.png" },
-  { title: "Semantic markup and metadata", image: "/images/geo/optimize-02.png" },
-  { title: "Multi-engine optimization", image: "/images/geo/optimize-03.png" },
-  { title: "Image & media optimization", image: "/images/geo/optimize-04.png" },
+  { title: "Content Architecture and Hierarchy", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/60119b83-5024-4efc-edde-585a84dd2100/public" },
+  { title: "Semantic markup and metadata", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/147febb9-0d15-49f2-2408-71f7f29b6700/public" },
+  { title: "Multi-engine optimization", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/3c3064d9-09d8-4f0c-e06e-743e6ec4ca00/public" },
+  { title: "Image & media optimization", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/72b5f1dc-0fa3-45f3-a4ec-bbea9e339600/public" },
 ];
 
 const methodSteps = [
@@ -60,19 +60,19 @@ const methodSteps = [
 ];
 
 const whyGeoItems = [
-  { image: "/images/geo/why-geo-01.png" },
-  { image: "/images/geo/why-geo-02.png" },
-  { image: "/images/geo/why-geo-03.png" },
-  { image: "/images/geo/why-geo-04.png" },
-  { image: "/images/geo/why-geo-05.png" },
+  { image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/707b3e8b-49b6-4282-1005-d1d4de0db400/public" },
+  { image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/bedfa4c1-7385-4774-9039-2c9412466600/public" },
+  { image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/4dce55b0-c4e6-4459-27b2-4bb110d56900/public" },
+  { image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/220a5014-5271-4ac7-58c7-4fdddd233600/public" },
+  { image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/8e8c5d60-cc1f-493e-8353-2937c8047800/public" },
 ];
 
 const useCases = [
-  { title: "E-commerce", desc: "Corporate and service websites", image: "/images/geo/usecase-01.png" },
-  { title: "SaaS", desc: "Thought leadership and editorial content", image: "/images/geo/usecase-02.png" },
-  { title: "Healthcare", desc: "Multi-region and multi-language platforms", image: "/images/geo/usecase-03.png" },
-  { title: "Finance", desc: "AI-ready content hubs", image: "/images/geo/usecase-04.png" },
-  { title: "Education", desc: "Brands preparing for AI-driven search visibility", image: "/images/geo/usecase-05.png" },
+  { title: "E-commerce", desc: "Corporate and service websites", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/b42d0e77-4b0b-4314-855a-50742215f400/public" },
+  { title: "SaaS", desc: "Thought leadership and editorial content", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/b6d8c2f0-639e-4be4-963e-3bcf48bd1400/public" },
+  { title: "Healthcare", desc: "Multi-region and multi-language platforms", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/e65d732c-ec5f-4775-5e9e-9842929fd300/public" },
+  { title: "Finance", desc: "AI-ready content hubs", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/b2122307-7cd1-4046-b85c-1d3c3029e800/public" },
+  { title: "Education", desc: "Brands preparing for AI-driven search visibility", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/4d210387-714f-4c9e-729d-11f757158700/public" },
 ];
 
 const faqLeft = [
@@ -153,7 +153,7 @@ export default function GeoPage() {
       <h1 className="text-[140px] text-white whitespace-nowrap">
         DDIP GEO OPTMIZATION
         <span className="mx-4 inline-block">
-          <img src="/images/homepage/nameStar.png" className="h-[70px]" />
+          <img src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/154cd613-2d04-4634-41b3-834c90dc5800/public" className="h-[70px]" />
         </span>
         AI CONTENT GENERATION
       </h1>
@@ -164,7 +164,7 @@ export default function GeoPage() {
       <h1 className="text-[140px] text-white whitespace-nowrap">
         DDIP GEO OPTMIZATION
         <span className="mx-4 inline-block">
-          <img src="/images/homepage/nameStar.png" className="h-[70px]" />
+          <img src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/154cd613-2d04-4634-41b3-834c90dc5800/public" className="h-[70px]" />
         </span>
         AI CONTENT GENERATION
       </h1>
@@ -206,27 +206,27 @@ export default function GeoPage() {
       
       {/* 1. 45 Prompts Box (Top Left of group) */}
       <div className="absolute -top-10 left-10 z-30 transform hover:scale-105 transition-transform duration-300" style={{top:"50px",left:"260px"}}>
-        <img src="/images/geo/why-geo-02.png" alt="45 prompts" className="w-[180px] drop-shadow-2xl" />
+        <img src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/126eeb07-a598-40d1-507b-a169c3a61700/public" alt="45 prompts" className="w-[180px] drop-shadow-2xl" />
       </div>
 
       {/* 2. Main Platform Stats Chart (Center) */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 w-[426px]">
-        <img src="/images/geo/geoHomepage3.png" alt="AI Stats Chart" className="drop-shadow-2xl ml-[-95px]" />
+        <img src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/955273a6-c801-43e4-0062-087b7818f400/public" alt="AI Stats Chart" className="drop-shadow-2xl ml-[-95px]" />
       </div>
 
       {/* 3. AI Visibility Gauge (Top Right) */}
       <div className="absolute top-[90px] right-[0px] z-30">
-        <img src="/images/geo/geoHomepage2.png" alt="65% Visibility" className="w-[140px] drop-shadow-2xl" />
+        <img src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/90710c77-9f67-41f8-bda2-b4c00d5cd500/public" alt="65% Visibility" className="w-[140px] drop-shadow-2xl" />
       </div>
 
       {/* 4. Citations / Sources (Bottom Right) */}
       <div className="absolute bottom-[150px] right-[-50px] z-30">
-        <img src="/images/geo/geoHomepage1.png" alt="345 sources" className="w-[160px] drop-shadow-xl" />
+        <img src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/515630f1-bbc9-435a-827a-dda9e69eb700/public" alt="345 sources" className="w-[160px] drop-shadow-xl" />
       </div>
 
       {/* 5. Tool Icons Cluster (Bottom Center) */}
       <div className="absolute -bottom-5 right-[130px] z-40">
-        <img src="/images/geo/why-geo-01.png" alt="AI Icons" className="w-[200px]" />
+        <img src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/27262750-55ac-4bf3-a2ba-48f39ea3f800/public" alt="AI Icons" className="w-[200px]" />
       </div>
 
     </div>
@@ -254,7 +254,7 @@ export default function GeoPage() {
                 Longer Enough
               </h2>
               <div className="w-full mt-[60px] d-flex flex justify-end">
-              <img src="/images/geo/asset-01.png" className="w-[500px] "/>
+              <img src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/81f155be-4acd-4ee4-f772-861a73198900/public" className="w-[500px] "/>
               </div>
             </div>
             <div className="space-y-4">
@@ -278,7 +278,7 @@ Instead of scrolling through result pages, users increasingly ask questions and 
            <div className="relative overflow-hidden px-4 pt-8 pb-24 sm:px-8 sm:pt-10 md:px-[70px] md:pt-[35px] mt-[60px]" style={{ minHeight: "600px" }}>
       {/* Background */}
       <div className="absolute inset-0 z-0">
-        <img src="/images/geo/photo-02.png" alt="background clouds" className="w-full h-full object-cover" />
+        <img src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/3a299844-7937-43b1-4a7b-3478050b4900/public" alt="background clouds" className="w-full h-full object-cover" />
       </div>
 
       {/* Main Heading */}
@@ -365,7 +365,7 @@ Instead of scrolling through result pages, users increasingly ask questions and 
           {/* Left Side - Search Platform Box (Top Left) */}
           <div className="absolute left-[6%] top-0 w-[280px] md:w-[320px] lg:w-[380px] bg-white rounded-2xl shadow-lg p-5">
             <Image 
-              src="/images/geo/what-geo-02.png"
+              src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/23654e2b-dd79-4cca-114e-e32316b23100/public"
               alt="Search Platform"
               width={380}
               height={280}
@@ -380,7 +380,7 @@ Instead of scrolling through result pages, users increasingly ask questions and 
           {/* Center - Product Comparison (Bottom Center) */}
           <div className="absolute left-[33%] top-[36%]  w-[200px]  bg-white rounded-2xl shadow-lg">
             <img 
-             src="/images/geo/what-geo-06.png"
+             src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/4b9c86e7-e472-4cca-9ea2-9a342ecdd000/public"
               alt="Product Comparison"
               className="w-[200px] h-[175px]"
             />
@@ -390,7 +390,7 @@ Instead of scrolling through result pages, users increasingly ask questions and 
 <div className="absolute  right-[22%] top-[-42%] w-[230px]">
 
    <img 
-              src="/images/geo/what-geo-03.png"
+              src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/b99e4b63-4401-4b60-7310-47c6a8bc6500/public"
               alt="Stats Analytics"
               className="w-full h-auto"
             />
@@ -398,7 +398,7 @@ Instead of scrolling through result pages, users increasingly ask questions and 
 
 <div className="absolute  right-[16%] top-[-27%] w-[230px]">
    <img
-              src="/images/geo/what-geo-04.png"
+              src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/08c1fef4-298a-49cb-aaff-63067d39a100/public"
               alt="Stats Analytics"
               className="w-full h-auto"
             />
@@ -407,7 +407,7 @@ Instead of scrolling through result pages, users increasingly ask questions and 
 <div className="absolute  right-[0%] top-[-45%] w-[110px] h-[180px]">
   
    <img 
-             src="/images/geo/aivisibleImg.png"
+             src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/5de9bd15-8fac-4ea0-61d8-77ba0a967c00/public"
               alt="Stats Analytics"
               className="w-[110px]"
 
@@ -416,7 +416,7 @@ Instead of scrolling through result pages, users increasingly ask questions and 
           {/* Right Side - Analytics Stats (Top Right) */}
           <div className="absolute right-0 top-0 w-[43%]  rounded-2xl ">
             <img 
-              src="/images/geo/what-geo-05.png"
+              src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/da727212-dc17-4cd0-4145-347ce2da7100/public"
               alt="Stats Analytics"
               className="w-full h-auto"
             />
@@ -469,33 +469,33 @@ Instead of scrolling through result pages, users increasingly ask questions and 
 
         {/* LEFT TOP — large AI cube */}
         <div className="absolute left-[65px] top-[40px] w-[360px] z-10">
-          <img src="/images/geo/firstAicc.png" alt="AI cube" className="w-full drop-shadow-xl" />
+          <img src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/9b006a7f-a8df-4fd5-d33a-9f29001ad500/public" alt="AI cube" className="w-full drop-shadow-xl" />
         </div>
 
        
 
         {/* LEFT BOTTOM — chat card */}
         <div className="absolute left-[-155px] bottom-[60px] h-[210px] w-[500px] z-10">
-          <img src="/images/geo/rightside11.png" alt="chat card" className="w-full drop-shadow-lg" />
+          <img src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/e81d8f80-071d-4611-ec3b-71b73e478000/public" alt="chat card" className="w-full drop-shadow-lg" />
         </div>
 
         {/* TOP CENTER — small cube */}
         <div style={{ transform: "rotate(22.26deg)" }} className="absolute right-[600px] top-[70px] w-[100px] z-10">
-          <img src="/images/geo/centercc.png" alt="small cube" className="w-full drop-shadow-lg" />
+          <img src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/3757d4f4-61ab-4b44-5c3d-8ce9773da900/public" alt="small cube" className="w-full drop-shadow-lg" />
         </div>
 
 
 
         {/* RIGHT BOTTOM — star cube */}
         <div className="absolute right-[-235px] bottom-[-20px] w-[530px] z-10">
-          <img style={{ transform: "rotate(19.91deg)" }}  src="/images/geo/supla.png" alt="star cube" className="w-full drop-shadow-xl" />
+          <img style={{ transform: "rotate(19.91deg)" }}  src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/8ef107f7-3615-45c9-5ed9-cfd04ca34700/public" alt="star cube" className="w-full drop-shadow-xl" />
         </div>
 
  <div className="absolute right-[300px] bottom-[0px] w-[400px] z-10">
-          <img  src="/images/geo/centerside11.png" alt="star cube" className="w-full drop-shadow-xl" />
+          <img  src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/2d6bd3db-fff4-4911-d7b2-af67ad763500/public" alt="star cube" className="w-full drop-shadow-xl" />
         </div>
 <div className="absolute right-[-20px] top-[190px] w-[400px] z-10">
-          <img src="/images/geo/leftside11.png" alt="text right" className="w-full drop-shadow-xl" />
+          <img src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/bb3f40ab-c3e7-48b3-ea78-81b6afb06d00/public" alt="text right" className="w-full drop-shadow-xl" />
         </div>
         {/* CENTER TEXT */}
         <div className="relative z-20 mx-auto max-w-[700px] text-center py-32">
@@ -537,7 +537,7 @@ Instead of scrolling through result pages, users increasingly ask questions and 
             {/* Background image — full section, high opacity dark overlay */}
             <div className="absolute inset-0 z-0">
               <img
-                src="/images/geo/blurimage.png"
+                src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/7fd78ad6-d243-4ff7-7e8e-7b3642947f00/public"
                 alt=""
                 className="w-full h-full object-cover object-center"
                 
@@ -560,19 +560,19 @@ Instead of scrolling through result pages, users increasingly ask questions and 
               <div className="flex-1 relative z-10" style={{ minHeight: "320px" }}>
                 {/* Brand appears in 45 prompts card */}
                 <div className="absolute top-[100px] left-[60px]">
-                  <img src="/images/geo/why-geo-02.png" alt="45 prompts" className="w-[240px] drop-shadow-xl" />
+                  <img src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/126eeb07-a598-40d1-507b-a169c3a61700/public" alt="45 prompts" className="w-[240px] drop-shadow-xl" />
                 </div>
                 {/* Stats chart card */}
                 <div className="absolute top-[-10px] left-[355px]">
-                  <img src="/images/geo/what-geo-06.png" alt="Stats" className="w-[200px] drop-shadow-xl" />
+                  <img src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/4b9c86e7-e472-4cca-9ea2-9a342ecdd000/public" alt="Stats" className="w-[200px] drop-shadow-xl" />
                 </div>
                 {/* Chat search card */}
                 <div className="absolute top-[220px] left-[-220px]">
-                  <img src="/images/geo/chtgpt11.png" alt="Chat search" className="w-[400px] drop-shadow-xl" />
+                  <img src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/5696d1ab-9c12-4d0c-43ce-41062f80df00/public" alt="Chat search" className="w-[400px] drop-shadow-xl" />
                 </div>
                 {/* AI tool icons */}
                 <div className="absolute top-[250px] left-[230px]">
-                  <img src="/images/geo/why-geo-01.png" alt="AI tools" className="w-[240px] drop-shadow-lg" />
+                  <img src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/27262750-55ac-4bf3-a2ba-48f39ea3f800/public" alt="AI tools" className="w-[240px] drop-shadow-lg" />
                 </div>
               </div>
 

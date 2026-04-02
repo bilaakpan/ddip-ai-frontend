@@ -13,7 +13,7 @@ import FaqSection from "@/components/desktop/FaqSection";
 const processSteps = [
   {
     step: "01",
-    image: "/images/process/step-01.png",
+    image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/840870cf-3f8a-4ffa-ecf5-42c951983400/public",
     title: "Discovery & Strategy",
     description:
       "We start by understanding your business, goals, audience, and competitive landscape. Through workshops and research, we define the AI strategy that will drive real results.",
@@ -25,7 +25,7 @@ const processSteps = [
   },
   {
     step: "02",
-    image: "/images/process/step-02.png",
+    image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/21580366-d582-4166-54c0-ca19cf5c5c00/public",
     title: "Concept & Design",
     description:
       "Our creative team develops concepts, wireframes, and visual designs that align with your brand identity and strategic objectives. Every pixel is intentional.",
@@ -37,7 +37,7 @@ const processSteps = [
   },
   {
     step: "03",
-    image: "/images/process/step-03.png",
+    image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/efad73dc-dbb1-48df-a783-3f83ff054a00/public",
     title: "AI Development & Integration",
     description:
       "We build and integrate AI-powered systems — from content generation pipelines to automation workflows — using cutting-edge models and battle-tested architectures.",
@@ -49,7 +49,7 @@ const processSteps = [
   },
   {
     step: "04",
-    image: "/images/process/step-04.png",
+    image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/9bbc75a1-f667-4be4-0c98-f21a6c069000/public",
     title: "Testing & Optimization",
     description:
       "Rigorous testing across all touchpoints. We optimize for performance, accuracy, and user experience — ensuring every AI system delivers consistent, reliable results.",
@@ -61,7 +61,7 @@ const processSteps = [
   },
   {
     step: "05",
-    image: "/images/process/step-05.png",
+    image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/60f0e23b-ae4e-4186-cf0c-47b08d778700/public",
     title: "Launch & Ongoing Support",
     description:
       "We deploy your AI-powered systems and provide ongoing monitoring, maintenance, and optimization. Your dedicated team ensures everything runs smoothly post-launch.",
@@ -75,13 +75,13 @@ const processSteps = [
 
 const howWeWork = [
   {
-    image: "/images/process/how-01.png",
+    image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/1c99f5c0-02dc-42d2-fd18-fbeece3bde00/public",
     title: "Collaborative Partnership",
     description:
       "We work as an extension of your team — not a black-box vendor. Regular check-ins, transparent communication, and shared project boards keep everyone aligned.",
   },
   {
-    image: "/images/process/how-02.png",
+    image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/514497a1-8216-4d8b-d6b1-9130cfa5e300/public",
     title: "Agile & Iterative",
     description:
       "We ship in sprints, gather feedback fast, and iterate continuously. You see progress every week, not just at the end. This reduces risk and ensures we build exactly what you need.",
@@ -90,25 +90,25 @@ const howWeWork = [
 
 const whatWeDeliver = [
   {
-    image: "/images/process/delivers-01.png",
+    image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/cbfc29b0-c4d8-4248-ee33-949eb1283a00/public",
     title: "AI-Powered Websites",
     description:
       "High-performance, SEO-optimized websites with integrated AI features — from chatbots to dynamic content personalization.",
   },
   {
-    image: "/images/process/delivers-02.png",
+    image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/a606ee0f-1568-4baf-6dc7-f214cf946c00/public",
     title: "Automation Systems",
     description:
       "End-to-end workflow automation that eliminates repetitive tasks and scales your operations without scaling your team.",
   },
   {
-    image: "/images/process/delivers-03.png",
+    image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/5269947f-a9b0-4e28-22d9-215b65493e00/public",
     title: "AI Content & Creative",
     description:
       "Production-ready AI-generated content — videos, images, copy, and social media assets — at scale and on-brand.",
   },
   {
-    image: "/images/process/delivers-04.png",
+    image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/05a98c25-687f-4aad-2baa-cc667314d000/public",
     title: "Data & Analytics Dashboards",
     description:
       "Custom dashboards that turn your data into actionable insights. AI-powered reporting that tells you what matters and what to do next.",
@@ -177,9 +177,9 @@ export default function ProcessPage() {
               <div className="flex animate-marquee">
                 <h1 className="text-[140px] text-white whitespace-nowrap">
                   OUR PROCESS <span className="inline-block">
-                    <img src="/images/homepage/nameStar.png" className="h-[70px]" />
+                    <img src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/154cd613-2d04-4634-41b3-834c90dc5800/public" className="h-[70px]" />
                   </span>  OUR PROCESS <span className="inline-block">
-                    <img src="/images/homepage/nameStar.png" className="h-[70px]" />
+                    <img src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/154cd613-2d04-4634-41b3-834c90dc5800/public" className="h-[70px]" />
                   </span>
                 </h1>
               </div>
@@ -231,7 +231,7 @@ export default function ProcessPage() {
 
           {/* Left — image with overlaid text labels */}
           <div className="shrink-0 w-[60%] relative">
-            <img src="/images/process/firstprocess11.png" alt="Understanding" className="w-full h-auto object-contain" />
+            <img src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/6f75a92d-2ea1-480c-fb72-7f9573c73400/public" alt="Understanding" className="w-full h-auto object-contain" />
             {/* strategy — top center */}
             <span className="absolute top-[18%] left-[50%] -translate-x-1/2 z-10 text-[16px] font-medium text-[#226576]" style={{ fontFamily: "Bricolage Grotesque" }}>strategy</span>
             {/* technology — bottom left */}
@@ -271,10 +271,10 @@ export default function ProcessPage() {
 
           <div className="mt-12 grid grid-cols-4 gap-6">
             {[
-              { image: "/images/process/delivers-01.png", title: "Clarity before complexity", desc: "We define the right solution before building anything." },
-              { image: "/images/process/delivers-02.png", title: "Customization over templates", desc: "No generic AI setups. Every system is designed around the brand." },
-              { image: "/images/process/delivers-03.png", title: "Human-led intelligence", desc: "AI accelerates — people decide." },
-              { image: "/images/process/delivers-04.png", title: "Scalability with control", desc: "Systems that grow without losing consistency or quality." },
+              { image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/cbfc29b0-c4d8-4248-ee33-949eb1283a00/public", title: "Clarity before complexity", desc: "We define the right solution before building anything." },
+              { image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/a606ee0f-1568-4baf-6dc7-f214cf946c00/public", title: "Customization over templates", desc: "No generic AI setups. Every system is designed around the brand." },
+              { image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/5269947f-a9b0-4e28-22d9-215b65493e00/public", title: "Human-led intelligence", desc: "AI accelerates — people decide." },
+              { image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/05a98c25-687f-4aad-2baa-cc667314d000/public", title: "Scalability with control", desc: "Systems that grow without losing consistency or quality." },
             ].map((item, i) => (
               <div key={i} className="flex flex-col">
                 {/* Image card */}
@@ -298,7 +298,7 @@ export default function ProcessPage() {
       {/* ─── From First Contact to Long-Term Partnership ─── */}
       <section className="relative overflow-hidden rounded-[24px] mx-[60px] my-12 mb-20" style={{ minHeight: "480px" }}>
         {/* BG image */}
-        <img src="/images/process/partnership-overview.png" alt="Partnership" className="absolute inset-0 w-full h-full object-cover" />
+        <img src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/47ee54cb-7da4-43ec-2f77-1a62a340a200/public" alt="Partnership" className="absolute inset-0 w-full h-full object-cover" />
         {/* Dark overlay */}
         <div className="absolute inset-0 bg-[#063746]/60" />
 
@@ -317,10 +317,10 @@ export default function ProcessPage() {
             {/* Left — 2x2 grid */}
             <div className="grid grid-cols-2 gap-3">
               {[
-                { image: "/images/process/step-01.png", label: "Launching an", bold: "AI influencer or brand ambassador" },
-                { image: "/images/process/step-02.png", label: "Building an", bold: "AI-driven content engine" },
-                { image: "/images/process/step-03.png", label: "Designing", bold: "automated workflows with AI agents" },
-                { image: "/images/process/step-04.png", label: "Creating a long-term", bold: "AI brand ecosystem" },
+                { image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/840870cf-3f8a-4ffa-ecf5-42c951983400/public", label: "Launching an", bold: "AI influencer or brand ambassador" },
+                { image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/21580366-d582-4166-54c0-ca19cf5c5c00/public", label: "Building an", bold: "AI-driven content engine" },
+                { image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/efad73dc-dbb1-48df-a783-3f83ff054a00/public", label: "Designing", bold: "automated workflows with AI agents" },
+                { image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/9bbc75a1-f667-4be4-0c98-f21a6c069000/public", label: "Creating a long-term", bold: "AI brand ecosystem" },
               ].map((item, i) => (
                 <div key={i} className="flex items-center gap-3 rounded-[10px] p-3" style={{ width: "370px", height: "110px", background: "rgba(255,255,255,0.12)", backdropFilter: "blur(10px)" }}>
                   <div className="shrink-0 w-[60px] h-[60px] overflow-hidden rounded-[8px]">
@@ -338,7 +338,7 @@ export default function ProcessPage() {
             <div className="flex rounded-[10px] overflow-hidden" style={{ width: "370px", height: "240px", background: "rgba(255,255,255,0.12)", backdropFilter: "blur(10px)" }}>
               {/* Image — left half */}
               <div className="w-[55%] h-full overflow-hidden rounded-[8px]">
-                <img src="/images/process/step-05.png" alt="AI ad films" className="w-full h-full object-cover" />
+                <img src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/60f0e23b-ae4e-4186-cf0c-47b08d778700/public" alt="AI ad films" className="w-full h-full object-cover" />
               </div>
               {/* Text — right half */}
               <div className="flex-1 flex flex-col justify-center px-4">
@@ -372,9 +372,9 @@ export default function ProcessPage() {
           {/* 3 images with arrows */}
           <div className="flex items-center justify-center gap-0">
             {[
-              { image: "/images/process/how-01.png", label: "Human intelligence leads." },
-              { image: "/images/process/how-02.png", label: "AI systems follow." },
-              { image: "/images/process/how-03.png", label: "Results scale." },
+              { image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/1c99f5c0-02dc-42d2-fd18-fbeece3bde00/public", label: "Human intelligence leads." },
+              { image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/514497a1-8216-4d8b-d6b1-9130cfa5e300/public", label: "AI systems follow." },
+              { image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/47784523-ee38-424b-9c91-c420806c0900/public", label: "Results scale." },
             ].map((item, i) => (
               <div key={i} className="flex items-center">
                 <div className="flex flex-col items-center">
@@ -410,7 +410,7 @@ export default function ProcessPage() {
               <div className="relative">
                 {/* IMAGE */}
                 <img
-                  src="/images/process/insight-Group 641.png"
+                  src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/f123a0a7-ad4f-4441-1163-3ca9cf8ad500/public"
                   alt="Process insight visual"
                   className="absolute w-[55%] -top-12 left-16 sm:w-[60%] md:w-[55%] lg:w-[50%] object-contain"
                 />

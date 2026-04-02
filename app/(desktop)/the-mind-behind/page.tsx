@@ -6,9 +6,9 @@ import Image from "next/image";
 /* ─── Data ─── */
 
 const projectCards = [
-  { title: "Understanding the brand", image: "/images/mind-behind/project-01.png" },
-  { title: "Understanding the business challenge", image: "/images/mind-behind/project-02.png" },
-  { title: "Understanding the audience, culture, and context", image: "/images/mind-behind/project-03.png" },
+  { title: "Understanding the brand", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/a2d5d052-049b-4c2c-9925-c2bc1f2e1a00/public" },
+  { title: "Understanding the business challenge", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/d0845db1-d5af-44ff-1964-a82639fa1f00/public" },
+  { title: "Understanding the audience, culture, and context", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/60853bec-454d-4315-9780-071492147100/public" },
 ];
 
 const humanAiItems = [
@@ -210,7 +210,7 @@ export default function TheMindBehindPage() {
           <div className="relative overflow-hidden rounded-[24px] px-12 py-14" style={{ background: "#002834" }}>
 
             {/* BG image */}
-            <Image src="/images/mind-behind/human-ai-hero.png" alt="bg" fill className="object-cover opacity-40" sizes="100vw" />
+            <Image src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/d3ec1192-f7d6-4c41-86f4-83ae0813a800/public" alt="bg" fill className="object-cover opacity-40" sizes="100vw" />
 
             {/* Content grid: left + center + right */}
             <div className="relative z-10 grid grid-cols-[1fr_auto_1fr] gap-8 items-start">
@@ -287,13 +287,13 @@ export default function TheMindBehindPage() {
 
           {/* Floating icons — absolute positioned */}
           <div className="absolute top-[100px] right-[230px] z-10">
-            <Image src="/images/mind-behind/bb-01.png" alt="icon" width={300} height={110} className="object-contain" />
+            <Image src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/814f5a17-3122-4cbb-f28d-35cab9058200/public" alt="icon" width={300} height={110} className="object-contain" />
           </div>
           <div className="absolute top-[290px] left-[400px] right-[80px] z-10">
-            <Image src="/images/mind-behind/bb-02.png" alt="icon" width={240} height={100} className="object-contain" />
+            <Image src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/e80f3209-582e-45d0-4d75-94b93bc7e600/public" alt="icon" width={240} height={100} className="object-contain" />
           </div>
           <div className="absolute top-[380px] right-[170px] z-10">
-            <Image src="/images/mind-behind/bb-03.png" alt="icon" width={280} height={120} className="object-contain" />
+            <Image src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/ce65cf14-a5de-4cb8-0023-b0cee10b7100/public" alt="icon" width={280} height={120} className="object-contain" />
           </div>
 
           {/* Top heading + subtitle */}
@@ -329,7 +329,7 @@ export default function TheMindBehindPage() {
 
             {/* Left — single image */}
             <div className="shrink-0 w-[50%]">
-              <img src="/images/mind-behind/system-03.png" alt="System" className="w-full h-auto rounded-[16px] object-contain" />
+              <img src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/9ac22dc8-19e4-47cd-ce11-6b503e251a00/public" alt="System" className="w-full h-auto rounded-[16px] object-contain" />
             </div>
 
             {/* Right — bottom text only */}
@@ -397,7 +397,7 @@ export default function TheMindBehindPage() {
           <div className="grid grid-cols-2 gap-16 mb-16 items-center">
             {/* Left — circular arrow image */}
             <div className="flex items-center justify-center">
-              <Image src="/images/mind-behind/refresh.png" alt="circular arrow" width={320} height={320} className="object-contain" />
+              <Image src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/6fa83d35-93fe-4424-8a75-0a2972d1cc00/public" alt="circular arrow" width={320} height={320} className="object-contain" />
             </div>
             {/* Right — text */}
             <div>
@@ -448,7 +448,7 @@ export default function TheMindBehindPage() {
           <div className="relative overflow-hidden rounded-[24px]" style={{ minHeight: "420px" }}>
 
             {/* BG image — full, no opacity */}
-            <Image src="/images/mind-behind/photo-03.png" alt="The Future" fill className="object-cover" sizes="100vw" />
+            <Image src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/819c196e-ab9b-41cf-8c00-d310b3b63500/public" alt="The Future" fill className="object-cover" sizes="100vw" />
 
             {/* Left — blurred text card */}
             <div className="relative z-10 flex h-full items-start p-10" style={{ minHeight: "420px" }}>

@@ -102,7 +102,7 @@ const staticProjects = [
     field: "Real Estate",
     categories: ["Visual Style Definition", "AI Model Selection & Optimization", "Use-Case Development", "Prompt Crafting"],
     description: "Lorem Ipsum is simply",
-    image: "/images/work2.mp4",
+    image: "/videos/work2.mp4",
     mediaType: "video",
   },
   {
@@ -156,7 +156,7 @@ export default function WorksPage() {
         field: w.field || "",
         categories: [w.field || ""].filter(Boolean),
         description: "Lorem Ipsum is simply",
-        image: w.mediaUrl || "/images/works/grid-r1-c1.jpg",
+        image: w.mediaUrl || "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/70a4b0fb-332f-4dc5-7877-c92a15e69d00/public",
         mediaType: w.mediaType,
       }));
     }

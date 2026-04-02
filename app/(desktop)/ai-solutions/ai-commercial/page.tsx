@@ -20,15 +20,15 @@ const heroPartners = ["VG", "brother", "Vestine", "OPTIMUM", "ColaSel", "Colorfu
 const meaningItems = [
   {
     title: "AI-driven storyboarding and pre-production",
-    image: "/images/ai-commercial/frame-01.png",
+    image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/04f4cb07-ecde-4e20-c763-0cb3838ead00/public",
   },
   {
     title: "Real-time generation of scenes and assets",
-    image: "/images/ai-commercial/frame-02.png",
+    image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/ce155513-8c81-4907-0bf1-63fa581de400/public",
   },
   {
     title: "Cinematic output without the studio overhead",
-    image: "/images/ai-commercial/frame-03.png",
+    image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/d1d5fb05-4289-4080-54f1-18fbdfdece00/public",
   },
 ];
 
@@ -65,30 +65,30 @@ const methodSteps = [
 const generateItems = [
   {
     title: "Brand and campaign films",
-    image: "/images/ai-content/showcase-01.png",
+    image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/35a5d56e-da6e-42ce-4072-9b24938c1a00/public",
   },
   {
     title: "Digital commercials",
-    image: "/images/ai-content/showcase-02.png",
+    image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/ce65649d-7f6d-4497-8d8a-697ee865d800/public",
   },
   {
     title: "Product and launch videos",
-    image: "/images/ai-content/showcase-03.png",
+    image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/0156ebdc-189b-4bce-808d-49f28c020200/public",
   },
 ];
 
 const useCaseCards = [
-  { title: "Vesta Global", image: "/images/ai-commercial/frame-04.png" },
-  { title: "Bizim Mutfak", image: "/images/ai-commercial/frame-05.png" },
-  { title: "Realkom", image: "/images/ai-commercial/frame-06.png" },
-  { title: "Brother", image: "/images/ai-commercial/frame-01.png" },
+  { title: "Vesta Global", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/c8c8cf4a-7c43-4965-3eb9-273d07e05800/public" },
+  { title: "Bizim Mutfak", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/81574077-c99c-413c-6012-8e10bf34f000/public" },
+  { title: "Realkom", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/2394166e-4704-4ac0-0458-e6a3f7372f00/public" },
+  { title: "Brother", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/04f4cb07-ecde-4e20-c763-0cb3838ead00/public" },
 ];
 
 const toolIcons = [
-  "/images/ai-commercial/layer-icon-01.png",
-  "/images/ai-commercial/layer-icon-02.png",
-  "/images/ai-commercial/layer-icon-03.png",
-  "/images/ai-commercial/layer-icon-04.png",
+  "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/f46dbb54-c366-4922-ddbe-0be442b6af00/public",
+  "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/79ad8341-ddac-4e20-41d6-bf65ab711500/public",
+  "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/a6646f63-84e1-4a9b-820d-b7063f47cd00/public",
+  "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/72101ace-0e03-4f71-0a20-d3bfc51e7f00/public",
 ];
 
 const faqLeft = [
@@ -136,7 +136,7 @@ export default function AICommercialPage() {
         {/* Hero image — right side */}
         <div className="absolute right-0 top-0 h-full w-full">
           <Image
-            src="/images/ai-commercial/hero-slider.png"
+            src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/4a7bbe61-767f-462a-df7d-807b71ae4d00/public"
             alt="AI Commercial showcase"
             fill
             className="object-cover object-left"
@@ -212,12 +212,12 @@ export default function AICommercialPage() {
 
           {/* Floating icon — left edge, half outside */}
           <div className="absolute left-0 top-[45%] -translate-y-1/2 -translate-x-1/2 z-10">
-            <img src="/images/ai-commercial/layer-icon-02.png" className="w-[120px] h-[120px] object-contain" style={{ transform: "rotate(24.73deg)" }} />
+            <img src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/79ad8341-ddac-4e20-41d6-bf65ab711500/public" className="w-[120px] h-[120px] object-contain" style={{ transform: "rotate(24.73deg)" }} />
           </div>
 
           {/* Floating icon — bottom center */}
           <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 z-10">
-            <img src="/images/ai-commercial/layer-icon-04.png" className="w-[130px] h-[130px] object-contain" style={{ transform: "rotate(-29.82deg)" }} />
+            <img src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/72101ace-0e03-4f71-0a20-d3bfc51e7f00/public" className="w-[130px] h-[130px] object-contain" style={{ transform: "rotate(-29.82deg)" }} />
           </div>
 
           {/* Top heading row */}
@@ -230,7 +230,7 @@ export default function AICommercialPage() {
                 AI commercial production at DDIP is not about replacing creativity.
               </p>
             </div>
-            <img src="/images/ai-commercial/layer-icon-02.png" className="w-[130px] h-[130px] object-contain" />
+            <img src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/79ad8341-ddac-4e20-41d6-bf65ab711500/public" className="w-[130px] h-[130px] object-contain" />
           </div>
 
           {/* Two-column layout */}
@@ -242,18 +242,18 @@ export default function AICommercialPage() {
               <div className="flex gap-1.5 ml-[80px] justify-end">
                 
                   <div className="relative h-[70px] w-[400px] overflow-hidden rounded-[6px] bg-[#D9D9D9]">
-                    <Image src={`/images/ai-commercial/frame-01.png`} alt="" fill className="object-cover" sizes="120px" />
+                    <Image src={`https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/04f4cb07-ecde-4e20-c763-0cb3838ead00/public`} alt="" fill className="object-cover" sizes="120px" />
                   </div>
               
               </div>
               {/* Row 2 — 4 images with thumb */}
               <div className="flex gap-1.5 items-center ml-[40px] justify-start relative left-[-100px]">
                 <div className="relative h-[70px] w-[300px] overflow-hidden rounded-[6px] bg-[#D9D9D9]">
-                  <Image src="/images/ai-commercial/frame-04.png" alt="" fill className="object-cover" sizes="70px" />
+                  <Image src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/c8c8cf4a-7c43-4965-3eb9-273d07e05800/public" alt="" fill className="object-cover" sizes="70px" />
                 </div>
               
                   <div  className="relative h-[70px] w-[300px] overflow-hidden rounded-[6px] bg-[#D9D9D9]">
-                    <Image src={`/images/ai-commercial/frame-02.png`} alt="" fill className="object-cover" sizes="100px" />
+                    <Image src={`https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/ce155513-8c81-4907-0bf1-63fa581de400/public`} alt="" fill className="object-cover" sizes="100px" />
                   </div>
             
               </div>
@@ -261,7 +261,7 @@ export default function AICommercialPage() {
               <div className="flex gap-1.5 justify-start">
                 
                   <div className="relative h-[70px] w-[400px] overflow-hidden rounded-[6px] bg-[#D9D9D9]">
-                    <Image src={`/images/ai-commercial/frame-03.png`} alt="" fill className="object-cover" sizes="100px" />
+                    <Image src={`https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/d1d5fb05-4289-4080-54f1-18fbdfdece00/public`} alt="" fill className="object-cover" sizes="100px" />
                   </div>
                
               </div>
@@ -269,7 +269,7 @@ export default function AICommercialPage() {
               <div className="flex gap-1 rounded-[8px] overflow-hidden bg-[#1a1a1a] p-1.5">
              
                   <div className="relative h-[70px] flex-1 overflow-hidden rounded-[4px] bg-[#333]">
-                    <Image src={`/images/ai-commercial/frame-04.png`} alt="" fill className="object-cover" sizes="80px" />
+                    <Image src={`https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/c8c8cf4a-7c43-4965-3eb9-273d07e05800/public`} alt="" fill className="object-cover" sizes="80px" />
                   </div>
                
               </div>
@@ -277,7 +277,7 @@ export default function AICommercialPage() {
               <div className="flex gap-1 rounded-[8px] overflow-hidden bg-[#1a1a1a] p-1.5 relative left-[-80px]">
                
                   <div className="relative h-[70px] flex-1 overflow-hidden rounded-[4px] bg-[#333]">
-                    <Image src={`/images/ai-commercial/frame-05.png`} alt="" fill className="object-cover" sizes="80px" />
+                    <Image src={`https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/81574077-c99c-413c-6012-8e10bf34f000/public`} alt="" fill className="object-cover" sizes="80px" />
                   </div>
                
               </div>
@@ -287,7 +287,7 @@ export default function AICommercialPage() {
             <div className="flex flex-col gap-6 w-[50%] relative">
               {/* Floating icon — top-left of video */}
               <div className="absolute -top-[70px] -left-[60px] z-10">
-                <img src="/images/ai-commercial/layer-icon-03.png" className="w-[170px] h-[170px] object-contain" style={{ transform: "rotate(11.17deg)" }} />
+                <img src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/a6646f63-84e1-4a9b-820d-b7063f47cd00/public" className="w-[170px] h-[170px] object-contain" style={{ transform: "rotate(11.17deg)" }} />
               </div>
               {/* Video with dashed border */}
               <div className="relative">
@@ -383,7 +383,7 @@ export default function AICommercialPage() {
         description2=""
         descriptionClassName="w-[300px]"
         tagline="The result is not just an automation - it’s creative acceleration."
-        bgImage="/images/ai-commercial/commercialimage11.png"
+        bgImage="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/6fdebd9a-9938-43d8-45b7-c990b5b92500/public"
         bgOpacity="opacity-60"
         features={[
           { icon: "/images/ai-commercial/icon-01.svg", label: "Faster pre-production and visualization" },

@@ -13,7 +13,7 @@ const fallbackArticles: Omit<Insight, "createdAt" | "updatedAt">[] = [
     title: "10 Best AI Ad Creative Generators & Tools in 2026 (Tested)",
     slug: "best-ai-ad-creative-generators-2026",
     category: "Real Estate",
-    imageUrl: "/images/mobile/sections/27.png",
+    imageUrl: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/f5e924fc-6e2b-4289-db2e-43cb2bf28e00/public",
     body: "",
     publishedAt: "2026-02-15T10:00:00Z",
     seoDescription:
@@ -24,7 +24,7 @@ const fallbackArticles: Omit<Insight, "createdAt" | "updatedAt">[] = [
     title: "12 AI Consulting Companies for Enterprises in 2026",
     slug: "ai-consulting-companies-enterprises-2026",
     category: "Food",
-    imageUrl: "/images/mobile/sections/27-1.png",
+    imageUrl: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/8890702b-0792-4504-a38c-c4a776bc2900/public",
     body: "",
     publishedAt: "2026-02-10T10:00:00Z",
     seoDescription:
@@ -35,7 +35,7 @@ const fallbackArticles: Omit<Insight, "createdAt" | "updatedAt">[] = [
     title: "AI-Powered Wellness Campaigns That Actually Convert",
     slug: "ai-wellness-campaigns-convert",
     category: "Wellness",
-    imageUrl: "/images/mobile/sections/27-2.png",
+    imageUrl: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/881e76b1-d243-4eba-b942-d94ad61c4400/public",
     body: "",
     publishedAt: "2026-02-05T10:00:00Z",
     seoDescription:
@@ -46,7 +46,7 @@ const fallbackArticles: Omit<Insight, "createdAt" | "updatedAt">[] = [
     title: "How Fashion Brands Use AI Influencers to Drive Sales",
     slug: "fashion-brands-ai-influencers",
     category: "Fashion",
-    imageUrl: "/images/mobile/sections/27-3.png",
+    imageUrl: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/e7bf66d9-8dbe-402f-2c4d-2ae153dc1300/public",
     body: "",
     publishedAt: "2026-01-28T10:00:00Z",
     seoDescription:
@@ -57,7 +57,7 @@ const fallbackArticles: Omit<Insight, "createdAt" | "updatedAt">[] = [
     title: "The Future of AI Content in Real Estate Marketing",
     slug: "future-ai-content-real-estate",
     category: "Real Estate",
-    imageUrl: "/images/mobile/sections/A_01 1.png",
+    imageUrl: "/https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/7f0b2dc3-8ff2-47b8-cf63-d2588a456800/public",
     body: "",
     publishedAt: "2026-01-20T10:00:00Z",
     seoDescription:
@@ -68,7 +68,7 @@ const fallbackArticles: Omit<Insight, "createdAt" | "updatedAt">[] = [
     title: "5 Automation Workflows Every Food Brand Needs",
     slug: "automation-workflows-food-brands",
     category: "Food",
-    imageUrl: "/images/mobile/sections/BB_01 1.png",
+    imageUrl: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/0d312ddd-5d7d-4e2e-f417-34f24eda5f00/public",
     body: "",
     publishedAt: "2026-01-15T10:00:00Z",
     seoDescription:

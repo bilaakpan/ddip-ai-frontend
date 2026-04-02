@@ -39,7 +39,7 @@ export default function InfluencerCard({
                     <div className="flex items-center gap-3 rounded-full bg-[#063746B2]/80 px-4 py-2 backdrop-blur-md">
                         <span className="text-[16px] text-white">{name}</span>
                         <img
-                            src="/images/ai-influencer/image.png"
+                            src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/8c6dfd82-c580-49a7-be40-a53090c65400/public"
                             alt="flag"
                             className="h-5 w-5 rounded-sm object-cover"
                         />

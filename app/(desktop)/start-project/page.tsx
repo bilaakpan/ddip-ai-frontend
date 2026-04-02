@@ -225,13 +225,13 @@ const SEO_ACTIVITIES = [
 ];
 
 function getBgImage(service: string, step: number): string {
-  if (step === 0) return "/images/mind-behind/photo-03.png";
-  if (service === "automation") return "/images/automation/hero-slider.png";
-  if (service === "geo") return "/images/automation/hero-slider.png";
-  if (service === "ai-commercial") return "/images/ai-influencer/Mask-group4.png";
-  if (service === "ai-content") return "/images/ai-influencer/Mask-group4.png";
-  if (service === "other") return "/images/geo/photo-02.png";
-  return "/images/ai-influencer/Mask-group2.png";
+  if (step === 0) return "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/819c196e-ab9b-41cf-8c00-d310b3b63500/public";
+  if (service === "automation") return "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/fbfb2d0f-627c-45ac-b654-b317ce6df500/public";
+  if (service === "geo") return "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/fbfb2d0f-627c-45ac-b654-b317ce6df500/public";
+  if (service === "ai-commercial") return "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/33f263bd-4e5a-4e0d-5e92-b2e69b7e2500/public";
+  if (service === "ai-content") return "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/33f263bd-4e5a-4e0d-5e92-b2e69b7e2500/public";
+  if (service === "other") return "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/3a299844-7937-43b1-4a7b-3478050b4900/public";
+  return "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/6e2ce4f2-3eb9-486c-7c11-5b9297b37000/public";
 }
 
 function getSectionTitle(service: string, step: number): string {
@@ -517,7 +517,7 @@ export default function StartProjectPage() {
         <section className="relative overflow-hidden" style={{ minHeight: 800, background: "#fff", margin: "50px" }}>
           {/* Background image */}
           <Image
-            src="/images/mind-behind/photo-03.png"
+            src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/819c196e-ab9b-41cf-8c00-d310b3b63500/public"
             alt="AI portrait"
             fill
             className="object-cover object-center"
