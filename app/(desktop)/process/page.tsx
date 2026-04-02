@@ -221,7 +221,7 @@ export default function ProcessPage() {
           {/* <video autoPlay muted loop playsInline className="h-full w-full object-cover" style={{ transform: "scaleX(-1)" }}>
             <source src="/videos/ourprocessherovideo.mp4" type="video/mp4" />
           </video> */}
-          <img src="/images/process/placeholdervideoimageofprocess.png" className="h-full w-full object-cover"/>
+          <img src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/e868dec0-6af7-4619-021d-93a86c4ecb00/public" className="h-full w-full object-cover"/>
         </div>
       </section>
 

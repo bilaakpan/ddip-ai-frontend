@@ -24,13 +24,13 @@ const aiSolutionLinks = [
 ];
 
 const megaMenuCards = [
-  { title: "AI Content Generation",            href: "/ai-solutions/ai-content",    image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/35a5d56e-da6e-42ce-4072-9b24938c1a00/public" },
-  { title: "Create Your Influencer with AI",   href: "/ai-solutions/ai-influencer", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/ce65649d-7f6d-4497-8d8a-697ee865d800/public" },
-  { title: "AI Brand Ambassador Generation",   href: "/ai-solutions/ai-influencer", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/0156ebdc-189b-4bce-808d-49f28c020200/public" },
-  { title: "AI Mascot Generation",             href: "/ai-solutions/ai-influencer", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/2d7cdb27-97bb-4e13-a6c3-c294744bab00/public" },
-  { title: "AI Commercial Production",         href: "/ai-solutions/ai-commercial", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/c8f04ee1-15bf-4166-fe3d-d8435e01d400/public" },
-  { title: "Automated Workflow with AI Agents",href: "/ai-solutions/automation",    image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/88a98018-ccae-4069-42c9-17f68a346e00/public" },
-  { title: "GEO for Websites",                 href: "/ai-solutions/geo",           image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/35a5d56e-da6e-42ce-4072-9b24938c1a00/public" },
+  { title: "AI Content Generation",            href: "/ai-solutions/ai-content",    image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/ddb0a7cb-8270-467a-ce4c-12567bd51300/public" },
+  { title: "Create Your Influencer with AI",   href: "/ai-solutions/ai-influencer", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/985616a3-ae36-4288-620a-126ca1bb6900/public" },
+  { title: "AI Brand Ambassador Generation",   href: "/ai-solutions/ai-influencer", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/bc414ede-e75d-4e65-273d-bc095b590a00/public" },
+  { title: "AI Mascot Generation",             href: "/ai-solutions/ai-influencer", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/ddb0a7cb-8270-467a-ce4c-12567bd51300/public" },
+  { title: "AI Commercial Production",         href: "/ai-solutions/ai-commercial", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/985616a3-ae36-4288-620a-126ca1bb6900/public" },
+  { title: "Automated Workflow with AI Agents",href: "/ai-solutions/automation",    image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/bc414ede-e75d-4e65-273d-bc095b590a00/public" },
+  { title: "GEO for Websites",                 href: "/ai-solutions/geo",           image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/f6ea4bd4-e07d-4c94-d687-482cf81c5e00/public" },
 ];
 
 /**
