@@ -1,5 +1,5 @@
 "use client";
-
+import { Stream } from "@cloudflare/stream-react";
 import useEmblaCarousel from "embla-carousel-react";
 import AutoPlay from "embla-carousel-autoplay";
 
@@ -25,9 +25,14 @@ export default function UseCaseCarousel({ items }: UseCaseCarouselProps) {
         {items.map((item, i) => (
           <div key={i} className="shrink-0 flex flex-col" style={{ width: "370px", paddingRight: "20px" }}>
             <div className="relative overflow-hidden rounded-[16px] bg-[#D9D9D9]" style={{ height: "520px" }}>
-              <video autoPlay muted loop playsInline className="w-full h-full object-cover">
-                <source src={item.video} type="video/mp4" />
-              </video>
+              <Stream
+                src={item.video}
+                controls={false}
+                autoplay
+                muted
+                loop
+                className="w-full h-full object-cover"
+              />
               <div className="absolute top-3 right-3 flex flex-wrap justify-end gap-1.5">
                 {item.tags.map((tag) => (
                   <span key={tag} className="rounded-full bg-white/80 px-2.5 py-1 text-[10px] font-medium text-[#063746] backdrop-blur-sm"

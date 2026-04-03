@@ -1,244 +1,429 @@
-"use client";
+// ArticleHero.tsx
+// Next.js component with Tailwind CSS
+// Replica of the blog article layout from the screenshot
 
+import Image from "next/image";
 import Link from "next/link";
-import { useState, useEffect } from "react";
-import { useParams } from "next/navigation";
-import { Container } from "@/components/layout";
-import { Button } from "@/components/ui";
-import { cmsApi, type Insight } from "@/lib/api";
+import { cn } from "@/lib/utils";
 
-/* ─── Share Icons ─── */
-
-function ShareIcons() {
-  return (
-    <div className="flex items-center gap-4">
-      <span className="text-sm text-light-body">Share:</span>
-
-      <button
-        className="flex h-10 w-10 items-center justify-center rounded-full border border-border-light text-light-body transition-colors hover:border-teal-500 hover:text-teal-700"
-        aria-label="Share on X"
-      >
-        <svg className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-        </svg>
-      </button>
-
-      <button
-        className="flex h-10 w-10 items-center justify-center rounded-full border border-border-light text-light-body transition-colors hover:border-teal-500 hover:text-teal-700"
-        aria-label="Share on LinkedIn"
-      >
-        <svg className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-        </svg>
-      </button>
-
-      <button
-        className="flex h-10 w-10 items-center justify-center rounded-full border border-border-light text-light-body transition-colors hover:border-teal-500 hover:text-teal-700"
-        aria-label="Share on Facebook"
-      >
-        <svg className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
-        </svg>
-      </button>
-
-      <button
-        className="flex h-10 w-10 items-center justify-center rounded-full border border-border-light text-light-body transition-colors hover:border-teal-500 hover:text-teal-700"
-        aria-label="Copy link"
-      >
-        <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
-          <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
-        </svg>
-      </button>
-    </div>
-  );
+interface Insight {
+    id: string;
+    title: string;
+    slug: string;
+    category: string;
+    publishedAt: string;
+    createdAt: string;
+    updatedAt: string;
+    seoDescription: string;
+    body: string;
+    imageUrl: string;
 }
 
-/* ─── Page ─── */
+const mockArticles: Insight[] = [
+    {
+        id: "1",
+        title: "The Future of AI in Content Creation",
+        slug: "future-ai-content",
+        category: "Real Estate",
+        publishedAt: new Date().toISOString(),
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+        seoDescription: "10 Best AI Ad Creative Generators & Tools in 2026 (Tested)",
+        body: "Detailed article content about AI and content creation...",
+        imageUrl: "/images/insights/article1.svg"
+    },
+    {
+        id: "2",
+        title: "Building Influencer Brands with AI",
+        slug: "ai-influencer-brands",
+        category: "Food",
+        publishedAt: new Date().toISOString(),
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+        seoDescription: "12 AI Consulting Companies for Enterprises in 2026",
+        body: "Detailed article content about AI influencers...",
+        imageUrl: "/images/insights/article2.png"
+    },
+    {
+        id: "3",
+        title: "Automated Workflow Solutions",
+        slug: "automated-workflows",
+        category: "Wellness",
+        publishedAt: new Date().toISOString(),
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+        seoDescription: "15 Best AI Presentation Makers & Tools of 2026 (New Picks)",
+        body: "Detailed article content about workflow automation...",
+        imageUrl: "/images/insights/article3.svg"
+    },
 
-export default function InsightDetailPage() {
-  const params = useParams();
-  const slug = params.slug as string;
+];
 
-  const [article, setArticle] = useState<Insight | null>(null);
-  const [relatedArticles, setRelatedArticles] = useState<Insight[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
+export default function ArticleHero() {
+    const gridArticles = mockArticles;
 
-  useEffect(() => {
-    if (!slug) return;
-
-    cmsApi
-      .insightBySlug(slug)
-      .then((res) => setArticle(res.data))
-      .catch(() => setError(true))
-      .finally(() => setLoading(false));
-
-    cmsApi
-      .insights({ page: 1, limit: 4 })
-      .then((res) => {
-        setRelatedArticles(res.data.filter((a) => a.slug !== slug).slice(0, 3));
-      })
-      .catch(() => {});
-  }, [slug]);
-
-  if (loading) {
+    const tocItems = [
+        "Ask where AI can help in video creation",
+        "How AI fits into modern video production pipelines (and how it doesn't)",
+        "Where AI helps most: Speed, cost, scale",
+        "5 questions to ask yourself to fit AI into your next video project",
+        "How Superside blends AI speed with creative precision",
+        "The future of video isn't AI vs. human. It's both.",
+    ];
     return (
-      <section className="bg-dark-bg py-32">
-        <Container>
-          <div className="text-center text-white/40">Loading article...</div>
-        </Container>
-      </section>
-    );
-  }
+        <div className="min-h-screen bg-[#f0f4f0] font-sanspt-20 sm:pt-24 md:pt-35 pb-8 sm:pb-10 md:pb-12">
+            <div className="p-8 sm:p-12 md:p-16 lg:p-20 mx-auto w-full max-w-[1608px] px-[60px] max-md:px-5">
 
-  if (error || !article) {
-    return (
-      <section className="bg-dark-bg py-32">
-        <Container>
-          <div className="text-center">
-            <h1 className="font-heading text-4xl font-medium text-white">Article Not Found</h1>
-            <p className="mt-4 text-white/50">The article you&apos;re looking for doesn&apos;t exist.</p>
-            <Link href="/insights" className="mt-8 inline-block text-teal-500 underline underline-offset-4 hover:text-teal-400">
-              Back to Insights
-            </Link>
-          </div>
-        </Container>
-      </section>
-    );
-  }
+                {/* Date */}
+                <p className="text-xl sm:text-2xl md:text-3xl text-[#063746] mb-4 sm:mb-6 tracking-wide">
+                    December 8, 2025
+                </p>
 
-  return (
-    <>
-      {/* BACK LINK */}
-      <section className="bg-dark-bg pb-0 pt-8">
-        <Container>
-          <Link href="/insights" className="inline-flex items-center gap-2 text-sm text-white/50 transition-colors hover:text-teal-500">
-            <svg className="h-4 w-4" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M13 8H3M7 4L3 8l4 4" />
-            </svg>
-            Back to Insights
-          </Link>
-        </Container>
-      </section>
-
-      {/* ARTICLE HEADER */}
-      <section className="bg-dark-bg py-16 lg:py-24">
-        <Container>
-          <div className="mx-auto max-w-4xl">
-            {article.category && (
-              <span className="rounded-full bg-teal-500/15 px-4 py-1.5 text-xs font-medium text-teal-500">
-                {article.category}
-              </span>
-            )}
-            <h1 className="mt-6 font-heading text-[clamp(36px,4vw,64px)] font-medium leading-[1.1] text-white">
-              {article.title}
-            </h1>
-            <div className="mt-8 flex items-center gap-6">
-              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-teal-500/20 text-sm font-medium text-teal-500">D</div>
-              <div>
-                <p className="text-sm font-medium text-white">DDip AI Team</p>
-                <div className="flex items-center gap-3 text-xs text-white/40">
-                  <span>{new Date(article.publishedAt).toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" })}</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </Container>
-      </section>
-
-      {/* HERO IMAGE */}
-      {article.imageUrl && (
-        <section className="bg-dark-bg pb-16">
-          <Container>
-            <div className="aspect-[21/9] w-full overflow-hidden rounded-[var(--radius-card)] bg-gradient-to-br from-[#002834] to-[#063746]">
-              <img
-                src={article.imageUrl}
-                alt={article.title}
-                className="h-full w-full object-cover"
-                onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }}
-              />
-            </div>
-          </Container>
-        </section>
-      )}
-
-      {/* ARTICLE BODY */}
-      <section className="bg-light-bg py-20 lg:py-28">
-        <Container>
-          <div className="mx-auto max-w-3xl">
-            <div
-              className="prose prose-lg max-w-none text-light-body [&_h2]:font-heading [&_h2]:text-light-text [&_h3]:font-heading [&_h3]:text-light-text [&_a]:text-teal-600 [&_a:hover]:text-teal-700"
-              dangerouslySetInnerHTML={{ __html: article.body }}
-            />
-            <div className="my-12 h-px bg-border-light" />
-            <ShareIcons />
-          </div>
-        </Container>
-      </section>
-
-      {/* RELATED ARTICLES */}
-      {relatedArticles.length > 0 && (
-        <section className="bg-dark-bg py-24 lg:py-32">
-          <Container>
-            <h2 className="font-heading text-subsection font-medium uppercase text-white">Related Articles</h2>
-            <div className="mt-12 grid grid-cols-3 gap-8">
-              {relatedArticles.map((related) => (
-                <Link key={related.id} href={`/insights/${related.slug}`} className="group">
-                  <article className="overflow-hidden rounded-[var(--radius-card)] border border-border-dark bg-dark-surface transition-all duration-300 hover:-translate-y-1 hover:border-teal-500/30 hover:shadow-lg hover:shadow-teal-500/5">
-                    <div className="relative aspect-video overflow-hidden">
-                      {related.imageUrl ? (
-                        <img src={related.imageUrl} alt={related.title} className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
-                      ) : (
-                        <div className="absolute inset-0 bg-gradient-to-br from-teal-900/30 to-dark-surface" />
-                      )}
-                      <div className="absolute inset-0 bg-gradient-to-t from-dark-surface/60 to-transparent" />
-                      {related.category && (
-                        <div className="absolute left-4 top-4">
-                          <span className="rounded-full bg-dark-bg/60 px-3 py-1 text-[11px] font-medium text-teal-500 backdrop-blur-sm">{related.category}</span>
+                {/* Title */}
+                <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium text-[#0d2b3e] leading-tight max-w-sm sm:max-w-md">
+                    Don&apos;t Ask if You Should Use AI in
+                </h1>
+                <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium text-[#0d2b3e] leading-tight max-w-sm sm:max-w-md mb-20 sm:mb-30">
+                    Video Production–Ask Where
+                </h1>
+                <div className="flex flex-col sm:flex-row gap-8 sm:gap-12 md:gap-16 lg:gap-25">
+                    {/* Left Sidebar */}
+                    <div className="flex flex-col gap-4 sm:gap-6 min-w-20 sm:min-w-24 pt-1">
+                        <div className="mb-20">
+                            <p className="text-xl sm:text-2xl md:text-3xl font-semibold text-[#063746] tracking-widest uppercase mb-1 sm:mb-2">
+                                Posted On
+                            </p>
+                            <p className="text-xl sm:text-2xl md:text-3xl text-[#063746] sm:mb-4">10/28/25</p>
                         </div>
-                      )}
-                    </div>
-                    <div className="p-6">
-                      <div className="flex items-center gap-3 text-xs text-white/40">
-                        <span>{new Date(related.publishedAt).toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" })}</span>
-                      </div>
-                      <h3 className="mt-3 font-heading text-lg font-medium leading-snug text-white">{related.title}</h3>
-                      <p className="mt-3 text-sm leading-relaxed text-white/45 line-clamp-2">{related.seoDescription || ""}</p>
-                      <div className="mt-5 flex items-center gap-2 text-sm font-medium text-teal-500 transition-colors group-hover:text-teal-400">
-                        <span>Read More</span>
-                        <svg className="h-4 w-4 transition-transform group-hover:translate-x-1" viewBox="0 0 16 16" fill="none">
-                          <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                        </svg>
-                      </div>
-                    </div>
-                  </article>
-                </Link>
-              ))}
-            </div>
-          </Container>
-        </section>
-      )}
 
-      {/* NEWSLETTER CTA */}
-      <section className="border-t border-border-dark bg-dark-bg py-24 lg:py-32">
-        <Container>
-          <div className="mx-auto max-w-2xl text-center">
-            <h2 className="font-heading text-[clamp(36px,4vw,64px)] font-medium uppercase leading-[1.1] text-white">Want to Learn More?</h2>
-            <p className="mt-4 text-sm leading-relaxed text-white/50">
-              Subscribe to our newsletter for the latest insights on AI-powered creative production, industry analysis, and exclusive content.
-            </p>
-            <div className="mt-10 flex items-center gap-4">
-              <input type="email" placeholder="Enter your email address" className="h-12 flex-1 rounded-[var(--radius-input)] border border-[#2A2F3E] bg-[#1A1F2E] px-5 text-sm text-white placeholder:text-white/40 transition-colors focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500 hover:border-white/20" />
-              <Button variant="primary" size="md">Subscribe</Button>
+                        <div className="mb-20">
+                            <p className="text-3xl font-semibold text-[#063746] tracking-widest uppercase mb-2">
+                                Share Article
+                            </p>
+                            <div className="px-3 sm:px-4 flex gap-6 sm:gap-8 items-center">
+                                {/* LinkedIn */}
+                                <a href="#" className="text-[#000000] hover:text-[#0d2b3e] transition-colors">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="25"
+                                        height="25"
+                                        fill="currentColor"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S.02 4.88.02 3.5C.02 2.12 1.13 1 2.5 1s2.48 1.12 2.48 2.5zM.5 8.5h4V24h-4V8.5zm7.5 0h3.8v2.1h.05c.53-1 1.82-2.1 3.75-2.1 4 0 4.75 2.64 4.75 6.07V24h-4v-8.57c0-2.04-.04-4.67-2.85-4.67-2.86 0-3.3 2.23-3.3 4.53V24h-4V8.5z" />
+                                    </svg>
+                                </a>
+                                {/* Twitter/X */}
+                                <a href="#" className="text-[#000000] hover:text-[#0d2b3e] transition-colors">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="25"
+                                        height="25"
+                                        fill="currentColor"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                                    </svg>
+                                </a>
+                                {/* Facebook */}
+                                <a href="#" className="text-[#000000] hover:text-[#0d2b3e] transition-colors">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="25"
+                                        height="25"
+                                        fill="currentColor"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.97h-1.514c-1.491 0-1.956.93-1.956 1.874v2.25h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z" />
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div className="mt-4">
+                            <a
+                                href="#"
+                                className="text-xl sm:text-2xl underline font-semibold text-[#0d2b3e] tracking-widest uppercase hover:underline flex items-center gap-1 sm:gap-2"
+                            >
+                                All Articles <span>→</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    {/* Right: Overlapping Image Cards */}
+                    <div className="relative flex-1">
+                        {/* Center main card */}
+                        <div className="relative w-full h-80 sm:h-100 md:h-125 lg:h-150">
+                            <Image
+                                src="/images/insights/details1.png"
+                                alt="Insights 1"
+                                fill
+                                className="object-cover"
+                                sizes="100vw"
+                                priority
+                            />
+                        </div>
+
+                        <div className="p-4 sm:p-8 md:p-12 lg:pr-20 mx-auto w-full max-w-[1608px] px-[60px] max-md:px-5">
+                            {/* Intro paragraph - bold/lead */}
+                            <p className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold text-[#000000] leading-relaxed mb-4 sm:mb-6">
+                                AI video tools have reached enterprise quality. Yet, many teams still don&apos;t
+                                quite know how and where to fit AI into their video production workflows.
+                                This guide, packed with expert insights, covers the good, the bad and the
+                                how-to of hybrid human–AI video workflows to help you create top-quality videos fast.
+                            </p>
+
+                            {/* Body paragraphs */}
+                            <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-black leading-relaxed mb-3 sm:mb-4 md:mb-5">
+                                The smartest brands no longer ask whether to use AI in video production. They pinpoint where it fits,
+                                what it accelerates and when it truly adds creative value.
+                            </p>
+
+                            <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-black leading-relaxed mb-3 sm:mb-4 md:mb-5">
+                                This shift from &quot;if&quot; to &quot;where&quot; marks a fundamental change for enterprise creative teams. AI video
+                                tools have exploded in quality and accessibility. But while the tech barrier has been lowered, the
+                                strategic questions have become more complex.
+                            </p>
+
+                            <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-black leading-relaxed mb-3 sm:mb-4 md:mb-5">
+                                Most enterprise marketing leaders find themselves caught between two extremes. The hype that
+                                promises AI will replace entire production teams, and the skepticism that dismisses the tech as
+                                expensive experimentation. The reality sits somewhere in between, and is far more nuanced than
+                                either camp suggests.
+                            </p>
+
+                            <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-black leading-relaxed mb-3 sm:mb-4 md:mb-5">
+                                Here at Ddip.ai, we&apos;ve seen firsthand how AI can reduce timelines from weeks to days, generate
+                                countless variations from a single concept, and make previously unaffordable creative styles
+                                accessible.
+                                <br />
+                                But we also recognize that video production requires a delicate balance of technical capability and
+                                human creative direction to effectively serve business goals.
+                            </p>
+
+                            <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-black leading-relaxed mb-3 sm:mb-4 md:mb-5">
+                                If you&apos;re in search of a strategic AI video framework, and not just another &quot;AI tools roundup&quot; or &quot;top
+                                10 video hacks&quot; article, you&apos;ve landed where you need to be.
+                            </p>
+
+                            <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-black leading-relaxed">
+                                This guide is for creative operations directors, brand managers and video strategy leads who need to
+                                make informed decisions about where AI belongs in their creative pipeline, with insights from Manuel
+                                Berbin, Generative AI Researcher &amp; Creative at Ddip.ai.
+                            </p>
+
+
+
+
+
+                            <div className="border-l-2 border-black pl-4 sm:pl-6 md:pl-8">
+                                <p className="text-sm sm:text-base md:text-lg lg:text-xl font-bold text-[#9F9F9F] tracking-widest uppercase mb-2 sm:mb-3 md:mb-4 mt-6 sm:mt-8 md:mt-12 lg:mt-18">
+                                    In This Article
+                                </p>
+                                <ul className="flex flex-col gap-2 sm:gap-3">
+                                    {tocItems.map((item, i) => (
+                                        <li key={i}>
+                                            <a
+                                                href="#"
+                                                className="text-xs sm:text-sm md:text-base lg:text-lg text-[#000000] leading-snug hover:underline block"
+                                            >
+                                                {item}
+                                            </a>
+                                        </li>
+                                    ))}
+                                </ul>
+
+                            </div>
+
+
+
+                            {/* Section heading */}
+                            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-[#000000] leading-tight mb-3 sm:mb-4 md:mb-5 mt-6 sm:mt-8">
+                                Ask where AI can help in video production
+                            </h2>
+
+                            {/* Body paragraphs */}
+                            <p className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl text-black leading-relaxed mb-3 sm:mb-4">
+                                The biggest misconception about AI usage in video production is that it&apos;s a binary, all-or-nothing
+                                decision: Either the entire video is AI-generated, or none of it is.
+                                <br />
+                                The truth is that almost all successful AI video workflows are hybrid by design.
+                            </p>
+
+                            <p className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl text-black leading-relaxed mb-3 sm:mb-4">
+                                For Berbin and other Superside creatives, the secret to AI-assisted video production lies in a key
+                                mental shift: &quot;Don&apos;t ask &apos;should we use AI?&apos; Ask, &apos;how can we AI in our next video campaign or
+                                project?&apos;&quot;
+                            </p>
+
+                            <p className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl text-black leading-relaxed mb-2 sm:mb-3">
+                                From here, some practical questions should follow:
+                            </p>
+
+                            <ul className="mb-3 sm:mb-4 flex flex-col gap-1 sm:gap-2 pl-1">
+                                {[
+                                    "Could AI speed up our storyboarding phase?",
+                                    "AI helps us explore visual options before commitment to a direction?",
+                                    "Can AI generate the background assets we need without the headaches associated with stock footage?",
+                                ].map((q, i) => (
+                                    <li key={i} className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl text-black leading-relaxed flex gap-2">
+                                        <span className="mt-1 sm:mt-1.5 w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-gray-400 shrink-0" />
+                                        {q}
+                                    </li>
+                                ))}
+                            </ul>
+
+                            <p className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl text-black leading-relaxed mb-3 sm:mb-4">
+                                These questions help enterprise teams identify specific production bottlenecks where AI can provide
+                                measurable value: faster turnaround times and iterations, more creative options and reduced costs.
+                                Ultimately, however, human creatives must remain at the helm and in control of strategic decisions to
+                                ensure the best creative results.
+                            </p>
+
+                            <p className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl text-black leading-relaxed mb-3 sm:mb-4">
+                                AI can, for example, help you build a never-sunset of highly stylized visuals that set the tone for a
+                                brand awareness campaign. But it&apos;s unlikely to be the right fit for customer testimonial videos that
+                                rely on genuine facial expressions and unscripted human dialogue. You can also use AI to quickly
+                                generate assets for social media campaigns, but choose to still use cleaner, professional video
+                                production methods for flagship brand videos.
+                            </p>
+
+                            <p className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl text-black leading-relaxed">
+                                The shift from a binary mindset to modular assessment is where Superside&apos;s expertise becomes
+                                critical. If you make an AI evaluation of your in-house creative team, we&apos;ll help you identify steps in
+                                your video production process where AI could assist, match the right AI tools to specific tasks, and
+                                ultimately integrate AI-powered elements into polished creative assets that&apos;ll help you deliver on
+                                your marketing and business goals.
+                            </p>
+
+                            <div className="mt-8 sm:mt-12 md:mt-16 lg:mt-20 relative w-full h-64">
+                                <Image src="/images/insights/article3.svg"
+                                    alt="insights-01"
+                                    fill
+                                    className="rounded-sm object-contain" />
+                            </div>
+
+                            {/* Section Heading */}
+                            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-black leading-tight mb-3 sm:mb-4 md:mb-5 lg:mb-6 mt-6 sm:mt-8 md:mt-12 lg:mt-16 xl:mt-22">
+                                How AI fits into modern video production pipelines (and how it doesn&apos;t)
+                            </h2>
+
+                            {/* Intro */}
+                            <p className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl text-black leading-relaxed mb-3 sm:mb-4">
+                                When you see video production as a chain of connected parts, it&apos;s easier to identify the best tasks for
+                                AI and the ones that need human creativity. Let&apos;s take a closer look at what to consider.
+                            </p>
+
+                            <p className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl text-black leading-relaxed mb-3 sm:mb-4">
+                                For Berbin and other Superside creatives, the secret to AI-assisted video production lies in a key
+                                mindset shift: &quot;Don&apos;t ask &apos;should we use AI?&apos; Ask, &apos;how can we use AI in our next video campaign or
+                                project?&apos;&quot;
+                            </p>
+
+                            <p className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl text-black leading-relaxed mb-2 sm:mb-3">
+                                From here, more precise questions should follow:
+                            </p>
+
+                            {/* Inline list (no bullets, just line breaks like screenshot) */}
+                            <div className="mb-3 sm:mb-4 flex flex-col gap-1 sm:gap-2">
+                                <p className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl text-black leading-relaxed">
+                                    Could AI speed up our storyboarding phase?
+                                </p>
+                                <p className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl text-black leading-relaxed">
+                                    Can AI help us explore visual styles before we commit to a direction?
+                                </p>
+                                <p className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl text-black leading-relaxed">
+                                    Can AI generate the background assets we need without the headaches associated with stock
+                                    licensing?
+                                </p>
+                            </div>
+
+                            <p className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl text-black leading-relaxed mb-3 sm:mb-4">
+                                These questions help enterprise teams identify specific production bottlenecks where AI can provide
+                                measurable value, such as faster turnaround times, more creative options and reduced costs.
+                                Ultimately, however, human creatives must remain at the helm and in control of strategic decisions to
+                                ensure the best creative results.
+                            </p>
+
+                            <p className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl text-black leading-relaxed mb-3 sm:mb-4">
+                                AI can, for example, help your team create surreal or highly stylized visuals that set the tone for a
+                                brand awareness campaign. But it&apos;s unlikely to be the right fit for customer testimonial videos that
+                                rely on genuine facial expressions and unscripted human dialogue. You can also use AI to quickly
+                                generate assets for social media cutdowns, but choose to still use classic, professional video
+                                production methods for flagship brand videos.
+                            </p>
+
+                            <p className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl text-black leading-relaxed">
+                                The shift from a binary mindset to modular assessment is where Superside&apos;s expertise becomes
+                                crucial. If you make us an extension of your in-house creative team, we&apos;ll help you identify stages in
+                                your video production process where AI could assist, match the right AI tools to specific tasks, and
+                                ultimately integrate AI-generated elements into polished creative assets that&apos;ll help you deliver on
+                                your marketing and business goals.
+                            </p>
+
+                        </div>
+
+                        <div className="flex items-center justify-between">
+                            <p className="text-[#063746] font-medium text-7xl uppercase">Related Articles</p>
+                            <Link
+                                href="/insights"
+                                className="font-medium text-3xl text-[#063746] underline underline-offset-4 transition-colors hover:text-[#1CE3F4]"
+                            >
+                                All Articles →
+                            </Link>
+                        </div>
+
+                        {/* Article Grid — 3 columns */}
+                        {gridArticles.length > 0 && (
+                            <div className="mt-8 sm:mt-10 lg:mt-12 grid grid-cols-1 gap-6 sm:gap-8 lg:grid-cols-2 xl:grid-cols-3">
+                                {gridArticles.map((article) => (
+                                    <Link
+                                        key={article.id}
+                                        href={`/insights/${article.slug}`}
+                                        className="group"
+                                    >
+                                        <article className="overflow-hidden  bg-white">
+                                            {/* Image */}
+                                            <div className="relative aspect-[4/3] h-60 sm:h-72 md:h-80 lg:h-90 overflow-hidden">
+                                                {article.imageUrl ? (
+                                                    <Image
+                                                        src={article.imageUrl}
+                                                        alt={article.title}
+                                                        fill
+                                                        className="object-cover transition-transform duration-500 group-hover:scale-105 rounded-md"
+                                                        sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                                                    />
+                                                ) : (
+                                                    <div className="absolute inset-0 bg-gradient-to-br from-[#002834]/30 to-[#063746]/50" />
+                                                )}
+                                                {article.category && (
+                                                    <div className="absolute left-4 top-4">
+                                                        <span className={cn(
+                                                            "rounded-full px-2 py-1 text-xs sm:text-sm font-medium text-black backdrop-blur-sm",
+                                                            (article.category === "Food" || article.category === "Healthcare" || article.category === "Education" || article.category === "Wellness")
+                                                                ? "bg-[#D7DBC0]/90"
+                                                                : "bg-[#DBC0CD]/90"
+                                                        )}>
+                                                            {article.category}
+                                                        </span>
+                                                    </div>
+                                                )}
+                                            </div>
+
+                                            {/* Card Body */}
+                                            <div className="mt-6 sm:mt-8 md:mt-10 px-2 sm:px-4">
+                                                <h3 className="font-heading text-xl sm:text-2xl md:text-3xl font-medium leading-snug text-black capitalize">
+                                                    {article.seoDescription}
+                                                </h3>
+                                            </div>
+                                        </article>
+                                    </Link>
+                                ))}
+                            </div>
+                        )}
+                    </div>
+                </div>
             </div>
-            <div className="mt-10 flex items-center justify-center gap-6">
-              <Link href="/start-project"><Button variant="secondary" size="lg">Start a Project</Button></Link>
-              <Link href="/lets-connect"><Button variant="ghost" size="lg">Get in Touch</Button></Link>
-            </div>
-          </div>
-        </Container>
-      </section>
-    </>
-  );
+        </div>
+    );
 }

@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import Image from "next/image";
-
+import { Container } from "@/components/layout";
+import { Stream } from "@cloudflare/stream-react";
 /* ─── Data ─── */
 
 const projectCards = [
@@ -29,9 +30,15 @@ export default function TheMindBehindPage() {
       <section className="relative overflow-hidden bg-dark-bg pb-16 pt-40">
         {/* BG video — right 70%, bottom 50% only */}
         <div className="absolute z-0" style={{ right: 0, bottom: 0, width: "70%", height: "50%" }}>
-          <video autoPlay muted loop playsInline className="h-full w-full object-cover opacity-40">
-            <source src="/videos/mindsbehindherosectionvideo.mp4" type="video/mp4" />
-          </video>
+          <Stream
+            src="2eac757943335639efc39c031d9e1ac2"
+            controls={false}
+            autoplay
+            muted
+            loop
+            className="h-full w-full object-cover opacity-40"
+          />
+
           {/* Fade edges to match bg */}
           <div className="absolute inset-0" style={{
             background: "linear-gradient(to right, var(--color-dark-bg) 0%, transparent 20%), linear-gradient(to bottom, var(--color-dark-bg) 0%, transparent 20%), linear-gradient(to left, transparent 80%, transparent 100%), linear-gradient(to top, transparent 80%, transparent 100%)"
@@ -64,31 +71,31 @@ export default function TheMindBehindPage() {
               At ddip.ai, we believe the future of brands is not built by AI alone — and not by humans alone either. It is built in between.
             </p>
 
-          
 
-           <div className="mt-[60px] flex items-start flex-col gap-4">
-            <div className="flex items-center justify-center">
-              <svg width="99" height="122" viewBox="0 0 99 122" fill="none" className="h-[90px] w-auto" aria-label="Scroll down">
-                <g clipPath="url(#arrow-clip)">
-                  <path d="M56.9199 0L56.9199 95.9621L89.1853 66.0555L98.7897 75.9435L98.9811 76.9205L49.6919 122L0 76.9205L0.198028 75.9435L9.61097 66.2194L42.0612 95.9621L42.0612 0L56.9199 0Z" fill="white" />
-                </g>
-                <defs>
-                  <clipPath id="arrow-clip">
-                    <rect width="98.9811" height="122" fill="white" />
-                  </clipPath>
-                </defs>
-              </svg>
+
+            <div className="mt-[60px] flex items-start flex-col gap-4">
+              <div className="flex items-center justify-center">
+                <svg width="99" height="122" viewBox="0 0 99 122" fill="none" className="h-[90px] w-auto" aria-label="Scroll down">
+                  <g clipPath="url(#arrow-clip)">
+                    <path d="M56.9199 0L56.9199 95.9621L89.1853 66.0555L98.7897 75.9435L98.9811 76.9205L49.6919 122L0 76.9205L0.198028 75.9435L9.61097 66.2194L42.0612 95.9621L42.0612 0L56.9199 0Z" fill="white" />
+                  </g>
+                  <defs>
+                    <clipPath id="arrow-clip">
+                      <rect width="98.9811" height="122" fill="white" />
+                    </clipPath>
+                  </defs>
+                </svg>
+              </div>
+              <Link href="#discover" className="font-heading text-[25px] font-medium text-white underline decoration-white/30 underline-offset-8 hover:decoration-[#1CE3F4]">
+                Discover The Mind Behind
+              </Link>
             </div>
-            <Link href="#discover" className="font-heading text-[25px] font-medium text-white underline decoration-white/30 underline-offset-8 hover:decoration-[#1CE3F4]">
-             Discover The Mind Behind
-            </Link>
-          </div>
 
 
 
           </div>
 
-       
+
         </div>
 
         <div className="absolute bottom-10 right-[60px] z-10">
@@ -102,20 +109,20 @@ export default function TheMindBehindPage() {
       <section className="bg-light-bg py-16">
         <div className="px-[60px]">
           <div className="flex items-start justify-center gap-8">
-            <h2 className="font-bold leading-[1] shrink-0" style={{ fontFamily: "SF Pro Display", fontSize: "80px", color: "#00BCCF" }}>
-              Where
+            <h2 className="font-bold leading-[1] shrink-0" style={{ fontSize: "80px", color: "#00BCCF" }}>
+              WHERE
             </h2>
             <div className="pt-4 space-y-1">
-              <p style={{ fontFamily: "SF Pro Display", fontSize: "20px", color: "#002834" }}>
+              <p style={{ fontSize: "20px", color: "#002834" }}>
                 artificial intelligence amplifies creativity.
               </p>
-              <p style={{ fontFamily: "SF Pro Display", fontSize: "20px", color: "#002834" }}>
+              <p style={{ fontSize: "20px", color: "#002834" }}>
                 human insight gives it direction.
               </p>
-              <p style={{ fontFamily: "SF Pro Display", fontSize: "20px", color: "#002834" }}>
+              <p style={{ fontSize: "20px", color: "#002834" }}>
                 systems think fast — and people think deep.
               </p>
-              <p className="mt-4 font-semibold" style={{ fontFamily: "SF Pro Display", fontSize: "28px", color: "#063746" }}>
+              <p className="mt-4 font-semibold" style={{ fontSize: "28px", color: "#063746" }}>
                 This is the mind behind everything we design.
               </p>
             </div>
@@ -131,8 +138,8 @@ export default function TheMindBehindPage() {
 
           {/* Row 1: ✳ + WE DON'T REPLACE */}
           <div className="flex items-center gap-4">
-            <span className="font-bold leading-none shrink-0" style={{ fontFamily: "Bricolage Grotesque", fontSize: "100px", color: "#002834" }}>✳</span>
-            <h2 className="font-bold leading-[1.0] uppercase" style={{ fontFamily: "Bricolage Grotesque", fontSize: "100px", color: "#002834" }}>
+            <span className="font-medium leading-none shrink-0" style={{ fontFamily: "Bricolage Grotesque", fontSize: "100px", color: "#002834" }}>✳</span>
+            <h2 className="font-medium leading-[1.0] uppercase" style={{ fontFamily: "Bricolage Grotesque", fontSize: "100px", color: "#002834" }}>
               We Don&apos;t Replace
             </h2>
           </div>
@@ -140,22 +147,22 @@ export default function TheMindBehindPage() {
           {/* Row 2: tagline left + HUMAN THINKING right */}
           <div className="flex items-end gap-8">
             <div className="shrink-0 pb-3 pl-[40px] min-w-[260px]">
-              <p style={{ fontFamily: "SF Pro Display", fontSize: "20px", color: "#002834",textAlign:"end" }}>AI is not our destination.</p>
-              <p style={{ fontFamily: "SF Pro Display", fontSize: "20px", color: "#002834",textAlign:"end" }}>It is our accelerator.</p>
+              <p style={{ fontSize: "20px", color: "#002834", textAlign: "end" }}>AI is not our destination.</p>
+              <p style={{ fontSize: "20px", color: "#002834", textAlign: "end" }}>It is our accelerator.</p>
             </div>
-            <h2 className="font-bold leading-[1.0] uppercase" style={{ fontFamily: "Bricolage Grotesque", fontSize: "100px", color: "#002834" }}>
+            <h2 className="font-medium leading-[1.0] uppercase" style={{ fontFamily: "Bricolage Grotesque", fontSize: "100px", color: "#002834" }}>
               Human Thinking.
             </h2>
           </div>
 
           {/* Row 3: WE EXPAND IT */}
-          <h2 className="font-bold leading-[1.0] uppercase" style={{ fontFamily: "SF Pro Display", fontSize: "140px", color: "#039EB7",textAlign:"center" }}>
+          <h2 className="font-bold leading-[1.0] uppercase" style={{ fontSize: "140px", color: "#039EB7", textAlign: "center" }}>
             We Expand It.
           </h2>
 
           {/* Description — bottom right */}
           <div className="flex justify-end">
-            <p className="max-w-sm" style={{ fontFamily: "SF Pro Display", fontSize: "21px", color: "#002834" }}>
+            <p className="max-w-sm" style={{ fontSize: "21px", color: "#002834" }}>
               We don&apos;t use AI to automate creativity away — we use it to free creative minds from limitations, repetition, and inefficiency.
             </p>
           </div>
@@ -167,7 +174,7 @@ export default function TheMindBehindPage() {
           ════════════════════════════════════════════════════════ */}
       <section className="bg-light-bg py-24">
         <div className="px-[60px]">
-          <h2 className="font-heading text-[36px] font-medium leading-[1.1] text-[#063746]">
+          <h2 className="font-heading text-[36px] font-medium leading-[1.1] text-[#126478]">
             Every Project At Ddip.AI Starts With
             <br />
             Human Understanding:
@@ -191,8 +198,8 @@ export default function TheMindBehindPage() {
                 {i < projectCards.length - 1 && (
                   <div className="flex items-center px-6 pb-12">
                     <svg width="200" height="16" viewBox="0 0 200 16" fill="none">
-                      <line x1="0" y1="8" x2="188" y2="8" stroke="#039EB7" strokeWidth="1.5"/>
-                      <path d="M188 3L198 8L188 13" stroke="#039EB7" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+                      <line x1="0" y1="8" x2="188" y2="8" stroke="#039EB7" strokeWidth="1.5" />
+                      <path d="M188 3L198 8L188 13" stroke="#039EB7" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
                     </svg>
                   </div>
                 )}
@@ -210,7 +217,7 @@ export default function TheMindBehindPage() {
           <div className="relative overflow-hidden rounded-[24px] px-12 py-14" style={{ background: "#002834" }}>
 
             {/* BG image */}
-            <Image src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/d3ec1192-f7d6-4c41-86f4-83ae0813a800/public" alt="bg" fill className="object-cover opacity-40" sizes="100vw" />
+            <Image src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/d3ec1192-f7d6-4c41-86f4-83ae0813a800/public" alt="bg" fill className="object-cover" sizes="100vw" />
 
             {/* Content grid: left + center + right */}
             <div className="relative z-10 grid grid-cols-[1fr_auto_1fr] gap-8 items-start">
@@ -249,7 +256,7 @@ export default function TheMindBehindPage() {
               </div>
 
               {/* Center — empty (bg image shows through) */}
-              <div className="w-[200px]" />
+              <div className="w-[320px]" />
 
               {/* Right — 3 glassmorphism boxes + tagline */}
               <div className="flex flex-col gap-3 justify-center pt-16">
@@ -269,7 +276,7 @@ export default function TheMindBehindPage() {
                     </div>
                   </div>
                 ))}
-                <p className="mt-3 text-[13px] text-white/50" style={{ fontFamily: "var(--font-body)" }}>
+                <p className="mt-3 text-[13px] text-white" style={{ fontFamily: "var(--font-body)" }}>
                   This balance is what makes our work feel natural,<br />credible, and alive — not synthetic.
                 </p>
               </div>
@@ -292,12 +299,12 @@ export default function TheMindBehindPage() {
           <div className="absolute top-[290px] left-[400px] right-[80px] z-10">
             <Image src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/e80f3209-582e-45d0-4d75-94b93bc7e600/public" alt="icon" width={240} height={100} className="object-contain" />
           </div>
-          <div className="absolute top-[380px] right-[170px] z-10">
+          <div className="absolute top-[430px] right-[170px] z-10">
             <Image src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/ce65cf14-a5de-4cb8-0023-b0cee10b7100/public" alt="icon" width={280} height={120} className="object-contain" />
           </div>
 
           {/* Top heading + subtitle */}
-          <h2 className="font-heading text-[48px] font-medium leading-[1.1] text-[#063746]">
+          <h2 className="font-heading text-[48px] font-medium leading-[1.1] text-[#063746]" style={{ fontFamily: "var(--font-body)" }}>
             A System,<br />Not a Shortcut
           </h2>
           <p className="mt-4 text-[26px] text-[#002834] w-[330px]" style={{ fontFamily: "var(--font-body)" }}>
@@ -307,9 +314,9 @@ export default function TheMindBehindPage() {
           {/* "Every brand has" — outside flex, right side aligned */}
           <div className="mt-16 flex justify-end">
             <div className="w-[50%]">
-              <p className="text-[13px] text-[#063746]/40" style={{ fontFamily: "var(--font-body)" }}>Every brand has:</p>
+              <p className="text-[18px] text-[#063746]" style={{ fontFamily: "var(--font-body)" }}>Every brand has:</p>
               <div className="flex items-start gap-4 mt-2">
-                <h3 className="font-heading text-[64px] font-bold uppercase leading-[1] text-[#1CE3F4]">
+                <h3 className="font-heading text-[64px] font-bold uppercase leading-[1] text-[#00BCCF]">
                   A DIFFERENT
                 </h3>
                 <div className="flex flex-col gap-1">
@@ -337,7 +344,7 @@ export default function TheMindBehindPage() {
               <p className="mt-10 text-[30px] leading-[1.7] text-[#002834]" style={{ fontFamily: "var(--font-body)" }}>
                 From AI influencers to brand ambassadors, from content engines to automated workflows - each solution is tailored, trained, and designed specifically for the brand it serves.
               </p>
-              <p className="mt-6 text-[34px] font-bold leading-[1.4] text-[#002834]" style={{ fontFamily: "var(--font-body)" }}>
+              <p className="mt-6 text-[34px] font-medium leading-[1.4] text-[#145365]" style={{ fontFamily: "var(--font-body)" }}>
                 AI IS NOT A SHORTCUT.<br />
                 IT&apos;S A SYSTEM — AND SYSTEMS<br />
                 NEED ARCHITECTS.
@@ -351,35 +358,40 @@ export default function TheMindBehindPage() {
       {/* ════════════════════════════════════════════════════════
           7. MARQUEE — "WE DESIGN FOR BRANDS ✻ NOT FOR ALGORITHMS"
           ════════════════════════════════════════════════════════ */}
-      <section className="overflow-hidden bg-light-bg py-8">
-       
 
-        <div className="overflow-hidden whitespace-nowrap">
-          <div className="flex animate-marquee">
-            {[...Array(2)].map((_, i) => (
-              <div className="flex" key={i} >
-            <h1 className="text-[80px] text-[#145365] whitespace-nowrap" style={{lineHeight:"normal"}}>
-             WE DESIGN FOR BRANDS,<span className="text-[#1CE3F4]/40">✻</span>
+      <section className="overflow-hidden bg-[#F6F9F2] ">
+        <div className="w-full overflow-hidden">
+          <div className="flex w-max animate-marquee">
+            <h1 className="flex items-center whitespace-nowrap font-heading uppercase leading-none text-[#145365] text-[clamp(48px,8vw,96px)] sm:text-[clamp(36px,7vw,80px)] md:text-[clamp(48px,8vw,120px)]">
+              WE DESIGN FOR BRANDS,
+              <img src="/images/common/star.svg" alt="*" className="mx-10 h-18 w-18 relative top-[0.08em]" />
             </h1>
-            </div>
-          ))}
-         
+            <h1 className="ml-10 flex items-center whitespace-nowrap font-heading uppercase leading-none text-[#145365] text-[clamp(48px,8vw,96px)] sm:text-[clamp(36px,7vw,80px)] md:text-[clamp(48px,8vw,120px)]">
+              WE DESIGN FOR BRANDS,
+              <img src="/images/common/star.svg" alt="*" className="mx-10 w-18 h-18 relative top-[0.08em]" />
+              WE DESIGN FOR BRANDS,
+              <img src="/images/common/star.svg" alt="*" className="mx-10 w-18 h-18 relative top-[0.08em]" />
+            </h1>
           </div>
-        </div>
-         <div className="overflow-hidden whitespace-nowrap">
-          <div className="flex animate-marquee">
-             {[...Array(2)].map((_, i) => (
-            <div className="flex" key={i}>
-            <div className="text-[140px] text-[#145365] whitespace-nowrap" style={{lineHeight:"normal"}}>
-             NOT FOR ALGORITHMS<span className="text-[#1CE3F4]/40">✻</span>{" "}
-            </div>
-          </div>
-                ))}
-          </div>
-          
         </div>
       </section>
 
+      <section className="overflow-hidden bg-[#F6F9F2] ">
+        <div className="w-full overflow-hidden">
+          <div className="flex w-max animate-marquee">
+            <h1 className="flex items-center whitespace-nowrap font-heading uppercase leading-none text-[#145365] text-[clamp(64px,10vw,120px)] sm:text-[clamp(48px,9vw,100px)] md:text-[clamp(64px,10vw,150px)]">
+              NOT FOR ALGORITHMS
+              <img src="/images/common/star.svg" alt="*" className="mx-10 h-18 w-18 relative top-[0.08em]" />
+            </h1>
+            <h1 className="ml-10 flex items-center whitespace-nowrap font-heading uppercase leading-none text-[#145365] text-[clamp(64px,10vw,120px)] sm:text-[clamp(48px,9vw,100px)] md:text-[clamp(64px,10vw,150px)]">
+              NOT FOR ALGORITHMS
+              <img src="/images/common/star.svg" alt="*" className="mx-10 w-18 h-18 relative top-[0.08em]" />
+              NOT FOR ALGORITHMS
+              <img src="/images/common/star.svg" alt="*" className="mx-10 w-18 h-18 relative top-[0.08em]" />
+            </h1>
+          </div>
+        </div>
+      </section>
       {/* ════════════════════════════════════════════════════════
           8. BRANDS NEED SOMETHING DURABLE
           ════════════════════════════════════════════════════════ */}
@@ -387,7 +399,7 @@ export default function TheMindBehindPage() {
         <div className="px-[60px]">
 
           {/* Trends text — top */}
-          <p className="mb-12 leading-[1.5]" style={{ fontFamily: "SF Pro Display", fontSize: "30px", color: "#145365" }}>
+          <p className="mb-12 leading-[1.5]" style={{ fontSize: "30px", color: "#145365" }}>
             Trends change.<br />
             Platforms evolve.<br />
             Algorithms update overnight.
@@ -401,20 +413,20 @@ export default function TheMindBehindPage() {
             </div>
             {/* Right — text */}
             <div>
-              <p style={{ fontFamily: "SF Pro Display", fontSize: "22px", color: "#145365",width:"320px" }}>
+              <p style={{ fontSize: "22px", color: "#145365", width: "320px" }}>
                 Brands, however, need something more durable:
               </p>
               <div className="mt-4 space-y-1">
                 {["clarity", "consistency", "emotional connection"].map(item => (
-                  <p key={item} style={{ fontFamily: "SF Pro Display", fontSize: "22px", color: "#145365" }}>
+                  <p key={item} style={{ fontSize: "22px", color: "#145365" }}>
                     • {item}
                   </p>
                 ))}
               </div>
-              <p className="mt-8" style={{ fontFamily: "SF Pro Display", fontSize: "24px", color: "#145365",width:"500px" }}>
+              <p className="mt-8" style={{ fontSize: "24px", color: "#145365", width: "500px" }}>
                 That&apos;s why we design AI systems that serve brand identity, not platform logic.
               </p>
-              <p className="mt-4" style={{ fontFamily: "SF Pro Display", fontSize: "24px", color: "#145365",width:"500px" }}>
+              <p className="mt-4" style={{ fontSize: "24px", color: "#145365", width: "500px" }}>
                 Technology adapts. The brand remains recognizable.
               </p>
             </div>
@@ -438,7 +450,7 @@ export default function TheMindBehindPage() {
         </div>
       </section>
 
-     
+
 
       {/* ════════════════════════════════════════════════════════
           10. THE FUTURE WE BELIEVE IN — dark card
@@ -452,7 +464,7 @@ export default function TheMindBehindPage() {
 
             {/* Left — blurred text card */}
             <div className="relative z-10 flex h-full items-start p-10" style={{ minHeight: "420px" }}>
-              <div className="max-w-[420px] rounded-[20px] p-8" style={{ background: "rgba(255,255,255,0.08)", backdropFilter: "blur(40px)" }}>
+              <div className="max-w-[590px] rounded-[20px] p-8" style={{ background: "rgba(255,255,255,0.08)", backdropFilter: "blur(40px)" }}>
                 <h2 className="font-heading text-[40px] font-medium leading-[1.1] text-white">
                   The Future We<br />Believe In
                 </h2>
@@ -498,55 +510,71 @@ export default function TheMindBehindPage() {
       {/* ════════════════════════════════════════════════════════
           12. BOTTOM MARQUEE — "NOT AI-FIRST ✻ NOT HUMAN-ONLY"
           ════════════════════════════════════════════════════════ */}
-      <section className="overflow-hidden whitespace-nowrap">
-         <div className="flex animate-marquee">
-            {[...Array(5)].map((_, i) => (
-              <div className="flex" key={i} >
-            <h1 className="text-[80px] text-[#145365] whitespace-nowrap" style={{lineHeight:"normal"}}>
-              NOT AI-FIRST<span className="text-[#1CE3F4]/40">✻</span>
-            </h1>
-            </div>
-          ))}
-         
-          </div>
-           <div className="flex animate-marquee">
-            {[...Array(5)].map((_, i) => (
-              <div className="flex" key={i} >
-            <h1 className="text-[80px] text-[#145365] whitespace-nowrap" style={{lineHeight:"normal"}}>
-                NOT HUMAN-ONLY<span className="text-[#1CE3F4]/40">✻</span>
-            </h1>
-            </div>
-          ))}
-         
-          </div>
 
+
+      <section className="overflow-hidden bg-[#F6F9F2] ">
+        <div className="w-full overflow-hidden">
+          <div className="flex w-max animate-marquee">
+            <h1 className="flex items-center whitespace-nowrap font-heading uppercase leading-none text-[#145365] text-[clamp(48px,8vw,96px)] sm:text-[clamp(36px,7vw,80px)] md:text-[clamp(48px,8vw,120px)]">
+              NOT AI-FIRST
+              <img src="/images/common/star.svg" alt="*" className="mx-10 h-18 w-18 relative top-[0.08em]" />
+            </h1>
+            <h1 className="ml-10 flex items-center whitespace-nowrap font-heading uppercase leading-none text-[#145365] text-[clamp(48px,8vw,96px)] sm:text-[clamp(36px,7vw,80px)] md:text-[clamp(48px,8vw,120px)]">
+              NOT AI-FIRST
+              <img src="/images/common/star.svg" alt="*" className="mx-10 w-18 h-18 relative top-[0.08em]" />
+              NOT AI-FIRST
+              <img src="/images/common/star.svg" alt="*" className="mx-10 w-18 h-18 relative top-[0.08em]" />
+            </h1>
+          </div>
+        </div>
       </section>
-      
+
+      <section className="overflow-hidden bg-[#F6F9F2]">
+        <div className="w-full overflow-hidden">
+          <div className="flex w-max animate-marquee">
+            <h1 className="flex items-center whitespace-nowrap font-heading uppercase leading-none text-[#145365] text-[clamp(48px,8vw,96px)] sm:text-[clamp(36px,7vw,80px)] md:text-[clamp(48px,8vw,120px)]">
+              NOT HUMAN-ONLY
+              <img src="/images/common/star.svg" alt="*" className="mx-10 h-18 w-18 relative top-[0.08em]" />
+            </h1>
+            <h1 className="ml-10 flex items-center whitespace-nowrap font-heading uppercase leading-none text-[#145365] text-[clamp(48px,8vw,96px)] sm:text-[clamp(36px,7vw,80px)] md:text-[clamp(48px,8vw,120px)]">
+              NOT HUMAN-ONLY
+              <img src="/images/common/star.svg" alt="*" className="mx-10 w-18 h-18 relative top-[0.08em]" />
+              NOT HUMAN-ONLY
+              <img src="/images/common/star.svg" alt="*" className="mx-10 w-18 h-18 relative top-[0.08em]" />
+            </h1>
+          </div>
+          <div className="flex flex-col items-end mx-10 py-8">
+            <div>
+              <p className="text-[#145365] font-heading text-[18px]">Human-led intelligence.</p>
+              <p className="text-[#145365] font-heading text-[18px]">System-driven creativity.</p>
+              <p className="text-[#145365] text-[16px]">Designed for brands that want more than</p>
+              <p className="text-[#145365] text-[16px]">outputs — they want impact.</p>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* ════════════════════════════════════════════════════════
           13. CTA
           ════════════════════════════════════════════════════════ */}
-     
-
-       <section className="bg-light-bg py-24">
-              <div
-                className="mx-[60px] flex items-center justify-between rounded-[20px] px-[25px] py-[60px]"
-                style={{ background: "linear-gradient(-90deg, #002834 0%, #129CAC 100%)" }}
-              >
-             
-               <h2 className="font-heading text-[20px] font-bold leading-[1.2] text-[#EBFFFF]">
-              Curious how this mindset turns into real systems?
+      <section className="bg-light-bg py-24">
+        <div
+          className="mx-[60px] flex items-center justify-between rounded-[20px] px-[60px] py-[60px]"
+          style={{ background: "linear-gradient(-90deg, #002834 0%, #129CAC 100%)" }}
+        >
+          <h2 className="font-heading text-[28px] font-bold leading-[1.2] text-[#EBFFFF]">
+            Curious how this mindset turns into real systems?
           </h2>
-                <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4">
             <Link href="/ai-solutions" className="rounded-full border border-[#063746]/20 px-6 py-2.5 font-heading text-[14px] font-medium text-[#063746] transition bg-[#1CE3F4]">
               Explore our AI Solutions
             </Link>
-            <Link href="/start-project" className="rounded-full border border-white px-6 py-2.5 font-heading text-[14px] font-medium text-white transition ">
+            <Link href="/start-project" className="rounded-full border border-white px-6 py-2.5 font-heading text-[14px] font-medium text-white transition">
               Start a Project
             </Link>
           </div>
-              </div>
-            </section>
+        </div>
+      </section>
     </>
   );
 }

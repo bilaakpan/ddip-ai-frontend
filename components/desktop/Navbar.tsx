@@ -4,6 +4,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
+import useEmblaCarousel from "embla-carousel-react";
+import Autoplay from "embla-carousel-autoplay";
 
 const navLinks = [
   { label: "Process", href: "/process" },
@@ -34,56 +36,81 @@ const megaMenuCards = [
 ];
 
 /**
- * Carousel for mega menu cards with prev/next arrows and dots
+ * Carousel for mega menu cards with Embla carousel library
  */
 function MegaMenuCarousel({ cards }: { cards: { title: string; href: string; image: string }[] }) {
-  const [current, setCurrent] = useState(0);
-  const visible = 3;
-  const total = cards.length;
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: "start" }, [
+    Autoplay({ delay: 3000, stopOnInteraction: false }),
+  ]);
+  const [selectedIndex, setSelectedIndex] = useState(0);
 
-  const prev = () => setCurrent((c) => (c - 1 + total) % total);
-  const next = () => setCurrent((c) => (c + 1) % total);
+  useEffect(() => {
+    if (!emblaApi) return;
 
-  const visibleCards = Array.from({ length: visible }, (_, i) => cards[(current + i) % total]);
+    const onSelect = () => {
+      setSelectedIndex(emblaApi.selectedScrollSnap());
+    };
+
+    emblaApi.on("select", onSelect);
+    return () => {
+      emblaApi.off("select", onSelect);
+    };
+  }, [emblaApi]);
+
+  const scroll = (direction: "prev" | "next") => {
+    if (!emblaApi) return;
+    if (direction === "prev") {
+      emblaApi.scrollPrev();
+    } else {
+      emblaApi.scrollNext();
+    }
+  };
+
+  const scrollTo = (index: number) => {
+    if (!emblaApi) return;
+    emblaApi.scrollTo(index);
+  };
 
   return (
     <div className="relative flex flex-col gap-3">
       {/* Left arrow */}
-      <button onClick={prev} className="absolute -left-4 top-1/2 -translate-y-1/2 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-white/15 hover:bg-white/30 transition">
+      <button onClick={() => scroll("prev")} className="absolute -left-4 top-1/2 -translate-y-1/2 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-white/15 hover:bg-white/30 transition">
         <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M8 2L4 6L8 10" stroke="white" strokeWidth="1.5" strokeLinecap="round"/></svg>
       </button>
 
       {/* Right arrow */}
-      <button onClick={next} className="absolute -right-4 top-1/2 -translate-y-1/2 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-white/15 hover:bg-white/30 transition">
+      <button onClick={() => scroll("next")} className="absolute -right-4 top-1/2 -translate-y-1/2 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-white/15 hover:bg-white/30 transition">
         <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M4 2L8 6L4 10" stroke="white" strokeWidth="1.5" strokeLinecap="round"/></svg>
       </button>
 
-      {/* Cards row */}
-      <div className="flex gap-3">
-        {visibleCards.map((card, i) => (
-          <Link
-            key={i}
-            href={card.href}
-            className="group relative flex-1 overflow-hidden rounded-[16px]"
-            style={{ aspectRatio: "4/5" }}
-          >
-            <Image src={card.image} alt={card.title} fill className="object-cover transition-transform duration-300 group-hover:scale-105" sizes="200px" />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
-            <div className="relative flex h-full flex-col justify-end p-3">
-              <p className="text-[13px] font-medium leading-snug text-white" style={{ fontFamily: "SF Pro Display" }}>
-                {card.title}
-              </p>
-            </div>
-          </Link>
-        ))}
+      {/* Carousel container */}
+      <div className="overflow-hidden" ref={emblaRef}>
+        <div className="flex gap-3">
+          {cards.map((card, i) => (
+            <Link
+              key={i}
+              href={card.href}
+              className="group relative flex-none w-full overflow-hidden rounded-[16px]"
+              style={{ aspectRatio: "4/5", flexBasis: "33.333%" }}
+            >
+              <Image src={card.image} alt={card.title} fill className="object-cover transition-transform duration-300 group-hover:scale-105" sizes="200px" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
+              <div className="relative flex h-full flex-col justify-end p-3">
+                <p className="text-[13px] font-medium leading-snug text-white" style={{ fontFamily: "SF Pro Display" }}>
+                  {card.title}
+                </p>
+              </div>
+            </Link>
+          ))}
+        </div>
       </div>
 
       {/* Dots */}
       <div className="flex items-center justify-center gap-1.5 mt-1">
         {cards.map((_, i) => (
-          <button key={i} onClick={() => setCurrent(i)}
+          <button key={i} onClick={() => scrollTo(i)}
             className="rounded-full transition-all"
-            style={{ width: i === current ? "20px" : "6px", height: "6px", background: i === current ? "#002834" : "rgba(255,255,255,0.3)" }}
+            style={{ width: i === selectedIndex ? "20px" : "6px", height: "6px", background: i === selectedIndex ? "#002834" : "rgba(255,255,255,0.3)" }}
           />
         ))}
       </div>

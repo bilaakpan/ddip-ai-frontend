@@ -1,5 +1,5 @@
 "use client";
-
+import { Stream } from "@cloudflare/stream-react";
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
@@ -20,22 +20,22 @@ const heroPartners = ["VG", "brother", "Vestine", "OPTIMUM", "ColaSel", "Colorfu
 const dreamSteps = [
   { label: "Dream it.", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/bb102694-2ca6-44a5-9037-4865b1e41400/public" },
   { label: "Create it.", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/2bf2b49d-9a2e-4878-032e-7cbb7687ae00/public" },
-  { label: "Animate it.", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/a50f1f9d-c362-407b-d72b-277705a61000/public" },
-  { label: "Finish it.", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/4eb7734a-2629-45b5-a3ae-22c14598ac00/public" },
+  { label: "Animate it.", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/ea92c822-fdb8-4e4f-d0d2-bbaf28654a00/public" },
+  { label: "Finish it.", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/ce1aa4dc-ec06-45ac-bd3e-b63c28bbd600/public" },
 ];
 
 const generateItems = [
   {
     title: "Campaign visuals and key assets",
-    image: "/images/ai-content/showcase-01.png",
+    image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/bb102694-2ca6-44a5-9037-4865b1e41400/public",
   },
   {
     title: "Social media content and variations",
-    image: "/images/ai-content/showcase-02.png",
+    image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/2bf2b49d-9a2e-4878-032e-7cbb7687ae00/public",
   },
   {
     title: "Short-form content",
-    image: "/images/ai-content/showcase-03.png",
+    image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/a50f1f9d-c362-407b-d72b-277705a61000/public",
   },
 ];
 
@@ -121,7 +121,7 @@ export default function AIContentPage() {
           setCmsFaqRight(res.data.slice(mid).map((f: Faq) => f.question));
         }
       })
-      .catch(() => {});
+      .catch(() => { });
   }, []);
 
   return (
@@ -142,9 +142,14 @@ export default function AIContentPage() {
                 <img src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/1e1a01b7-cad6-4218-de1f-d23f5d27d400/public" alt="icon" className="h-[50px] w-[50px] object-contain" />
               </div>
               <div className="h-full w-full overflow-hidden rounded-[16px] ">
-                <video autoPlay muted loop playsInline className="h-[350px] w-full object-cover">
-                  <source src="/videos/ai-content-video-first.mp4" type="video/mp4" />
-                </video>
+                <Stream
+                  src="cec8f6e44f63bb833b4b9b71452d48cb"
+                  controls={false}
+                  autoplay
+                  muted
+                  loop
+                  className="h-[350px] w-full object-cover"
+                />
               </div>
             </div>
           </div>
@@ -172,9 +177,16 @@ export default function AIContentPage() {
                 <img src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/6d7c5e48-3eaa-4a0f-4092-7e4094da7f00/public" alt="icon" className="h-[50px] w-[50px] object-contain" />
               </div>
               <div className="h-full w-full overflow-hidden rounded-[16px]">
-                <video autoPlay muted loop playsInline className="h-full w-full object-cover">
-                  <source src="/videos/ai-content-video-middle.mp4" type="video/mp4" />
-                </video>
+
+                <Stream
+                  src="03d397e2992efcc651de0d04701b2ca1"
+                  controls={false}
+                  autoplay
+                  muted
+                  loop
+                  className="h-full w-full object-cover"
+                />
+
               </div>
             </div>
           </div>
@@ -185,9 +197,14 @@ export default function AIContentPage() {
               <img src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/24b4e848-2873-476b-c343-3350ac28bc00/publicng" alt="icon" className="h-[50px] w-[50px] object-contain" />
             </div>
             <div className="h-full w-full overflow-hidden rounded-[16px] h-[430px]">
-              <video autoPlay muted loop playsInline className="h-[430px] w-full object-cover">
-                <source src="/videos/ai-content-video-last.mp4" type="video/mp4" />
-              </video>
+              <Stream
+                src="90f5aaa3d5ea96226052be6f9122b8c2"
+                controls={false}
+                autoplay
+                muted
+                loop
+                className="h-[430px] w-full object-cover"
+              />
             </div>
           </div>
         </div>
@@ -236,7 +253,7 @@ export default function AIContentPage() {
         </div>
 
         {/* [SCROLL] text */}
-         <div className="absolute bottom-10 right-[60px] z-10">
+        <div className="absolute bottom-10 right-[60px] z-10">
           <p className="text-[16px] tracking-wider text-white" style={{ fontFamily: "var(--font-body)" }}>[SCROLL]</p>
         </div>
       </section>
@@ -289,7 +306,7 @@ export default function AIContentPage() {
           <div className="flex items-start">
 
             {/* ── STEP 1: Dream it — 3 prompt cards ── */}
-            <div className="shrink-0 flex flex-col" style={{ height: "440px" ,textAlign:"center"}}>
+            <div className="shrink-0 flex flex-col" style={{ height: "440px", textAlign: "center" }}>
               <p className="font-heading text-[25px] text-white/50 mb-3">Dream it.</p>
               <div className="flex flex-col gap-2 flex-1 justify-center">
                 {[
@@ -300,7 +317,7 @@ export default function AIContentPage() {
                   <div key={i} className="flex items-center gap-2 rounded-[8px] px-3 py-1.5" style={{ width: "220px", background: "#08262F", border: "1px solid #BEBEBE", boxShadow: "0px 0px 3.8px 4px #FFFFFF2E inset" }}>
                     <span className="text-[13px] text-white flex-1 truncate" style={{ fontFamily: "var(--font-body)" }}>{text}</span>
                     <div className="shrink-0 flex h-5 w-5 items-center justify-center rounded-full border border-white/20 bg-white">
-                      <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="#08262F" strokeWidth="2"><path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z"/></svg>
+                      <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="#08262F" strokeWidth="2"><path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z" /></svg>
                     </div>
                   </div>
                 ))}
@@ -310,38 +327,38 @@ export default function AIContentPage() {
             {/* ── 3 lines converge → single line → NODE 1 ── */}
             <div className="shrink-0 relative flex flex-col justify-center" style={{ width: "100px", height: "490px" }}>
               <svg width="100" height="120" viewBox="0 0 100 120" fill="none" className="relative">
-                <path d="M0 15  C40 15  40 60 75 60" stroke="rgba(255,255,255,0.5)" strokeWidth="1.5" fill="none"/>
-                <path d="M0 60  L75 60"               stroke="rgba(255,255,255,0.5)" strokeWidth="1.5" fill="none"/>
-                <path d="M0 105 C40 105 40 60 75 60"  stroke="rgba(255,255,255,0.5)" strokeWidth="1.5" fill="none"/>
-                <line x1="75" y1="60" x2="100" y2="60" stroke="rgba(255,255,255,0.5)" strokeWidth="1.5"/>
+                <path d="M0 15  C40 15  40 60 75 60" stroke="rgba(255,255,255,0.5)" strokeWidth="1.5" fill="none" />
+                <path d="M0 60  L75 60" stroke="rgba(255,255,255,0.5)" strokeWidth="1.5" fill="none" />
+                <path d="M0 105 C40 105 40 60 75 60" stroke="rgba(255,255,255,0.5)" strokeWidth="1.5" fill="none" />
+                <line x1="75" y1="60" x2="100" y2="60" stroke="rgba(255,255,255,0.5)" strokeWidth="1.5" />
               </svg>
               <Image src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/73eb47b0-8e72-4f36-60a2-fc3530f58200/public" alt="node" width={26} height={26}
                 className="absolute" style={{ left: "87px", top: "50%", transform: "translate(-50%, -50%)" }} />
             </div>
 
             {/* ── STEP 2: Create it — 4 images 2x2 ── */}
-            <div className="shrink-0 flex flex-col" style={{ height: "440px" ,textAlign:"center"}}>
+            <div className="shrink-0 flex flex-col" style={{ height: "440px", textAlign: "center" }}>
               <p className="font-heading text-[25px] text-white/50 mb-3">Create it.</p>
               <div className="flex-1 flex items-center">
                 <div className="grid grid-cols-2 gap-1.5">
-                {[
-                  "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/bb102694-2ca6-44a5-9037-4865b1e41400/public",
-                  "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/2bf2b49d-9a2e-4878-032e-7cbb7687ae00/public",
-                  "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/a50f1f9d-c362-407b-d72b-277705a61000/public",
-                  "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/4eb7734a-2629-45b5-a3ae-22c14598ac00/public",
-                ].map((src, i) => (
-                  <div key={i} className="relative h-[95px] w-[80px] overflow-hidden rounded-[8px]">
-                    <Image src={src} alt={`create-${i}`} fill className="object-cover" sizes="80px" />
-                  </div>
-                ))}
-              </div>
+                  {[
+                    "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/bb102694-2ca6-44a5-9037-4865b1e41400/public",
+                    "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/2bf2b49d-9a2e-4878-032e-7cbb7687ae00/public",
+                    "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/a50f1f9d-c362-407b-d72b-277705a61000/public",
+                    "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/4eb7734a-2629-45b5-a3ae-22c14598ac00/public",
+                  ].map((src, i) => (
+                    <div key={i} className="relative h-[95px] w-[80px] overflow-hidden rounded-[8px]">
+                      <Image src={src} alt={`create-${i}`} fill className="object-cover" sizes="80px" />
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
 
             {/* ── connector: ddipicon1 → line → ddipicon2 ── */}
             <div className="shrink-0 relative flex flex-col justify-center" style={{ width: "100px", height: "490px" }}>
               <svg width="100" height="4" viewBox="0 0 100 4" fill="none">
-                <line x1="10" y1="2" x2="90" y2="2" stroke="rgba(255,255,255,0.5)" strokeWidth="1.5"/>
+                <line x1="10" y1="2" x2="90" y2="2" stroke="rgba(255,255,255,0.5)" strokeWidth="1.5" />
               </svg>
               <Image src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/73eb47b0-8e72-4f36-60a2-fc3530f58200/public" alt="node" width={26} height={26}
                 className="absolute" style={{ left: "0px", top: "50%", transform: "translateY(-50%)" }} />
@@ -350,65 +367,103 @@ export default function AIContentPage() {
             </div>
 
             {/* ── STEP 3: Animate it — 1 tall + 2 stacked + 2 stacked ── */}
-            <div className="shrink-0 flex flex-col" style={{ height: "440px" ,textAlign:"center"}}>
+            <div className="shrink-0 flex flex-col" style={{ height: "440px", textAlign: "center" }}>
               <p className="font-heading text-[25px] text-white/50 mb-3">Animate it.</p>
               <div className="flex-1 flex items-center">
                 <div className="flex gap-1.5 items-center">
-                <div className="relative h-[156px] w-[90px] overflow-hidden rounded-[8px]">
-                  <video autoPlay muted loop playsInline className="h-full w-full object-cover">
-                    <source src="/videos/ai-content-video-middle.mp4" type="video/mp4" />
-                  </video>
-                </div>
-                <div className="flex flex-col gap-1.5">
                   <div className="relative h-[156px] w-[90px] overflow-hidden rounded-[8px]">
-                    <video autoPlay muted loop playsInline className="h-full w-full object-cover">
-                      <source src="/videos/work1.mp4" type="video/mp4" />
-                    </video>
+                 
+                    <Stream
+                      src="03d397e2992efcc651de0d04701b2ca1"
+                      controls={false}
+                      autoplay
+                      muted
+                      loop
+                      className="h-full w-full object-cover"
+                    />
+
                   </div>
-                  <div className="relative h-[156px] w-[90px] overflow-hidden rounded-[8px]">
-                    <video autoPlay muted loop playsInline className="h-full w-full object-cover">
-                      <source src="/videos/work2.mp4" type="video/mp4" />
-                    </video>
+                  <div className="flex flex-col gap-1.5">
+                    <div className="relative h-[156px] w-[90px] overflow-hidden rounded-[8px]">
+                
+                      <Stream
+                        src="52d4f5fdd1335b2fbaba2f41798273f1"
+                        controls={false}
+                        autoplay
+                        muted
+                        loop
+                        className="h-full w-full object-cover"
+                      />
+
+                    </div>
+                    <div className="relative h-[156px] w-[90px] overflow-hidden rounded-[8px]">
+                     
+                      <Stream
+                        src="90b6c18df1bb19d1117f6d29f6859036"
+                        controls={false}
+                        autoplay
+                        muted
+                        loop
+                        className="h-full w-full object-cover"
+                      />
+                    </div>
+                  </div>
+                  <div className="flex flex-col gap-1.5">
+                    <div className="relative h-[156px] w-[90px] overflow-hidden rounded-[8px] mt-[30px]">
+                 
+                      <Stream
+                        src="8ffbc4055a9b0210350a2748fcbb8ce4"
+                        controls={false}
+                        autoplay
+                        muted
+                        loop
+                        className="h-full w-full object-cover"
+                      />
+                    </div>
+                    <div className="relative h-[156px] w-[90px] overflow-hidden rounded-[8px]">
+                 
+                      <Stream
+                        src="2f4c298d7224c5140c18bc3c0f6faf22"
+                        controls={false}
+                        autoplay
+                        muted
+                        loop
+                        className="h-full w-full object-cover"
+                      />
+                    </div>
                   </div>
                 </div>
-                <div className="flex flex-col gap-1.5">
-                  <div className="relative h-[156px] w-[90px] overflow-hidden rounded-[8px] mt-[30px]">
-                    <video autoPlay muted loop playsInline className="h-full w-full object-cover">
-                      <source src="/videos/work3.mp4" type="video/mp4" />
-                    </video>
-                  </div>
-                  <div className="relative h-[156px] w-[90px] overflow-hidden rounded-[8px]">
-                    <video autoPlay muted loop playsInline className="h-full w-full object-cover">
-                      <source src="/videos/work4.mp4" type="video/mp4" />
-                    </video>
-                  </div>
-                </div>
-              </div>
               </div>
             </div>
 
             {/* ── 5 lines → merge → ddipicon3 ── */}
             <div className="shrink-0 relative flex flex-col justify-center" style={{ width: "90px", height: "490px" }}>
               <svg width="90" height="196" viewBox="0 0 90 196" fill="none" className="relative">
-                <path d="M0 20  C40 20  40 98 65 98" stroke="rgba(255,255,255,0.5)" strokeWidth="1.5" fill="none"/>
-                <path d="M0 59  C40 59  40 98 65 98" stroke="rgba(255,255,255,0.5)" strokeWidth="1.5" fill="none"/>
-                <path d="M0 98  L65 98"               stroke="rgba(255,255,255,0.5)" strokeWidth="1.5" fill="none"/>
-                <path d="M0 137 C40 137 40 98 65 98"  stroke="rgba(255,255,255,0.5)" strokeWidth="1.5" fill="none"/>
-                <path d="M0 176 C40 176 40 98 65 98"  stroke="rgba(255,255,255,0.5)" strokeWidth="1.5" fill="none"/>
-                <line x1="65" y1="98" x2="90" y2="98" stroke="rgba(255,255,255,0.5)" strokeWidth="1.5"/>
+                <path d="M0 20  C40 20  40 98 65 98" stroke="rgba(255,255,255,0.5)" strokeWidth="1.5" fill="none" />
+                <path d="M0 59  C40 59  40 98 65 98" stroke="rgba(255,255,255,0.5)" strokeWidth="1.5" fill="none" />
+                <path d="M0 98  L65 98" stroke="rgba(255,255,255,0.5)" strokeWidth="1.5" fill="none" />
+                <path d="M0 137 C40 137 40 98 65 98" stroke="rgba(255,255,255,0.5)" strokeWidth="1.5" fill="none" />
+                <path d="M0 176 C40 176 40 98 65 98" stroke="rgba(255,255,255,0.5)" strokeWidth="1.5" fill="none" />
+                <line x1="65" y1="98" x2="90" y2="98" stroke="rgba(255,255,255,0.5)" strokeWidth="1.5" />
               </svg>
               <Image src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/248292a1-8078-42b6-a7f1-cc34d064ef00/public" alt="node" width={26} height={26}
                 className="absolute" style={{ right: "0px", top: "50%", transform: "translateY(-50%)" }} />
             </div>
 
             {/* ── STEP 4: Finish it ── */}
-            <div className="shrink-0 flex flex-col" style={{ height: "440px",textAlign:"center" }}>
+            <div className="shrink-0 flex flex-col" style={{ height: "440px", textAlign: "center" }}>
               <p className="font-heading text-[25px] text-white/50 mb-3">Finish it.</p>
               <div className="flex-1 flex items-center">
                 <div className="relative h-[400px] w-[250px] overflow-hidden rounded-[12px]">
-                  <video autoPlay muted loop playsInline className="h-full w-full object-cover">
-                    <source src="/videos/ai-content-video-last.mp4" type="video/mp4" />
-                  </video>
+                
+                      <Stream
+                        src="90f5aaa3d5ea96226052be6f9122b8c2"
+                        controls={false}
+                        autoplay
+                        muted
+                        loop
+                        className="h-full w-full object-cover"
+                      />
                 </div>
               </div>
             </div>
@@ -457,6 +512,15 @@ export default function AIContentPage() {
                       className="object-cover"
                       sizes="320px"
                     />
+                    {/* <Stream
+                      src={item.image}
+                      controls={false}
+                      autoplay
+                      muted
+                      loop
+                    className="object-cover"
+                    /> */}
+
                   </div>
                   <p className="mt-4 text-[16px] text-[#063746]" style={{ fontFamily: "var(--font-body)" }}>
                     {item.title}
@@ -480,7 +544,7 @@ export default function AIContentPage() {
       {/* ════════════════════════════════════════════════════════
           5. OUR 4D METHOD — 4 tilted icon cards
           ════════════════════════════════════════════════════════ */}
-    <FourDMethodSection />
+      <FourDMethodSection />
 
       {/* ════════════════════════════════════════════════════════
           6. CONTENT AT SCALE — dark card
@@ -545,10 +609,10 @@ export default function AIContentPage() {
           {/* Use Case Carousel */}
           <div className="mt-[100px]">
             <UseCaseCarousel items={[
-              { title: "Vesta Global", video: "/videos/contentgenerationusecases1.mp4", tags: ["Campaign Visuals", "Brand Identity"] },
-              { title: "Bizim Mutfak", video: "/videos/ai-content-video-first.mp4", tags: ["Social Media", "Content Variations"] },
-              { title: "Realkom", video: "/videos/contentgenerationusecases3.mp4", tags: ["Short-form Content", "Prompt Crafting"] },
-              { title: "Brother", video: "/videos/contentgenerationusecases4.mp4", tags: ["Editorial Visuals", "Brand Campaigns"] },
+              { title: "Vesta Global", video: "4efeb3daa0597c05c31d144beccea3f8", tags: ["Campaign Visuals", "Brand Identity"] },
+              { title: "Bizim Mutfak", video: "cec8f6e44f63bb833b4b9b71452d48cb", tags: ["Social Media", "Content Variations"] },
+              { title: "Realkom", video: "f9b719e86584fee5e05197a5e4c5e840", tags: ["Short-form Content", "Prompt Crafting"] },
+              { title: "Brother", video: "c6727f63163d214df0ef35997644d8d2", tags: ["Editorial Visuals", "Brand Campaigns"] },
             ]} />
           </div>
 
@@ -593,7 +657,7 @@ export default function AIContentPage() {
       {/* ════════════════════════════════════════════════════════
           9. PARTNERS
           ════════════════════════════════════════════════════════ */}
-   <PartnersSection />
+      <PartnersSection />
 
       {/* ════════════════════════════════════════════════════════
           10. FAQ
@@ -603,7 +667,7 @@ export default function AIContentPage() {
       {/* ════════════════════════════════════════════════════════
           11. CTA
           ════════════════════════════════════════════════════════ */}
-     <section className="bg-light-bg py-24">
+      <section className="bg-light-bg py-24">
         <div
           className="mx-[60px] flex items-center justify-between rounded-[20px] px-[60px] py-[60px]"
           style={{ background: "linear-gradient(-90deg, #002834 0%, #129CAC 100%)" }}

@@ -937,10 +937,10 @@ export default function AIInfluencerPage() {
 
           {/* Embla auto-scroll carousel — component */}
           <UseCaseCarousel items={[
-            { title: "Vesta Global", video: "/videos/contentgenerationusecases1.mp4", tags: ["Visual Style Definition", "AI Model Selection & Optimization", "Use-Case Development", "Prompt Crafting"] },
-            { title: "Nadlan Star", video: "/videos/influcener11.mp4", tags: ["Use-Case Development", "Prompt Crafting"] },
-            { title: "Vesta Global", video: "/videos/influcener22.mp4", tags: ["Use-Case Development", "Prompt Crafting"] },
-            { title: "Nadlan Star", video: "/videos/influcener33.mp4", tags: ["Visual Style Definition", "Prompt Crafting"] },
+            { title: "Vesta Global", video: "https://customer-avhhoygwtxxdpkyp.cloudflarestream.com/4efeb3daa0597c05c31d144beccea3f8/watch", tags: ["Visual Style Definition", "AI Model Selection & Optimization", "Use-Case Development", "Prompt Crafting"] },
+            { title: "Nadlan Star", video: "https://customer-avhhoygwtxxdpkyp.cloudflarestream.com/f87ff43c16d018cdafd6c1ce68423c67/watch", tags: ["Use-Case Development", "Prompt Crafting"] },
+            { title: "Vesta Global", video: "https://customer-avhhoygwtxxdpkyp.cloudflarestream.com/8a161380969c7a822ca6075723101fdb/watch", tags: ["Use-Case Development", "Prompt Crafting"] },
+            { title: "Nadlan Star", video: "https://customer-avhhoygwtxxdpkyp.cloudflarestream.com/557784e65cd48dfcc66ec4545dd50b2a/watch", tags: ["Visual Style Definition", "Prompt Crafting"] },
           ]} />
 
         </div>

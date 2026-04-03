@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { Stream } from "@cloudflare/stream-react";
 import { useState, useEffect } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import AutoPlay from "embla-carousel-autoplay";
@@ -65,16 +66,17 @@ const methodSteps = [
 const generateItems = [
   {
     title: "Brand and campaign films",
-    image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/35a5d56e-da6e-42ce-4072-9b24938c1a00/public",
+    vedio: "67280354826bc7e849dcf374cb99c759"
   },
   {
     title: "Digital commercials",
-    image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/ce65649d-7f6d-4497-8d8a-697ee865d800/public",
-  },
+    vedio: "1944567a71eb965b43587e4827fe4d72"  },
   {
     title: "Product and launch videos",
-    image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/0156ebdc-189b-4bce-808d-49f28c020200/public",
-  },
+    vedio: "b2816aa7fba4ac757f3034e886c69cc0"  },
+    {
+    title: "Hero videos for integrated campaigns",
+    vedio: "24de38b44fb5a937655b4bb88d5feb37"  },
 ];
 
 const useCaseCards = [
@@ -109,7 +111,7 @@ export default function AICommercialPage() {
   const [cmsFaqLeft, setCmsFaqLeft] = useState(faqLeft);
   const [cmsFaqRight, setCmsFaqRight] = useState(faqRight);
 
-   const [emblaRef] = useEmblaCarousel({ loop: true, dragFree: true }, [
+  const [emblaRef] = useEmblaCarousel({ loop: true, dragFree: true }, [
     AutoPlay({ delay: 3000, stopOnInteraction: false, stopOnMouseEnter: true }),
   ]);
 
@@ -124,7 +126,7 @@ export default function AICommercialPage() {
           setCmsFaqRight(res.data.slice(mid).map((f: Faq) => f.question));
         }
       })
-      .catch(() => {});
+      .catch(() => { });
   }, []);
 
   return (
@@ -147,12 +149,12 @@ export default function AICommercialPage() {
         </div>
 
         {/* Marquee heading */}
-        
 
-         <div className="overflow-hidden whitespace-nowrap mt-[-70px]">
+
+        <div className="overflow-hidden whitespace-nowrap mt-[-70px]">
           <div className="flex animate-marquee">
             <h1 className="text-[140px] text-white whitespace-nowrap">
-               AI COMMERCIAL PRODUCTION
+              AI COMMERCIAL PRODUCTION
             </h1>
           </div>
         </div>
@@ -160,19 +162,19 @@ export default function AICommercialPage() {
         {/* Subtitle + CTAs */}
         <div className="relative z-10 mt-10 px-[60px]">
           <h2 className="max-w-lg font-heading text-[28px] font-medium leading-[1.2] text-white">
-           A New Approach To
-            <br /> 
+            A New Approach To
+            <br />
             Commercial Production.
           </h2>
           <p
             className="mt-4 max-w-lg text-[18px] leading-[1.6] text-white/70"
             style={{ fontFamily: "var(--font-body)" }}
           >
-           AI supports production while creativity leads every decision.
+            AI supports production while creativity leads every decision.
           </p>
 
           {/* Down arrow + CTA */}
-           <div className="mt-[60px] flex items-start flex-col gap-4">
+          <div className="mt-[60px] flex items-start flex-col gap-4">
             <div className="flex items-center justify-center">
               <svg width="99" height="122" viewBox="0 0 99 122" fill="none" className="h-[90px] w-auto" aria-label="Scroll down">
                 <g clipPath="url(#arrow-clip)">
@@ -190,7 +192,7 @@ export default function AICommercialPage() {
             </Link>
           </div>
 
-          
+
         </div>
 
         {/* [SCROLL] text */}
@@ -202,7 +204,7 @@ export default function AICommercialPage() {
       {/* ════════════════════════════════════════════════════════
           2. PARTNERS ROW
           ════════════════════════════════════════════════════════ */}
-     <HeroPartnersSection />
+      <HeroPartnersSection />
 
       {/* ════════════════════════════════════════════════════════
           3. WHAT AI COMMERCIAL PRODUCTION MEANS AT DDIP.AI
@@ -240,46 +242,46 @@ export default function AICommercialPage() {
             <div className="flex flex-col gap-3 w-[50%]">
               {/* Row 1 — 3 images, small */}
               <div className="flex gap-1.5 ml-[80px] justify-end">
-                
-                  <div className="relative h-[70px] w-[400px] overflow-hidden rounded-[6px] bg-[#D9D9D9]">
-                    <Image src={`https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/04f4cb07-ecde-4e20-c763-0cb3838ead00/public`} alt="" fill className="object-cover" sizes="120px" />
-                  </div>
-              
+
+                <div className="relative h-[70px] w-[400px] overflow-hidden rounded-[6px] bg-[#D9D9D9]">
+                  <Image src={`https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/04f4cb07-ecde-4e20-c763-0cb3838ead00/public`} alt="" fill className="object-cover" sizes="120px" />
+                </div>
+
               </div>
               {/* Row 2 — 4 images with thumb */}
               <div className="flex gap-1.5 items-center ml-[40px] justify-start relative left-[-100px]">
                 <div className="relative h-[70px] w-[300px] overflow-hidden rounded-[6px] bg-[#D9D9D9]">
                   <Image src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/c8c8cf4a-7c43-4965-3eb9-273d07e05800/public" alt="" fill className="object-cover" sizes="70px" />
                 </div>
-              
-                  <div  className="relative h-[70px] w-[300px] overflow-hidden rounded-[6px] bg-[#D9D9D9]">
-                    <Image src={`https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/ce155513-8c81-4907-0bf1-63fa581de400/public`} alt="" fill className="object-cover" sizes="100px" />
-                  </div>
-            
+
+                <div className="relative h-[70px] w-[300px] overflow-hidden rounded-[6px] bg-[#D9D9D9]">
+                  <Image src={`https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/ce155513-8c81-4907-0bf1-63fa581de400/public`} alt="" fill className="object-cover" sizes="100px" />
+                </div>
+
               </div>
               {/* Row 3 — 5 images */}
               <div className="flex gap-1.5 justify-start">
-                
-                  <div className="relative h-[70px] w-[400px] overflow-hidden rounded-[6px] bg-[#D9D9D9]">
-                    <Image src={`https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/d1d5fb05-4289-4080-54f1-18fbdfdece00/public`} alt="" fill className="object-cover" sizes="100px" />
-                  </div>
-               
+
+                <div className="relative h-[70px] w-[400px] overflow-hidden rounded-[6px] bg-[#D9D9D9]">
+                  <Image src={`https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/d1d5fb05-4289-4080-54f1-18fbdfdece00/public`} alt="" fill className="object-cover" sizes="100px" />
+                </div>
+
               </div>
               {/* Row 4 — 6 images, dark strip */}
               <div className="flex gap-1 rounded-[8px] overflow-hidden bg-[#1a1a1a] p-1.5">
-             
-                  <div className="relative h-[70px] flex-1 overflow-hidden rounded-[4px] bg-[#333]">
-                    <Image src={`https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/c8c8cf4a-7c43-4965-3eb9-273d07e05800/public`} alt="" fill className="object-cover" sizes="80px" />
-                  </div>
-               
+
+                <div className="relative h-[70px] flex-1 overflow-hidden rounded-[4px] bg-[#333]">
+                  <Image src={`https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/c8c8cf4a-7c43-4965-3eb9-273d07e05800/public`} alt="" fill className="object-cover" sizes="80px" />
+                </div>
+
               </div>
               {/* Row 5 — 7 images, dark strip */}
               <div className="flex gap-1 rounded-[8px] overflow-hidden bg-[#1a1a1a] p-1.5 relative left-[-80px]">
-               
-                  <div className="relative h-[70px] flex-1 overflow-hidden rounded-[4px] bg-[#333]">
-                    <Image src={`https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/81574077-c99c-413c-6012-8e10bf34f000/public`} alt="" fill className="object-cover" sizes="80px" />
-                  </div>
-               
+
+                <div className="relative h-[70px] flex-1 overflow-hidden rounded-[4px] bg-[#333]">
+                  <Image src={`https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/81574077-c99c-413c-6012-8e10bf34f000/public`} alt="" fill className="object-cover" sizes="80px" />
+                </div>
+
               </div>
             </div>
 
@@ -292,9 +294,14 @@ export default function AICommercialPage() {
               {/* Video with dashed border */}
               <div className="relative">
                 <div className="overflow-hidden rounded-[12px]" style={{ border: "1.5px dashed #063746/40" }}>
-                  <video autoPlay muted loop playsInline className="w-full h-[280px] object-cover rounded-[12px]">
-                    <source src="/videos/work1.mp4" type="video/mp4" />
-                  </video>
+                  <Stream
+                    src="674ae5c4363ac80438bcfe52196530f7"
+                    controls={false}
+                    autoplay
+                    muted
+                    loop
+                    className="w-full h-[280px] object-cover rounded-[12px]"
+                  />
                 </div>
                 {/* Label badge */}
                 <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-2 rounded-full bg-[#063746] px-4 py-1.5">
@@ -317,7 +324,7 @@ export default function AICommercialPage() {
 
 
 
-   {/* ════════════════════════════════════════════════════════
+      {/* ════════════════════════════════════════════════════════
           4. WHAT WE GENERATE
           ════════════════════════════════════════════════════════ */}
       <section className="bg-light-bg py-24">
@@ -339,14 +346,23 @@ export default function AICommercialPage() {
             <div className="flex gap-6">
               {[...generateItems, ...generateItems].map((item, i) => (
                 <div key={i} className="shrink-0 w-[320px]">
-                  <div className="relative aspect-[4/3] overflow-hidden rounded-[16px] bg-[#D9D9D9]">
-                    <Image
-                      src={item.image}
+                  <div className="relative h-[500px] overflow-hidden rounded-[16px] bg-[#D9D9D9]">
+                    {/* <Image
+                      src={item.vedio}
                       alt={item.title}
                       fill
                       className="object-cover"
                       sizes="320px"
+                    /> */}
+                    <Stream
+                      src={item.vedio}
+                      controls={false}
+                      autoplay
+                      muted
+                      loop
+                      className="object-cover w-full"
                     />
+
                   </div>
                   <p className="mt-4 text-[16px] text-[#063746]" style={{ fontFamily: "var(--font-body)" }}>
                     {item.title}
@@ -371,7 +387,7 @@ export default function AICommercialPage() {
       {/* ════════════════════════════════════════════════════════
           4. OUR 4D METHOD
           ════════════════════════════════════════════════════════ */}
-     <FourDMethodSection />
+      <FourDMethodSection />
 
 
       {/* ════════════════════════════════════════════════════════
@@ -389,7 +405,7 @@ export default function AICommercialPage() {
           { icon: "/images/ai-commercial/icon-01.svg", label: "Faster pre-production and visualization" },
           { icon: "/images/ai-commercial/icon-02.svg", label: "Greater flexibility in creative exploration" },
           { icon: "/images/ai-commercial/icon-03.svg", label: "Easier adaptation across formats and markets" },
-           { icon: "/images/ai-commercial/icon-03.svg", label: "More room for bold ideas with lower production risk" },
+          { icon: "/images/ai-commercial/icon-03.svg", label: "More room for bold ideas with lower production risk" },
         ]}
       />
 
@@ -409,38 +425,38 @@ export default function AICommercialPage() {
             delivers cinematic results across every format.
           </p>
 
-          
 
-           <div className="mt-12 flex gap-4">
-                      {[
-                        { icon: "/images/ai-content/icon-05.svg", label: "Brand campaigns and product launches" },
-                        { icon: "/images/ai-content/icon-06.svg", label: "Social media content ecosystems" },
-                        { icon: "/images/ai-content/icon-07.svg", label: "Editorial and blog visuals" },
-                        { icon: "/images/ai-content/icon-08.svg", label: "Event and announcement assets" },
-                        { icon: "/images/ai-content/icon-09.svg", label: "E-commerce and catalog visuals" },
-                      ].map((item, i) => (
-                        <div key={i} className="flex flex-1 items-start gap-3 rounded-[12px] px-4 py-4"
-                          style={{ background: "#002834", backdropFilter: "blur(45.31px)" }}>
-                          <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-[8px] bg-white/10">
-                            <Image src={item.icon} alt={item.label} width={18} height={18} />
-                          </div>
-                          <span className="text-[12px] leading-[1.5]"
-                            style={{ fontFamily: "Bricolage Grotesque", color: "#FFFFFF" }}>
-                            {item.label}
-                          </span>
-                        </div>
-                      ))}
-                    </div>
- <p className="mt-10 text-center text-[20px] font-medium"
+
+          <div className="mt-12 flex gap-4">
+            {[
+              { icon: "/images/ai-content/icon-05.svg", label: "Brand campaigns and product launches" },
+              { icon: "/images/ai-content/icon-06.svg", label: "Social media content ecosystems" },
+              { icon: "/images/ai-content/icon-07.svg", label: "Editorial and blog visuals" },
+              { icon: "/images/ai-content/icon-08.svg", label: "Event and announcement assets" },
+              { icon: "/images/ai-content/icon-09.svg", label: "E-commerce and catalog visuals" },
+            ].map((item, i) => (
+              <div key={i} className="flex flex-1 items-start gap-3 rounded-[12px] px-4 py-4"
+                style={{ background: "#002834", backdropFilter: "blur(45.31px)" }}>
+                <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-[8px] bg-white/10">
+                  <Image src={item.icon} alt={item.label} width={18} height={18} />
+                </div>
+                <span className="text-[12px] leading-[1.5]"
+                  style={{ fontFamily: "Bricolage Grotesque", color: "#FFFFFF" }}>
+                  {item.label}
+                </span>
+              </div>
+            ))}
+          </div>
+          <p className="mt-10 text-center text-[20px] font-medium"
             style={{ fontFamily: "SF Pro Display", color: "#063746" }}>
             At DDIP.AI, each project starts with a story.
           </p>
- <div className="mt-[100px]">
+          <div className="mt-[100px]">
             <UseCaseCarousel items={[
-              { title: "Vesta Global", video: "/videos/contentgenerationusecases4.mp4", tags: ["Campaign Visuals", "Brand Identity"] },
-              { title: "Bizim Mutfak", video: "/videos/comericialvideos11.mp4", tags: ["Social Media", "Content Variations"] },
-              { title: "Realkom", video: "/videos/ai-content-video-first.mp4", tags: ["Short-form Content", "Prompt Crafting"] },
-              { title: "Brother", video: "/videos/contentgenerationusecases3.mp4", tags: ["Editorial Visuals", "Brand Campaigns"] },
+              { title: "Vesta Global", video: "c6727f63163d214df0ef35997644d8d2", tags: ["Campaign Visuals", "Brand Identity"] },
+              { title: "Bizim Mutfak", video: "df994cb7f01eed564047b8323e82eb47", tags: ["Social Media", "Content Variations"] },
+              { title: "Realkom", video: "cec8f6e44f63bb833b4b9b71452d48cb", tags: ["Short-form Content", "Prompt Crafting"] },
+              { title: "Brother", video: "f9b719e86584fee5e05197a5e4c5e840", tags: ["Editorial Visuals", "Brand Campaigns"] },
             ]} />
           </div>
         </div>
@@ -449,10 +465,10 @@ export default function AICommercialPage() {
       {/* ════════════════════════════════════════════════════════
           6. OUR TOOL ECOSYSTEM
           ════════════════════════════════════════════════════════ */}
-   
 
 
- <section className="bg-light-bg py-10">
+
+      <section className="bg-light-bg py-10">
         <div className="">
           <h2 className="text-center font-heading text-[36px] font-bold leading-[1.1] text-[#126478]">
             Our Tool Ecosystem
@@ -461,8 +477,8 @@ export default function AICommercialPage() {
             className="mx-auto mt-4 max-w-2xl text-center text-[14px] leading-[1.6] text-[#063746]"
             style={{ fontFamily: "var(--font-body)" }}
           >
-          Our ecosystem is built around selecting the right AI tools for each creative challenge.
-The real value comes from how these tools are orchestrated to support storytelling and visual quality.
+            Our ecosystem is built around selecting the right AI tools for each creative challenge.
+            The real value comes from how these tools are orchestrated to support storytelling and visual quality.
           </p>
 
         </div>
@@ -473,7 +489,7 @@ The real value comes from how these tools are orchestrated to support storytelli
       {/* ════════════════════════════════════════════════════════
           7. PARTNERS
           ════════════════════════════════════════════════════════ */}
-    <PartnersSection />
+      <PartnersSection />
 
       {/* ════════════════════════════════════════════════════════
           8. FAQ — Dark rounded card
@@ -483,7 +499,7 @@ The real value comes from how these tools are orchestrated to support storytelli
       {/* ════════════════════════════════════════════════════════
           9. CTA
           ════════════════════════════════════════════════════════ */}
-          <section className="bg-light-bg py-24">
+      <section className="bg-light-bg py-24">
         <div
           className="mx-[60px] flex items-center justify-between rounded-[20px] px-[60px] py-[60px]"
           style={{ background: "linear-gradient(-90deg, #002834 0%, #129CAC 100%)" }}

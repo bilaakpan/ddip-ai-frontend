@@ -155,28 +155,26 @@ export default function InsightsPage() {
       {/* ════════════════════════════════════════════════════════
           HERO — Dark bg with marquee-style heading
           ════════════════════════════════════════════════════════ */}
-      <section className="overflow-hidden bg-[#F6F9F2] pt-20 sm:pt-24 md:pt-35 pb-8 sm:pb-10 md:pb-12">
-        <Container>
-          {/* Marquee heading */}
-          <div className="overflow-hidden w-full">
-            <div className="flex w-max animate-marquee">
-              <h1 className="whitespace-nowrap text-[#063746] font-heading text-[clamp(32px,6vw,64px)] sm:text-[clamp(36px,7vw,80px)] md:text-[clamp(48px,8vw,120px)] uppercase leading-[1.05]">
-                INSIGHTS{" "}
-                <span className="mx-4 text-teal-500">✻</span>
-              </h1>
-              {/* duplicate for seamless scroll */}
-              <h1 className="whitespace-nowrap text-[#063746] font-heading text-[clamp(32px,6vw,64px)] sm:text-[clamp(36px,7vw,80px)] md:text-[clamp(48px,8vw,120px)] uppercase leading-[1.05] ml-10">
-                INSIGHTS{" "} <span className="mx-4 text-teal-500">✻</span>
-                INSIGHTS{" "} <span className="mx-4 text-teal-500">✻</span>
-              </h1>
-            </div>
+
+
+      <section className="overflow-hidden bg-[#F6F9F2] mt-30">
+        <div className="w-full overflow-hidden">
+          <div className="flex w-max animate-marquee">
+            <h1 className="flex items-center whitespace-nowrap font-heading uppercase leading-none text-[#145365] text-[clamp(64px,6vw,64px)] sm:text-[clamp(36px,7vw,80px)] md:text-[clamp(48px,8vw,120px)]">
+              INSIGHTS{" "}
+              <img src="/images/common/star.svg" alt="*" className="mx-10 h-18 w-18 relative top-[0.08em]" />
+            </h1>
+            <h1 className="ml-10 flex items-center whitespace-nowrap font-heading uppercase leading-none text-[#145365] text-[clamp(64px,6vw,64px)] sm:text-[clamp(36px,7vw,80px)] md:text-[clamp(48px,8vw,120px)]">
+              INSIGHTS{" "}
+              <img src="/images/common/star.svg" alt="*" className="mx-10 w-18 h-18 relative top-[0.08em]" />
+              INSIGHTS{" "}
+              <img src="/images/common/star.svg" alt="*" className="mx-10 w-18 h-18 relative top-[0.08em]" />
+            </h1>
           </div>
-          <p className="mt-6 sm:mt-8 max-w-xs sm:max-w-md md:max-w-2xl text-left text-base sm:text-lg md:text-xl leading-[1.6] text-[#063746] px-4">
-            Creative ideas, practical tips and insider info—the Ddip.ai blog
-            helps your team get great design done at scale.
-          </p>
-        </Container>
+        </div>
       </section>
+
+
       {/* ════════════════════════════════════════════════════════
           CATEGORY FILTERS + ARTICLE GRID — Light background
           ════════════════════════════════════════════════════════ */}

@@ -11,6 +11,7 @@ import Autoplay from "embla-carousel-autoplay";
 import FaqSection from "@/components/desktop/FaqSection";
 import PartnersSection from "@/components/desktop/PartnersSection";
 import { PopupInfluencer, InfluencerPopupModal } from "@/components/desktop/influencer-popUp";
+import { Stream } from "@cloudflare/stream-react";
 
 /* ─── Data ─── */
 
@@ -41,7 +42,7 @@ const aiSolutions = [
   {
     title: "AI Content Generation",
     href: "/ai-solutions/ai-content",
-    media: "/videos/ai1.mp4",
+    media: "4aca9b4110ceac3eb1d3bd087deb763e",
     mediaType: "video" as const,
     description:
       "Design meets intelligence as we use specialized AI tools to transform moodboards into refined, design-driven campaigns.",
@@ -59,7 +60,7 @@ const aiSolutions = [
   {
     title: "Automation with a Creative Touch",
     href: "/ai-solutions",
-    media: "/videos/IntroducingaIworkflow.mp4",
+    media: "bdb805b635f8e3a865a3157336836136",
     mediaType: "video" as const,
     description:
       "We design intelligent workflows that eliminate repetitive tasks, allowing your teams to focus on what truly drives value, creativity and strategy.",
@@ -81,28 +82,28 @@ const selectedWork = [
     title: "Vesta Global",
     subtitle: "AI-powered real estate branding and visual identity",
     category: "Real Estate",
-    video: "/videos/work1.mp4",
+    video: "52d4f5fdd1335b2fbaba2f41798273f1",
     tags: ["Visual Style Definition", "AI Model Selection & Optimization", "Use-Case Development", "Prompt Crafting"],
   },
   {
     title: "Cesi Design",
     subtitle: "Interior design showcase with AI-generated visuals",
     category: "Interior Design",
-    video: "/videos/work2.mp4",
+    video: "90b6c18df1bb19d1117f6d29f6859036",
     tags: ["Enhanced Storytelling", "High-Impact Brand Moment", "Dynamic Interior Visuals"],
   },
   {
     title: "Mediterra Group",
     subtitle: "Premium real estate marketing with creative AI",
     category: "Real Estate",
-    video: "/videos/work3.mp4",
+    video: "8ffbc4055a9b0210350a2748fcbb8ce4",
     tags: ["Refined Visual Storytelling", "Consistent Brand Identity", "Impactful Presentation Experience"],
   },
   {
     title: "Brother",
     subtitle: "Product campaign powered by AI production",
     category: "Printer Solutions",
-    video: "/videos/work4.mp4",
+    video: "2f4c298d7224c5140c18bc3c0f6faf22",
     tags: ["Creative AI Integration", "Custom Character Creation", "Enhanced Campaign Impact"],
   },
 ];
@@ -360,18 +361,20 @@ export default function HomePage() {
           </div>
 
           {/* Bottom bar */}
-          <div className="flex items-end justify-between" style={{ position: "relative", top: "-190px", paddingLeft: "80px", paddingRight: '40px' }}>
+          <div className="flex items-end justify-between" style={{ position: "relative", top: "-190px" }}>
             <div className="flex flex-col gap-4">
-              <svg width="99" height="122" viewBox="0 0 99 122" fill="none" className="h-[90px] w-auto" aria-label="Scroll down">
-                <g clipPath="url(#arrow-clip)">
-                  <path d="M56.9199 0L56.9199 95.9621L89.1853 66.0555L98.7897 75.9435L98.9811 76.9205L49.6919 122L0 76.9205L0.198028 75.9435L9.61097 66.2194L42.0612 95.9621L42.0612 0L56.9199 0Z" fill="white" />
-                </g>
-                <defs>
-                  <clipPath id="arrow-clip">
-                    <rect width="98.9811" height="122" fill="white" />
-                  </clipPath>
-                </defs>
-              </svg>
+              <div className="flex items-start gap-2 text-white">
+                <svg width="99" height="122" viewBox="0 0 99 122" fill="none" className="h-[90px] w-auto" aria-label="Scroll down">
+                  <g clipPath="url(#arrow-clip)">
+                    <path d="M56.9199 0L56.9199 95.9621L89.1853 66.0555L98.7897 75.9435L98.9811 76.9205L49.6919 122L0 76.9205L0.198028 75.9435L9.61097 66.2194L42.0612 95.9621L42.0612 0L56.9199 0Z" fill="white" />
+                  </g>
+                  <defs>
+                    <clipPath id="arrow-clip">
+                      <rect width="98.9811" height="122" fill="white" />
+                    </clipPath>
+                  </defs>
+                </svg>
+              </div>
               <a
                 href="#discover"
                 className="text-white underline decoration-white/40 underline-offset-8 transition-colors hover:decoration-teal-500"
@@ -433,9 +436,14 @@ export default function HomePage() {
           ════════════════════════════════════════════════════════ */}
       <section className="bg-light-bg py-24 lg:py-32">
         <div className="mx-auto mb-16 w-[1182px] max-w-full overflow-hidden" style={{ aspectRatio: "1182/525" }}>
-          <video autoPlay muted loop playsInline className="h-full w-full object-cover">
-            <source src="/videos/statement-video.mp4" type="video/mp4" />
-          </video>
+          <Stream
+            src="9e3a0d22828697a21a65a4ea035f5c3d"
+            controls={false}
+            autoplay
+            muted
+            loop
+            className="h-full w-full object-cover"
+          />
         </div>
 
         <div className="px-[60px]">
@@ -456,9 +464,16 @@ export default function HomePage() {
             WE DESIGN{" "}
             <span className="relative inline-block align-middle">
               <span className="inline-flex h-[0.88em] w-[1.52em] items-center justify-center overflow-hidden rounded-lg">
-                <video autoPlay muted loop playsInline className="h-full w-full object-cover">
-                  <source src="/videos/statement-video.mp4" type="video/mp4" />
-                </video>
+         
+                <Stream
+                  src="9e3a0d22828697a21a65a4ea035f5c3d"
+                  controls={false}
+                  autoplay
+                  muted
+                  loop
+                  className="h-full w-full object-cover"
+
+                />
               </span>
             </span>{" "}
             WITH IT.
@@ -526,15 +541,15 @@ export default function HomePage() {
                 {/* Media area */}
                 <div className="relative aspect-[974/536] overflow-hidden rounded-[17px] mx-[50px] mt-[50px]">
                   {solution.mediaType === "video" ? (
-                    <video
-                      autoPlay
+                 
+                    <Stream
+                      src={solution.media}
+                      controls={false}
+                      autoplay
                       muted
                       loop
-                      playsInline
                       className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    >
-                      <source src={solution.media} type="video/mp4"  />
-                    </video>
+                    />
                   ) : (
                     <img
                       src={solution.media}
@@ -643,15 +658,16 @@ export default function HomePage() {
               <Link key={item.title} href="/works" className="group">
                 {/* Video */}
                 <div className="relative aspect-[792/700] overflow-hidden bg-[#D9D9D9]">
-                  <video
-                    autoPlay
+            
+                  <Stream
+                    src={item.video}
+                    controls={false}
+                    autoplay
                     muted
                     loop
-                    playsInline
                     className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  >
-                    <source src={item.video} type="video/mp4" />
-                  </video>
+
+                  />
                   {/* Bottom shadow gradient */}
                   <div className="absolute bottom-0 left-0 right-0 h-[200px] bg-gradient-to-t from-black/40 to-transparent" />
                   {/* Overlay tag pills — positioned inside image */}
@@ -721,15 +737,16 @@ export default function HomePage() {
         {/* Full-width video (1920x1091 in Figma) */}
         <div className="mt-16 w-full overflow-hidden">
           <div className="aspect-[1920/1091]">
-            <video
-              autoPlay
+            
+            <Stream
+              src="665822d5062aae2129504c3a2b474494"
+              controls={false}
+              autoplay
               muted
               loop
-              playsInline
               className="h-full w-full object-cover"
-            >
-              <source src="/videos/main-slider.mp4" type="video/mp4" />
-            </video>
+
+            />
           </div>
         </div>
 
@@ -973,9 +990,15 @@ export default function HomePage() {
 
           {/* Workflow image */}
           <div className="mt-12 aspect-[1608/905] overflow-hidden">
-            <video autoPlay muted loop playsInline className="h-full w-full object-cover">
-              <source src="/videos/IntroducingaIworkflow.mp4" type="video/mp4" />
-            </video>
+           
+            <Stream
+              src="bdb805b635f8e3a865a3157336836136"
+              controls={false}
+              autoplay
+              muted
+              loop
+          className="h-full w-full object-cover"
+            />
           </div>
 
           {/* Sub-section: Systems designed to move ideas faster */}

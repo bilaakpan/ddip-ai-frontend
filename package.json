@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@cloudflare/stream-react": "^1.9.3",
     "@hookform/resolvers": "^5.2.2",
     "clsx": "^2.1.1",
     "embla-carousel-autoplay": "^8.6.0",

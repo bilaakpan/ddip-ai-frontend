@@ -25,7 +25,7 @@ export default function FaqSection({
         {/* Title */}
         <div className="px-[59px] pt-[85px]">
           <h2 className="font-heading text-[80px] font-medium uppercase leading-[0.99] text-[#EBFFFF]">
-            <span className="text-[#1CE3F4]">F</span>AQ
+            <span>F</span>AQ
           </h2>
         </div>
 

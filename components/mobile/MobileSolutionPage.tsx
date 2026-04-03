@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { cmsApi, type Faq } from "@/lib/api";
-
+import { Stream } from "@cloudflare/stream-react";
 interface UseCase {
   title: string;
   description: string;
@@ -106,7 +106,7 @@ export default function MobileSolutionPage({
           );
         }
       })
-      .catch(() => {});
+      .catch(() => { });
   }, [pageSlug]);
 
   return (
@@ -115,15 +115,14 @@ export default function MobileSolutionPage({
       <section className="relative min-h-[60vh] overflow-hidden bg-dark-bg">
         <div className="absolute inset-0 z-0">
           {heroVideo ? (
-            <video
-              autoPlay
+            <Stream
+            src={heroVideo}
+              controls={false}
+              autoplay
               muted
               loop
-              playsInline
               className="h-full w-full object-cover"
-            >
-              <source src={heroVideo} type="video/mp4" />
-            </video>
+            />
           ) : heroImage ? (
             <Image
               src={heroImage}
@@ -328,17 +327,15 @@ export default function MobileSolutionPage({
                     {faq.question}
                   </span>
                   <span
-                    className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-white/20 text-[16px] text-white transition-transform duration-200 ${
-                      openFaq === i ? "rotate-45" : ""
-                    }`}
+                    className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-white/20 text-[16px] text-white transition-transform duration-200 ${openFaq === i ? "rotate-45" : ""
+                      }`}
                   >
                     +
                   </span>
                 </button>
                 <div
-                  className={`overflow-hidden transition-all duration-300 ${
-                    openFaq === i ? "max-h-[300px] pb-4" : "max-h-0"
-                  }`}
+                  className={`overflow-hidden transition-all duration-300 ${openFaq === i ? "max-h-[300px] pb-4" : "max-h-0"
+                    }`}
                 >
                   <p className="text-[13px] leading-[1.5] text-[#90B2BD]">
                     {faq.answer}

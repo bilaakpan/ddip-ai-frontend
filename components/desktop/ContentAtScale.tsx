@@ -35,7 +35,7 @@ export default function ContentAtScale({
           style={{ background: "rgba(0,0,0,1)", backdropFilter: "blur(238.3px)" }}>
 
           {/* BG image */}
-          <Image src={bgImage} alt="bg" fill className={`object-cover ${bgOpacity}`} sizes="100vw" />
+          <Image src={bgImage} alt="bg" fill  sizes="100vw" />
 
           {/* Left */}
           <div className="relative z-10 w-[45%]">

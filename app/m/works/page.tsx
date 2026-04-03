@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useState, useEffect, useMemo } from "react";
 import { cmsApi, type Work } from "@/lib/api";
-
+import { Stream } from "@cloudflare/stream-react";
 /* ── Component ────────────────────────────────────────── */
 
 export default function MobileWorksPage() {
@@ -17,7 +17,7 @@ export default function MobileWorksPage() {
       .then((res) => {
         if (res.data?.length) setWorks(res.data);
       })
-      .catch(() => {})
+      .catch(() => { })
       .finally(() => setLoading(false));
   }, []);
 
@@ -59,11 +59,10 @@ export default function MobileWorksPage() {
             <button
               key={filter}
               onClick={() => setActiveFilter(filter)}
-              className={`rounded-full border px-5 py-2 font-heading text-[13px] font-medium transition-all duration-300 ${
-                activeFilter === filter
-                  ? "border-teal-500 bg-teal-500 text-[#002834]"
-                  : "border-light-text/20 bg-transparent text-light-text/70"
-              }`}
+              className={`rounded-full border px-5 py-2 font-heading text-[13px] font-medium transition-all duration-300 ${activeFilter === filter
+                ? "border-teal-500 bg-teal-500 text-[#002834]"
+                : "border-light-text/20 bg-transparent text-light-text/70"
+                }`}
             >
               {filter}
             </button>
@@ -96,15 +95,15 @@ export default function MobileWorksPage() {
                 {/* Media card */}
                 <div className="relative aspect-[4/3] overflow-hidden rounded-[14px]">
                   {work.mediaType === "video" && work.mediaUrl ? (
-                    <video
-                      autoPlay
+                    <Stream
+                      src={work.mediaUrl}
+                      controls={false}
+                      autoplay
                       muted
                       loop
-                      playsInline
                       className="absolute inset-0 h-full w-full object-cover"
-                    >
-                      <source src={work.mediaUrl} type="video/mp4" />
-                    </video>
+                    />
+
                   ) : work.mediaUrl ? (
                     <img
                       src={work.mediaUrl}

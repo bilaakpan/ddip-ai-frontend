@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { cmsApi, type AiSolution, type Work, type Influencer, type Faq } from "@/lib/api";
-
+import { Stream } from "@cloudflare/stream-react";
 /* ─── Fallback Data ─── */
 
 const capabilities = [
@@ -152,7 +152,7 @@ export default function MobileHomePage() {
           }))
         );
       }
-    }).catch(() => {});
+    }).catch(() => { });
 
     cmsApi.works(true).then((res) => {
       if (res.data?.length) {
@@ -165,7 +165,7 @@ export default function MobileHomePage() {
           }))
         );
       }
-    }).catch(() => {});
+    }).catch(() => { });
 
     cmsApi.influencers({ homepage: true }).then((res) => {
       if (res.data?.length) {
@@ -180,7 +180,7 @@ export default function MobileHomePage() {
           }))
         );
       }
-    }).catch(() => {});
+    }).catch(() => { });
 
     cmsApi.faqs("main").then((res) => {
       if (res.data?.length) {
@@ -188,7 +188,7 @@ export default function MobileHomePage() {
           res.data.map((f: Faq) => ({ question: f.question, answer: f.answer }))
         );
       }
-    }).catch(() => {});
+    }).catch(() => { });
   }, []);
 
   return (
@@ -269,15 +269,14 @@ export default function MobileHomePage() {
 
         {/* Video / Image */}
         <div className="mt-8 overflow-hidden rounded-[14px]">
-          <video
-            autoPlay
+          <Stream
+            src="9e3a0d22828697a21a65a4ea035f5c3d"
+            controls={false}
+            autoplay
             muted
             loop
-            playsInline
             className="h-auto w-full"
-          >
-            <source src="/videos/statement-video.mp4" type="video/mp4" />
-          </video>
+          />
         </div>
 
         <p className="mt-6 text-[15px] leading-[1.6] text-light-body">
@@ -337,15 +336,14 @@ export default function MobileHomePage() {
                 {/* Media */}
                 <div className="relative aspect-[4/3] overflow-hidden">
                   {solution.mediaType === "video" ? (
-                    <video
-                      autoPlay
+                    <Stream
+                      src={solution.media}
+                      controls={false}
+                      autoplay
                       muted
                       loop
-                      playsInline
                       className="h-full w-full object-cover"
-                    >
-                      <source src={solution.media} type="video/mp4" />
-                    </video>
+                    />
                   ) : (
                     <Image
                       src={solution.media}
@@ -411,15 +409,14 @@ export default function MobileHomePage() {
           {cmsWorks.map((work, i) => (
             <div key={i} className="overflow-hidden rounded-[14px]">
               <div className="relative aspect-[16/10]">
-                <video
-                  autoPlay
+                <Stream
+                  src={work.video}
+                  controls={false}
+                  autoplay
                   muted
                   loop
-                  playsInline
                   className="h-full w-full object-cover"
-                >
-                  <source src={work.video} type="video/mp4" />
-                </video>
+                />
               </div>
               <div className="bg-white p-4">
                 <p className="text-[12px] font-medium uppercase tracking-wider text-[#126478]">
@@ -457,9 +454,14 @@ export default function MobileHomePage() {
         </h2>
 
         <div className="mt-6 overflow-hidden rounded-[14px]">
-          <video autoPlay muted loop playsInline className="h-auto w-full">
-            <source src="/videos/main-slider.mp4" type="video/mp4" />
-          </video>
+          <Stream
+            src="665822d5062aae2129504c3a2b474494"
+            controls={false}
+            autoplay
+            muted
+            loop
+            className="h-auto w-full"
+          />
         </div>
 
         <p className="mt-6 text-[15px] leading-[1.6] text-light-body">
@@ -665,17 +667,15 @@ export default function MobileHomePage() {
                     {faq.question}
                   </span>
                   <span
-                    className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-white/20 text-[16px] text-white transition-transform duration-200 ${
-                      openFaq === i ? "rotate-45" : ""
-                    }`}
+                    className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-white/20 text-[16px] text-white transition-transform duration-200 ${openFaq === i ? "rotate-45" : ""
+                      }`}
                   >
                     +
                   </span>
                 </button>
                 <div
-                  className={`overflow-hidden transition-all duration-300 ${
-                    openFaq === i ? "max-h-[200px] pb-4" : "max-h-0"
-                  }`}
+                  className={`overflow-hidden transition-all duration-300 ${openFaq === i ? "max-h-[200px] pb-4" : "max-h-0"
+                    }`}
                 >
                   <p className="text-[13px] leading-[1.5] text-[#90B2BD]">
                     {faq.answer}

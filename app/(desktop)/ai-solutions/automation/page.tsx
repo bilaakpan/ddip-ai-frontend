@@ -9,7 +9,7 @@ import FourDMethodSection from "@/components/desktop/FourDMethodSection";
 import FaqSection from "@/components/desktop/FaqSection";
 import ContactFormSection from "@/components/desktop/ContactFormSection";
 import AccordionWithImage from "@/components/desktop/AccordionWithImage";
-
+import { Stream } from "@cloudflare/stream-react";
 /* ─── Data ─── */
 
 const heroPartners = ["VG", "brother", "Vestine", "OPTIMUM", "ColaSel"];
@@ -77,7 +77,7 @@ export default function AutomationPage() {
           setCmsFaqRight(res.data.slice(mid).map((f: Faq) => f.question));
         }
       })
-      .catch(() => {});
+      .catch(() => { });
   }, []);
 
   const allFaqLeft = [...cmsFaqLeft, ...faqLeft2];
@@ -101,15 +101,15 @@ export default function AutomationPage() {
           <div className="absolute inset-0 bg-gradient-to-r from-dark-bg via-dark-bg/60 to-transparent" />
         </div>
 
-        
+
 
         <div className="overflow-hidden whitespace-nowrap">
-  <div className="flex animate-marquee">
-      <h1 className="text-[140px] text-white whitespace-nowrap">
-        Automation with a Creative Touch
-      </h1>
-  </div>
-</div>
+          <div className="flex animate-marquee">
+            <h1 className="text-[140px] text-white whitespace-nowrap">
+              Automation with a Creative Touch
+            </h1>
+          </div>
+        </div>
 
         <div className="relative z-10 mt-8 px-[60px]">
           <h2 className="max-w-lg font-heading text-[40px] font-medium leading-[1.3] text-white">
@@ -143,7 +143,7 @@ export default function AutomationPage() {
             </Link>
           </div>
 
-         
+
         </div>
 
         <div className="absolute bottom-10 right-[60px] z-10">
@@ -152,7 +152,7 @@ export default function AutomationPage() {
       </section>
 
       {/* Partners Row */}
-     <HeroPartnersSection />
+      <HeroPartnersSection />
 
       {/* ════════════════════════════════════════════════════════
           2. AUTOMATION MADE SIMPLE — Accordion
@@ -180,27 +180,27 @@ export default function AutomationPage() {
             </p>
           </div>
           <button onClick={() => window.location.href = '/ai-solutions/automation/templates'} className="flex items-center gap-2 rounded-full bg-white px-5 py-3 text-[13px] font-medium text-[#063746] shadow-md hover:bg-white/90">
-           
+
             See More Templates
           </button>
         </div>
 
         <div className="grid grid-cols-4 gap-5">
-          {featuredAutomations.slice(0,8).map((item) => (
+          {featuredAutomations.slice(0, 8).map((item) => (
             <div key={item.title} className="rounded-[16px] p-5 flex flex-col justify-between" style={{ backgroundColor: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.12)", boxShadow: "0 4px 24px rgba(0,0,0,0.2)" }}>
               {/* Top — social icons + +5 */}
               <div className="flex items-center gap-2">
                 {/* Globe */}
                 <div className="w-8 h-8 rounded-lg flex items-center justify-center bg-white/10">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2"><circle cx="12" cy="12" r="10" /><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20" /></svg>
                 </div>
                 {/* Telegram */}
                 <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ backgroundColor: "#229ED9" }}>
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.248l-2.04 9.613c-.15.67-.54.835-1.094.52l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L7.48 14.49l-2.95-.924c-.64-.2-.653-.64.136-.948l11.527-4.445c.533-.194 1.002.13.37.075z"/></svg>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.248l-2.04 9.613c-.15.67-.54.835-1.094.52l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L7.48 14.49l-2.95-.924c-.64-.2-.653-.64.136-.948l11.527-4.445c.533-.194 1.002.13.37.075z" /></svg>
                 </div>
                 {/* YouTube */}
                 <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ backgroundColor: "#FF0000" }}>
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M23.495 6.205a3.007 3.007 0 00-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 00.527 6.205a31.247 31.247 0 00-.522 5.805 31.247 31.247 0 00.522 5.783 3.007 3.007 0 002.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 002.088-2.088 31.247 31.247 0 00.5-5.783 31.247 31.247 0 00-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M23.495 6.205a3.007 3.007 0 00-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 00.527 6.205a31.247 31.247 0 00-.522 5.805 31.247 31.247 0 00.522 5.783 3.007 3.007 0 002.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 002.088-2.088 31.247 31.247 0 00.5-5.783 31.247 31.247 0 00-.5-5.805zM9.609 15.601V8.408l6.264 3.602z" /></svg>
                 </div>
                 {/* +5 badge */}
                 <div className="w-8 h-8 rounded-lg flex items-center justify-center bg-white/10">
@@ -246,17 +246,15 @@ export default function AutomationPage() {
 
           {/* Right — Dark image card */}
           <div className="flex-1 overflow-hidden rounded-[24px]">
-          <video
-  autoPlay
-  muted
-  loop
-  playsInline
-  className="w-full h-auto object-cover"
->
-  <source src="/videos/automation11.mp4" type="video/mp4" />
-</video>
+            <Stream
+              src="2f9a15572f298dc4e8a6b480d57abdad"
+              controls={false}
+              autoplay
+              muted
+              loop
+              className="w-full h-auto object-cover"
+            />
           </div>
-
         </div>
       </section>
 

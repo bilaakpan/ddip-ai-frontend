@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useState, useEffect, useMemo } from "react";
 import { cmsApi, type Work } from "@/lib/api";
 import { Container } from "@/components/layout";
+import { Stream } from "@cloudflare/stream-react";
 /* ─── Fallback static projects (shown while CMS loads or if empty) ─── */
 const staticProjects = [
   {
@@ -12,7 +13,7 @@ const staticProjects = [
     field: "Real Estate",
     categories: ["Visual Style Definition", "AI Model Selection & Optimization", "Use-Case Development", "Prompt Crafting"],
     description: "Lorem Ipsum is simply",
-    image: "/videos/work1.mp4",
+    image: "52d4f5fdd1335b2fbaba2f41798273f1",
     mediaType: "video",
   },
   {
@@ -21,7 +22,7 @@ const staticProjects = [
     field: "Real Estate",
     categories: ["Visual Style Definition", "AI Model Selection & Optimization", "Use-Case Development", "Prompt Crafting"],
     description: "Lorem Ipsum is simply",
-    image: "/videos/work2.mp4",
+    image: "90b6c18df1bb19d1117f6d29f6859036",
     mediaType: "video",
   },
   {
@@ -30,7 +31,7 @@ const staticProjects = [
     field: "Real Estate",
     categories: ["Visual Style Definition", "AI Model Selection & Optimization", "Use-Case Development", "Prompt Crafting"],
     description: "Lorem Ipsum is simply",
-    image: "/videos/work3.mp4",
+    image: "8ffbc4055a9b0210350a2748fcbb8ce4",
     mediaType: "video",
   },
   {
@@ -39,7 +40,7 @@ const staticProjects = [
     field: "Real Estate",
     categories: ["Visual Style Definition", "AI Model Selection & Optimization", "Use-Case Development", "Prompt Crafting"],
     description: "Lorem Ipsum is simply",
-    image: "/videos/work1.mp4",
+    image: "52d4f5fdd1335b2fbaba2f41798273f1",
     mediaType: "video",
   },
   {
@@ -48,7 +49,7 @@ const staticProjects = [
     field: "Real Estate",
     categories: ["Visual Style Definition", "AI Model Selection & Optimization", "Use-Case Development", "Prompt Crafting"],
     description: "Lorem Ipsum is simply",
-    image: "/videos/work2.mp4",
+    image: "90b6c18df1bb19d1117f6d29f6859036",
     mediaType: "video",
   },
   {
@@ -57,7 +58,7 @@ const staticProjects = [
     field: "Real Estate",
     categories: ["Visual Style Definition", "AI Model Selection & Optimization", "Use-Case Development", "Prompt Crafting"],
     description: "Lorem Ipsum is simply",
-    image: "/videos/work3.mp4",
+    image: "8ffbc4055a9b0210350a2748fcbb8ce4",
     mediaType: "video",
   },
   {
@@ -66,7 +67,7 @@ const staticProjects = [
     field: "Real Estate",
     categories: ["Visual Style Definition", "AI Model Selection & Optimization", "Use-Case Development", "Prompt Crafting"],
     description: "Lorem Ipsum is simply",
-    image: "/videos/work1.mp4",
+    image: "52d4f5fdd1335b2fbaba2f41798273f1",
     mediaType: "video",
   },
   {
@@ -75,7 +76,7 @@ const staticProjects = [
     field: "Real Estate",
     categories: ["Visual Style Definition", "AI Model Selection & Optimization", "Use-Case Development", "Prompt Crafting"],
     description: "Lorem Ipsum is simply",
-    image: "/videos/work2.mp4",
+    image: "90b6c18df1bb19d1117f6d29f6859036",
     mediaType: "video",
   },
   {
@@ -84,7 +85,7 @@ const staticProjects = [
     field: "Real Estate",
     categories: ["Visual Style Definition", "AI Model Selection & Optimization", "Use-Case Development", "Prompt Crafting"],
     description: "Lorem Ipsum is simply",
-    image: "/videos/work3.mp4",
+    image: "8ffbc4055a9b0210350a2748fcbb8ce4",
     mediaType: "video",
   },
   {
@@ -93,7 +94,7 @@ const staticProjects = [
     field: "Real Estate",
     categories: ["Visual Style Definition", "AI Model Selection & Optimization", "Use-Case Development", "Prompt Crafting"],
     description: "Lorem Ipsum is simply",
-    image: "/videos/work1.mp4",
+    image: "52d4f5fdd1335b2fbaba2f41798273f1",
     mediaType: "video",
   },
   {
@@ -102,7 +103,7 @@ const staticProjects = [
     field: "Real Estate",
     categories: ["Visual Style Definition", "AI Model Selection & Optimization", "Use-Case Development", "Prompt Crafting"],
     description: "Lorem Ipsum is simply",
-    image: "/videos/work2.mp4",
+    image: "90b6c18df1bb19d1117f6d29f6859036",
     mediaType: "video",
   },
   {
@@ -111,7 +112,7 @@ const staticProjects = [
     field: "Real Estate",
     categories: ["Visual Style Definition", "AI Model Selection & Optimization", "Use-Case Development", "Prompt Crafting"],
     description: "Lorem Ipsum is simply",
-    image: "/videos/work3.mp4",
+    image: "8ffbc4055a9b0210350a2748fcbb8ce4",
     mediaType: "video",
   },
 ];
@@ -176,7 +177,7 @@ export default function WorksPage() {
           1. HERO — Marquee "WORK ✻ WORK ✻ WO..."
           ════════════════════════════════════════════════════════ */}
       <section className="bg-light-bg pb-8 sm:pb-10 md:pb-12 pt-24 sm:pt-32 md:pt-40">
- 
+
         {activeTab === "grid" ? (
           /* Grid Tab Content - Original Marquee */
           <Container key="grid-content">
@@ -259,7 +260,7 @@ export default function WorksPage() {
             )}
           </div>
           <div className="flex items-center gap-4">
-     
+
             <button
               onClick={() => handleTabChange("grid")}
               className={`inline-flex items-center gap-2 rounded-full px-8 py-3 font-heading text-2xl font-medium transition-colors ${activeTab === "grid"
@@ -329,7 +330,7 @@ export default function WorksPage() {
               </button>
             </div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-x-6 sm:gap-y-8 lg:gap-y-12">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-4 sm:gap-x-6 sm:gap-y-8 lg:gap-y-12">
               {filteredProjects.map((project) => (
                 <Link
                   key={project.id}
@@ -341,15 +342,14 @@ export default function WorksPage() {
                     {/* Image */}
                     <div className="relative aspect-[4/3] overflow-hidden">
                       {project.mediaType === "video" && project.image ? (
-                        <video
-                          autoPlay
+                        <Stream
+                          src={project.image}
+                          controls={false}
+                          autoplay
                           muted
                           loop
-                          playsInline
                           className="absolute inset-0 h-full w-full object-cover"
-                        >
-                          <source src={project.image} type="video/mp4" />
-                        </video>
+                        />
                       ) : (
                         <Image
                           src={project.image}

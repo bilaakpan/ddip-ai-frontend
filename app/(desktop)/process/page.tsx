@@ -218,10 +218,10 @@ export default function ProcessPage() {
 
         {/* Hero video — full bg */}
         <div className="absolute inset-0 z-0">
-          {/* <video autoPlay muted loop playsInline className="h-full w-full object-cover" style={{ transform: "scaleX(-1)" }}>
+          <video autoPlay muted loop playsInline className="h-full w-full object-cover" style={{ transform: "scaleX(-1)" }}>
             <source src="/videos/ourprocessherovideo.mp4" type="video/mp4" />
-          </video> */}
-          <img src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/e868dec0-6af7-4619-021d-93a86c4ecb00/public" className="h-full w-full object-cover"/>
+          </video>
+
         </div>
       </section>
 
@@ -254,7 +254,7 @@ export default function ProcessPage() {
                 understanding.
               </span>
             </div>
-            <p className="mt-6 leading-[1.7]" style={{ fontFamily: "SF Pro Display", fontSize: "16px", color: "#063746", width: "400px" }}>
+            <p className="mt-6 leading-[1.7]" style={{ fontSize: "16px", color: "#063746", width: "400px" }}>
               Because meaningful automation, effective AI, and scalable creativity can only happen when <span style={{ color: "#00BCCF" }}>strategy, human insight, and technology</span> move together.
             </p>
           </div>
@@ -299,8 +299,6 @@ export default function ProcessPage() {
       <section className="relative overflow-hidden rounded-[24px] mx-[60px] my-12 mb-20" style={{ minHeight: "480px" }}>
         {/* BG image */}
         <img src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/47ee54cb-7da4-43ec-2f77-1a62a340a200/public" alt="Partnership" className="absolute inset-0 w-full h-full object-cover" />
-        {/* Dark overlay */}
-        <div className="absolute inset-0 bg-[#063746]/60" />
 
         {/* Content */}
         <div className="relative z-10 p-12 flex flex-col h-full" style={{ minHeight: "480px" }}>
@@ -360,7 +358,7 @@ export default function ProcessPage() {
 
           {/* Heading center */}
           <div className="text-center mb-12">
-            <h2 className="font-bold" style={{ fontFamily: "SF Pro Display", fontSize: "40px", color: "#126478" }}>
+            <h2 className="font-bold" style={{ fontSize: "40px", color: "#126478" }}>
               How We Work
             </h2>
             <p className="mt-3 mx-auto max-w-xl" style={{ fontFamily: "Arial", fontSize: "17px", color: "#063746" }}>
@@ -400,9 +398,9 @@ export default function ProcessPage() {
 
       {/* From Insight to Intelligent Impact */}
       <section className="bg-light-bg py-16 lg:py-24">
-       
+
         <Container>
-           <h2 className="w-[300px] font-bold" style={{fontFamily:"Bricolage Grotesque",color:"#126478",fontSize:'30px'}}>From Insight to Intelligent Impact</h2>
+          <h2 className="w-[300px] font-bold" style={{ fontFamily: "Bricolage Grotesque", color: "#126478", fontSize: '30px' }}>From Insight to Intelligent Impact</h2>
           <div className="rounded-[24px]  bg-[#f5f8f3] px-6 py-8 lg:px-14 lg:py-12">
 
             <div className="grid gap-10 lg:grid-cols-[1fr_360px] lg:gap-16">
