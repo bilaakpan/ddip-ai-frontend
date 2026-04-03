@@ -51,6 +51,7 @@ interface FormData {
   referenceUrl: string;
   brandFile: File | null;
   briefFile: File | null;
+  scriptFile: File | null;
 
   /* Workflow Automation Steps 10-11 */
   timeline: string;
@@ -275,6 +276,7 @@ const INITIAL_FORM: FormData = {
   referenceUrl: "",
   brandFile: null,
   briefFile: null,
+  scriptFile: null,
   timeline: "",
   uploadOptions: [],
   cta: "",
@@ -406,7 +408,12 @@ export default function StartProjectPage() {
   const isGeo = form.service === "geo" && step > 0;
   const isOther = form.service === "other" && step > 0;
   const sectionTitle = isAiInfluencer ? "AI Influencer" : isWorkflowAutomation ? "Workflow Automation" : isAiProduction ? "AI Production / AI Content Generation" : isGeo ? "Geo Optimization" : "Tell Us Your Project";
-  const totalSteps = form.service === "ai-influencer" ? 6 : isWorkflowAutomation ? 13 : isAiProduction ? 12 : form.service === "geo" ? 13 : form.service === "other" ? 2 : STEP_LABELS.length;
+  const totalSteps = form.service === "ai-influencer" ? 8
+    : form.service === "automation" ? 14
+    : (form.service === "ai-commercial" || form.service === "ai-content") ? 15
+    : form.service === "geo" ? 13
+    : form.service === "other" ? 2
+    : STEP_LABELS.length;
 
 
 
@@ -420,13 +427,14 @@ export default function StartProjectPage() {
       if (!form.service) newErrors.service = "Please select a service";
     } else if (isAiInfluencer) {
       if (s === 1 && form.regions.length === 0) newErrors.regions = "Select at least one region";
-      if (s === 2 && form.audience.length === 0) newErrors.audience = "Select at least one audience";
-      if (s === 3 && form.purpose.length === 0) newErrors.purpose = "Select at least one purpose";
+      if (s === 4 && form.audience.length === 0) newErrors.audience = "Select at least one audience";
+      if (s === 5 && form.purpose.length === 0) newErrors.purpose = "Select at least one purpose";
       // step 4 is optional (Upload style reference) — no validation needed
     } else if (form.service === "geo") {
       // GEO steps are all optional - just allow next
     } else if (isWorkflowAutomation || isAiProduction) {
       // WA and AI Production steps are all optional - just allow next
+      if (isAiProduction && s === 4 && form.regions.length === 0) newErrors.regions = "Please select at least one target market";
     } else if (isOther) {
       if (s === 1) {
         if (!form.companyName.trim()) newErrors.companyName = "Company name is required";
@@ -683,95 +691,70 @@ export default function StartProjectPage() {
                 )}
 
 
-                {/* ── AI Influencer: Step 1 — Regions / Language / Type ── */}
+                {/* ── AI Influencer: Step 1 — Regions ── */}
                 {isAiInfluencer && step === 1 && (
-                  <div className="flex flex-col gap-4">
-                    <div>
-                      <p className="mb-2 text-[22px] font-semibold text-[#0A7D94]">Select target regions</p>
-                      {errors.regions && <p className="mb-1 text-xs text-red-500">{errors.regions}</p>}
-                      <div className="flex flex-wrap gap-x-5 gap-y-2">
-                        {AI_REGIONS.map((r) => (
-                          <label key={r} className="flex cursor-pointer items-center gap-2">
-                            <div
-                              onClick={() => toggleArr("regions", r)}
-                              className={cn(
-                                "flex h-4 w-4 shrink-0 items-center justify-center rounded border transition-colors",
-                                form.regions.includes(r) ? "bg-[#76717F]" : "bg-white"
-                              )}
-                            >
-                              {form.regions.includes(r) && (
-                                <svg className="h-2.5 w-2.5 text-white" viewBox="0 0 10 10" fill="none">
-                                  <path d="M1.5 5l2.5 2.5 4.5-4.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                                </svg>
-                              )}
-                            </div>
-                            <span className="text-[18px] text-[#3F404D]">{r}</span>
-                          </label>
-                        ))}
-                      </div>
-                    </div>
-                    <div>
-                      <p className="mb-2 text-[22px] font-semibold text-[#0A7D94]">Which Language?</p>
-                      <div className="flex flex-wrap gap-x-5 gap-y-2">
-                        {AI_LANGUAGES.map((l) => (
-                          <label key={l} className="flex cursor-pointer items-center gap-2">
-                            <div
-                              onClick={() => toggleArr("languages", l)}
-                              className={cn(
-                                "flex h-4 w-4 shrink-0 items-center justify-center rounded border transition-colors",
-                                form.languages.includes(l) ? " bg-[#76717F]" : "border-gray-400 bg-white"
-                              )}
-                            >
-                              {form.languages.includes(l) && (
-                                <svg className="h-2.5 w-2.5 text-white" viewBox="0 0 10 10" fill="none">
-                                  <path d="M1.5 5l2.5 2.5 4.5-4.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                                </svg>
-                              )}
-                            </div>
-                            <span className="text-[18px] text-[#3F404D]">{l}</span>
-                          </label>
-                        ))}
-                        {form.languages.includes("Other") && (
-                          <input
-                            type="text"
-                            placeholder="Specify a text"
-                            value={form.languageOther}
-                            onChange={(e) => updateField("languageOther", e.target.value)}
-                            className="h-7 rounded border border-gray-300 px-2 text-[12px] focus:border-[#76717F] focus:outline-none"
-                          />
-                        )}
-                      </div>
-                    </div>
-                    <div>
-                      <p className="mb-2 text-[22px] font-semibold text-[#0A7D94]">Which type of influencer should it be?</p>
-                      <div className="flex flex-wrap gap-x-5 gap-y-2">
-                        {AI_INFLUENCER_TYPES.map((t) => (
-                          <label key={t} className="flex cursor-pointer items-center gap-2">
-                            <div className={cn(
-                              "flex h-4 w-4 shrink-0 items-center justify-center rounded-full border-2 transition-colors",
-                              form.influencerType === t ? "border-[#76717F]" : "border-gray-400"
-                            )}>
-                              {form.influencerType === t && <div className="h-2 w-2 rounded-full bg-[#76717F]" />}
-                            </div>
-                            <input type="radio" className="sr-only" checked={form.influencerType === t} onChange={() => updateField("influencerType", t)} />
-                            <span className="text-[18px] text-[#3F404D]">{t}</span>
-                          </label>
-                        ))}
-                      </div>
+                  <div>
+                    <p className="mb-2 text-[22px] font-semibold text-[#0A7D94]">Select target regions</p>
+                    {errors.regions && <p className="mb-1 text-xs text-red-500">{errors.regions}</p>}
+                    <div className="flex flex-col gap-3 mt-4">
+                      {AI_REGIONS.map((r) => (
+                        <label key={r} className="flex cursor-pointer items-center gap-2" onClick={() => toggleArr("regions", r)}>
+                          <div className={cn("flex h-4 w-4 shrink-0 items-center justify-center rounded border transition-colors", form.regions.includes(r) ? "bg-[#76717F]" : "bg-white border-gray-400")}>
+                            {form.regions.includes(r) && (<svg className="h-2.5 w-2.5 text-white" viewBox="0 0 10 10" fill="none"><path d="M1.5 5l2.5 2.5 4.5-4.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>)}
+                          </div>
+                          <span className="text-[18px] text-[#3F404D]">{r}</span>
+                        </label>
+                      ))}
                     </div>
                   </div>
                 )}
 
-                {/* ── AI Influencer: Step 2 — Audience ── */}
+                {/* ── AI Influencer: Step 2 — Language ── */}
                 {isAiInfluencer && step === 2 && (
+                  <div>
+                    <p className="mb-2 text-[22px] font-semibold text-[#0A7D94]">Which Language?</p>
+                    <div className="flex flex-col gap-3 mt-4">
+                      {AI_LANGUAGES.map((l) => (
+                        <label key={l} className="flex cursor-pointer items-center gap-2" onClick={() => toggleArr("languages", l)}>
+                          <div className={cn("flex h-4 w-4 shrink-0 items-center justify-center rounded border transition-colors", form.languages.includes(l) ? "bg-[#76717F]" : "border-gray-400 bg-white")}>
+                            {form.languages.includes(l) && (<svg className="h-2.5 w-2.5 text-white" viewBox="0 0 10 10" fill="none"><path d="M1.5 5l2.5 2.5 4.5-4.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>)}
+                          </div>
+                          <span className="text-[18px] text-[#3F404D]">{l}</span>
+                        </label>
+                      ))}
+                      {form.languages.includes("Other") && (
+                        <input type="text" placeholder="Specify a text" value={form.languageOther} onChange={(e) => updateField("languageOther", e.target.value)} className="h-7 rounded border border-gray-300 px-2 text-[12px] focus:border-[#76717F] focus:outline-none" />
+                      )}
+                    </div>
+                  </div>
+                )}
+
+                {/* ── AI Influencer: Step 3 — Influencer Type ── */}
+                {isAiInfluencer && step === 3 && (
+                  <div>
+                    <p className="mb-2 text-[22px] font-semibold text-[#0A7D94]">Which type of influencer should it be?</p>
+                    <div className="flex flex-col gap-3 mt-4">
+                      {AI_INFLUENCER_TYPES.map((t) => (
+                        <label key={t} className="flex cursor-pointer items-center gap-2" onClick={() => updateField("influencerType", t)}>
+                          <div className={cn("flex h-4 w-4 shrink-0 items-center justify-center rounded-full border-2 transition-colors", form.influencerType === t ? "border-[#76717F]" : "border-gray-400")}>
+                            {form.influencerType === t && <div className="h-2 w-2 rounded-full bg-[#76717F]" />}
+                          </div>
+                          <span className="text-[18px] text-[#3F404D]">{t}</span>
+                        </label>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* ── AI Influencer: Step 4 — Audience ── */}
+                {isAiInfluencer && step === 4 && (
                   <div>
                     <p className="mb-3 text-[22px] font-medium text-[#0A7D94]">What is the profile of the target audience?</p>
                     {errors.audience && <p className="mb-2 text-xs text-red-500">{errors.audience}</p>}
                     <div className="flex flex-col gap-2.5">
                       {AI_AUDIENCES.map((a) => (
-                        <label key={a} className="flex cursor-pointer items-center gap-2.5">
+                        <label key={a} className="flex cursor-pointer items-center gap-2.5" onClick={() => toggleArr("audience", a)}>
                           <div
-                            onClick={() => toggleArr("audience", a)}
                             className={cn(
                               "flex h-4 w-4 shrink-0 items-center justify-center rounded border transition-colors",
                               form.audience.includes(a) ? "bg-[#3F404D]" : "border-gray-400 text-white"
@@ -799,16 +782,15 @@ export default function StartProjectPage() {
                   </div>
                 )}
 
-                {/* ── AI Influencer: Step 3 — Purpose ── */}
-                {isAiInfluencer && step === 3 && (
+                {/* ── AI Influencer: Step 5 — Purpose ── */}
+                {isAiInfluencer && step === 5 && (
                   <div>
                     <p className="mb-3 text-[22px] font-medium text-[#0A7D94]">For what purpose will the influencer be used?</p>
                     {errors.purpose && <p className="mb-2 text-xs text-red-500">{errors.purpose}</p>}
                     <div className="flex flex-col gap-2.5">
                       {AI_PURPOSES.map((p) => (
-                        <label key={p} className="flex cursor-pointer items-center gap-2.5">
+                        <label key={p} className="flex cursor-pointer items-center gap-2.5" onClick={() => toggleArr("purpose", p)}>
                           <div
-                            onClick={() => toggleArr("purpose", p)}
                             className={cn(
                               "flex h-4 w-4 shrink-0 items-center justify-center rounded border transition-colors",
                               form.purpose.includes(p) ? "bg-[#3F404D]" : "border-gray-400 bg-white"
@@ -836,8 +818,8 @@ export default function StartProjectPage() {
                   </div>
                 )}
 
-                {/* ── AI Influencer: Step 4 — Upload / Brief ── */}
-                {isAiInfluencer && step === 4 && (
+                {/* ── AI Influencer: Step 6 — Upload / Brief ── */}
+                {isAiInfluencer && step === 6 && (
                   <div>
                     <p className="mb-1 text-[22px] font-medium text-[#0A7D94]">Upload style reference (optional)</p>
                     <p className="mb-4 text-[12px] text-[#616161]">Pinterest, Instagram links</p>
@@ -902,66 +884,66 @@ export default function StartProjectPage() {
                   </div>
                 )}
 
-                {/* ── Workflow Automation: Step 2 — Industry + Team size ── */}
+                {/* ── Workflow Automation: Step 2 — Industry ── */}
                 {isWorkflowAutomation && step === 2 && (
                   <div className="flex flex-col gap-4">
-                    <div>
-                      <p className="mb-1.5 text-[22px] font-medium text-[#0A7D94]">Industry</p>
-                      <select
-                        value={form.waIndustry}
-                        onChange={(e) => {
-                          updateField("waIndustry", e.target.value);
-                          if (e.target.value !== "Other") {
-                            updateField("waIndustryOther", "");
-                          }
+                    <p className="mb-1.5 text-[22px] font-medium text-[#0A7D94]">Industry</p>
+                    <select
+                      value={form.waIndustry}
+                      onChange={(e) => {
+                        updateField("waIndustry", e.target.value);
+                        if (e.target.value !== "Other") {
+                          updateField("waIndustryOther", "");
+                        }
+                      }}
+                      className="h-9 w-full rounded border border-gray-300 px-3 text-[13px] text-gray-700 focus:outline-none"
+                    >
+                      <option value="">Select industry</option>
+                      {WA_INDUSTRIES.map((i) => <option key={i} value={i}>{i}</option>)}
+                    </select>
+                    <label className="flex cursor-pointer items-center gap-2">
+                      <input
+                        type="checkbox"
+                        className="form-checkbox h-4 w-4 rounded border-gray-300 text-[#0A7D94] focus:ring-[#0A7D94]"
+                        checked={form.waIndustry === "Other"}
+                        onChange={() => {
+                          updateField("waIndustry", form.waIndustry === "Other" ? "" : "Other");
+                          updateField("waIndustryOther", "");
                         }}
-                        className="h-9 w-full rounded border border-gray-300 px-3 text-[13px] text-gray-700 focus:outline-none"
-                      >
-                        <option value="">Select industry</option>
-                        {WA_INDUSTRIES.map((i) => <option key={i} value={i}>{i}</option>)}
-                      </select>
-                      <label className="mt-3 flex cursor-pointer items-center gap-2">
-                        <input
-                          type="checkbox"
-                          className="form-checkbox h-4 w-4 rounded border-gray-300 text-[#0A7D94] focus:ring-[#0A7D94]"
-                          checked={form.waIndustry === "Other"}
-                          onChange={() => {
-                            updateField("waIndustry", form.waIndustry === "Other" ? "" : "Other");
-                            updateField("waIndustryOther", "");
-                          }}
-                        />
-                        <span className="text-[18px] text-[#3F404D]">Other</span>
-                      </label>
-                      {form.waIndustry === "Other" && (
-                        <input type="text" placeholder="Specify it in text" value={form.waIndustryOther} onChange={(e) => updateField("waIndustryOther", e.target.value)} className="mt-2 h-8 w-full rounded border border-gray-300 px-3 text-[13px] focus:border-[#0A7D94] focus:outline-none" />
-                      )}
-                    </div>
-                    <div>
-                      <p className="mb-1.5 text-[22px] font-medium text-[#0A7D94]">Team size</p>
-                      <div className="flex flex-col gap-2">
-                        {WA_TEAM_SIZES.map((s) => (
-                          <label key={s} className="flex cursor-pointer items-center gap-2">
-                            <div className={cn("flex h-4 w-4 shrink-0 items-center justify-center rounded-full border-2 transition-colors", form.waTeamSize === s ? "border-[#0A7D94]" : "border-gray-400")}>
-                              {form.waTeamSize === s && <div className="h-2 w-2 rounded-full bg-[#0A7D94]" />}
-                            </div>
-                            <input type="radio" className="sr-only" checked={form.waTeamSize === s} onChange={() => updateField("waTeamSize", s)} />
-                            <span className="text-[18px] text-[#3F404D]">{s}</span>
-                          </label>
-                        ))}
-                      </div>
+                      />
+                      <span className="text-[18px] text-[#3F404D]">Other</span>
+                    </label>
+                    {form.waIndustry === "Other" && (
+                      <input type="text" placeholder="Specify it in text" value={form.waIndustryOther} onChange={(e) => updateField("waIndustryOther", e.target.value)} className="h-8 w-full rounded border border-gray-300 px-3 text-[13px] focus:border-[#0A7D94] focus:outline-none" />
+                    )}
+                  </div>
+                )}
+
+                {/* ── Workflow Automation: Step 3 — Team Size ── */}
+                {isWorkflowAutomation && step === 3 && (
+                  <div className="flex flex-col gap-4">
+                    <p className="mb-1.5 text-[22px] font-medium text-[#0A7D94]">Team size</p>
+                    <div className="flex flex-col gap-2">
+                      {WA_TEAM_SIZES.map((s) => (
+                        <label key={s} className="flex cursor-pointer items-center gap-2" onClick={() => updateField("waTeamSize", s)}>
+                          <div className={cn("flex h-4 w-4 shrink-0 items-center justify-center rounded-full border-2 transition-colors", form.waTeamSize === s ? "border-[#0A7D94]" : "border-gray-400")}>
+                            {form.waTeamSize === s && <div className="h-2 w-2 rounded-full bg-[#0A7D94]" />}
+                          </div>
+                          <span className="text-[18px] text-[#3F404D]">{s}</span>
+                        </label>
+                      ))}
                     </div>
                   </div>
                 )}
 
-                {/* ── Workflow Automation: Step 3 — Areas to automate ── */}
-                {isWorkflowAutomation && step === 3 && (
+                {/* ── Workflow Automation: Step 4 — Areas to automate ── */}
+                {isWorkflowAutomation && step === 4 && (
                   <div>
                     <p className="mb-3 text-[22px] font-medium text-[#0A7D94]">Which areas do you want to automate?</p>
                     <div className="grid grid-cols-2 gap-x-4 gap-y-8 mt-4">
                       {WA_AREAS.map((a) => (
-                        <label key={a} className="flex cursor-pointer items-start gap-2">
+                        <label key={a} className="flex cursor-pointer items-start gap-2" onClick={() => toggleArr("waAreas", a)}>
                           <div
-                            onClick={() => toggleArr("waAreas", a)}
                             className={cn("mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded border transition-colors", form.waAreas.includes(a) ? "border-[#3F404D] bg-[#3F404D]" : "border-gray-400 bg-white")}
                           >
                             {form.waAreas.includes(a) && (
@@ -980,8 +962,8 @@ export default function StartProjectPage() {
                   </div>
                 )}
 
-                {/* ── Workflow Automation: Step 4 — How does process work ── */}
-                {isWorkflowAutomation && step === 4 && (
+                {/* ── Workflow Automation: Step 5 — How does process work ── */}
+                {isWorkflowAutomation && step === 5 && (
                   <div>
                     <p className="mb-3 text-[22px] font-medium text-[#0A7D94]">How does this process work today?</p>
                     <div className="flex flex-col gap-5">
@@ -998,8 +980,8 @@ export default function StartProjectPage() {
                   </div>
                 )}
 
-                {/* ── Workflow Automation: Step 5 — Contact Info ── */}
-                {isWorkflowAutomation && step === 5 && (
+                {/* ── Workflow Automation: Step 6 — Contact Info ── */}
+                {isWorkflowAutomation && step === 6 && (
                   <div className="flex-1">
                     {/* Title */}
                     <h3 className="text-[22px] font-medium text-[#0A7D94]">
@@ -1023,10 +1005,10 @@ export default function StartProjectPage() {
                         <label
                           key={item}
                           className="flex cursor-pointer items-center gap-3"
+                          onClick={() => toggleArr("waAreas", item)}
                         >
                           {/* Checkbox UI */}
                           <div
-                            onClick={() => toggleArr("waAreas", item)}
                             className={cn(
                               "flex h-4.5 w-4.5 items-center justify-center rounded border transition-all",
                               form.waAreas.includes(item)
@@ -1080,8 +1062,8 @@ export default function StartProjectPage() {
                   </div>
                 )}
 
-                {/* ── Workflow Automation: Step 6 — Autonomy Level ── */}
-                {isWorkflowAutomation && step === 6 && (
+                {/* ── Workflow Automation: Step 7 — Autonomy Level ── */}
+                {isWorkflowAutomation && step === 7 && (
                   <div className="flex-1 flex flex-col justify-between">
                     {/* Top Content */}
                     <div>
@@ -1150,8 +1132,8 @@ export default function StartProjectPage() {
                   </div>
                 )}
 
-                {/* ── Workflow Automation: Step 7 — Data & Platforms ── */}
-                {isWorkflowAutomation && step === 7 && (
+                {/* ── Workflow Automation: Step 8 — Data & Platforms ── */}
+                {isWorkflowAutomation && step === 8 && (
                   <div className="flex-1">
                     <h2 className="text-[22px] font-semibold text-[#0A7D94] mb-5">
                       What data or platforms should the automation use?
@@ -1169,7 +1151,7 @@ export default function StartProjectPage() {
                           { key: "email", label: "Email inbox" },
                           { key: "ads", label: "Ads platforms" },
                         ].map(({ key, label }) => (
-                          <label key={key} className="flex items-center gap-3 cursor-pointer">
+                          <label key={key} className="flex items-center gap-3 cursor-pointer" onClick={() => togglePlatform(key)}>
                             <div
                               className={cn(
                                 "flex h-5 w-5 shrink-0 items-center justify-center rounded border-2 transition-colors",
@@ -1177,7 +1159,6 @@ export default function StartProjectPage() {
                                   ? "border-[#0A7D94] bg-[#0A7D94]"
                                   : "border-gray-400 bg-white"
                               )}
-                              onClick={() => togglePlatform(key)}
                             >
                               {form.platforms?.includes(key) && (
                                 <svg className="h-3 w-3 text-white" viewBox="0 0 20 20" fill="none">
@@ -1185,7 +1166,6 @@ export default function StartProjectPage() {
                                 </svg>
                               )}
                             </div>
-                            <input type="checkbox" className="sr-only" checked={!!form.platforms?.includes(key)} onChange={() => togglePlatform(key)} />
                             <span>{label}</span>
                           </label>
                         ))}
@@ -1197,7 +1177,7 @@ export default function StartProjectPage() {
                           { key: "apis", label: "APIs" },
                           { key: "not_sure", label: "\u201cNot sure yet\u201d" },
                         ].map(({ key, label }) => (
-                          <label key={key} className="flex items-center gap-3 cursor-pointer">
+                          <label key={key} className="flex items-center gap-3 cursor-pointer" onClick={() => togglePlatform(key)}>
                             <div
                               className={cn(
                                 "flex h-5 w-5 shrink-0 items-center justify-center rounded border-2 transition-colors",
@@ -1205,7 +1185,6 @@ export default function StartProjectPage() {
                                   ? "border-[#0A7D94] bg-[#0A7D94]"
                                   : "border-gray-400 bg-white"
                               )}
-                              onClick={() => togglePlatform(key)}
                             >
                               {form.platforms?.includes(key) && (
                                 <svg className="h-3 w-3 text-white" viewBox="0 0 20 20" fill="none">
@@ -1213,7 +1192,6 @@ export default function StartProjectPage() {
                                 </svg>
                               )}
                             </div>
-                            <input type="checkbox" className="sr-only" checked={!!form.platforms?.includes(key)} onChange={() => togglePlatform(key)} />
                             <span>{label}</span>
                           </label>
                         ))}
@@ -1222,8 +1200,8 @@ export default function StartProjectPage() {
                   </div>
                 )}
 
-                {/* ── Workflow Automation: Step 8 — Deliverables ── */}
-                {isWorkflowAutomation && step === 8 && (
+                {/* ── Workflow Automation: Step 9 — Deliverables ── */}
+                {isWorkflowAutomation && step === 9 && (
                   <div className="flex-1">
                     <h3 className="text-[22px] font-semibold text-[#0A7D94] mb-5">
                       What should the automation deliver?
@@ -1241,7 +1219,7 @@ export default function StartProjectPage() {
                           { key: "reports", label: "Reports & dashboards" },
                           { key: "alerts", label: "Alerts & notifications" },
                         ].map(({ key, label }) => (
-                          <label key={key} className="flex items-center gap-3 cursor-pointer">
+                          <label key={key} className="flex items-center gap-3 cursor-pointer" onClick={() => toggleDeliverable(key)}>
                             <div
                               className={cn(
                                 "flex h-5 w-5 shrink-0 items-center justify-center rounded border-2 transition-colors",
@@ -1249,7 +1227,6 @@ export default function StartProjectPage() {
                                   ? "border-[#0A7D94] bg-[#0A7D94]"
                                   : "border-gray-400 bg-white"
                               )}
-                              onClick={() => toggleDeliverable(key)}
                             >
                               {form.deliverables?.includes(key) && (
                                 <svg className="h-3 w-3 text-white" viewBox="0 0 20 20" fill="none">
@@ -1257,7 +1234,6 @@ export default function StartProjectPage() {
                                 </svg>
                               )}
                             </div>
-                            <input type="checkbox" className="sr-only" checked={!!form.deliverables?.includes(key)} onChange={() => toggleDeliverable(key)} />
                             <span>{label}</span>
                           </label>
                         ))}
@@ -1269,7 +1245,7 @@ export default function StartProjectPage() {
                           { key: "ai_agents", label: "AI agents / assistants" },
                           { key: "other", label: "Other" },
                         ].map(({ key, label }) => (
-                          <label key={key} className="flex items-center gap-3 cursor-pointer">
+                          <label key={key} className="flex items-center gap-3 cursor-pointer" onClick={() => toggleDeliverable(key)}>
                             <div
                               className={cn(
                                 "flex h-5 w-5 shrink-0 items-center justify-center rounded border-2 transition-colors",
@@ -1277,7 +1253,6 @@ export default function StartProjectPage() {
                                   ? "border-[#0A7D94] bg-[#0A7D94]"
                                   : "border-gray-400 bg-white"
                               )}
-                              onClick={() => toggleDeliverable(key)}
                             >
                               {form.deliverables?.includes(key) && (
                                 <svg className="h-3 w-3 text-white" viewBox="0 0 20 20" fill="none">
@@ -1285,7 +1260,6 @@ export default function StartProjectPage() {
                                 </svg>
                               )}
                             </div>
-                            <input type="checkbox" className="sr-only" checked={!!form.deliverables?.includes(key)} onChange={() => toggleDeliverable(key)} />
                             <span>{label}</span>
                           </label>
                         ))}
@@ -1303,8 +1277,8 @@ export default function StartProjectPage() {
                   </div>
                 )}
 
-                {/* ── Workflow Automation: Step 9 — Rules & Constraints ── */}
-                {isWorkflowAutomation && step === 9 && (
+                {/* ── Workflow Automation: Step 10 — Rules & Constraints ── */}
+                {isWorkflowAutomation && step === 10 && (
                   <div className="flex-1">
                     <h2 className="text-[22px] font-semibold text-[#0A7D94] mb-5">
                       Any rules, risks or constraints we should know?
@@ -1320,19 +1294,17 @@ export default function StartProjectPage() {
                         { value: "none", label: "None" },
                       ].map(({ value, label }) => (
                         <div key={value}>
-                          <label className="flex items-center gap-3 cursor-pointer">
+                          <label className="flex items-center gap-3 cursor-pointer" onClick={() => updateField("constraints", value)}>
                             <div
                               className={cn(
                                 "flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 transition-colors",
                                 form.constraints === value ? "border-[#0A7D94]" : "border-gray-400"
                               )}
-                              onClick={() => updateField("constraints", value)}
                             >
                               {form.constraints === value && (
                                 <div className="h-2.5 w-2.5 rounded-full bg-[#0A7D94]" />
                               )}
                             </div>
-                            <input type="radio" name="constraints" value={value} checked={form.constraints === value} onChange={() => updateField("constraints", value)} className="sr-only" />
                             <span>{label}</span>
                           </label>
                           {value === "compliance" && form.constraints === "compliance" && (
@@ -1350,8 +1322,8 @@ export default function StartProjectPage() {
                   </div>
                 )}
 
-                {/* ── Workflow Automation: Step 10 — Timeline ── */}
-                {isWorkflowAutomation && step === 10 && (
+                {/* ── Workflow Automation: Step 11 — Timeline ── */}
+                {isWorkflowAutomation && step === 11 && (
                   <div className="flex-1 flex flex-col justify-between">
                     {/* Top Content */}
                     <div>
@@ -1414,8 +1386,8 @@ export default function StartProjectPage() {
                   </div>
                 )}
 
-                {/* ── Workflow Automation: Step 11 — Upload / Deep Dive ── */}
-                {isWorkflowAutomation && step === 11 && (
+                {/* ── Workflow Automation: Step 12 — Upload / Deep Dive ── */}
+                {isWorkflowAutomation && step === 12 && (
                   <div className="flex-1 flex flex-col justify-between">
                     {/* Top Content */}
                     <div>
@@ -1484,9 +1456,8 @@ export default function StartProjectPage() {
                     <div className="mt-5">
                       <div className="mt-2 flex flex-col gap-3">
                         {["Turkey", "MENA", "Europe", "Global"].map((market) => (
-                          <label key={market} className="flex cursor-pointer items-center gap-2">
+                          <label key={market} className="flex cursor-pointer items-center gap-2" onClick={() => toggleRegion(market)}>
                             <div
-                              onClick={() => toggleRegion(market)}
                               className={cn(
                                 "flex h-4 w-4 shrink-0 items-center justify-center rounded border transition-colors",
                                 form.regions.includes(market) ? "bg-[#76717F]" : "bg-white"
@@ -1847,7 +1818,6 @@ export default function StartProjectPage() {
                     <h3 className="text-[22px] font-semibold text-[#0A7D94]">
                       Which brands do you consider your competitors?
                     </h3>
-                    <p className="mt-4 text-[16px] text-[#3F404D]">Example placeholder:</p>
                     <div className="mt-4 flex flex-col gap-5 w-full">
                       <div>
                         <label className="text-[14px] text-[#3F404D] mb-1.5 block">Brand name</label>
@@ -1907,19 +1877,17 @@ export default function StartProjectPage() {
                         "Analysis / consultancy only",
                         "Not sure, please guide me",
                       ].map((option) => (
-                        <label key={option} className="flex cursor-pointer items-center gap-3">
+                        <label key={option} className="flex cursor-pointer items-center gap-3" onClick={() => updateField("geoExpectedOutcome", option)}>
                           <div
                             className={cn(
                               "flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 transition-colors",
                               form.geoExpectedOutcome === option ? "border-[#0A7D94]" : "border-[#C3C3C3]"
                             )}
-                            onClick={() => updateField("geoExpectedOutcome", option)}
                           >
                             {form.geoExpectedOutcome === option && (
                               <div className="h-2.5 w-2.5 rounded-full bg-[#0A7D94]" />
                             )}
                           </div>
-                          <input type="radio" name="geoExpectedOutcome" value={option} checked={form.geoExpectedOutcome === option} onChange={() => updateField("geoExpectedOutcome", option)} className="sr-only" />
                           <span className="text-[18px] text-[#3F404D]">{option}</span>
                         </label>
                       ))}
@@ -1940,19 +1908,17 @@ export default function StartProjectPage() {
                         { value: "1month", label: "Within 1 month" },
                         { value: "exploring", label: "Just exploring" },
                       ].map(({ value, label }) => (
-                        <label key={value} className="flex cursor-pointer items-center gap-3">
+                        <label key={value} className="flex cursor-pointer items-center gap-3" onClick={() => updateField("geoTimeline", value)}>
                           <div
                             className={cn(
                               "flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 transition-colors",
                               form.geoTimeline === value ? "border-[#0A7D94]" : "border-[#C3C3C3]"
                             )}
-                            onClick={() => updateField("geoTimeline", value)}
                           >
                             {form.geoTimeline === value && (
                               <div className="h-2.5 w-2.5 rounded-full bg-[#0A7D94]" />
                             )}
                           </div>
-                          <input type="radio" name="geoTimeline" value={value} checked={form.geoTimeline === value} onChange={() => updateField("geoTimeline", value)} className="sr-only" />
                           <span className="text-[18px] text-[#3F404D]">{label}</span>
                         </label>
                       ))}
@@ -2000,7 +1966,7 @@ export default function StartProjectPage() {
                           "Product usage video",
                           "AI-generated cinematic film",
                         ].map((contentType) => (
-                          <label key={contentType} className="flex cursor-pointer items-center gap-3">
+                          <label key={contentType} className="flex cursor-pointer items-center gap-3" onClick={() => updateField("influencerType", contentType)}>
                             <div className={cn(
                               "flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 transition-colors",
                               form.influencerType === contentType ? "border-[#0A7D94]" : "border-[#C3C3C3]"
@@ -2009,7 +1975,6 @@ export default function StartProjectPage() {
                                 <div className="h-2.5 w-2.5 rounded-full bg-[#0A7D94]" />
                               )}
                             </div>
-                            <input type="radio" name="contentType" value={contentType} checked={form.influencerType === contentType} onChange={() => updateField("influencerType", contentType)} className="sr-only" />
                             <span className="text-[18px] text-[#3F404D]">{contentType}</span>
                           </label>
                         ))}
@@ -2021,7 +1986,7 @@ export default function StartProjectPage() {
                           "Mixed media (AI + live footage)",
                           "Other",
                         ].map((contentType) => (
-                          <label key={contentType} className="flex cursor-pointer items-center gap-3">
+                          <label key={contentType} className="flex cursor-pointer items-center gap-3" onClick={() => updateField("influencerType", contentType)}>
                             <div className={cn(
                               "flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 transition-colors",
                               form.influencerType === contentType ? "border-[#0A7D94]" : "border-[#C3C3C3]"
@@ -2030,7 +1995,6 @@ export default function StartProjectPage() {
                                 <div className="h-2.5 w-2.5 rounded-full bg-[#0A7D94]" />
                               )}
                             </div>
-                            <input type="radio" name="contentType" value={contentType} checked={form.influencerType === contentType} onChange={() => updateField("influencerType", contentType)} className="sr-only" />
                             <span className="text-[18px] text-[#3F404D]">{contentType}</span>
                           </label>
                         ))}
@@ -2054,7 +2018,7 @@ export default function StartProjectPage() {
                         "Explain the technology/function",
                         "Other",
                       ].map((objective) => (
-                        <label key={objective} className="flex cursor-pointer items-center gap-3">
+                        <label key={objective} className="flex cursor-pointer items-center gap-3" onClick={() => updateField("audienceSingle", objective)}>
                           <div className={cn(
                             "flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 transition-colors",
                             form.audienceSingle === objective ? "border-[#0A7D94]" : "border-[#C3C3C3]"
@@ -2063,7 +2027,6 @@ export default function StartProjectPage() {
                               <div className="h-2.5 w-2.5 rounded-full bg-[#0A7D94]" />
                             )}
                           </div>
-                          <input type="radio" name="objective" value={objective} checked={form.audienceSingle === objective} onChange={() => updateField("audienceSingle", objective)} className="sr-only" />
                           <span className="text-[18px] text-[#3F404D]">{objective}</span>
                         </label>
                       ))}
@@ -2086,7 +2049,7 @@ export default function StartProjectPage() {
                         "Community/app redirection",
                         "No CTA (brand awareness)",
                       ].map((ctaOption) => (
-                        <label key={ctaOption} className="flex cursor-pointer items-center gap-3">
+                        <label key={ctaOption} className="flex cursor-pointer items-center gap-3" onClick={() => updateField("cta", ctaOption)}>
                           <div className={cn(
                             "flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 transition-colors",
                             form.cta === ctaOption ? "border-[#0A7D94]" : "border-[#C3C3C3]"
@@ -2095,7 +2058,6 @@ export default function StartProjectPage() {
                               <div className="h-2.5 w-2.5 rounded-full bg-[#0A7D94]" />
                             )}
                           </div>
-                          <input type="radio" name="cta" value={ctaOption} checked={form.cta === ctaOption} onChange={() => updateField("cta", ctaOption)} className="sr-only" />
                           <span className="text-[18px] text-[#3F404D]">{ctaOption}</span>
                         </label>
                       ))}
@@ -2109,15 +2071,15 @@ export default function StartProjectPage() {
                     <h3 className="text-[22px] font-semibold text-[#0A7D94] mb-6">
                       Select your target market.
                     </h3>
+                    {errors.regions && <p className="mb-3 text-xs text-red-500">{errors.regions}</p>}
                     <div className="flex flex-col gap-5">
                       {["TR", "MENA", "EU", "Global", "Other"].map((market) => (
-                        <label key={market} className="flex cursor-pointer items-center gap-3">
+                        <label key={market} className="flex cursor-pointer items-center gap-3" onClick={() => toggleRegion(market)}>
                           <div
                             className={cn(
                               "flex h-5 w-5 shrink-0 items-center justify-center rounded border-2 transition-colors",
                               (form.regions || []).includes(market) ? "border-[#76717F] bg-[#76717F]" : "border-gray-400 bg-white"
                             )}
-                            onClick={() => toggleRegion(market)}
                           >
                             {(form.regions || []).includes(market) && (
                               <svg className="h-3 w-3 text-white" viewBox="0 0 20 20" fill="none">
@@ -2125,7 +2087,6 @@ export default function StartProjectPage() {
                               </svg>
                             )}
                           </div>
-                          <input type="checkbox" className="sr-only" checked={(form.regions || []).includes(market)} onChange={() => toggleRegion(market)} />
                           <span className="text-[18px] text-[#3F404D]">{market}</span>
                         </label>
                       ))}
@@ -2152,13 +2113,12 @@ export default function StartProjectPage() {
                           "Women-focused",
                           "Men-focused",
                         ].map((opt) => (
-                          <label key={opt} className="flex cursor-pointer items-center gap-3">
+                          <label key={opt} className="flex cursor-pointer items-center gap-3" onClick={() => toggleArrayValue("targetAudience", opt)}>
                             <div
                               className={cn(
                                 "flex h-5 w-5 shrink-0 items-center justify-center rounded border-2 transition-colors",
                                 (form.targetAudience || []).includes(opt) ? "border-[#76717F] bg-[#76717F]" : "border-gray-400 bg-white"
                               )}
-                              onClick={() => toggleArrayValue("targetAudience", opt)}
                             >
                               {(form.targetAudience || []).includes(opt) && (
                                 <svg className="h-3 w-3 text-white" viewBox="0 0 20 20" fill="none">
@@ -2166,7 +2126,6 @@ export default function StartProjectPage() {
                                 </svg>
                               )}
                             </div>
-                            <input type="checkbox" className="sr-only" checked={(form.targetAudience || []).includes(opt)} onChange={() => toggleArrayValue("targetAudience", opt)} />
                             <span className="text-[18px] text-[#3F404D]">{opt}</span>
                           </label>
                         ))}
@@ -2175,13 +2134,12 @@ export default function StartProjectPage() {
                       {/* Right column */}
                       <div className="flex flex-col gap-5">
                         {["Families", "Students"].map((opt) => (
-                          <label key={opt} className="flex cursor-pointer items-center gap-3">
+                          <label key={opt} className="flex cursor-pointer items-center gap-3" onClick={() => toggleArrayValue("targetAudience", opt)}>
                             <div
                               className={cn(
                                 "flex h-5 w-5 shrink-0 items-center justify-center rounded border-2 transition-colors",
                                 (form.targetAudience || []).includes(opt) ? "border-[#76717F] bg-[#76717F]" : "border-gray-400 bg-white"
                               )}
-                              onClick={() => toggleArrayValue("targetAudience", opt)}
                             >
                               {(form.targetAudience || []).includes(opt) && (
                                 <svg className="h-3 w-3 text-white" viewBox="0 0 20 20" fill="none">
@@ -2189,7 +2147,6 @@ export default function StartProjectPage() {
                                 </svg>
                               )}
                             </div>
-                            <input type="checkbox" className="sr-only" checked={(form.targetAudience || []).includes(opt)} onChange={() => toggleArrayValue("targetAudience", opt)} />
                             <span className="text-[18px] text-[#3F404D]">{opt}</span>
                           </label>
                         ))}
@@ -2208,13 +2165,12 @@ export default function StartProjectPage() {
                       {/* Left column */}
                       <div className="flex flex-col gap-5">
                         {["Cinematic", "Ultra-realistic", "Clean & Minimal", "Futuristic", "Sci-fi", "Warm", "Emotional", "Premium luxury"].map((opt) => (
-                          <label key={opt} className="flex cursor-pointer items-center gap-3">
+                          <label key={opt} className="flex cursor-pointer items-center gap-3" onClick={() => toggleArrayValue("visualStyle", opt)}>
                             <div
                               className={cn(
                                 "flex h-5 w-5 shrink-0 items-center justify-center rounded border-2 transition-colors",
                                 (form.visualStyle || []).includes(opt) ? "border-[#76717F] bg-[#76717F]" : "border-gray-400 bg-white"
                               )}
-                              onClick={() => toggleArrayValue("visualStyle", opt)}
                             >
                               {(form.visualStyle || []).includes(opt) && (
                                 <svg className="h-3 w-3 text-white" viewBox="0 0 20 20" fill="none">
@@ -2222,7 +2178,6 @@ export default function StartProjectPage() {
                                 </svg>
                               )}
                             </div>
-                            <input type="checkbox" className="sr-only" checked={(form.visualStyle || []).includes(opt)} onChange={() => toggleArrayValue("visualStyle", opt)} />
                             <span className="text-[18px] text-[#3F404D]">{opt}</span>
                           </label>
                         ))}
@@ -2231,13 +2186,12 @@ export default function StartProjectPage() {
                       {/* Right column */}
                       <div className="flex flex-col gap-5">
                         {["Studio product-focused", "Bold & Energetic", "Cartoon & Stylized", "Other"].map((opt) => (
-                          <label key={opt} className="flex cursor-pointer items-center gap-3">
+                          <label key={opt} className="flex cursor-pointer items-center gap-3" onClick={() => toggleArrayValue("visualStyle", opt)}>
                             <div
                               className={cn(
                                 "flex h-5 w-5 shrink-0 items-center justify-center rounded border-2 transition-colors",
                                 (form.visualStyle || []).includes(opt) ? "border-[#76717F] bg-[#76717F]" : "border-gray-400 bg-white"
                               )}
-                              onClick={() => toggleArrayValue("visualStyle", opt)}
                             >
                               {(form.visualStyle || []).includes(opt) && (
                                 <svg className="h-3 w-3 text-white" viewBox="0 0 20 20" fill="none">
@@ -2245,7 +2199,6 @@ export default function StartProjectPage() {
                                 </svg>
                               )}
                             </div>
-                            <input type="checkbox" className="sr-only" checked={(form.visualStyle || []).includes(opt)} onChange={() => toggleArrayValue("visualStyle", opt)} />
                             <span className="text-[18px] text-[#3F404D]">{opt}</span>
                           </label>
                         ))}
@@ -2254,191 +2207,105 @@ export default function StartProjectPage() {
                   </div>
                 )}
 
-                {/* ── AI Production: Step 7 — Video Details Selection ── */}
+                {/* ── AI Production: Step 7 — Video Duration ── */}
                 {isAiProduction && step === 7 && (
-                  <div className="flex-1 flex flex-col gap-6">
-                    {/* Duration */}
-                    <div>
-                      <h3 className="text-[22px] font-semibold text-[#0A7D94] mb-4">
-                        What is your target video duration?
-                      </h3>
-                      <div className="flex flex-wrap gap-x-8 gap-y-3">
-                        {["5–15 sec", "15–30 sec", "30–60 sec", "1 - 2 min", "2 min+"].map((opt) => (
-                          <label key={opt} className="flex cursor-pointer items-center gap-2">
-                            <div className={cn(
-                              "flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 transition-colors",
-                              form.videoDuration === opt ? "border-[#0A7D94]" : "border-[#C3C3C3]"
-                            )}>
-                              {form.videoDuration === opt && <div className="h-2.5 w-2.5 rounded-full bg-[#0A7D94]" />}
-                            </div>
-                            <input type="radio" name="videoDuration" value={opt} checked={form.videoDuration === opt} onChange={() => updateField("videoDuration", opt)} className="sr-only" />
-                            <span className="text-[18px] text-[#3F404D]">{opt}</span>
-                          </label>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* Platforms */}
-                    <div>
-                      <h3 className="text-[22px] font-semibold text-[#0A7D94] mb-4">
-                        Which platforms will it be published on?
-                      </h3>
-                      <div className="grid grid-cols-3 gap-x-6 gap-y-4">
-                        {["TikTok", "YouTube & YouTube Ads", "Meta Ads (IG & Facebook)", "Website hero video", "TV", "Other"].map((opt) => (
-                          <label key={opt} className="flex cursor-pointer items-center gap-3">
-                            <div
-                              className={cn(
-                                "flex h-5 w-5 shrink-0 items-center justify-center rounded border-2 transition-colors",
-                                (form.videoPlatforms || []).includes(opt) ? "border-[#76717F] bg-[#76717F]" : "border-gray-400 bg-white"
-                              )}
-                              onClick={() => toggleArrayValue("videoPlatforms", opt)}
-                            >
-                              {(form.videoPlatforms || []).includes(opt) && (
-                                <svg className="h-3 w-3 text-white" viewBox="0 0 20 20" fill="none">
-                                  <path d="M4 10l4 4 8-8" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-                                </svg>
-                              )}
-                            </div>
-                            <input type="checkbox" className="sr-only" checked={(form.videoPlatforms || []).includes(opt)} onChange={() => toggleArrayValue("videoPlatforms", opt)} />
-                            <span className="text-[18px] text-[#3F404D]">{opt}</span>
-                          </label>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* Format */}
-                    <div>
-                      <h3 className="text-[22px] font-semibold text-[#0A7D94] mb-4">
-                        Preferred video format?
-                      </h3>
-                      <div className="flex flex-wrap gap-x-8 gap-y-3">
-                        {["Vertical 9:16", "Square 1:1", "Horizontal 16:9", "Other"].map((opt) => (
-                          <label key={opt} className="flex cursor-pointer items-center gap-3">
-                            <div
-                              className={cn(
-                                "flex h-5 w-5 shrink-0 items-center justify-center rounded border-2 transition-colors",
-                                (form.videoFormat || []).includes(opt) ? "border-[#76717F] bg-[#76717F]" : "border-gray-400 bg-white"
-                              )}
-                              onClick={() => toggleArrayValue("videoFormat", opt)}
-                            >
-                              {(form.videoFormat || []).includes(opt) && (
-                                <svg className="h-3 w-3 text-white" viewBox="0 0 20 20" fill="none">
-                                  <path d="M4 10l4 4 8-8" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-                                </svg>
-                              )}
-                            </div>
-                            <input type="checkbox" className="sr-only" checked={(form.videoFormat || []).includes(opt)} onChange={() => toggleArrayValue("videoFormat", opt)} />
-                            <span className="text-[18px] text-[#3F404D]">{opt}</span>
-                          </label>
-                        ))}
-                      </div>
+                  <div className="flex-1">
+                    <h3 className="text-[22px] font-semibold text-[#0A7D94] mb-4">What is your target video duration?</h3>
+                    <div className="flex flex-col gap-4 mt-4">
+                      {["5–15 sec", "15–30 sec", "30–60 sec", "1 - 2 min", "2 min+"].map((opt) => (
+                        <label key={opt} className="flex cursor-pointer items-center gap-2" onClick={() => updateField("videoDuration", opt)}>
+                          <div className={cn("flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 transition-colors", form.videoDuration === opt ? "border-[#0A7D94]" : "border-[#C3C3C3]")}>
+                            {form.videoDuration === opt && <div className="h-2.5 w-2.5 rounded-full bg-[#0A7D94]" />}
+                          </div>
+                          <span className="text-[18px] text-[#3F404D]">{opt}</span>
+                        </label>
+                      ))}
                     </div>
                   </div>
                 )}
 
-
-
-                {/* ── AI Production: Step — Audio & Format ── */}
+                {/* ── AI Production: Step 8 — Video Platforms ── */}
                 {isAiProduction && step === 8 && (
-                  <div className="flex-1 flex flex-col gap-6">
-                    {/* Sound / Music */}
-                    <div>
-                      <h3 className="text-[22px] font-semibold text-[#0A7D94] mb-4">
-                        Sound / music preference?
-                      </h3>
-                      <div className="grid grid-cols-3 gap-x-6 gap-y-4">
-                        {["Soft emotional", "Energetic", "Cinematic orchestral", "Minimalist", "Electronic futuristic", "No music"].map((opt) => (
-                          <label key={opt} className="flex cursor-pointer items-center gap-3">
-                            <div
-                              className={cn(
-                                "flex h-5 w-5 shrink-0 items-center justify-center rounded border-2 transition-colors",
-                                (form.musicPreference || []).includes(opt) ? "border-[#76717F] bg-[#76717F]" : "border-gray-400 bg-white"
-                              )}
-                              onClick={() => toggleArrayValue("musicPreference", opt)}
-                            >
-                              {(form.musicPreference || []).includes(opt) && (
-                                <svg className="h-3 w-3 text-white" viewBox="0 0 20 20" fill="none">
-                                  <path d="M4 10l4 4 8-8" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-                                </svg>
-                              )}
-                            </div>
-                            <input type="checkbox" className="sr-only" checked={(form.musicPreference || []).includes(opt)} onChange={() => toggleArrayValue("musicPreference", opt)} />
-                            <span className="text-[18px] text-[#3F404D]">{opt}</span>
-                          </label>
-                        ))}
-                      </div>
+                  <div className="flex-1">
+                    <h3 className="text-[22px] font-semibold text-[#0A7D94] mb-4">Which platforms will it be published on?</h3>
+                    <div className="flex flex-col gap-4 mt-4">
+                      {["TikTok", "YouTube & YouTube Ads", "Meta Ads (IG & Facebook)", "Website hero video", "TV", "Other"].map((opt) => (
+                        <label key={opt} className="flex cursor-pointer items-center gap-3" onClick={() => toggleArrayValue("videoPlatforms", opt)}>
+                          <div className={cn("flex h-5 w-5 shrink-0 items-center justify-center rounded border-2 transition-colors", (form.videoPlatforms || []).includes(opt) ? "border-[#76717F] bg-[#76717F]" : "border-gray-400 bg-white")}>
+                            {(form.videoPlatforms || []).includes(opt) && (<svg className="h-3 w-3 text-white" viewBox="0 0 20 20" fill="none"><path d="M4 10l4 4 8-8" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" /></svg>)}
+                          </div>
+                          <span className="text-[18px] text-[#3F404D]">{opt}</span>
+                        </label>
+                      ))}
                     </div>
+                  </div>
+                )}
 
-                    {/* Preferred video format */}
-                    <div>
-                      <h3 className="text-[22px] font-semibold text-[#0A7D94] mb-4">
-                        Preferred video format?
-                      </h3>
-                      <div className="flex flex-wrap gap-x-8 gap-y-3">
-                        {["Vertical 9:16", "Square 1:1", "Horizontal 16:9", "Other"].map((opt) => (
-                          <label key={opt} className="flex cursor-pointer items-center gap-3">
-                            <div
-                              className={cn(
-                                "flex h-5 w-5 shrink-0 items-center justify-center rounded border-2 transition-colors",
-                                (form.videoFormats || []).includes(opt) ? "border-[#76717F] bg-[#76717F]" : "border-gray-400 bg-white"
-                              )}
-                              onClick={() => toggleArrayValue("videoFormats", opt)}
-                            >
-                              {(form.videoFormats || []).includes(opt) && (
-                                <svg className="h-3 w-3 text-white" viewBox="0 0 20 20" fill="none">
-                                  <path d="M4 10l4 4 8-8" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-                                </svg>
-                              )}
-                            </div>
-                            <input type="checkbox" className="sr-only" checked={(form.videoFormats || []).includes(opt)} onChange={() => toggleArrayValue("videoFormats", opt)} />
-                            <span className="text-[18px] text-[#3F404D]">{opt}</span>
-                          </label>
-                        ))}
-                      </div>
+                {/* ── AI Production: Step 9 — Video Format ── */}
+                {isAiProduction && step === 9 && (
+                  <div className="flex-1">
+                    <h3 className="text-[22px] font-semibold text-[#0A7D94] mb-4">Preferred video format?</h3>
+                    <div className="flex flex-col gap-4 mt-4">
+                      {["Vertical 9:16", "Square 1:1", "Horizontal 16:9", "Other"].map((opt) => (
+                        <label key={opt} className="flex cursor-pointer items-center gap-3" onClick={() => toggleArrayValue("videoFormat", opt)}>
+                          <div className={cn("flex h-5 w-5 shrink-0 items-center justify-center rounded border-2 transition-colors", (form.videoFormat || []).includes(opt) ? "border-[#76717F] bg-[#76717F]" : "border-gray-400 bg-white")}>
+                            {(form.videoFormat || []).includes(opt) && (<svg className="h-3 w-3 text-white" viewBox="0 0 20 20" fill="none"><path d="M4 10l4 4 8-8" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" /></svg>)}
+                          </div>
+                          <span className="text-[18px] text-[#3F404D]">{opt}</span>
+                        </label>
+                      ))}
                     </div>
+                  </div>
+                )}
 
-                    {/* Voice-over */}
-                    <div>
-                      <h3 className="text-[22px] font-semibold text-[#0A7D94] mb-4">
-                        Would you like a voice-over?
-                      </h3>
-                      <div className="flex gap-16 mb-4">
-                        {["Yes", "No", "Not sure"].map((opt) => (
-                          <label key={opt} className="flex cursor-pointer items-center gap-3">
-                            <div
-                              className={cn(
-                                "flex h-5 w-5 shrink-0 items-center justify-center rounded border-2 transition-colors",
-                                form.voiceOver === opt ? "border-[#76717F] bg-[#76717F]" : "border-gray-400 bg-white"
-                              )}
-                              onClick={() => updateField("voiceOver", opt)}
-                            >
-                              {form.voiceOver === opt && (
-                                <svg className="h-3 w-3 text-white" viewBox="0 0 20 20" fill="none">
-                                  <path d="M4 10l4 4 8-8" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-                                </svg>
-                              )}
-                            </div>
-                            <input type="radio" name="voiceOver" value={opt} checked={form.voiceOver === opt} onChange={() => updateField("voiceOver", opt)} className="sr-only" />
-                            <span className="text-[18px] text-[#3F404D]">{opt}</span>
-                          </label>
-                        ))}
-                      </div>
-                      <div className="relative w-64">
-                        <select
-                          value={form.voiceOverLanguage || ""}
-                          onChange={(e) => updateField("voiceOverLanguage", e.target.value)}
-                          className="w-full appearance-none rounded-xl border border-gray-300 bg-white px-4 py-3 text-[15px] text-gray-500 focus:border-[#0A7D94] focus:outline-none"
-                        >
-                          <option value="">Please select your language</option>
-                          <option value="English">English</option>
-                          <option value="Turkish">Turkish</option>
-                          <option value="Arabic">Arabic</option>
-                          <option value="Spanish">Spanish</option>
-                          <option value="French">French</option>
-                          <option value="German">German</option>
-                        </select>
-                        <div className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm">▼</div>
-                      </div>
+
+
+                {/* ── AI Production: Step 10 — Music Preference ── */}
+                {isAiProduction && step === 10 && (
+                  <div className="flex-1">
+                    <h3 className="text-[22px] font-semibold text-[#0A7D94] mb-4">Sound / music preference?</h3>
+                    <div className="grid grid-cols-2 gap-x-6 gap-y-4 mt-4">
+                      {["Soft emotional", "Energetic", "Cinematic orchestral", "Minimalist", "Electronic futuristic", "No music"].map((opt) => (
+                        <label key={opt} className="flex cursor-pointer items-center gap-3" onClick={() => toggleArrayValue("musicPreference", opt)}>
+                          <div className={cn("flex h-5 w-5 shrink-0 items-center justify-center rounded border-2 transition-colors", (form.musicPreference || []).includes(opt) ? "border-[#76717F] bg-[#76717F]" : "border-gray-400 bg-white")}>
+                            {(form.musicPreference || []).includes(opt) && (<svg className="h-3 w-3 text-white" viewBox="0 0 20 20" fill="none"><path d="M4 10l4 4 8-8" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" /></svg>)}
+                          </div>
+                          <span className="text-[18px] text-[#3F404D]">{opt}</span>
+                        </label>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* ── AI Production: Step 11 — Voice Over ── */}
+                {isAiProduction && step === 11 && (
+                  <div className="flex-1">
+                    <h3 className="text-[22px] font-semibold text-[#0A7D94] mb-4">Would you like a voice-over?</h3>
+                    <div className="flex flex-col gap-4 mt-4 mb-6">
+                      {["Yes", "No", "Not sure"].map((opt) => (
+                        <label key={opt} className="flex cursor-pointer items-center gap-3" onClick={() => updateField("voiceOver", opt)}>
+                          <div className={cn("flex h-5 w-5 shrink-0 items-center justify-center rounded border-2 transition-colors", form.voiceOver === opt ? "border-[#76717F] bg-[#76717F]" : "border-gray-400 bg-white")}>
+                            {form.voiceOver === opt && (<svg className="h-3 w-3 text-white" viewBox="0 0 20 20" fill="none"><path d="M4 10l4 4 8-8" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" /></svg>)}
+                          </div>
+                          <span className="text-[18px] text-[#3F404D]">{opt}</span>
+                        </label>
+                      ))}
+                    </div>
+                    <div className="relative w-64">
+                      <select
+                        value={form.voiceOverLanguage || ""}
+                        onChange={(e) => updateField("voiceOverLanguage", e.target.value)}
+                        className="w-full appearance-none rounded-xl border border-gray-300 bg-white px-4 py-3 text-[15px] text-gray-500 focus:border-[#0A7D94] focus:outline-none"
+                      >
+                        <option value="">Please select your language</option>
+                        <option value="English">English</option>
+                        <option value="Turkish">Turkish</option>
+                        <option value="Arabic">Arabic</option>
+                        <option value="Spanish">Spanish</option>
+                        <option value="French">French</option>
+                        <option value="German">German</option>
+                      </select>
+                      <div className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm">▼</div>
                     </div>
                   </div>
                 )}
@@ -2446,8 +2313,8 @@ export default function StartProjectPage() {
 
 
 
-                {/* ── AI Production: Step — Script Status ── */}
-                {isAiProduction && step === 9 && (
+                {/* ── AI Production: Step 12 — Script Status ── */}
+                {isAiProduction && step === 12 && (
                   <div className="flex-1 max-w-[900px]">
 
                     {/* Title */}
@@ -2460,7 +2327,7 @@ export default function StartProjectPage() {
 
                       {/* ───────── Available ───────── */}
                       <div>
-                        <label className="flex items-center gap-3 cursor-pointer">
+                        <label className="flex items-center gap-3 cursor-pointer" onClick={() => updateField("scriptStatus", "Available")}>
                           <div
                             className={cn(
                               "flex h-6 w-6 items-center justify-center rounded-md border-2 transition",
@@ -2475,33 +2342,32 @@ export default function StartProjectPage() {
                               </svg>
                             )}
                           </div>
-
-                          <input
-                            type="radio"
-                            className="hidden"
-                            checked={form.scriptStatus === "Available"}
-                            onChange={() => updateField("scriptStatus", "Available")}
-                          />
-
                           <span className="text-[18px] text-[#3F404D]">Available</span>
                         </label>
 
                         {/* Upload Box (ALWAYS visible like design) */}
-                        <div className="mt-6 w-full max-w-[420px] h-[130px] rounded-xl border border-dashed border-[#CFCFCF] flex items-center justify-center">
+                        <label className="mt-6 w-full max-w-[420px] h-[130px] rounded-xl border border-dashed border-[#CFCFCF] flex items-center justify-center cursor-pointer hover:border-[#117A8B] transition-colors">
                           <div className="flex flex-col items-center gap-2 text-[#6B6B6B]">
                             <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                               <path d="M12 16V4" />
                               <path d="M8 8l4-4 4 4" />
                               <path d="M20 16v2a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-2" />
                             </svg>
-                            <span className="text-[16px]">Upload</span>
+                            <span className="text-[16px]">
+                              {form.scriptFile ? (form.scriptFile as File).name : "Upload"}
+                            </span>
                           </div>
-                        </div>
+                          <input
+                            type="file"
+                            className="hidden"
+                            onChange={(e) => { const f = e.target.files?.[0]; if (f) updateField("scriptFile", f); }}
+                          />
+                        </label>
                       </div>
 
                       {/* ───────── Not Available ───────── */}
                       <div>
-                        <label className="flex items-center gap-3 cursor-pointer">
+                        <label className="flex items-center gap-3 cursor-pointer" onClick={() => updateField("scriptStatus", "Not available")}>
                           <div
                             className={cn(
                               "flex h-6 w-6 items-center justify-center rounded-md border-2 transition",
@@ -2516,14 +2382,6 @@ export default function StartProjectPage() {
                               </svg>
                             )}
                           </div>
-
-                          <input
-                            type="radio"
-                            className="hidden"
-                            checked={form.scriptStatus === "Not available"}
-                            onChange={() => updateField("scriptStatus", "Not available")}
-                          />
-
                           <span className="text-[18px] text-[#3F404D]">Not available</span>
                         </label>
 
@@ -2538,7 +2396,7 @@ export default function StartProjectPage() {
 
                       {/* ───────── Draft Available ───────── */}
                       <div>
-                        <label className="flex items-center gap-3 cursor-pointer">
+                        <label className="flex items-center gap-3 cursor-pointer" onClick={() => updateField("scriptStatus", "Draft available")}>
                           <div
                             className={cn(
                               "flex h-6 w-6 items-center justify-center rounded-md border-2 transition",
@@ -2553,33 +2411,32 @@ export default function StartProjectPage() {
                               </svg>
                             )}
                           </div>
-
-                          <input
-                            type="radio"
-                            className="hidden"
-                            checked={form.scriptStatus === "Draft available"}
-                            onChange={() => updateField("scriptStatus", "Draft available")}
-                          />
-
                           <span className="text-[18px] text-[#3F404D]">Draft available</span>
                         </label>
 
                         {/* Upload */}
-                        <div className="mt-6 w-full max-w-[420px] h-[130px] rounded-xl border border-dashed border-[#CFCFCF] flex items-center justify-center">
+                        <label className="mt-6 w-full max-w-[420px] h-[130px] rounded-xl border border-dashed border-[#CFCFCF] flex items-center justify-center cursor-pointer hover:border-[#117A8B] transition-colors">
                           <div className="flex flex-col items-center gap-2 text-[#6B6B6B]">
                             <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                               <path d="M12 16V4" />
                               <path d="M8 8l4-4 4 4" />
                               <path d="M20 16v2a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-2" />
                             </svg>
-                            <span className="text-[16px]">Upload</span>
+                            <span className="text-[16px]">
+                              {form.scriptFile ? (form.scriptFile as File).name : "Upload"}
+                            </span>
                           </div>
-                        </div>
+                          <input
+                            type="file"
+                            className="hidden"
+                            onChange={(e) => { const f = e.target.files?.[0]; if (f) updateField("scriptFile", f); }}
+                          />
+                        </label>
                       </div>
 
                       {/* ───────── No Script ───────── */}
                       <div className="flex items-start">
-                        <label className="flex items-center gap-3 cursor-pointer mt-1">
+                        <label className="flex items-center gap-3 cursor-pointer mt-1" onClick={() => updateField("scriptStatus", "I don’t need a script")}>
                           <div
                             className={cn(
                               "flex h-6 w-6 items-center justify-center rounded-md border-2 transition",
@@ -2613,8 +2470,8 @@ export default function StartProjectPage() {
                   </div>
                 )}
 
-                {/* ── AI Production: Step — Timeline & Additional Materials ── */}
-                {isAiProduction && step === 10 && (
+                {/* ── AI Production: Step 13 — Timeline & Additional Materials ── */}
+                {isAiProduction && step === 13 && (
                   <div className="flex-1 flex flex-col gap-6">
                     {/* Timeline */}
                     <div>

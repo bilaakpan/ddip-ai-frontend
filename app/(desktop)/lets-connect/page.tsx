@@ -9,10 +9,13 @@ interface ContactForm {
   companyName: string;
   country: string;
   details: string;
+  honeypot: string; // spam trap — must stay empty
 }
 interface FormErrors {
   fullName?: string;
   companyEmail?: string;
+  details?: string;
+  honeypot?: string;
 }
 /**
  * Let's Connect — Contact Page
@@ -29,10 +32,12 @@ export default function LetsConnectPage() {
     companyName: "",
     country: "",
     details: "",
+    honeypot: "",
   });
   const [errors, setErrors] = useState<FormErrors>({});
   const [submitted, setSubmitted] = useState(false);
   const [sending, setSending] = useState(false);
+  const [lastSubmitTime, setLastSubmitTime] = useState<number>(0);
   function updateField(field: keyof ContactForm, value: string) {
     setForm((prev) => ({ ...prev, [field]: value }));
     if (errors[field as keyof FormErrors]) {
@@ -41,12 +46,45 @@ export default function LetsConnectPage() {
   }
   function validate(): boolean {
     const newErrors: FormErrors = {};
+
+    // Honeypot — if filled, it's a bot
+    if (form.honeypot) {
+      setErrors({});
+      setSubmitted(true); // silently fake success
+      return false;
+    }
+
+    // Rate limit — 60 seconds between submissions
+    const now = Date.now();
+    if (lastSubmitTime && now - lastSubmitTime < 60_000) {
+      newErrors.companyEmail = "Please wait a moment before submitting again";
+      setErrors(newErrors);
+      return false;
+    }
+
     if (!form.fullName.trim()) newErrors.fullName = "Full name is required";
+
+    // Block obvious fake names (all same char, numbers only, too short)
+    if (form.fullName.trim().length < 2) newErrors.fullName = "Please enter your full name";
+
     if (!form.companyEmail.trim()) {
       newErrors.companyEmail = "Email is required";
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.companyEmail)) {
       newErrors.companyEmail = "Please enter a valid email address";
+    } else {
+      // Block disposable/temp email domains
+      const blockedDomains = ["mailinator.com", "tempmail.com", "guerrillamail.com", "10minutemail.com", "throwam.com", "yopmail.com"];
+      const domain = form.companyEmail.split("@")[1]?.toLowerCase();
+      if (blockedDomains.includes(domain)) {
+        newErrors.companyEmail = "Please use a valid company email address";
+      }
     }
+
+    // Details: if provided, must be meaningful (min 10 chars)
+    if (form.details.trim() && form.details.trim().length < 10) {
+      newErrors.details = "Please provide more details (at least 10 characters)";
+    }
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   }
@@ -62,6 +100,7 @@ export default function LetsConnectPage() {
         subject: form.companyName || undefined,
         message: form.details || "No details provided",
       });
+      setLastSubmitTime(Date.now());
       setSubmitted(true);
     } catch {
       setSubmitted(true);
@@ -81,14 +120,14 @@ export default function LetsConnectPage() {
             <div className="flex w-max animate-marquee">
               <h1 className="whitespace-nowrap text-[#063746] font-heading text-[clamp(32px,6vw,64px)] sm:text-[clamp(36px,7vw,80px)] md:text-[clamp(48px,8vw,120px)] uppercase leading-[1.05]">
                 LET&apos;S CONNECT
-                <span className="mx-4 text-teal-500">✻</span>
+                <span className="mx-4 text-[#063746]">✻</span>
               </h1>
               {/* duplicate for seamless scroll */}
               <h1 className="whitespace-nowrap text-[#063746] font-heading text-[clamp(32px,6vw,64px)] sm:text-[clamp(36px,7vw,80px)] md:text-[clamp(48px,8vw,120px)] uppercase leading-[1.05] ml-10">
                 LET&apos;S CONNECT
-                <span className="mx-4 text-teal-500">✻</span>
+                <span className="mx-4 text-[#063746]">✻</span>
                 LET&apos;S CONNECT
-                <span className="mx-4 text-teal-500">✻</span>
+                <span className="mx-4 text-[#063746]">✻</span>
               </h1>
             </div>
           </div>
@@ -137,6 +176,7 @@ export default function LetsConnectPage() {
                       companyName: "",
                       country: "",
                       details: "",
+                      honeypot: "",
                     });
                   }}
                 >
@@ -145,6 +185,19 @@ export default function LetsConnectPage() {
               </div>
             ) : (
               <form onSubmit={handleSubmit} noValidate className="space-y-4 sm:space-y-6">
+                {/* Honeypot — hidden from real users, bots will fill this */}
+                <div aria-hidden="true" style={{ position: "absolute", left: "-9999px", opacity: 0, pointerEvents: "none", tabIndex: -1 } as React.CSSProperties}>
+                  <label htmlFor="website">Website</label>
+                  <input
+                    id="website"
+                    name="website"
+                    type="text"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    value={form.honeypot}
+                    onChange={(e) => updateField("honeypot", e.target.value)}
+                  />
+                </div>
                 <div className="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-2">
                   {/* Full Name */}
                   <div className="flex flex-col">
@@ -236,6 +289,9 @@ export default function LetsConnectPage() {
                     onChange={(e) => updateField("details", e.target.value)}
                     className="w-full resize-y rounded-md border border-gray-300 bg-white px-3 sm:px-4 py-2.5 sm:py-3 text-[#888888] placeholder:text-gray-400 transition-colors hover:border-gray-400 focus:border-[#1CE3F4] focus:outline-none focus:ring-2 focus:ring-[#1CE3F4] focus:ring-offset-0"
                   />
+                  {errors.details && (
+                    <p className="mt-1 text-xs text-red-500">{errors.details}</p>
+                  )}
                 </div>
                 {/* Submit */}
                 <div className="pt-3 sm:pt-4">
@@ -285,8 +341,7 @@ export default function LetsConnectPage() {
           <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-12 md:gap-16">
             {/* LEFT: CONNECT */}
             <div className="md:w-[40%]">
-              <h2 className="font-heading uppercase text-[#0f3b44] leading-none
-          text-5xl sm:text-6xl md:text-7xl lg:text-[110px] tracking-[-0.02em]">
+              <h2 className="font-heading uppercase text-[#0f3b44] leading-none text-[33px] sm:text-[45px] md:text-[57px] lg:text-[95px] tracking-[-0.02em]">
                 CONNECT
               </h2>
             </div>
