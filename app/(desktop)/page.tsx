@@ -548,9 +548,10 @@ export default function HomePage() {
                       className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                     />
                   ) : (
-                    <img
+                    <Image
                       src={solution.media}
                       alt={solution.title}
+                      fill
                       className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                     />
                   )}
@@ -841,9 +842,10 @@ export default function HomePage() {
               {[...cmsInfluencers.row1, ...cmsInfluencers.row1].map((inf, idx) => (
                 <div key={`row1-${idx}`} className="w-[376px] flex-shrink-0 cursor-pointer" onClick={() => { setSelectedInfluencer(inf); setIsInfluencerPopupOpen(true); }}>
                   <div className="relative h-[518px] w-full overflow-hidden rounded-[20px] bg-[#EFEFEF]">
-                    <img
+                    <Image
                       src={inf.image}
                       alt={inf.name}
+                      fill
                       className="absolute inset-0 h-full w-full object-cover"
                     />
                     <div
@@ -860,9 +862,11 @@ export default function HomePage() {
                     <div className="absolute bottom-[20px] left-[20px] right-[20px] flex items-center justify-between">
                       <div className="flex items-center gap-2 rounded-full bg-[#063746B2] px-[22px] py-[12px]">
                         {inf.country && (
-                          <img
+                          <Image
                             src={`https://flagcdn.com/w20/${inf.country.toLowerCase()}.png`}
                             alt={inf.country}
+                            height={4}
+                            width={5}
                             className="h-[14px] w-[20px] rounded-sm object-cover"
                           />
                         )}
@@ -898,9 +902,10 @@ export default function HomePage() {
               {[...cmsInfluencers.row2, ...cmsInfluencers.row2].map((inf, idx) => (
                 <div key={`row2-${idx}`} className="w-[376px] flex-shrink-0 cursor-pointer" onClick={() => { setSelectedInfluencer(inf); setIsInfluencerPopupOpen(true); }}>
                   <div className="relative h-[518px] w-full overflow-hidden rounded-[20px] bg-[#EFEFEF]">
-                    <img
+                    <Image
                       src={inf.image}
                       alt={inf.name}
+                      fill
                       className="absolute inset-0 h-full w-full object-cover"
                     />
                     <div
@@ -917,9 +922,11 @@ export default function HomePage() {
                     <div className="absolute bottom-[20px] left-[20px] right-[20px] flex items-center justify-between">
                       <div className="flex items-center gap-2 rounded-full bg-[#063746B2] px-[22px] py-[12px]">
                         {inf.country && (
-                          <img
+                          <Image
                             src={`https://flagcdn.com/w20/${inf.country.toLowerCase()}.png`}
                             alt={inf.country}
+                            height={4}
+                            width={5}
                             className="h-[14px] w-[20px] rounded-sm object-cover"
                           />
                         )}
@@ -1089,10 +1096,12 @@ export default function HomePage() {
               { src: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/50fb6339-c64b-468a-f30b-525f4ec61000/public", name: "Seedream", top: "55%", left: "85%", size: 109 },
               { src: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/99fe4e74-0843-449e-9b8d-ead7ca7f3e00/public", name: "Mystic", top: "40%", left: "25%", size: 86 },
             ].map((tool) => (
-              <img
+              <Image
                 key={tool.name}
                 src={tool.src}
                 alt={tool.name}
+                height={tool.size}
+                width={tool.size}
                 className="absolute opacity-80 transition-opacity duration-300 hover:opacity-100"
                 style={{
                   top: tool.top,
