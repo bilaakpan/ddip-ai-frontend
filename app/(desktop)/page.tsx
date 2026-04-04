@@ -146,10 +146,7 @@ const partners = [
   { name: "Google AI", image: "/images/partners/google-ai.svg" },
 ];
 
-/**
- * DDip AI Homepage — Desktop
- * Pixel-perfect rebuild from Figma UI page (node 255:542, 1728x15709)
- */
+
 export default function HomePage() {
 
   // Hero carousel
