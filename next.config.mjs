@@ -6,10 +6,12 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'imagedelivery.net',
+        pathname: '/**', // ✅ IMPORTANT
       },
       {
         protocol: 'https',
         hostname: 'flagcdn.com',
+        pathname: '/**',
       },
     ],
   },
