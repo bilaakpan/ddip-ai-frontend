@@ -286,6 +286,7 @@ export default function HomePage() {
             <Image
               key={src}
               src={src}
+              unoptimized
               alt="DDiP AI hero"
               fill
               priority={i === 0}
@@ -417,6 +418,7 @@ export default function HomePage() {
             {/* Talk to AI widget */}
             <div className="relative h-[250px] w-[253px]">
               <Image
+              unoptimized
                 src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/893c48e8-59f1-400e-9cb8-0d36b752db00/public"
                 alt="Talk to our AI assistant — DDiP AI virtual chat"
                 fill
@@ -552,6 +554,7 @@ export default function HomePage() {
                       src={solution.media}
                       alt={solution.title}
                       fill
+                      unoptimized
                       className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                     />
                   )}
@@ -843,8 +846,10 @@ export default function HomePage() {
                 <div key={`row1-${idx}`} className="w-[376px] flex-shrink-0 cursor-pointer" onClick={() => { setSelectedInfluencer(inf); setIsInfluencerPopupOpen(true); }}>
                   <div className="relative h-[518px] w-full overflow-hidden rounded-[20px] bg-[#EFEFEF]">
                     <Image
+                    unoptimized
                       src={inf.image}
                       alt={inf.name}
+                      
                       fill
                       className="absolute inset-0 h-full w-full object-cover"
                     />
@@ -906,6 +911,7 @@ export default function HomePage() {
                       src={inf.image}
                       alt={inf.name}
                       fill
+                      unoptimized
                       className="absolute inset-0 h-full w-full object-cover"
                     />
                     <div
@@ -927,6 +933,7 @@ export default function HomePage() {
                             alt={inf.country}
                             height={4}
                             width={5}
+                            unoptimized
                             className="h-[14px] w-[20px] rounded-sm object-cover"
                           />
                         )}
@@ -1099,6 +1106,7 @@ export default function HomePage() {
               <Image
                 key={tool.name}
                 src={tool.src}
+                unoptimized
                 alt={tool.name}
                 height={tool.size}
                 width={tool.size}
