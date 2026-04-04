@@ -28,10 +28,10 @@ export default function HlsPlayer({
     const [shouldFillHeight, setShouldFillHeight] = useState(false);
 
     // Construct full URL if only ID is passed
-    const fullSrc = src.startsWith("http")
+    const fullSrc = src.startsWith("https")
         ? src
         : `${CLOUDFLARE_STREAM_BASE}/${src}/manifest/video.m3u8`;
-
+console.log("fullSrc",fullSrc,"src",src)
     useEffect(() => {
         if (!videoRef.current || !fullSrc) return;
 

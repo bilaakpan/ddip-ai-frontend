@@ -247,6 +247,7 @@ export default function HomePage() {
 
     cmsApi.influencers({ homepage: true }).then((res) => {
       if (res.data?.length) {
+        console.log("res.data?",res?.data)
         const colors = ["#CDDBC0", "#DBC0CD", "#C0C2DB", "#C0D7DB", "#DBD8C0"];
         // Use hardcoded sector data since CMS category field only has "Influencer"
         const sectors = ["Real Estate", "Fashion", "Food", "Fashion", "Lifestyle", "HR", "Tech", "Wellness", "Fashion", "Fashion"];
