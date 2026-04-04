@@ -9,7 +9,7 @@ import FourDMethodSection from "@/components/desktop/FourDMethodSection";
 import FaqSection from "@/components/desktop/FaqSection";
 import ContactFormSection from "@/components/desktop/ContactFormSection";
 import AccordionWithImage from "@/components/desktop/AccordionWithImage";
-import { Stream } from "@cloudflare/stream-react";
+import HlsPlayer from "@/components/desktop/video";
 /* ─── Data ─── */
 
 const heroPartners = ["VG", "brother", "Vestine", "OPTIMUM", "ColaSel"];
@@ -246,12 +246,13 @@ export default function AutomationPage() {
 
           {/* Right — Dark image card */}
           <div className="flex-1 overflow-hidden rounded-[24px]">
-            <Stream
+            <HlsPlayer
               src="2f9a15572f298dc4e8a6b480d57abdad"
+              autoPlay={true}
               controls={false}
-              autoplay
-              muted
-              loop
+              muted={true}
+              loop={true}
+              fillHeight={true}
               className="w-full h-auto object-cover"
             />
           </div>

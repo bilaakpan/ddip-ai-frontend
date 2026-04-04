@@ -11,7 +11,7 @@ import Autoplay from "embla-carousel-autoplay";
 import FaqSection from "@/components/desktop/FaqSection";
 import PartnersSection from "@/components/desktop/PartnersSection";
 import { PopupInfluencer, InfluencerPopupModal } from "@/components/desktop/influencer-popUp";
-import { Stream } from "@cloudflare/stream-react";
+import HlsPlayer from "@/components/desktop/video";
 
 /* ─── Data ─── */
 
@@ -436,12 +436,13 @@ export default function HomePage() {
           ════════════════════════════════════════════════════════ */}
       <section className="bg-light-bg py-24 lg:py-32">
         <div className="mx-auto mb-16 w-[1182px] max-w-full overflow-hidden" style={{ aspectRatio: "1182/525" }}>
-          <Stream
+          <HlsPlayer
             src="9e3a0d22828697a21a65a4ea035f5c3d"
+            autoPlay={true}
             controls={false}
-            autoplay
-            muted
-            loop
+            muted={true}
+            loop={true}
+            fillHeight={true}
             className="h-full w-full object-cover"
           />
         </div>
@@ -464,15 +465,14 @@ export default function HomePage() {
             WE DESIGN{" "}
             <span className="relative inline-block align-middle">
               <span className="inline-flex h-[0.88em] w-[1.52em] items-center justify-center overflow-hidden rounded-lg">
-         
-                <Stream
+                <HlsPlayer
                   src="9e3a0d22828697a21a65a4ea035f5c3d"
+                  autoPlay={true}
                   controls={false}
-                  autoplay
-                  muted
-                  loop
+                  muted={true}
+                  loop={true}
+                  fillHeight={true}
                   className="h-full w-full object-cover"
-
                 />
               </span>
             </span>{" "}
@@ -541,13 +541,13 @@ export default function HomePage() {
                 {/* Media area */}
                 <div className="relative aspect-[974/536] overflow-hidden rounded-[17px] mx-[50px] mt-[50px]">
                   {solution.mediaType === "video" ? (
-                 
-                    <Stream
+                    <HlsPlayer
                       src={solution.media}
+                      autoPlay={true}
                       controls={false}
-                      autoplay
-                      muted
-                      loop
+                      muted={true}
+                      loop={true}
+                      fillHeight={true}
                       className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                     />
                   ) : (
@@ -658,15 +658,14 @@ export default function HomePage() {
               <Link key={item.title} href="/works" className="group">
                 {/* Video */}
                 <div className="relative aspect-[792/700] overflow-hidden bg-[#D9D9D9]">
-            
-                  <Stream
+                  <HlsPlayer
                     src={item.video}
+                    autoPlay={true}
                     controls={false}
-                    autoplay
-                    muted
-                    loop
+                    muted={true}
+                    loop={true}
+                    fillHeight={true}
                     className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-
                   />
                   {/* Bottom shadow gradient */}
                   <div className="absolute bottom-0 left-0 right-0 h-[200px] bg-gradient-to-t from-black/40 to-transparent" />
@@ -737,15 +736,14 @@ export default function HomePage() {
         {/* Full-width video (1920x1091 in Figma) */}
         <div className="mt-16 w-full overflow-hidden">
           <div className="aspect-[1920/1091]">
-            
-            <Stream
+            <HlsPlayer
               src="665822d5062aae2129504c3a2b474494"
+              autoPlay={true}
               controls={false}
-              autoplay
-              muted
-              loop
+              muted={true}
+              loop={true}
+              fillHeight={true}
               className="h-full w-full object-cover"
-
             />
           </div>
         </div>
@@ -990,14 +988,14 @@ export default function HomePage() {
 
           {/* Workflow image */}
           <div className="mt-12 aspect-[1608/905] overflow-hidden">
-           
-            <Stream
+            <HlsPlayer
               src="bdb805b635f8e3a865a3157336836136"
+              autoPlay={true}
               controls={false}
-              autoplay
-              muted
-              loop
-          className="h-full w-full object-cover"
+              muted={true}
+              loop={true}
+              fillHeight={true}
+              className="h-full w-full object-cover"
             />
           </div>
 

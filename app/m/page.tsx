@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { cmsApi, type AiSolution, type Work, type Influencer, type Faq } from "@/lib/api";
-import { Stream } from "@cloudflare/stream-react";
+import HlsPlayer from "@/components/desktop/video";
 /* ─── Fallback Data ─── */
 
 const capabilities = [
@@ -269,12 +269,13 @@ export default function MobileHomePage() {
 
         {/* Video / Image */}
         <div className="mt-8 overflow-hidden rounded-[14px]">
-          <Stream
+          <HlsPlayer
             src="9e3a0d22828697a21a65a4ea035f5c3d"
+            autoPlay={true}
             controls={false}
-            autoplay
-            muted
-            loop
+            muted={true}
+            loop={true}
+            fillHeight={true}
             className="h-auto w-full"
           />
         </div>
@@ -336,12 +337,13 @@ export default function MobileHomePage() {
                 {/* Media */}
                 <div className="relative aspect-[4/3] overflow-hidden">
                   {solution.mediaType === "video" ? (
-                    <Stream
+                    <HlsPlayer
                       src={solution.media}
+                      autoPlay={true}
                       controls={false}
-                      autoplay
-                      muted
-                      loop
+                      muted={true}
+                      loop={true}
+                      fillHeight={true}
                       className="h-full w-full object-cover"
                     />
                   ) : (
@@ -409,12 +411,13 @@ export default function MobileHomePage() {
           {cmsWorks.map((work, i) => (
             <div key={i} className="overflow-hidden rounded-[14px]">
               <div className="relative aspect-[16/10]">
-                <Stream
+                <HlsPlayer
                   src={work.video}
+                  autoPlay={true}
                   controls={false}
-                  autoplay
-                  muted
-                  loop
+                  muted={true}
+                  loop={true}
+                  fillHeight={true}
                   className="h-full w-full object-cover"
                 />
               </div>
@@ -454,12 +457,13 @@ export default function MobileHomePage() {
         </h2>
 
         <div className="mt-6 overflow-hidden rounded-[14px]">
-          <Stream
+          <HlsPlayer
             src="665822d5062aae2129504c3a2b474494"
+            autoPlay={true}
             controls={false}
-            autoplay
-            muted
-            loop
+            muted={true}
+            loop={true}
+            fillHeight={true}
             className="h-auto w-full"
           />
         </div>

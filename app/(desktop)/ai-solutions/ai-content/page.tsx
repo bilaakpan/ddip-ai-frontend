@@ -1,5 +1,5 @@
 "use client";
-import { Stream } from "@cloudflare/stream-react";
+import HlsPlayer from "@/components/desktop/video";
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
@@ -142,12 +142,13 @@ export default function AIContentPage() {
                 <img src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/1e1a01b7-cad6-4218-de1f-d23f5d27d400/public" alt="icon" className="h-[50px] w-[50px] object-contain" />
               </div>
               <div className="h-full w-full overflow-hidden rounded-[16px] ">
-                <Stream
+                <HlsPlayer
                   src="cec8f6e44f63bb833b4b9b71452d48cb"
+                  autoPlay={true}
                   controls={false}
-                  autoplay
-                  muted
-                  loop
+                  muted={true}
+                  loop={true}
+                  fillHeight={true}
                   className="h-[350px] w-full object-cover"
                 />
               </div>
@@ -177,16 +178,15 @@ export default function AIContentPage() {
                 <img src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/6d7c5e48-3eaa-4a0f-4092-7e4094da7f00/public" alt="icon" className="h-[50px] w-[50px] object-contain" />
               </div>
               <div className="h-full w-full overflow-hidden rounded-[16px]">
-
-                <Stream
+                <HlsPlayer
                   src="03d397e2992efcc651de0d04701b2ca1"
+                  autoPlay={true}
                   controls={false}
-                  autoplay
-                  muted
-                  loop
+                  muted={true}
+                  loop={true}
+                  fillHeight={true}
                   className="h-full w-full object-cover"
                 />
-
               </div>
             </div>
           </div>
@@ -197,12 +197,13 @@ export default function AIContentPage() {
               <img src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/24b4e848-2873-476b-c343-3350ac28bc00/publicng" alt="icon" className="h-[50px] w-[50px] object-contain" />
             </div>
             <div className="h-full w-full overflow-hidden rounded-[16px] h-[430px]">
-              <Stream
+              <HlsPlayer
                 src="90f5aaa3d5ea96226052be6f9122b8c2"
+                autoPlay={true}
                 controls={false}
-                autoplay
-                muted
-                loop
+                muted={true}
+                loop={true}
+                fillHeight={true}
                 className="h-[430px] w-full object-cover"
               />
             </div>
@@ -372,62 +373,60 @@ export default function AIContentPage() {
               <div className="flex-1 flex items-center">
                 <div className="flex gap-1.5 items-center">
                   <div className="relative h-[156px] w-[90px] overflow-hidden rounded-[8px]">
-                 
-                    <Stream
+                    <HlsPlayer
                       src="03d397e2992efcc651de0d04701b2ca1"
+                      autoPlay={true}
                       controls={false}
-                      autoplay
-                      muted
-                      loop
+                      muted={true}
+                      loop={true}
+                      fillHeight={true}
                       className="h-full w-full object-cover"
                     />
-
                   </div>
                   <div className="flex flex-col gap-1.5">
                     <div className="relative h-[156px] w-[90px] overflow-hidden rounded-[8px]">
-                
-                      <Stream
+                      <HlsPlayer
                         src="52d4f5fdd1335b2fbaba2f41798273f1"
+                        autoPlay={true}
                         controls={false}
-                        autoplay
-                        muted
-                        loop
+                        muted={true}
+                        loop={true}
+                        fillHeight={true}
                         className="h-full w-full object-cover"
                       />
-
                     </div>
                     <div className="relative h-[156px] w-[90px] overflow-hidden rounded-[8px]">
-                     
-                      <Stream
+                      <HlsPlayer
                         src="90b6c18df1bb19d1117f6d29f6859036"
+                        autoPlay={true}
                         controls={false}
-                        autoplay
-                        muted
-                        loop
+                        muted={true}
+                        loop={true}
+                        fillHeight={true}
                         className="h-full w-full object-cover"
                       />
                     </div>
                   </div>
                   <div className="flex flex-col gap-1.5">
                     <div className="relative h-[156px] w-[90px] overflow-hidden rounded-[8px] mt-[30px]">
-                 
-                      <Stream
+                      <HlsPlayer
                         src="8ffbc4055a9b0210350a2748fcbb8ce4"
+                        autoPlay={true}
                         controls={false}
-                        autoplay
-                        muted
-                        loop
+                        muted={true}
+                        loop={true}
+                        fillHeight={true}
                         className="h-full w-full object-cover"
                       />
                     </div>
                     <div className="relative h-[156px] w-[90px] overflow-hidden rounded-[8px]">
-                 
-                      <Stream
+                      <HlsPlayer
                         src="2f4c298d7224c5140c18bc3c0f6faf22"
+                        autoPlay={true}
                         controls={false}
-                        autoplay
-                        muted
-                        loop
+                        muted={true}
+                        loop={true}
+                        fillHeight={true}
                         className="h-full w-full object-cover"
                       />
                     </div>
@@ -455,15 +454,15 @@ export default function AIContentPage() {
               <p className="font-heading text-[25px] text-white/50 mb-3">Finish it.</p>
               <div className="flex-1 flex items-center">
                 <div className="relative h-[400px] w-[250px] overflow-hidden rounded-[12px]">
-                
-                      <Stream
-                        src="90f5aaa3d5ea96226052be6f9122b8c2"
-                        controls={false}
-                        autoplay
-                        muted
-                        loop
-                        className="h-full w-full object-cover"
-                      />
+                  <HlsPlayer
+                    src="90f5aaa3d5ea96226052be6f9122b8c2"
+                    autoPlay={true}
+                    controls={false}
+                    muted={true}
+                    loop={true}
+                    fillHeight={true}
+                    className="h-full w-full object-cover"
+                  />
                 </div>
               </div>
             </div>
@@ -511,15 +510,7 @@ export default function AIContentPage() {
                       fill
                       className="object-cover"
                       sizes="320px"
-                    />
-                    {/* <Stream
-                      src={item.image}
-                      controls={false}
-                      autoplay
-                      muted
-                      loop
-                    className="object-cover"
-                    /> */}
+                    />     
 
                   </div>
                   <p className="mt-4 text-[16px] text-[#063746]" style={{ fontFamily: "var(--font-body)" }}>

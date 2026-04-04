@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useState, useEffect, useMemo } from "react";
 import { cmsApi, type Work } from "@/lib/api";
-import { Stream } from "@cloudflare/stream-react";
+import HlsPlayer from "@/components/desktop/video";
 /* ── Component ────────────────────────────────────────── */
 
 export default function MobileWorksPage() {
@@ -95,12 +95,13 @@ export default function MobileWorksPage() {
                 {/* Media card */}
                 <div className="relative aspect-[4/3] overflow-hidden rounded-[14px]">
                   {work.mediaType === "video" && work.mediaUrl ? (
-                    <Stream
+                    <HlsPlayer
                       src={work.mediaUrl}
+                      autoPlay={true}
                       controls={false}
-                      autoplay
-                      muted
-                      loop
+                      muted={true}
+                      loop={true}
+                      fillHeight={true}
                       className="absolute inset-0 h-full w-full object-cover"
                     />
 

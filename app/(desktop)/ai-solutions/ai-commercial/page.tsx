@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { Stream } from "@cloudflare/stream-react";
+import { Container } from "@/components/layout";
+import HlsPlayer from "@/components/desktop/video";
 import { useState, useEffect } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import AutoPlay from "embla-carousel-autoplay";
@@ -294,12 +295,13 @@ export default function AICommercialPage() {
               {/* Video with dashed border */}
               <div className="relative">
                 <div className="overflow-hidden rounded-[12px]" style={{ border: "1.5px dashed #063746/40" }}>
-                  <Stream
+                  <HlsPlayer
                     src="674ae5c4363ac80438bcfe52196530f7"
+                    autoPlay={true}
                     controls={false}
-                    autoplay
-                    muted
-                    loop
+                    muted={true}
+                    loop={true}
+                    fillHeight={true}
                     className="w-full h-[280px] object-cover rounded-[12px]"
                   />
                 </div>
@@ -354,12 +356,13 @@ export default function AICommercialPage() {
                       className="object-cover"
                       sizes="320px"
                     /> */}
-                    <Stream
+                    <HlsPlayer
                       src={item.vedio}
+                      autoPlay={true}
                       controls={false}
-                      autoplay
-                      muted
-                      loop
+                      muted={true}
+                      loop={true}
+                      fillHeight={true}
                       className="object-cover w-full"
                     />
 

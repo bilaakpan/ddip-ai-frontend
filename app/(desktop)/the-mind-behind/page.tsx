@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Container } from "@/components/layout";
-import { Stream } from "@cloudflare/stream-react";
+import HlsPlayer from "@/components/desktop/video";
 /* ─── Data ─── */
 
 const projectCards = [
@@ -30,12 +30,13 @@ export default function TheMindBehindPage() {
       <section className="relative overflow-hidden bg-dark-bg pb-16 pt-40">
         {/* BG video — right 70%, bottom 50% only */}
         <div className="absolute z-0" style={{ right: 0, bottom: 0, width: "70%", height: "50%" }}>
-          <Stream
+          <HlsPlayer
             src="2eac757943335639efc39c031d9e1ac2"
+            autoPlay={true}
             controls={false}
-            autoplay
-            muted
-            loop
+            muted={true}
+            loop={true}
+            fillHeight={true}
             className="h-full w-full object-cover opacity-40"
           />
 

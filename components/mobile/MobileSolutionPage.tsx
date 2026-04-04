@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { cmsApi, type Faq } from "@/lib/api";
-import { Stream } from "@cloudflare/stream-react";
+import HlsPlayer from "@/components/desktop/video";
 interface UseCase {
   title: string;
   description: string;
@@ -115,12 +115,13 @@ export default function MobileSolutionPage({
       <section className="relative min-h-[60vh] overflow-hidden bg-dark-bg">
         <div className="absolute inset-0 z-0">
           {heroVideo ? (
-            <Stream
-            src={heroVideo}
+            <HlsPlayer
+              src={heroVideo}
+              autoPlay={true}
               controls={false}
-              autoplay
-              muted
-              loop
+              muted={true}
+              loop={true}
+              fillHeight={true}
               className="h-full w-full object-cover"
             />
           ) : heroImage ? (

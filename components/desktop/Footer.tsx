@@ -2,6 +2,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Stream } from "@cloudflare/stream-react";
+import HlsPlayer from "./video";
 const companyLinks = [
   { label: "Process", href: "/#discover" },
   { label: "Works", href: "/works" },
@@ -136,12 +137,12 @@ export function Footer() {
             {/* VIDEO */}
             <div className="w-full max-w-[420px] overflow-hidden rounded-md">
               <div className="relative aspect-video">
-                <Stream
+                <HlsPlayer
                   src="9e3a0d22828697a21a65a4ea035f5c3d"
+                  autoPlay={true}
                   controls={false}
-                  autoplay
-                  muted
-                  loop
+                  muted={true}
+                  loop={true}
                   className="absolute inset-0 w-full h-full object-cover"
                 />
               </div>

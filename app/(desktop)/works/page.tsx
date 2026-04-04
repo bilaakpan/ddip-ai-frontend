@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useState, useEffect, useMemo } from "react";
 import { cmsApi, type Work } from "@/lib/api";
 import { Container } from "@/components/layout";
-import { Stream } from "@cloudflare/stream-react";
+import HlsPlayer from "@/components/desktop/video";
 /* ─── Fallback static projects (shown while CMS loads or if empty) ─── */
 const staticProjects = [
   {
@@ -18,7 +18,7 @@ const staticProjects = [
   },
   {
     id: "2",
-    title: "Vesta Global",
+    title: "Cesi Design",
     field: "Real Estate",
     categories: ["Visual Style Definition", "AI Model Selection & Optimization", "Use-Case Development", "Prompt Crafting"],
     description: "Lorem Ipsum is simply",
@@ -27,7 +27,7 @@ const staticProjects = [
   },
   {
     id: "3",
-    title: "Vesta Global",
+    title: "Mediterra Group",
     field: "Real Estate",
     categories: ["Visual Style Definition", "AI Model Selection & Optimization", "Use-Case Development", "Prompt Crafting"],
     description: "Lorem Ipsum is simply",
@@ -36,7 +36,7 @@ const staticProjects = [
   },
   {
     id: "4",
-    title: "Vesta Global",
+    title: "Brother",
     field: "Real Estate",
     categories: ["Visual Style Definition", "AI Model Selection & Optimization", "Use-Case Development", "Prompt Crafting"],
     description: "Lorem Ipsum is simply",
@@ -54,7 +54,7 @@ const staticProjects = [
   },
   {
     id: "6",
-    title: "Vesta Global",
+    title: "Cesi Design",
     field: "Real Estate",
     categories: ["Visual Style Definition", "AI Model Selection & Optimization", "Use-Case Development", "Prompt Crafting"],
     description: "Lorem Ipsum is simply",
@@ -63,7 +63,7 @@ const staticProjects = [
   },
   {
     id: "7",
-    title: "Vesta Global",
+    title: "Mediterra Group",
     field: "Real Estate",
     categories: ["Visual Style Definition", "AI Model Selection & Optimization", "Use-Case Development", "Prompt Crafting"],
     description: "Lorem Ipsum is simply",
@@ -81,7 +81,7 @@ const staticProjects = [
   },
   {
     id: "9",
-    title: "Vesta Global",
+    title: "Cesi Design",
     field: "Real Estate",
     categories: ["Visual Style Definition", "AI Model Selection & Optimization", "Use-Case Development", "Prompt Crafting"],
     description: "Lorem Ipsum is simply",
@@ -90,7 +90,7 @@ const staticProjects = [
   },
   {
     id: "10",
-    title: "Vesta Global",
+    title: "Mediterra Group",
     field: "Real Estate",
     categories: ["Visual Style Definition", "AI Model Selection & Optimization", "Use-Case Development", "Prompt Crafting"],
     description: "Lorem Ipsum is simply",
@@ -99,7 +99,7 @@ const staticProjects = [
   },
   {
     id: "11",
-    title: "Vesta Global",
+    title: "Brother",
     field: "Real Estate",
     categories: ["Visual Style Definition", "AI Model Selection & Optimization", "Use-Case Development", "Prompt Crafting"],
     description: "Lorem Ipsum is simply",
@@ -132,12 +132,9 @@ export default function WorksPage() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [works, setWorks] = useState<Work[]>([]);
   const [activeTab, setActiveTab] = useState("grid");
-  // Test function to verify state changes
+  const [activeListProject, setActiveListProject] = useState<string | null>(null);
   const handleTabChange = (tab: string) => {
-    console.log("Changing tab from", activeTab, "to", tab);
-    alert(`Changing to ${tab} view`); // Add alert to ensure function is called
     setActiveTab(tab);
-    console.log("After setActiveTab, activeTab is now:", activeTab);
   };
   useEffect(() => {
     cmsApi
@@ -200,24 +197,57 @@ export default function WorksPage() {
             </p>
           </Container>
         ) : (
-          /* List Tab Content - Replacing Grid Container */
+          /* List Tab Content */
           <Container key="list-content">
-            <div className="py-12 sm:py-16 md:py-20">
-              <p className="font-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-[#063746] mb-6 sm:mb-8">
-                Mediterra Group
-              </p>
-              <p className="text-base sm:text-lg md:text-xl text-[#063746]/80 leading-relaxed max-w-3xl">
-                Brother
-              </p>
-              <p className="text-base sm:text-lg md:text-xl text-[#063746]/80 leading-relaxed max-w-3xl">
-                Vesta Global
-              </p>
-              <p className="text-base sm:text-lg md:text-xl text-[#063746]/80 leading-relaxed max-w-3xl">
-                Bİzİm Mutfak
-              </p>
-              <p className="text-base sm:text-lg md:text-xl text-[#063746]/80 leading-relaxed max-w-3xl">
-                Optİmum
-              </p>
+            <div className="py-8 flex gap-12">
+              {/* Left — project names */}
+              <div className="flex-1">
+                {filteredProjects.map((project, i) => (
+                  <div
+                    key={project.id}
+                    onClick={() => setActiveListProject(project.id)}
+                    className="group cursor-pointer py-6 flex items-center"
+                  >
+                    <span className={`font-heading text-[clamp(28px,5vw,72px)] font-bold uppercase leading-none transition-colors ${activeListProject === project.id ? "text-[#063746]" : "text-[#063746]/30 group-hover:text-[#063746]"}`}>
+                      {project.title}
+                    </span>
+                    
+                 
+                  </div>
+                ))}
+              </div>
+
+              {/* Right — video preview */}
+              <div className="w-[500px] shrink-0 sticky top-32 self-start">
+                {(() => {
+                  const active = filteredProjects.find(p => p.id === activeListProject) || filteredProjects[0];
+                  if (!active) return null;
+                  return (
+                    <div className="relative overflow-hidden bg-[#063746]/5 h-[400px]">
+                      {active.mediaType === "video" && active.image ? (
+                        <HlsPlayer
+                          src={active.image}
+                          autoPlay={true}
+                          controls={false}
+                          muted={true}
+                          loop={true}
+                          fillHeight={true}
+                          className="absolute inset-0 w-full object-cover"
+                        />
+                      ) : (
+                        <Image src={active.image} alt={active.title} width={500} height={400} className="w-full h-[400px] object-cover" />
+                      )}
+                      <div className="p-4">
+                        <div className="flex items-baseline justify-between">
+                          <p className="font-heading text-[18px] font-semibold text-[#063746]">{active.title}</p>
+                          <p className="text-sm text-[#063746]/60 font-medium uppercase">({active.field})</p>
+                        </div>
+                        <p className="text-sm text-[#063746]/50 mt-1">{active.description}</p>
+                      </div>
+                    </div>
+                  );
+                })()}
+              </div>
             </div>
           </Container>
         )}
@@ -272,17 +302,13 @@ export default function WorksPage() {
             </button>
             <button
               onClick={() => {
-                console.log("List button clicked directly!");
-                alert("List button clicked!");
-                setIsDropdownOpen(false); // Close dropdown first
+                setIsDropdownOpen(false);
                 setActiveTab("list");
-                console.log("Set activeTab to list");
               }}
               className={`inline-flex items-center gap-2 rounded-full px-8 py-3 font-heading text-2xl font-medium transition-colors ${activeTab === "list"
                 ? "bg-[#063746] text-[#EBFFFF]"
                 : "text-[#063746] hover:bg-[#1CE3F4]/80"
                 }`}
-              style={{ zIndex: 9999, position: 'relative' }}
             >
               List
             </button>
@@ -311,6 +337,7 @@ export default function WorksPage() {
       {/* ════════════════════════════════════════════════════════
           3. PROJECT GRID — 4 columns
           ════════════════════════════════════════════════════════ */}
+      {activeTab === "grid" && (
       <section className="bg-light-bg pb-16 sm:pb-20 lg:pb-24">
         <div className="px-4 sm:px-6 md:px-8 lg:px-12 xl:px-15">
           {loading ? (
@@ -340,15 +367,16 @@ export default function WorksPage() {
                   {/* Card Container */}
                   <div className="relative overflow-hidden bg-white">
                     {/* Image */}
-                    <div className="relative aspect-[4/3] overflow-hidden">
+                    <div className="relative aspect-[4/3]  w-full h-[400px]  overflow-hidden">
                       {project.mediaType === "video" && project.image ? (
-                        <Stream
+                        <HlsPlayer
                           src={project.image}
+                          autoPlay={true}
                           controls={false}
-                          autoplay
-                          muted
-                          loop
-                          className="absolute inset-0 h-full w-full object-cover"
+                          muted={true}
+                          loop={true}
+                          fillHeight={true}
+                          className="absolute inset-0 w-full object-cover"
                         />
                       ) : (
                         <Image
@@ -395,6 +423,7 @@ export default function WorksPage() {
           )}
         </div>
       </section>
+      )}
       {/* ════════════════════════════════════════════════════════
           4. CTA
           ════════════════════════════════════════════════════════ */}
