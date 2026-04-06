@@ -42,7 +42,7 @@ const mockArticles: Insight[] = [
         updatedAt: new Date().toISOString(),
         seoDescription: "12 AI Consulting Companies for Enterprises in 2026",
         body: "Detailed article content about AI influencers...",
-        imageUrl: "/images/insights/article2.png"
+        imageUrl: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/046c3680-7356-4294-690d-482d7d1c5700/public"
     },
     {
         id: "3",
@@ -155,7 +155,7 @@ export default function ArticleHero() {
                         {/* Center main card */}
                         <div className="relative w-full h-80 sm:h-100 md:h-125 lg:h-150">
                             <Image
-                                src="/images/insights/details1.png"
+                                src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/1e7ed0aa-8ba6-46a9-be56-63b28c581100/public"
                                 alt="Insights 1"
                                 fill
                                 className="object-cover"
