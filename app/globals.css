@@ -209,3 +209,8 @@ h6 {
 .abc stream div video {
     width: auto !important;
 }
+
+/* Hide footer in list view on works page */
+body.hide-footer footer {
+  display: none !important;
+}

@@ -542,7 +542,7 @@ export default function StartProjectPage() {
                   <h3 className="text-[34px] font-semibold text-[#039EB7] mb-2">
                     Last Step - Smart Summary
                   </h3>
-                  <p className="text-dark-bg text-[24px] mb-5">Based on your answer,we will design </p>
+                  <p className="text-dark-bg text-[24px] mb-5">Based on your answer, we will design </p>
                   {/* Bullet points */}
                   <ul className="space-y-4">
                     <li className="flex items-start gap-3">
@@ -965,17 +965,30 @@ export default function StartProjectPage() {
                 {/* ── Workflow Automation: Step 5 — How does process work ── */}
                 {isWorkflowAutomation && step === 5 && (
                   <div>
-                    <p className="mb-3 text-[22px] font-medium text-[#0A7D94]">How does this process work today?</p>
+                    <p className="mb-6 text-[22px] font-medium text-[#0A7D94]">How does this process work today?</p>
                     <div className="flex flex-col gap-5">
-                      {WA_PROCESS.map((p) => (
-                        <label key={p} className="flex cursor-pointer items-start gap-2">
-                          <div className={cn("mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full border-2 transition-colors", form.waProcess === p ? "border-[#1CE3F4]" : "border-gray-400")}>
-                            {form.waProcess === p && <div className="h-2 w-2 rounded-full bg-[#1CE3F4]" />}
-                          </div>
-                          <input type="radio" className="sr-only" checked={form.waProcess === p} onChange={() => updateField("waProcess", p)} />
-                          <span className="text-[18px] text-[#3F404D] leading-tight">{p}</span>
-                        </label>
-                      ))}
+                      {/* Free text option — radio + inline input */}
+                      <label className="flex cursor-pointer items-center gap-3" onClick={() => updateField("waProcess", "Free text")}>
+                        <div className={cn("flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 transition-colors", form.waProcess === "Free text" ? "border-[#0A7D94]" : "border-gray-300")}>
+                          {form.waProcess === "Free text" && <div className="h-2.5 w-2.5 rounded-full bg-[#0A7D94]" />}
+                        </div>
+                        <input
+                          type="text"
+                          placeholder="Free text"
+                          value={form.waProcessText}
+                          onClick={(e) => { e.stopPropagation(); updateField("waProcess", "Free text"); }}
+                          onChange={(e) => updateField("waProcessText", e.target.value)}
+                          className="flex-1 rounded-lg border border-gray-200 px-4 py-2 text-[16px] text-[#3F404D] placeholder-gray-400 focus:border-[#0A7D94] focus:outline-none"
+                        />
+                      </label>
+
+                      {/* Preset option */}
+                      <label className="flex cursor-pointer items-center gap-3" onClick={() => updateField("waProcess", "We manually prepare content, post it, check performance, adjust campaigns...")}>
+                        <div className={cn("flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 transition-colors", form.waProcess === "We manually prepare content, post it, check performance, adjust campaigns..." ? "border-[#0A7D94]" : "border-gray-300")}>
+                          {form.waProcess === "We manually prepare content, post it, check performance, adjust campaigns..." && <div className="h-2.5 w-2.5 rounded-full bg-[#0A7D94]" />}
+                        </div>
+                        <span className="text-[16px] text-[#3F404D] leading-tight">We manually prepare content, post it, check performance, adjust campaigns...</span>
+                      </label>
                     </div>
                   </div>
                 )}

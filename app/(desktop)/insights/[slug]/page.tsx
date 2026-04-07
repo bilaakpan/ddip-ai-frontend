@@ -71,8 +71,8 @@ export default function ArticleHero() {
         "The future of video isn't AI vs. human. It's both.",
     ];
     return (
-        <div className="min-h-screen bg-[#f0f4f0] font-sanspt-20 sm:pt-24 md:pt-35 pb-8 sm:pb-10 md:pb-12">
-            <div className="p-8 sm:p-12 md:p-16 lg:p-20 mx-auto w-full max-w-[1608px] px-[60px] max-md:px-5">
+        <div className="min-h-screen bg-[#f0f4f0] font-sanspt-20 pt-24 pb-8 ">
+            <div className="p-8 sm:p-12 md:p-16 lg:p-20 mx-auto w-full max-w-[1808px] px-[60px] max-md:px-5">
 
                 {/* Date */}
                 <p className="text-xl sm:text-2xl md:text-3xl text-[#063746] mb-4 sm:mb-6 tracking-wide">
@@ -86,7 +86,7 @@ export default function ArticleHero() {
                 <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium text-[#0d2b3e] leading-tight max-w-sm sm:max-w-md mb-20 sm:mb-30">
                     Video Production–Ask Where
                 </h1>
-                <div className="flex flex-col sm:flex-row gap-8 sm:gap-12 md:gap-16 lg:gap-25">
+                <div className="flex flex-col sm:flex-row gap-8 ">
                     {/* Left Sidebar */}
                     <div className="flex flex-col gap-4 sm:gap-6 min-w-20 sm:min-w-24 pt-1">
                         <div className="mb-20">
