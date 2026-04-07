@@ -12,10 +12,10 @@ export default function DesktopLayout({
   children: React.ReactNode;
 }) {
   return (
-    <>
+    <div className="desktop-zoom">
       <Navbar />
       <main className="min-h-screen">{children}</main>
       <Footer />
-    </>
+    </div>
   );
 }

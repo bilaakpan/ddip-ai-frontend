@@ -296,47 +296,47 @@ export default function ProcessPage() {
 
 
       {/* ─── From First Contact to Long-Term Partnership ─── */}
-      <section className="relative overflow-hidden rounded-[24px] mx-[60px] my-12 mb-20" style={{ minHeight: "480px" }}>
+      <section className="relative overflow-hidden rounded-[24px] mx-[60px] my-12 mb-20" style={{ height: "600px" }}>
         {/* BG image */}
         <img src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/47ee54cb-7da4-43ec-2f77-1a62a340a200/public" alt="Partnership" className="absolute inset-0 w-full h-full object-cover" />
 
         {/* Content */}
-        <div className="relative z-10 p-12 flex flex-col h-full" style={{ minHeight: "480px" }}>
+        <div className="relative z-10 px-15 pb-15 pt-20 flex flex-col h-full">
           <h2 className="font-heading text-[48px] font-medium leading-[1.1] text-white max-w-md">
             From First Contact to<br />Long-Term Partnership
           </h2>
 
-          <p className="mt-10 text-[14px] text-white/70" style={{ fontFamily: "var(--font-body)" }}>
+          <p className="mt-10 text-[18px] text-white" style={{ fontFamily: "var(--font-body)" }}>
             This process applies whether you are:
           </p>
 
           {/* Cards — 2x2 grid left + 1 tall card right */}
-          <div className="mt-4 flex gap-3 w-[100%]">
-            {/* Left — 2x2 grid */}
-            <div className="grid grid-cols-2 gap-3">
+          <div className="mt-4 flex gap-3 flex-1 min-h-0">
+            {/* Left — 2x2 grid, takes up remaining width minus right card */}
+            <div className="grid grid-cols-2 gap-3 flex-1">
               {[
                 { image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/840870cf-3f8a-4ffa-ecf5-42c951983400/public", label: "Launching an", bold: "AI influencer or brand ambassador" },
                 { image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/21580366-d582-4166-54c0-ca19cf5c5c00/public", label: "Building an", bold: "AI-driven content engine" },
                 { image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/efad73dc-dbb1-48df-a783-3f83ff054a00/public", label: "Designing", bold: "automated workflows with AI agents" },
                 { image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/9bbc75a1-f667-4be4-0c98-f21a6c069000/public", label: "Creating a long-term", bold: "AI brand ecosystem" },
               ].map((item, i) => (
-                <div key={i} className="flex items-center gap-3 rounded-[10px] p-3" style={{ width: "370px", height: "110px", background: "rgba(255,255,255,0.12)", backdropFilter: "blur(10px)" }}>
-                  <div className="shrink-0 w-[60px] h-[60px] overflow-hidden rounded-[8px]">
+                <div key={i} className="flex items-center gap-3 rounded-[10px] p-3" style={{ background: "rgba(255,255,255,0.12)", backdropFilter: "blur(10px)", maxHeight: "100px" }}>
+                  <div className="shrink-0 w-[70px] h-[70px] overflow-hidden rounded-[8px]">
                     <img src={item.image} alt={item.bold} className="w-full h-full object-cover" />
                   </div>
                   <div>
-                    <p className="text-[11px] text-white/60" style={{ fontFamily: "var(--font-body)" }}>{item.label}</p>
-                    <p className="text-[13px] font-medium text-white leading-[1.3]" style={{ fontFamily: "var(--font-body)" }}>{item.bold}</p>
+                    <p className="text-[14px] text-white" style={{ fontFamily: "var(--font-body)" }}>{item.label}</p>
+                    <p className="text-[17px] font-medium text-white leading-[1.3]" style={{ fontFamily: "var(--font-body)" }}>{item.bold}</p>
                   </div>
                 </div>
               ))}
             </div>
 
-            {/* Right — 1 tall card */}
-            <div className="flex rounded-[10px] overflow-hidden" style={{ width: "370px", height: "240px", background: "rgba(255,255,255,0.12)", backdropFilter: "blur(10px)" }}>
+            {/* Right — 1 tall card, fixed width ~25% */}
+            <div className="flex rounded-[10px] overflow-hidden w-[25%] mb-6" style={{ background: "rgba(255,255,255,0.12)", backdropFilter: "blur(10px)" }}>
               {/* Image — left half */}
-              <div className="w-[55%] h-full overflow-hidden rounded-[8px]">
-                <img src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/60f0e23b-ae4e-4186-cf0c-47b08d778700/public" alt="AI ad films" className="w-full h-full object-cover" />
+              <div className="w-[55%] h-full overflow-hidden rounded-[8px] p-3">
+                <img src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/60f0e23b-ae4e-4186-cf0c-47b08d778700/public" alt="AI ad films" className="w-full h-full object-cover rounded-[8px]" />
               </div>
               {/* Text — right half */}
               <div className="flex-1 flex flex-col justify-center px-4">
@@ -346,7 +346,7 @@ export default function ProcessPage() {
             </div>
           </div>
 
-          <p className="mt-6 text-[13px] text-white/70" style={{ fontFamily: "var(--font-body)" }}>
+          <p className=" text-[18px] text-white/70 " style={{ fontFamily: "var(--font-body)" }}>
             Each project may look different — but the <strong className="text-white">thinking behind it stays the same.</strong>
           </p>
         </div>

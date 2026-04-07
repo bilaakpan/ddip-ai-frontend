@@ -296,11 +296,11 @@ export default function ArticleHero() {
                                 your marketing and business goals.
                             </p>
 
-                            <div className="mt-8 sm:mt-12 md:mt-16 lg:mt-20 relative w-full h-64">
+                            <div className="mt-8 sm:mt-12 md:mt-16 lg:mt-20 relative w-full h-[500px]">
                                 <Image src="/images/insights/article3.svg"
                                     alt="insights-01"
                                     fill
-                                    className="rounded-sm object-contain" />
+                                    className="rounded-sm object-cover" />
                             </div>
 
                             {/* Section Heading */}
@@ -363,66 +363,70 @@ export default function ArticleHero() {
 
                         </div>
 
-                        <div className="flex items-center justify-between">
-                            <p className="text-[#063746] font-medium text-7xl uppercase">Related Articles</p>
-                            <Link
-                                href="/insights"
-                                className="font-medium text-3xl text-[#063746] underline underline-offset-4 transition-colors hover:text-[#1CE3F4]"
-                            >
-                                All Articles →
-                            </Link>
-                        </div>
 
-                        {/* Article Grid — 3 columns */}
-                        {gridArticles.length > 0 && (
-                            <div className="mt-8 sm:mt-10 lg:mt-12 grid grid-cols-1 gap-6 sm:gap-8 lg:grid-cols-2 xl:grid-cols-3">
-                                {gridArticles.map((article) => (
-                                    <Link
-                                        key={article.id}
-                                        href={`/insights/${article.slug}`}
-                                        className="group"
-                                    >
-                                        <article className="overflow-hidden  bg-white">
-                                            {/* Image */}
-                                            <div className="relative aspect-[4/3] h-60 sm:h-72 md:h-80 lg:h-90 overflow-hidden">
-                                                {article.imageUrl ? (
-                                                    <Image
-                                                        src={article.imageUrl}
-                                                        alt={article.title}
-                                                        fill
-                                                        className="object-cover transition-transform duration-500 group-hover:scale-105 rounded-md"
-                                                        sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-                                                    />
-                                                ) : (
-                                                    <div className="absolute inset-0 bg-gradient-to-br from-[#002834]/30 to-[#063746]/50" />
-                                                )}
-                                                {article.category && (
-                                                    <div className="absolute left-4 top-4">
-                                                        <span className={cn(
-                                                            "rounded-full px-2 py-1 text-xs sm:text-sm font-medium text-black backdrop-blur-sm",
-                                                            (article.category === "Food" || article.category === "Healthcare" || article.category === "Education" || article.category === "Wellness")
-                                                                ? "bg-[#D7DBC0]/90"
-                                                                : "bg-[#DBC0CD]/90"
-                                                        )}>
-                                                            {article.category}
-                                                        </span>
-                                                    </div>
-                                                )}
-                                            </div>
-
-                                            {/* Card Body */}
-                                            <div className="mt-6 sm:mt-8 md:mt-10 px-2 sm:px-4">
-                                                <h3 className="font-heading text-xl sm:text-2xl md:text-3xl font-medium leading-snug text-black capitalize">
-                                                    {article.seoDescription}
-                                                </h3>
-                                            </div>
-                                        </article>
-                                    </Link>
-                                ))}
-                            </div>
-                        )}
                     </div>
+
                 </div>
+
+            </div>
+            <div className="px-[60px] mt-16">
+                <div className="flex items-center justify-between mb-12">
+                    <p className="text-[#063746] font-medium text-7xl uppercase">Related Articles</p>
+                    <Link
+                        href="/insights"
+                        className="font-medium text-3xl text-[#063746] underline underline-offset-4 transition-colors hover:text-[#1CE3F4]"
+                    >
+                        All Articles →
+                    </Link>
+                </div>
+
+                {/* Article Grid — 3 columns */}
+                {gridArticles.length > 0 && (
+                    <div className="grid grid-cols-1 gap-6 sm:gap-8 lg:grid-cols-2 xl:grid-cols-3">
+                        {gridArticles.map((article) => (
+                            <Link
+                                key={article.id}
+                                href={`/insights/${article.slug}`}
+                                className="group"
+                            >
+                                <article className="overflow-hidden bg-transparent">
+                                    {/* Image */}
+                                    <div className="relative aspect-4/3 overflow-hidden rounded-md">
+                                        {article.imageUrl ? (
+                                            <Image
+                                                src={article.imageUrl}
+                                                alt={article.title}
+                                                fill
+                                                className="object-cover transition-transform duration-500 group-hover:scale-105"
+                                                sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                                            />
+                                        ) : (
+                                            <div className="absolute inset-0 bg-linear-to-br from-dark-bg/30 to-[#063746]/50" />
+                                        )}
+                                        {article.category && (
+                                            <div className="absolute left-4 top-4">
+                                                <span className={cn(
+                                                    "rounded-full px-2 py-1 text-sm font-medium text-black backdrop-blur-sm",
+                                                    (article.category === "Food" || article.category === "Healthcare" || article.category === "Education" || article.category === "Wellness")
+                                                        ? "bg-[#D7DBC0]/90"
+                                                        : "bg-[#DBC0CD]/90"
+                                                )}>
+                                                    {article.category}
+                                                </span>
+                                            </div>
+                                        )}
+                                    </div>
+                                    {/* Card Body */}
+                                    <div className="mt-4 px-1">
+                                        <h3 className="font-heading text-2xl font-medium leading-snug text-[#063746] capitalize">
+                                            {article.seoDescription}
+                                        </h3>
+                                    </div>
+                                </article>
+                            </Link>
+                        ))}
+                    </div>
+                )}
             </div>
         </div>
     );

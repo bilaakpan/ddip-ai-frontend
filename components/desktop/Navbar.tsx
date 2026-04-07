@@ -258,7 +258,7 @@ export function Navbar() {
                             key={subLink.label}
                             href={subLink.href}
                             className="block px-2 py-1.5 text-[15px] text-white transition-colors hover:text-[#1CE3F4]"
-                            style={{ fontFamily: "SF Pro Display" }}
+                       
                           >
                             {subLink.label}
                           </Link>

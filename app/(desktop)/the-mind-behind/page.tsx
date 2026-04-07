@@ -396,11 +396,18 @@ export default function TheMindBehindPage() {
       {/* ════════════════════════════════════════════════════════
           8. BRANDS NEED SOMETHING DURABLE
           ════════════════════════════════════════════════════════ */}
-      <section className="bg-light-bg py-10">
-        <div className="px-[60px]">
+      <section className="relative py-10 overflow-hidden">
+        {/* Background image */}
+        <img
+          src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/d0d22818-2f6c-4cd2-0447-0dac443d8100/public"
+          alt=""
+          className="absolute inset-0 w-full h-full object-cover  pointer-events-none"
+          aria-hidden="true"
+        />
+        <div className="relative z-10 px-[60px]">
 
           {/* Trends text — top */}
-          <p className="mb-12 leading-[1.5]" style={{ fontSize: "30px", color: "#145365" }}>
+          <p className="mb-12 leading-[1.5] ml-50" style={{ fontSize: "30px", color: "#145365" }}>
             Trends change.<br />
             Platforms evolve.<br />
             Algorithms update overnight.
@@ -410,7 +417,7 @@ export default function TheMindBehindPage() {
           <div className="grid grid-cols-2 gap-16 mb-16 items-center">
             {/* Left — circular arrow image */}
             <div className="flex items-center justify-center">
-              <Image src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/6fa83d35-93fe-4424-8a75-0a2972d1cc00/public" alt="circular arrow" width={320} height={320} className="object-contain" />
+              <Image src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/6fa83d35-93fe-4424-8a75-0a2972d1cc00/public" alt="circular arrow" width={520} height={520} className="object-contain" />
             </div>
             {/* Right — text */}
             <div>
@@ -447,7 +454,6 @@ export default function TheMindBehindPage() {
               </h3>
             </div>
           </div>
-
         </div>
       </section>
 
@@ -500,7 +506,7 @@ export default function TheMindBehindPage() {
       {/* ════════════════════════════════════════════════════════
           11. THIS IS THE MIND BEHIND DDIP.AI
           ════════════════════════════════════════════════════════ */}
-      <section className="bg-light-bg py-24">
+      <section className="bg-light-bg">
         <div className="px-[60px]">
           <p className="text-[#1CE3F4] font-heading text-[30px] font-medium">
             This is the Mind Behind ddip.ai

@@ -4,9 +4,9 @@ import Image from "next/image";
 import { Stream } from "@cloudflare/stream-react";
 import HlsPlayer from "./video";
 const companyLinks = [
-  { label: "Process", href: "/#discover" },
+  { label: "Process", href: "/process" },
   { label: "Works", href: "/works" },
-  { label: "What We Do", href: "/#discover" },
+  // { label: "What We Do", href: "/#discover" },
   { label: "The Mind Behind", href: "/the-mind-behind" },
   { label: "Insights", href: "/insights" },
   { label: "Contact", href: "/lets-connect" },

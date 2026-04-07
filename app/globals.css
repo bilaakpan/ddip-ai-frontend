@@ -99,6 +99,23 @@ h6 {
   }
 }
 
+/* ─── Desktop zoom — scale down 25% for 13" screens, full size at 1920px+ ─── */
+.desktop-zoom {
+  zoom: 0.75;
+}
+
+@media (min-width: 1600px) {
+  .desktop-zoom {
+    zoom: 0.875;
+  }
+}
+
+@media (min-width: 1920px) {
+  .desktop-zoom {
+    zoom: 1;
+  }
+}
+
 /* ─── Base Styles ─── */
 html {
   scroll-behavior: smooth;

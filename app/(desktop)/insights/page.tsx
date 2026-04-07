@@ -282,7 +282,7 @@ export default function InsightsPage() {
                   href={`/insights/${article.slug}`}
                   className="group"
                 >
-                  <article className="overflow-hidden  bg-white">
+                  <article className="overflow-hidden bg-transparent">
                     {/* Image */}
                     <div className="relative aspect-[4/3] h-60 sm:h-72 md:h-80 lg:h-90 overflow-hidden">
                       {article.imageUrl ? (
