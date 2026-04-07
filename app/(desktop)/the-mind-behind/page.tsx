@@ -396,60 +396,71 @@ export default function TheMindBehindPage() {
       {/* ════════════════════════════════════════════════════════
           8. BRANDS NEED SOMETHING DURABLE
           ════════════════════════════════════════════════════════ */}
-      <section className="relative py-10 overflow-hidden">
+      <section className="relative overflow-hidden bg-[#F6F9F2]" style={{ height: "1200px" }}>
         {/* Background image */}
         <img
-          src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/d0d22818-2f6c-4cd2-0447-0dac443d8100/public"
+          src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/eba38997-062e-4147-aedc-756707da8200/public"
           alt=""
-          className="absolute inset-0 w-full h-full object-cover  pointer-events-none"
+          className="absolute inset-0 w-full h-full object-cover object-center pointer-events-none"
           aria-hidden="true"
         />
-        <div className="relative z-10 px-[60px]">
-
-          {/* Trends text — top */}
-          <p className="mb-12 leading-[1.5] ml-50" style={{ fontSize: "30px", color: "#145365" }}>
-            Trends change.<br />
-            Platforms evolve.<br />
-            Algorithms update overnight.
-          </p>
-
-          {/* Top row — image left + text right */}
-          <div className="grid grid-cols-2 gap-16 mb-16 items-center">
-            {/* Left — circular arrow image */}
-            <div className="flex items-center justify-center">
-              <Image src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/6fa83d35-93fe-4424-8a75-0a2972d1cc00/public" alt="circular arrow" width={520} height={520} className="object-contain" />
-            </div>
-            {/* Right — text */}
-            <div>
-              <p style={{ fontSize: "22px", color: "#145365", width: "320px" }}>
-                Brands, however, need something more durable:
-              </p>
-              <div className="mt-4 space-y-1">
-                {["clarity", "consistency", "emotional connection"].map(item => (
-                  <p key={item} style={{ fontSize: "22px", color: "#145365" }}>
-                    • {item}
-                  </p>
-                ))}
-              </div>
-              <p className="mt-8" style={{ fontSize: "24px", color: "#145365", width: "500px" }}>
-                That&apos;s why we design AI systems that serve brand identity, not platform logic.
-              </p>
-              <p className="mt-4" style={{ fontSize: "24px", color: "#145365", width: "500px" }}>
-                Technology adapts. The brand remains recognizable.
-              </p>
-            </div>
+        <div className="relative z-10 h-full w-full px-[60px]">
+          {/* Trends text — top-left (matches screenshot) */}
+          <div className="absolute top-[120px] left-[100px]">
+            <p className="leading-[1.5]" style={{ fontSize: "50px", color: "#145365", fontFamily: "var(--font-body)" }}>
+              Trends change.
+              <br />
+              Platforms evolve.
+              <br />
+              Algorithms update overnight.
+            </p>
           </div>
 
-          {/* Big type row */}
-          <div className="flex items-center justify-center gap-6 flex-wrap ">
-            <h2 className="font-bold leading-[1.0] uppercase" style={{ fontFamily: "Bricolage Grotesque", fontSize: "160px", color: "#145365" }}>
+          {/* Right copy block */}
+          <div className="absolute top-[235px] right-[110px]">
+            <p style={{ fontSize: "30px", color: "#145365", width: "520px", fontFamily: "var(--font-body)" }}>
+              Brands, however, need something
+              <br />
+              more durable:
+            </p>
+            <div className="mt-4 space-y-1">
+              {["clarity", "consistency", "emotional connection"].map((item) => (
+                <p key={item} style={{ fontSize: "30px", color: "#145365", fontFamily: "var(--font-body)" }}>
+                  • {item}
+                </p>
+              ))}
+            </div>
+            <p className="mt-8" style={{ fontSize: "32px", color: "#145365", width: "620px", fontFamily: "var(--font-body)" }}>
+              That&apos;s why we design AI systems that serve brand
+              <br />
+              identity, not platform logic.
+            </p>
+            <p className="mt-4" style={{ fontSize: "32px", color: "#145365", width: "620px", fontFamily: "var(--font-body)" }}>
+              Technology adapts. The brand remains
+              <br />
+              recognizable.
+            </p>
+          </div>
+
+          {/* Bottom lockup */}
+          <div className="absolute left-[615px] top-[1085px] flex items-end gap-2">
+            <h2
+              className="font-bold leading-[0.92] uppercase"
+              style={{ fontFamily: "Bricolage Grotesque", fontSize: "96px", color: "#145365" }}
+            >
               Always
             </h2>
-            <div className="flex flex-col gap-1">
-              <h3 className="font-bold leading-[1.0] uppercase" style={{ fontFamily: "Bricolage Grotesque", fontSize: "50px", color: "#039EB7" }}>
+            <div className="flex flex-col">
+              <h3
+                className="font-bold leading-[0.92] uppercase"
+                style={{ fontFamily: "Bricolage Grotesque", fontSize: "52px", color: "#039EB7" }}
+              >
                 human
               </h3>
-              <h3 className="font-bold leading-[1.0] uppercase" style={{ fontFamily: "Bricolage Grotesque", fontSize: "50px", color: "#039EB7" }}>
+              <h3
+                className="font-bold leading-[0.92] uppercase"
+                style={{ fontFamily: "Bricolage Grotesque", fontSize: "52px", color: "#039EB7" }}
+              >
                 intentional
               </h3>
             </div>

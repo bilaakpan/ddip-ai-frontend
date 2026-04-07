@@ -870,7 +870,11 @@ export default function StartProjectPage() {
                   <div className="flex flex-col gap-4">
                     <p className="mb-1 text-[22px] font-medium text-[#0A7D94]">Which best describes you?</p>
                     {WA_WHO.map((w) => (
-                      <label key={w} className="flex cursor-pointer items-center gap-2">
+                      <label
+                        key={w}
+                        className="flex cursor-pointer items-center gap-2"
+                        onClick={() => updateField("waWhoAreYou", w)}
+                      >
                         <div className={cn("flex h-4 w-4 shrink-0 items-center justify-center rounded-full border-2 transition-colors", form.waWhoAreYou === w ? "border-[#474857]" : "border-[#474857]")}>
                           {form.waWhoAreYou === w && <div className="h-2 w-2 rounded-full bg-[#474857]" />}
                         </div>
@@ -1695,7 +1699,11 @@ export default function StartProjectPage() {
                     <div className="mt-5">
                       <div className="mt-2 flex flex-col gap-2">
                         {GEO_PLATFORMS.map((platform) => (
-                          <label key={platform} className="flex cursor-pointer items-center gap-3">
+                          <label
+                            key={platform}
+                            className="flex cursor-pointer items-center gap-3"
+                            onClick={() => updateField("geoPlatform", platform)}
+                          >
                             <div
                               className={cn(
                                 "flex h-4 w-4 shrink-0 items-center justify-center rounded-full border-2 transition-colors",
@@ -2493,7 +2501,11 @@ export default function StartProjectPage() {
                       </h3>
                       <div className="flex flex-wrap gap-x-8 gap-y-3">
                         {["ASAP", "1–2 weeks", "1 month", "Just exploring"].map((opt) => (
-                          <label key={opt} className="flex cursor-pointer items-center gap-2">
+                          <label
+                            key={opt}
+                            className="flex cursor-pointer items-center gap-2"
+                            onClick={() => updateField("projectTimeline", opt)}
+                          >
                             <div className={cn(
                               "flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 transition-colors",
                               form.projectTimeline === opt ? "border-[#0A7D94]" : "border-[#C3C3C3]"

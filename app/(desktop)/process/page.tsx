@@ -148,6 +148,7 @@ const faqItems = [
 export default function ProcessPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [cmsFaqs, setCmsFaqs] = useState(faqItems);
+  const [activeInsightStep, setActiveInsightStep] = useState(0);
   const cmsFaqLeft = cmsFaqs.slice(0, Math.ceil(cmsFaqs.length / 2)).map(f => f.question);
   const cmsFaqRight = cmsFaqs.slice(Math.ceil(cmsFaqs.length / 2)).map(f => f.question);
 
@@ -158,14 +159,99 @@ export default function ProcessPage() {
   }, []);
 
   const insightSteps = [
-    "Understand",
-    "Define",
-    "Design",
-    "Train",
-    "Create & Automate",
-    "Optimize",
-    "Scale",
+    {
+      title: "Understand",
+      subtitle: "Brand. Business. Challenge.",
+      description: "We Start By Listening - Not Generating.",
+      listHeading: "We analyze:",
+      bullets: [
+        "Brand DNA & tone of voice",
+        "Business goals & growth challenges",
+        "Target audience, market & culture",
+        "Existing workflows, tools & bottlenecks",
+      ],
+      closing: "AI doesn't start here. Humans do.",
+    },
+    {
+      title: "Define",
+      subtitle: "Direction. Priorities. Outcomes.",
+      description: "We align strategy before execution.",
+      listHeading: "We define:",
+      bullets: [
+        "Clear AI use-cases mapped to impact",
+        "Success metrics and project milestones",
+        "System requirements and constraints",
+        "Decision framework for rollout",
+      ],
+      closing: "Clarity first. Then momentum.",
+    },
+    {
+      title: "Design",
+      subtitle: "Flows. Interfaces. Experiences.",
+      description: "We design systems people can trust and use.",
+      listHeading: "We design:",
+      bullets: [
+        "User journeys and interaction patterns",
+        "Brand-aligned visual language",
+        "Prompts, logic, and content structures",
+        "Human review points and safeguards",
+      ],
+      closing: "Great AI still needs great design.",
+    },
+    {
+      title: "Train",
+      subtitle: "Data. Prompts. Performance.",
+      description: "We tune intelligence to your specific context.",
+      listHeading: "We train:",
+      bullets: [
+        "Models against brand and domain context",
+        "Prompt systems for consistency",
+        "Output quality and relevance checks",
+        "Feedback loops for improvement",
+      ],
+      closing: "Precision is built, not assumed.",
+    },
+    {
+      title: "Create & Automate",
+      subtitle: "Systems. Workflows. Execution.",
+      description: "We turn strategy into working automation.",
+      listHeading: "We build:",
+      bullets: [
+        "Content and campaign generation pipelines",
+        "Agent-driven operational workflows",
+        "Integrations with your existing stack",
+        "Governance rules for quality control",
+      ],
+      closing: "Automation should feel intentional.",
+    },
+    {
+      title: "Optimize",
+      subtitle: "Measure. Learn. Improve.",
+      description: "We continuously refine what works.",
+      listHeading: "We optimize:",
+      bullets: [
+        "Performance across speed and quality",
+        "Conversion and engagement outcomes",
+        "Prompt and process efficiency",
+        "Cross-channel consistency",
+      ],
+      closing: "Iteration is where advantage compounds.",
+    },
+    {
+      title: "Scale",
+      subtitle: "Teams. Channels. Growth.",
+      description: "We expand systems without losing control.",
+      listHeading: "We scale:",
+      bullets: [
+        "Operations across teams and markets",
+        "Reusable frameworks and templates",
+        "Governance for brand safety",
+        "Roadmaps for long-term evolution",
+      ],
+      closing: "Scale with confidence, not chaos.",
+    },
   ];
+  const selectedInsightStep = insightSteps[activeInsightStep];
   return (
     <>
       {/* ─── Hero ─── */}
@@ -397,15 +483,14 @@ export default function ProcessPage() {
       </section>
 
       {/* From Insight to Intelligent Impact */}
-      <section className="bg-light-bg py-16 lg:py-24">
+      <section className="bg-[#F6F9F2] py-16 lg:py-24">
 
         <Container>
           <h2 className="w-[300px] font-bold" style={{ fontFamily: "Bricolage Grotesque", color: "#126478", fontSize: '30px' }}>From Insight to Intelligent Impact</h2>
-          <div className="rounded-[24px]  bg-[#f5f8f3] px-6 py-8 lg:px-14 lg:py-12">
-
+          <div className="rounded-[24px]  bg-[#ffffff] px-6 py-8 lg:px-14 lg:py-12">
             <div className="grid gap-10 lg:grid-cols-[1fr_360px] lg:gap-16">
               {/* LEFT SIDE */}
-              <div className="relative">
+              <div className="relative ">
                 {/* IMAGE */}
                 <img
                   src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/f123a0a7-ad4f-4441-1163-3ca9cf8ad500/public"
@@ -413,38 +498,37 @@ export default function ProcessPage() {
                   className="absolute w-[55%] -top-12 left-16 sm:w-[60%] md:w-[55%] lg:w-[50%] object-contain"
                 />
                 {/* CARD */}
-                <div className="absolute -bottom-6 left-[100px] t-[190px] w-full max-w-[480px] rounded-[16px] border border-[#dde2df] bg-[#E6F8FD33] p-5 backdrop-blur-md shadow-md">
+                <div className="absolute bg-[#E6F8FD33] -bottom-16 left-[100px] t-[190px] w-full max-w-[480px] rounded-[16px] border border-[#dde2df] bg-[#E6F8FD33] p-5 backdrop-blur-md shadow-md">
 
                   <div className="flex items-start gap-4">
 
                     <span className="text-[48px] font-semibold text-[#002834] leading-none">
-                      01
+                      {String(activeInsightStep + 1).padStart(2, "0")}
                     </span>
                     <div>
                       <h3 className="text-[32px] font-semibold text-[#002834] leading-tight">
-                        Understand
+                        {selectedInsightStep.title}
                       </h3>
                       <p className="text-[14px] font-bold text-[#002834]"
                         style={{ fontFamily: 'var(--font-body)' }}
                       >
-                        Brand. Business. Challenge.
+                        {selectedInsightStep.subtitle}
                       </p>
                       <p className="text-[13px] text-[#002834] mt-1">
-                        We Start By Listening - Not Generating.
+                        {selectedInsightStep.description}
                       </p>
                     </div>
                   </div>
                   <div className="mt-4 text-[13px] text-[#002834]">
-                    <p>We analyze:</p>
+                    <p>{selectedInsightStep.listHeading}</p>
                     <ul className="mt-2 list-disc pl-5 space-y-1">
-                      <li>Brand DNA & tone of voice</li>
-                      <li>Business goals & growth challenges</li>
-                      <li>Target audience, market & culture</li>
-                      <li>Existing workflows, tools & bottlenecks</li>
+                      {selectedInsightStep.bullets.map((bullet) => (
+                        <li key={bullet}>{bullet}</li>
+                      ))}
                     </ul>
                   </div>
                   <p className="mt-4 font-semibold text-[14px] text-[#002834]">
-                    AI doesn’t start here. Humans do.
+                    {selectedInsightStep.closing}
                   </p>
                 </div>
               </div>
@@ -452,17 +536,27 @@ export default function ProcessPage() {
               <div className="hidden lg:block">
                 <ul className="space-y-6">
                   {insightSteps.map((step, index) => (
-                    <li key={step} className="flex items-center gap-4">
-
-                      <div className="relative flex h-12 w-12 items-center justify-center rounded-full border border-[#063746]/40 text-[#063746] text-lg">
-                        {String(index + 1).padStart(2, "0")}
-                        {index < insightSteps.length - 1 && (
-                          <span className="absolute top-12 left-1/2 w-px h-6 -translate-x-1/2 bg-[#063746]/30" />
-                        )}
-                      </div>
-                      <span className="text-[22px] font-medium text-[#063746]">
-                        {step}
-                      </span>
+                    <li key={step.title}>
+                      <button
+                        type="button"
+                        onClick={() => setActiveInsightStep(index)}
+                        className="group flex w-full items-center gap-4 text-left cursor-pointer"
+                        aria-label={`Show step ${String(index + 1).padStart(2, "0")} ${step.title}`}
+                        aria-pressed={activeInsightStep === index}
+                      >
+                        <span className={`relative flex h-12 w-12 items-center justify-center rounded-full border text-lg transition-colors ${activeInsightStep === index
+                          ? "border-[#00BCCF] bg-[#00BCCF] text-white"
+                          : "border-[#063746]/40 text-[#063746] group-hover:border-[#00BCCF] group-hover:text-[#00BCCF]"
+                          }`}>
+                          {String(index + 1).padStart(2, "0")}
+                          {index < insightSteps.length - 1 && (
+                            <span className="absolute top-12 left-1/2 w-px h-6 -translate-x-1/2 bg-[#063746]/30" />
+                          )}
+                        </span>
+                        <span className={`text-[22px] font-medium transition-colors ${activeInsightStep === index ? "text-[#00BCCF]" : "text-[#063746] group-hover:text-[#00BCCF]"}`}>
+                          {step.title}
+                        </span>
+                      </button>
                     </li>
                   ))}
                 </ul>
