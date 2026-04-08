@@ -284,7 +284,7 @@ export default function InsightsPage() {
                 >
                   <article className="overflow-hidden bg-transparent">
                     {/* Image */}
-                    <div className="relative aspect-[4/3] h-60 sm:h-72 md:h-80 lg:h-90 overflow-hidden">
+                    <div className="relative aspect-[16/9] h-90 sm:h-96 md:h-[400px] lg:h-[450px] overflow-hidden">
                       {article.imageUrl ? (
                         <Image
                           src={article.imageUrl}

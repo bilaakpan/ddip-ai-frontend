@@ -9,7 +9,7 @@ import Autoplay from "embla-carousel-autoplay";
 
 const navLinks = [
   { label: "Process", href: "/process" },
-  { label: "Ai Solutions", href: "/ai-solutions", hasDropdown: true },
+  { label: "AI Solutions", href: "/ai-solutions", hasDropdown: true },
   { label: "Works", href: "/works", hasDropdown: true },
   { label: "The Mind Behind", href: "/the-mind-behind" },
   { label: "Insights", href: "/insights" },
@@ -169,13 +169,13 @@ export function Navbar() {
         mobileMenuOpen && "max-md:z-[1001]"
       )}
     >
-      <div className="flex h-[79px] items-center justify-between gap-4 px-[30px] max-md:h-[60px] max-md:px-5">
+      <div className="flex h-[85px] items-center justify-between gap-4 px-[30px] max-md:h-[60px] max-md:px-5">
         {/* Logo */}
         <Link href="/" className="flex items-center" onClick={() => setMobileMenuOpen(false)}>
           <Image
             src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/1c4902c6-da41-4213-c084-5181a2316b00/public"
             alt="DDiP AI"
-            width={90}
+            width={95}
             height={32}
             className="h-8 w-auto max-md:h-7"
             priority
@@ -216,7 +216,7 @@ export function Navbar() {
             >
               <Link
                 href={link.href}
-                className="whitespace-nowrap font-heading text-[14px] font-medium leading-[1.2] text-white transition-colors hover:text-teal-500"
+                className="whitespace-nowrap font-heading text-[18px] font-medium leading-[1.2] text-white transition-colors hover:text-teal-500"
               >
                 {link.label}
                 {link.hasDropdown && (
@@ -239,8 +239,8 @@ export function Navbar() {
                 )}
               </Link>
 
-              {/* Mega Menu Dropdown — only for Ai Solutions */}
-              {link.hasDropdown && link.label === "Ai Solutions" && dropdownOpen === link.label && (
+              {/* Mega Menu Dropdown — only for AI Solutions */}
+              {link.hasDropdown && link.label === "AI Solutions" && dropdownOpen === link.label && (
                 <div className="fixed left-1/2 -translate-x-1/2 pt-4" style={{ top: "70px", width: "100%", maxWidth: "1490px" }}
                   onMouseEnter={() => handleMouseEnter(link.label)}
                   onMouseLeave={() => handleMouseLeave()}
@@ -279,7 +279,7 @@ export function Navbar() {
         <div className="flex items-center gap-[20px] max-md:hidden xl:gap-[40px] shrink-0">
           <Link
             href="/start-project"
-            className="whitespace-nowrap font-body text-[14px] font-medium leading-[1.2] text-white transition-colors hover:text-teal-500"
+            className="whitespace-nowrap font-body text-[18px] font-medium leading-[1.2] text-white transition-colors hover:text-teal-500"
           >
             Start a Project
           </Link>

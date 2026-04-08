@@ -175,19 +175,19 @@ export default function GeoPage() {
 
   
 
-  <div className="relative z-20 mt-8 px-[75px] flex flex-col lg:flex-row justify-between items-start">
+  <div className="relative z-20 mt-8 px-[130px] flex flex-col lg:flex-row justify-between items-start">
     {/* LEFT SIDE: Text Content */}
-    <div className="max-w-lg">
-      <h2 className="font-heading text-[40px] font-medium leading-[1.3] text-white">
+    <div className="">
+      <h2 className="font-heading text-[60px] font-medium leading-[1.0] text-white">
         Visibility No Longer Ends
         <br />
         With Search.
       </h2>
-      <p className="mt-4 text-[18px] leading-[1.6] text-white/70" style={{ fontFamily: "var(--font-body)" }}>
+      <p className="mt-4 text-[26px] leading-[1.6] text-white/70" style={{ fontFamily: "var(--font-body)" }}>
         GEO Optimization helps brands become visible in AI-powered search, discovery, and answer engines.
       </p>
 
-      <div className="flex flex-col gap-4 mt-[60px]">
+      <div className="flex flex-col gap-4 mt-[100px]">
         <svg width="99" height="122" viewBox="0 0 99 122" fill="none" className="h-[90px] w-[90px]" aria-label="Scroll down">
           <path d="M56.9199 0L56.9199 95.9621L89.1853 66.0555L98.7897 75.9435L98.9811 76.9205L49.6919 122L0 76.9205L0.198028 75.9435L9.61097 66.2194L42.0612 95.9621L42.0612 0L56.9199 0Z" fill="white" />
         </svg>
@@ -244,11 +244,11 @@ export default function GeoPage() {
       {/* ════════════════════════════════════════════════════════
           2. WHY SEO ALONE IS NO LONGER ENOUGH
           ════════════════════════════════════════════════════════ */}
-      <section id="discover" className="bg-light-bg py-24">
-        <div className="px-[60px]">
+      <section id="discover" className="bg-light-bg">
+        <div className="">
           <div className="grid grid-cols-2 gap-16">
-            <div>
-              <h2 className="font-heading text-[40px] font-medium uppercase leading-[1.1] text-[#063746]">
+            <div className="px-20">
+              <h2 className="font-heading text-[60px] font-medium uppercase leading-[1.1] text-[#063746]">
                 Why SEO Alone Is No
                 <br />
                 Longer Enough
@@ -325,8 +325,8 @@ Instead of scrolling through result pages, users increasingly ask questions and 
       {/* ════════════════════════════════════════════════════════
           3. WHAT GEO OPTIMIZATION MEANS AT DDIP.AI
           ════════════════════════════════════════════════════════ */}
-      <section className="bg-light-bg py-24">
-        <div className="px-[60px]">
+      <section className="bg-light-bg">
+        <div className="">
           {/* <div className="grid grid-cols-2 gap-16">
             <h2 className="font-heading text-[40px] font-medium leading-[1.1] text-[#063746]">
               What GEO Optimization
@@ -347,14 +347,14 @@ Instead of scrolling through result pages, users increasingly ask questions and 
           <div className="min-h-screen bg-[#d4e5e1] relative overflow-hidden px-6 py-10 md:px-12 md:py-16 lg:px-20 lg:py-20">
       
       {/* Main Content Container */}
-      <div className="max-w-[1400px] mx-auto relative">
+      <div className=" mx-auto relative">
         
         {/* Header Section */}
         <div className="mb-12 md:mb-16">
-          <h1 className="text-[60px] font-bricolage font-bold text-[#1a4d4d] mb-4 md:mb-6 leading-tight max-w-3xl">
+          <h1 className="text-[90px] text-[#063746] mb-4 md:mb-6 leading-tight max-w-3xl" style={{fontWeight:"400"}}>
             What GEO Optimization<br />Means At Ddip.ai
           </h1>
-          <p className="text-base text-[24px] text-[#2d6b6b] max-w-2xl font-sf leading-relaxed">
+          <p className="text-base text-[28px] text-[#145365] max-w-2xl font-sf leading-relaxed">
             At DDIP.AI, GEO Optimization is about designing content and structure that AI systems can clearly read, interpret, and trust.
           </p>
         </div>
@@ -444,7 +444,7 @@ Instead of scrolling through result pages, users increasingly ask questions and 
         {/* Header row */}
         <div className="flex items-start justify-between mb-12">
           <h2 className="font-heading text-[50px] font-medium text-white leading-[1.1]" style={{ fontFamily: "Bricolage Grotesque, sans-serif" }}>What We Optimize</h2>
-          <p className="w-[540px] text-white/60 text-[22px] leading-[1.6]" style={{ fontFamily: "SF Pro Display, var(--font-body)" }}>
+          <p className="w-[540px] text-white text-[22px] leading-[1.6]" style={{ fontFamily: "SF Pro Display, var(--font-body)" }}>
             Our GEO work focuses on the foundations that make content AI-readable and discoverable:
           </p>
         </div>
@@ -456,7 +456,7 @@ Instead of scrolling through result pages, users increasingly ask questions and 
               <div className="relative w-full h-[280px] overflow-hidden rounded-[16px] bg-white">
                 <Image src={item.image} alt={item.title} fill className="object-cover" sizes="380px" />
               </div>
-              <p className="mt-4 text-[18px] text-white/60" style={{ fontFamily: "Bricolage Grotesque, sans-serif" }}>{item.title}</p>
+              <p className="mt-4 text-[18px] text-white" style={{ fontFamily: "Bricolage Grotesque, sans-serif" }}>{item.title}</p>
             </div>
           ))}
         </div>
@@ -498,21 +498,21 @@ Instead of scrolling through result pages, users increasingly ask questions and 
           <img src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/bb3f40ab-c3e7-48b3-ea78-81b6afb06d00/public" alt="text right" className="w-full drop-shadow-xl" />
         </div>
         {/* CENTER TEXT */}
-        <div className="relative z-20 mx-auto max-w-[700px] text-center py-32">
-          <h2 className="font-heading text-[54px] text-left font-medium leading-[1.1] text-[#063746]" style={{ fontFamily: "Bricolage Grotesque, sans-serif" }}>
+        <div className="relative z-20 mx-auto max-w-[800px] text-center py-32">
+          <h2 className="font-heading text-[60px] text-left font-medium leading-[1.1] text-[#063746]" style={{ fontFamily: "Bricolage Grotesque, sans-serif" }}>
             From search to discovery
           </h2>
-          <p className="mt-3 text-[30px] text-[#145365] text-left" style={{ fontFamily: "SF Pro Display" }}>
+          <p className="mt-3 text-[34px] text-[#145365] text-left" style={{ fontFamily: "SF Pro Display" }}>
             Search is evolving into discovery.
           </p>
           <div className="mt-8 space-y-4 text-left">
-            <p className="text-[30px] leading-[1.7] text-[#145365]" style={{ fontFamily: "SF Pro Display" }}>
+            <p className="text-[34px] leading-[1.7] text-[#145365]" style={{ fontFamily: "SF Pro Display" }}>
               AI-powered systems don&apos;t just index pages, they analyze meaning, relationships, and relevance.
             </p>
-            <p className="text-[18px] leading-[1.7] text-[#145365]" style={{ fontFamily: "SF Pro Display" }}>
+            <p className="text-[22px] leading-[1.7] text-[#145365]" style={{ fontFamily: "SF Pro Display" }}>
               They look for clear signals, structured information, and authoritative context.
             </p>
-            <p className="text-[18px] leading-[1.7] text-[#145365]" style={{ fontFamily: "SF Pro Display" }}>
+            <p className="text-[22px] leading-[1.7] text-[#145365]" style={{ fontFamily: "SF Pro Display" }}>
               GEO Optimization aligns your content with how these systems work, ensuring your brand shows up not only in searches, but in answers, summaries, and recommendations.
             </p>
           </div>
@@ -585,7 +585,7 @@ Instead of scrolling through result pages, users increasingly ask questions and 
                   { icon: "/images/geo/icon-04.svg", text: "More room for bold ideas with lower production risk" },
                 ].map((item, i) => (
                   <div key={i} className="flex items-center gap-3 rounded-xl px-4 py-3" style={{ backgroundColor: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.12)" }}>
-                    <img src={item.icon} alt="" className="w-4 h-4 opacity-70 shrink-0" style={{ filter: "invert(1)" }} />
+                    <img src={item.icon} alt="" className="w-6 h-6 opacity-70 shrink-0" style={{ filter: "invert(1)" }} />
                     <span className="text-[14px] text-white" style={{ fontFamily: "Bricolage Grotesque" }}>{item.text}</span>
                   </div>
                 ))}
@@ -607,7 +607,7 @@ Instead of scrolling through result pages, users increasingly ask questions and 
           <h2 className="text-center font-heading text-[48px] font-medium uppercase leading-[1.05] text-[#063746]">
             Use Cases
           </h2>
-          <p className="text-center mt-2 text-[22px] text-[#063746]/60" style={{ fontFamily: "SF Pro Display, var(--font-body)" }}>
+          <p className="text-center mt-2 text-[22px] " style={{ fontFamily: "SF Pro Display, var(--font-body)" }}>
             GEO Optimization supports:
           </p>
           <div className="mt-12 grid grid-cols-5 gap-4">
@@ -641,19 +641,25 @@ Instead of scrolling through result pages, users increasingly ask questions and 
       {/* ════════════════════════════════════════════════════════
           10. CTA
           ════════════════════════════════════════════════════════ */}
-      <section className="bg-light-bg py-6 px-[60px]">
+   <section className="bg-light-bg pb-24 pt-24">
         <div
-          className="flex items-center justify-between px-[60px] py-[28px] rounded-[16px]"
-          style={{ background: "linear-gradient(270deg, #002834 -2.7%, #129CAC 105.91%)" }}
+          className="mx-[60px] flex items-center justify-between rounded-[20px] px-[60px] py-[60px]"
+          style={{ background: "linear-gradient(-90deg, #002834 0%, #129CAC 100%)" }}
         >
-          <h2 className="font-heading text-[22px] font-semibold text-white">
+          <h2 className="font-heading text-[28px] font-bold leading-[1.2] text-[#EBFFFF]">
             Let&apos;s design what&apos;s next together.
           </h2>
           <Link
             href="/start-project"
-            className="inline-flex items-center rounded-full bg-[#1CE3F4] px-8 py-4 font-heading text-[15px] font-medium text-[#063746] hover:bg-[#1CE3F4]/80 whitespace-nowrap"
+            className="inline-flex items-center justify-center rounded-full bg-[#1CE3F4] px-[26px] transition-opacity hover:opacity-90"
+            style={{ height: "64px" }}
           >
-            Begin Your Transformation
+            <span
+              className="text-[24px] font-medium leading-[1.2] text-[#002834]"
+              style={{ fontFamily: "var(--font-body)" }}
+            >
+              Begin Your Transformation
+            </span>
           </Link>
         </div>
       </section>

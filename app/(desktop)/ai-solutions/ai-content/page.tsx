@@ -27,15 +27,15 @@ const dreamSteps = [
 const generateItems = [
   {
     title: "Campaign visuals and key assets",
-    image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/bb102694-2ca6-44a5-9037-4865b1e41400/public",
+    image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/ccd01df2-c98a-4d5d-7b36-c7249bd5ca00/public",
   },
   {
     title: "Social media content and variations",
-    image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/2bf2b49d-9a2e-4878-032e-7cbb7687ae00/public",
+    image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/524d751c-3b9d-4982-7497-dd8a0e300f00/public",
   },
   {
     title: "Short-form content",
-    image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/a50f1f9d-c362-407b-d72b-277705a61000/public",
+    image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/ccd01df2-c98a-4d5d-7b36-c7249bd5ca00/public",
   },
 ];
 
@@ -293,10 +293,10 @@ export default function AIContentPage() {
               </h2>
             </div>
             <div className="space-y-4">
-              <p className="text-[15px] leading-[1.6] text-white/60" style={{ fontFamily: "var(--font-body)" }}>
+              <p className="text-[24px] leading-[1.6] text-white" style={{ fontFamily: "var(--font-body)" }}>
                 AI content generation at DDiP is not about speed or volume alone.
               </p>
-              <p className="text-[15px] leading-[1.6] text-white/60" style={{ fontFamily: "var(--font-body)" }}>
+              <p className="text-[24px] leading-[1.6] text-white mt-2" style={{ fontFamily: "var(--font-body)" }}>
                 It&apos;s about using AI as a creative partner — supporting design decisions,
                 expanding possibilities, and accelerating production without losing intent.
               </p>
@@ -304,11 +304,12 @@ export default function AIContentPage() {
           </div>
 
           {/* ── Wiring Flow ── */}
-          <div className="flex items-start">
+
+          <div className="flex w-full items-start justify-between">
 
             {/* ── STEP 1: Dream it — 3 prompt cards ── */}
             <div className="shrink-0 flex flex-col" style={{ height: "440px", textAlign: "center" }}>
-              <p className="font-heading text-[25px] text-white/50 mb-3">Dream it.</p>
+              <p className="font-heading text-[25px] text-white mb-3">Dream it.</p>
               <div className="flex flex-col gap-2 flex-1 justify-center">
                 {[
                   "A luxury real estate model in a...",
@@ -339,7 +340,7 @@ export default function AIContentPage() {
 
             {/* ── STEP 2: Create it — 4 images 2x2 ── */}
             <div className="shrink-0 flex flex-col" style={{ height: "440px", textAlign: "center" }}>
-              <p className="font-heading text-[25px] text-white/50 mb-3">Create it.</p>
+              <p className="font-heading text-[25px] text-white mb-3">Create it.</p>
               <div className="flex-1 flex items-center">
                 <div className="grid grid-cols-2 gap-1.5">
                   {[
@@ -369,7 +370,7 @@ export default function AIContentPage() {
 
             {/* ── STEP 3: Animate it — 1 tall + 2 stacked + 2 stacked ── */}
             <div className="shrink-0 flex flex-col" style={{ height: "440px", textAlign: "center" }}>
-              <p className="font-heading text-[25px] text-white/50 mb-3">Animate it.</p>
+              <p className="font-heading text-[25px] text-white mb-3">Animate it.</p>
               <div className="flex-1 flex items-center">
                 <div className="flex gap-1.5 items-center">
                   <div className="relative h-[156px] w-[90px] overflow-hidden rounded-[8px]">
@@ -451,7 +452,7 @@ export default function AIContentPage() {
 
             {/* ── STEP 4: Finish it ── */}
             <div className="shrink-0 flex flex-col" style={{ height: "440px", textAlign: "center" }}>
-              <p className="font-heading text-[25px] text-white/50 mb-3">Finish it.</p>
+              <p className="font-heading text-[25px] text-white mb-3">Finish it.</p>
               <div className="flex-1 flex items-center">
                 <div className="relative h-[400px] w-[250px] overflow-hidden rounded-[12px]">
                   <HlsPlayer
@@ -468,11 +469,12 @@ export default function AIContentPage() {
             </div>
 
           </div>
+
           {/* ── End Wiring Flow ── */}
 
           {/* Statement */}
           <div className="mt-16 flex items-center gap-3">
-            <p className="text-[18px] font-medium text-white" style={{ fontFamily: "var(--font-body)" }}>
+            <p className="text-[25px] font-medium text-white" style={{ fontFamily: "var(--font-body)" }}>
               We don&apos;t replace creative thinking. We amplify it.
             </p>
           </div>
@@ -490,7 +492,7 @@ export default function AIContentPage() {
               What We Generate
             </h2>
             <p
-              className="text-[20px] leading-[1.6] text-[#063746]/60"
+              className="text-[28px] leading-[1.6] text-[#063746]"
               style={{ fontFamily: "var(--font-body)" }}
             >
               We create AI-assisted content across formats and platforms  always
@@ -500,20 +502,20 @@ export default function AIContentPage() {
 
           {/* Showcase — auto-scrolling horizontal carousel */}
           <div className="mt-12 overflow-hidden" ref={emblaRef}>
-            <div className="flex gap-6">
+            <div className="flex gap-[29px]">
               {[...generateItems, ...generateItems].map((item, i) => (
-                <div key={i} className="shrink-0 w-[320px]">
-                  <div className="relative aspect-[4/3] overflow-hidden rounded-[16px] bg-[#D9D9D9]">
+                <div key={i} className="shrink-0 w-[727px]">
+                  <div className="relative h-[548px] overflow-hidden rounded-[16px] bg-[#D9D9D9]">
                     <Image
                       src={item.image}
                       alt={item.title}
                       fill
                       className="object-cover"
-                      sizes="320px"
-                    />     
+                      sizes="727px"
+                    />
 
                   </div>
-                  <p className="mt-4 text-[16px] text-[#063746]" style={{ fontFamily: "var(--font-body)" }}>
+                  <p className="mt-4 text-[24px] text-[#063746]" style={{ fontFamily: "var(--font-body)" }}>
                     {item.title}
                   </p>
                 </div>
@@ -523,10 +525,16 @@ export default function AIContentPage() {
 
           {/* Statement */}
           <p
-            className="mt-12 text-[20px] w-[450px] leading-[1.6] text-[#145365]"
+            className="mt-12 text-[34px]  text-[#145365]"
             style={{ fontFamily: "var(--font-body)" }}
           >
-            Each output is designed to feel coherent, intentional, and ready to
+            Each output is designed to feel coherent,
+          </p>
+              <p
+            className="text-[34px]  text-[#145365]"
+            style={{ fontFamily: "var(--font-body)" }}
+          >
+           intentional, and ready to
             use.
           </p>
         </div>
@@ -547,9 +555,9 @@ export default function AIContentPage() {
         tagline={"Scale is built into the system, not\nadded later."}
         bgImage="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/233c554f-70bb-4ffb-7036-64224285bd00/public"
         features={[
-          { icon: "/images/ai-content/icon-05.svg", label: "Instagram, TikTok, LinkedIn, YouTube" },
-          { icon: "/images/ai-content/icon-06.svg", label: "Multi-language adaptations" },
-          { icon: "/images/ai-content/icon-07.svg", label: "Creative variations for testing and performance" },
+          { icon: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/d79d8208-d108-4b58-d556-48855c230500/public", label: "Instagram, TikTok, LinkedIn, YouTube" },
+          { icon: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/6f120319-2d8a-41b2-c5f5-d1d2e9588f00/public", label: "Multi-language adaptations" },
+          { icon: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/5b8d9404-47b2-4933-b877-c179928f2c00/public", label: "Creative variations for testing and performance" },
         ]}
       />
 
@@ -564,13 +572,13 @@ export default function AIContentPage() {
             style={{ fontFamily: "Bricolage Grotesque", color: "#063746" }}>
             Use Cases
           </h2>
-          <p className="mx-auto mt-4 max-w-3xl text-center text-[18px] leading-[1.6]"
-            style={{ fontFamily: "SF Pro Display", color: "#063746" }}>
+          <p className="mx-auto mt-4 max-w-7xl text-center text-[24px] leading-[1.6]"
+            style={{  color: "#063746" }}>
             AI content generation supports different creative needs, from always-on content to campaign launches.
           </p>
 
           {/* 5 cards row */}
-          <div className="mt-12 flex gap-4">
+          <div className="mt-12 flex gap-[14px] justify-center items-center">
             {[
               { icon: "/images/ai-content/icon-05.svg", label: "Brand campaigns and product launches" },
               { icon: "/images/ai-content/icon-06.svg", label: "Social media content ecosystems" },
@@ -578,12 +586,12 @@ export default function AIContentPage() {
               { icon: "/images/ai-content/icon-08.svg", label: "Event and announcement assets" },
               { icon: "/images/ai-content/icon-09.svg", label: "E-commerce and catalog visuals" },
             ].map((item, i) => (
-              <div key={i} className="flex flex-1 items-start gap-3 rounded-[12px] px-4 py-4"
-                style={{ background: "#002834", backdropFilter: "blur(45.31px)" }}>
-                <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-[8px] bg-white/10">
-                  <Image src={item.icon} alt={item.label} width={18} height={18} />
+              <div key={i} className="flex flex-1 items-center gap-3"
+                style={{ background: "#002834", backdropFilter: "blur(45.31px)", width: "304px", height: "97.6px", borderRadius: "7.33px", padding: "8.8px 13.2px" }}>
+                <div className="flex h-[75px] w-[75px] shrink-0 items-center justify-center rounded-[8px]  border border-[#FFFFFF4D]">
+                  <Image src={item.icon} alt={item.label} width={25} height={25} />
                 </div>
-                <span className="text-[12px] leading-[1.5]"
+                <span className="text-[18px] leading-[1.5] text-center"
                   style={{ fontFamily: "Bricolage Grotesque", color: "#FFFFFF" }}>
                   {item.label}
                 </span>
@@ -604,6 +612,10 @@ export default function AIContentPage() {
               { title: "Bizim Mutfak", video: "cec8f6e44f63bb833b4b9b71452d48cb", tags: ["Social Media", "Content Variations"] },
               { title: "Realkom", video: "f9b719e86584fee5e05197a5e4c5e840", tags: ["Short-form Content", "Prompt Crafting"] },
               { title: "Brother", video: "c6727f63163d214df0ef35997644d8d2", tags: ["Editorial Visuals", "Brand Campaigns"] },
+              { title: "Vesta Global", video: "4efeb3daa0597c05c31d144beccea3f8", tags: ["Campaign Visuals", "Brand Identity"] },
+              { title: "Bizim Mutfak", video: "cec8f6e44f63bb833b4b9b71452d48cb", tags: ["Social Media", "Content Variations"] },
+              { title: "Realkom", video: "f9b719e86584fee5e05197a5e4c5e840", tags: ["Short-form Content", "Prompt Crafting"] },
+              { title: "Brother", video: "c6727f63163d214df0ef35997644d8d2", tags: ["Editorial Visuals", "Brand Campaigns"] },
             ]} />
           </div>
 
@@ -615,11 +627,11 @@ export default function AIContentPage() {
           ════════════════════════════════════════════════════════ */}
       <section className="bg-light-bg py-10">
         <div className="">
-          <h2 className="text-center font-heading text-[36px] font-bold leading-[1.1] text-[#126478]">
+          <h2 className="text-center font-heading text-[56px] font-bold leading-[1.1] text-[#126478]">
             Our Tool Ecosystem
           </h2>
           <p
-            className="mx-auto mt-4 max-w-2xl text-center text-[14px] leading-[1.6] text-[#063746]"
+            className="mx-auto mt-4 max-w-5xl text-center text-[26px] leading-[1.6] text-[#063746]"
             style={{ fontFamily: "var(--font-body)" }}
           >
             Our ecosystem is built around selecting the right AI tools for each
@@ -627,7 +639,7 @@ export default function AIContentPage() {
             orchestrated to support storytelling and visual quality.
           </p>
 
-          <div className="mx-auto mt-12 flex max-w-lg items-center justify-center gap-8">
+          {/* <div className="mx-auto mt-12 flex max-w-lg items-center justify-center gap-8">
             {toolIcons.map((icon, i) => (
               <div
                 key={i}
@@ -641,7 +653,7 @@ export default function AIContentPage() {
                 />
               </div>
             ))}
-          </div>
+          </div> */}
         </div>
       </section>
 

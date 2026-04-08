@@ -91,12 +91,7 @@ export default function TheMindBehindPage() {
                 Discover The Mind Behind
               </Link>
             </div>
-
-
-
           </div>
-
-
         </div>
 
         <div className="absolute bottom-10 right-[60px] z-10">
@@ -396,7 +391,7 @@ export default function TheMindBehindPage() {
       {/* ════════════════════════════════════════════════════════
           8. BRANDS NEED SOMETHING DURABLE
           ════════════════════════════════════════════════════════ */}
-      <section className="relative overflow-hidden bg-[#F6F9F2]" style={{ height: "1200px" }}>
+      <section className="relative overflow-hidden bg-[#F6F9F2]" style={{ height: "1350px" }}>
         {/* Background image */}
         <img
           src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/eba38997-062e-4147-aedc-756707da8200/public"
@@ -443,23 +438,23 @@ export default function TheMindBehindPage() {
           </div>
 
           {/* Bottom lockup */}
-          <div className="absolute left-[615px] top-[1085px] flex items-end gap-2">
+          <div className="absolute left-[615px] top-[1085px] flex items-end gap-2 mt-20">
             <h2
               className="font-bold leading-[0.92] uppercase"
-              style={{ fontFamily: "Bricolage Grotesque", fontSize: "96px", color: "#145365" }}
+              style={{ fontFamily: "Bricolage Grotesque", fontSize: "130px", color: "#145365" }}
             >
               Always
             </h2>
             <div className="flex flex-col">
               <h3
                 className="font-bold leading-[0.92] uppercase"
-                style={{ fontFamily: "Bricolage Grotesque", fontSize: "52px", color: "#039EB7" }}
+                style={{ fontFamily: "Bricolage Grotesque", fontSize: "75px", color: "#039EB7" }}
               >
                 human
               </h3>
               <h3
                 className="font-bold leading-[0.92] uppercase"
-                style={{ fontFamily: "Bricolage Grotesque", fontSize: "52px", color: "#039EB7" }}
+                style={{ fontFamily: "Bricolage Grotesque", fontSize: "75px", color: "#039EB7" }}
               >
                 intentional
               </h3>
@@ -563,10 +558,10 @@ export default function TheMindBehindPage() {
           </div>
           <div className="flex flex-col items-end mx-10 py-8">
             <div>
-              <p className="text-[#145365] font-heading text-[18px]">Human-led intelligence.</p>
-              <p className="text-[#145365] font-heading text-[18px]">System-driven creativity.</p>
-              <p className="text-[#145365] text-[16px]">Designed for brands that want more than</p>
-              <p className="text-[#145365] text-[16px]">outputs — they want impact.</p>
+              <p className="text-[#145365] font-heading text-[25px]">Human-led intelligence.</p>
+              <p className="text-[#145365] font-heading text-[25px]">System-driven creativity.</p>
+              <p className="text-[#145365] text-[25px]">Designed for brands that want more than</p>
+              <p className="text-[#145365] text-[25px]">outputs — they want impact.</p>
             </div>
           </div>
         </div>

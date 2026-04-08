@@ -14,7 +14,32 @@ import UseCaseCarousel from "@/components/desktop/UseCaseCarousel";
 import FaqSection from "@/components/desktop/FaqSection";
 import AccordionWithImage from "@/components/desktop/AccordionWithImage";
 import ContactFormSection from "@/components/desktop/ContactFormSection";
+import { ChevronDown, ChevronUp } from "lucide-react";
+
 /* ─── Data ─── */
+const items = [
+  {
+    title: "AI Brand Ambassador",
+    content:
+      "Your brand's digital representative. Designed to embody your identity, deliver messages, and build authentic audience relationships across campaigns and platforms.",
+  },
+  {
+    title: "AI Influencer",
+    content:
+      "A fully digital persona designed to create content, engage audiences, and represent brands across social media with complete consistency.",
+  },
+  {
+    title: "AI Blogger",
+    content:
+      "An AI-powered content creator that produces written and visual blog content, driving SEO and organic engagement.",
+  },
+  {
+    title: "AI Mascot",
+    content:
+      "A stylized character that represents your brand personality, designed for marketing campaigns and community engagement.",
+  },
+];
+
 const topInfluencer = [
   {
     type: "Real Estate",
@@ -253,6 +278,7 @@ const filterOptions = [
 const heroPartners = ["VG", "Vestine", "Optimum", "Colorful"];
 
 export default function AIInfluencerPage() {
+  const [openIndex, setOpenIndex] = useState(0);
   const [openFaqLeft, setOpenFaqLeft] = useState<number | null>(null);
   const [openFaqRight, setOpenFaqRight] = useState<number | null>(null);
   const [activeTab, setActiveTab] = useState(0);
@@ -521,31 +547,91 @@ export default function AIInfluencerPage() {
       {/* ════════════════════════════════════════════════════════
           4. THE SPECTRUM OF AI INFLUENCERS
           ════════════════════════════════════════════════════════ */}
-      <AccordionWithImage
+      {/* <AccordionWithImage
         heading={"The Spectrum of\nAI Influencers"}
         subheading="AI influencers serve different purposes. Understanding the spectrum helps choose the right fit for your brand."
-        defaultImage="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/a6335ebb-a94d-49fe-f728-6034821b4500/public"
+        defaultImage="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/3ae0f1a7-9f73-4c29-9d1e-f45ca0381b00/public"
         items={[
           { title: "AI Brand Ambassador", description: "A virtual representative that communicates your brand identity with purpose and precision across every channel.", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/3bb85d3d-0153-4afa-2959-adafcc4f1900/public" },
           { title: "AI Influencer", description: "A digital persona designed to engage, create, and influence — powered by AI, shaped by your strategy.", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/995b7c78-e5e9-4a39-412f-9f183bbd0500/public" },
           { title: "AI Blogger", description: "An AI-driven writer that produces consistent, SEO-optimized content to fuel your brand narrative.", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/e302e17b-3d7a-4e23-5779-603178dedd00/public" },
           { title: "AI Mascot", description: "A stylized character built for relatability, recognition, and emotional resonance with audiences.", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/c836b07d-e84a-4f01-5f1c-03b54afafd00/public" },
         ]}
-      />
+      /> */}
+      <section className="py-24 bg-light-bg">
+        <div className="flex items-center justify-center px-[60px]">
+          <div className="bg-white rounded-[24px] shadow-lg w-full p-12 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            {/* Left Section */}
+            <div>
+              <h2 className="font-heading text-[60px] font-bold text-[#063746] mb-4 leading-tight">
+                The Spectrum of<br />AI Influencers
+              </h2>
+              <p className="text-[#063746] text-[22px] mb-10 leading-relaxed" style={{ fontFamily: "var(--font-body)" }}>
+                AI influencers are a spectrum of intelligent digital personas built to represent brands in new ways. From brand ambassadors to stylized mascots, each type serves a unique role.
+              </p>
 
+              <div className="space-y-0">
+                {items.map((item, index) => {
+                  const isOpen = index === openIndex;
+                  return (
+                    <div key={index} className="border-b border-[#063746]/10">
+                      <button
+                        onClick={() => setOpenIndex(isOpen ? -1 : index)}
+                        className="flex items-center justify-between w-full text-left py-5 hover:opacity-80 transition"
+                      >
+                        <span className={`text-[34px] font-medium transition-colors ${isOpen ? "text-[#0A7D94]" : "text-[#86868D]"}`}>
+                          {item.title}
+                        </span>
+                        {isOpen ? (
+                          <ChevronUp size={25} className="text-[#86868D] shrink-0" />
+                        ) : (
+                          <ChevronDown size={25} className="text-[#86868D] shrink-0" />
+                        )}
+                      </button>
+                      {isOpen && item.content && (
+                        <p className="text-[#5C5C5C] text-[22px] pb-5 leading-relaxed" style={{ fontFamily: "var(--font-body)" }}>
+                          {item.content}
+                        </p>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Right Section — tall portrait image */}
+            <div className="flex items-center justify-center">
+              <div className="relative w-full max-w-[550px] h-[600px] rounded-[20px] overflow-hidden shadow-xl">
+                <Image
+                  src={items[openIndex >= 0 ? openIndex : 0] ? [
+                    "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/3ae0f1a7-9f73-4c29-9d1e-f45ca0381b00/public",
+                    "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/a0e9404d-c437-42b7-1433-144fff823900/public",
+                    "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/cea0a78c-9afa-4922-39c1-49bbb3c88d00/public",
+                    "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/0ffc2a21-abab-4878-398a-3d49d9f4bc00/public",
+                  ][openIndex >= 0 ? openIndex : 0] : "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/3bb85d3d-0153-4afa-2959-adafcc4f1900/public"}
+                  alt={items[openIndex >= 0 ? openIndex : 0]?.title || "AI Influencer"}
+                  fill
+                  className="object-cover transition-all duration-500"
+                  sizes="360px"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
       {/* ════════════════════════════════════════════════════════
           5. EVERY INDUSTRY DESERVES ITS OWN VOICE
           ════════════════════════════════════════════════════════ */}
       <section className="bg-[#002834] py-24">
         <div className="px-[70px]">
-          <h2 className="font-heading text-[48px] font-bold leading-[1.05] text-[#1CE3F4]">
+          <h2 className="font-heading text-[60px] font-bold leading-[1.05] text-[#1CE3F4]">
             Every Industry Deserves
             <br />
             Its Own Voice.
           </h2>
           <div className="mt-4 grid grid-cols-2 gap-60">
             <p
-              className="text-[16px] leading-[1.6] text-[#90B2BD]"
+              className="text-[30px] leading-[1.6] text-[#90B2BD] mt-2"
               style={{ fontFamily: "var(--font-body)" }}
             >
               Our AI influencers reflect the diversity of industries and
@@ -554,7 +640,7 @@ export default function AIInfluencerPage() {
             </p>
             <div>
               <p
-                className="text-[16px] leading-[1.6] text-[#90B2BD]"
+                className="text-[30px] leading-[1.6] text-[#90B2BD]"
                 style={{ fontFamily: "var(--font-body)" }}
               >
                 Choose from our curated library or request a
@@ -562,12 +648,12 @@ export default function AIInfluencerPage() {
                 brand.
 
               </p>
-              <button className="flex items-center gap-3 rounded-full bg-[#1CE3F4] px-6 py-2.5 mt-10 font-heading text-[14px] font-medium text-[#0E4252] transition hover:bg-[#1CE3F4]/80">
+              <button className="flex items-center gap-3 rounded-full bg-[#1CE3F4] px-6 py-2.5 mt-10 font-heading text-[22px] font-medium text-[#0E4252] transition hover:bg-[#1CE3F4]/80">
                 <span>Explore The Collection</span> {plusButton()}
               </button>
             </div>
           </div>
-          <div className="flex flex-wrap gap-16 p-4 mt-35.75 relative z-10">
+          <div className="flex flex-wrap gap-5 p-4 mt-35 relative z-10 ml-4">
             {filters.map((item, index) => (
               <div key={index} className="relative">
 
@@ -576,14 +662,14 @@ export default function AIInfluencerPage() {
                   onClick={() =>
                     setOpenFilter(openFilter === index ? null : index)
                   }
-                  className="flex items-center justify-between px-4 py-3 bg-[#FFFFFF] rounded-full cursor-pointer"
+                  className="flex items-center justify-between px-8 py-5 bg-[#FFFFFF] rounded-full cursor-pointer"
                 >
-                  <span className="text-[#4D5347] text-sm font-medium">
+                  <span className="text-[#4D5347] text-[22px] font-medium">
                     {item}
                   </span>
 
                   <svg
-                    className={`w-4 h-4 ml-14  text-gray-500 transition-transform ${openFilter === index ? "rotate-180" : ""
+                    className={`w-6 h-6 ml-14  text-[#86868D] transition-transform ${openFilter === index ? "rotate-180" : ""
                       }`}
                     fill="none"
                     stroke="currentColor"
@@ -905,7 +991,7 @@ export default function AIInfluencerPage() {
       {/* ════════════════════════════════════════════════════════
           8. HOW IT WORKS — 3 steps with icon cards
           ════════════════════════════════════════════════════════ */}
-  <FourDMethodSection />
+      <FourDMethodSection />
 
       {/* ════════════════════════════════════════════════════════
           9. USE CASES — scrollable cards with tabs
@@ -941,6 +1027,10 @@ export default function AIInfluencerPage() {
             { title: "Nadlan Star", video: "https://customer-avhhoygwtxxdpkyp.cloudflarestream.com/f87ff43c16d018cdafd6c1ce68423c67/watch", tags: ["Use-Case Development", "Prompt Crafting"] },
             { title: "Vesta Global", video: "https://customer-avhhoygwtxxdpkyp.cloudflarestream.com/8a161380969c7a822ca6075723101fdb/watch", tags: ["Use-Case Development", "Prompt Crafting"] },
             { title: "Nadlan Star", video: "https://customer-avhhoygwtxxdpkyp.cloudflarestream.com/557784e65cd48dfcc66ec4545dd50b2a/watch", tags: ["Visual Style Definition", "Prompt Crafting"] },
+            { title: "Vesta Global", video: "https://customer-avhhoygwtxxdpkyp.cloudflarestream.com/4efeb3daa0597c05c31d144beccea3f8/watch", tags: ["Visual Style Definition", "AI Model Selection & Optimization", "Use-Case Development", "Prompt Crafting"] },
+            { title: "Nadlan Star", video: "https://customer-avhhoygwtxxdpkyp.cloudflarestream.com/f87ff43c16d018cdafd6c1ce68423c67/watch", tags: ["Use-Case Development", "Prompt Crafting"] },
+            { title: "Vesta Global", video: "https://customer-avhhoygwtxxdpkyp.cloudflarestream.com/8a161380969c7a822ca6075723101fdb/watch", tags: ["Use-Case Development", "Prompt Crafting"] },
+            { title: "Nadlan Star", video: "https://customer-avhhoygwtxxdpkyp.cloudflarestream.com/557784e65cd48dfcc66ec4545dd50b2a/watch", tags: ["Visual Style Definition", "Prompt Crafting"] },
           ]} />
 
         </div>
@@ -949,7 +1039,7 @@ export default function AIInfluencerPage() {
       {/* ════════════════════════════════════════════════════════
           10. PARTNERS
           ════════════════════════════════════════════════════════ */}
-    <PartnersSection />
+      <PartnersSection />
 
       {/* ════════════════════════════════════════════════════════
           11. FAQ — Two-column accordion + Live FAQ
@@ -959,7 +1049,7 @@ export default function AIInfluencerPage() {
       {/* ════════════════════════════════════════════════════════
           12. CTA — "Let's Build What's Next, Together."
           ════════════════════════════════════════════════════════ */}
-     <ContactFormSection />
+      <ContactFormSection />
     </>
   );
 }

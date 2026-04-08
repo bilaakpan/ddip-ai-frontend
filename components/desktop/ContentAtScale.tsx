@@ -31,7 +31,7 @@ export default function ContentAtScale({
   return (
     <section className="bg-light-bg py-12">
       <div className="px-[60px]">
-        <div className="relative overflow-hidden rounded-[24px] px-16 py-16 flex items-start justify-between min-h-[320px]"
+        <div className="relative overflow-hidden rounded-[24px] px-16 py-16 flex items-start justify-between min-h-[580px]"
           style={{ background: "rgba(0,0,0,1)", backdropFilter: "blur(238.3px)" }}>
 
           {/* BG image */}
@@ -42,18 +42,18 @@ export default function ContentAtScale({
             <h2 className="text-[48px] font-medium leading-[1.1]" style={{ fontFamily: "Bricolage Grotesque", color: "#FFFFFF" }}>
               {heading}
             </h2>
-            <p className={`mt-4 ${descriptionClassName}`} style={{ fontFamily: "SF Pro Display", color: "#FFFFFF" }}>
+            <p className={`mt-4 ${descriptionClassName}`} style={{  color: "#FFFFFF" }}>
               {description1}
             </p>
             {description2 && (
-              <p className={`mt-3 ${descriptionClassName}`} style={{ fontFamily: "SF Pro Display", color: "#FFFFFF" }}>
+              <p className={`mt-3 ${descriptionClassName}`} style={{  color: "#FFFFFF" }}>
                 {description2}
               </p>
             )}
           </div>
 
           {/* Right — feature rows */}
-          <div className="relative z-10 w-[40%] flex flex-col gap-3">
+          <div className="relative z-10 w-[25%] flex flex-col gap-3">
             {features.map((item, i) => (
               <div key={i} className="flex items-center gap-3 rounded-[10px] px-4 py-3"
                 style={{ background: "#FFFFFF1A", backdropFilter: "blur(45.31px)" }}>

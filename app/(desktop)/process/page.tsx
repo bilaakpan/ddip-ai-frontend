@@ -328,19 +328,19 @@ export default function ProcessPage() {
 
           {/* Right — text */}
           <div className="flex-1">
-            <p style={{ fontFamily: "Bricolage Grotesque", fontSize: "16px", color: "#9C9C9C" }}>
+            <p style={{ fontFamily: "Bricolage Grotesque", fontSize: "22px", color: "#9C9C9C" }}>
               We don't start with tools.<br />
               We don't start with AI.
             </p>
             <div className="mt-4 flex items-baseline flex-wrap">
-              <span className="font-bold uppercase leading-[1.1]" style={{ fontFamily: "Bricolage Grotesque", fontSize: "40px", color: "#063746" }}>
+              <span className="font-bold uppercase leading-[1.1]" style={{ fontFamily: "Bricolage Grotesque", fontSize: "57px", color: "#063746" }}>
                 We start with
               </span>
-              <span className="font-bold uppercase leading-[1.1]" style={{ fontFamily: "Bricolage Grotesque", fontSize: "40px", color: "#00BCCF" }}>
+              <span className="font-bold uppercase leading-[1.1]" style={{ fontFamily: "Bricolage Grotesque", fontSize: "57px", color: "#00BCCF" }}>
                 understanding.
               </span>
             </div>
-            <p className="mt-6 leading-[1.7]" style={{ fontSize: "16px", color: "#063746", width: "400px" }}>
+            <p className="mt-6 leading-[1.7]" style={{ fontSize: "24px", color: "#063746", width: "600px" }}>
               Because meaningful automation, effective AI, and scalable creativity can only happen when <span style={{ color: "#00BCCF" }}>strategy, human insight, and technology</span> move together.
             </p>
           </div>
@@ -397,9 +397,9 @@ export default function ProcessPage() {
           </p>
 
           {/* Cards — 2x2 grid left + 1 tall card right */}
-          <div className="mt-4 flex gap-3 flex-1 min-h-0">
+          <div className="mt-4 flex gap-3 flex-1 min-h-0 items-start">
             {/* Left — 2x2 grid, takes up remaining width minus right card */}
-            <div className="grid grid-cols-2 gap-3 flex-1">
+            <div className="grid grid-cols-2 gap-10 flex-1">
               {[
                 { image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/840870cf-3f8a-4ffa-ecf5-42c951983400/public", label: "Launching an", bold: "AI influencer or brand ambassador" },
                 { image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/21580366-d582-4166-54c0-ca19cf5c5c00/public", label: "Building an", bold: "AI-driven content engine" },
@@ -407,7 +407,7 @@ export default function ProcessPage() {
                 { image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/9bbc75a1-f667-4be4-0c98-f21a6c069000/public", label: "Creating a long-term", bold: "AI brand ecosystem" },
               ].map((item, i) => (
                 <div key={i} className="flex items-center gap-3 rounded-[10px] p-3" style={{ background: "rgba(255,255,255,0.12)", backdropFilter: "blur(10px)", maxHeight: "100px" }}>
-                  <div className="shrink-0 w-[70px] h-[70px] overflow-hidden rounded-[8px]">
+                  <div className="shrink-0 w-[80px] h-[90px] overflow-hidden rounded-[8px]">
                     <img src={item.image} alt={item.bold} className="w-full h-full object-cover" />
                   </div>
                   <div>
@@ -419,7 +419,7 @@ export default function ProcessPage() {
             </div>
 
             {/* Right — 1 tall card, fixed width ~25% */}
-            <div className="flex rounded-[10px] overflow-hidden w-[25%] mb-6" style={{ background: "rgba(255,255,255,0.12)", backdropFilter: "blur(10px)" }}>
+            <div className="flex rounded-[10px] overflow-hidden w-[25%]" style={{ background: "rgba(255,255,255,0.12)", backdropFilter: "blur(10px)", height: "fit-content" }}>
               {/* Image — left half */}
               <div className="w-[55%] h-full overflow-hidden rounded-[8px] p-3">
                 <img src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/60f0e23b-ae4e-4186-cf0c-47b08d778700/public" alt="AI ad films" className="w-full h-full object-cover rounded-[8px]" />
@@ -483,14 +483,15 @@ export default function ProcessPage() {
       </section>
 
       {/* From Insight to Intelligent Impact */}
-      <section className="bg-[#F6F9F2] py-16 lg:py-24">
+      <section className="bg-[#F6F9F2] py-16">
+        <h2 className="w-[300px] font-bold mb-5 ml-55" style={{ fontFamily: "Bricolage Grotesque", color: "#126478", fontSize: '30px' }}>From Insight to Intelligent Impact</h2>
 
         <Container>
-          <h2 className="w-[300px] font-bold" style={{ fontFamily: "Bricolage Grotesque", color: "#126478", fontSize: '30px' }}>From Insight to Intelligent Impact</h2>
-          <div className="rounded-[24px]  bg-[#ffffff] px-6 py-8 lg:px-14 lg:py-12">
+          <div className="rounded-[30px]  bg-[#ffffff] h-[700px] px-14 py-14 ">
+
             <div className="grid gap-10 lg:grid-cols-[1fr_360px] lg:gap-16">
               {/* LEFT SIDE */}
-              <div className="relative ">
+              <div className="relative mt-10">
                 {/* IMAGE */}
                 <img
                   src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/f123a0a7-ad4f-4441-1163-3ca9cf8ad500/public"
@@ -498,11 +499,11 @@ export default function ProcessPage() {
                   className="absolute w-[55%] -top-12 left-16 sm:w-[60%] md:w-[55%] lg:w-[50%] object-contain"
                 />
                 {/* CARD */}
-                <div className="absolute bg-[#E6F8FD33] -bottom-16 left-[100px] t-[190px] w-full max-w-[480px] rounded-[16px] border border-[#dde2df] bg-[#E6F8FD33] p-5 backdrop-blur-md shadow-md">
+                <div className="absolute bg-[#E6F8FD33] -bottom-16 left-[100px] t-[190px] w-full max-w-[480px] rounded-[16px] bg-[#E6F8FD33] p-5 backdrop-blur-md shadow-md">
 
                   <div className="flex items-start gap-4">
 
-                    <span className="text-[48px] font-semibold text-[#002834] leading-none">
+                    <span className="text-[48px] font-medium text-[#002834] leading-none">
                       {String(activeInsightStep + 1).padStart(2, "0")}
                     </span>
                     <div>
@@ -519,7 +520,7 @@ export default function ProcessPage() {
                       </p>
                     </div>
                   </div>
-                  <div className="mt-4 text-[13px] text-[#002834]">
+                  <div className="mt-4 text-[13px] text-[#002834] ml-[70px]">
                     <p>{selectedInsightStep.listHeading}</p>
                     <ul className="mt-2 list-disc pl-5 space-y-1">
                       {selectedInsightStep.bullets.map((bullet) => (
@@ -527,13 +528,13 @@ export default function ProcessPage() {
                       ))}
                     </ul>
                   </div>
-                  <p className="mt-4 font-semibold text-[14px] text-[#002834]">
+                  <p className="mt-4 font-semibold text-[14px] text-[#002834] ml-[70px]">
                     {selectedInsightStep.closing}
                   </p>
                 </div>
               </div>
               {/* RIGHT SIDE */}
-              <div className="hidden lg:block">
+              <div className="hidden lg:block mt-10">
                 <ul className="space-y-6">
                   {insightSteps.map((step, index) => (
                     <li key={step.title}>

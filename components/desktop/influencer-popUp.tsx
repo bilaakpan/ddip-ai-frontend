@@ -30,7 +30,7 @@ export function InfluencerPopupModal({
     const countryText = profile.country || "Global";
     return (
         <div
-            className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-6"
+            className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-6 mt-20"
             onClick={onClose}
         >
             <div
@@ -51,12 +51,12 @@ export function InfluencerPopupModal({
                     />
                 </div>
                 {/* ✅ Responsive Layout */}
-                <div className="relative z-[2] grid grid-cols-1 md:grid-cols-[40%_60%]" style={{height:"550px",overflow:"scroll",scrollbarWidth:"none"}}>
+                <div className="relative z-[2] grid grid-cols-1 md:grid-cols-[40%_60%]" style={{height:"750px",overflow:"scroll",scrollbarWidth:"none"}}>
                     {/* LEFT IMAGE */}
                     <div className="relative  w-full overflow-hidden">
                         <div className="absolute -left-[32%] top-[5%] h-[80%] w-[630px]">
                             <Image
-                                src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/5ffaf3b0-1c81-4f18-6dba-9b2acaa77000/public"
+                                src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/9b257786-7738-4d56-09be-dac3721c2300/public"
                                 alt={profile.name}
                                 fill
                                 priority
@@ -65,7 +65,7 @@ export function InfluencerPopupModal({
                         </div>
                         {/* IMAGE */}
                         <Image
-                            src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/8c6dfd82-c580-49a7-be40-a53090c65400/public"
+                            src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/a851a6fa-901f-4861-0e8e-465d120cb700/public"
                             alt=""
                             fill
                             priority

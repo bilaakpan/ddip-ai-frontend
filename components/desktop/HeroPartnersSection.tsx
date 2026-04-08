@@ -11,7 +11,7 @@ const heroPartners = [
 export default function HeroPartnersSection() {
   return (
     <section className="bg-[#F8F9F8] py-16 px-[75px]">
-      <div className="max-w-7xl mx-auto">
+      <div className="">
         <h2 className="text-[#2D4A4B] font-heading text-xl font-semibold mb-12">
           Partners
         </h2>

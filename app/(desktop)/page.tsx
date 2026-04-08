@@ -773,7 +773,7 @@ export default function HomePage() {
           Figma section 40: #002834 bg, blur ellipses, 5 influencer cards
           ════════════════════════════════════════════════════════ */}
       <section className="relative overflow-hidden bg-[#002834] py-24 lg:py-32">
-        {/* Decorative blur ellipses */}
+  
         <div
           className="absolute right-[-100px] top-[100px] h-[777px] w-[777px] rounded-full"
           style={{ background: "#129CAC4D", filter: "blur(335px)" }}
@@ -792,7 +792,6 @@ export default function HomePage() {
             The Future Face of Brands
           </h2>
 
-          {/* Subtitle — only highlighted words in white */}
           <p
             className="mx-auto mt-8 max-w-[977px] text-center text-[34px] leading-[1.19] text-[#90B2BD]"
             style={{ fontFamily: "var(--font-body)" }}
@@ -801,31 +800,45 @@ export default function HomePage() {
             combining expressiveness, adaptability, and visual intelligence.
           </p>
 
-          {/* Filter tabs + Discover More */}
-          <div className="mt-16 flex items-center justify-between px-[60px]">
+          {/* Filter tabs — centered */}
+          <div className="mt-16 flex items-center justify-center gap-3 px-[60px]">
             {/* Filter pills */}
-            <div className="flex items-center gap-5 rounded-full bg-white/90 px-[15px] py-[9px]">
+            <div className="flex flex-wrap items-center justify-center gap-3 rounded-full bg-white/90 px-6 py-5">
               <button
-                className="rounded-full bg-[#063746] px-[30px] py-[20px] text-[22px] leading-[1.2] text-[#EBFFFF]"
+                className="rounded-full bg-[#063746] px-5 py-2 text-[16px] leading-[1.2] text-[#EBFFFF]"
                 style={{ fontFamily: "var(--font-body)" }}
               >
-                Influencer
+                All Persona
               </button>
               <button
-                className="rounded-full px-[30px] py-[20px] text-[22px] leading-[1.2] text-[#063746] transition-colors hover:bg-[#063746]/10"
+                className="rounded-full px-5 py-2 text-[16px] leading-[1.2] text-[#063746] transition-colors hover:bg-[#063746]/10"
                 style={{ fontFamily: "var(--font-body)" }}
               >
-                Ambassador
+                All Region
               </button>
               <button
-                className="rounded-full px-[30px] py-[20px] text-[22px] leading-[1.2] text-[#063746] transition-colors hover:bg-[#063746]/10"
+                className="rounded-full px-5 py-2 text-[16px] leading-[1.2] text-[#063746] transition-colors hover:bg-[#063746]/10"
                 style={{ fontFamily: "var(--font-body)" }}
               >
-                Mascot
+                All Language
+              </button>
+              <button
+                className="rounded-full px-5 py-2 text-[16px] leading-[1.2] text-[#063746] transition-colors hover:bg-[#063746]/10"
+                style={{ fontFamily: "var(--font-body)" }}
+              >
+                All Gender
+              </button>
+              <button
+                className="rounded-full px-5 py-2 text-[16px] leading-[1.2] text-[#063746] transition-colors hover:bg-[#063746]/10"
+                style={{ fontFamily: "var(--font-body)" }}
+              >
+                All Industry
               </button>
             </div>
+          </div>
 
-            {/* Discover More */}
+          {/* Discover More link — centered below filters */}
+          <div className="mt-6 flex items-center justify-center">
             <Link
               href="/ai-solutions/ai-influencer"
               className="group flex items-center gap-3"
@@ -839,7 +852,6 @@ export default function HomePage() {
             </Link>
           </div>
 
-          {/* Influencer Cards — 2 rows, horizontal scroll */}
           <div className="mt-10 overflow-hidden px-[60px]" ref={emblaRow1Ref}>
             <div className="flex gap-5">
               {[...cmsInfluencers.row1, ...cmsInfluencers.row1].map((inf, idx) => (
