@@ -947,43 +947,48 @@ export default function AIInfluencerPage() {
           ════════════════════════════════════════════════════════ */}
       <section className="bg-light-bg py-24">
         <div className="px-[60px]">
-          <div className="grid grid-cols-2 gap-16">
-            {/* Left — heading */}
+          {/* Header section */}
+          <div className="grid grid-cols-2 gap-16 mb-20">
             <div>
-              <h2 className="font-heading text-[48px] font-medium leading-[1.1] text-[#063746]">
+              <h2 className="font-heading text-[56px] font-medium text-[#063746]">
                 From Idea to Identity
               </h2>
+            </div>
+            <div>
               <p
-                className="mt-6 max-w-md text-[16px] leading-[1.6] text-[#063746]/60"
+                className="text-[44px] leading-[1.6] text-[#063746]/70 mb-6"
                 style={{ fontFamily: "var(--font-body)" }}
               >
-                Your brand deserves a voice of its own. We create intelligent,
-                expressive AI personas that amplify your values and connect with
-                audiences globally.
+                Your brand deserves a voice of its own. We create intelligent, expressive AI personas that embody your values and connect with audiences globally.
               </p>
+              <button className="rounded-full bg-[#0E4252] px-8 py-3 text-[22px] font-medium text-white transition hover:bg-[#063746]/90" style={{ fontFamily: "var(--font-body)" }}>
+                Start Your Project
+              </button>
             </div>
+          </div>
 
-            {/* Right — steps */}
-            <div className="space-y-10">
-              {processSteps.map((step) => (
-                <div key={step.num} className="flex gap-8">
-                  <span className="font-heading text-[14px] font-medium text-[#1CE3F4]">
+          {/* Steps */}
+          <div className="space-y-8">
+            {processSteps.map((step) => (
+              <div key={step.num} className="pb-8 border-b border-[#063746]/10 last:border-b-0">
+                <div className="grid grid-cols-2 gap-16">
+                  <span className="font-heading text-[36px] font-medium text-[#063746]">
                     {step.num}
                   </span>
-                  <div>
-                    <h3 className="font-heading text-[20px] font-medium text-[#063746]">
+                  <div className="flex-1">
+                    <h3 className="font-heading text-[60px] font-medium text-[#063746] mb-2">
                       {step.title}
                     </h3>
                     <p
-                      className="mt-2 text-[14px] leading-[1.6] text-[#063746]/60"
+                      className="text-[34px] leading-[1.6] text-[#063746]/70"
                       style={{ fontFamily: "var(--font-body)" }}
                     >
                       {step.description}
                     </p>
                   </div>
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>

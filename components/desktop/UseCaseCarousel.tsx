@@ -22,7 +22,7 @@ export default function UseCaseCarousel({ items }: UseCaseCarouselProps) {
   return (
     <div className="overflow-hidden" ref={emblaRef}>
       <div className="flex">
-        {items.map((item, i) => (
+        {[...items, ...items].map((item, i) => (
           <div key={i} className="shrink-0 flex flex-col" style={{ width: "370px", paddingRight: "20px" }}>
             <div className="relative overflow-hidden rounded-[16px] bg-[#D9D9D9]" style={{ height: "520px" }}>
               <HlsPlayer

@@ -9,7 +9,7 @@ import Autoplay from "embla-carousel-autoplay";
 
 const navLinks = [
   { label: "Process", href: "/process" },
-  { label: "AI Solutions", href: "/ai-solutions", hasDropdown: true },
+  { label: "AI Solutions", href: "", hasDropdown: true },
   { label: "Works", href: "/works", hasDropdown: true },
   { label: "The Mind Behind", href: "/the-mind-behind" },
   { label: "Insights", href: "/insights" },

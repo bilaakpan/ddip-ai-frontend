@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
+import { ChevronUp, ChevronDown } from "lucide-react";
 
 interface AccordionItem {
   title: string;
@@ -21,80 +23,72 @@ export default function AccordionWithImage({
   items,
   defaultImage,
 }: AccordionWithImageProps) {
-  const [open, setOpen] = useState<number | null>(null);
+  const [openIndex, setOpenIndex] = useState<number>(-1);
 
-  const activeImage = open !== null ? items[open].image : defaultImage;
-  const activeAlt = open !== null ? items[open].title : "Default";
+  const activeImage = openIndex >= 0 ? items[openIndex].image : defaultImage;
 
   return (
-    <section id="discover" className="bg-light-bg py-24">
-      <div className="px-[60px]">
-        {/* Header */}
-        <div className="grid grid-cols-2 gap-16 mb-16">
+    <section className="py-24 bg-light-bg">
+      <div className="flex items-center justify-center px-[60px]">
+        <div className="bg-white rounded-[24px] shadow-lg w-full p-12 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          {/* Left Section */}
           <div>
-            <h2 className="font-heading text-[50px] font-medium uppercase leading-[1.1] text-[#063746]">
+            <h2 className="font-heading text-[60px] font-bold text-[#063746] mb-4 leading-tight">
               {heading}
             </h2>
-          </div>
-          <div>
             <p
-              className="text-[24px] leading-[1.6] text-[#063746]"
-              style={{ fontFamily: "SF Pro Display" }}
+              className="text-[#063746] text-[22px] mb-10 leading-relaxed"
+              style={{ fontFamily: "var(--font-body)" }}
             >
               {subheading}
             </p>
-          </div>
-        </div>
 
-        {/* Accordion + Image */}
-        <div className="flex gap-0 rounded-[20px] overflow-hidden border border-[#063746]/10 bg-white">
-          {/* Left — Accordion */}
-          <div className="w-[50%] py-2">
-            {items.map((item, i) => (
-              <div key={item.title} className="border-b border-[#063746]/10 last:border-b-0">
-                <button
-                  className="flex w-full items-center justify-between px-8 py-6 text-left"
-                  onClick={() => setOpen(open === i ? null : i)}
-                >
-                  <span
-                    className="font-heading text-[18px] font-medium"
-                    style={{ color: open === i ? "#1CE3F4" : "#063746" }}
-                  >
-                    {item.title}
-                  </span>
-                  <svg
-                    className={`h-4 w-4 shrink-0 transition-transform ${open === i ? "rotate-180" : ""}`}
-                    style={{ color: open === i ? "#1CE3F4" : "#063746" }}
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                  >
-                    <path d="M6 9l6 6 6-6" />
-                  </svg>
-                </button>
-                {open === i && (
-                  <div className="px-8 pb-6">
-                    <p
-                      className="text-[14px] leading-[1.6] text-[#063746]/50"
-                      style={{ fontFamily: "var(--font-body)" }}
+            <div className="space-y-0">
+              {items.map((item, index) => {
+                const isOpen = index === openIndex;
+                return (
+                  <div key={index} className="border-b border-[#063746]/10">
+                    <button
+                      onClick={() => setOpenIndex(isOpen ? -1 : index)}
+                      className="flex items-center justify-between w-full text-left py-5 hover:opacity-80 transition"
                     >
-                      {item.description}
-                    </p>
+                      <span
+                        className={`text-[34px] font-medium transition-colors ${isOpen ? "text-[#0A7D94]" : "text-[#86868D]"
+                          }`}
+                      >
+                        {item.title}
+                      </span>
+                      {isOpen ? (
+                        <ChevronUp size={25} className="text-[#86868D] shrink-0" />
+                      ) : (
+                        <ChevronDown size={25} className="text-[#86868D] shrink-0" />
+                      )}
+                    </button>
+                    {isOpen && item.description && (
+                      <p
+                        className="text-[#5C5C5C] text-[22px] pb-5 leading-relaxed"
+                        style={{ fontFamily: "var(--font-body)" }}
+                      >
+                        {item.description}
+                      </p>
+                    )}
                   </div>
-                )}
-              </div>
-            ))}
+                );
+              })}
+            </div>
           </div>
 
-          {/* Right — Image */}
-          <div className="w-[50%] shrink-0">
-            <img
-              src={activeImage}
-              alt={activeAlt}
-              className="w-full h-full object-cover rounded-r-[20px]"
-              style={{ minHeight: "320px" }}
-            />
+          {/* Right Section — tall portrait image */}
+          <div className="flex items-center justify-center">
+            <div className="relative w-full max-w-[750px] h-[620px] rounded-[20px] overflow-hidden shadow-xl">
+              <Image
+                src={activeImage}
+                alt={items[openIndex >= 0 ? openIndex : 0]?.title || "Default"}
+                fill
+                className="object-cover transition-all duration-500"
+                sizes="360px"
+              />
+            </div>
           </div>
         </div>
       </div>

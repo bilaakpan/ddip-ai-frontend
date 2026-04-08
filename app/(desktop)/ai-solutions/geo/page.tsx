@@ -449,16 +449,18 @@ Instead of scrolling through result pages, users increasingly ask questions and 
           </p>
         </div>
 
-        {/* Horizontal scroll cards */}
-        <div className="flex gap-6 overflow-x-auto pb-4" style={{ scrollbarWidth: "none" }}>
-          {optimizeItems.map((item) => (
-            <div key={item.title} className="flex-shrink-0 w-[380px]">
-              <div className="relative w-full h-[280px] overflow-hidden rounded-[16px] bg-white">
-                <Image src={item.image} alt={item.title} fill className="object-cover" sizes="380px" />
+        {/* Horizontal scroll cards - infinite loop */}
+        <div className="overflow-hidden">
+          <div className="flex gap-6 pb-4 animate-marquee" style={{ scrollbarWidth: "none" }}>
+            {[...optimizeItems, ...optimizeItems].map((item, index) => (
+              <div key={`${item.title}-${index}`} className="flex-shrink-0 w-[380px]">
+                <div className="relative w-full h-[280px] overflow-hidden rounded-[16px] bg-white">
+                  <Image src={item.image} alt={item.title} fill className="object-cover" sizes="380px" />
+                </div>
+                <p className="mt-4 text-[18px] text-white" style={{ fontFamily: "Bricolage Grotesque, sans-serif" }}>{item.title}</p>
               </div>
-              <p className="mt-4 text-[18px] text-white" style={{ fontFamily: "Bricolage Grotesque, sans-serif" }}>{item.title}</p>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </section>
 
