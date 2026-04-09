@@ -36,8 +36,12 @@ export default function FourDMethodSection() {
         className="relative mx-auto mt-20 flex items-center justify-center gap-40"
         style={{ height: "600px", maxWidth: "1600px" }}
       >
-        {/* Dashed connecting line */}
-        <div className="absolute top-[50%] left-[8%] right-[8%] border-t-2 border-dashed border-[#063746]/20 z-0" />
+        {/* Connecting image */}
+        <img
+          src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/5b237882-4b7c-42ee-ed94-21743ef81d00/public"
+          alt="connecting line"
+          className="absolute top-[70%] left-[8%] right-[8%] z-0 w-[84%] object-cover -translate-y-1/2"
+        />
 
         {methodSteps.map((step, i) => (
           <div

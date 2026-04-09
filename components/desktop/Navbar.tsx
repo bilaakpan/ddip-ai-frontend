@@ -72,7 +72,7 @@ function MegaMenuCarousel({ cards }: { cards: { title: string; href: string; ima
   };
 
   return (
-    <div className="relative flex flex-col gap-3">
+    <div className="relative flex flex-col gap-3 w-[80%] ml-auto">
       {/* Left arrow */}
       <button onClick={() => scroll("prev")} className="absolute -left-4 top-1/2 -translate-y-1/2 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-white/15 hover:bg-white/30 transition">
         <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M8 2L4 6L8 10" stroke="white" strokeWidth="1.5" strokeLinecap="round"/></svg>
@@ -93,8 +93,8 @@ function MegaMenuCarousel({ cards }: { cards: { title: string; href: string; ima
               className="group relative flex-none w-full overflow-hidden rounded-[16px]"
               style={{ aspectRatio: "4/5", flexBasis: "33.333%" }}
             >
-              <Image src={card.image} alt={card.title} fill className="object-cover transition-transform duration-300 group-hover:scale-105" sizes="200px" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
+              <Image src={card.image} alt={card.title} fill className="object-cover transition-transform duration-300 group-hover:scale-105 h-[200px]" />
+              {/* <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" /> */}
               <div className="relative flex h-full flex-col justify-end p-3">
                 <p className="text-[13px] font-medium leading-snug text-white" style={{ fontFamily: "SF Pro Display" }}>
                   {card.title}
@@ -175,7 +175,7 @@ export function Navbar() {
           <Image
             src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/1c4902c6-da41-4213-c084-5181a2316b00/public"
             alt="DDiP AI"
-            width={95}
+            width={100}
             height={32}
             className="h-8 w-auto max-md:h-7"
             priority
@@ -252,12 +252,12 @@ export function Navbar() {
                     <div className="grid grid-cols-[260px_1fr] gap-8 items-center">
 
                       {/* Left — text links */}
-                      <div className="space-y-2">
+                      <div className="space-y-2 w-[100%]">
                         {aiSolutionLinks.map((subLink) => (
                           <Link
                             key={subLink.label}
                             href={subLink.href}
-                            className="block px-2 py-1.5 text-[15px] text-white transition-colors hover:text-[#1CE3F4]"
+                            className="block w-[500px] px-2 py-1.5 text-[20px] text-white transition-colors hover:text-[#1CE3F4]"
                        
                           >
                             {subLink.label}

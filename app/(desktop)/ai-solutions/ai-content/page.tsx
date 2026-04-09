@@ -267,7 +267,7 @@ export default function AIContentPage() {
       {/* ════════════════════════════════════════════════════════
           3. WHAT AI CONTENT GENERATION MEANS AT DDIP.AI
           ════════════════════════════════════════════════════════ */}
-      <section id="discover" className="relative bg-dark-bg py-24 overflow-hidden">
+    <section id="discover" className="relative bg-dark-bg py-24 overflow-hidden">
         {/* Grid background */}
         <div className="absolute inset-0 opacity-20">
           <div className="h-full w-full" style={{
@@ -328,14 +328,28 @@ export default function AIContentPage() {
 
             {/* ── 3 lines converge → single line → NODE 1 ── */}
             <div className="shrink-0 relative flex flex-col justify-center" style={{ width: "100px", height: "490px" }}>
-              <svg width="100" height="120" viewBox="0 0 100 120" fill="none" className="relative">
+              {/* <svg width="100" height="120" viewBox="0 0 100 120" fill="none" className="relative">
                 <path d="M0 15  C40 15  40 60 75 60" stroke="rgba(255,255,255,0.5)" strokeWidth="1.5" fill="none" />
                 <path d="M0 60  L75 60" stroke="rgba(255,255,255,0.5)" strokeWidth="1.5" fill="none" />
                 <path d="M0 105 C40 105 40 60 75 60" stroke="rgba(255,255,255,0.5)" strokeWidth="1.5" fill="none" />
                 <line x1="75" y1="60" x2="100" y2="60" stroke="rgba(255,255,255,0.5)" strokeWidth="1.5" />
-              </svg>
+              </svg> */}
+
+        <svg width="240" height="120" viewBox="-140 0 240 120" fill="none" className="relative left-[-80px]">
+  <path d="M-140 15 L0 15" stroke="rgba(255,255,255,0.5)" strokeWidth="1.5" fill="none" />
+  <path d="M0 15 C40 15 40 60 75 60" stroke="rgba(255,255,255,0.5)" strokeWidth="1.5" fill="none" />
+  
+  <path d="M-140 60 L0 60" stroke="rgba(255,255,255,0.5)" strokeWidth="1.5" fill="none" />
+  <path d="M0 60 L75 60" stroke="rgba(255,255,255,0.5)" strokeWidth="1.5" fill="none" />
+  
+  <path d="M-140 105 L0 105" stroke="rgba(255,255,255,0.5)" strokeWidth="1.5" fill="none" />
+  <path d="M0 105 C40 105 40 60 75 60" stroke="rgba(255,255,255,0.5)" strokeWidth="1.5" fill="none" />
+  
+  <line x1="75" y1="60" x2="100" y2="60" stroke="rgba(255,255,255,0.5)" strokeWidth="1.5" />
+</svg>
+
               <Image src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/73eb47b0-8e72-4f36-60a2-fc3530f58200/public" alt="node" width={26} height={26}
-                className="absolute" style={{ left: "87px", top: "50%", transform: "translate(-50%, -50%)" }} />
+                className="absolute" style={{ left: "150px", top: "50%", transform: "translate(-50%, -50%)" }} />
             </div>
 
             {/* ── STEP 2: Create it — 4 images 2x2 ── */}
@@ -358,14 +372,14 @@ export default function AIContentPage() {
             </div>
 
             {/* ── connector: ddipicon1 → line → ddipicon2 ── */}
-            <div className="shrink-0 relative flex flex-col justify-center" style={{ width: "100px", height: "490px" }}>
-              <svg width="100" height="4" viewBox="0 0 100 4" fill="none">
-                <line x1="10" y1="2" x2="90" y2="2" stroke="rgba(255,255,255,0.5)" strokeWidth="1.5" />
-              </svg>
+            <div className="shrink-0 relative flex flex-col justify-center left-[-75px]" style={{ width: "100px", height: "490px" }}>
+              <svg width="250" height="4" viewBox="0 0 250 4" fill="none">
+  <line x1="10" y1="2" x2="240" y2="2" stroke="rgba(255,255,255,0.5)" strokeWidth="1.5" />
+</svg>
               <Image src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/73eb47b0-8e72-4f36-60a2-fc3530f58200/public" alt="node" width={26} height={26}
                 className="absolute" style={{ left: "0px", top: "50%", transform: "translateY(-50%)" }} />
               <Image src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/fdf3d272-410d-4ef4-260a-63f4ea52cc00/public" alt="node" width={26} height={26}
-                className="absolute" style={{ left: "74px", top: "50%", transform: "translateY(-50%)" }} />
+                className="absolute" style={{ left: "220px", top: "50%", transform: "translateY(-50%)" }} />
             </div>
 
             {/* ── STEP 3: Animate it — 1 tall + 2 stacked + 2 stacked ── */}
@@ -438,16 +452,34 @@ export default function AIContentPage() {
 
             {/* ── 5 lines → merge → ddipicon3 ── */}
             <div className="shrink-0 relative flex flex-col justify-center" style={{ width: "90px", height: "490px" }}>
-              <svg width="90" height="196" viewBox="0 0 90 196" fill="none" className="relative">
+              {/* <svg width="90" height="196" viewBox="0 0 90 196" fill="none" className="relative">
                 <path d="M0 20  C40 20  40 98 65 98" stroke="rgba(255,255,255,0.5)" strokeWidth="1.5" fill="none" />
                 <path d="M0 59  C40 59  40 98 65 98" stroke="rgba(255,255,255,0.5)" strokeWidth="1.5" fill="none" />
                 <path d="M0 98  L65 98" stroke="rgba(255,255,255,0.5)" strokeWidth="1.5" fill="none" />
                 <path d="M0 137 C40 137 40 98 65 98" stroke="rgba(255,255,255,0.5)" strokeWidth="1.5" fill="none" />
                 <path d="M0 176 C40 176 40 98 65 98" stroke="rgba(255,255,255,0.5)" strokeWidth="1.5" fill="none" />
                 <line x1="65" y1="98" x2="90" y2="98" stroke="rgba(255,255,255,0.5)" strokeWidth="1.5" />
-              </svg>
+              </svg> */}
+              <svg width="240" height="196" viewBox="-150 0 240 196" fill="none" className="relative left-[-80px]">
+  <path d="M-150 20 L0 20" stroke="rgba(255,255,255,0.5)" strokeWidth="1.5" fill="none" />
+  <path d="M0 20  C40 20  40 98 65 98" stroke="rgba(255,255,255,0.5)" strokeWidth="1.5" fill="none" />
+  
+  <path d="M-150 59 L0 59" stroke="rgba(255,255,255,0.5)" strokeWidth="1.5" fill="none" />
+  <path d="M0 59  C40 59  40 98 65 98" stroke="rgba(255,255,255,0.5)" strokeWidth="1.5" fill="none" />
+  
+  <path d="M-150 98 L0 98" stroke="rgba(255,255,255,0.5)" strokeWidth="1.5" fill="none" />
+  <path d="M0 98  L65 98" stroke="rgba(255,255,255,0.5)" strokeWidth="1.5" fill="none" />
+  
+  <path d="M-150 137 L0 137" stroke="rgba(255,255,255,0.5)" strokeWidth="1.5" fill="none" />
+  <path d="M0 137 C40 137 40 98 65 98" stroke="rgba(255,255,255,0.5)" strokeWidth="1.5" fill="none" />
+  
+  <path d="M-150 176 L0 176" stroke="rgba(255,255,255,0.5)" strokeWidth="1.5" fill="none" />
+  <path d="M0 176 C40 176 40 98 65 98" stroke="rgba(255,255,255,0.5)" strokeWidth="1.5" fill="none" />
+  
+  <line x1="65" y1="98" x2="90" y2="98" stroke="rgba(255,255,255,0.5)" strokeWidth="1.5" />
+</svg>
               <Image src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/248292a1-8078-42b6-a7f1-cc34d064ef00/public" alt="node" width={26} height={26}
-                className="absolute" style={{ right: "0px", top: "50%", transform: "translateY(-50%)" }} />
+                className="absolute" style={{ right: "-70px", top: "50%", transform: "translateY(-50%)" }} />
             </div>
 
             {/* ── STEP 4: Finish it ── */}
