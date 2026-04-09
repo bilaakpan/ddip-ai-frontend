@@ -160,7 +160,7 @@ export default function AIContentPage() {
             {/* Image with icon outside top-left */}
             <div className="relative h-[200px] w-[250px]">
               <div className="absolute -left-3 -top-3 z-20 flex  items-center justify-center rounded-md bg-[#063746] shadow-md">
-                <img src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/9999da12-fa45-44d3-19da-67228a63c400/public" alt="icon" className="h-[50px] w-[50px] object-contain" />
+                <img src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/1e1a01b7-cad6-4218-de1f-d23f5d27d400/public" alt="icon" className="h-[50px] w-[50px] object-contain" />
               </div>
               <div className="h-full w-full overflow-hidden rounded-[16px]">
                 <Image
@@ -194,7 +194,7 @@ export default function AIContentPage() {
           {/* Col 3 — tall woman video with icon outside top-left */}
           <div className="relative h-[513px] w-[250px]">
             <div className="absolute -left-3 -top-3 z-20 flex items-center justify-center rounded-md bg-[#063746] shadow-md">
-              <img src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/24b4e848-2873-476b-c343-3350ac28bc00/publicng" alt="icon" className="h-[50px] w-[50px] object-contain" />
+              <img src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/66a5192b-b87d-488a-073b-47b8b8c8d100/public" alt="icon" className="h-[50px] w-[50px] object-contain" />
             </div>
             <div className="h-full w-full overflow-hidden rounded-[16px] h-[430px]">
               <HlsPlayer

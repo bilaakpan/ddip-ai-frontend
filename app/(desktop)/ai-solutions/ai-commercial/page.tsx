@@ -71,13 +71,16 @@ const generateItems = [
   },
   {
     title: "Digital commercials",
-    vedio: "1944567a71eb965b43587e4827fe4d72"  },
+    vedio: "1944567a71eb965b43587e4827fe4d72"
+  },
   {
     title: "Product and launch videos",
-    vedio: "b2816aa7fba4ac757f3034e886c69cc0"  },
-    {
+    vedio: "b2816aa7fba4ac757f3034e886c69cc0"
+  },
+  {
     title: "Hero videos for integrated campaigns",
-    vedio: "24de38b44fb5a937655b4bb88d5feb37"  },
+    vedio: "24de38b44fb5a937655b4bb88d5feb37"
+  },
 ];
 
 const useCaseCards = [
@@ -210,20 +213,28 @@ export default function AICommercialPage() {
       {/* ════════════════════════════════════════════════════════
           3. WHAT AI COMMERCIAL PRODUCTION MEANS AT DDIP.AI
           ════════════════════════════════════════════════════════ */}
+
+
+
+
+
       <section id="discover" className="relative bg-light-bg py-16">
         <div className="px-[60px]">
 
-          {/* Floating icon — left edge, half outside */}
+
+
           <div className="absolute left-0 top-[45%] -translate-y-1/2 -translate-x-1/2 z-10">
             <img src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/79ad8341-ddac-4e20-41d6-bf65ab711500/public" className="w-[120px] h-[120px] object-contain" style={{ transform: "rotate(24.73deg)" }} />
           </div>
 
-          {/* Floating icon — bottom center */}
-          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 z-10">
+
+
+          <div className="absolute bottom-[-50px] left-1/2 right-[620px] -translate-x-1/2 translate-y-1/2 z-10">
             <img src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/72101ace-0e03-4f71-0a20-d3bfc51e7f00/public" className="w-[130px] h-[130px] object-contain" style={{ transform: "rotate(-29.82deg)" }} />
           </div>
 
-          {/* Top heading row */}
+
+
           <div className="flex items-start justify-between mb-12">
             <div className="w-[60%]">
               <h2 className="font-heading text-[60px] font-medium leading-[1.1] text-[#063746]">
@@ -233,67 +244,63 @@ export default function AICommercialPage() {
                 AI commercial production at DDIP is not about replacing creativity.
               </p>
             </div>
-            <img src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/79ad8341-ddac-4e20-41d6-bf65ab711500/public" className="w-[130px] h-[130px] object-contain" />
+            <img src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/79ad8341-ddac-4e20-41d6-bf65ab711500/public" className="w-[130px] h-[130px] object-contain relative -left-[100px]" />
           </div>
 
-          {/* Two-column layout */}
-          <div className="flex gap-12 items-start">
 
-            {/* Left — film strip rows */}
+
+          <div className="flex gap-12 items-start relative">
+
             <div className="flex flex-col gap-3 w-[50%]">
-              {/* Row 1 — 3 images, small */}
+
               <div className="flex gap-1.5 ml-[80px] justify-end">
 
-                <div className="relative h-[70px] w-[400px] overflow-hidden rounded-[6px] bg-[#D9D9D9]">
-                  <Image src={`https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/04f4cb07-ecde-4e20-c763-0cb3838ead00/public`} alt="" fill className="object-cover" sizes="120px" />
+                <div className="relative h-[103px] w-[400px] overflow-hidden rounded-[6px] bg-[#D9D9D9] mr-[180px]">
+
+                  <Image src={"https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/c8c8cf4a-7c43-4965-3eb9-273d07e05800/public"} alt="" height={103} width={463} className="object-cover" style={{ height: "103px" }} />
                 </div>
 
               </div>
-              {/* Row 2 — 4 images with thumb */}
+
               <div className="flex gap-1.5 items-center ml-[40px] justify-start relative left-[-100px]">
-                <div className="relative h-[70px] w-[300px] overflow-hidden rounded-[6px] bg-[#D9D9D9]">
-                  <Image src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/c8c8cf4a-7c43-4965-3eb9-273d07e05800/public" alt="" fill className="object-cover" sizes="70px" />
+                <div className="relative h-[89px] w-[300px] overflow-hidden rounded-[6px] bg-[#D9D9D9]">
+                  <Image src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/d1d5fb05-4289-4080-54f1-18fbdfdece00/public" alt="" fill className="object-cover" />
                 </div>
 
-                <div className="relative h-[70px] w-[300px] overflow-hidden rounded-[6px] bg-[#D9D9D9]">
-                  <Image src={`https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/ce155513-8c81-4907-0bf1-63fa581de400/public`} alt="" fill className="object-cover" sizes="100px" />
+                <div className="relative h-[89px] w-[300px] overflow-hidden rounded-[6px] bg-[#D9D9D9]">
+                  <Image src={`https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/ce155513-8c81-4907-0bf1-63fa581de400/public`} alt="" fill className="object-cover" />
                 </div>
-
               </div>
-              {/* Row 3 — 5 images */}
+
               <div className="flex gap-1.5 justify-start">
+                <div className="relative h-[90px] w-[400px] overflow-hidden rounded-[6px] bg-[#D9D9D9]">
+                  <Image src={`https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/04f4cb07-ecde-4e20-c763-0cb3838ead00/public`} alt="" fill className="object-cover" />
+                </div>
+              </div>
 
-                <div className="relative h-[70px] w-[400px] overflow-hidden rounded-[6px] bg-[#D9D9D9]">
-                  <Image src={`https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/d1d5fb05-4289-4080-54f1-18fbdfdece00/public`} alt="" fill className="object-cover" sizes="100px" />
+              <div className="flex gap-1 rounded-[8px] overflow-hidden bg-[#1A1A1A] p-1.5">
+                <div className="relative h-[82px] flex-1 overflow-hidden rounded-[4px] bg-[#333]" style={{ width: '600px' }}>
+                  <Image src="/images/ai-commercial/thirdimageaicommercial.png" alt="" fill className="object-cover" />
                 </div>
 
               </div>
-              {/* Row 4 — 6 images, dark strip */}
-              <div className="flex gap-1 rounded-[8px] overflow-hidden bg-[#1a1a1a] p-1.5">
 
-                <div className="relative h-[70px] flex-1 overflow-hidden rounded-[4px] bg-[#333]">
-                  <Image src={`https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/c8c8cf4a-7c43-4965-3eb9-273d07e05800/public`} alt="" fill className="object-cover" sizes="80px" />
-                </div>
-
-              </div>
-              {/* Row 5 — 7 images, dark strip */}
-              <div className="flex gap-1 rounded-[8px] overflow-hidden bg-[#1a1a1a] p-1.5 relative left-[-80px]">
-
-                <div className="relative h-[70px] flex-1 overflow-hidden rounded-[4px] bg-[#333]">
-                  <Image src={`https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/81574077-c99c-413c-6012-8e10bf34f000/public`} alt="" fill className="object-cover" sizes="80px" />
+              <div className="flex gap-1 rounded-[8px] overflow-hidden bg-[#1A1A1A] p-1.5 relative left-[-150px]">
+                <div className="relative h-[78px] flex-1 overflow-hidden rounded-[4px] bg-[#333]">
+                  <Image src="/images/ai-commercial/fourthimageofaicomercial.png" alt="" fill className="object-cover" />
                 </div>
 
               </div>
             </div>
 
-            {/* Right — video + description */}
-            <div className="flex flex-col gap-6 w-[50%] relative">
-              {/* Floating icon — top-left of video */}
-              <div className="absolute -top-[70px] -left-[60px] z-10">
+            <div className="flex flex-col gap-6 w-[50%] relative" style={{ alignItems: "end" }}>
+
+              <div className="absolute -top-[70px] left-[115px] z-10">
                 <img src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/a6646f63-84e1-4a9b-820d-b7063f47cd00/public" className="w-[170px] h-[170px] object-contain" style={{ transform: "rotate(11.17deg)" }} />
               </div>
-              {/* Video with dashed border */}
+
               <div className="relative">
+
                 <div className="overflow-hidden rounded-[12px]" style={{ border: "1.5px dashed #063746/40" }}>
                   <HlsPlayer
                     src="674ae5c4363ac80438bcfe52196530f7"
@@ -301,17 +308,12 @@ export default function AICommercialPage() {
                     controls={false}
                     muted={true}
                     loop={true}
-                    fillHeight={true}
-                    className="w-full h-[280px] object-cover rounded-[12px]"
+                    fillHeight={false}
+                    fillWidth={false}
+                    className="w-[630px] h-[375px] object-cover rounded-[12px]"
                   />
                 </div>
-                {/* Label badge */}
-                <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-2 rounded-full bg-[#063746] px-4 py-1.5">
-                  <span className="text-[12px] font-medium text-white" style={{ fontFamily: "var(--font-body)" }}>596 Fill × 335.25 · Video</span>
-                </div>
               </div>
-
-              {/* Description */}
               <div>
                 <h3 className="font-heading text-[28px] font-medium text-[#063746]">It's about expanding it.</h3>
                 <p className="mt-3 text-[14px] leading-[1.7] text-[#063746]/60" style={{ fontFamily: "var(--font-body)" }}>
@@ -323,7 +325,6 @@ export default function AICommercialPage() {
           </div>
         </div>
       </section>
-
 
 
       {/* ════════════════════════════════════════════════════════
@@ -347,15 +348,8 @@ export default function AICommercialPage() {
           <div className="mt-12 overflow-hidden" ref={emblaRef}>
             <div className="flex gap-6">
               {[...generateItems, ...generateItems].map((item, i) => (
-                <div key={i} className="shrink-0 w-[320px]">
+                <div key={i} className="shrink-0 w-[320px] gap-4">
                   <div className="relative h-[500px] overflow-hidden rounded-[16px] bg-[#D9D9D9]">
-                    {/* <Image
-                      src={item.vedio}
-                      alt={item.title}
-                      fill
-                      className="object-cover"
-                      sizes="320px"
-                    /> */}
                     <HlsPlayer
                       src={item.vedio}
                       autoPlay={true}
@@ -397,7 +391,7 @@ export default function AICommercialPage() {
           4.5. CONTENT AT SCALE — dark card
           ════════════════════════════════════════════════════════ */}
       <ContentAtScale
-        heading="Expanding Creative Possibilities With Ai"
+        heading="Expanding Creative Possibilities With AI"
         description1="AI allows us to push creative boundaries without increasing complexity."
         description2=""
         descriptionClassName="w-[300px]"
@@ -405,10 +399,10 @@ export default function AICommercialPage() {
         bgImage="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/6fdebd9a-9938-43d8-45b7-c990b5b92500/public"
         bgOpacity="opacity-60"
         features={[
-          { icon: "/images/ai-commercial/icon-01.svg", label: "Faster pre-production and visualization" },
-          { icon: "/images/ai-commercial/icon-02.svg", label: "Greater flexibility in creative exploration" },
-          { icon: "/images/ai-commercial/icon-03.svg", label: "Easier adaptation across formats and markets" },
-          { icon: "/images/ai-commercial/icon-03.svg", label: "More room for bold ideas with lower production risk" },
+          { icon: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/834b85e5-e315-4bb4-fca3-0287a4505000/public", label: "Faster pre-production and visualization" },
+          { icon: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/261ea08b-ff9b-4458-9d4e-b38561a6e800/public", label: "Greater flexibility in creative exploration" },
+          { icon: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/2a980055-2831-4df3-4e5f-696434fb0f00/public", label: "Easier adaptation across formats and markets" },
+          { icon: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/5de7cba3-0419-4598-e2fc-de3af00cca00/public", label: "More room for bold ideas with lower production risk" },
         ]}
       />
 
@@ -417,40 +411,39 @@ export default function AICommercialPage() {
           ════════════════════════════════════════════════════════ */}
       <section className="bg-light-bg py-24">
         <div className="px-[60px]">
-          <h2 className="text-center font-heading text-[48px] font-medium uppercase leading-[1.05] text-[#063746]">
+
+          {/* Heading */}
+          <h2 className="text-center text-[50px] font-medium leading-[1.1]"
+            style={{ fontFamily: "Bricolage Grotesque", color: "#063746" }}>
             Use Cases
           </h2>
-          <p
-            className="mx-auto mt-4 max-w-2xl text-center text-[15px] leading-[1.6] text-[#063746]/60"
-            style={{ fontFamily: "var(--font-body)" }}
-          >
-            From product launches to brand films, AI commercial production
-            delivers cinematic results across every format.
+          <p className="mx-auto mt-4 max-w-7xl text-center text-[24px] leading-[1.6]"
+            style={{ color: "#063746" }}>
+            AI content generation supports different creative needs, from always-on content to campaign launches.
           </p>
 
-
-
-          <div className="mt-12 flex gap-4">
+          {/* 5 cards row */}
+          <div className="mt-12 flex gap-[14px] justify-center items-center">
             {[
-              { icon: "/images/ai-content/icon-05.svg", label: "Brand campaigns and product launches" },
-              { icon: "/images/ai-content/icon-06.svg", label: "Social media content ecosystems" },
-              { icon: "/images/ai-content/icon-07.svg", label: "Editorial and blog visuals" },
-              { icon: "/images/ai-content/icon-08.svg", label: "Event and announcement assets" },
-              { icon: "/images/ai-content/icon-09.svg", label: "E-commerce and catalog visuals" },
+              { icon: "/images/ai-content/icon2.svg", label: "Brand campaigns and product launches" },
+              { icon: "/images/ai-content/icon4.svg", label: "Social media content ecosystems" },
+              { icon: "/images/ai-content/icon5.svg", label: "Editorial and blog visuals" },
+              { icon: "/images/ai-content/icon1.svg", label: "Event and announcement assets" },
+              { icon: "/images/ai-content/icon3.svg", label: "E-commerce and catalog visuals" },
             ].map((item, i) => (
-              <div key={i} className="flex flex-1 items-start gap-3 rounded-[12px] px-4 py-4"
-                style={{ background: "#002834", backdropFilter: "blur(45.31px)" }}>
-                <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-[8px] bg-white/10">
-                  <Image src={item.icon} alt={item.label} width={18} height={18} />
+              <div key={i} className="flex flex-1 items-center gap-3"
+                style={{ background: "#002834", backdropFilter: "blur(45.31px)", width: "304px", height: "97.6px", borderRadius: "7.33px", padding: "8.8px 13.2px" }}>
+                <div className="flex h-[75px] w-[75px] shrink-0 items-center justify-center rounded-[8px]  border border-[#FFFFFF4D]">
+                  <Image src={item.icon} alt={item.label} width={25} height={25} />
                 </div>
-                <span className="text-[12px] leading-[1.5]"
+                <span className="text-[18px] leading-[1.5] text-center"
                   style={{ fontFamily: "Bricolage Grotesque", color: "#FFFFFF" }}>
                   {item.label}
                 </span>
               </div>
             ))}
           </div>
-          <p className="mt-10 text-center text-[20px] font-medium"
+          <p className="mt-10 text-center text-[26px] font-medium"
             style={{ fontFamily: "SF Pro Display", color: "#063746" }}>
             At DDIP.AI, each project starts with a story.
           </p>
@@ -473,11 +466,11 @@ export default function AICommercialPage() {
 
       <section className="bg-light-bg py-10">
         <div className="">
-          <h2 className="text-center font-heading text-[36px] font-bold leading-[1.1] text-[#126478]">
+          <h2 className="text-center font-heading text-[56px] font-bold leading-[1.1] text-[#126478]">
             Our Tool Ecosystem
           </h2>
           <p
-            className="mx-auto mt-4 max-w-2xl text-center text-[14px] leading-[1.6] text-[#063746]"
+            className="mx-auto mt-4 max-w-6xl text-center text-[26px] leading-[1.6] text-[#063746]"
             style={{ fontFamily: "var(--font-body)" }}
           >
             Our ecosystem is built around selecting the right AI tools for each creative challenge.

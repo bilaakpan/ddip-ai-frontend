@@ -37,7 +37,7 @@ const processSteps = [
   },
   {
     step: "03",
-    image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/efad73dc-dbb1-48df-a783-3f83ff054a00/public",
+    image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/840870cf-3f8a-4ffa-ecf5-42c951983400/public",
     title: "AI Development & Integration",
     description:
       "We build and integrate AI-powered systems — from content generation pipelines to automation workflows — using cutting-edge models and battle-tested architectures.",
@@ -49,7 +49,7 @@ const processSteps = [
   },
   {
     step: "04",
-    image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/9bbc75a1-f667-4be4-0c98-f21a6c069000/public",
+    image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/21580366-d582-4166-54c0-ca19cf5c5c00/public",
     title: "Testing & Optimization",
     description:
       "Rigorous testing across all touchpoints. We optimize for performance, accuracy, and user experience — ensuring every AI system delivers consistent, reliable results.",
@@ -61,7 +61,7 @@ const processSteps = [
   },
   {
     step: "05",
-    image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/60f0e23b-ae4e-4186-cf0c-47b08d778700/public",
+    image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/840870cf-3f8a-4ffa-ecf5-42c951983400/public",
     title: "Launch & Ongoing Support",
     description:
       "We deploy your AI-powered systems and provide ongoing monitoring, maintenance, and optimization. Your dedicated team ensures everything runs smoothly post-launch.",
@@ -171,6 +171,7 @@ export default function ProcessPage() {
         "Existing workflows, tools & bottlenecks",
       ],
       closing: "AI doesn't start here. Humans do.",
+      image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/b17c4a07-5323-4e9a-e361-572649d78d00/public",
     },
     {
       title: "Define",
@@ -184,6 +185,7 @@ export default function ProcessPage() {
         "Decision framework for rollout",
       ],
       closing: "Clarity first. Then momentum.",
+      image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/d78abd82-66ff-4f78-62bf-79a567fa3000/public",
     },
     {
       title: "Design",
@@ -197,6 +199,7 @@ export default function ProcessPage() {
         "Human review points and safeguards",
       ],
       closing: "Great AI still needs great design.",
+      image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/b17c4a07-5323-4e9a-e361-572649d78d00/public",
     },
     {
       title: "Train",
@@ -210,6 +213,7 @@ export default function ProcessPage() {
         "Feedback loops for improvement",
       ],
       closing: "Precision is built, not assumed.",
+      image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/d78abd82-66ff-4f78-62bf-79a567fa3000/public",
     },
     {
       title: "Create & Automate",
@@ -223,6 +227,7 @@ export default function ProcessPage() {
         "Governance rules for quality control",
       ],
       closing: "Automation should feel intentional.",
+      image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/b17c4a07-5323-4e9a-e361-572649d78d00/public",
     },
     {
       title: "Optimize",
@@ -236,6 +241,7 @@ export default function ProcessPage() {
         "Cross-channel consistency",
       ],
       closing: "Iteration is where advantage compounds.",
+      image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/d78abd82-66ff-4f78-62bf-79a567fa3000/public",
     },
     {
       title: "Scale",
@@ -249,6 +255,7 @@ export default function ProcessPage() {
         "Roadmaps for long-term evolution",
       ],
       closing: "Scale with confidence, not chaos.",
+      image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/b17c4a07-5323-4e9a-e361-572649d78d00/public",
     },
   ];
   const selectedInsightStep = insightSteps[activeInsightStep];
@@ -494,10 +501,16 @@ export default function ProcessPage() {
               <div className="relative mt-10">
                 {/* IMAGE */}
                 <img
-                  src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/f123a0a7-ad4f-4441-1163-3ca9cf8ad500/public"
+                  src={selectedInsightStep.image}
                   alt="Process insight visual"
-                  className="absolute w-[55%] -top-12 left-16 sm:w-[60%] md:w-[55%] lg:w-[50%] object-contain"
+                  className="absolute w-[55%] -top-12 left-16 sm:w-[60%] md:w-[55%] lg:w-[50%] object-contain transition-all duration-500"
                 />
+                      <img
+                  src={selectedInsightStep.image}
+                  alt="Process insight visual"
+                  className={`absolute w-[20%] ${selectedInsightStep.image.includes('d78abd82-66ff-4f78-62bf-79a567fa3000') ? 'top-62 left-12' : 'top-50 left-16'} sm:w-[20%] md:w-[25%] lg:w-[20%] object-contain transition-all duration-500`}
+                />
+                
                 {/* CARD */}
                 <div className="absolute bg-[#E6F8FD33] -bottom-16 left-[100px] t-[190px] w-full max-w-[480px] rounded-[16px] bg-[#E6F8FD33] p-5 backdrop-blur-md shadow-md">
 

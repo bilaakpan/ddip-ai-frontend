@@ -100,11 +100,11 @@ export default function AutomationTemplatesPage() {
 
           {/* Right — Cards grid */}
           <div className="flex-1">
-            <div className="grid grid-cols-3 gap-5">
+            <div className="grid grid-cols-3 gap-5 ">
               {filtered.map((item) => (
                 <div
                   key={item.title}
-                  className="rounded-[16px] p-5 flex flex-col"
+                  className="rounded-[16px] p-5 flex flex-col "
                   style={{
                     background: "#022E3C33",
                     border: "1px solid #53666B",

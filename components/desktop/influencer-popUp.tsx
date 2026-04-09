@@ -40,6 +40,18 @@ export function InfluencerPopupModal({
                 {/* Subtle corner tint like reference */}
                 <div className="pointer-events-none absolute -left-[10%] -top-[14%] z-[1] h-[240px] w-[240px] rounded-full bg-[#858CE3] opacity-20 blur-[90px]" />
                 <div className="pointer-events-none absolute -bottom-[10%] -right-[8%] z-[1] h-[260px] w-[260px] rounded-full bg-[#858CE3] opacity-20 blur-[100px]" />
+                
+                {/* Top Left Decorative Image */}
+                <div className="pointer-events-none absolute -top-[5%] -left-[5%] z-[1]">
+                  <Image
+                    src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/7ff79f69-0b0f-468c-4d84-9a41fba44200/public"
+                    alt=""
+                    width={800}
+                    height={800}
+                    className="h-auto w-[500px] object-cover opacity-30"
+                  />
+                </div>
+                
                 {/* Popup-level bottom glow image */}
                 <div className="pointer-events-none absolute inset-x-0 bottom-0 z-[1]">
                     <Image
@@ -51,10 +63,11 @@ export function InfluencerPopupModal({
                     />
                 </div>
                 {/* ✅ Responsive Layout */}
-                <div className="relative z-[2] grid grid-cols-1 md:grid-cols-[40%_60%]" style={{height:"750px",overflow:"scroll",scrollbarWidth:"none"}}>
+                <div className="relative z-[2] grid grid-cols-1 md:grid-cols-[40%_60%]" style={{ height: "750px", width: "100%", overflow: "scroll", scrollbarWidth: "none" }}>
                     {/* LEFT IMAGE */}
                     <div className="relative  w-full overflow-hidden">
-                        <div className="absolute -left-[32%] top-[5%] h-[80%] w-[630px]">
+                        <div className="absolute -left-[32%] bottom-[5%] h-[100%] w-[700px]">
+
                             <Image
                                 src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/9b257786-7738-4d56-09be-dac3721c2300/public"
                                 alt={profile.name}
@@ -71,7 +84,7 @@ export function InfluencerPopupModal({
                             priority
                             className="pointer-events-none z-[2] object-cover object-bottom opacity-95"
                         />
-                        {/* Glow effect comes from popup-level image */}
+
                         {/* TEXT */}
                         <p className="absolute bottom-[125px] left-4 sm:bottom-6 sm:left-6 text-[#FFFFFF] text-[26px] w-[200px] font-medium leading-[1.2] z-10"
                             style={{ fontFamily: "Bricolage Grotesque" }}
@@ -80,7 +93,7 @@ export function InfluencerPopupModal({
                         </p>
                     </div>
                     {/* RIGHT CONTENT */}
-                    <div className="pr-10 pt-10 pb-10 text-[#0A2B3A]">
+                    <div className="p-10 text-[#0A2B3A]">
                         {/* Header */}
                         <div className="flex items-start justify-between gap-4">
                             {/* LEFT: Name + Subtitle */}
@@ -187,10 +200,21 @@ export function InfluencerPopupModal({
                             </div>
                         </div>
                         {/* CTA */}
-                        <div className="pt-[22px] pr-[50px] pb-[22px] pl-[50px]">
-                            <button className="mt-6 w-full sm:w-auto rounded-full bg-[#002834] px-6 py-3 text-sm sm:text-base text-[#FFFFFF] hover:opacity-90">
+                        <div className="pt-[22px] pr-[50px] pb-[22px] pl-[50px] relative">
+                            {/* Decorative image near button */}
+                            <div className="pointer-events-none absolute -bottom-[74px] -right-[40px] z-0">
+                              <Image
+                                src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/f3c1407f-7e5d-4db8-f722-a2b27e2f6700/public"
+                                alt=""
+                                width={300}
+                                height={200}
+                                className="h-auto w-[500px] object-cover opacity-40"
+                              />
+                            </div>
+                            <button className="mt-6 w-full sm:w-auto rounded-full bg-[#002834] px-6 py-3 text-sm sm:text-base text-[#FFFFFF] hover:opacity-90 relative z-10">
                                 WORK WITH THIS INFLUENCER
                             </button>
+
                         </div>
                     </div>
                 </div>

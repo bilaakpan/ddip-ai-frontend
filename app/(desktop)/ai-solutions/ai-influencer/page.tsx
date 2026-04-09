@@ -601,7 +601,7 @@ export default function AIInfluencerPage() {
 
             {/* Right Section — tall portrait image */}
             <div className="flex items-center justify-center">
-              <div className="relative w-full max-w-[550px] h-[600px] rounded-[20px] overflow-hidden shadow-xl">
+              <div className="relative w-full max-w-[600px] h-[750px] rounded-[20px] overflow-hidden shadow-xl">
                 <Image
                   src={items[openIndex >= 0 ? openIndex : 0] ? [
                     "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/3ae0f1a7-9f73-4c29-9d1e-f45ca0381b00/public",
@@ -970,17 +970,18 @@ export default function AIInfluencerPage() {
           {/* Steps */}
           <div className="space-y-8">
             {processSteps.map((step) => (
-              <div key={step.num} className="pb-8 border-b border-[#063746]/10 last:border-b-0">
+              <div key={step.num} className="">
                 <div className="grid grid-cols-2 gap-16">
                   <span className="font-heading text-[36px] font-medium text-[#063746]">
                     {step.num}
                   </span>
-                  <div className="flex-1">
-                    <h3 className="font-heading text-[60px] font-medium text-[#063746] mb-2">
+                  <div className="flex-1  border-b border-[#063746]/10 pb-5">
+                    <h3 className="font-heading text-[50px] font-medium text-[#063746] mb-2"
+                      style={{ fontFamily: "var(--font-body)" }}>
                       {step.title}
                     </h3>
                     <p
-                      className="text-[34px] leading-[1.6] text-[#063746]/70"
+                      className="text-[24px] leading-[1.6] text-[#063746] max-w-lg"
                       style={{ fontFamily: "var(--font-body)" }}
                     >
                       {step.description}
@@ -1005,12 +1006,12 @@ export default function AIInfluencerPage() {
         <div className="px-[60px]">
 
           {/* Heading */}
-          <h2 className="text-center font-heading text-[48px] font-medium uppercase leading-[1.05] text-[#063746] mb-8">
+          <h2 className="text-center font-heading text-[70px] font-medium uppercase leading-[1.05] text-[#063746] mb-8">
             Use Cases
           </h2>
 
           {/* Clickable category tabs */}
-          <div className="flex items-center gap-3 mb-10 justify-center">
+          <div className="flex items-center gap-3 mb-10 justify-center border border-[#C7C7C7] p-2 rounded-full w-3xl mx-auto">
             {["Real Estate", "Food", "Fashion", "Tech & Digital", "Wellness", "Consulting"].map((tab, i) => (
               <button key={tab}
                 onClick={() => setActiveTab(i)}
@@ -1018,7 +1019,7 @@ export default function AIInfluencerPage() {
                 style={{
                   background: activeTab === i ? "#063746" : "transparent",
                   color: activeTab === i ? "#fff" : "#063746",
-                  border: activeTab === i ? "none" : "1px solid #06374640",
+              
                   fontFamily: "var(--font-body)",
                 }}>
                 {tab}

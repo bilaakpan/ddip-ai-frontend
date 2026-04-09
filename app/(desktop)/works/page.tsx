@@ -241,7 +241,7 @@ export default function WorksPage() {
                     onClick={() => setActiveListProject(project.id)}
                     className="project-list-item group cursor-pointer flex items-center"
                   >
-                    <span className={`font-heading text-[clamp(32px,5vw,80px)] font-bold uppercase leading-none tracking-tight transition-colors duration-300 ${activeListProject === project.id ? "text-[#063746]" : "text-[#063746]/20 group-hover:text-[#063746]/60"}`}>
+                    <span className={`font-heading text-[90px] font-medium uppercase leading-none tracking-tight transition-colors duration-300 ${activeListProject === project.id ? "text-[#063746]" : "text-[#063746]/20 group-hover:text-[#063746]/60"}`}>
                       {project.title}
                     </span>
                     <span className={`ml-6 text-[16px] font-medium uppercase transition-colors duration-300 ${activeListProject === project.id ? "text-[#063746]/50" : "text-transparent"}`}>
@@ -288,7 +288,7 @@ export default function WorksPage() {
           </Container>
         )}
         {/* Subtitle + CTAs */}
-        <div className="mt-8 flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4 px-4 sm:px-8 md:px-12 lg:px-15">
+        <div className={`mt-8 flex flex-col sm:flex-row gap-4 px-4 sm:px-8 md:px-12 lg:px-15 ${activeTab === "list" ? "justify-end mr-65" : "items-start sm:items-end justify-between"}`}>
           {/* Dropdown — only show in grid view */}
           <div className="relative w-full sm:w-auto">
             {activeTab === "grid" && (

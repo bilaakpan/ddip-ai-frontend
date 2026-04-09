@@ -13,6 +13,7 @@ interface HlsPlayerProps {
     muted?: boolean;
     loop?: boolean;
     fillHeight?: boolean;
+    fillWidth?: boolean;
 }
 
 export default function HlsPlayer({
@@ -23,15 +24,16 @@ export default function HlsPlayer({
     muted = true,
     loop = false,
     fillHeight = true,
+    fillWidth = true
 }: HlsPlayerProps) {
     const videoRef = useRef<HTMLVideoElement>(null);
     const [shouldFillHeight, setShouldFillHeight] = useState(false);
-
+    const [shouldFillWidth, setShouldFillWidth] = useState(false);
     // Construct full URL if only ID is passed
     const fullSrc = src.startsWith("https")
         ? src
         : `${CLOUDFLARE_STREAM_BASE}/${src}/manifest/video.m3u8`;
-console.log("fullSrc",fullSrc,"src",src)
+    console.log("fullSrc", fullSrc, "src", src)
     useEffect(() => {
         if (!videoRef.current || !fullSrc) return;
 
@@ -57,51 +59,54 @@ console.log("fullSrc",fullSrc,"src",src)
 
     useEffect(() => {
         const video = videoRef.current;
-        if (!video || !fillHeight) return;
+        if (!video) return;
 
-        const checkAndApplyHeight = () => {
+        const checkAndApplySize = () => {
             const videoElement = video;
             const parentElement = videoElement.parentElement;
 
-            if (!parentElement) {
-                console.log('NO PARENT ELEMENT');
-                return;
-            }
+            if (!parentElement) return;
 
-            // Wait for video to be rendered and get actual dimensions
             setTimeout(() => {
-                const videoNaturalHeight = videoElement.videoHeight;
+                const videoHeight = videoElement.videoHeight;
+                const videoWidth = videoElement.videoWidth;
+
                 const parentHeight = parentElement.clientHeight;
+                const parentWidth = parentElement.clientWidth;
 
-                console.log('=== VIDEO HEIGHT CHECK ===');
-                console.log('Video natural height:', videoNaturalHeight);
-                console.log('Parent container height:', parentHeight);
-
-                // If video natural height is GREATER than parent container, stretch it with h-full
-                if (videoNaturalHeight > 0 && videoNaturalHeight > parentHeight) {
-                    console.log('✅ CONDITION TRUE: Applying h-full (video is taller)');
+                // HEIGHT LOGIC
+                if (fillHeight && videoHeight > 0 && videoHeight > parentHeight) {
                     setShouldFillHeight(true);
                 } else {
-                    console.log('❌ CONDITION FALSE: Not applying h-full (video fits or shorter)');
                     setShouldFillHeight(false);
                 }
+
+                // WIDTH LOGIC :point_down:
+                if (fillWidth && videoWidth > 0 && videoWidth > parentWidth) {
+                    setShouldFillWidth(true);
+                } else {
+                    setShouldFillWidth(false);
+                }
+
             }, 100);
         };
 
-        console.log('Setting up height check listeners...');
-        video.addEventListener('loadedmetadata', checkAndApplyHeight);
-        video.addEventListener('play', checkAndApplyHeight);
+        video.addEventListener('loadedmetadata', checkAndApplySize);
+        video.addEventListener('play', checkAndApplySize);
 
         return () => {
-            video.removeEventListener('loadedmetadata', checkAndApplyHeight);
-            video.removeEventListener('play', checkAndApplyHeight);
+            video.removeEventListener('loadedmetadata', checkAndApplySize);
+            video.removeEventListener('play', checkAndApplySize);
         };
-    }, [fillHeight]);
+    }, [fillHeight, fillWidth]);
 
     return (
         <video
             ref={videoRef}
-            className={`w-full ${shouldFillHeight ? 'h-full' : ''}  ${className}`}
+            className={`
+${shouldFillHeight ? 'h-full' : ''}
+${shouldFillWidth ? 'w-full' : ''}
+${className}`}
             autoPlay={autoPlay}
             controls={controls}
             muted={muted}
