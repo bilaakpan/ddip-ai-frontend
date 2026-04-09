@@ -50,7 +50,7 @@ export default function FaqSection({
                 )}
                 <div className={`grid transition-all duration-300 ${openLeft === i ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}>
                   <div className="overflow-hidden">
-                    <p className="pb-6 text-[16px] leading-relaxed text-[#90B2BD]" style={{ fontFamily: "var(--font-body)" }}>
+                    <p className="pb-6 text-[15px] leading-relaxed text-[#90B2BD]" style={{ fontFamily: "var(--font-body)" }}>
                       Our team will provide detailed information. Contact us to learn more.
                     </p>
                   </div>
