@@ -406,7 +406,7 @@ export default function ProcessPage() {
           {/* Cards — 2x2 grid left + 1 tall card right */}
           <div className="mt-4 flex gap-3 flex-1 min-h-0 items-start">
             {/* Left — 2x2 grid, takes up remaining width minus right card */}
-            <div className="grid grid-cols-2 gap-10 flex-1">
+            <div className="grid grid-cols-2 gap-[15px] flex-1">
               {[
                 { image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/840870cf-3f8a-4ffa-ecf5-42c951983400/public", label: "Launching an", bold: "AI influencer or brand ambassador" },
                 { image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/21580366-d582-4166-54c0-ca19cf5c5c00/public", label: "Building an", bold: "AI-driven content engine" },
@@ -426,7 +426,7 @@ export default function ProcessPage() {
             </div>
 
             {/* Right — 1 tall card, fixed width ~25% */}
-            <div className="flex rounded-[10px] overflow-hidden w-[25%]" style={{ background: "rgba(255,255,255,0.12)", backdropFilter: "blur(10px)", height: "fit-content" }}>
+            <div className="flex rounded-[10px] overflow-hidden w-[25%]" style={{ background: "rgba(255,255,255,0.12)", backdropFilter: "blur(10px)", height: "216px" }}>
               {/* Image — left half */}
               <div className="w-[55%] h-full overflow-hidden rounded-[8px] p-3">
                 <img src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/60f0e23b-ae4e-4186-cf0c-47b08d778700/public" alt="AI ad films" className="w-full h-full object-cover rounded-[8px]" />
