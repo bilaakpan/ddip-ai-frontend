@@ -391,7 +391,7 @@ export default function TheMindBehindPage() {
       {/* ════════════════════════════════════════════════════════
           8. BRANDS NEED SOMETHING DURABLE
           ════════════════════════════════════════════════════════ */}
-      <section className="relative overflow-hidden bg-[#F6F9F2]" style={{ height: "1350px" }}>
+      <section className="relative overflow-hidden bg-[#F6F9F2]" style={{ height: "1500px" }}>
         {/* Background image */}
         <img
           src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/eba38997-062e-4147-aedc-756707da8200/public"
@@ -412,7 +412,7 @@ export default function TheMindBehindPage() {
           </div>
 
           {/* Right copy block */}
-          <div className="absolute top-[235px] right-[110px]">
+          <div className="absolute top-[690px] right-[110px]">
             <p style={{ fontSize: "30px", color: "#145365", width: "520px", fontFamily: "var(--font-body)" }}>
               Brands, however, need something
               <br />
@@ -438,7 +438,7 @@ export default function TheMindBehindPage() {
           </div>
 
           {/* Bottom lockup */}
-          <div className="absolute left-[615px] top-[1085px] flex items-end gap-2 mt-20">
+          <div className="absolute left-1/2 -translate-x-1/2 top-[1226px] flex items-end gap-2 mt-20">
             <h2
               className="font-bold leading-[0.92] uppercase"
               style={{ fontFamily: "Bricolage Grotesque", fontSize: "130px", color: "#145365" }}
@@ -482,7 +482,7 @@ export default function TheMindBehindPage() {
                   The Future We<br />Believe In
                 </h2>
                 <div className="mt-6 space-y-3">
-                  <p className="text-[14px] text-white/80" style={{ fontFamily: "var(--font-body)" }}>
+                  <p className="text-[22px] text-white/80" style={{ fontFamily: "var(--font-body)" }}>
                     We see a future where:
                   </p>
                   <ul className="space-y-2">
@@ -492,13 +492,13 @@ export default function TheMindBehindPage() {
                       "Automation creates space for better ideas",
                       "Brands speak with more relevance, not more noise",
                     ].map(item => (
-                      <li key={item} className="text-[14px] text-white/80" style={{ fontFamily: "var(--font-body)" }}>• {item}</li>
+                      <li key={item} className="text-[22px] text-white/80" style={{ fontFamily: "var(--font-body)" }}>• {item}</li>
                     ))}
                   </ul>
-                  <p className="mt-4 text-[14px] text-white/80" style={{ fontFamily: "var(--font-body)" }}>
+                  <p className="mt-4 text-[22px] text-white/80" style={{ fontFamily: "var(--font-body)" }}>
                     In this future, success belongs to those who can orchestrate intelligence, not just use it.
                   </p>
-                  <p className="text-[14px] text-white/80" style={{ fontFamily: "var(--font-body)" }}>
+                  <p className="text-[22px] text-white/80" style={{ fontFamily: "var(--font-body)" }}>
                     That&apos;s the role we choose.
                   </p>
                 </div>

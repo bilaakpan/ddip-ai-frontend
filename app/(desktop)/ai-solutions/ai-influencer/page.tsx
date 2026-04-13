@@ -12,8 +12,8 @@ import useEmblaCarousel from "embla-carousel-react";
 import AutoPlay from "embla-carousel-autoplay";
 import UseCaseCarousel from "@/components/desktop/UseCaseCarousel";
 import FaqSection from "@/components/desktop/FaqSection";
-import AccordionWithImage from "@/components/desktop/AccordionWithImage";
 import ContactFormSection from "@/components/desktop/ContactFormSection";
+import { InfluencerPopupModal } from "@/components/desktop/influencer-popUp";
 import { ChevronDown, ChevronUp } from "lucide-react";
 
 /* ─── Data ─── */
@@ -285,6 +285,8 @@ export default function AIInfluencerPage() {
   const [cmsFaqLeft, setCmsFaqLeft] = useState(faqLeft);
   const [cmsFaqRight, setCmsFaqRight] = useState(faqRight);
   const [openFilter, setOpenFilter] = useState<number | null>(null);
+  const [showPopup, setShowPopup] = useState(false);
+  const [selectedInfluencer, setSelectedInfluencer] = useState<typeof topInfluencer[0] | null>(null);
   useEffect(() => {
     cmsApi
       .faqs("ai-influencer")
@@ -547,17 +549,7 @@ export default function AIInfluencerPage() {
       {/* ════════════════════════════════════════════════════════
           4. THE SPECTRUM OF AI INFLUENCERS
           ════════════════════════════════════════════════════════ */}
-      {/* <AccordionWithImage
-        heading={"The Spectrum of\nAI Influencers"}
-        subheading="AI influencers serve different purposes. Understanding the spectrum helps choose the right fit for your brand."
-        defaultImage="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/3ae0f1a7-9f73-4c29-9d1e-f45ca0381b00/public"
-        items={[
-          { title: "AI Brand Ambassador", description: "A virtual representative that communicates your brand identity with purpose and precision across every channel.", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/3bb85d3d-0153-4afa-2959-adafcc4f1900/public" },
-          { title: "AI Influencer", description: "A digital persona designed to engage, create, and influence — powered by AI, shaped by your strategy.", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/995b7c78-e5e9-4a39-412f-9f183bbd0500/public" },
-          { title: "AI Blogger", description: "An AI-driven writer that produces consistent, SEO-optimized content to fuel your brand narrative.", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/e302e17b-3d7a-4e23-5779-603178dedd00/public" },
-          { title: "AI Mascot", description: "A stylized character built for relatability, recognition, and emotional resonance with audiences.", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/c836b07d-e84a-4f01-5f1c-03b54afafd00/public" },
-        ]}
-      /> */}
+  
       <section className="py-24 bg-light-bg">
         <div className="flex items-center justify-center px-[60px]">
           <div className="bg-white rounded-[24px] shadow-lg w-full p-12 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
@@ -589,7 +581,7 @@ export default function AIInfluencerPage() {
                         )}
                       </button>
                       {isOpen && item.content && (
-                        <p className="text-[#5C5C5C] text-[22px] pb-5 leading-relaxed" style={{ fontFamily: "var(--font-body)" }}>
+                        <p className="text-[#5C5C5C] text-[22px] pb-5 leading-relaxed min-h-[110px]" style={{ fontFamily: "var(--font-body)" }}>
                           {item.content}
                         </p>
                       )}
@@ -648,9 +640,11 @@ export default function AIInfluencerPage() {
                 brand.
 
               </p>
+              <Link href="/ai-solutions/ai-influencer/templates">
               <button className="flex items-center gap-3 rounded-full bg-[#1CE3F4] px-6 py-2.5 mt-10 font-heading text-[22px] font-medium text-[#0E4252] transition hover:bg-[#1CE3F4]/80">
                 <span>Explore The Collection</span> {plusButton()}
               </button>
+              </Link>
             </div>
           </div>
           <div className="flex flex-wrap gap-5 p-4 mt-35 relative z-10 ml-4">
@@ -751,7 +745,13 @@ export default function AIInfluencerPage() {
                       </div>
 
                       {/* Plus */}
-                      <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white/80 sm:h-9 sm:w-9">
+                      <div 
+                        className="flex h-8 w-8 items-center justify-center rounded-full bg-white/80 sm:h-9 sm:w-9 cursor-pointer hover:bg-white transition"
+                        onClick={() => {
+                          setSelectedInfluencer(item);
+                          setShowPopup(true);
+                        }}
+                      >
                         <svg
                           className="h-4 w-4 text-[#012F3B] sm:h-5 sm:w-5"
                           viewBox="0 0 24 24"
@@ -956,7 +956,7 @@ export default function AIInfluencerPage() {
             </div>
             <div>
               <p
-                className="text-[44px] leading-[1.6] text-[#063746]/70 mb-6"
+                className="text-[44px] leading-[1.6] text-[#063746]/70 mb-6 font-bold"
                 style={{ fontFamily: "var(--font-body)" }}
               >
                 Your brand deserves a voice of its own. We create intelligent, expressive AI personas that embody your values and connect with audiences globally.
@@ -981,7 +981,7 @@ export default function AIInfluencerPage() {
                       {step.title}
                     </h3>
                     <p
-                      className="text-[24px] leading-[1.6] text-[#063746] max-w-lg"
+                      className="text-[30px] leading-[1.6] text-[#063746] max-w-lg"
                       style={{ fontFamily: "var(--font-body)" }}
                     >
                       {step.description}
@@ -1029,14 +1029,14 @@ export default function AIInfluencerPage() {
 
           {/* Embla auto-scroll carousel — component */}
           <UseCaseCarousel items={[
-            { title: "Vesta Global", video: "https://customer-avhhoygwtxxdpkyp.cloudflarestream.com/4efeb3daa0597c05c31d144beccea3f8/watch", tags: ["Visual Style Definition", "AI Model Selection & Optimization", "Use-Case Development", "Prompt Crafting"] },
-            { title: "Nadlan Star", video: "https://customer-avhhoygwtxxdpkyp.cloudflarestream.com/f87ff43c16d018cdafd6c1ce68423c67/watch", tags: ["Use-Case Development", "Prompt Crafting"] },
-            { title: "Vesta Global", video: "https://customer-avhhoygwtxxdpkyp.cloudflarestream.com/8a161380969c7a822ca6075723101fdb/watch", tags: ["Use-Case Development", "Prompt Crafting"] },
-            { title: "Nadlan Star", video: "https://customer-avhhoygwtxxdpkyp.cloudflarestream.com/557784e65cd48dfcc66ec4545dd50b2a/watch", tags: ["Visual Style Definition", "Prompt Crafting"] },
-            { title: "Vesta Global", video: "https://customer-avhhoygwtxxdpkyp.cloudflarestream.com/4efeb3daa0597c05c31d144beccea3f8/watch", tags: ["Visual Style Definition", "AI Model Selection & Optimization", "Use-Case Development", "Prompt Crafting"] },
-            { title: "Nadlan Star", video: "https://customer-avhhoygwtxxdpkyp.cloudflarestream.com/f87ff43c16d018cdafd6c1ce68423c67/watch", tags: ["Use-Case Development", "Prompt Crafting"] },
-            { title: "Vesta Global", video: "https://customer-avhhoygwtxxdpkyp.cloudflarestream.com/8a161380969c7a822ca6075723101fdb/watch", tags: ["Use-Case Development", "Prompt Crafting"] },
-            { title: "Nadlan Star", video: "https://customer-avhhoygwtxxdpkyp.cloudflarestream.com/557784e65cd48dfcc66ec4545dd50b2a/watch", tags: ["Visual Style Definition", "Prompt Crafting"] },
+            { title: "Vesta Global", video: "https://customer-avhhoygwtxxdpkyp.cloudflarestream.com/4efeb3daa0597c05c31d144beccea3f8/manifest/video.m3u8", tags: ["Visual Style Definition", "AI Model Selection & Optimization", "Use-Case Development", "Prompt Crafting"] },
+            { title: "Nadlan Star", video: "https://customer-avhhoygwtxxdpkyp.cloudflarestream.com/f87ff43c16d018cdafd6c1ce68423c67/manifest/video.m3u8", tags: ["Use-Case Development", "Prompt Crafting"] },
+            { title: "Vesta Global", video: "https://customer-avhhoygwtxxdpkyp.cloudflarestream.com/8a161380969c7a822ca6075723101fdb/manifest/video.m3u8", tags: ["Use-Case Development", "Prompt Crafting"] },
+            { title: "Nadlan Star", video: "https://customer-avhhoygwtxxdpkyp.cloudflarestream.com/557784e65cd48dfcc66ec4545dd50b2a/manifest/video.m3u8", tags: ["Visual Style Definition", "Prompt Crafting"] },
+            { title: "Vesta Global", video: "https://customer-avhhoygwtxxdpkyp.cloudflarestream.com/4efeb3daa0597c05c31d144beccea3f8/manifest/video.m3u8", tags: ["Visual Style Definition", "AI Model Selection & Optimization", "Use-Case Development", "Prompt Crafting"] },
+            { title: "Nadlan Star", video: "https://customer-avhhoygwtxxdpkyp.cloudflarestream.com/f87ff43c16d018cdafd6c1ce68423c67/manifest/video.m3u8", tags: ["Use-Case Development", "Prompt Crafting"] },
+            { title: "Vesta Global", video: "https://customer-avhhoygwtxxdpkyp.cloudflarestream.com/8a161380969c7a822ca6075723101fdb/manifest/video.m3u8", tags: ["Use-Case Development", "Prompt Crafting"] },
+            { title: "Nadlan Star", video: "https://customer-avhhoygwtxxdpkyp.cloudflarestream.com/557784e65cd48dfcc66ec4545dd50b2a/manifest/video.m3u8", tags: ["Visual Style Definition", "Prompt Crafting"] },
           ]} />
 
         </div>
@@ -1056,6 +1056,18 @@ export default function AIInfluencerPage() {
           12. CTA — "Let's Build What's Next, Together."
           ════════════════════════════════════════════════════════ */}
       <ContactFormSection />
+
+      {/* Influencer PopUp */}
+      <InfluencerPopupModal
+        open={showPopup}
+        influencer={selectedInfluencer ? {
+          name: selectedInfluencer.name,
+          archetype: selectedInfluencer.archetype,
+          industry: selectedInfluencer.type,
+          image: selectedInfluencer.image,
+        } : null}
+        onClose={() => setShowPopup(false)}
+      />
     </>
   );
 }

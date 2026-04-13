@@ -178,16 +178,16 @@ export default function GeoPage() {
   <div className="relative z-20 mt-8 px-[130px] flex flex-col lg:flex-row justify-between items-start">
     {/* LEFT SIDE: Text Content */}
     <div className="">
-      <h2 className="font-heading text-[60px] font-medium leading-[1.0] text-white">
+      <h2 className="font-heading text-[70px] font-medium leading-[1.0] text-white">
         Visibility No Longer Ends
         <br />
         With Search.
       </h2>
-      <p className="mt-4 text-[26px] leading-[1.6] text-white/70" style={{ fontFamily: "var(--font-body)" }}>
+      <p className="mt-4 text-[26px] leading-[1.6] text-white max-w-3xl" style={{ fontFamily: "var(--font-body)" }}>
         GEO Optimization helps brands become visible in AI-powered search, discovery, and answer engines.
       </p>
 
-      <div className="flex flex-col gap-4 mt-[100px]">
+      <div className="flex flex-col gap-4 mt-[120px]">
         <svg width="99" height="122" viewBox="0 0 99 122" fill="none" className="h-[90px] w-[90px]" aria-label="Scroll down">
           <path d="M56.9199 0L56.9199 95.9621L89.1853 66.0555L98.7897 75.9435L98.9811 76.9205L49.6919 122L0 76.9205L0.198028 75.9435L9.61097 66.2194L42.0612 95.9621L42.0612 0L56.9199 0Z" fill="white" />
         </svg>
@@ -225,7 +225,7 @@ export default function GeoPage() {
       </div>
 
       {/* 5. Tool Icons Cluster (Bottom Center) */}
-      <div className="absolute -bottom-5 right-[130px] z-40">
+      <div className="absolute bottom-12 right-[130px] z-40">
         <img src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/27262750-55ac-4bf3-a2ba-48f39ea3f800/public" alt="AI Icons" className="w-[200px]" />
       </div>
 
@@ -234,7 +234,7 @@ export default function GeoPage() {
 
   {/* Footer Scroll Indicator */}
   <div className="absolute bottom-10 right-[60px] z-10">
-    <p className="text-[11px] tracking-wider text-white/30" style={{ fontFamily: "var(--font-body)" }}>SCROLL</p>
+    <p className="text-[32px] tracking-wider text-white" style={{ fontFamily: "var(--font-body)" }}>(SCROLL)</p>
   </div>
 </section>
 
@@ -325,24 +325,9 @@ Instead of scrolling through result pages, users increasingly ask questions and 
       {/* ════════════════════════════════════════════════════════
           3. WHAT GEO OPTIMIZATION MEANS AT DDIP.AI
           ════════════════════════════════════════════════════════ */}
-      <section className="bg-light-bg">
+      <section>
         <div className="">
-          {/* <div className="grid grid-cols-2 gap-16">
-            <h2 className="font-heading text-[40px] font-medium leading-[1.1] text-[#063746]">
-              What GEO Optimization
-              <br />
-              Means At Ddip.ai
-            </h2>
-            <div className="space-y-4">
-              <p className="text-[15px] leading-[1.6] text-[#063746]/60" style={{ fontFamily: "var(--font-body)" }}>
-                At DDiP AI, GEO Optimization is about designing content and structure that AI systems can clearly read, interpret, and trust.
-              </p>
-              <p className="text-[15px] leading-[1.6] text-[#063746]/60" style={{ fontFamily: "var(--font-body)" }}>
-                This involves search engines, chat-based AI interfaces, and emerging discovery platforms.
-              </p>
-            </div>
-          </div> */}
-
+         
 
           <div className="min-h-screen bg-[#d4e5e1] relative overflow-hidden px-6 py-10 md:px-12 md:py-16 lg:px-20 lg:py-20">
       
@@ -504,17 +489,17 @@ Instead of scrolling through result pages, users increasingly ask questions and 
           <h2 className="font-heading text-[60px] text-left font-medium leading-[1.1] text-[#063746]" style={{ fontFamily: "Bricolage Grotesque, sans-serif" }}>
             From search to discovery
           </h2>
-          <p className="mt-3 text-[34px] text-[#145365] text-left" style={{ fontFamily: "SF Pro Display" }}>
+          <p className="mt-3 text-[34px] text-[#145365] text-left" >
             Search is evolving into discovery.
           </p>
           <div className="mt-8 space-y-4 text-left">
-            <p className="text-[34px] leading-[1.7] text-[#145365]" style={{ fontFamily: "SF Pro Display" }}>
+            <p className="text-[34px] leading-[1.7] text-[#145365]" >
               AI-powered systems don&apos;t just index pages, they analyze meaning, relationships, and relevance.
             </p>
-            <p className="text-[22px] leading-[1.7] text-[#145365]" style={{ fontFamily: "SF Pro Display" }}>
+            <p className="text-[22px] leading-[1.7] text-[#145365]">
               They look for clear signals, structured information, and authoritative context.
             </p>
-            <p className="text-[22px] leading-[1.7] text-[#145365]" style={{ fontFamily: "SF Pro Display" }}>
+            <p className="text-[22px] leading-[1.7] text-[#145365]">
               GEO Optimization aligns your content with how these systems work, ensuring your brand shows up not only in searches, but in answers, summaries, and recommendations.
             </p>
           </div>
@@ -534,7 +519,7 @@ Instead of scrolling through result pages, users increasingly ask questions and 
         <div className="px-[60px]">
           <div
             className="overflow-hidden rounded-[24px] px-16 py-16 relative"
-            style={{ minHeight: "420px" }}
+            style={{ minHeight: "500px" }}
           >
             {/* Background image — full section, high opacity dark overlay */}
             <div className="absolute inset-0 z-0">
@@ -553,7 +538,7 @@ Instead of scrolling through result pages, users increasingly ask questions and 
                 <h2 className="font-heading text-[52px] font-medium leading-[1.1] text-white" style={{fontFamily:"Bricolage Grotesque"}}>
                   Why GEO<br />Matters Now
                 </h2>
-                <p className="mt-4 text-[18px] leading-[1.6] text-white" style={{ fontFamily: "SF Pro Display" }}>
+                <p className="mt-4 text-[18px] leading-[1.6] text-white">
                   AI-powered search and answer engines are already shaping how people discover brands.
                 </p>
               </div>
@@ -579,19 +564,19 @@ Instead of scrolling through result pages, users increasingly ask questions and 
               </div>
 
               {/* RIGHT — Feature pills + description */}
-              <div className="w-[300px] shrink-0 z-10 relative flex flex-col gap-3">
+              <div className="w-[400px] shrink-0 z-10 relative flex flex-col gap-3">
                 {[
-                  { icon: "/images/geo/icon-01.svg", text: "Zero-click answers are increasing" },
-                  { icon: "/images/geo/icon-02.svg", text: "Chat-based search is becoming mainstream" },
-                  { icon: "/images/geo/icon-03.svg", text: "Brand authority is built through context, not repetition" },
-                  { icon: "/images/geo/icon-04.svg", text: "More room for bold ideas with lower production risk" },
+                  { icon: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/82fa97df-c669-400c-9639-912dee7cfc00/public", text: "Zero-click answers are increasing" },
+                  { icon: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/d7552922-a678-4800-1fae-558c4c41cf00/public", text: "Chat-based search is becoming mainstream" },
+                  { icon: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/21828731-d34d-4aac-7592-3e5701a02900/public", text: "Brand authority is built through context, not repetition" },
+                  { icon: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/ce41f3c8-b443-46a9-9dea-d946a6c6d100/public", text: "More room for bold ideas with lower production risk" },
                 ].map((item, i) => (
                   <div key={i} className="flex items-center gap-3 rounded-xl px-4 py-3" style={{ backgroundColor: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.12)" }}>
-                    <img src={item.icon} alt="" className="w-6 h-6 opacity-70 shrink-0" style={{ filter: "invert(1)" }} />
-                    <span className="text-[14px] text-white" style={{ fontFamily: "Bricolage Grotesque" }}>{item.text}</span>
+                   <div className="border border-white rounded p-2"> <img src={item.icon} alt="" className="w-6 h-6 shrink-0 text-white" /> </div>
+                    <span className="text-[14px] text-white font-medium" style={{ fontFamily: "Bricolage Grotesque" }}>{item.text}</span>
                   </div>
                 ))}
-                <p className="mt-4 text-[18px] leading-[1.6] text-white" style={{ fontFamily: "SF Pro Display" }}>
+                <p className="mt-4 text-[18px] leading-[1.6] text-white">
                   GEO Optimization helps brands stay visible as these systems become the primary gateway to information.
                 </p>
               </div>
@@ -619,7 +604,7 @@ Instead of scrolling through result pages, users increasingly ask questions and 
                   <Image src={item.image} alt={item.title} fill className="object-cover transition-transform duration-500 group-hover:scale-105" sizes="20vw" />
                   {/* Description overlay at bottom */}
                   <div className="absolute bottom-0 left-0 right-0 p-4">
-                    <p className="text-[14px] leading-[1.4] text-white" style={{ fontFamily: "Bricolage Grotesque, sans-serif" }}>
+                    <p className="text-[18px] leading-[1.4] text-white" style={{ fontFamily: "Bricolage Grotesque, sans-serif" }}>
                       {item.desc}
                     </p>
                   </div>

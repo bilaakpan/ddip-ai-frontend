@@ -237,10 +237,10 @@ export default function AICommercialPage() {
 
           <div className="flex items-start justify-between mb-12">
             <div className="w-[60%]">
-              <h2 className="font-heading text-[60px] font-medium leading-[1.1] text-[#063746]">
+              <h2 className="font-heading text-[70px] font-medium leading-[1.1] text-[#063746]">
                 What AI Commercial<br />Production Means At Ddip.ai
               </h2>
-              <p className="mt-4 text-[16px] text-[#063746]/60" style={{ fontFamily: "var(--font-body)" }}>
+              <p className="mt-4 text-[34px] text-[#063746]/60" style={{ fontFamily: "var(--font-body)" }}>
                 AI commercial production at DDIP is not about replacing creativity.
               </p>
             </div>
@@ -315,8 +315,8 @@ export default function AICommercialPage() {
                 </div>
               </div>
               <div>
-                <h3 className="font-heading text-[28px] font-medium text-[#063746]">It's about expanding it.</h3>
-                <p className="mt-3 text-[14px] leading-[1.7] text-[#063746]/60" style={{ fontFamily: "var(--font-body)" }}>
+                <h3 className="font-heading text-[34px] font-medium text-[#063746]">It's about expanding it.</h3>
+                <p className="mt-3 text-[22px] leading-[1.7] text-[#063746]/60" style={{ fontFamily: "var(--font-body)" }}>
                   We use AI as a production layer to explore ideas faster, visualize concepts earlier, and produce digital-first commercials with greater creative freedom — without losing narrative clarity or visual quality.
                 </p>
               </div>
@@ -436,8 +436,8 @@ export default function AICommercialPage() {
                 <div className="flex h-[75px] w-[75px] shrink-0 items-center justify-center rounded-[8px]  border border-[#FFFFFF4D]">
                   <Image src={item.icon} alt={item.label} width={25} height={25} />
                 </div>
-                <span className="text-[18px] leading-[1.5] text-center"
-                  style={{ fontFamily: "Bricolage Grotesque", color: "#FFFFFF" }}>
+                <span className="text-[18px] leading-[1.5] text-start"
+                  style={{ fontFamily: '"Bricolage Grotesque", sans-serif', color: "#FFFFFF" }}>
                   {item.label}
                 </span>
               </div>

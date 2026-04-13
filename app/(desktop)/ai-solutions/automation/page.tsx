@@ -157,6 +157,23 @@ export default function AutomationPage() {
       {/* ════════════════════════════════════════════════════════
           2. AUTOMATION MADE SIMPLE — Accordion
           ════════════════════════════════════════════════════════ */}
+<section id="discover" className="px-[60px] pt-24">
+      <div className="lg:col-span-2 grid grid-cols-2 gap-12 items-start mb-8">
+        <p className="font-heading text-[60px] font-semibold text-[#063746] leading-tight max-w-3xl uppercase" style={{ fontFamily: "Bricolage Grotesque, sans-serif" }}>
+   Automation Made Simple, Scalable, and Smart
+        </p>
+        <div className="flex justify-end">
+        <p
+          className="text-[#063746] text-[22px] leading-relaxed pt-2 max-w-lg"
+          style={{ fontFamily: "var(--font-body)" }}
+        >
+          A library of intelligent, pre-built workflows to automate what matters most. From content scheduling to customer engagement, each template is designed to connect, perform, and evolve with your business."
+
+        </p>
+        </div>
+      </div>
+</section>
+
       <AccordionWithImage
         heading={"Automation Made\nSimple, Scalable, And\nSmart"}
         subheading="A library of intelligent, pre-built workflows to automate what matters most. From content scheduling to customer engagement, each template is designed to connect, perform, and evolve with your business."
@@ -193,15 +210,15 @@ export default function AutomationPage() {
                 </div>
                 {/* Telegram */}
                 <div className="w-[50px] h-[50px] rounded-lg flex items-center justify-center" style={{ backgroundColor: "#229ED9" }}>
-                  <Image src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/e4ef2ee1-c4ca-4669-edbf-3a2f45d4f900/public" alt="Telegram" width={50} height={50} className="rounded"  />
+                  <Image src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/e4ef2ee1-c4ca-4669-edbf-3a2f45d4f900/public" alt="Telegram" width={50} height={50} className="rounded" />
                 </div>
                 {/* YouTube */}
                 <div className="w-[50px] h-[50px] rounded-lg flex items-center justify-center" style={{ backgroundColor: "#FF0000" }}>
-                  <Image src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/2de131fa-54be-4e66-d0a3-13e5b19bb400/public" alt="YouTube" width={50} height={50} className="rounded"  />
+                  <Image src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/2de131fa-54be-4e66-d0a3-13e5b19bb400/public" alt="YouTube" width={50} height={50} className="rounded" />
                 </div>
                 {/* +5 badge */}
                 <div className="w-[50px] h-[50px] rounded-lg flex items-center justify-center bg-white/10">
-             <Image src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/928968a1-3d43-4362-dd86-e36ac1e30100/public" alt="More" width={50} height={50} className="rounded"  />
+                  <Image src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/928968a1-3d43-4362-dd86-e36ac1e30100/public" alt="More" width={50} height={50} className="rounded" />
                 </div>
               </div>
 

@@ -107,7 +107,7 @@ export default function AIContentPage() {
   const [cmsFaqLeft, setCmsFaqLeft] = useState(faqLeft);
   const [cmsFaqRight, setCmsFaqRight] = useState(faqRight);
 
-  const [emblaRef] = useEmblaCarousel({ loop: true, dragFree: true }, [
+  const [emblaRef] = useEmblaCarousel({ loop: true, dragFree: true, align: "start", containScroll: "trimSnaps" }, [
     AutoPlay({ delay: 3000, stopOnInteraction: false, stopOnMouseEnter: true }),
   ]);
 
@@ -533,10 +533,10 @@ export default function AIContentPage() {
           </div>
 
           {/* Showcase — auto-scrolling horizontal carousel */}
-          <div className="mt-12 overflow-hidden" ref={emblaRef}>
-            <div className="flex gap-[29px]">
-              {[...generateItems, ...generateItems].map((item, i) => (
-                <div key={i} className="shrink-0 w-[727px]">
+          <div className="mt-12 overflow-hidden w-full" ref={emblaRef}>
+            <div className="flex gap-[29px] -mx-[60px] px-[60px]">
+              {[...generateItems, ...generateItems, ...generateItems].map((item, i) => (
+                <div key={i} className="shrink-0 w-[727px] min-w-[727px]">
                   <div className="relative h-[548px] overflow-hidden rounded-[16px] bg-[#D9D9D9]">
                     <Image
                       src={item.image}

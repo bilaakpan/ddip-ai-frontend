@@ -70,13 +70,13 @@ export default function FourDMethodSection() {
                   src={step.icon}
                   alt={step.title}
                   className="w-18 h-18 opacity-80"
-
+                  style={{ transform: `rotate(${i === 0 ? "33deg" : i === 3 ? "-33deg" : "0deg"})` }}
                 />
               </div>
 
               {/* Title */}
               <h3
-                className="text-[40px] font-semibold leading-tight mb-3 text-center"
+                className="text-[40px]  leading-tight mb-3 text-center"
                 style={{ color: step.textColor, fontFamily: "Bricolage Grotesque, sans-serif" }}
               >
                 {step.title}

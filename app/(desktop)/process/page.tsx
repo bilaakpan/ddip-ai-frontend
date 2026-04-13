@@ -347,7 +347,7 @@ export default function ProcessPage() {
                 understanding.
               </span>
             </div>
-            <p className="mt-6 leading-[1.7]" style={{ fontSize: "24px", color: "#063746", width: "600px" }}>
+            <p className="mt-6 leading-[1.7]" style={{ fontSize: "24px", color: "#063746", width: "500px" }}>
               Because meaningful automation, effective AI, and scalable creativity can only happen when <span style={{ color: "#00BCCF" }}>strategy, human insight, and technology</span> move together.
             </p>
           </div>
