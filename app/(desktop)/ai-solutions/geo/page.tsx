@@ -13,14 +13,14 @@ import PartnersSection from "@/components/desktop/PartnersSection";
 
 
 const heroPartners = [
-    { name: 'Vesta Global', logo: 'https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/df6e0710-2d50-486d-5f59-5e751559e900/public' },
-    { name: 'Brother', logo: 'https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/86b61c21-9a9c-439a-317a-85b52a8e1200/public' },
-    { name: 'Mediterra', logo: 'https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/c4b8d5eb-29a6-4b39-cf0e-bcb6da555800/public' },
-    { name: 'Bizim Mutfak', logo: 'https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/fd4760d4-1dac-4f11-1800-7c8f7e1dfa00/public' },
-    { name: 'Optimum', logo: 'https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/4b22ddb7-f87d-499e-df17-ae9efd2e5200/public' },
-    { name: 'CollaSel', logo: 'https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/e47e5b16-132e-40ee-537a-2d44a3283d00/public' },
-    { name: 'SelJel', logo: 'https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/4c453b6d-12e2-4fb3-f7d3-75d85e1a5200/public' },
-  ];
+  { name: 'Vesta Global', logo: 'https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/df6e0710-2d50-486d-5f59-5e751559e900/public' },
+  { name: 'Brother', logo: 'https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/86b61c21-9a9c-439a-317a-85b52a8e1200/public' },
+  { name: 'Mediterra', logo: 'https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/c4b8d5eb-29a6-4b39-cf0e-bcb6da555800/public' },
+  { name: 'Bizim Mutfak', logo: 'https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/fd4760d4-1dac-4f11-1800-7c8f7e1dfa00/public' },
+  { name: 'Optimum', logo: 'https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/4b22ddb7-f87d-499e-df17-ae9efd2e5200/public' },
+  { name: 'CollaSel', logo: 'https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/e47e5b16-132e-40ee-537a-2d44a3283d00/public' },
+  { name: 'SelJel', logo: 'https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/4c453b6d-12e2-4fb3-f7d3-75d85e1a5200/public' },
+];
 
 const whatGeoItems = [
   { title: "Content structure and format", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/1c2df9e6-58f9-4e83-fc29-0819fcd45e00/public" },
@@ -37,22 +37,22 @@ const optimizeItems = [
 ];
 
 const methodSteps = [
-  { 
+  {
     num: "01", title: "Define", icon: "/images/geo/icon-01.svg", rotate: "-22deg",
     desc: "We identify audience intent, search behavior, and the questions AI systems need to answer.",
     bg: "#E1E1E1", textColor: "#063746"
   },
-  { 
+  {
     num: "02", title: "Design", icon: "/images/geo/icon-02.svg", rotate: "-9deg",
     desc: "Content structure, hierarchy, and semantic flow are shaped for clarity and relevance.",
     bg: "#1CE3F4", textColor: "#063746"
   },
-  { 
+  {
     num: "03", title: "Develop", icon: "/images/geo/icon-03.svg", rotate: "9deg",
     desc: "AI-readable content and contextual signals are implemented across pages.",
     bg: "#063746", textColor: "#ffffff"
   },
-  { 
+  {
     num: "04", title: "Deliver", icon: "/images/geo/icon-04.svg", rotate: "22deg",
     desc: "Optimized content is deployed with measurable improvements in visibility and discoverability.",
     bg: "#1a8a9a", textColor: "#ffffff"
@@ -106,28 +106,28 @@ export default function GeoPage() {
           setCmsFaqRight(res.data.slice(mid).map((f: Faq) => f.question));
         }
       })
-      .catch(() => {});
+      .catch(() => { });
   }, []);
 
 
   function FeatureCard({ iconSrc, text }: { iconSrc: string; text: string }) {
-  return (
-    <div className="bg-white/8 border border-white/12 rounded-xl p-5 md:p-6 mb-4 backdrop-blur-md flex items-center gap-4 transition-all duration-300 hover:bg-white/12 hover:-translate-y-1">
-      <div className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center flex-shrink-0">
-        <img
-          src={iconSrc} 
-          alt="icon" 
-          width={22} 
-          height={22}
-          className="w-5 h-5 object-contain"
-        />
+    return (
+      <div className="bg-white/8 border border-white/12 rounded-xl p-5 md:p-6 mb-4 backdrop-blur-md flex items-center gap-4 transition-all duration-300 hover:bg-white/12 hover:-translate-y-1">
+        <div className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center flex-shrink-0">
+          <img
+            src={iconSrc}
+            alt="icon"
+            width={22}
+            height={22}
+            className="w-5 h-5 object-contain"
+          />
+        </div>
+        <p className="font-sf text-white/95 text-sm md:text-base leading-relaxed">
+          {text}
+        </p>
       </div>
-      <p className="font-sf text-white/95 text-sm md:text-base leading-relaxed">
-        {text}
-      </p>
-    </div>
-  );
-}
+    );
+  }
 
 
 
@@ -138,108 +138,108 @@ export default function GeoPage() {
           1. HERO — "DDIP GEO OPTIMIZAT..."
           ════════════════════════════════════════════════════════ */}
 
-<section className="relative overflow-hidden bg-dark-bg pb-16 pt-40 min-h-[900px]">
-  {/* Background Gradient */}
-  <div className="absolute right-0 top-0 h-full w-[55%]">
-    <div className="absolute inset-0 bg-gradient-to-r from-dark-bg via-dark-bg/60 to-transparent" />
-  </div>
+      <section className="relative overflow-hidden bg-dark-bg pb-16 pt-40 min-h-[900px]">
+        {/* Background Gradient */}
+        <div className="absolute right-0 top-0 h-full w-[55%]">
+          <div className="absolute inset-0 bg-gradient-to-r from-dark-bg via-dark-bg/60 to-transparent" />
+        </div>
 
-  {/* Top Scrolling Header */}
-<div className="overflow-hidden whitespace-nowrap">
-  <div className="flex animate-marquee">
-    
-    {/* First Copy */}
-    <div className="flex">
-      <h1 className="text-[140px] text-white whitespace-nowrap">
-        DDIP GEO OPTMIZATION
-        <span className="mx-4 inline-block">
-          <img src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/154cd613-2d04-4634-41b3-834c90dc5800/public" className="h-[70px]" />
-        </span>
-        AI CONTENT GENERATION
-      </h1>
-    </div>
+        {/* Top Scrolling Header */}
+        <div className="overflow-hidden whitespace-nowrap">
+          <div className="flex animate-marquee">
 
-    {/* Second Copy (duplicate for seamless loop) */}
-    <div className="flex">
-      <h1 className="text-[140px] text-white whitespace-nowrap">
-        DDIP GEO OPTMIZATION
-        <span className="mx-4 inline-block">
-          <img src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/154cd613-2d04-4634-41b3-834c90dc5800/public" className="h-[70px]" />
-        </span>
-        AI CONTENT GENERATION
-      </h1>
-    </div>
+            {/* First Copy */}
+            <div className="flex">
+              <h1 className="text-[140px] text-white whitespace-nowrap">
+                DDIP GEO OPTMIZATION
+                <span className="mx-4 inline-block">
+                  <img src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/154cd613-2d04-4634-41b3-834c90dc5800/public" className="h-[70px]" />
+                </span>
+                AI CONTENT GENERATION
+              </h1>
+            </div>
 
-  </div>
-</div>
+            {/* Second Copy (duplicate for seamless loop) */}
+            <div className="flex">
+              <h1 className="text-[140px] text-white whitespace-nowrap">
+                DDIP GEO OPTMIZATION
+                <span className="mx-4 inline-block">
+                  <img src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/154cd613-2d04-4634-41b3-834c90dc5800/public" className="h-[70px]" />
+                </span>
+                AI CONTENT GENERATION
+              </h1>
+            </div>
 
-  
+          </div>
+        </div>
 
-  <div className="relative z-20 mt-8 px-[130px] flex flex-col lg:flex-row justify-between items-start">
-    {/* LEFT SIDE: Text Content */}
-    <div className="">
-      <h2 className="font-heading text-[70px] font-medium leading-[1.0] text-white">
-        Visibility No Longer Ends
-        <br />
-        With Search.
-      </h2>
-      <p className="mt-4 text-[26px] leading-[1.6] text-white max-w-3xl" style={{ fontFamily: "var(--font-body)" }}>
-        GEO Optimization helps brands become visible in AI-powered search, discovery, and answer engines.
-      </p>
 
-      <div className="flex flex-col gap-4 mt-[120px]">
-        <svg width="99" height="122" viewBox="0 0 99 122" fill="none" className="h-[90px] w-[90px]" aria-label="Scroll down">
-          <path d="M56.9199 0L56.9199 95.9621L89.1853 66.0555L98.7897 75.9435L98.9811 76.9205L49.6919 122L0 76.9205L0.198028 75.9435L9.61097 66.2194L42.0612 95.9621L42.0612 0L56.9199 0Z" fill="white" />
-        </svg>
-        <a 
-          href="#discover" 
-          className="text-white underline decoration-white/40 underline-offset-8 transition-colors hover:decoration-teal-500 text-[25px]"
-          style={{ fontFamily: 'Bricolage Grotesque, sans-serif' }}
-        >
-         Discover Our GEO Optimization
-        </a>
-      </div>
-    </div>
 
-    {/* --- RIGHT SIDE: FLOATING IMAGES CONTAINER --- */}
-    <div className="relative w-full max-w-[650px] h-[500px] mt-10 lg:mt-0 hidden lg:block">
-      
-      {/* 1. 45 Prompts Box (Top Left of group) */}
-      <div className="absolute -top-10 left-10 z-30 transform hover:scale-105 transition-transform duration-300" style={{top:"50px",left:"260px"}}>
-        <img src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/126eeb07-a598-40d1-507b-a169c3a61700/public" alt="45 prompts" className="w-[180px] drop-shadow-2xl" />
-      </div>
+        <div className="relative z-20 mt-8 px-[130px] flex flex-col lg:flex-row justify-between items-start">
+          {/* LEFT SIDE: Text Content */}
+          <div className="">
+            <h2 className="font-heading text-[70px] font-medium leading-[1.0] text-white">
+              Visibility No Longer Ends
+              <br />
+              With Search.
+            </h2>
+            <p className="mt-4 text-[26px] leading-[1.6] text-white max-w-3xl" style={{ fontFamily: "var(--font-body)" }}>
+              GEO Optimization helps brands become visible in AI-powered search, discovery, and answer engines.
+            </p>
 
-      {/* 2. Main Platform Stats Chart (Center) */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 w-[426px]">
-        <img src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/955273a6-c801-43e4-0062-087b7818f400/public" alt="AI Stats Chart" className="drop-shadow-2xl ml-[-95px]" />
-      </div>
+            <div className="flex flex-col gap-4 mt-[120px]">
+              <svg width="99" height="122" viewBox="0 0 99 122" fill="none" className="h-[90px] w-[90px]" aria-label="Scroll down">
+                <path d="M56.9199 0L56.9199 95.9621L89.1853 66.0555L98.7897 75.9435L98.9811 76.9205L49.6919 122L0 76.9205L0.198028 75.9435L9.61097 66.2194L42.0612 95.9621L42.0612 0L56.9199 0Z" fill="white" />
+              </svg>
+              <a
+                href="#discover"
+                className="text-white underline decoration-white/40 underline-offset-8 transition-colors hover:decoration-teal-500 text-[25px]"
+                style={{ fontFamily: 'Bricolage Grotesque, sans-serif' }}
+              >
+                Discover Our GEO Optimization
+              </a>
+            </div>
+          </div>
 
-      {/* 3. AI Visibility Gauge (Top Right) */}
-      <div className="absolute top-[90px] right-[0px] z-30">
-        <img src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/90710c77-9f67-41f8-bda2-b4c00d5cd500/public" alt="65% Visibility" className="w-[140px] drop-shadow-2xl" />
-      </div>
+          {/* --- RIGHT SIDE: FLOATING IMAGES CONTAINER --- */}
+          <div className="relative w-full max-w-[650px] h-[500px] mt-10 lg:mt-0 hidden lg:block">
 
-      {/* 4. Citations / Sources (Bottom Right) */}
-      <div className="absolute bottom-[150px] right-[-50px] z-30">
-        <img src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/515630f1-bbc9-435a-827a-dda9e69eb700/public" alt="345 sources" className="w-[160px] drop-shadow-xl" />
-      </div>
+            {/* 1. 45 Prompts Box (Top Left of group) */}
+            <div className="absolute -top-10 left-10 z-30 transform hover:scale-105 transition-transform duration-300" style={{ top: "50px", left: "260px" }}>
+              <img src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/126eeb07-a598-40d1-507b-a169c3a61700/public" alt="45 prompts" className="w-[180px] drop-shadow-2xl" />
+            </div>
 
-      {/* 5. Tool Icons Cluster (Bottom Center) */}
-      <div className="absolute bottom-12 right-[130px] z-40">
-        <img src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/27262750-55ac-4bf3-a2ba-48f39ea3f800/public" alt="AI Icons" className="w-[200px]" />
-      </div>
+            {/* 2. Main Platform Stats Chart (Center) */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 w-[426px]">
+              <img src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/955273a6-c801-43e4-0062-087b7818f400/public" alt="AI Stats Chart" className="drop-shadow-2xl ml-[-95px]" />
+            </div>
 
-    </div>
-  </div>
+            {/* 3. AI Visibility Gauge (Top Right) */}
+            <div className="absolute top-[90px] right-[0px] z-30">
+              <img src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/90710c77-9f67-41f8-bda2-b4c00d5cd500/public" alt="65% Visibility" className="w-[140px] drop-shadow-2xl" />
+            </div>
 
-  {/* Footer Scroll Indicator */}
-  <div className="absolute bottom-10 right-[60px] z-10">
-    <p className="text-[32px] tracking-wider text-white" style={{ fontFamily: "var(--font-body)" }}>(SCROLL)</p>
-  </div>
-</section>
+            {/* 4. Citations / Sources (Bottom Right) */}
+            <div className="absolute bottom-[150px] right-[-50px] z-30">
+              <img src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/515630f1-bbc9-435a-827a-dda9e69eb700/public" alt="345 sources" className="w-[160px] drop-shadow-xl" />
+            </div>
 
-{/* actual partners comp */}
-<HeroPartnersSection />
+            {/* 5. Tool Icons Cluster (Bottom Center) */}
+            <div className="absolute bottom-12 right-[130px] z-40">
+              <img src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/27262750-55ac-4bf3-a2ba-48f39ea3f800/public" alt="AI Icons" className="w-[200px]" />
+            </div>
+
+          </div>
+        </div>
+
+        {/* Footer Scroll Indicator */}
+        <div className="absolute bottom-10 right-[60px] z-10">
+          <p className="text-[32px] tracking-wider text-white" style={{ fontFamily: "var(--font-body)" }}>(SCROLL)</p>
+        </div>
+      </section>
+
+      {/* actual partners comp */}
+      <HeroPartnersSection />
 
       {/* ════════════════════════════════════════════════════════
           2. WHY SEO ALONE IS NO LONGER ENOUGH
@@ -254,7 +254,7 @@ export default function GeoPage() {
                 Longer Enough
               </h2>
               <div className="w-full mt-[60px] d-flex flex justify-end">
-              <img src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/81f155be-4acd-4ee4-f772-861a73198900/public" className="w-[500px] "/>
+                <img src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/81f155be-4acd-4ee4-f772-861a73198900/public" className="w-[500px] " />
               </div>
             </div>
             <div className="space-y-4">
@@ -262,60 +262,60 @@ export default function GeoPage() {
                 SEO has shaped how brands become visible online for years.
               </p>
               <p className="text-[20px] leading-[1.6] text-[#063746]" style={{ fontFamily: "var(--font-body)" }}>
-               But how people search for information is changing. <br />
-Instead of scrolling through result pages, users increasingly ask questions and expect direct answers, often delivered by AI-powered search engines, chat interfaces, and answer systems
+                But how people search for information is changing. <br />
+                Instead of scrolling through result pages, users increasingly ask questions and expect direct answers, often delivered by AI-powered search engines, chat interfaces, and answer systems
               </p>
               <p className="text-[20px] leading-[1.6] text-[#063746]" style={{ fontFamily: "var(--font-body)" }}>
                 In this new environment, ranking is only part of the equation. What matters more is whether your content is <b>understood, trusted, and referenced</b> by these systems.
               </p>
-                <p className="text-[20px] leading-[1.6] text-[#063746]" style={{ fontFamily: "var(--font-body)" }}>
-               That's where GEO Optimization comes in.
+              <p className="text-[20px] leading-[1.6] text-[#063746]" style={{ fontFamily: "var(--font-body)" }}>
+                That's where GEO Optimization comes in.
               </p>
             </div>
           </div>
 
-       {/* seo geo compoent */}
-           <div className="relative overflow-hidden px-4 pt-8 pb-24 sm:px-8 sm:pt-10 md:px-[70px] md:pt-[35px] mt-[60px]" style={{ minHeight: "600px" }}>
-      {/* Background */}
-      <div className="absolute inset-0 z-0">
-        <img src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/3a299844-7937-43b1-4a7b-3478050b4900/public" alt="background clouds" className="w-full h-full object-cover" />
-      </div>
+          {/* seo geo compoent */}
+          <div className="relative overflow-hidden px-4 pt-8 pb-24 sm:px-8 sm:pt-10 md:px-[70px] md:pt-[35px] mt-[60px]" style={{ minHeight: "600px" }}>
+            {/* Background */}
+            <div className="absolute inset-0 z-0">
+              <img src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/3a299844-7937-43b1-4a7b-3478050b4900/public" alt="background clouds" className="w-full h-full object-cover" />
+            </div>
 
-      {/* Main Heading */}
-      <h1 className="relative z-10 text-[28px] sm:text-[34px] md:text-[40px] font-bricolage font-semibold text-white mb-[30px]">
-        SEO vs GEO: what's the difference?
-      </h1>
+            {/* Main Heading */}
+            <h1 className="relative z-10 text-[28px] sm:text-[34px] md:text-[40px] font-bricolage font-semibold text-white mb-[30px]">
+              SEO vs GEO: what's the difference?
+            </h1>
 
-      {/* Comparison Section */}
-      <div className="relative z-10 flex flex-col lg:flex-row gap-8 lg:gap-12 items-start lg:items-center">
-        {/* SEO Column */}
-        <div className="flex-1 w-full">
-          <h2 className="text-[22px] sm:text-[28px] font-bricolage font-bold text-white mb-[15px]">SEO</h2>
-          <FeatureCard iconSrc="/images/geo/icon-01.svg" text="SEO focuses on helping content rank in search engines." />
-          <FeatureCard iconSrc="/images/geo/icon-02.svg" text="SEO optimizes for keywords and rankings" />
-          <FeatureCard iconSrc="/images/geo/icon-03.svg" text="SEO aims to drive clicks" />
-        </div>
+            {/* Comparison Section */}
+            <div className="relative z-10 flex flex-col lg:flex-row gap-8 lg:gap-12 items-start lg:items-center">
+              {/* SEO Column */}
+              <div className="flex-1 w-full">
+                <h2 className="text-[22px] sm:text-[28px] font-bricolage font-bold text-white mb-[15px]">SEO</h2>
+                <FeatureCard iconSrc="/images/geo/icon-01.svg" text="SEO focuses on helping content rank in search engines." />
+                <FeatureCard iconSrc="/images/geo/icon-02.svg" text="SEO optimizes for keywords and rankings" />
+                <FeatureCard iconSrc="/images/geo/icon-03.svg" text="SEO aims to drive clicks" />
+              </div>
 
-        {/* VS */}
-        <div className="text-[48px] sm:text-[64px] lg:text-[80px] font-bricolage font-bold text-[#EBFFFF] flex-shrink-0 text-center w-full lg:w-auto">
-          V.S.
-        </div>
+              {/* VS */}
+              <div className="text-[48px] sm:text-[64px] lg:text-[80px] font-bricolage font-bold text-[#EBFFFF] flex-shrink-0 text-center w-full lg:w-auto">
+                V.S.
+              </div>
 
-        {/* GEO Column */}
-        <div className="flex-1 w-full">
-          <h2 className="text-[22px] sm:text-[28px] font-bricolage font-bold text-white mb-[15px]">GEO</h2>
-          <FeatureCard iconSrc="/images/geo/icon-04.svg" text="GEO focuses on helping content be interpreted and surfaced by AI systems." />
-          <FeatureCard iconSrc="/images/geo/icon-05.svg" text="GEO optimizes for context, structure, and intent" />
-          <FeatureCard iconSrc="/images/geo/icon-06.svg" text="GEO aims to become the answer" />
-        </div>
-      </div>
+              {/* GEO Column */}
+              <div className="flex-1 w-full">
+                <h2 className="text-[22px] sm:text-[28px] font-bricolage font-bold text-white mb-[15px]">GEO</h2>
+                <FeatureCard iconSrc="/images/geo/icon-04.svg" text="GEO focuses on helping content be interpreted and surfaced by AI systems." />
+                <FeatureCard iconSrc="/images/geo/icon-05.svg" text="GEO optimizes for context, structure, and intent" />
+                <FeatureCard iconSrc="/images/geo/icon-06.svg" text="GEO aims to become the answer" />
+              </div>
+            </div>
 
-      {/* Footer Text */}
-      <div className="relative z-10 mt-10 max-w-md text-white">
-        <p className="font-sf font-semibold mb-2 text-base md:text-lg">GEO doesn't replace SEO.</p>
-        <p className="font-sf opacity-90 text-sm md:text-base">"It builds on it" to prepare your content for AI-powered discovery.</p>
-      </div>
-    </div>
+            {/* Footer Text */}
+            <div className="relative z-10 mt-10 max-w-md text-white">
+              <p className="font-sf font-semibold mb-2 text-base md:text-lg">GEO doesn't replace SEO.</p>
+              <p className="font-sf opacity-90 text-sm md:text-base">"It builds on it" to prepare your content for AI-powered discovery.</p>
+            </div>
+          </div>
 
 
 
@@ -326,103 +326,88 @@ Instead of scrolling through result pages, users increasingly ask questions and 
           3. WHAT GEO OPTIMIZATION MEANS AT DDIP.AI
           ════════════════════════════════════════════════════════ */}
       <section>
-        <div className="">
-         
+        <div
+          className="min-h-screen relative overflow-hidden px-6 py-10 md:px-12 md:py-16 lg:px-20 lg:py-20"
+          style={{
+            backgroundImage: `
+        url('https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/4476e71b-422c-45ca-d223-93dff619db00/public'),
+        url('https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/6af3a93f-b1bd-4db1-b818-b6dc34f83b00/public')
+      `,
+            backgroundPosition: "0px -210px, center right",
+            backgroundRepeat: "no-repeat, no-repeat",
+            backgroundSize: "900px 1000px, 1100px 1500px"
+          }}
+        >
 
-          <div className="min-h-screen bg-[#d4e5e1] relative overflow-hidden px-6 py-10 md:px-12 md:py-16 lg:px-20 lg:py-20">
-      
-      {/* Main Content Container */}
-      <div className=" mx-auto relative">
-        
-        {/* Header Section */}
-        <div className="mb-12 md:mb-16">
-          <h1 className="text-[90px] text-[#063746] mb-4 md:mb-6 leading-tight max-w-3xl" style={{fontWeight:"400"}}>
-            What GEO Optimization<br />Means At Ddip.ai
-          </h1>
-          <p className="text-base text-[28px] text-[#145365] max-w-2xl font-sf leading-relaxed">
-            At DDIP.AI, GEO Optimization is about designing content and structure that AI systems can clearly read, interpret, and trust.
-          </p>
-        </div>
+          {/* 🧠 Main Content */}
+          <div className="mx-auto relative">
 
-        {/* Main Layout - Positioned Elements */}
-        <div className="relative w-full" style={{ minHeight: '580px' }}>
-          
-          {/* Left Side - Search Platform Box (Top Left) */}
-          <div className="absolute left-[6%] top-0 w-[280px] md:w-[320px] lg:w-[380px] bg-white rounded-2xl shadow-lg p-5">
-            <Image 
-              src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/23654e2b-dd79-4cca-114e-e32316b23100/public"
-              alt="Search Platform"
-              width={380}
-              height={280}
-              className="w-full h-auto"
-            />
-          </div>
-
-          
-
-         
-
-          {/* Center - Product Comparison (Bottom Center) */}
-          <div className="absolute left-[33%] top-[36%]  w-[200px]  bg-white rounded-2xl shadow-lg">
-            <img 
-             src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/4b9c86e7-e472-4cca-9ea2-9a342ecdd000/public"
-              alt="Product Comparison"
-              className="w-[200px] h-[175px]"
-            />
-          </div>
-
-
-<div className="absolute  right-[22%] top-[-42%] w-[230px]">
-
-   <img 
-              src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/b99e4b63-4401-4b60-7310-47c6a8bc6500/public"
-              alt="Stats Analytics"
-              className="w-full h-auto"
-            />
-</div>
-
-<div className="absolute  right-[16%] top-[-27%] w-[230px]">
-   <img
-              src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/08c1fef4-298a-49cb-aaff-63067d39a100/public"
-              alt="Stats Analytics"
-              className="w-full h-auto"
-            />
-</div>
-
-<div className="absolute  right-[0%] top-[-45%] w-[110px] h-[180px]">
-  
-   <img 
-             src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/5de9bd15-8fac-4ea0-61d8-77ba0a967c00/public"
-              alt="Stats Analytics"
-              className="w-[110px]"
-
-            />
-</div>
-          {/* Right Side - Analytics Stats (Top Right) */}
-          <div className="absolute right-0 top-0 w-[43%]  rounded-2xl ">
-            <img 
-              src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/da727212-dc17-4cd0-4145-347ce2da7100/public"
-              alt="Stats Analytics"
-              className="w-full h-auto"
-            />
-            {/* Bottom Text Section */}
-            <div className="mt-[70px] max-w-4xl">
-              <p className="text-base md:text-lg lg:text-xl text-[#2d6b6b] mb-4 font-sf leading-relaxed">
-                We optimize not just what you say, but how information is organized, connected, and presented — so your brand becomes discoverable in AI-driven environments.
-              </p>
-              <p className="text-sm md:text-base lg:text-lg text-[#2d6b6b] font-sf leading-relaxed">
-                This includes search engines, chat-based interfaces, and emerging answer platforms where visibility no longer looks like a list of links.
+            {/* Header */}
+            <div className="mb-12 md:mb-16">
+              <h1 className="text-[90px] text-[#063746] mb-4 md:mb-6 leading-tight max-w-3xl font-light">
+                What GEO Optimization<br />Means At Ddip.ai
+              </h1>
+              <p className="text-[28px] text-[#145365] max-w-2xl font-sf leading-relaxed">
+                At DDIP.AI, GEO Optimization is about designing content and structure that AI systems can clearly read, interpret, and trust.
               </p>
             </div>
+
+            {/* Layout */}
+            <div className="relative w-full" style={{ minHeight: '580px' }}>
+
+              {/* Left Image */}
+              <div className="absolute left-[6%] top-0 w-[280px] md:w-[320px] lg:w-[380px] bg-white rounded-2xl shadow-lg p-5" style={{ margin: "0px 0 0 30px" }}>
+                <img
+                  src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/23654e2b-dd79-4cca-114e-e32316b23100/public"
+                  alt="Search Platform"
+                  className="w-full h-auto"
+                />
+              </div>
+
+              {/* Center Image */}
+              <div className="absolute left-[33%] top-[36%] w-[200px] bg-white rounded-2xl shadow-lg">
+                <img
+                  src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/4b9c86e7-e472-4cca-9ea2-9a342ecdd000/public"
+                  alt="Product Comparison"
+                  className="w-[200px] h-[175px]"
+                />
+              </div>
+
+              {/* Floating Right Images */}
+              <div className="absolute right-[22%] top-[-42%] w-[230px]">
+                <img src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/b99e4b63-4401-4b60-7310-47c6a8bc6500/public" className="w-full" />
+              </div>
+
+              <div className="absolute right-[16%] top-[-27%] w-[230px]">
+                <img src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/08c1fef4-298a-49cb-aaff-63067d39a100/public" className="w-full" />
+              </div>
+
+              <div className="absolute right-[0%] top-[-45%] w-[110px]">
+                <img src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/5de9bd15-8fac-4ea0-61d8-77ba0a967c00/public" className="w-[110px]" />
+              </div>
+
+              {/* Right Section */}
+              <div className="absolute right-0 top-0 w-[43%]">
+                <img
+                  src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/da727212-dc17-4cd0-4145-347ce2da7100/public"
+                  className="w-full"
+                />
+
+                <div className="mt-[70px] max-w-4xl">
+                  <p className="text-base md:text-lg lg:text-xl text-[#2d6b6b] mb-4 font-sf leading-relaxed">
+                    We optimize not just what you say, but how information is organized, connected, and presented — so your brand becomes discoverable in AI-driven environments.
+                  </p>
+                  <p className="text-sm md:text-base lg:text-lg text-[#2d6b6b] font-sf leading-relaxed">
+                    This includes search engines, chat-based interfaces, and emerging answer platforms where visibility no longer looks like a list of links.
+                  </p>
+                </div>
+              </div>
+
+            </div>
           </div>
-
-        </div>
-
-      </div>
-    </div>
-
         </div>
       </section>
+
 
       {/* What We Optimize */}
       <section className="py-20 px-[60px]" style={{ backgroundColor: "#063746" }}>
@@ -459,7 +444,7 @@ Instead of scrolling through result pages, users increasingly ask questions and 
           <img src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/9b006a7f-a8df-4fd5-d33a-9f29001ad500/public" alt="AI cube" className="w-full drop-shadow-xl" />
         </div>
 
-       
+
 
         {/* LEFT BOTTOM — chat card */}
         <div className="absolute left-[-155px] bottom-[60px] h-[210px] w-[500px] z-10">
@@ -475,13 +460,13 @@ Instead of scrolling through result pages, users increasingly ask questions and 
 
         {/* RIGHT BOTTOM — star cube */}
         <div className="absolute right-[-235px] bottom-[-20px] w-[530px] z-10">
-          <img style={{ transform: "rotate(19.91deg)" }}  src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/8ef107f7-3615-45c9-5ed9-cfd04ca34700/public" alt="star cube" className="w-full drop-shadow-xl" />
+          <img style={{ transform: "rotate(19.91deg)" }} src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/8ef107f7-3615-45c9-5ed9-cfd04ca34700/public" alt="star cube" className="w-full drop-shadow-xl" />
         </div>
 
- <div className="absolute right-[300px] bottom-[0px] w-[400px] z-10">
-          <img  src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/2d6bd3db-fff4-4911-d7b2-af67ad763500/public" alt="star cube" className="w-full drop-shadow-xl" />
+        <div className="absolute right-[300px] bottom-[0px] w-[400px] z-10">
+          <img src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/2d6bd3db-fff4-4911-d7b2-af67ad763500/public" alt="star cube" className="w-full drop-shadow-xl" />
         </div>
-<div className="absolute right-[-20px] top-[190px] w-[400px] z-10">
+        <div className="absolute right-[-20px] top-[190px] w-[400px] z-10">
           <img src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/bb3f40ab-c3e7-48b3-ea78-81b6afb06d00/public" alt="text right" className="w-full drop-shadow-xl" />
         </div>
         {/* CENTER TEXT */}
@@ -527,7 +512,7 @@ Instead of scrolling through result pages, users increasingly ask questions and 
                 src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/7fd78ad6-d243-4ff7-7e8e-7b3642947f00/public"
                 alt=""
                 className="w-full h-full object-cover object-center"
-                
+
               />
               <div className="absolute inset-0" />
             </div>
@@ -535,7 +520,7 @@ Instead of scrolling through result pages, users increasingly ask questions and 
 
               {/* LEFT — Title + subtitle */}
               <div className="w-[400px] shrink-0 z-10 relative">
-                <h2 className="font-heading text-[52px] font-medium leading-[1.1] text-white" style={{fontFamily:"Bricolage Grotesque"}}>
+                <h2 className="font-heading text-[52px] font-medium leading-[1.1] text-white" style={{ fontFamily: "Bricolage Grotesque" }}>
                   Why GEO<br />Matters Now
                 </h2>
                 <p className="mt-4 text-[18px] leading-[1.6] text-white">
@@ -572,7 +557,7 @@ Instead of scrolling through result pages, users increasingly ask questions and 
                   { icon: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/ce41f3c8-b443-46a9-9dea-d946a6c6d100/public", text: "More room for bold ideas with lower production risk" },
                 ].map((item, i) => (
                   <div key={i} className="flex items-center gap-3 rounded-xl px-4 py-3" style={{ backgroundColor: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.12)" }}>
-                   <div className="border border-white rounded p-2"> <img src={item.icon} alt="" className="w-6 h-6 shrink-0 text-white" /> </div>
+                    <div className="border border-white rounded p-2"> <img src={item.icon} alt="" className="w-6 h-6 shrink-0 text-white" /> </div>
                     <span className="text-[14px] text-white font-medium" style={{ fontFamily: "Bricolage Grotesque" }}>{item.text}</span>
                   </div>
                 ))}
@@ -628,7 +613,7 @@ Instead of scrolling through result pages, users increasingly ask questions and 
       {/* ════════════════════════════════════════════════════════
           10. CTA
           ════════════════════════════════════════════════════════ */}
-   <section className="bg-light-bg pb-24 pt-24">
+      <section className="bg-light-bg pb-24 pt-24">
         <div
           className="mx-[60px] flex items-center justify-between rounded-[20px] px-[60px] py-[60px]"
           style={{ background: "linear-gradient(-90deg, #002834 0%, #129CAC 100%)" }}

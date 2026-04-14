@@ -164,14 +164,14 @@ export default function AICommercialPage() {
         </div>
 
         {/* Subtitle + CTAs */}
-        <div className="relative z-10 mt-10 px-[60px]">
-          <h2 className="max-w-lg font-heading text-[28px] font-medium leading-[1.2] text-white">
+        <div className="relative z-10 mt-10 px-[80px]">
+          <h2 className="max-w-lg font-heading text-[60px] font-medium leading-[1.2] text-white">
             A New Approach To
             <br />
             Commercial Production.
           </h2>
           <p
-            className="mt-4 max-w-lg text-[18px] leading-[1.6] text-white/70"
+            className="mt-4  text-[26px] leading-[1.6] text-white"
             style={{ fontFamily: "var(--font-body)" }}
           >
             AI supports production while creativity leads every decision.
@@ -200,8 +200,8 @@ export default function AICommercialPage() {
         </div>
 
         {/* [SCROLL] text */}
-        <div className="absolute bottom-10 right-[60px] z-10">
-          <p className="text-[16px] tracking-wider text-white" style={{ fontFamily: "var(--font-body)" }}>[SCROLL]</p>
+    <div className="absolute bottom-10 right-[60px] z-10">
+          <p className="text-[32px] tracking-wider text-white" style={{ fontFamily: "var(--font-body)" }}>(SCROLL)</p>
         </div>
       </section>
 

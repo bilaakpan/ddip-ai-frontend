@@ -88,17 +88,16 @@ export default function AutomationPage() {
       {/* ════════════════════════════════════════════════════════
           1. HERO — Marquee "AUTOMATION WITH A..."
           ════════════════════════════════════════════════════════ */}
-      <section className="relative overflow-hidden bg-dark-bg pb-16 pt-40">
-        <div className="absolute right-0 top-0 h-full w-[55%]">
+      <section className="relative overflow-hidden pb-16 pt-40">
+        <div className="absolute right-0 top-0 h-[1000px] w-[100%]">
           <Image
-            src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/fbfb2d0f-627c-45ac-b654-b317ce6df500/public"
+            src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/77f68331-a8dd-4518-b7e2-6b9f1e86eb00/public"
             alt="Automation showcase"
             fill
-            className="object-cover object-left"
+            className=""
             sizes="55vw"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-dark-bg via-dark-bg/60 to-transparent" />
         </div>
 
 
@@ -111,21 +110,21 @@ export default function AutomationPage() {
           </div>
         </div>
 
-        <div className="relative z-10 mt-8 px-[60px]">
-          <h2 className="max-w-lg font-heading text-[40px] font-medium leading-[1.3] text-white">
+        <div className="relative z-10 mt-8 px-[80px]">
+          <h2 className="max-w-lg font-heading text-[60px] font-medium leading-[1.3] text-white">
             Automation Designed for Intelligence and Impact
           </h2>
-          <p className="mt-4  text-[26px] w-[640px] leading-[1.6] text-white/70" style={{ fontFamily: "var(--font-body)" }}>
+          <p className="mt-4  text-[26px] w-[640px] leading-[1.6] text-white" style={{ fontFamily: "var(--font-body)" }}>
             Each custom is designed to automate, learn, and optimize — giving your team more time to think, create, and lead.
           </p>
 
           <div className="mt-8 flex items-center gap-6">
-            <Link href="/start-project" className="font-heading text-[30px] font-medium text-white underline decoration-white/30 underline-offset-8 hover:decoration-[#1CE3F4]">
+            <Link href="/start-project" className="font-heading text-[32px] font-medium text-white underline decoration-white/30 underline-offset-8 hover:decoration-[#1CE3F4]">
               Request a Custom Solution →
             </Link>
           </div>
 
-          <div className="mt-[60px] flex items-start  flex-col gap-4">
+          <div className="mt-[80px] flex items-start  flex-col gap-4">
             <div className="flex  items-center justify-center ">
               <svg width="99" height="122" viewBox="0 0 99 122" fill="none" className="h-[90px] w-auto" aria-label="Scroll down">
                 <g clipPath="url(#arrow-clip)">
@@ -142,12 +141,9 @@ export default function AutomationPage() {
               View Workflow Templates
             </Link>
           </div>
-
-
         </div>
-
         <div className="absolute bottom-10 right-[60px] z-10">
-          <p className="text-[16px] tracking-wider text-white" style={{ fontFamily: "var(--font-body)" }}>[SCROLL]</p>
+          <p className="text-[32px] tracking-wider text-white" style={{ fontFamily: "var(--font-body)" }}>(SCROLL)</p>
         </div>
       </section>
 
@@ -157,22 +153,22 @@ export default function AutomationPage() {
       {/* ════════════════════════════════════════════════════════
           2. AUTOMATION MADE SIMPLE — Accordion
           ════════════════════════════════════════════════════════ */}
-<section id="discover" className="px-[60px] pt-24">
-      <div className="lg:col-span-2 grid grid-cols-2 gap-12 items-start mb-8">
-        <p className="font-heading text-[60px] font-semibold text-[#063746] leading-tight max-w-3xl uppercase" style={{ fontFamily: "Bricolage Grotesque, sans-serif" }}>
-   Automation Made Simple, Scalable, and Smart
-        </p>
-        <div className="flex justify-end">
-        <p
-          className="text-[#063746] text-[22px] leading-relaxed pt-2 max-w-lg"
-          style={{ fontFamily: "var(--font-body)" }}
-        >
-          A library of intelligent, pre-built workflows to automate what matters most. From content scheduling to customer engagement, each template is designed to connect, perform, and evolve with your business."
+      <section id="discover" className="px-[60px] pt-24">
+        <div className="lg:col-span-2 grid grid-cols-2 gap-12 items-start mb-8">
+          <p className="font-heading text-[60px] font-semibold text-[#063746] leading-tight max-w-3xl uppercase" style={{ fontFamily: "Bricolage Grotesque, sans-serif" }}>
+            Automation Made Simple, Scalable, and Smart
+          </p>
+          <div className="flex justify-end">
+            <p
+              className="text-[#063746] text-[22px] leading-relaxed pt-2 max-w-lg"
+              style={{ fontFamily: "var(--font-body)" }}
+            >
+              A library of intelligent, pre-built workflows to automate what matters most. From content scheduling to customer engagement, each template is designed to connect, perform, and evolve with your business."
 
-        </p>
+            </p>
+          </div>
         </div>
-      </div>
-</section>
+      </section>
 
       <AccordionWithImage
         heading={"Automation Made\nSimple, Scalable, And\nSmart"}
@@ -192,7 +188,7 @@ export default function AutomationPage() {
             Designed for Impact
           </h2>
           <div className="flex items-start justify-between mt-4">
-            <p className="max-w-xl text-[24px] leading-[1.6] text-white/50" style={{ fontFamily: "var(--font-body)" }}>
+            <p className="max-w-xl text-[24px] leading-[1.6] text-white" style={{ fontFamily: "var(--font-body)" }}>
               Choose a workflow that fits your goals. From content generation to data analysis, automation starts here.
             </p>
             <button onClick={() => window.location.href = '/ai-solutions/automation/templates'} className="flex items-center gap-2 rounded-full bg-white px-7 py-3 text-[20px] font-medium text-[#063746] shadow-md hover:bg-white/90 ml-4 shrink-0">See More Templates</button>
@@ -201,31 +197,52 @@ export default function AutomationPage() {
 
         <div className="grid grid-cols-4 gap-5">
           {featuredAutomations.slice(0, 8).map((item) => (
-            <div key={item.title} className="rounded-[16px] h-[256px] p-10 flex flex-col justify-between" style={{ border: "2px solid", borderImageSource: "linear-gradient(127.27deg, #90E5F3 5.76%, rgba(255, 255, 255, 0) 21.91%, rgba(255, 255, 255, 0.0744803) 51.88%, rgba(255, 255, 255, 0.5) 68.75%)", boxShadow: "0 4px 24px rgba(0,0,0,0.2)" }}>
-              {/* Top — social icons + +5 */}
-              <div className="flex items-center gap-2">
-                {/* Globe */}
-                <div className="w-[50px] h-[50px] rounded-lg flex items-center justify-center">
-                  <Image src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/cf3fd8ca-58ce-47df-88ce-74a2b444b400/public" alt="Globe" width={50} height={50} className="rounded" />
-                </div>
-                {/* Telegram */}
-                <div className="w-[50px] h-[50px] rounded-lg flex items-center justify-center" style={{ backgroundColor: "#229ED9" }}>
-                  <Image src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/e4ef2ee1-c4ca-4669-edbf-3a2f45d4f900/public" alt="Telegram" width={50} height={50} className="rounded" />
-                </div>
-                {/* YouTube */}
-                <div className="w-[50px] h-[50px] rounded-lg flex items-center justify-center" style={{ backgroundColor: "#FF0000" }}>
-                  <Image src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/2de131fa-54be-4e66-d0a3-13e5b19bb400/public" alt="YouTube" width={50} height={50} className="rounded" />
-                </div>
-                {/* +5 badge */}
-                <div className="w-[50px] h-[50px] rounded-lg flex items-center justify-center bg-white/10">
-                  <Image src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/928968a1-3d43-4362-dd86-e36ac1e30100/public" alt="More" width={50} height={50} className="rounded" />
-                </div>
-              </div>
+            <div
+              key={item.title}
+              className="rounded-[20px] h-[256px] p-[1.5px]"
+              style={{
+                background:
+                  "linear-gradient(135deg, rgba(144,229,243,0.8) 0%, rgba(255,255,255,0.05) 35%, rgba(255,255,255,0.4) 100%)",
+                boxShadow: "0 10px 30px rgba(0, 180, 200, 0.25)",
+              }}
+            >
+              {/* Inner Card */}
+              <div
+                className="rounded-[18px] h-full p-10 flex flex-col justify-between backdrop-blur-md"
+                style={{
+                  background:
+                    "#002834",
+                  border: "1px solid rgba(255,255,255,0.12)",
+                  boxShadow: "inset 0 0 20px rgba(255,255,255,0.05)",
+                }}
+              >
+                {/* Top — SAME ICON UI (unchanged) */}
+                <div className="flex items-center gap-2">
+                  <div className="w-[50px] h-[50px] rounded-lg flex items-center justify-center">
+                    <Image src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/cf3fd8ca-58ce-47df-88ce-74a2b444b400/public" alt="Globe" width={50} height={50} className="rounded" />
+                  </div>
 
-              {/* Bottom — title */}
-              <p className="mt-10 text-[25px] font-medium text-white leading-[1.4]" style={{ fontFamily: "var(--font-body)" }}>
-                {item.title}
-              </p>
+                  <div className="w-[50px] h-[50px] rounded-lg flex items-center justify-center" style={{ backgroundColor: "#229ED9" }}>
+                    <Image src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/e4ef2ee1-c4ca-4669-edbf-3a2f45d4f900/public" alt="Telegram" width={50} height={50} className="rounded" />
+                  </div>
+
+                  <div className="w-[50px] h-[50px] rounded-lg flex items-center justify-center" style={{ backgroundColor: "#FF0000" }}>
+                    <Image src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/2de131fa-54be-4e66-d0a3-13e5b19bb400/public" alt="YouTube" width={50} height={50} className="rounded" />
+                  </div>
+
+                  <div className="w-[50px] h-[50px] rounded-lg flex items-center justify-center bg-white/10">
+                    <Image src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/928968a1-3d43-4362-dd86-e36ac1e30100/public" alt="More" width={50} height={50} className="rounded" />
+                  </div>
+                </div>
+
+                {/* Bottom — SAME TEXT UI (unchanged) */}
+                <p
+                  className="mt-10 text-[25px] font-medium text-white leading-[1.4]"
+                  style={{ fontFamily: "var(--font-body)" }}
+                >
+                  {item.title}
+                </p>
+              </div>
             </div>
           ))}
         </div>

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { cmsApi, type Faq } from "@/lib/api";
 import HeroPartnersSection from "@/components/desktop/HeroPartnersSection";
 import InfluencerCard from "@/components/desktop/InfluenerCard";
@@ -45,6 +45,9 @@ const topInfluencer = [
     type: "Real Estate",
     title: "AI Influencer",
     name: "Mina Özdemir ",
+    region: "Turkey Market (TR)",
+    language: "Turkish (TR)",
+    gender: "Female",
     archetype: "Analytical Visionary",
     description:
       "A fully digital persona designed to create content, engage audiences, and represent brands across social media with complete consistency.",
@@ -54,6 +57,9 @@ const topInfluencer = [
     type: "Fashion",
     title: "Brand Ambassador",
     name: "Mina Şen",
+    region: "European Market (EU)",
+    language: "English (EN)",
+    gender: "Female",
     archetype: "Color Story Weaver",
     description:
       "A virtual brand representative that embodies your company's values and maintains a consistent presence across all touchpoints.",
@@ -63,6 +69,9 @@ const topInfluencer = [
     type: "Food",
     title: "AI Blogger",
     name: "Elif Doğan",
+    region: "Turkey Market (TR)",
+    language: "Turkish (TR)",
+    gender: "Female",
     archetype: "Market-to-Table Storyteller",
     description:
       "An AI-powered content creator that produces written and visual blog content, driving SEO and organic engagement.",
@@ -72,6 +81,9 @@ const topInfluencer = [
     type: "Fashion",
     title: "Fashion",
     name: "Yasin El Fassi",
+    region: "Middle East & North Africa",
+    language: "Arabic (AR)",
+    gender: "Male",
     archetype: "Heritage Remix Artist",
     description:
       "A stylized character that represents your brand personality, designed for marketing campaigns and community engagement.",
@@ -81,6 +93,9 @@ const topInfluencer = [
     type: "Lifestyle",
     title: "Vesta Global",
     name: "Hassan Al Qasimi",
+    region: "Middle East & North Africa",
+    language: "Arabic (AR)",
+    gender: "Male",
     archetype: "Calm Change Navigator",
     description:
       "A stylized character that represents your brand personality, designed for marketing campaigns and community engagement.",
@@ -90,6 +105,9 @@ const topInfluencer = [
     type: "Real Estate",
     title: "AI Influencer",
     name: "Mina Özdemir ",
+    region: "Turkey Market (TR)",
+    language: "English (EN)",
+    gender: "Gender-Neutral",
     archetype: "Gentle Routine Architect",
     description:
       "A fully digital persona designed to create content, engage audiences, and represent brands across social media with complete consistency.",
@@ -99,6 +117,9 @@ const topInfluencer = [
     type: "Real Estate",
     title: "AI Influencer",
     name: "Mina Özdemir ",
+    region: "European Market (EU)",
+    language: "English (EN)",
+    gender: "Gender-Neutral",
     archetype: "People-First Strategist",
     description:
       "A fully digital persona designed to create content, engage audiences, and represent brands across social media with complete consistency.",
@@ -108,6 +129,9 @@ const topInfluencer = [
     type: "Real Estate",
     title: "AI Influencer",
     name: "Mina Özdemir ",
+    region: "European Market (EU)",
+    language: "English (EN)",
+    gender: "Male",
     archetype: "Digital Community Builder",
     description:
       "A fully digital persona designed to create content, engage audiences, and represent brands across social media with complete consistency.",
@@ -277,6 +301,20 @@ const filterOptions = [
 ];
 const heroPartners = ["VG", "Vestine", "Optimum", "Colorful"];
 
+const normalizeIndustry = (value: string) => {
+  if (value === "Tech & Digital") return "Tech";
+  if (value === "Food & Hospitality") return "Food";
+  return value;
+};
+
+const matchesPersona = (title: string, selected: string) => {
+  if (selected === "AI Brand Ambassador") return title.toLowerCase().includes("brand ambassador");
+  if (selected === "AI Influencer") return title.toLowerCase().includes("influencer");
+  if (selected === "AI Blogger") return title.toLowerCase().includes("blogger");
+  if (selected === "AI Mascot") return title.toLowerCase().includes("mascot");
+  return true;
+};
+
 export default function AIInfluencerPage() {
   const [openIndex, setOpenIndex] = useState(0);
   const [openFaqLeft, setOpenFaqLeft] = useState<number | null>(null);
@@ -285,6 +323,7 @@ export default function AIInfluencerPage() {
   const [cmsFaqLeft, setCmsFaqLeft] = useState(faqLeft);
   const [cmsFaqRight, setCmsFaqRight] = useState(faqRight);
   const [openFilter, setOpenFilter] = useState<number | null>(null);
+  const [selectedFilters, setSelectedFilters] = useState(filters);
   const [showPopup, setShowPopup] = useState(false);
   const [selectedInfluencer, setSelectedInfluencer] = useState<typeof topInfluencer[0] | null>(null);
   useEffect(() => {
@@ -316,6 +355,26 @@ export default function AIInfluencerPage() {
       </div>
     );
   };
+
+  const handleFilterSelect = (filterIndex: number, option: string) => {
+    setSelectedFilters((prev) => prev.map((item, idx) => (idx === filterIndex ? option : item)));
+    setOpenFilter(null);
+  };
+
+  const filteredInfluencers = useMemo(() => {
+    return topInfluencer.filter((item) => {
+      const [persona, region, language, gender, industry] = selectedFilters;
+
+      if (persona !== "All Persona" && !matchesPersona(item.title, persona)) return false;
+      if (region !== "All Region" && item.region !== region) return false;
+      if (language !== "All Language" && item.language !== language) return false;
+      if (gender !== "All Gender" && item.gender !== gender) return false;
+      if (industry !== "All Industry" && normalizeIndustry(item.type) !== normalizeIndustry(industry)) return false;
+
+      return true;
+    });
+  }, [selectedFilters]);
+
   return (
     <>
       {/* ════════════════════════════════════════════════════════
@@ -549,7 +608,7 @@ export default function AIInfluencerPage() {
       {/* ════════════════════════════════════════════════════════
           4. THE SPECTRUM OF AI INFLUENCERS
           ════════════════════════════════════════════════════════ */}
-  
+
       <section className="py-24 bg-light-bg">
         <div className="flex items-center justify-center px-[60px]">
           <div className="bg-white rounded-[24px] shadow-lg w-full p-12 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
@@ -641,9 +700,9 @@ export default function AIInfluencerPage() {
 
               </p>
               <Link href="/ai-solutions/ai-influencer/templates">
-              <button className="flex items-center gap-3 rounded-full bg-[#1CE3F4] px-6 py-2.5 mt-10 font-heading text-[22px] font-medium text-[#0E4252] transition hover:bg-[#1CE3F4]/80">
-                <span>Explore The Collection</span> {plusButton()}
-              </button>
+                <button className="flex items-center gap-3 rounded-full bg-[#1CE3F4] px-6 py-2.5 mt-10 font-heading text-[22px] font-medium text-[#0E4252] transition hover:bg-[#1CE3F4]/80">
+                  <span>Explore The Collection</span> {plusButton()}
+                </button>
               </Link>
             </div>
           </div>
@@ -659,7 +718,7 @@ export default function AIInfluencerPage() {
                   className="flex items-center justify-between px-8 py-5 bg-[#FFFFFF] rounded-full cursor-pointer"
                 >
                   <span className="text-[#4D5347] text-[22px] font-medium">
-                    {item}
+                    {selectedFilters[index]}
                   </span>
 
                   <svg
@@ -681,7 +740,7 @@ export default function AIInfluencerPage() {
                       <div
                         key={i}
                         className="px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer border-b last:border-none"
-                        onClick={() => setOpenFilter(null)}
+                        onClick={() => handleFilterSelect(index, option)}
                       >
                         {option}
                       </div>
@@ -709,7 +768,7 @@ export default function AIInfluencerPage() {
       auto-rows-fr
     "
             >
-              {topInfluencer.map((item, idx) => (
+              {filteredInfluencers.map((item, idx) => (
                 <div
                   key={`${item.name}-${idx}`}
                   className="group h-full w-full px-2 sm:px-0"
@@ -745,7 +804,7 @@ export default function AIInfluencerPage() {
                       </div>
 
                       {/* Plus */}
-                      <div 
+                      <div
                         className="flex h-8 w-8 items-center justify-center rounded-full bg-white/80 sm:h-9 sm:w-9 cursor-pointer hover:bg-white transition"
                         onClick={() => {
                           setSelectedInfluencer(item);
@@ -777,6 +836,11 @@ export default function AIInfluencerPage() {
 
               ))}
             </div>
+            {filteredInfluencers.length === 0 && (
+              <p className="mt-8 text-center text-[20px] text-white/80" style={{ fontFamily: "var(--font-body)" }}>
+                No influencers match the selected filters.
+              </p>
+            )}
           </div>
           {/* Industry portrait row */}
           {/* <div
@@ -1019,7 +1083,7 @@ export default function AIInfluencerPage() {
                 style={{
                   background: activeTab === i ? "#063746" : "transparent",
                   color: activeTab === i ? "#fff" : "#063746",
-              
+
                   fontFamily: "var(--font-body)",
                 }}>
                 {tab}

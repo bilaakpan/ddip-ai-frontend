@@ -1,6 +1,7 @@
 
 "use client";
 import Image from "next/image";
+
 export type PopupInfluencer = {
     name: string;
     archetype: string;
@@ -8,6 +9,7 @@ export type PopupInfluencer = {
     image: string;
     country?: string;
 };
+
 type InfluencerPopupModalProps = {
     open: boolean;
     onClose: () => void;
@@ -27,7 +29,21 @@ export function InfluencerPopupModal({
         country: "Kuwait",
     };
     const profile = influencer ?? fallback;
-    const countryText = profile.country || "Global";
+    const countryMap: Record<string, string> = {
+        TR: "Turkey",
+        TUR: "Turkey",
+        EU: "Europe",
+        EN: "England",
+        UK: "United Kingdom",
+        UAE: "United Arab Emirates",
+        KSA: "Saudi Arabia",
+        USA: "United States",
+        US: "United States",
+        QA: "Qatar",
+        KW: "Kuwait",
+    };
+    const countryKey = (profile.country || "").trim().toUpperCase();
+    const countryText = countryMap[countryKey] || profile.country || "Global";
     return (
         <div
             className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-6 mt-20"
@@ -40,18 +56,18 @@ export function InfluencerPopupModal({
                 {/* Subtle corner tint like reference */}
                 <div className="pointer-events-none absolute -left-[10%] -top-[14%] z-[1] h-[240px] w-[240px] rounded-full bg-[#858CE3] opacity-20 blur-[90px]" />
                 <div className="pointer-events-none absolute -bottom-[10%] -right-[8%] z-[1] h-[260px] w-[260px] rounded-full bg-[#858CE3] opacity-20 blur-[100px]" />
-                
+
                 {/* Top Left Decorative Image */}
                 <div className="pointer-events-none absolute -top-[5%] -left-[5%] z-[1]">
-                  <Image
-                    src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/7ff79f69-0b0f-468c-4d84-9a41fba44200/public"
-                    alt=""
-                    width={800}
-                    height={800}
-                    className="h-auto w-[500px] object-cover opacity-30"
-                  />
+                    <Image
+                        src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/7ff79f69-0b0f-468c-4d84-9a41fba44200/public"
+                        alt=""
+                        width={800}
+                        height={800}
+                        className="h-auto w-[500px] object-cover opacity-30"
+                    />
                 </div>
-                
+
                 {/* Popup-level bottom glow image */}
                 <div className="pointer-events-none absolute inset-x-0 bottom-0 z-[1]">
                     <Image
@@ -77,14 +93,15 @@ export function InfluencerPopupModal({
                             />
                         </div>
                         {/* IMAGE */}
-                        <Image
-                            src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/a851a6fa-901f-4861-0e8e-465d120cb700/public"
-                            alt=""
-                            fill
-                            priority
-                            className="pointer-events-none z-[2] object-cover object-bottom opacity-95"
-                        />
-
+                        <div className="absolute inset-0">
+                            <Image
+                                src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/a851a6fa-901f-4861-0e8e-465d120cb700/public"
+                                alt=""
+                                fill
+                                priority
+                                className="pointer-events-none z-[2] object-cover object-bottom opacity-95"
+                            />
+                        </div>
                         {/* TEXT */}
                         <p className="absolute bottom-[125px] left-4 sm:bottom-6 sm:left-6 text-[#FFFFFF] text-[26px] w-[200px] font-medium leading-[1.2] z-10"
                             style={{ fontFamily: "Bricolage Grotesque" }}
@@ -103,8 +120,8 @@ export function InfluencerPopupModal({
                                 >
                                     {profile.name}
                                 </h2>
-                                <p className="text-[clamp(14px,3vw,22px)] text-[#002834]"
-                                    style={{ fontFamily: "SF Pro Display" }}
+                                <p className="text-[26px] text-[#002834]"
+
                                 >
                                     {profile.industry} Coach | {countryText}
                                 </p>
@@ -113,14 +130,14 @@ export function InfluencerPopupModal({
                             <div className="flex items-center gap-3">
                                 {/* Industry Tag */}
                                 <span className="rounded-full bg-[#858CE3] font-medium px-4 py-1 text-xs sm:text-sm uppercase text-white whitespace-nowrap"
-                                    style={{ fontFamily: "SF Pro Display" }}
+
                                 >
                                     {profile.industry}
                                 </span>
                                 {/* Close Button */}
                                 <button
                                     onClick={onClose}
-                                    className="h-10 w-10 flex items-center justify-center rounded-full bg-[#000000CC] text-[#FFFFFF] font-bold shrink-0"
+                                    className="h-8 w-8 flex items-center justify-center rounded-full bg-[#000000CC] text-[#FFFFFF] font-bold shrink-0"
                                 >
                                     ✕
                                 </button>
@@ -132,7 +149,7 @@ export function InfluencerPopupModal({
                         </div>
                         {/* GRID INFO */}
                         <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4 text-[#000008] text-[22px]"
-                            style={{ fontFamily: "SF Pro Display" }}
+
                         >
                             <div>
                                 <h3 className="flex items-center gap-2 text-base sm:text-lg text-[32px] font-regular text-[#151D85]">
@@ -142,7 +159,7 @@ export function InfluencerPopupModal({
                                     </svg>
                                     Profile
                                 </h3>
-                                <p className="text-sm sm:text-base mt-1">
+                                <p className="text-[22px] sm:text-base mt-1">
                                     Builds calm through tiny daily rituals—tea, gratitude, and sunset walks. Shares gentle routines that help overwhelmed professionals reset without pressure.
                                 </p>
                             </div>
@@ -155,7 +172,7 @@ export function InfluencerPopupModal({
                                     </svg>
                                     Content Focus
                                 </h3>
-                                <p className="text-sm sm:text-base mt-1">
+                                <p className="text-[22px] sm:text-base mt-1">
                                     Micro-habits · Soft resets
                                     Self-compassion · Slow living
                                 </p>
@@ -169,20 +186,22 @@ export function InfluencerPopupModal({
                                     </svg>
                                     Visual Style
                                 </h3>
-                                <p className="text-sm sm:text-base mt-1">
+                                <p className="text-[22px] sm:text-base mt-1">
                                     Warm neutrals · Natural light
+                                    <br />
                                     Ritual close-ups · Cozy minimal spaces
                                 </p>
                             </div>
-                            <div>
-                                <h3 className="flex items-center gap-2 text-base text-[32px] sm:text-lg font-regular text-[#151D85]">
+                            <div className="">
+                                <h3 className="flex items-center mt-[13px] gap-2 text-base text-[32px] sm:text-lg font-regular text-[#151D85]">
                                     <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2">
                                         <path d="M3 12h3l2-6 4 12 2-6h7" />
                                     </svg>
                                     Tone
                                 </h3>
-                                <p className="text-sm sm:text-base mt-1">
+                                <p className="text-[22px] sm:text-base mt-1">
                                     Soft · Calm
+                                    <br />
                                     Nurturing · Reassuring
                                 </p>
                             </div>
@@ -193,25 +212,25 @@ export function InfluencerPopupModal({
                                     </svg>
                                     Brand Fit
                                 </h3>
-                                <p className="text-sm sm:text-base mt-1 mr-20">
+                                <p className="text-[22px] sm:text-base mt-1 mr-20">
                                     Wellness · Mental health · Habit tools
                                     · Morning routines
                                 </p>
                             </div>
                         </div>
                         {/* CTA */}
-                        <div className="pt-[22px] pr-[50px] pb-[22px] pl-[50px] relative">
+                        <div className="pt-[22px] pr-[50px] pb-[22px] relative">
                             {/* Decorative image near button */}
                             <div className="pointer-events-none absolute -bottom-[74px] -right-[40px] z-0">
-                              <Image
-                                src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/f3c1407f-7e5d-4db8-f722-a2b27e2f6700/public"
-                                alt=""
-                                width={300}
-                                height={200}
-                                className="h-auto w-[500px] object-cover opacity-40"
-                              />
+                                <Image
+                                    src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/f3c1407f-7e5d-4db8-f722-a2b27e2f6700/public"
+                                    alt=""
+                                    width={300}
+                                    height={200}
+                                    className="h-auto w-[500px] object-cover opacity-40"
+                                />
                             </div>
-                            <button className="mt-6 w-full sm:w-auto rounded-full bg-[#002834] px-6 py-3 text-sm sm:text-base text-[#FFFFFF] hover:opacity-90 relative z-10">
+                            <button className="mt-6 w-full sm:w-auto rounded-full bg-[#002834] px-6 py-3 text-[22px] sm:text-base text-[#FFFFFF] hover:opacity-90 relative z-10">
                                 WORK WITH THIS INFLUENCER
                             </button>
 

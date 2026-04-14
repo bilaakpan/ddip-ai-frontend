@@ -220,14 +220,14 @@ export default function AIContentPage() {
         </div>
 
         {/* Subtitle + CTAs */}
-        <div className="relative z-10 mt-10 px-[60px]">
-          <h2 className="max-w-lg font-heading text-[40px] font-medium leading-[1.2] text-white">
+        <div className="relative z-10 mt-10 px-[80px]">
+          <h2 className="max-w-lg font-heading text-[60px] font-medium leading-[1.2] text-white">
             Where Creative Thinking
             <br />
             Meets AI Production.
           </h2>
           <p
-            className="mt-4 max-w-lg text-[26px] leading-[1.6] text-white/70"
+            className="mt-4 max-w-2xl text-[26px] leading-[1.6] text-white"
             style={{ fontFamily: "var(--font-body)" }}
           >
             From creative direction to final delivery, we generate content that
@@ -254,8 +254,8 @@ export default function AIContentPage() {
         </div>
 
         {/* [SCROLL] text */}
-        <div className="absolute bottom-10 right-[60px] z-10">
-          <p className="text-[16px] tracking-wider text-white" style={{ fontFamily: "var(--font-body)" }}>[SCROLL]</p>
+          <div className="absolute bottom-2 right-[60px] z-10">
+          <p className="text-[32px] tracking-wider text-white" style={{ fontFamily: "var(--font-body)" }}>(SCROLL)</p>
         </div>
       </section>
 

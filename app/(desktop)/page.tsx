@@ -306,13 +306,13 @@ export default function HomePage() {
               style={{
                 fontFamily: 'Bricolage Grotesque, sans-serif',
                 fontWeight: 400,
-                fontSize: '110.32px',
-                lineHeight: '100px',
+                fontSize: '150px',
+                lineHeight: '150px',
                 letterSpacing: '0%'
               }}
             >
-              <span className="relative -top-[0.05em] mr-4 inline-block align-baseline text-[0.6em]">
-                <svg className="inline h-[0.9em] w-[0.9em]" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="2">
+              <span className="relative -top-[0.05em] mr-4 inline-block align-baseline text-[0.85em]">
+                <svg className="inline h-[1.1em] w-[1.1em]" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="2">
                   <line x1="24" y1="2" x2="24" y2="46" />
                   <line x1="2" y1="24" x2="46" y2="24" />
                   <line x1="7" y1="7" x2="41" y2="41" />
@@ -328,12 +328,12 @@ export default function HomePage() {
           </div>
 
           {/* Problem text — left side, aligned with heading area */}
-          <div className="absolute right-[200px] top-[45%] mt-[10px] max-w-[300px] text-left">
+          <div className="absolute right-[370px] top-[50%] mt-[10px] max-w-[300px] text-left">
             <p className="flex items-center gap-2 text-white"
               style={{
                 fontFamily: 'SF Pro Display, sans-serif',
                 fontWeight: 400,
-                fontSize: '20.34px',
+                fontSize: '30px',
                 lineHeight: '120%'
               }}
             >
@@ -350,7 +350,7 @@ export default function HomePage() {
               style={{
                 fontFamily: 'SF Pro Display, sans-serif',
                 fontWeight: 400,
-                fontSize: '18.34px',
+                fontSize: '20px',
                 lineHeight: '120%'
               }}
             >
@@ -359,7 +359,7 @@ export default function HomePage() {
           </div>
 
           {/* Bottom bar */}
-          <div className="flex items-end justify-between" style={{ position: "relative", top: "-190px" }}>
+          <div className="flex items-end justify-between" style={{ position: "relative", top: "-20px" }}>
             <div className="flex flex-col gap-4">
               <div className="flex items-start gap-2 text-white">
                 <svg width="99" height="122" viewBox="0 0 99 122" fill="none" className="h-[90px] w-auto" aria-label="Scroll down">
@@ -368,7 +368,7 @@ export default function HomePage() {
                   </g>
                   <defs>
                     <clipPath id="arrow-clip">
-                      <rect width="98.9811" height="122" fill="white" />
+                      <rect width="100" height="130" fill="white" />
                     </clipPath>
                   </defs>
                 </svg>
@@ -379,7 +379,7 @@ export default function HomePage() {
                 style={{
                   fontFamily: 'Bricolage Grotesque, sans-serif',
                   fontWeight: 400,
-                  fontSize: '25px',
+                  fontSize: '40px',
                   lineHeight: '120%'
                 }}
               >
@@ -416,14 +416,14 @@ export default function HomePage() {
             </div>
 
             {/* Talk to AI widget */}
-            <div className="relative h-[250px] w-[253px]">
+            <div className="relative h-[320px] w-[324px]">
               <Image
               unoptimized
                 src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/893c48e8-59f1-400e-9cb8-0d36b752db00/public"
                 alt="Talk to our AI assistant — DDiP AI virtual chat"
                 fill
                 className="object-contain object-right-bottom"
-                sizes="253px"
+                sizes="324px"
               />
             </div>
           </div>
