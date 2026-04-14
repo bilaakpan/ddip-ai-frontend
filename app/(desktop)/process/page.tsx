@@ -277,34 +277,29 @@ export default function ProcessPage() {
                 </h1>
               </div>
             </div>
-            <p className="w-[500px] text-[40px] text-body-sm leading-[1.7] text-white" style={{ lineHeight: "normal" }}>
+            <p className="max-w-3xl text-[60px] text-body-sm leading-[1.7] text-white" style={{ lineHeight: "normal" }}>
               How We Turn Intelligence Into Impact Not a workflow. A designed system.
             </p>
             <div className="mt-10 flex items-center gap-6">
-              <p className="text-white text-[18px] w-[500px]">At ddip.ai, every project follows a clear, intentional process - designed to transform brand challenges into intelligent, scalable systems.</p>
+              <p className="text-white text-[26px] max-w-4xl">At ddip.ai, every project follows a clear, intentional process - designed to transform brand challenges into intelligent, scalable systems.</p>
             </div>
-            <div className="max-w-lg">
-              <h2 className="font-heading text-[40px] font-medium leading-[1.3] text-white">
-                Visibility No Longer Ends
-                <br />
-                With Search.
-              </h2>
-              <p className="mt-4 text-[18px] leading-[1.6] text-white/70" style={{ fontFamily: "var(--font-body)" }}>
-                GEO Optimization helps brands become visible in AI-powered search, discovery, and answer engines.
-              </p>
 
-              <div className="flex flex-col gap-4 mt-[60px]">
+            <div className="max-w-lg">
+              <div className="flex flex-col gap-4 mt-[100px]">
                 <svg width="99" height="122" viewBox="0 0 99 122" fill="none" className="h-[90px] w-[90px]" aria-label="Scroll down">
                   <path d="M56.9199 0L56.9199 95.9621L89.1853 66.0555L98.7897 75.9435L98.9811 76.9205L49.6919 122L0 76.9205L0.198028 75.9435L9.61097 66.2194L42.0612 95.9621L42.0612 0L56.9199 0Z" fill="white" />
                 </svg>
                 <a
                   href="#discover"
-                  className="text-white underline decoration-white/40 underline-offset-8 transition-colors hover:decoration-teal-500 text-[25px]"
+                  className="text-white underline decoration-white underline-offset-8 transition-colors hover:decoration-teal-500 text-[32px]"
                   style={{ fontFamily: 'Bricolage Grotesque, sans-serif' }}
                 >
                   Discover Our Process
                 </a>
               </div>
+                  <div className="absolute bottom-0 -right-[130px] z-10">
+          <p className="text-[32px] tracking-wider text-white" style={{ fontFamily: "var(--font-body)" }}>(SCROLL)</p>
+        </div>
             </div>
           </div>
         </Container>

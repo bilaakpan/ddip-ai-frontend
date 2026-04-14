@@ -79,7 +79,7 @@ export function InfluencerPopupModal({
                     />
                 </div>
                 {/* ✅ Responsive Layout */}
-                <div className="relative z-[2] grid grid-cols-1 md:grid-cols-[40%_60%]" style={{ height: "750px", width: "100%", overflow: "scroll", scrollbarWidth: "none" }}>
+                <div className="relative z-[2] grid grid-cols-1 md:grid-cols-[40%_60%] overflow-hidden" style={{ height: "750px", width: "100%" }}>
                     {/* LEFT IMAGE */}
                     <div className="relative  w-full overflow-hidden">
                         <div className="absolute -left-[32%] bottom-[5%] h-[100%] w-[700px]">
@@ -110,7 +110,10 @@ export function InfluencerPopupModal({
                         </p>
                     </div>
                     {/* RIGHT CONTENT */}
-                    <div className="p-10 text-[#0A2B3A]">
+                    <div
+                        className="h-full overflow-y-auto p-10 text-[#0A2B3A]"
+                        style={{ scrollbarWidth: "none" }}
+                    >
                         {/* Header */}
                         <div className="flex items-start justify-between gap-4">
                             {/* LEFT: Name + Subtitle */}
@@ -153,10 +156,11 @@ export function InfluencerPopupModal({
                         >
                             <div>
                                 <h3 className="flex items-center gap-2 text-base sm:text-lg text-[32px] font-regular text-[#151D85]">
-                                    <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2">
-                                        <circle cx="12" cy="8" r="4" />
-                                        <path d="M4 20c1.8-3.5 4.7-5 8-5s6.2 1.5 8 5" />
-                                    </svg>
+                                    <img
+                                        src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/d89cf06f-f85b-4b4d-11dd-154999c05900/public"
+                                        alt="Profile icon"
+                                        className="h-5 w-5 object-contain"
+                                    />
                                     Profile
                                 </h3>
                                 <p className="text-[22px] sm:text-base mt-1">
@@ -165,11 +169,12 @@ export function InfluencerPopupModal({
                             </div>
                             <div>
                                 <h3 className="flex items-center gap-2 text-base text-[32px] sm:text-lg font-regular text-[#151D85]">
-                                    <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2">
-                                        <path d="M4 7l8-4 8 4-8 4-8-4z" />
-                                        <path d="M4 12l8 4 8-4" />
-                                        <path d="M4 17l8 4 8-4" />
-                                    </svg>
+                                    <img
+                                        src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/ad276dcb-b7fc-47d8-3159-2f840c8a6600/public"
+
+                                        alt="Content focus icon"
+                                        className="h-5 w-5 object-contain"
+                                    />
                                     Content Focus
                                 </h3>
                                 <p className="text-[22px] sm:text-base mt-1">
@@ -179,11 +184,11 @@ export function InfluencerPopupModal({
                             </div>
                             <div className="border-t border-[#FFFFFFCC] w-[971px] pt-3" >
                                 <h3 className="flex items-center gap-2 text-base text-[32px] sm:text-lg font-regular text-[#151D85]">
-                                    <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2">
-                                        <rect x="3" y="5" width="18" height="14" rx="2" />
-                                        <circle cx="9" cy="10" r="2" />
-                                        <path d="M21 15l-5-5-6 6-2-2-5 5" />
-                                    </svg>
+                                    <img
+                                        src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/a05d1e5a-c448-4d1e-d220-2473ac353800/public"
+                                        alt="Visual style icon"
+                                        className="h-5 w-5 object-contain"
+                                    />
                                     Visual Style
                                 </h3>
                                 <p className="text-[22px] sm:text-base mt-1">
@@ -194,9 +199,11 @@ export function InfluencerPopupModal({
                             </div>
                             <div className="">
                                 <h3 className="flex items-center mt-[13px] gap-2 text-base text-[32px] sm:text-lg font-regular text-[#151D85]">
-                                    <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2">
-                                        <path d="M3 12h3l2-6 4 12 2-6h7" />
-                                    </svg>
+                                    <img
+                                        src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/0a1d17bb-710d-4c64-854b-1ea229300800/public"
+                                        alt="Tone icon"
+                                        className="h-5 w-5 object-contain"
+                                    />
                                     Tone
                                 </h3>
                                 <p className="text-[22px] sm:text-base mt-1">
@@ -207,9 +214,11 @@ export function InfluencerPopupModal({
                             </div>
                             <div className="sm:col-span-2 border-t border-[#FFFFFFCC] w-[971px] pt-3">
                                 <h3 className="flex items-center gap-2 text-base text-[32px] sm:text-lg font-regular text-[#151D85]">
-                                    <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2">
-                                        <path d="M12 3l2.7 5.5 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.8 1-6.1L3.2 9.4l6.1-.9L12 3z" />
-                                    </svg>
+                                    <img
+                                        src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/c8997a96-4ea5-4fc3-721d-27dc95d6fe00/public"
+                                        alt="Brand fit icon"
+                                        className="h-5 w-5 object-contain"
+                                    />
                                     Brand Fit
                                 </h3>
                                 <p className="text-[22px] sm:text-base mt-1 mr-20">

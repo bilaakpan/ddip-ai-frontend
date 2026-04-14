@@ -300,63 +300,67 @@ export default function HomePage() {
         {/* Hero content */}
         <div className="relative z-10 flex min-h-screen flex-col px-[60px] pb-10 pt-40 max-md:px-5 max-md:pt-24">
           <div className="flex flex-1 items-end pb-[15vh]">
-            <h1
-              className="w-full text-center uppercase text-white"
-              lang="en"
-              style={{
-                fontFamily: 'Bricolage Grotesque, sans-serif',
-                fontWeight: 400,
-                fontSize: '150px',
-                lineHeight: '150px',
-                letterSpacing: '0%'
-              }}
-            >
-              <span className="relative -top-[0.05em] mr-4 inline-block align-baseline text-[0.85em]">
-                <svg className="inline h-[1.1em] w-[1.1em]" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="2">
-                  <line x1="24" y1="2" x2="24" y2="46" />
-                  <line x1="2" y1="24" x2="46" y2="24" />
-                  <line x1="7" y1="7" x2="41" y2="41" />
-                  <line x1="41" y1="7" x2="7" y2="41" />
-                </svg>
-              </span>
-              CREATE YOUR
-              <br />
-              &nbsp;&nbsp;OWN AI INFLUENCER
-              <br />
-              <span className="mr-[170px]">WITH US!</span>
-            </h1>
+            <div className="relative w-full">
+              <h1
+                className="w-full text-center uppercase text-white"
+                lang="en"
+                style={{
+                  fontFamily: 'Bricolage Grotesque, sans-serif',
+                  fontWeight: 400,
+                  fontSize: '150px',
+                  lineHeight: '150px',
+                  letterSpacing: '0%'
+                }}
+              >
+                <span className="relative -top-[0.05em] mr-4 inline-block align-baseline text-[0.85em]">
+                  <svg className="inline h-[1.1em] w-[1.1em]" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="2">
+                    <line x1="24" y1="2" x2="24" y2="46" />
+                    <line x1="2" y1="24" x2="46" y2="24" />
+                    <line x1="7" y1="7" x2="41" y2="41" />
+                    <line x1="41" y1="7" x2="7" y2="41" />
+                  </svg>
+                </span>
+                CREATE YOUR
+                <br />
+                &nbsp;&nbsp;OWN AI INFLUENCER
+                <br />
+                <span className="mr-[170px]">WITH US!</span>
+              </h1>
+
+              {/* Problem text — left side, aligned with heading area */}
+              <div className="absolute right-[340px] bottom-[20px]  mt-[10px] max-w-[300px] text-left">
+                <p className="flex items-center gap-2 text-white"
+                  style={{
+                    fontFamily: 'SF Pro Display, sans-serif',
+                    fontWeight: 400,
+                    fontSize: '30px',
+                    lineHeight: '120%'
+                  }}
+                >
+                  <svg className="inline h-4 w-4" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="2">
+                    <line x1="24" y1="2" x2="24" y2="46" />
+                    <line x1="2" y1="24" x2="46" y2="24" />
+                    <line x1="7" y1="7" x2="41" y2="41" />
+                    <line x1="41" y1="7" x2="7" y2="41" />
+                  </svg>
+                  Problem:
+                </p>
+                <p
+                  className="mt-2 text-white/90"
+                  style={{
+                    fontFamily: 'SF Pro Display, sans-serif',
+                    fontWeight: 400,
+                    fontSize: '20px',
+                    lineHeight: '120%'
+                  }}
+                >
+                  We need to promote our brand but the influencer prices are too high.
+                </p>
+              </div>
+            </div>
           </div>
 
-          {/* Problem text — left side, aligned with heading area */}
-          <div className="absolute right-[370px] top-[50%] mt-[10px] max-w-[300px] text-left">
-            <p className="flex items-center gap-2 text-white"
-              style={{
-                fontFamily: 'SF Pro Display, sans-serif',
-                fontWeight: 400,
-                fontSize: '30px',
-                lineHeight: '120%'
-              }}
-            >
-              <svg className="inline h-4 w-4" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="2">
-                <line x1="24" y1="2" x2="24" y2="46" />
-                <line x1="2" y1="24" x2="46" y2="24" />
-                <line x1="7" y1="7" x2="41" y2="41" />
-                <line x1="41" y1="7" x2="7" y2="41" />
-              </svg>
-              Problem:
-            </p>
-            <p
-              className="mt-2 text-white/90"
-              style={{
-                fontFamily: 'SF Pro Display, sans-serif',
-                fontWeight: 400,
-                fontSize: '20px',
-                lineHeight: '120%'
-              }}
-            >
-              We need to promote our brand but the influencer prices are too high.
-            </p>
-          </div>
+
 
           {/* Bottom bar */}
           <div className="flex items-end justify-between" style={{ position: "relative", top: "-20px" }}>
@@ -418,7 +422,7 @@ export default function HomePage() {
             {/* Talk to AI widget */}
             <div className="relative h-[320px] w-[324px]">
               <Image
-              unoptimized
+                unoptimized
                 src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/893c48e8-59f1-400e-9cb8-0d36b752db00/public"
                 alt="Talk to our AI assistant — DDiP AI virtual chat"
                 fill
@@ -773,7 +777,7 @@ export default function HomePage() {
           Figma section 40: #002834 bg, blur ellipses, 5 influencer cards
           ════════════════════════════════════════════════════════ */}
       <section className="relative overflow-hidden bg-[#002834] py-24 lg:py-32">
-  
+
         <div
           className="absolute right-[-100px] top-[100px] h-[777px] w-[777px] rounded-full"
           style={{ background: "#129CAC4D", filter: "blur(335px)" }}
@@ -858,10 +862,10 @@ export default function HomePage() {
                 <div key={`row1-${idx}`} className="w-[376px] flex-shrink-0 cursor-pointer" onClick={() => { setSelectedInfluencer(inf); setIsInfluencerPopupOpen(true); }}>
                   <div className="relative h-[518px] w-full overflow-hidden rounded-[20px] bg-[#EFEFEF]">
                     <Image
-                    unoptimized
+                      unoptimized
                       src={inf.image}
                       alt={inf.name}
-                      
+
                       fill
                       className="absolute inset-0 h-full w-full object-cover"
                     />
