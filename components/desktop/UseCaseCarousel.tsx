@@ -27,7 +27,7 @@ export default function UseCaseCarousel({ items }: UseCaseCarouselProps) {
             <div className="relative overflow-hidden rounded-[16px] bg-[#D9D9D9]" style={{ height: "520px" }}>
               <HlsPlayer
                 src={item.video}
-                autoPlay={true}
+                autoPlay={false}
                 controls={false}
                 muted={true}
                 loop={true}

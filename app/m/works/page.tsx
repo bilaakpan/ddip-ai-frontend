@@ -98,6 +98,7 @@ export default function MobileWorksPage() {
                     <HlsPlayer
                       src={work.mediaUrl}
                       autoPlay={true}
+                      hoverToPlay={false}
                       controls={false}
                       muted={true}
                       loop={true}

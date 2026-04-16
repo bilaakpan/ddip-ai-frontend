@@ -144,7 +144,7 @@ export default function AIContentPage() {
               <div className="h-full w-full overflow-hidden rounded-[16px] ">
                 <HlsPlayer
                   src="cec8f6e44f63bb833b4b9b71452d48cb"
-                  autoPlay={true}
+                  autoPlay={false}
                   controls={false}
                   muted={true}
                   loop={true}
@@ -180,7 +180,7 @@ export default function AIContentPage() {
               <div className="h-full w-full overflow-hidden rounded-[16px]">
                 <HlsPlayer
                   src="03d397e2992efcc651de0d04701b2ca1"
-                  autoPlay={true}
+                  autoPlay={false}
                   controls={false}
                   muted={true}
                   loop={true}
@@ -199,7 +199,7 @@ export default function AIContentPage() {
             <div className="h-full w-full overflow-hidden rounded-[16px] h-[430px]">
               <HlsPlayer
                 src="90f5aaa3d5ea96226052be6f9122b8c2"
-                autoPlay={true}
+                autoPlay={false}
                 controls={false}
                 muted={true}
                 loop={true}
@@ -390,7 +390,7 @@ export default function AIContentPage() {
                   <div className="relative h-[156px] w-[90px] overflow-hidden rounded-[8px]">
                     <HlsPlayer
                       src="03d397e2992efcc651de0d04701b2ca1"
-                      autoPlay={true}
+                      autoPlay={false}
                       controls={false}
                       muted={true}
                       loop={true}
@@ -402,7 +402,7 @@ export default function AIContentPage() {
                     <div className="relative h-[156px] w-[90px] overflow-hidden rounded-[8px]">
                       <HlsPlayer
                         src="52d4f5fdd1335b2fbaba2f41798273f1"
-                        autoPlay={true}
+                        autoPlay={false}
                         controls={false}
                         muted={true}
                         loop={true}
@@ -413,7 +413,7 @@ export default function AIContentPage() {
                     <div className="relative h-[156px] w-[90px] overflow-hidden rounded-[8px]">
                       <HlsPlayer
                         src="90b6c18df1bb19d1117f6d29f6859036"
-                        autoPlay={true}
+                        autoPlay={false}
                         controls={false}
                         muted={true}
                         loop={true}
@@ -426,7 +426,7 @@ export default function AIContentPage() {
                     <div className="relative h-[156px] w-[90px] overflow-hidden rounded-[8px] mt-[30px]">
                       <HlsPlayer
                         src="8ffbc4055a9b0210350a2748fcbb8ce4"
-                        autoPlay={true}
+                        autoPlay={false}
                         controls={false}
                         muted={true}
                         loop={true}
@@ -437,7 +437,7 @@ export default function AIContentPage() {
                     <div className="relative h-[156px] w-[90px] overflow-hidden rounded-[8px]">
                       <HlsPlayer
                         src="2f4c298d7224c5140c18bc3c0f6faf22"
-                        autoPlay={true}
+                        autoPlay={false}
                         controls={false}
                         muted={true}
                         loop={true}
@@ -489,7 +489,7 @@ export default function AIContentPage() {
                 <div className="relative h-[400px] w-[250px] overflow-hidden rounded-[12px]">
                   <HlsPlayer
                     src="90f5aaa3d5ea96226052be6f9122b8c2"
-                    autoPlay={true}
+                    autoPlay={false}
                     controls={false}
                     muted={true}
                     loop={true}

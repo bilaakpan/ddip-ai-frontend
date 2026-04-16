@@ -14,22 +14,25 @@ interface HlsPlayerProps {
     loop?: boolean;
     fillHeight?: boolean;
     fillWidth?: boolean;
+    hoverToPlay?: boolean;
 }
 
 export default function HlsPlayer({
     src,
     className = "",
-    autoPlay = true,
+    autoPlay = false,
     controls = true,
     muted = true,
     loop = false,
     fillHeight = true,
-    fillWidth = true
+    fillWidth = true,
+    hoverToPlay = true,
 }: HlsPlayerProps) {
     const videoRef = useRef<HTMLVideoElement>(null);
+    const containerRef = useRef<HTMLDivElement>(null);
     const [shouldFillHeight, setShouldFillHeight] = useState(false);
     const [shouldFillWidth, setShouldFillWidth] = useState(false);
-    // Construct full URL if only ID is passed
+
     const fullSrc = src.startsWith("https")
         ? src
         : `${CLOUDFLARE_STREAM_BASE}/${src}/manifest/video.m3u8`;
@@ -39,21 +42,16 @@ export default function HlsPlayer({
 
         let hls: Hls | undefined;
 
-        // Check if browser supports HLS.js
         if (Hls.isSupported()) {
             hls = new Hls();
             hls.loadSource(fullSrc);
             hls.attachMedia(videoRef.current);
-        }
-        // Native HLS support (Safari)
-        else if (videoRef.current.canPlayType("application/vnd.apple.mpegurl")) {
+        } else if (videoRef.current.canPlayType("application/vnd.apple.mpegurl")) {
             videoRef.current.src = fullSrc;
         }
 
         return () => {
-            if (hls) {
-                hls.destroy();
-            }
+            if (hls) hls.destroy();
         };
     }, [fullSrc]);
 
@@ -62,56 +60,71 @@ export default function HlsPlayer({
         if (!video) return;
 
         const checkAndApplySize = () => {
-            const videoElement = video;
-            const parentElement = videoElement.parentElement;
-
+            const parentElement = video.parentElement;
             if (!parentElement) return;
 
             setTimeout(() => {
-                const videoHeight = videoElement.videoHeight;
-                const videoWidth = videoElement.videoWidth;
-
+                const videoHeight = video.videoHeight;
+                const videoWidth = video.videoWidth;
                 const parentHeight = parentElement.clientHeight;
                 const parentWidth = parentElement.clientWidth;
 
-                // HEIGHT LOGIC
-                if (fillHeight && videoHeight > 0 && videoHeight > parentHeight) {
-                    setShouldFillHeight(true);
-                } else {
-                    setShouldFillHeight(false);
-                }
-
-                // WIDTH LOGIC :point_down:
-                if (fillWidth && videoWidth > 0 && videoWidth > parentWidth) {
-                    setShouldFillWidth(true);
-                } else {
-                    setShouldFillWidth(false);
-                }
-
+                setShouldFillHeight(fillHeight && videoHeight > 0 && videoHeight > parentHeight);
+                setShouldFillWidth(fillWidth && videoWidth > 0 && videoWidth > parentWidth);
             }, 100);
         };
 
-        video.addEventListener('loadedmetadata', checkAndApplySize);
-        video.addEventListener('play', checkAndApplySize);
+        video.addEventListener("loadedmetadata", checkAndApplySize);
+        video.addEventListener("play", checkAndApplySize);
 
         return () => {
-            video.removeEventListener('loadedmetadata', checkAndApplySize);
-            video.removeEventListener('play', checkAndApplySize);
+            video.removeEventListener("loadedmetadata", checkAndApplySize);
+            video.removeEventListener("play", checkAndApplySize);
         };
     }, [fillHeight, fillWidth]);
 
+    // Hover-to-play: listen on the nearest positioned parent so overlays don't block
+    useEffect(() => {
+        if (!hoverToPlay) return;
+
+        // Walk up to find the closest relative/absolute/fixed parent to attach hover
+        const container = containerRef.current?.closest<HTMLElement>(
+            "[class*='relative'], [class*='overflow-hidden'], [class*='group']"
+        ) ?? containerRef.current;
+
+        if (!container) return;
+
+        const onEnter = () => videoRef.current?.play().catch(() => {});
+        const onLeave = () => {
+            if (videoRef.current) {
+                videoRef.current.pause();
+                videoRef.current.currentTime = 0;
+            }
+        };
+
+        container.addEventListener("mouseenter", onEnter);
+        container.addEventListener("mouseleave", onLeave);
+
+        return () => {
+            container.removeEventListener("mouseenter", onEnter);
+            container.removeEventListener("mouseleave", onLeave);
+        };
+    }, [hoverToPlay]);
+
     return (
-        <video
-            ref={videoRef}
-            className={`
-${shouldFillHeight ? 'h-full' : ''}
-${shouldFillWidth ? 'w-full' : ''}
+        <div ref={containerRef} className="contents">
+            <video
+                ref={videoRef}
+                className={`
+${shouldFillHeight ? "h-full" : ""}
+${shouldFillWidth ? "w-full" : ""}
 ${className}`}
-            autoPlay={autoPlay}
-            controls={controls}
-            muted={muted}
-            loop={loop}
-            playsInline
-        />
+                autoPlay={autoPlay}
+                controls={controls}
+                muted={muted}
+                loop={loop}
+                playsInline
+            />
+        </div>
     );
 }

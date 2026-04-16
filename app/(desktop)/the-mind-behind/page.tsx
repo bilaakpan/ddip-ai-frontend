@@ -32,7 +32,7 @@ export default function TheMindBehindPage() {
         <div className="absolute z-0" style={{ right: 0, bottom: 0, width: "70%", height: "50%" }}>
           <HlsPlayer
             src="2eac757943335639efc39c031d9e1ac2"
-            autoPlay={true}
+            autoPlay={false}
             controls={false}
             muted={true}
             loop={true}

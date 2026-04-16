@@ -139,7 +139,7 @@ export function Footer() {
               <div className="relative aspect-video">
                 <HlsPlayer
                   src="9e3a0d22828697a21a65a4ea035f5c3d"
-                  autoPlay={true}
+                  autoPlay={false}
                   controls={false}
                   muted={true}
                   loop={true}

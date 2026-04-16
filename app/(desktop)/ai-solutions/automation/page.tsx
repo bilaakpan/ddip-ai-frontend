@@ -279,7 +279,7 @@ export default function AutomationPage() {
           <div className="flex-1 overflow-hidden rounded-[24px] h-[600px] w-[874px]">
             <HlsPlayer
               src="2f9a15572f298dc4e8a6b480d57abdad"
-              autoPlay={true}
+              autoPlay={false}
               controls={false}
               muted={true}
               loop={true}

@@ -328,7 +328,7 @@ export default function HomePage() {
               </h1>
 
               {/* Problem text — left side, aligned with heading area */}
-              <div className="absolute right-[340px] bottom-[20px]  mt-[10px] max-w-[300px] text-left">
+              <div className="absolute right-[280px] bottom-[0px]  mt-[10px] max-w-[300px] text-left">
                 <p className="flex items-center gap-2 text-white"
                   style={{
                     fontFamily: 'SF Pro Display, sans-serif',
@@ -441,7 +441,7 @@ export default function HomePage() {
         <div className="mx-auto mb-16 w-[1182px] max-w-full overflow-hidden" style={{ aspectRatio: "1182/525" }}>
           <HlsPlayer
             src="9e3a0d22828697a21a65a4ea035f5c3d"
-            autoPlay={true}
+            autoPlay={false}
             controls={false}
             muted={true}
             loop={true}
@@ -470,7 +470,7 @@ export default function HomePage() {
               <span className="inline-flex h-[0.88em] w-[1.52em] items-center justify-center overflow-hidden rounded-lg">
                 <HlsPlayer
                   src="9e3a0d22828697a21a65a4ea035f5c3d"
-                  autoPlay={true}
+                  autoPlay={false}
                   controls={false}
                   muted={true}
                   loop={true}
@@ -491,7 +491,7 @@ export default function HomePage() {
       <section className="bg-light-bg py-16 pb-24">
         <div className="px-[60px]">
           {/* Top row: tagline left + description right */}
-          <div className="flex gap-16">
+          <div className="flex">
             <div className="w-1/2">
               <p className="font-heading text-[24px] font-normal leading-[1.2] text-[#063746]">
                 From Insight to Intelligence
@@ -499,7 +499,7 @@ export default function HomePage() {
             </div>
             <div className="w-1/2">
               <p
-                className="text-[28px] font-bold leading-[1.3] text-[#063746]"
+                className="text-[44px] font-bold leading-[1.3] text-[#063746]"
                 style={{ fontFamily: "var(--font-body)" }}
               >
                 We help brands unlock their creative potential through the
@@ -546,7 +546,7 @@ export default function HomePage() {
                   {solution.mediaType === "video" ? (
                     <HlsPlayer
                       src={solution.media}
-                      autoPlay={true}
+                      autoPlay={false}
                       controls={false}
                       muted={true}
                       loop={true}
@@ -665,7 +665,7 @@ export default function HomePage() {
                 <div className="relative aspect-[792/700] overflow-hidden bg-[#D9D9D9]">
                   <HlsPlayer
                     src={item.video}
-                    autoPlay={true}
+                    autoPlay={false}
                     controls={false}
                     muted={true}
                     loop={true}
@@ -743,7 +743,7 @@ export default function HomePage() {
           <div className="aspect-[1920/1091]">
             <HlsPlayer
               src="665822d5062aae2129504c3a2b474494"
-              autoPlay={true}
+              autoPlay={false}
               controls={false}
               muted={true}
               loop={true}
@@ -1017,7 +1017,7 @@ export default function HomePage() {
           <div className="mt-12 aspect-[1608/905] overflow-hidden">
             <HlsPlayer
               src="bdb805b635f8e3a865a3157336836136"
-              autoPlay={true}
+              autoPlay={false}
               controls={false}
               muted={true}
               loop={true}

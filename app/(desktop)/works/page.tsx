@@ -262,7 +262,7 @@ export default function WorksPage() {
                         {active.mediaType === "video" && active.image ? (
                           <HlsPlayer
                             src={active.image}
-                            autoPlay={true}
+                            autoPlay={false}
                             controls={false}
                             muted={true}
                             loop={true}
@@ -408,7 +408,7 @@ export default function WorksPage() {
                       {project.mediaType === "video" && project.image ? (
                         <HlsPlayer
                           src={project.image}
-                          autoPlay={true}
+                          autoPlay={false}
                           controls={false}
                           muted={true}
                           loop={true}

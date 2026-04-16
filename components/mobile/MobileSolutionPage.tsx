@@ -118,6 +118,7 @@ export default function MobileSolutionPage({
             <HlsPlayer
               src={heroVideo}
               autoPlay={true}
+              hoverToPlay={false}
               controls={false}
               muted={true}
               loop={true}

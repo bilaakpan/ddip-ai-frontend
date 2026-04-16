@@ -1020,8 +1020,8 @@ export default function AIInfluencerPage() {
             </div>
             <div>
               <p
-                className="text-[44px] leading-[1.6] text-[#063746]/70 mb-6 font-bold"
-                style={{ fontFamily: "var(--font-body)" }}
+                className="text-[44px] leading-[1.6] text-[#063746] mb-6 font-bold"
+                style={{ fontFamily: "Bricolage Grotesque" }}
               >
                 Your brand deserves a voice of its own. We create intelligent, expressive AI personas that embody your values and connect with audiences globally.
               </p>

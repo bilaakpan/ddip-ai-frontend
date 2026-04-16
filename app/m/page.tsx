@@ -272,6 +272,7 @@ export default function MobileHomePage() {
           <HlsPlayer
             src="9e3a0d22828697a21a65a4ea035f5c3d"
             autoPlay={true}
+            hoverToPlay={false}
             controls={false}
             muted={true}
             loop={true}
@@ -340,6 +341,7 @@ export default function MobileHomePage() {
                     <HlsPlayer
                       src={solution.media}
                       autoPlay={true}
+                      hoverToPlay={false}
                       controls={false}
                       muted={true}
                       loop={true}
@@ -414,6 +416,7 @@ export default function MobileHomePage() {
                 <HlsPlayer
                   src={work.video}
                   autoPlay={true}
+                  hoverToPlay={false}
                   controls={false}
                   muted={true}
                   loop={true}
@@ -460,6 +463,7 @@ export default function MobileHomePage() {
           <HlsPlayer
             src="665822d5062aae2129504c3a2b474494"
             autoPlay={true}
+            hoverToPlay={false}
             controls={false}
             muted={true}
             loop={true}

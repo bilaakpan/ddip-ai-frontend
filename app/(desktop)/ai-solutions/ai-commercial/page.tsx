@@ -304,7 +304,7 @@ export default function AICommercialPage() {
                 <div className="overflow-hidden rounded-[12px]" style={{ border: "1.5px dashed #063746/40" }}>
                   <HlsPlayer
                     src="674ae5c4363ac80438bcfe52196530f7"
-                    autoPlay={true}
+                    autoPlay={false}
                     controls={false}
                     muted={true}
                     loop={true}
@@ -352,7 +352,7 @@ export default function AICommercialPage() {
                   <div className="relative h-[500px] overflow-hidden rounded-[16px] bg-[#D9D9D9]">
                     <HlsPlayer
                       src={item.vedio}
-                      autoPlay={true}
+                      autoPlay={false}
                       controls={false}
                       muted={true}
                       loop={true}
