@@ -257,6 +257,7 @@ export default function WorksPage() {
                   const active = filteredProjects.find(p => p.id === activeListProject) || filteredProjects[0];
                   if (!active) return null;
                   return (
+                    <div className="flex flex-col gap-[40px]">
                     <div className="overflow-hidden rounded-[12px] bg-[#063746]/5">
                       <div className="relative h-[320px]">
                         {active.mediaType === "video" && active.image ? (
@@ -281,6 +282,21 @@ export default function WorksPage() {
                         <p className="text-sm text-[#063746] mt-1">{active.description}</p>
                       </div>
                     </div>
+                    <div className="w-[420px] shrink-0 flex items-center justify-center gap-4">
+              <button
+                onClick={() => handleTabChange("grid")}
+                className="inline-flex items-center gap-2 rounded-full px-8 py-3 font-heading text-2xl font-medium transition-colors text-[#063746] hover:bg-[#1CE3F4]/80"
+              >
+                Grid
+              </button>
+              <button
+                onClick={() => { setIsDropdownOpen(false); handleTabChange("list"); }}
+                className="inline-flex items-center gap-2 rounded-full px-8 py-3 font-heading text-2xl font-medium transition-colors bg-[#063746] text-[#EBFFFF]"
+              >
+                List
+              </button>
+            </div>
+            </div>
                   );
                 })()}
               </div>
@@ -288,10 +304,11 @@ export default function WorksPage() {
           </Container>
         )}
         {/* Subtitle + CTAs */}
-        <div className={`mt-8 flex flex-col sm:flex-row gap-4 px-4 sm:px-8 md:px-12 lg:px-15 ${activeTab === "list" ? "justify-end mr-65" : "items-start sm:items-end justify-between"}`}>
-          {/* Dropdown — only show in grid view */}
-          <div className="relative w-full sm:w-auto">
-            {activeTab === "grid" && (
+        {activeTab === "grid" ? (
+          /* Grid view — filter left, buttons right */
+          <div className="mt-8 flex items-center justify-between px-4 sm:px-8 md:px-12 lg:px-15">
+            {/* Dropdown filter */}
+            <div className="relative">
               <button
                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                 className="inline-flex items-center gap-2 rounded-full text-[#063746] px-6 py-2.5 sm:px-8 sm:py-3 font-heading text-lg sm:text-2xl font-medium transition-colors hover:bg-[#1CE3F4]/80"
@@ -299,58 +316,42 @@ export default function WorksPage() {
                 {activeFilter === "All" ? "All Projects" : activeFilter}
                 <svg
                   className={`w-4 h-4 sm:w-5 sm:h-5 transition-transform ${isDropdownOpen ? 'rotate-180' : ''}`}
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
+                  fill="none" stroke="currentColor" viewBox="0 0 24 24"
                 >
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                 </svg>
               </button>
-            )}
-            {isDropdownOpen && activeTab === "grid" && (
-              <div className="absolute top-full left-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-[#063746]/20 z-50">                {filterOptions.map((filter) => (
-                  <button
-                    key={filter}
-                    onClick={() => {
-                      setActiveFilter(filter);
-                      setIsDropdownOpen(false);
-                    }}
-                    className={`w-full text-left px-4 py-3 text-lg font-medium transition-colors ${activeFilter === filter
-                      ? "bg-[#1CE3F4] text-[#063746]"
-                      : "text-[#063746] hover:bg-[#063746]/10"
-                      }`}
-                  >
-                    {filter}
-                  </button>
-                ))}
-              </div>
-            )}
+              {isDropdownOpen && (
+                <div className="absolute top-full left-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-[#063746]/20 z-50">
+                  {filterOptions.map((filter) => (
+                    <button
+                      key={filter}
+                      onClick={() => { setActiveFilter(filter); setIsDropdownOpen(false); }}
+                      className={`w-full text-left px-4 py-3 text-lg font-medium transition-colors ${activeFilter === filter ? "bg-[#1CE3F4] text-[#063746]" : "text-[#063746] hover:bg-[#063746]/10"}`}
+                    >
+                      {filter}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+            {/* Grid / List buttons */}
+            <div className="flex items-center gap-4">
+              <button
+                onClick={() => handleTabChange("grid")}
+                className="inline-flex items-center gap-2 rounded-full px-8 py-3 font-heading text-2xl font-medium transition-colors bg-[#063746] text-[#EBFFFF]"
+              >
+                Grid
+              </button>
+              <button
+                onClick={() => { setIsDropdownOpen(false); handleTabChange("list"); }}
+                className="inline-flex items-center gap-2 rounded-full px-8 py-3 font-heading text-2xl font-medium transition-colors text-[#063746] hover:bg-[#1CE3F4]/80"
+              >
+                List
+              </button>
+            </div>
           </div>
-          <div className="flex items-center gap-4">
-
-            <button
-              onClick={() => handleTabChange("grid")}
-              className={`inline-flex items-center gap-2 rounded-full px-8 py-3 font-heading text-2xl font-medium transition-colors ${activeTab === "grid"
-                ? "bg-[#063746] text-[#EBFFFF]"
-                : "text-[#063746] hover:bg-[#1CE3F4]/80"
-                }`}
-            >
-              Grid
-            </button>
-            <button
-              onClick={() => {
-                setIsDropdownOpen(false);
-                handleTabChange("list");
-              }}
-              className={`inline-flex items-center gap-2 rounded-full px-8 py-3 font-heading text-2xl font-medium transition-colors ${activeTab === "list"
-                ? "bg-[#063746] text-[#EBFFFF]"
-                : "text-[#063746] hover:bg-[#1CE3F4]/80"
-                }`}
-            >
-              List
-            </button>
-          </div>
-        </div>
+        ) : null}
       </section>
       {/* ════════════════════════════════════════════════════════
           2. FILTER TABS

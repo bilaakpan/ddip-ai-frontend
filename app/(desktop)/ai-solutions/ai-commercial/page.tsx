@@ -164,7 +164,7 @@ export default function AICommercialPage() {
         </div>
 
         {/* Subtitle + CTAs */}
-        <div className="relative z-10 mt-10 px-[80px]">
+        <div className="relative z-10 px-[80px]">
           <h2 className="max-w-lg font-heading text-[60px] font-medium leading-[1.2] text-white">
             A New Approach To
             <br />
@@ -178,31 +178,34 @@ export default function AICommercialPage() {
           </p>
 
           {/* Down arrow + CTA */}
-          <div className="mt-[60px] flex items-start flex-col gap-4">
-            <div className="flex items-center justify-center">
-              <svg width="99" height="122" viewBox="0 0 99 122" fill="none" className="h-[90px] w-auto" aria-label="Scroll down">
-                <g clipPath="url(#arrow-clip)">
-                  <path d="M56.9199 0L56.9199 95.9621L89.1853 66.0555L98.7897 75.9435L98.9811 76.9205L49.6919 122L0 76.9205L0.198028 75.9435L9.61097 66.2194L42.0612 95.9621L42.0612 0L56.9199 0Z" fill="white" />
-                </g>
-                <defs>
-                  <clipPath id="arrow-clip">
-                    <rect width="98.9811" height="122" fill="white" />
-                  </clipPath>
-                </defs>
-              </svg>
+          <div className="mt-[120px] flex flex-row items-end  justify-between gap-4">
+            <div className="flex flex-col gap-4 items-start">
+              <div className="flex items-center justify-center">
+                <svg width="99" height="122" viewBox="0 0 99 122" fill="none" className="h-[90px] w-auto" aria-label="Scroll down">
+                  <g clipPath="url(#arrow-clip)">
+                    <path d="M56.9199 0L56.9199 95.9621L89.1853 66.0555L98.7897 75.9435L98.9811 76.9205L49.6919 122L0 76.9205L0.198028 75.9435L9.61097 66.2194L42.0612 95.9621L42.0612 0L56.9199 0Z" fill="white" />
+                  </g>
+                  <defs>
+                    <clipPath id="arrow-clip">
+                      <rect width="98.9811" height="122" fill="white" />
+                    </clipPath>
+                  </defs>
+                </svg>
+              </div>
+              <div className="flex">
+                <Link href="#discover" className="font-heading text-[25px] font-medium text-white underline decoration-white/30 underline-offset-8 hover:decoration-[#1CE3F4]">
+                  Discover Our Creative Approach
+                </Link>
+
+              </div>
+
             </div>
-            <Link href="#discover" className="font-heading text-[25px] font-medium text-white underline decoration-white/30 underline-offset-8 hover:decoration-[#1CE3F4]">
-              Discover Our Creative Approach
-            </Link>
+            <p className="text-[32px] tracking-wider text-white" style={{ fontFamily: "var(--font-body)" }}>(SCROLL)</p>
           </div>
 
 
         </div>
 
-        {/* [SCROLL] text */}
-    <div className="absolute bottom-10 right-[60px] z-10">
-          <p className="text-[32px] tracking-wider text-white" style={{ fontFamily: "var(--font-body)" }}>(SCROLL)</p>
-        </div>
       </section>
 
       {/* ════════════════════════════════════════════════════════
@@ -229,7 +232,7 @@ export default function AICommercialPage() {
 
 
 
-          <div className="absolute bottom-[-50px] left-1/2 right-[620px] -translate-x-1/2 translate-y-1/2 z-10">
+          <div className="absolute bottom-[-10px] left-[48%] right-[620px] -translate-x-1/2 translate-y-1/2 z-10">
             <img src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/72101ace-0e03-4f71-0a20-d3bfc51e7f00/public" className="w-[130px] h-[130px] object-contain" style={{ transform: "rotate(-29.82deg)" }} />
           </div>
 
@@ -332,12 +335,12 @@ export default function AICommercialPage() {
           ════════════════════════════════════════════════════════ */}
       <section className="bg-light-bg py-24">
         <div className="px-[60px]">
-          <div className="grid grid-cols-2 gap-16">
+          <div className="grid grid-cols-2 gap-110">
             <h2 className="font-heading text-[48px] font-medium leading-[1.05] text-[#063746]">
               What We Produce
             </h2>
             <p
-              className="text-[20px] leading-[1.6] text-[#063746]/60"
+              className="text-[25px] leading-[1.6] text-[#145365]"
               style={{ fontFamily: "var(--font-body)" }}
             >
               We create AI-assisted commercial films designed for modern, digital-first campaigns.
@@ -345,7 +348,7 @@ export default function AICommercialPage() {
           </div>
 
           {/* Showcase — auto-scrolling horizontal carousel */}
-          <div className="mt-12 overflow-hidden" ref={emblaRef}>
+          {/* <div className="mt-12 overflow-hidden" ref={emblaRef}>
             <div className="flex gap-6">
               {[...generateItems, ...generateItems].map((item, i) => (
                 <div key={i} className="shrink-0 w-[320px] gap-4">
@@ -367,7 +370,36 @@ export default function AICommercialPage() {
                 </div>
               ))}
             </div>
-          </div>
+          </div> */}
+
+          <div className="mt-12 overflow-hidden" ref={emblaRef}>
+  <div className="flex -ml-[24px]"> {/* gap-6 = 24px */}
+    {[...generateItems, ...generateItems].map((item, i) => (
+      <div key={i} className="flex-[0_0_510px] pl-[24px]">
+        
+        <div className="relative h-[500px] w-full overflow-hidden rounded-[16px] bg-[#D9D9D9]">
+          <HlsPlayer
+            src={item.vedio}
+            autoPlay={false}
+            controls={false}
+            muted={true}
+            loop={true}
+            fillHeight={true}
+            className="absolute inset-0 h-full w-full object-cover"
+          />
+        </div>
+
+        <p 
+          className="mt-4 text-[16px] text-[#063746]" 
+          style={{ fontFamily: "var(--font-body)" }}
+        >
+          {item.title}
+        </p>
+
+      </div>
+    ))}
+  </div>
+</div>
 
           {/* Statement */}
           <p

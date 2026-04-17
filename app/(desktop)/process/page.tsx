@@ -284,8 +284,8 @@ export default function ProcessPage() {
               <p className="text-white text-[26px] max-w-4xl">At ddip.ai, every project follows a clear, intentional process - designed to transform brand challenges into intelligent, scalable systems.</p>
             </div>
 
-            <div className="max-w-lg">
-              <div className="flex flex-col gap-4 mt-[100px]">
+            <div className="relative top-[100px] flex justify-between items-end">
+              <div className="flex flex-col gap-4">
                 <svg width="99" height="122" viewBox="0 0 99 122" fill="none" className="h-[90px] w-[90px]" aria-label="Scroll down">
                   <path d="M56.9199 0L56.9199 95.9621L89.1853 66.0555L98.7897 75.9435L98.9811 76.9205L49.6919 122L0 76.9205L0.198028 75.9435L9.61097 66.2194L42.0612 95.9621L42.0612 0L56.9199 0Z" fill="white" />
                 </svg>
@@ -297,7 +297,7 @@ export default function ProcessPage() {
                   Discover Our Process
                 </a>
               </div>
-                  <div className="absolute bottom-0 -right-[130px] z-10">
+                  <div className="">
           <p className="text-[32px] tracking-wider text-white" style={{ fontFamily: "var(--font-body)" }}>(SCROLL)</p>
         </div>
             </div>
@@ -314,11 +314,11 @@ export default function ProcessPage() {
       </section>
 
       {/* ─── We Start With Understanding ─── */}
-      <section className="bg-light-bg py-20">
-        <div className="px-[60px] flex items-center gap-16">
+      <section className="bg-light-bg pt-20">
+        <div className="px-[60px] flex items-start gap-16">
 
           {/* Left — image with overlaid text labels */}
-          <div className="shrink-0 w-[60%] relative">
+          <div className="shrink-0 w-[54%] relative">
             <img src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/6f75a92d-2ea1-480c-fb72-7f9573c73400/public" alt="Understanding" className="w-full h-auto object-contain" />
             {/* strategy — top center */}
             <span className="absolute top-[18%] left-[50%] -translate-x-1/2 z-10 text-[16px] font-medium text-[#226576]" style={{ fontFamily: "Bricolage Grotesque" }}>strategy</span>
@@ -329,12 +329,12 @@ export default function ProcessPage() {
           </div>
 
           {/* Right — text */}
-          <div className="flex-1">
+          <div className="pt-[80px]">
             <p style={{ fontFamily: "Bricolage Grotesque", fontSize: "22px", color: "#9C9C9C" }}>
               We don't start with tools.<br />
               We don't start with AI.
             </p>
-            <div className="mt-4 flex items-baseline flex-wrap">
+            <div className="flex items-baseline flex-wrap">
               <span className="font-bold uppercase leading-[1.1]" style={{ fontFamily: "Bricolage Grotesque", fontSize: "57px", color: "#063746" }}>
                 We start with
               </span>
@@ -342,7 +342,7 @@ export default function ProcessPage() {
                 understanding.
               </span>
             </div>
-            <p className="mt-6 leading-[1.7]" style={{ fontSize: "24px", color: "#063746", width: "500px" }}>
+            <p className="" style={{ fontSize: "24px", color: "#063746", width: "630px",lineHeight:"normal" }}>
               Because meaningful automation, effective AI, and scalable creativity can only happen when <span style={{ color: "#00BCCF" }}>strategy, human insight, and technology</span> move together.
             </p>
           </div>
@@ -351,7 +351,7 @@ export default function ProcessPage() {
       </section>
 
       {/* ─── What We Deliver ─── */}
-      <section className="bg-light-bg py-20">
+      <section className="bg-light-bg pb-20">
         <div className="px-[60px]">
           <h2 className="font-heading text-[40px] font-medium leading-[1.1] text-[#063746]">
             What This<br />Process Delivers

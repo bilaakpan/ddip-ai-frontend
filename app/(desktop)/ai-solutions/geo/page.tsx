@@ -175,10 +175,10 @@ export default function GeoPage() {
 
 
 
-        <div className="relative z-20 mt-8 px-[130px] flex flex-col lg:flex-row justify-between items-start">
+        <div className="relative z-20 px-[130px] flex flex-col lg:flex-row justify-between items-start">
           {/* LEFT SIDE: Text Content */}
           <div className="">
-            <h2 className="font-heading text-[70px] font-medium leading-[1.0] text-white">
+            <h2 className="font-heading text-[60px] font-medium leading-[1.0] text-white">
               Visibility No Longer Ends
               <br />
               With Search.
@@ -186,7 +186,7 @@ export default function GeoPage() {
             <p className="mt-4 text-[26px] leading-[1.6] text-white max-w-3xl" style={{ fontFamily: "var(--font-body)" }}>
               GEO Optimization helps brands become visible in AI-powered search, discovery, and answer engines.
             </p>
-
+{/* 
             <div className="flex flex-col gap-4 mt-[120px]">
               <svg width="99" height="122" viewBox="0 0 99 122" fill="none" className="h-[90px] w-[90px]" aria-label="Scroll down">
                 <path d="M56.9199 0L56.9199 95.9621L89.1853 66.0555L98.7897 75.9435L98.9811 76.9205L49.6919 122L0 76.9205L0.198028 75.9435L9.61097 66.2194L42.0612 95.9621L42.0612 0L56.9199 0Z" fill="white" />
@@ -198,7 +198,8 @@ export default function GeoPage() {
               >
                 Discover Our GEO Optimization
               </a>
-            </div>
+            </div> */}
+            
           </div>
 
           {/* --- RIGHT SIDE: FLOATING IMAGES CONTAINER --- */}
@@ -232,10 +233,31 @@ export default function GeoPage() {
           </div>
         </div>
 
-        {/* Footer Scroll Indicator */}
-        <div className="absolute bottom-10 right-[60px] z-10">
-          <p className="text-[32px] tracking-wider text-white" style={{ fontFamily: "var(--font-body)" }}>(SCROLL)</p>
-        </div>
+        <div className="flex flex-row items-end px-[60px] justify-between gap-4">
+            <div className="flex flex-col gap-4 items-start">
+            <div className="flex items-center justify-center">
+              <svg width="99" height="122" viewBox="0 0 99 122" fill="none" className="h-[90px] w-auto" aria-label="Scroll down">
+                <g clipPath="url(#arrow-clip)">
+                  <path d="M56.9199 0L56.9199 95.9621L89.1853 66.0555L98.7897 75.9435L98.9811 76.9205L49.6919 122L0 76.9205L0.198028 75.9435L9.61097 66.2194L42.0612 95.9621L42.0612 0L56.9199 0Z" fill="white" />
+                </g>
+                <defs>
+                  <clipPath id="arrow-clip">
+                    <rect width="98.9811" height="122" fill="white" />
+                  </clipPath>
+                </defs>
+              </svg>
+            </div>
+            <div className="flex">
+            <Link href="#discover" className="font-heading text-[25px] font-medium text-white underline decoration-white/30 underline-offset-8 hover:decoration-[#1CE3F4]">
+                Discover Our GEO Optimization
+            </Link>
+                    
+</div>
+  
+</div>
+<p className="text-[32px] tracking-wider text-white" style={{ fontFamily: "var(--font-body)" }}>(SCROLL)</p>
+          </div>
+    
       </section>
 
       {/* actual partners comp */}

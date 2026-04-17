@@ -275,7 +275,7 @@ export default function InsightsPage() {
           )} */}
           {/* Article Grid — 3 columns */}
           {gridArticles.length > 0 && (
-            <div className="mt-8 sm:mt-10 lg:mt-12 grid grid-cols-1 gap-6 sm:gap-8 lg:grid-cols-2 xl:grid-cols-3">
+            <div className="mt-8 sm:mt-10 lg:mt-12 grid grid-cols-1 gap-6 sm:gap-8 lg:grid-cols-3 xl:grid-cols-3">
               {gridArticles.map((article) => (
                 <Link
                   key={article.id}

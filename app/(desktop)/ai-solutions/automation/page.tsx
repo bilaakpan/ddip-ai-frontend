@@ -104,7 +104,7 @@ export default function AutomationPage() {
 
         <div className="overflow-hidden whitespace-nowrap">
           <div className="flex animate-marquee">
-            <h1 className="text-[140px] text-white whitespace-nowrap">
+            <h1 className="text-[140px] text-white whitespace-nowrap uppercase">
               Automation with a Creative Touch
             </h1>
           </div>

@@ -279,9 +279,9 @@ export default function HomePage() {
       {/* ════════════════════════════════════════════════════════
           1. HERO SECTION
           ════════════════════════════════════════════════════════ */}
-      <section className="relative min-h-screen overflow-hidden bg-dark-bg">
+      <section className="relative overflow-hidden bg-dark-bg" style={{ minHeight: '100vh' }}>
         {/* Background image carousel */}
-        <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 z-0" style={{ height: '100%' }}>
           {heroImages.map((src, i) => (
             <Image
               key={src}
@@ -290,7 +290,7 @@ export default function HomePage() {
               alt="DDiP AI hero"
               fill
               priority={i === 0}
-              className={`object-cover object-center transition-opacity duration-1000 ${i === heroSlide ? "opacity-100" : "opacity-0"}`}
+              className={`object-cover object-top transition-opacity duration-1000 ${i === heroSlide ? "opacity-100" : "opacity-0"}`}
               sizes="100vw"
             />
           ))}
@@ -298,8 +298,8 @@ export default function HomePage() {
         </div>
 
         {/* Hero content */}
-        <div className="relative z-10 flex min-h-screen flex-col px-[60px] pb-10 pt-40 max-md:px-5 max-md:pt-24">
-          <div className="flex flex-1 items-end pb-[15vh]">
+        <div className="relative z-10 flex flex-col px-[60px] pt-28 max-md:px-5 max-md:pt-24">
+          <div className="pb-6">
             <div className="relative w-full">
               <h1
                 className="w-full text-center uppercase text-white"
@@ -307,28 +307,25 @@ export default function HomePage() {
                 style={{
                   fontFamily: 'Bricolage Grotesque, sans-serif',
                   fontWeight: 400,
-                  fontSize: '150px',
-                  lineHeight: '150px',
+                  lineHeight: 1,
                   letterSpacing: '0%'
                 }}
               >
-                <span className="relative -top-[0.05em] mr-4 inline-block align-baseline text-[0.85em]">
-                  <svg className="inline h-[1.1em] w-[1.1em]" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="2">
-                    <line x1="24" y1="2" x2="24" y2="46" />
-                    <line x1="2" y1="24" x2="46" y2="24" />
-                    <line x1="7" y1="7" x2="41" y2="41" />
-                    <line x1="41" y1="7" x2="7" y2="41" />
-                  </svg>
+                <span style={{ fontSize: '150px', lineHeight: '1', display: 'block' }}>
+                  <span className="relative -top-[0.05em] mr-4 inline-block align-baseline" style={{ fontSize: '0.85em' }}>
+                    <svg className="inline h-[1.1em] w-[1.1em]" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="2">
+                      <line x1="24" y1="2" x2="24" y2="46" />
+                      <line x1="2" y1="24" x2="46" y2="24" />
+                      <line x1="7" y1="7" x2="41" y2="41" />
+                      <line x1="41" y1="7" x2="7" y2="41" />
+                    </svg>
+                  </span>
+                  CREATE YOUR
                 </span>
-                CREATE YOUR
-                <br />
-                &nbsp;&nbsp;OWN AI INFLUENCER
-                <br />
-                <span className="mr-[170px]">WITH US!</span>
-              </h1>
-
-              {/* Problem text — left side, aligned with heading area */}
-              <div className="absolute right-[280px] bottom-[0px]  mt-[10px] max-w-[300px] text-left">
+                <span style={{ fontSize: '120px', lineHeight: '1', display: 'block',marginRight:'280px' }}>&nbsp;&nbsp;OWN AI INFLUENCER</span>
+                <div className="flex row-flex justify-center  gap-[5px]">
+                <span style={{ fontSize: '155px', lineHeight: '1' }}>WITH US!</span>
+                 <div className="pt-[30px] max-w-[300px] text-left">
                 <p className="flex items-center gap-2 text-white"
                   style={{
                     fontFamily: 'SF Pro Display, sans-serif',
@@ -346,24 +343,31 @@ export default function HomePage() {
                   Problem:
                 </p>
                 <p
-                  className="mt-2 text-white/90"
+                  className="ml-[25px] text-white/90"
                   style={{
                     fontFamily: 'SF Pro Display, sans-serif',
                     fontWeight: 400,
                     fontSize: '20px',
-                    lineHeight: '120%'
+                    lineHeight: '120%',
+                    textTransform:"lowercase",
+                    width:"400px"
                   }}
                 >
                   We need to promote our brand but the influencer prices are too high.
                 </p>
               </div>
+              </div>
+              </h1>
+
+              {/* Problem text — left side, aligned with heading area */}
+             
             </div>
           </div>
 
 
 
           {/* Bottom bar */}
-          <div className="flex items-end justify-between" style={{ position: "relative", top: "-20px" }}>
+          <div className="flex items-end justify-between pb-[50px]" style={{ position: "relative", top: "-250px", marginBottom: "-250px" }}>
             <div className="flex flex-col gap-4">
               <div className="flex items-start gap-2 text-white">
                 <svg width="99" height="122" viewBox="0 0 99 122" fill="none" className="h-[90px] w-auto" aria-label="Scroll down">
@@ -420,7 +424,7 @@ export default function HomePage() {
             </div>
 
             {/* Talk to AI widget */}
-            <div className="relative h-[320px] w-[324px]">
+            <div className="relative h-[320px] w-[324px] right-[100px] top-[50px]">
               <Image
                 unoptimized
                 src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/893c48e8-59f1-400e-9cb8-0d36b752db00/public"
@@ -451,21 +455,23 @@ export default function HomePage() {
         </div>
 
         <div className="px-[60px]">
-          <p className="mb-6 font-heading text-[25.6px] font-semibold leading-[1.2] text-[#126478]">
+          <p className=" font-heading text-[25.6px] font-semibold leading-[1.2] text-[#126478]">
             Why DDIP AI
           </p>
           <h2
-            className="max-w-[1609px] font-bold uppercase text-[#063746]"
+            className="w-full font-bold uppercase text-[#063746]"
             style={{
               fontFamily: "var(--font-body)",
-              lineHeight: "104.64%",
-              fontSize: "clamp(70px, calc((100vw - 120px) * 0.0907), 146px)",
-              letterSpacing: "-0.04em",
+              lineHeight: "105%",
+              fontSize: "130px",
+              letterSpacing: "0%",
             }}
           >
+            <span>
             WE DON&apos;T JUST USE AI
+            </span>
             <br />
-            WE DESIGN{" "}
+            <span>WE DESIGN{" "}
             <span className="relative inline-block align-middle">
               <span className="inline-flex h-[0.88em] w-[1.52em] items-center justify-center overflow-hidden rounded-lg">
                 <HlsPlayer
@@ -480,6 +486,7 @@ export default function HomePage() {
               </span>
             </span>{" "}
             WITH IT.
+            </span>
           </h2>
         </div>
       </section>
@@ -856,10 +863,10 @@ export default function HomePage() {
             </Link>
           </div>
 
-          <div className="mt-10 overflow-hidden px-[60px]" ref={emblaRow1Ref}>
-            <div className="flex gap-5">
+          {/* <div className="mt-10 overflow-hidden px-[60px]" ref={emblaRow1Ref}>
+            <div className="flex">
               {[...cmsInfluencers.row1, ...cmsInfluencers.row1].map((inf, idx) => (
-                <div key={`row1-${idx}`} className="w-[376px] flex-shrink-0 cursor-pointer" onClick={() => { setSelectedInfluencer(inf); setIsInfluencerPopupOpen(true); }}>
+                <div key={`row1-${idx}`} className="w-[376px] flex-shrink-0 cursor-pointer ml-[25px]" onClick={() => { setSelectedInfluencer(inf); setIsInfluencerPopupOpen(true); }}>
                   <div className="relative h-[518px] w-full overflow-hidden rounded-[20px] bg-[#EFEFEF]">
                     <Image
                       unoptimized
@@ -915,69 +922,146 @@ export default function HomePage() {
                 </div>
               ))}
             </div>
+          </div> */}
+         <div className="mt-10 overflow-hidden px-[60px]" ref={emblaRow1Ref}>
+  <div className="flex -ml-[25px]"> {/* negative margin trick */}
+    {[...cmsInfluencers.row1, ...cmsInfluencers.row1].map((inf, idx) => (
+      <div 
+        key={`row1-${idx}`} 
+        className="flex-[0_0_376px] pl-[25px]" /* flex-shrink-0 ki jagah flex shorthand + padding */
+        onClick={() => { 
+          setSelectedInfluencer(inf); 
+          setIsInfluencerPopupOpen(true); 
+        }}
+      >
+        <div className="cursor-pointer"> {/* cursor yahan move kiya */}
+          <div className="relative h-[518px] w-full overflow-hidden rounded-[20px] bg-[#EFEFEF]">
+            <Image
+              unoptimized
+              src={inf.image}
+              alt={inf.name}
+              fill
+              className="absolute inset-0 h-full w-full object-cover"
+            />
+            <div
+              className="absolute right-[20px] top-[20px] rounded-full px-[18px] py-[9px]"
+              style={{ backgroundColor: inf.color }}
+            >
+              <span
+                className="text-[18px] uppercase leading-[1.2] text-black"
+                style={{ fontFamily: "var(--font-body)" }}
+              >
+                {inf.industry}
+              </span>
+            </div>
+            <div className="absolute bottom-[20px] left-[20px] right-[20px] flex items-center justify-between">
+              <div className="flex items-center gap-2 rounded-full bg-[#063746B2] px-[22px] py-[12px]">
+                {inf.country && (
+                  <Image
+                    src={`https://flagcdn.com/w20/${inf.country.toLowerCase()}.png`}
+                    alt={inf.country}
+                    height={4}
+                    width={5}
+                    className="h-[14px] w-[20px] rounded-sm object-cover"
+                  />
+                )}
+                <span
+                  className="text-[18px] leading-[1.2] text-white"
+                  style={{ fontFamily: "var(--font-body)" }}
+                >
+                  {inf.name}
+                </span>
+              </div>
+              <div className="flex h-[48px] w-[48px] items-center justify-center rounded-full bg-white/80">
+                <svg className="h-[30px] w-[30px] text-[#012F3B]" viewBox="0 0 30 30" fill="none" stroke="currentColor" strokeWidth="4">
+                  <line x1="15" y1="0" x2="15" y2="30" />
+                  <line x1="0" y1="15" x2="30" y2="15" />
+                </svg>
+              </div>
+            </div>
           </div>
+          <p
+            className="mt-4 text-[20px] leading-[1.2] text-[#90B2BD]"
+            style={{ fontFamily: "var(--font-body)" }}
+          >
+            &ldquo;{inf.archetype}&rdquo;
+          </p>
+        </div>
+      </div>
+    ))}
+  </div>
+</div>
 
           {/* Row 2 */}
-          <div className="mt-8 overflow-hidden px-[60px]" ref={emblaRow2Ref}>
-            <div className="flex gap-5">
-              {[...cmsInfluencers.row2, ...cmsInfluencers.row2].map((inf, idx) => (
-                <div key={`row2-${idx}`} className="w-[376px] flex-shrink-0 cursor-pointer" onClick={() => { setSelectedInfluencer(inf); setIsInfluencerPopupOpen(true); }}>
-                  <div className="relative h-[518px] w-full overflow-hidden rounded-[20px] bg-[#EFEFEF]">
-                    <Image
-                      src={inf.image}
-                      alt={inf.name}
-                      fill
-                      unoptimized
-                      className="absolute inset-0 h-full w-full object-cover"
-                    />
-                    <div
-                      className="absolute right-[20px] top-[20px] rounded-full px-[18px] py-[9px]"
-                      style={{ backgroundColor: inf.color }}
-                    >
-                      <span
-                        className="text-[18px] uppercase leading-[1.2] text-black"
-                        style={{ fontFamily: "var(--font-body)" }}
-                      >
-                        {inf.industry}
-                      </span>
-                    </div>
-                    <div className="absolute bottom-[20px] left-[20px] right-[20px] flex items-center justify-between">
-                      <div className="flex items-center gap-2 rounded-full bg-[#063746B2] px-[22px] py-[12px]">
-                        {inf.country && (
-                          <Image
-                            src={`https://flagcdn.com/w20/${inf.country.toLowerCase()}.png`}
-                            alt={inf.country}
-                            height={4}
-                            width={5}
-                            unoptimized
-                            className="h-[14px] w-[20px] rounded-sm object-cover"
-                          />
-                        )}
-                        <span
-                          className="text-[18px] leading-[1.2] text-white"
-                          style={{ fontFamily: "var(--font-body)" }}
-                        >
-                          {inf.name}
-                        </span>
-                      </div>
-                      <div className="flex h-[48px] w-[48px] items-center justify-center rounded-full bg-white/80">
-                        <svg className="h-[30px] w-[30px] text-[#012F3B]" viewBox="0 0 30 30" fill="none" stroke="currentColor" strokeWidth="4">
-                          <line x1="15" y1="0" x2="15" y2="30" />
-                          <line x1="0" y1="15" x2="30" y2="15" />
-                        </svg>
-                      </div>
-                    </div>
-                  </div>
-                  <p
-                    className="mt-4 text-[20px] leading-[1.2] text-[#90B2BD]"
-                    style={{ fontFamily: "var(--font-body)" }}
-                  >
-                    &ldquo;{inf.archetype}&rdquo;
-                  </p>
-                </div>
-              ))}
+        <div className="mt-8 overflow-hidden px-[60px]" ref={emblaRow2Ref}>
+  <div className="flex -ml-[20px]"> {/* gap-5 = 20px, so negative margin */}
+    {[...cmsInfluencers.row2, ...cmsInfluencers.row2].map((inf, idx) => (
+      <div 
+        key={`row2-${idx}`} 
+        className="flex-[0_0_376px] pl-[20px]" /* flex basis + padding for gap */
+        onClick={() => { 
+          setSelectedInfluencer(inf); 
+          setIsInfluencerPopupOpen(true); 
+        }}
+      >
+        <div className="cursor-pointer">
+          <div className="relative h-[518px] w-full overflow-hidden rounded-[20px] bg-[#EFEFEF]">
+            <Image
+              src={inf.image}
+              alt={inf.name}
+              fill
+              unoptimized
+              className="absolute inset-0 h-full w-full object-cover"
+            />
+            <div
+              className="absolute right-[20px] top-[20px] rounded-full px-[18px] py-[9px]"
+              style={{ backgroundColor: inf.color }}
+            >
+              <span
+                className="text-[18px] uppercase leading-[1.2] text-black"
+                style={{ fontFamily: "var(--font-body)" }}
+              >
+                {inf.industry}
+              </span>
+            </div>
+            <div className="absolute bottom-[20px] left-[20px] right-[20px] flex items-center justify-between">
+              <div className="flex items-center gap-2 rounded-full bg-[#063746B2] px-[22px] py-[12px]">
+                {inf.country && (
+                  <Image
+                    src={`https://flagcdn.com/w20/${inf.country.toLowerCase()}.png`}
+                    alt={inf.country}
+                    height={4}
+                    width={5}
+                    unoptimized
+                    className="h-[14px] w-[20px] rounded-sm object-cover"
+                  />
+                )}
+                <span
+                  className="text-[18px] leading-[1.2] text-white"
+                  style={{ fontFamily: "var(--font-body)" }}
+                >
+                  {inf.name}
+                </span>
+              </div>
+              <div className="flex h-[48px] w-[48px] items-center justify-center rounded-full bg-white/80">
+                <svg className="h-[30px] w-[30px] text-[#012F3B]" viewBox="0 0 30 30" fill="none" stroke="currentColor" strokeWidth="4">
+                  <line x1="15" y1="0" x2="15" y2="30" />
+                  <line x1="0" y1="15" x2="30" y2="15" />
+                </svg>
+              </div>
             </div>
           </div>
+          <p
+            className="mt-4 text-[20px] leading-[1.2] text-[#90B2BD]"
+            style={{ fontFamily: "var(--font-body)" }}
+          >
+            &ldquo;{inf.archetype}&rdquo;
+          </p>
+        </div>
+      </div>
+    ))}
+  </div>
+</div>
         </div>
       </section>
 

@@ -112,7 +112,7 @@ export default function HlsPlayer({
     }, [hoverToPlay]);
 
     return (
-        <div ref={containerRef} className="contents">
+        <div ref={containerRef}>
             <video
                 ref={videoRef}
                 className={`

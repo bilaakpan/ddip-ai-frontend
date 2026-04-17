@@ -132,16 +132,16 @@ export default function AIContentPage() {
       <section className="relative overflow-hidden bg-dark-bg pb-16 pt-40">
 
         {/* Hero image and videos — right side */}
-        <div className="absolute right-[60px] top-[340px] z-10 flex gap-3">
+        <div className="absolute bottom-[0px] right-[60px] top-[340px] z-10 flex gap-3">
           {/* Col 1 — single video */}
           <div className="flex flex-col gap-3 justify-end">
             {/* Video with icon outside top-left */}
-            <div className="relative h-[250px] w-[250px]">
+            <div className="relative h-[600px] w-[250px] group top-[265px]">
               {/* Icon — outside top-left */}
               <div className="absolute -left-3 -top-3 z-20 flex items-center justify-center rounded-md bg-[#063746] shadow-md">
                 <img src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/1e1a01b7-cad6-4218-de1f-d23f5d27d400/public" alt="icon" className="h-[50px] w-[50px] object-contain" />
               </div>
-              <div className="h-full w-full overflow-hidden rounded-[16px] ">
+              <div className="h-full w-full overflow-hidden rounded-t-[16px]">
                 <HlsPlayer
                   src="cec8f6e44f63bb833b4b9b71452d48cb"
                   autoPlay={false}
@@ -149,6 +149,7 @@ export default function AIContentPage() {
                   muted={true}
                   loop={true}
                   fillHeight={true}
+                  hoverToPlay={true}
                   className="h-[350px] w-full object-cover"
                 />
               </div>
@@ -158,7 +159,7 @@ export default function AIContentPage() {
           {/* Col 2 — image on top, video on bottom */}
           <div className="flex flex-col gap-3 justify-end">
             {/* Image with icon outside top-left */}
-            <div className="relative h-[200px] w-[250px]">
+            <div className="relative h-[200px] top-[150px] w-[250px]">
               <div className="absolute -left-3 -top-3 z-20 flex  items-center justify-center rounded-md bg-[#063746] shadow-md">
                 <img src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/1e1a01b7-cad6-4218-de1f-d23f5d27d400/public" alt="icon" className="h-[50px] w-[50px] object-contain" />
               </div>
@@ -173,7 +174,7 @@ export default function AIContentPage() {
               </div>
             </div>
             {/* Video with icon outside top-left */}
-            <div className="relative h-[205px] w-[250px]">
+            <div className="relative h-[400px] top-[140px] w-[250px] group">
               <div className="absolute -left-3 -top-3 z-20 flex items-center justify-center rounded-md bg-[#063746] shadow-md">
                 <img src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/6d7c5e48-3eaa-4a0f-4092-7e4094da7f00/public" alt="icon" className="h-[50px] w-[50px] object-contain" />
               </div>
@@ -185,6 +186,7 @@ export default function AIContentPage() {
                   muted={true}
                   loop={true}
                   fillHeight={true}
+                  hoverToPlay={true}
                   className="h-full w-full object-cover"
                 />
               </div>
@@ -192,11 +194,11 @@ export default function AIContentPage() {
           </div>
 
           {/* Col 3 — tall woman video with icon outside top-left */}
-          <div className="relative h-[513px] w-[250px]">
+          <div className="relative h-[513px] w-[250px] group">
             <div className="absolute -left-3 -top-3 z-20 flex items-center justify-center rounded-md bg-[#063746] shadow-md">
               <img src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/66a5192b-b87d-488a-073b-47b8b8c8d100/public" alt="icon" className="h-[50px] w-[50px] object-contain" />
             </div>
-            <div className="h-full w-full overflow-hidden rounded-[16px] h-[430px]">
+            <div className="h-full w-full overflow-hidden rounded-[16px]">
               <HlsPlayer
                 src="90f5aaa3d5ea96226052be6f9122b8c2"
                 autoPlay={false}
@@ -204,6 +206,7 @@ export default function AIContentPage() {
                 muted={true}
                 loop={true}
                 fillHeight={true}
+                hoverToPlay={true}
                 className="h-[430px] w-full object-cover"
               />
             </div>
@@ -254,7 +257,7 @@ export default function AIContentPage() {
         </div>
 
         {/* [SCROLL] text */}
-          <div className="absolute bottom-2 right-[60px] z-10">
+          <div className="absolute right-[60px] z-10 bottom-[50px]">
           <p className="text-[32px] tracking-wider text-white" style={{ fontFamily: "var(--font-body)" }}>(SCROLL)</p>
         </div>
       </section>
