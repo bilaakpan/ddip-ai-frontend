@@ -4,151 +4,178 @@ import Link from "next/link";
 import { useState, useEffect, useMemo } from "react";
 import { cmsApi, type Work } from "@/lib/api";
 import HlsPlayer from "@/components/desktop/video";
-/* ── Component ────────────────────────────────────────── */
+
+/* ─── Static fallback ─── */
+const staticProjects = [
+  { id: "1", title: "Vesta Global", field: "Real Estate", categories: ["Visual Style Definition", "AI Model Selection & Optimization", "Use-Case Development", "Prompt Crafting"], image: "52d4f5fdd1335b2fbaba2f41798273f1", mediaType: "video" },
+  { id: "2", title: "Cesi Design", field: "Interior Design", categories: ["Enhanced Storytelling", "High-Impact Brand Moment", "Dynamic Interior Visuals"], image: "90b6c18df1bb19d1117f6d29f6859036", mediaType: "video" },
+  { id: "3", title: "Mediterra Group", field: "Real Estate", categories: ["Refined Visual Storytelling", "Consistent Brand Identity"], image: "8ffbc4055a9b0210350a2748fcbb8ce4", mediaType: "video" },
+  { id: "4", title: "Brother", field: "AI Solutions", categories: ["Creative AI Integration", "Custom Character Creation"], image: "2f4c298d7224c5140c18bc3c0f6faf22", mediaType: "video" },
+  { id: "5", title: "Vesta Global", field: "Real Estate", categories: ["Visual Style Definition", "Prompt Crafting"], image: "90b6c18df1bb19d1117f6d29f6859036", mediaType: "video" },
+  { id: "6", title: "Cesi Design", field: "Interior Design", categories: ["Dynamic Interior Visuals"], image: "8ffbc4055a9b0210350a2748fcbb8ce4", mediaType: "video" },
+];
+
+const filterOptions = ["All", "Real Estate", "Logo Design", "Interior Design", "AI Solutions", "Branding", "Strategy & Solutions"];
+
+const safePx: React.CSSProperties = {
+  paddingLeft: "max(20px, env(safe-area-inset-left))",
+  paddingRight: "max(20px, env(safe-area-inset-right))",
+};
 
 export default function MobileWorksPage() {
+  const [loading, setLoading] = useState(false);
   const [activeFilter, setActiveFilter] = useState("All");
   const [works, setWorks] = useState<Work[]>([]);
-  const [loading, setLoading] = useState(true);
-
+  const [isOpen, setIsOpen] = useState(false);
+  const [visibleCount, setVisibleCount] = useState(4);
   useEffect(() => {
-    cmsApi
-      .works()
-      .then((res) => {
-        if (res.data?.length) setWorks(res.data);
-      })
-      .catch(() => { })
-      .finally(() => setLoading(false));
+    cmsApi.works().then((res) => {
+      if (res.data?.length) setWorks(res.data);
+    }).catch(() => { }).finally(() => setLoading(false));
   }, []);
 
-  // Build filter categories from work fields
-  const filters = useMemo(() => {
-    const fields = [...new Set(works.map((w) => w.field).filter(Boolean))];
-    return ["All", ...fields] as string[];
+  const projects = useMemo(() => {
+    if (works.length > 0) {
+      return works.map((w) => ({
+        id: w.id,
+        title: w.title,
+        field: w.field || "",
+        categories: [w.field || ""].filter(Boolean),
+        image: w.mediaUrl || "",
+        mediaType: w.mediaType,
+      }));
+    }
+    return staticProjects;
   }, [works]);
 
-  const filteredProjects =
-    activeFilter === "All"
-      ? works
-      : works.filter((w) => w.field === activeFilter);
+  const filtered = activeFilter === "All"
+    ? projects
+    : projects.filter((p) => p.field === activeFilter || p.categories?.includes(activeFilter));
 
   return (
     <>
-      {/* ─── Hero ─── */}
-      <section className="bg-light-bg px-5 py-14">
-        <p className="font-heading text-[13px] uppercase tracking-widest text-teal-600">
-          Portfolio
-        </p>
-        <h1 className="mt-2 font-heading text-[clamp(32px,9vw,48px)] font-bold uppercase leading-[1.05] text-light-text">
-          SELECTED
-          <br />
-          WORK
-        </h1>
-        <p className="mt-4 max-w-[90%] text-[15px] leading-[1.5] text-light-body">
-          A curated collection of projects where AI meets design. From CGI real
-          estate visuals to full-scale brand identities, each project showcases
-          the creative power of human insight amplified by artificial
-          intelligence.
+      {/* ══════════════════════════════════════
+          HERO — marquee
+      ══════════════════════════════════════ */}
+      <section className="overflow-hidden bg-[#F6F9F2] pt-10 pb-4">
+        <div className="overflow-hidden">
+          <div className="flex w-max animate-marquee whitespace-nowrap">
+            {[...Array(4)].map((_, i) => (
+              <span key={i} className="flex items-center pr-8 font-heading text-[86px] uppercase leading-none text-dark-bg">
+                WORK
+                <img src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/309a089d-b47f-4446-fd5b-13db6ee1fe00/public" alt="*" className="mx-6 h-16 w-16 relative top-[0.05em]" />
+              </span>
+            ))}
+          </div>
+        </div>
+        <p className="mt-4 text-[22px] leading-relaxed text-[#063746]" style={safePx}>
+          See how we partner with visionary teams to build brands that stand out and push the boundaries of innovation.
         </p>
       </section>
 
-      {/* ─── Filter Tabs ─── */}
-      <section className="bg-light-bg px-5 pb-6">
-        <div className="flex flex-wrap items-center gap-2">
-          {filters.map((filter) => (
-            <button
-              key={filter}
-              onClick={() => setActiveFilter(filter)}
-              className={`rounded-full border px-5 py-2 font-heading text-[13px] font-medium transition-all duration-300 ${activeFilter === filter
-                ? "border-teal-500 bg-teal-500 text-[#002834]"
-                : "border-light-text/20 bg-transparent text-light-text/70"
-                }`}
+      {/* ══════════════════════════════════════
+          FILTERS — dropdown
+      ══════════════════════════════════════ */}
+      <section className="bg-[#F6F9F2] pb-6">
+        <div
+          className="relative w-[60%]"
+          style={{
+            paddingLeft: "max(20px, env(safe-area-inset-left))",
+            paddingRight: "max(20px, env(safe-area-inset-right))",
+          }}
+        >
+          {/* Trigger button */}
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="flex w-full items-center justify-between rounded-[28px] bg-[#F3F3F3] px-6 py-4 text-[16px] font-medium text-[#4B4B4B] shadow-sm"
+          >
+            <span>{activeFilter}</span>
+            <svg
+              className={`h-5 w-5 text-[#6B6B6B] transition-transform ${isOpen ? "rotate-180" : ""}`}
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              viewBox="0 0 24 24"
             >
-              {filter}
-            </button>
-          ))}
+              <path d="M6 15l6-6 6 6" />
+            </svg>
+          </button>
+
+          {/* Dropdown — floats over content below */}
+          {isOpen && (
+            <div className="absolute left-5 top-full mt-2 w-[calc(100%-20px)] z-50 rounded-[20px] bg-[#F3F3F3] shadow-lg overflow-hidden">
+              {filterOptions.map((option) => (
+                <button
+                  key={option}
+                  onClick={() => {
+                    setActiveFilter(option);
+                    setIsOpen(false);
+                  }}
+                  className="block w-full border-b border-[#D6D6D6] px-6 py-4 text-left text-[16px] text-[#8B8B8B] last:border-b-0"
+                >
+                  {option}
+                </button>
+              ))}
+            </div>
+          )}
         </div>
       </section>
-
-      {/* ─── Portfolio Grid ─── */}
-      <section className="bg-light-bg px-5 pb-14">
+      {/* ══════════════════════════════════════
+          PROJECT GRID
+      ══════════════════════════════════════ */}
+      <section
+        className="bg-light-bg pb-16"
+        style={{
+          paddingLeft: "max(20px, env(safe-area-inset-left))",
+          paddingRight: "max(20px, env(safe-area-inset-right))",
+          paddingBottom: "max(64px, calc(16px + env(safe-area-inset-bottom)))",
+        }}
+      >
         {loading ? (
-          <div className="py-20 text-center text-light-body/50">
-            Loading projects...
-          </div>
-        ) : filteredProjects.length === 0 ? (
-          <div className="flex flex-col items-center justify-center py-20 text-center">
-            <p className="font-heading text-[18px] font-medium text-light-text/50">
-              No projects in this category yet.
-            </p>
-            <button
-              onClick={() => setActiveFilter("All")}
-              className="mt-4 text-[14px] text-teal-600 underline underline-offset-4"
-            >
+          <p className="py-16 text-center text-[14px] text-[#063746]/40">Loading projects...</p>
+        ) : filtered.length === 0 ? (
+          <div className="flex flex-col items-center py-16 text-center">
+            <p className="text-[14px] text-[#063746]/50">No projects in this category yet.</p>
+            <button onClick={() => setActiveFilter("All")} className="mt-3 text-[13px] text-[#1CE3F4] underline underline-offset-4">
               View all projects
             </button>
           </div>
         ) : (
           <div className="flex flex-col gap-6">
-            {filteredProjects.map((work) => (
-              <Link key={work.id} href="/works" className="group">
-                {/* Media card */}
-                <div className="relative aspect-[4/3] overflow-hidden rounded-[14px]">
-                  {work.mediaType === "video" && work.mediaUrl ? (
-                    <HlsPlayer
-                      src={work.mediaUrl}
-                      autoPlay={true}
-                      hoverToPlay={false}
-                      controls={false}
-                      muted={true}
-                      loop={true}
-                      fillHeight={true}
-                      className="absolute inset-0 h-full w-full object-cover"
-                    />
+            {filtered.slice(0, visibleCount).map((project) => (
+              <Link key={project.id} href="/m/works" className="group block">
+                <div className="overflow-hidden bg-white shadow-sm">
+                  {/* Video / Image */}
+                  <div className="relative h-114.5 w-full overflow-hidden">
+                    {project.mediaType === "video" && project.image ? (
+                      <HlsPlayer
+                        src={project.image}
+                        autoPlay controls={false} muted loop fillHeight
+                        className="absolute inset-0 h-full w-full object-cover"
+                      />
+                    ) : (
+                      <img src={project.image} alt={project.title} className="h-full w-full object-cover" />
+                    )}
+                    <div className="absolute right-3 top-3 flex flex-wrap justify-end gap-1 bg-[#FFFFFFCC] rounded-full px-2 py-1">
+                      <h3 className="font-heading text-[12px] text-[#000000]">{project.field}</h3>
 
-                  ) : work.mediaUrl ? (
-                    <img
-                      src={work.mediaUrl}
-                      alt={work.title}
-                      className="absolute inset-0 h-full w-full object-cover"
-                    />
-                  ) : (
-                    <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-[#002834] to-[#063746]">
-                      <span className="font-heading text-[32px] font-bold text-white/10">
-                        {work.title?.charAt(0) || "?"}
-                      </span>
                     </div>
-                  )}
-
-                  {/* Hover overlay */}
-                  <div className="absolute inset-0 bg-dark-bg/0 transition-colors duration-300 group-hover:bg-dark-bg/40" />
-
-                  {/* Action icon */}
-                  <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-full border border-white/30 bg-white/10 backdrop-blur-sm">
-                      <svg
-                        className="h-4 w-4 text-white"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <path d="M7 17L17 7M17 7H7M17 7v10" />
-                      </svg>
+                    {/* Category tags */}
+                    <div className="absolute left-3 bottom-3 flex flex-wrap justify-end gap-1">
+                      {project.categories?.slice(0, 2).map((cat, i) => (
+                        <span key={i} className="rounded-full bg-white/90 px-2 py-0.5 text-[10px] font-medium text-[#063746] backdrop-blur-sm">
+                          {cat}
+                        </span>
+                      ))}
                     </div>
                   </div>
-                </div>
-
-                {/* Text below card */}
-                <div className="mt-3">
-                  <h3 className="font-heading text-[15px] font-medium text-light-text">
-                    {work.title}
-                  </h3>
-                  <p className="mt-1 text-[12px] uppercase tracking-wider text-light-body/60">
-                    {work.field || ""}
-                  </p>
+                  {/* Card body */}
+                  <div className="p-4">
+                    <div className="flex items-baseline flex-col gap-2">
+                      <h3 className="font-heading text-[22px] text-[#063746]">{project.title}</h3>
+                      <span className="text-[14px] text-[#063746]">We partnered with Vesta Global to redefine their real estate presence through AI-powered visual storytelling and dynamic property showcases.</span>
+                    </div>
+                  </div>
                 </div>
               </Link>
             ))}
@@ -156,37 +183,17 @@ export default function MobileWorksPage() {
         )}
       </section>
 
-      {/* ─── CTA ─── */}
-      <section className="bg-dark-bg px-5 py-14">
-        <div className="text-center">
-          <p className="text-[12px] uppercase tracking-widest text-white/50">
-            Ready to create something extraordinary?
-          </p>
-          <h2 className="mt-3 font-heading text-[clamp(28px,8vw,40px)] font-medium uppercase leading-[1.05] text-white">
-            HAVE A PROJECT
-            <br />
-            IN MIND?
-          </h2>
-          <p className="mt-4 text-[15px] leading-[1.5] text-white/50">
-            Let&apos;s bring your vision to life with the perfect blend of AI
-            technology and creative expertise.
-          </p>
-          <div className="mt-6 flex flex-col items-center gap-3">
-            <Link
-              href="/start-project"
-              className="inline-flex items-center gap-2 rounded-full bg-[#1CE3F4] px-6 py-3 text-[14px] font-medium text-[#002834]"
-            >
-              Start a Project
-            </Link>
-            <Link
-              href="/lets-connect"
-              className="inline-flex items-center gap-2 rounded-full border border-white/20 px-6 py-3 text-[14px] font-medium text-white"
-            >
-              Let&apos;s Connect
-            </Link>
-          </div>
-        </div>
-      </section>
+      {/* Load More */}
+      {!loading && filtered.length > visibleCount && (
+        <section className="bg-light-bg pb-10 flex justify-center" style={safePx}>
+          <button
+            onClick={() => setVisibleCount((prev) => prev + 4)}
+            className="flex items-center gap-2 text-[22px] font-semibold text-[#126478] active:text-[#00b3c3]"
+          >
+            LOAD MORE
+          </button>
+        </section>
+      )}
     </>
   );
 }

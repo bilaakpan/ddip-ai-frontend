@@ -14,6 +14,7 @@ import UseCaseCarousel from "@/components/desktop/UseCaseCarousel";
 import FaqSection from "@/components/desktop/FaqSection";
 import ContactFormSection from "@/components/desktop/ContactFormSection";
 import { InfluencerPopupModal } from "@/components/desktop/influencer-popUp";
+import InfluencerCarousel from "@/components/desktop/InfluencerCarousel";
 import { ChevronDown, ChevronUp } from "lucide-react";
 
 /* ─── Data ─── */
@@ -750,126 +751,10 @@ export default function AIInfluencerPage() {
               </div>
             ))}
           </div>
-          <div className="mt-10 sm:mt-12 lg:mt-16">
-            <div
-              className="
-      grid 
-      grid-cols-1 
-      sm:grid-cols-2 
-      lg:grid-cols-3 
-      xl:grid-cols-4
-      gap-y-8
-      sm:gap-y-10
-      lg:gap-y-12
-      gap-x-4
-      sm:gap-x-5
-      lg:gap-x-6
-      justify-items-stretch
-      auto-rows-fr
-    "
-            >
-              {filteredInfluencers.map((item, idx) => (
-                <div
-                  key={`${item.name}-${idx}`}
-                  className="group h-full w-full px-2 sm:px-0"
-                >
-                  <div className="relative mx-auto aspect-[376/518] w-full max-w-[360px] overflow-hidden rounded-3xl sm:max-w-[376px]">
 
-                    {/* Image */}
-                    <Image
-                      src={item.image}
-                      alt={item.name}
-                      fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
+          {/* ── Influencer Cards: 4 visible + auto-scroll ── */}
+          <InfluencerCarousel influencers={filteredInfluencers} bgColors={bgColors} onSelect={(item) => { setSelectedInfluencer(item); setShowPopup(true); }} />
 
-                    {/* Top Tag */}
-                    <div className={`absolute right-3 top-3 rounded-full px-4 py-1.5 sm:right-5 sm:top-5 sm:px-6 sm:py-2 ${bgColors[item.type as keyof typeof bgColors]}`}>
-                      <span className="text-xs font-medium uppercase text-black sm:text-[14px]">
-                        {item.type}
-                      </span>
-                    </div>
-
-                    {/* Bottom */}
-                    <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between sm:bottom-5 sm:left-5 sm:right-5">
-
-                      {/* Name */}
-                      <div className="flex items-center gap-2 rounded-full bg-[#063746B2]/80 px-3 py-1.5 backdrop-blur-md sm:gap-3 sm:px-4 sm:py-2">
-                        <span className="text-sm text-white sm:text-[16px]">{item.name}</span>
-                        <img
-                          src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/8c6dfd82-c580-49a7-be40-a53090c65400/public"
-                          alt="flag"
-                          className="h-4 w-4 rounded-sm object-cover sm:h-5 sm:w-5"
-                        />
-                      </div>
-
-                      {/* Plus */}
-                      <div
-                        className="flex h-8 w-8 items-center justify-center rounded-full bg-white/80 sm:h-9 sm:w-9 cursor-pointer hover:bg-white transition"
-                        onClick={() => {
-                          setSelectedInfluencer(item);
-                          setShowPopup(true);
-                        }}
-                      >
-                        <svg
-                          className="h-4 w-4 text-[#012F3B] sm:h-5 sm:w-5"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                        >
-                          <line x1="12" y1="5" x2="12" y2="19" />
-                          <line x1="5" y1="12" x2="19" y2="12" />
-                        </svg>
-                      </div>
-
-                    </div>
-                  </div>
-
-                  {/* Bottom caption (like the example in your screenshot) */}
-                  <div className="mt-3 px-2 sm:px-0">
-                    <p className="text-left font-heading text-[14px] leading-[1.2] text-white/80 sm:text-[16px]">
-                      "{item.archetype}"
-                    </p>
-                  </div>
-                </div>
-
-              ))}
-            </div>
-            {filteredInfluencers.length === 0 && (
-              <p className="mt-8 text-center text-[20px] text-white/80" style={{ fontFamily: "var(--font-body)" }}>
-                No influencers match the selected filters.
-              </p>
-            )}
-          </div>
-          {/* Industry portrait row */}
-          {/* <div
-            className="mt-12 flex gap-5 overflow-x-auto pb-4"
-            style={{ scrollbarWidth: "none" }}
-          >
-            {industries.map((ind) => (
-              <div
-                key={ind.name}
-                className="group relative w-[240px] shrink-0"
-              >
-                <div className="relative aspect-[3/4] overflow-hidden rounded-[20px]">
-                  <Image
-                    src={ind.image}
-                    alt={ind.name}
-                    fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-105"
-                    sizes="240px"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#063746]/50 to-transparent" />
-                  <div className="absolute bottom-4 left-4">
-                    <span className="font-heading text-[16px] font-medium text-white">
-                      {ind.name}
-                    </span>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div> */}
         </div>
       </section>
 

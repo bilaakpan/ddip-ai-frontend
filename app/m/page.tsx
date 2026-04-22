@@ -1,11 +1,17 @@
 "use client";
-
 import Link from "next/link";
 import Image from "next/image";
-import { useState, useEffect } from "react";
-import { cmsApi, type AiSolution, type Work, type Influencer, type Faq } from "@/lib/api";
+import { Play, Pause } from "lucide-react";
+import { useState, useEffect, useRef, useCallback } from "react";
+import useEmblaCarousel from "embla-carousel-react";
+import Autoplay from "embla-carousel-autoplay";
+import FaqSection from "@/components/desktop/FaqSection";
+import PartnersSection from "@/components/desktop/PartnersSection";
+import { PopupInfluencer, } from "@/components/desktop/influencer-popUp";
 import HlsPlayer from "@/components/desktop/video";
-/* ─── Fallback Data ─── */
+import { InfluencerPopupModal } from "@/components/mobile/influencer-popUp";
+
+/* ─── Data ─── */
 
 const capabilities = [
   {
@@ -30,11 +36,11 @@ const capabilities = [
   },
 ];
 
-const aiSolutionsFallback = [
+const aiSolutions = [
   {
     title: "AI Content Generation",
     href: "/ai-solutions/ai-content",
-    media: "/videos/solutions/ai-content-gen.mp4",
+    media: "4aca9b4110ceac3eb1d3bd087deb763e",
     mediaType: "video" as const,
     description:
       "Design meets intelligence as we use specialized AI tools to transform moodboards into refined, design-driven campaigns.",
@@ -43,7 +49,7 @@ const aiSolutionsFallback = [
   {
     title: "Create Your Influencer with AI",
     href: "/ai-solutions/ai-influencer",
-    media: "/images/homepage/solution-influencer.jpg",
+    media: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/846771a3-24bb-46b7-f265-45d58b267900/public",
     mediaType: "image" as const,
     description:
       "AI influencers bring your brand to life with smart storytelling and real-time multilingual engagement.",
@@ -51,17 +57,17 @@ const aiSolutionsFallback = [
   },
   {
     title: "Automation with a Creative Touch",
-    href: "/ai-solutions/automation",
-    media: "/videos/solutions/automation.mp4",
+    href: "/ai-solutions",
+    media: "bdb805b635f8e3a865a3157336836136",
     mediaType: "video" as const,
     description:
-      "We design intelligent workflows that eliminate repetitive tasks, allowing your teams to focus on what truly drives value.",
+      "We design intelligent workflows that eliminate repetitive tasks, allowing your teams to focus on what truly drives value, creativity and strategy.",
     tags: ["Automated Video Creator", "Automated LinkedIn Posts", "Amazon Stock & Price Tracker", "Personal Assistant"],
   },
   {
     title: "GEO Solutions",
-    href: "/ai-solutions/geo",
-    media: "/images/homepage/solution-geo.jpg",
+    href: "/ai-solutions",
+    media: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/173463a6-4e3f-44fc-6fd4-61697f25d700/public",
     mediaType: "image" as const,
     description:
       "Traditional SEO isn't enough; it must be supported with GEO. At ddip, we optimize for generative engines.",
@@ -69,250 +75,356 @@ const aiSolutionsFallback = [
   },
 ];
 
-const selectedWorkFallback = [
+const selectedWork = [
   {
     title: "Vesta Global",
     subtitle: "AI-powered real estate branding and visual identity",
     category: "Real Estate",
-    video: "/videos/works/vesta-global.mp4",
+    video: "52d4f5fdd1335b2fbaba2f41798273f1",
+    tags: ["Visual Style Definition", "AI Model Selection & Optimization", "Use-Case Development", "Prompt Crafting"],
   },
   {
     title: "Cesi Design",
     subtitle: "Interior design showcase with AI-generated visuals",
     category: "Interior Design",
-    video: "/videos/works/cesi-design.mp4",
+    video: "90b6c18df1bb19d1117f6d29f6859036",
+    tags: ["Enhanced Storytelling", "High-Impact Brand Moment", "Dynamic Interior Visuals"],
   },
   {
     title: "Mediterra Group",
     subtitle: "Premium real estate marketing with creative AI",
     category: "Real Estate",
-    video: "/videos/works/mediterra.mp4",
+    video: "8ffbc4055a9b0210350a2748fcbb8ce4",
+    tags: ["Refined Visual Storytelling", "Consistent Brand Identity", "Impactful Presentation Experience"],
   },
   {
     title: "Brother",
     subtitle: "Product campaign powered by AI production",
     category: "Printer Solutions",
-    video: "/videos/works/brother.mp4",
+    video: "2f4c298d7224c5140c18bc3c0f6faf22",
+    tags: ["Creative AI Integration", "Custom Character Creation", "Enhanced Campaign Impact"],
   },
 ];
 
-const influencersFallback = [
-  { name: "Mina Özdemir", archetype: "Analytical Visionary", industry: "Real Estate", color: "#CDDBC0", image: "/images/homepage/influencer-01.png" },
-  { name: "Mina Şen", archetype: "Color Story Weaver", industry: "Fashion", color: "#DBC0CD", image: "/images/homepage/influencer-02.jpg" },
-  { name: "Elif Doğan", archetype: "Market-to-Table Storyteller", industry: "Food", color: "#C0C2DB", image: "/images/homepage/influencer-03.png" },
-  { name: "Yasin El Fassi", archetype: "Heritage Remix Artist", industry: "Fashion", color: "#DBC0CD", image: "/images/homepage/influencer-04.png" },
-  { name: "Aylin Demir", archetype: "Calm Change Navigator", industry: "Lifestyle", color: "#C0D7DB", image: "/images/homepage/influencer-05.png" },
-  { name: "Laila Haddad", archetype: "People-First Strategist", industry: "HR", color: "#CDDBC0", image: "/images/homepage/influencer-06.png" },
-  { name: "Deniz Akar", archetype: "Future-Forward Thinker", industry: "Tech", color: "#C0C2DB", image: "/images/homepage/influencer-07.png" },
-  { name: "Selin Kara", archetype: "Mindful Storyteller", industry: "Wellness", color: "#DBD8C0", image: "/images/homepage/influencer-08.png" },
-  { name: "Ece Yilmaz", archetype: "Cultural Bridge Builder", industry: "Fashion", color: "#DBC0CD", image: "/images/homepage/influencer-09.png" },
-  { name: "Mina Şen", archetype: "Color Story Weaver", industry: "Fashion", color: "#DBC0CD", image: "/images/homepage/influencer-10.png" },
+const influencersRow1 = [
+  { name: "Mina Özdemir", archetype: "Analytical Visionary", industry: "Real Estate", color: "#CDDBC0", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/81d25d40-2890-403e-93d7-49e36b06cd00/public", country: "TR" },
+  { name: "Mina Şen", archetype: "Color Story Weaver", industry: "Fashion", color: "#DBC0CD", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/56d8bb08-9c7d-49ca-e1ec-aa074fdf1600/public", country: "TR" },
+  { name: "Elif Doğan", archetype: "Market-to-Table Storyteller", industry: "Food", color: "#C0C2DB", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/e1fe1be8-8ca5-4eef-cf2a-925bae6f7300/public", country: "TR" },
+  { name: "Yasin El Fassi", archetype: "Heritage Remix Artist", industry: "Fashion", color: "#DBC0CD", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/259023e7-e8b0-4214-ee42-9f2b02a1a800/public", country: "MA" },
+  { name: "Aylin Demir", archetype: "Calm Change Navigator", industry: "Lifestyle", color: "#C0D7DB", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/57fe254b-21d7-4443-1476-6eccc458df00/public", country: "TR" },
 ];
 
-const faqsFallback = [
-  { question: "What makes DDIP AI different from other AI agencies?", answer: "We combine strategic design thinking with cutting-edge AI technology to deliver measurable results." },
-  { question: "Do you develop your own AI tools?", answer: "We leverage the best existing AI tools and customize workflows for each client's unique needs." },
-  { question: "How do your AI workflows improve efficiency?", answer: "Our intelligent automations eliminate repetitive tasks, freeing teams to focus on creativity and strategy." },
-  { question: "What are AI Influencers, and how do they work?", answer: "AI Influencers are virtual personas created using AI that represent your brand across digital platforms." },
-  { question: "How do you ensure the human element remains part of your AI-driven work?", answer: "Every project starts with human insight — AI amplifies our creative vision, never replaces it." },
-  { question: "Can non-creative or technical companies benefit from your workflow solutions?", answer: "Absolutely. Our automation workflows help any organization streamline operations and scale efficiently." },
-  { question: "How does DDIP stay up to date with evolving AI technologies?", answer: "We continuously evaluate and adopt new AI tools and methodologies to keep our solutions cutting-edge." },
+const influencersRow2 = [
+  { name: "Laila Haddad", archetype: "People-First Strategist", industry: "HR", color: "#CDDBC0", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/8ebaf72d-1931-4412-d1ef-55f1feb9dd00/public", country: "AE" },
+  { name: "Deniz Akar", archetype: "Future-Forward Thinker", industry: "Tech", color: "#C0C2DB", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/923ba48c-8d17-4f6f-a974-09eae19dc300/public", country: "TR" },
+  { name: "Selin Kara", archetype: "Mindful Storyteller", industry: "Wellness", color: "#DBD8C0", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/ae712d05-13a0-46d1-c9e5-6f92fdeda700/public", country: "TR" },
+  { name: "Ece Yilmaz", archetype: "Cultural Bridge Builder", industry: "Fashion", color: "#DBC0CD", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/0c4bfad2-2109-4bbb-d78b-dcc73c1def00/public", country: "TR" },
+  { name: "Mina Şen", archetype: "Color Story Weaver", industry: "Fashion", color: "#DBC0CD", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/5dfe3b6d-e750-4279-3815-6dd960b62e00/public", country: "TR" },
+];
+
+const faqLeft = [
+  "What makes DDIP AI different from other AI agencies?",
+  "Do you develop your own AI tools?",
+  "How do your AI workflows improve efficiency?",
+  "What are AI Influencers, and how do they work?",
+];
+
+const faqRight = [
+  "How do you ensure the human element remains part of your AI-driven work?",
+  "Can non-creative or technical companies benefit from your workflow solutions?",
+  "How does DDIP stay up to date with evolving AI technologies?",
+  "What industries do you serve?",
 ];
 
 const partners = [
-  { name: "AWS" },
-  { name: "Google Cloud" },
-  { name: "Google Partner" },
-  { name: "Microsoft" },
-  { name: "Salesforce" },
+  { name: "Microsoft", image: "/images/partners/microsoft.svg" },
+  { name: "Salesforce", image: "/images/partners/salesforce.svg" },
+  { name: "Google", image: "/images/partners/google.svg" },
+  { name: "AWS", image: "/images/partners/aws.svg" },
+  { name: "Google AI", image: "/images/partners/google-ai.svg" },
 ];
 
-/**
- * DDip AI Homepage — Mobile
- * Matches Figma "mobile" page → ANASAYFA frame (375 x 10241)
- */
-export default function MobileHomePage() {
+const heroImages = [
+  "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/668d2dbe-1430-43f2-d9d4-43fdd6b55f00/public",
+  "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/ca026e67-6810-45b1-4bf2-f1e8aeacd800/public",
+  "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/a14a9b12-bd23-450e-1009-79149e9d7f00/public",
+];
+const faqFallback = [
+  { question: "Is GEO the same as SEO?", answer: "No. SEO focuses on ranking in traditional search engines. GEO (Generative Engine Optimization) focuses on making your content readable, trustworthy, and citable by AI-powered systems." },
+  { question: "Do I still need SEO?", answer: "Yes. GEO builds on SEO — it doesn't replace it. Both work together to maximize your visibility across traditional and AI-driven search." },
+  { question: "Is GEO only about content?", answer: "No. GEO covers content structure, semantic markup, metadata, multi-engine presence, and topic authority signals." },
+  { question: "How does GEO affect AI-generated results?", answer: "GEO helps your content become a trusted source that AI systems reference when generating answers, summaries, and recommendations." },
+  { question: "Is GEO a one-time optimization?", answer: "No. GEO is an ongoing process as AI systems evolve and new discovery patterns emerge." },
+  { question: "How do you measure GEO performance?", answer: "We track AI citation frequency, brand mention in AI answers, structured data coverage, and content discoverability across AI platforms." },
+];
+const safePx: React.CSSProperties = {
+  paddingLeft: "max(20px, env(safe-area-inset-left))",
+  paddingRight: "max(20px, env(safe-area-inset-right))",
+};
+
+export default function HomePage() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
-  const [cmsSolutions, setCmsSolutions] = useState(aiSolutionsFallback);
-  const [cmsWorks, setCmsWorks] = useState(selectedWorkFallback);
-  const [cmsInfluencers, setCmsInfluencers] = useState(influencersFallback);
-  const [cmsFaqs, setCmsFaqs] = useState(faqsFallback);
+  const [cmsFaqs, setCmsFaqs] = useState(faqFallback);
+
+  const [heroSlide, setHeroSlide] = useState(0);
+  const [heroPlaying, setHeroPlaying] = useState(true);
+  const heroTimer = useRef<ReturnType<typeof setInterval> | null>(null);
+  const [isInfluencerPopupOpen, setIsInfluencerPopupOpen] = useState(false);
+  const [selectedInfluencer, setSelectedInfluencer] = useState<PopupInfluencer | null>(null);
+  const startHeroTimer = useCallback(() => {
+    if (heroTimer.current) clearInterval(heroTimer.current);
+    heroTimer.current = setInterval(() => {
+      setHeroSlide((prev) => (prev + 1) % 3);
+    }, 6000);
+  }, []);
 
   useEffect(() => {
-    cmsApi.aiSolutions().then((res) => {
-      if (res.data?.length) {
-        setCmsSolutions(
-          res.data.map((s: AiSolution) => ({
-            title: s.title,
-            href: `/ai-solutions/${s.slug}`,
-            media: s.mediaUrl || "",
-            mediaType: (s.mediaType as "video" | "image") || "image",
-            description: s.body || "",
-            tags: s.tags?.map((t) => t.tag.name) || [],
-          }))
-        );
-      }
-    }).catch(() => { });
+    if (heroPlaying) {
+      startHeroTimer();
+    } else if (heroTimer.current) {
+      clearInterval(heroTimer.current);
+    }
+    return () => { if (heroTimer.current) clearInterval(heroTimer.current); };
+  }, [heroPlaying, startHeroTimer]);
 
-    cmsApi.works(true).then((res) => {
-      if (res.data?.length) {
-        setCmsWorks(
-          res.data.map((w: Work) => ({
-            title: w.title,
-            subtitle: w.body || "",
-            category: w.field || "",
-            video: w.mediaUrl || "",
-          }))
-        );
-      }
-    }).catch(() => { });
+  // CMS data state — initialized with fallback data, replaced when API responds
+  const [cmsSolutions, setCmsSolutions] = useState(aiSolutions);
+  const [cmsWorks, setCmsWorks] = useState(selectedWork);
+  const [cmsInfluencers, setCmsInfluencers] = useState({ row1: influencersRow1, row2: influencersRow2 });
+  const autoplayRow1 = useRef(Autoplay({ delay: 2000, stopOnInteraction: false, stopOnMouseEnter: false }));
+  const autoplayRow2 = useRef(Autoplay({ delay: 2500, stopOnInteraction: false, stopOnMouseEnter: false }));
+  const [emblaRow1Ref] = useEmblaCarousel({ loop: true, align: "start", dragFree: true }, [autoplayRow1.current]);
+  const [emblaRow2Ref] = useEmblaCarousel({ loop: true, align: "start", dragFree: true }, [autoplayRow2.current]);
 
-    cmsApi.influencers({ homepage: true }).then((res) => {
-      if (res.data?.length) {
-        const colors = ["#CDDBC0", "#DBC0CD", "#C0C2DB", "#C0D7DB", "#DBD8C0"];
-        setCmsInfluencers(
-          res.data.map((inf: Influencer, i: number) => ({
-            name: `${inf.name}${inf.surname ? ` ${inf.surname}` : ""}`,
-            archetype: inf.persona || "",
-            industry: inf.category || "Influencer",
-            color: colors[i % colors.length],
-            image: inf.imageUrl || "",
-          }))
-        );
-      }
-    }).catch(() => { });
 
-    cmsApi.faqs("main").then((res) => {
-      if (res.data?.length) {
-        setCmsFaqs(
-          res.data.map((f: Faq) => ({ question: f.question, answer: f.answer }))
-        );
-      }
-    }).catch(() => { });
-  }, []);
+  const autoplayPlugin = useRef(Autoplay({ delay: 3000, stopOnInteraction: true }));
+  const [emblaRef, emblaApi] = useEmblaCarousel(
+    { loop: true, align: "start", skipSnaps: false },
+    [autoplayPlugin.current]
+  );
+  const [solutionsIndex, setSolutionsIndex] = useState(0);
+  const [solutionsPlaying, setSolutionsPlaying] = useState(true);
+
+  useEffect(() => {
+    if (!emblaApi) return;
+    emblaApi.on("select", () => setSolutionsIndex(emblaApi.selectedScrollSnap()));
+  }, [emblaApi]);
+
+  const scrollSolutions = useCallback((i: number) => emblaApi?.scrollTo(i), [emblaApi]);
+
+  const togglePlay = () => {
+    if (!emblaApi) return;
+    const ap = autoplayPlugin.current;
+    if (solutionsPlaying) {
+      ap.stop();
+    } else {
+      ap.play();
+    }
+    setSolutionsPlaying((p) => !p);
+  };
 
   return (
     <>
       {/* ════════════════════════════════════════════════════════
-          1. HERO
+          1. HERO SECTION
           ════════════════════════════════════════════════════════ */}
-      <section className="relative min-h-[100svh] overflow-hidden bg-dark-bg">
-        <div className="absolute inset-0 z-0">
-          <Image
-            src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/d609bc26-f583-4bee-da4b-8cd9255a3400/public"
-            alt="AI-generated influencer — DDiP AI"
-            fill
-            priority
-            className="object-cover object-top"
-            sizes="100vw"
+      <section className="relative overflow-hidden bg-black flex flex-col">
+        {/* Top: portrait video fills upper portion */}
+        <div className="relative w-125" style={{ height: "55vh" }}>
+          <HlsPlayer
+            src="https://customer-avhhoygwtxxdpkyp.cloudflarestream.com/1a3475f20aa2ad6346f9c1087f74d458/manifest/video.m3u8"
+            className="absolute inset-0 object-cover w-full h-full"
+            autoPlay={true}
+            muted={true}
+            loop={true}
+            controls={false}
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-dark-bg/90 via-dark-bg/30 to-dark-bg/50" />
+          {/* Bottom fade into black */}
+          <div className="absolute inset-0 bg-linear-to-b from-transparent via-black/30 to-black" />
         </div>
 
-        <div className="relative z-10 flex min-h-[100svh] flex-col justify-center px-5 pb-8 pt-[80px]">
-          {/* Arrow icon */}
-          <div className="mb-4">
-            <svg className="h-[50px] w-[50px] text-white/80" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="2">
-              <line x1="24" y1="2" x2="24" y2="46" />
-              <line x1="2" y1="24" x2="46" y2="24" />
-              <line x1="24" y1="2" x2="36" y2="14" />
-              <line x1="24" y1="2" x2="12" y2="14" />
-            </svg>
+        {/* Bottom: dark content area - overlapping image and below */}
+        <div className="relative z-10 -mt-30 flex flex-1 flex-col justify-between bg-transparent px-5 pb-8 pt-4">
+          {/* Heading */}
+          <div>
+            <h1
+              className="uppercase text-white leading-none"
+              lang="en"
+              style={{
+                fontFamily: 'Bricolage Grotesque, sans-serif',
+                fontSize: '42px',
+              }}
+            >
+              <div className="flex">
+                {/* Star icon inline before first line */}
+                <div className="inline-flex items-start gap-2 mt-2 mr-2">
+                  <svg
+                    className="shrink-0"
+                    style={{ width: '0.75em', height: '0.75em', marginBottom: '0.05em' }}
+                    viewBox="0 0 48 48"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.5"
+                  >
+                    <line x1="24" y1="2" x2="24" y2="46" />
+                    <line x1="2" y1="24" x2="46" y2="24" />
+                    <line x1="7" y1="7" x2="41" y2="41" />
+                    <line x1="41" y1="7" x2="7" y2="41" />
+                  </svg>
+
+                </div>
+                <div>
+                  CREATE YOUR
+                  <br />
+                  OWN AI
+                  <br />
+                  INFLUENCER
+                  <br />
+                  WITH US!
+                  {/* Problem text */}
+                  <div className="mt-5">
+                    <p
+                      className="font-semibold text-white"
+                      style={{
+                        fontFamily: 'SF Pro Display, sans-serif',
+                        fontSize: '15px',
+                        lineHeight: '1.3',
+                      }}
+                    >
+                      Problem:
+                    </p>
+                    <p
+                      className="mt-1 text-white lowercase"
+                      style={{
+                        fontFamily: 'SF Pro Display, sans-serif',
+                        fontSize: '14px',
+                        lineHeight: '1.5',
+                      }}
+                    >
+                      We need to promote our brand but the influencer prices are too high.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </h1>
           </div>
 
-          <h1 className="font-heading text-[clamp(36px,10vw,56px)] font-normal uppercase leading-[1.05] text-white">
-            Create Your{" "}
-            <span className="block">Own AI</span>
-            <span className="block">Influencer</span>
-            <span className="block">With Us!</span>
-          </h1>
-
-          {/* Bottom info */}
-          <div className="mt-auto flex items-end justify-between">
-            <div>
-              <Link
-                href="#solutions"
-                className="inline-flex items-center gap-2 text-[14px] text-white/70 transition-colors hover:text-white"
+          {/* Bottom bar: arrow+link | whatsapp | talk to AI */}
+          <div className="flex items-end justify-between">
+            {/* Left: arrow + discover link */}
+            <div className="flex flex-col gap-2">
+              <svg width="28" height="36" viewBox="0 0 99 122" fill="none" aria-label="Scroll down">
+                <g clipPath="url(#m-arrow-clip)">
+                  <path d="M56.9199 0L56.9199 95.9621L89.1853 66.0555L98.7897 75.9435L98.9811 76.9205L49.6919 122L0 76.9205L0.198028 75.9435L9.61097 66.2194L42.0612 95.9621L42.0612 0L56.9199 0Z" fill="white" />
+                </g>
+                <defs>
+                  <clipPath id="m-arrow-clip">
+                    <rect width="100" height="130" fill="white" />
+                  </clipPath>
+                </defs>
+              </svg>
+              <a
+                href="#discover"
+                className="text-white underline decoration-white/40 underline-offset-4"
+                style={{
+                  fontFamily: 'Bricolage Grotesque, sans-serif',
+                  fontWeight: 400,
+                  fontSize: '14px',
+                  lineHeight: '1.2',
+                }}
               >
                 Discover AI Solutions
-                <svg className="h-3 w-3" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M2 6h8M6 2l4 4-4 4" />
-                </svg>
-              </Link>
+              </a>
             </div>
-            <div className="flex items-center gap-2">
-              <span className="h-1.5 w-6 rounded-full bg-white" />
-              <span className="h-1.5 w-1.5 rounded-full bg-white/40" />
-              <span className="h-1.5 w-1.5 rounded-full bg-white/40" />
+
+            {/* Right: Talk to AI widget */}
+            <div className="relative overflow-hidden rounded-[10px]" style={{ width: 120, height: 150 }}>
+              <Image
+                unoptimized
+                src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/893c48e8-59f1-400e-9cb8-0d36b752db00/public"
+                alt="Talk to our AI assistant"
+                fill
+                className="object-cover"
+                sizes="120px"
+              />
             </div>
           </div>
         </div>
       </section>
 
       {/* ════════════════════════════════════════════════════════
-          2. STATEMENT — "We Don't Just Use AI, We Design With It."
+          2. STATEMENT — "WE DON'T JUST USE AI WE DESIGN WITH IT."
           ════════════════════════════════════════════════════════ */}
-      <section className="bg-light-bg px-5 py-16">
-        <p className="mb-3 font-heading text-[14px] font-semibold uppercase tracking-widest text-[#126478]">
-          Why DDiP AI
-        </p>
-        <h2
-          className="text-[clamp(32px,9vw,48px)] font-bold uppercase leading-[1.05]"
-          style={{ fontFamily: "var(--font-body)" }}
-        >
-          WE DON&apos;T JUST USE AI
-          <br />
-          WE DESIGN
-          <br />
-          WITH IT.
-        </h2>
-
-        {/* Video / Image */}
-        <div className="mt-8 overflow-hidden rounded-[14px]">
+      <section className="bg-light-bg pt-8 pb-10">
+        {/* Video — rounded rectangle with side margins */}
+        <div className="mx-5 overflow-hidden" style={{ aspectRatio: "16/9" }}>
           <HlsPlayer
             src="9e3a0d22828697a21a65a4ea035f5c3d"
             autoPlay={true}
-            hoverToPlay={false}
             controls={false}
             muted={true}
             loop={true}
             fillHeight={true}
-            className="h-auto w-full"
+            className="h-full w-full object-cover"
           />
         </div>
 
-        <p className="mt-6 text-[15px] leading-[1.6] text-light-body">
-          We help brands unlock their full potential by blending AI-driven strategies
-          with creative design — delivering solutions that are both innovative and
-          measurable across all verticals and touchpoints.
-        </p>
-
-        {/* Labels */}
-        <div className="mt-6 flex flex-col gap-2">
-          <p className="text-[12px] font-medium uppercase tracking-wider text-[#126478]">
-            Powered by AI Technology
+        {/* Text below video */}
+        <div className="px-5 pt-8">
+          <p
+            className="mb-4 font-semibold text-[#126478]"
+            style={{ fontFamily: "var(--font-body)", fontSize: "24px" }}
+          >
+            Why DDIP AI
           </p>
-          <p className="text-[12px] font-medium uppercase tracking-wider text-[#126478]">
-            Designed by Creative Minds
-          </p>
+          <h2
+            className="font-bold uppercase text-[#063746]"
+            style={{
+              fontFamily: "var(--font-body)",
+              fontSize: "58px",
+              lineHeight: "1.0",
+              letterSpacing: "-0.02em",
+            }}
+          > WE DON&apos;T JUST USE AI WE DESIGN WITH IT.
+          </h2>
         </div>
+      </section>
 
-        {/* Capabilities */}
-        <div className="mt-10 flex flex-col gap-6">
-          <h3 className="font-heading text-[14px] font-semibold uppercase tracking-widest text-[#126478]">
+      {/* ════════════════════════════════════════════════════════
+          3. ABOUT — "From Insight to Intelligence" + 4 Capability Cards
+          Figma sections 19-24
+          ════════════════════════════════════════════════════════ */}
+      <section className="bg-light-bg py-10 pb-12">
+        <div className="px-5">
+          {/* Tagline + description — stacked */}
+          <p
+            className="text-[22px] leading-[1.3] text-[#126478]"
+            style={{ fontFamily: "var(--font-body)" }}
+          >
             From Insight to Intelligence
-          </h3>
-          <p className="text-[15px] leading-[1.6] text-light-body">
-            We build strategies that start with understanding — combining deep research
-            with AI-powered creativity to deliver impactful, scalable outcomes.
           </p>
-          <div className="grid grid-cols-1 gap-4">
-            {capabilities.map((cap, i) => (
-              <div key={i} className="rounded-[14px] border border-border-light p-5">
-                <h4 className="font-heading text-[16px] font-medium uppercase text-light-text">
+          <p
+            className="mt-3 text-[28px] font-medium leading-[1.3] text-[#063746]"
+
+          >
+            We help brands unlock their creative potential through the synergy of human insight and AI-driven precision.
+          </p>
+
+          {/* 4 Capability items — single column */}
+          <div className="mt-8 flex flex-col gap-7">
+            {capabilities.map((cap) => (
+              <div key={cap.title}>
+                <h3
+                  className="text-[18px] uppercase leading-normal text-[#063746]"
+                  style={{ fontFamily: "var(--font-body)", letterSpacing: "0.04em" }}
+                  lang="en"
+                >
                   {cap.title}
-                </h4>
-                <p className="mt-2 text-[14px] leading-[1.5] text-light-body">
+                </h3>
+                <p
+                  className="mt-2 text-[16px] leading-normal text-[#063746]"
+                  style={{ fontFamily: "var(--font-body)" }}
+                >
                   {cap.description}
                 </p>
               </div>
@@ -322,390 +434,410 @@ export default function MobileHomePage() {
       </section>
 
       {/* ════════════════════════════════════════════════════════
-          3. OUR AI SOLUTIONS
+          4. OUR AI SOLUTIONS — mobile swipeable cards
           ════════════════════════════════════════════════════════ */}
-      <section id="solutions" className="bg-light-bg px-5 py-16">
-        <h2 className="font-heading text-[clamp(36px,9vw,48px)] font-medium uppercase leading-[0.99] text-light-text">
-          OUR AI
-          <br />
-          SOLUTIONS
-        </h2>
+      <section className="bg-light-bg pt-8 pb-10">
+        {/* Section heading */}
+        <div className="px-5 mb-6">
+          <h2
+            className="font-medium uppercase text-[#063746]"
+            style={{
+              fontFamily: "var(--font-body)",
+              fontSize: "clamp(44px, 12vw, 56px)",
+              lineHeight: "1.0",
+              letterSpacing: "-0.02em",
+            }}
+          >
+            OUR AI
+            <br />
+            SOLUTIONS
+          </h2>
+        </div>
 
-        <div className="mt-8 flex flex-col gap-6">
-          {cmsSolutions.map((solution, i) => (
-            <Link key={i} href={solution.href} className="group block">
-              <div className="overflow-hidden rounded-[20px] bg-white">
-                {/* Media */}
-                <div className="relative aspect-[4/3] overflow-hidden">
+        {/* Swipeable cards */}
+        <div className="overflow-hidden" ref={emblaRef}>
+          <div className="flex">
+            {cmsSolutions.map((solution) => (
+              <Link
+                key={solution.title}
+                href={solution.href}
+                className="shrink-0 w-screen px-2"
+              >
+                {/* Solution title above media */}
+                <p
+                  className="mb-3 font-semibold text-[#063746]"
+                  style={{ fontFamily: "var(--font-body)", fontSize: "17px" }}
+                >
+                  {solution.title}
+                </p>
+
+                {/* Media — rounded rectangle */}
+                <div className="relative overflow-hidden rounded-card w-full" style={{ aspectRatio: "16/10" }}>
                   {solution.mediaType === "video" ? (
                     <HlsPlayer
                       src={solution.media}
                       autoPlay={true}
-                      hoverToPlay={false}
                       controls={false}
                       muted={true}
                       loop={true}
                       fillHeight={true}
-                      className="h-full w-full object-cover"
+                      className="absolute inset-0 h-full w-full object-cover"
                     />
                   ) : (
                     <Image
                       src={solution.media}
                       alt={solution.title}
                       fill
-                      className="object-cover"
-                      sizes="(max-width: 768px) 100vw, 50vw"
+                      unoptimized
+                      className="absolute inset-0 h-full w-full object-cover"
                     />
                   )}
-                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4">
-                    <h3
-                      className="text-[20px] font-bold leading-[1.2] text-white"
-                      style={{ fontFamily: "var(--font-body)" }}
-                    >
-                      {solution.title}
-                    </h3>
-                  </div>
                 </div>
-                {/* Info */}
-                <div className="p-5">
-                  <p className="text-[14px] leading-[1.5] text-light-body">
-                    {solution.description}
-                  </p>
-                  <div className="mt-4 flex flex-wrap gap-2">
-                    {solution.tags.map((tag, j) => (
+
+                {/* Description */}
+                <p
+                  className="mt-4 text-[15px] leading-normal text-[#063746]"
+                  style={{ fontFamily: "var(--font-body)" }}
+                >
+                  {solution.description}
+                </p>
+
+                {/* Tags */}
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {solution.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="rounded-full border border-[#063746]/40 px-3 py-1.5 text-[11px] leading-normal text-[#063746]"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+
+        {/* Controls — Dots + Play/Pause */}
+        <div className="mt-6 flex items-center justify-center gap-3">
+          <div className="flex items-center gap-1.5 rounded-full bg-[#E8E8E8] px-4 py-2">
+            {cmsSolutions.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => { scrollSolutions(i); setSolutionsPlaying(false); autoplayPlugin.current.stop(); }}
+                aria-label={`Slide ${i + 1}`}
+                className="transition-all duration-300"
+                style={{
+                  width: i === solutionsIndex ? 24 : 8,
+                  height: 8,
+                  borderRadius: 9999,
+                  backgroundColor: i === solutionsIndex ? "#063746" : "#A1A1A1",
+                  opacity: i === solutionsIndex ? 1 : 0.4,
+                }}
+              />
+            ))}
+          </div>
+          <button
+            onClick={togglePlay}
+            aria-label={solutionsPlaying ? "Pause" : "Play"}
+            className="flex h-9 w-9 items-center justify-center rounded-full border border-[#A1A1A1] text-[#A1A1A1] transition hover:bg-[#A1A1A1] hover:text-white"
+          >
+            {solutionsPlaying ? (
+              <Pause className="h-4 w-4 fill-current" />
+            ) : (
+              <Play className="h-4 w-4 fill-current" />
+            )}
+          </button>
+        </div>
+      </section>
+
+      {/* ════════════════════════════════════════════════════════
+          5. SELECTED WORK — mobile single column
+          ════════════════════════════════════════════════════════ */}
+      <section className="bg-light-bg pt-8 pb-10">
+        <div className="px-5">
+          {/* Heading */}
+          <h2
+            className="font-medium uppercase text-[#063746]"
+            style={{
+              fontFamily: "var(--font-body)",
+              fontSize: "36px",
+              lineHeight: "1.0",
+              letterSpacing: "-0.02em",
+            }}
+            lang="en"
+          >
+            SELECTED
+            <br />
+            WORK
+          </h2>
+
+          {/* Cards — stacked vertically */}
+          <div className="mt-6 flex flex-col gap-8">
+            {cmsWorks.map((item) => (
+              <Link key={item.title} href="/works">
+                {/* Video with rounded corners */}
+                <div className="relative w-full h-115 overflow-hidden bg-[#D9D9D9]" style={{ aspectRatio: "4/3" }}>
+                  <HlsPlayer
+                    src={item.video}
+                    autoPlay={true}
+                    controls={false}
+                    muted={true}
+                    loop={true}
+                    fillHeight={true}
+                    className="absolute inset-0 h-full w-full object-cover"
+                  />
+                  {/* Tag pills — top right overlay */}
+                  <div className="absolute right-3 top-3 uppercase flex flex-wrap gap-1.5 max-w-[70%] bg-white rounded-full text-[#000000] text-[12px]" style={{padding:"10px 16px"}}>
+                    {item.category}
+                  </div>
+                  {/* Tag pills — boottom left overlay */}
+                  <div className="absolute left-3 bottom-3 flex flex-wrap gap-1.5 max-w-[70%]">
+                    {item.tags.map((tag) => (
                       <span
-                        key={j}
-                        className="rounded-full border border-[#C3C3C3] px-3 py-1 text-[10px] text-light-text"
+                        key={tag}
+                        className="rounded-full border border-white/50 bg-white/75 px-2 py-1 text-[9px] leading-normal text-[#063746]"
                       >
                         {tag}
                       </span>
                     ))}
                   </div>
                 </div>
-              </div>
+
+                {/* Info below */}
+                <div className="mt-3">
+                  <h3
+                    className="text-[22px] font-semibold leading-normal text-[#063746]"
+                    style={{ fontFamily: "var(--font-body)" }}
+                  >
+                    {item.title}
+                  </h3>
+                  <p
+                    className="mt-1 text-[14px] leading-normal text-[#063746]/70"
+                    style={{ fontFamily: "var(--font-body)" }}
+                  >
+                    {item.subtitle}
+                  </p>
+                </div>
+              </Link>
+            ))}
+          </div>
+
+          {/* See more link — centered at bottom */}
+          <div className="mt-8 text-center">
+            <Link
+              href="/works"
+              className="text-[24px] text-[#063746] underline underline-offset-4"
+              style={{ fontFamily: "var(--font-body)" }}
+            >
+              See more of our work
             </Link>
-          ))}
+          </div>
         </div>
       </section>
 
       {/* ════════════════════════════════════════════════════════
-          4. SELECTED WORK
+          6. THE DDIP APPROACH — mobile
           ════════════════════════════════════════════════════════ */}
-      <section className="bg-light-bg px-5 py-16">
-        <div className="mb-2 flex items-end justify-between">
-          <h2 className="font-heading text-[clamp(36px,9vw,48px)] font-medium uppercase leading-[0.99] text-light-text">
-            SELECTED
+      <section className="bg-light-bg pt-10 pb-12">
+        {/* Label + heading */}
+        <div className="px-5 text-center">
+          <p
+            className="font-normal text-[#039EB7]"
+            style={{ fontFamily: "var(--font-body)", fontSize: "18px" }}
+          >
+            The DDIP Approach
+          </p>
+          <h2
+            className="mt-3 font-bold uppercase"
+            style={{
+              fontFamily: "var(--font-body)",
+              fontSize: "32px",
+              lineHeight: "1.05",
+              letterSpacing: "-0.02em",
+              background: "linear-gradient(266.43deg, #063746 1.48%, #00BCCF 117.86%)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              backgroundClip: "text"
+            }}
+          >
+            WE DESIGN SYSTEMS
             <br />
-            WORK.
+            THAT EVOLVE WITH
+            <br />
+            THE INDUSTRY.
           </h2>
         </div>
-        <Link
-          href="/works"
-          className="mb-8 inline-flex items-center gap-1 text-[14px] text-[#126478]"
-        >
-          See more of our work
-          <svg className="h-3 w-3" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="2">
-            <path d="M2 6h8M6 2l4 4-4 4" />
-          </svg>
-        </Link>
 
-        <div className="flex flex-col gap-6">
-          {cmsWorks.map((work, i) => (
-            <div key={i} className="overflow-hidden rounded-[14px]">
-              <div className="relative aspect-[16/10]">
-                <HlsPlayer
-                  src={work.video}
-                  autoPlay={true}
-                  hoverToPlay={false}
-                  controls={false}
-                  muted={true}
-                  loop={true}
-                  fillHeight={true}
-                  className="h-full w-full object-cover"
-                />
-              </div>
-              <div className="bg-white p-4">
-                <p className="text-[12px] font-medium uppercase tracking-wider text-[#126478]">
-                  {work.category}
-                </p>
-                <h3 className="mt-1 font-heading text-[20px] font-medium text-light-text">
-                  {work.title}
-                </h3>
-                <p className="mt-1 text-[14px] text-light-body">
-                  {work.subtitle}
-                </p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* ════════════════════════════════════════════════════════
-          5. DDIP APPROACH — Gradient heading
-          ════════════════════════════════════════════════════════ */}
-      <section className="bg-light-bg px-5 py-16">
-        <p className="mb-3 font-heading text-[14px] font-semibold uppercase tracking-widest text-[#039EB7]">
-          The DDiP Approach
-        </p>
-        <h2
-          className="text-[clamp(28px,7vw,40px)] font-bold uppercase leading-[1.1]"
-          style={{
-            fontFamily: "var(--font-body)",
-            background: "linear-gradient(199deg, #063746 0%, #00BCCF 100%)",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-          }}
-        >
-          WE DESIGN SYSTEMS TO EVOLVE WITH THE INDUSTRY.
-        </h2>
-
-        <div className="mt-6 overflow-hidden rounded-[14px]">
+        {/* Full-width video */}
+        <div className="mt-8 w-full overflow-hidden" style={{ aspectRatio: "16/9" }}>
           <HlsPlayer
             src="665822d5062aae2129504c3a2b474494"
             autoPlay={true}
-            hoverToPlay={false}
             controls={false}
             muted={true}
             loop={true}
             fillHeight={true}
-            className="h-auto w-full"
+            className="h-full w-full object-cover"
           />
         </div>
 
-        <p className="mt-6 text-[15px] leading-[1.6] text-light-body">
-          By combining creative thinking with intelligent technology, we build workflows
-          and experiences that grow alongside your business and your industry.
-        </p>
+        {/* Body text */}
+        <div className="px-5 mt-8">
+          <p
+            className="text-center text-[14px] leading-[1.6] text-[#063746]"
+            style={{ fontFamily: "var(--font-body)" }}
+          >
+            We believe continuous learning especially in AI. While we follow the trends,
+            also we track emerging AI tools, test their creative potential, and integrate
+            only the ones that meet our performance standards.
+          </p>
+          <p
+            className="mt-5 text-center text-[13px] leading-[1.6] text-[#063746]"
+            style={{ fontFamily: "var(--font-body)" }}
+          >
+            Every DDIP project operates through this evolving framework,
+            combining precision, adaptability, and creative control to deliver results that stay ahead of the curve.
+          </p>
+        </div>
       </section>
 
       {/* ════════════════════════════════════════════════════════
-          6. FUTURE FACE OF BRANDS — Dark section
+          7. THE FUTURE FACE OF BRANDS — mobile
           ════════════════════════════════════════════════════════ */}
-      <section className="bg-[#002834] px-5 py-16">
-        {/* Blur ellipses */}
-        <div className="pointer-events-none absolute left-0 top-0 h-[300px] w-[300px] rounded-full bg-[#00BCCF]/10 blur-[100px]" />
-
-        <p className="mb-2 text-[12px] font-medium uppercase tracking-wider text-[#1CE3F4]">
-          Discover AI
-        </p>
-        <h2
-          className="text-[clamp(32px,9vw,48px)] font-bold uppercase leading-[1.05] text-[#1CE3F4]"
-          style={{ fontFamily: "var(--font-body)" }}
-        >
-          THE FUTURE
-          <br />
-          FACE OF
-          <br />
-          BRANDS
-        </h2>
-
-        {/* Filter pills */}
-        <div className="mt-6 flex gap-2">
-          <button className="rounded-full bg-[#1CE3F4] px-4 py-2 text-[12px] font-medium text-[#002834]">
-            influencer
-          </button>
-          <button className="rounded-full border border-white/20 px-4 py-2 text-[12px] text-white/60">
-            Ambassador
-          </button>
-          <button className="rounded-full border border-white/20 px-4 py-2 text-[12px] text-white/60">
-            Mascot
-          </button>
-        </div>
-
-        {/* Influencer grid — 2 columns on mobile */}
-        <div className="mt-8 grid grid-cols-2 gap-3">
-          {cmsInfluencers.slice(0, 6).map((inf, i) => (
-            <div
-              key={i}
-              className="relative overflow-hidden rounded-[14px]"
-              style={{ backgroundColor: inf.color }}
+      <section className="relative overflow-hidden bg-dark-bg pt-10 pb-10">
+        <div className="relative z-10">
+          {/* Title */}
+          <div className="px-5 text-center">
+            <h2
+              className="font-bold uppercase text-[#1CE3F4]"
+              style={{
+                fontFamily: "var(--font-body)",
+                fontSize: "32px",
+                lineHeight: "1.05",
+              }}
             >
-              <div className="relative aspect-[3/4]">
-                <Image
-                  src={inf.image}
-                  alt={inf.name}
-                  fill
-                  className="object-cover"
-                  sizes="50vw"
-                />
-              </div>
-              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-3">
-                <p className="text-[13px] font-medium text-white">{inf.name}</p>
-                <p className="text-[10px] text-white/70">{inf.archetype}</p>
-              </div>
-            </div>
-          ))}
-        </div>
+              THE FUTURE FACE OF BRANDS
+            </h2>
 
-        <Link
-          href="/ai-solutions/ai-influencer"
-          className="mt-6 inline-flex items-center gap-2 text-[14px] text-[#1CE3F4]"
-        >
-          Discover More
-          <svg className="h-3 w-3" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="2">
-            <path d="M2 6h8M6 2l4 4-4 4" />
-          </svg>
-        </Link>
-      </section>
-
-      {/* ════════════════════════════════════════════════════════
-          7. SMARTER WORKFLOWS
-          ════════════════════════════════════════════════════════ */}
-      <section className="bg-light-bg px-5 py-16">
-        <h2
-          className="text-[clamp(28px,7vw,40px)] font-bold uppercase leading-[1.1]"
-          style={{
-            fontFamily: "var(--font-body)",
-            background: "linear-gradient(199deg, #063746 0%, #00BCCF 100%)",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-          }}
-        >
-          SMARTER WORKFLOWS, LIMITLESS POTENTIAL
-        </h2>
-
-        <p className="mt-4 text-[15px] leading-[1.6] text-light-body">
-          Systems designed to move ideas faster — connecting strategy, content, and
-          technology in one integrated flow.
-        </p>
-
-        <div className="mt-6 overflow-hidden rounded-[14px]">
-          <Image
-            src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/bbe8dab9-ddbc-436c-b0ab-94be60b86200/public"
-            alt="3D workflow visualization"
-            width={670}
-            height={460}
-            className="h-auto w-full"
-          />
-        </div>
-
-        <Link
-          href="/ai-solutions/automation"
-          className="mt-6 inline-flex items-center gap-2 rounded-full border border-[#002834] px-6 py-3 text-[14px] font-medium text-[#002834]"
-        >
-          Explore Our Workflows
-          <span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#002834] text-white">
-            <svg className="h-3 w-3" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M2 6h8M6 2l4 4-4 4" />
-            </svg>
-          </span>
-        </Link>
-      </section>
-
-      {/* ════════════════════════════════════════════════════════
-          8. +45 AI TOOLS
-          ════════════════════════════════════════════════════════ */}
-      <section className="bg-light-bg px-5 py-16">
-        <div className="relative flex min-h-[300px] items-center justify-center">
-          {/* Tool logos scattered */}
-          {[
-            { src: "/images/ai-tools/openai.png", top: "5%", left: "10%" },
-            { src: "/images/ai-tools/midjourney.png", top: "10%", left: "75%" },
-            { src: "/images/ai-tools/runway.png", top: "30%", left: "5%" },
-            { src: "/images/ai-tools/heygen.png", top: "35%", left: "80%" },
-            { src: "/images/ai-tools/gemini.png", top: "60%", left: "8%" },
-            { src: "/images/ai-tools/kling.png", top: "65%", left: "78%" },
-            { src: "/images/ai-tools/flux.png", top: "85%", left: "15%" },
-            { src: "/images/ai-tools/freepik.png", top: "80%", left: "70%" },
-          ].map((tool, i) => (
-            <div
-              key={i}
-              className="absolute h-10 w-10"
-              style={{ top: tool.top, left: tool.left }}
+            <p
+              className="mx-auto mt-4 text-center text-[14px] leading-[1.6] text-[#90B2BD]"
+              style={{ fontFamily: "var(--font-body)" }}
             >
-              <Image
-                src={tool.src}
-                alt=""
-                width={40}
-                height={40}
-                className="h-full w-full object-contain"
-              />
-            </div>
-          ))}
-          {/* Center text */}
-          <div className="text-center">
-            <p className="font-heading text-[32px] font-medium text-light-text">
-              +45 Ai Tools
-            </p>
-            <p className="mt-2 text-[14px] text-light-body">
-              we&apos;re designed to integrate with
+              Our AI influencers represent the <span className="font-bold text-white">next step</span> in brand
+              communication, combining expressiveness, adaptability, and visual intelligence.
             </p>
           </div>
-        </div>
-      </section>
 
-      {/* ════════════════════════════════════════════════════════
-          9. PARTNERS
-          ════════════════════════════════════════════════════════ */}
-      <section className="bg-light-bg px-5 py-16">
-        <h2 className="mb-8 font-heading text-[clamp(36px,9vw,48px)] font-medium uppercase leading-[0.99] text-light-text">
-          PARTNERS
-        </h2>
-        <div className="grid grid-cols-2 gap-3">
-          {partners.map((partner, i) => (
-            <div
-              key={i}
-              className="flex h-[100px] items-center justify-center rounded-[14px] border border-[#C3C3C3]"
-            >
-              <span className="text-[14px] font-medium text-light-body">
-                {partner.name}
-              </span>
+          {/* Filter tabs */}
+          <div className="mt-6 px-5">
+            <div className="flex items-center rounded-full bg-white px-2 py-2 gap-1">
+              <button
+                className="flex-1 rounded-full bg-[#063746] py-2 text-[13px] font-medium leading-[1.2] text-white"
+                style={{ fontFamily: "var(--font-body)" }}
+              >
+                Influencer
+              </button>
+              <button
+                className="flex-1 rounded-full py-2 text-[13px] leading-[1.2] text-[#063746]"
+                style={{ fontFamily: "var(--font-body)" }}
+              >
+                Ambassador
+              </button>
+              <button
+                className="flex-1 rounded-full py-2 text-[13px] leading-[1.2] text-[#063746]"
+                style={{ fontFamily: "var(--font-body)" }}
+              >
+                Mascot
+              </button>
             </div>
-          ))}
-        </div>
-      </section>
+          </div>
 
-      {/* ════════════════════════════════════════════════════════
-          10. FAQ
-          ════════════════════════════════════════════════════════ */}
-      <section className="bg-light-bg px-5 py-16">
-        <div className="rounded-[20px] bg-[#002834] p-6">
-          <h2 className="mb-6 font-heading text-[clamp(36px,9vw,48px)] font-medium uppercase text-[#EBFFFF]">
-            FAQ
-          </h2>
-
-          <div className="flex flex-col">
-            {cmsFaqs.map((faq, i) => (
-              <div key={i} className="border-b border-white/10">
-                <button
-                  onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                  className="flex w-full items-center justify-between py-4 text-left"
-                >
-                  <span className="pr-4 text-[14px] leading-[1.4] text-[#EBFFFF]">
-                    {faq.question}
-                  </span>
-                  <span
-                    className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-white/20 text-[16px] text-white transition-transform duration-200 ${openFaq === i ? "rotate-45" : ""
-                      }`}
-                  >
-                    +
-                  </span>
-                </button>
+          {/* Single-row scrolling influencer cards */}
+          <div className="mt-6 overflow-hidden" ref={emblaRow1Ref}>
+            <div className="flex gap-4 px-5">
+              {[...cmsInfluencers.row1, ...cmsInfluencers.row2].map((inf, idx) => (
                 <div
-                  className={`overflow-hidden transition-all duration-300 ${openFaq === i ? "max-h-[200px] pb-4" : "max-h-0"
-                    }`}
+                  key={`inf-${idx}`}
+                  className="shrink-0 cursor-pointer"
+                  style={{ width: "calc(75vw)" }}
+                  onClick={() => { setSelectedInfluencer(inf); setIsInfluencerPopupOpen(true); }}
                 >
-                  <p className="text-[13px] leading-[1.5] text-[#90B2BD]">
-                    {faq.answer}
+                  {/* Card image */}
+                  <div className="relative overflow-hidden rounded-2xl bg-[#EFEFEF]" style={{ aspectRatio: "3/4" }}>
+                    <Image
+                      unoptimized
+                      src={inf.image}
+                      alt={inf.name}
+                      fill
+                      className="absolute inset-0 h-full w-full object-cover"
+                    />
+                    {/* Industry tag — top right */}
+                    <div
+                      className="absolute right-3 top-3 rounded-full px-3 py-1.25"
+                      style={{ backgroundColor: inf.color }}
+                    >
+                      <span
+                        className="text-[11px] uppercase leading-[1.2] text-black font-medium"
+                        style={{ fontFamily: "var(--font-body)" }}
+                      >
+                        {inf.industry}
+                      </span>
+                    </div>
+                    {/* Bottom: name + flag + plus button */}
+                    <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between">
+                      <div className="flex items-center gap-2 rounded-full bg-[#063746CC] px-3 py-2">
+                        {inf.country && (
+                          <Image
+                            src={`https://flagcdn.com/w20/${inf.country.toLowerCase()}.png`}
+                            alt={inf.country}
+                            height={4}
+                            width={5}
+                            unoptimized
+                            className="h-3 w-4.5 rounded-sm object-cover"
+                          />
+                        )}
+                        <span
+                          className="text-[13px] leading-[1.2] text-white"
+                          style={{ fontFamily: "var(--font-body)" }}
+                        >
+                          {inf.name}
+                        </span>
+                      </div>
+                      <div className="flex h-9 w-9 items-center justify-center rounded-full bg-white/90">
+                        <svg className="h-4.5 w-4.5 text-[#012F3B]" viewBox="0 0 30 30" fill="none" stroke="currentColor" strokeWidth="4">
+                          <line x1="15" y1="0" x2="15" y2="30" />
+                          <line x1="0" y1="15" x2="30" y2="15" />
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                  {/* Archetype below card */}
+                  <p
+                    className="mt-2 text-[12px] leading-[1.3] text-[#90B2BD]"
+                    style={{ fontFamily: "var(--font-body)" }}
+                  >
+                    &ldquo;{inf.archetype}&rdquo;
                   </p>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
 
-          {/* Live FAQ CTA */}
-          <div className="mt-6 rounded-[14px] bg-[#063746] p-5 text-center">
-            <p className="text-[14px] font-medium text-[#1CE3F4]">Live FAQ</p>
-            <p className="mt-1 text-[18px] font-bold text-white">
-              Didn&apos;t find your answer?
-            </p>
+          {/* Discover More — bottom right */}
+          <div className="mt-6 flex items-center justify-end px-5">
             <Link
-              href="/lets-connect"
-              className="mt-4 inline-flex items-center gap-2 rounded-full bg-[#1CE3F4] px-6 py-3 text-[14px] font-medium text-[#002834]"
+              href="/m/ai-solutions/ai-influencer"
+              className="flex items-center gap-2"
             >
-              Talk to us
-              <svg className="h-3 w-3" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M2 6h8M6 2l4 4-4 4" />
+              <span
+                className="text-[15px] font-semibold text-white underline underline-offset-4"
+                style={{ fontFamily: "var(--font-body)" }}
+              >
+                Discover More
+              </span>
+              <svg className="h-4.5 w-4.5 text-white" viewBox="0 0 24 16" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M0 8h22M16 1l7 7-7 7" />
               </svg>
             </Link>
           </div>
@@ -713,30 +845,260 @@ export default function MobileHomePage() {
       </section>
 
       {/* ════════════════════════════════════════════════════════
-          11. CTA BAR
+          8. SMARTER WORKFLOWS — mobile
           ════════════════════════════════════════════════════════ */}
-      <section className="bg-light-bg px-5 pb-16">
-        <div
-          className="rounded-[20px] p-6 text-center"
-          style={{
-            background: "linear-gradient(-90deg, #002834 0%, #129CAC 100%)",
-          }}
-        >
-          <p className="font-heading text-[20px] font-bold text-[#EBFFFF]">
+      <section className="bg-light-bg pt-10 pb-12">
+        {/* Heading + description */}
+        <div className="px-5">
+          <h2
+            className="font-bold uppercase"
+            style={{
+              fontFamily: "var(--font-body)",
+              fontSize: "32px",
+              lineHeight: "1.05",
+              letterSpacing: "-0.01em",
+              background: "linear-gradient(199deg, #063746 0%, #00BCCF 100%)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              backgroundClip: "text",
+            }}
+          >
+            SMARTER
+            <br />
+            WORKFLOWS,
+            <br />
+            LIMITLESS POTENTIAL
+          </h2>
+
+          <p
+            className="mt-4 text-[14px] leading-[1.6] text-[#063746]"
+            style={{ fontFamily: "var(--font-body)" }}
+          >
+            Our AI automation systems accelerate processes across every layer of
+            business, from content generation and chatbot communication to data
+            analysis and voice assistants.
+          </p>
+        </div>
+
+        {/* Full-width video — no side margins */}
+        <div className="mt-6 w-full overflow-hidden" style={{ aspectRatio: "16/9" }}>
+          <HlsPlayer
+            src="bdb805b635f8e3a865a3157336836136"
+            autoPlay={true}
+            controls={false}
+            muted={true}
+            loop={true}
+            fillHeight={true}
+            className="h-full w-full object-cover"
+          />
+        </div>
+
+        {/* Sub-section */}
+        <div className="px-5 mt-8">
+          <h3
+            className="text-[22px] font-normal leading-[1.3] text-[#063746]"
+            style={{ fontFamily: "var(--font-body)" }}
+          >
+            Systems designed to move ideas faster.
+          </h3>
+
+          <p
+            className="mt-4 text-[15px] leading-[1.6] text-[#063746]"
+            style={{ fontFamily: "var(--font-body)" }}
+          >
+            They are designed to minimize human intervention where it is not
+            needed, allowing people to focus on what drives true value:
+            creativity, strategy, and innovation.
+          </p>
+          <p
+            className="mt-4 text-[14px] leading-[1.6] text-[#063746]"
+            style={{ fontFamily: "var(--font-body)" }}
+          >
+            With tailor-made integrations, DDIP automation unlocks new
+            opportunities for efficiency and creativity, no matter the field.
+          </p>
+
+          {/* CTA Button */}
+          <div className="mt-6">
+            <Link
+              href="/m/ai-solutions"
+              className="inline-flex items-center gap-4 rounded-full bg-[#063746] py-2.5 pl-5 pr-2.5"
+            >
+              <span
+                className="text-[15px] font-medium leading-[1.2] text-white"
+                style={{ fontFamily: "var(--font-body)" }}
+              >
+                Explore Our Workflows
+              </span>
+              <span className="flex h-8.5 w-8.5 items-center justify-center rounded-full bg-[#039EB7]">
+                <svg className="h-4 w-4 text-white" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="3">
+                  <line x1="10" y1="1" x2="10" y2="19" />
+                  <line x1="1" y1="10" x2="19" y2="10" />
+                </svg>
+              </span>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ════════════════════════════════════════════════════════
+          9. PARTNERS (moved before FAQ per client feedback)
+          Figma sections 47-57: 5 bordered logo boxes
+          ════════════════════════════════════════════════════════ */}
+      <section className="bg-light-bg py-10" style={safePx}>
+        <h2 className="font-heading text-[40px] font-bold uppercase leading-none text-[#063746] mb-6">
+          Partners
+        </h2>
+
+        {/* Top row — 2 wide cells */}
+        <div className="border border-[#C3C3C3]">
+          <div className="grid grid-cols-2">
+            {partners.slice(0, 2).map((partner) => (
+              <div key={partner.name} className="flex h-35 items-center justify-center border-r border-[#C3C3C3] last:border-r-0">
+                {partner.image ? (
+                  <img src={partner.image} alt={partner.name} className="max-h-15 max-w-30 object-contain" />
+                ) : (
+                  <span className="font-heading text-lg font-semibold text-[#063746]/40">{partner.name}</span>
+                )}
+              </div>
+            ))}
+          </div>
+
+          {/* Bottom row — 3 equal cells */}
+          <div className="grid grid-cols-3 border-t border-[#C3C3C3]">
+            {partners.slice(2).map((partner) => (
+              <div key={partner.name} className="flex h-30 items-center justify-center border-r border-[#C3C3C3] last:border-r-0">
+                {partner.image ? (
+                  <img src={partner.image} alt={partner.name} className="max-h-12 max-w-22 object-contain" />
+                ) : (
+                  <span className="font-heading text-base font-semibold text-[#063746]/40">{partner.name}</span>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+
+      {/* ════════════════════════════════════════════════════════
+          11. FAQ
+          Figma section 58: Dark card #002834, 2-column FAQ, bottom CTA
+          ════════════════════════════════════════════════════════ */}
+      <section className="bg-light-bg py-10">
+        <div className="rounded-[20px] bg-dark-bg p-5">
+          <h2 className="mb-5 font-heading text-[36px] font-medium uppercase text-[#FFFFFF]">
+            FAQ
+          </h2>
+          <hr className="text-[#EBFFFF33]" />
+          <div className="flex flex-col">
+            {cmsFaqs.map((faq, i) => (
+              <div key={i} className="border-b border-[#EBFFFF33]">
+                <button
+                  onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                  className="flex w-full items-center justify-between gap-3 py-4 text-left"
+                  aria-expanded={openFaq === i}
+                >
+                  <span className="text-[16px] leading-snug text-[#FFFFFF]">{i + 1}. {faq.question}</span>
+                  <span className={`flex h-6 w-6 shrink-0 items-center justify-center text-[16px] text-white transition-transform duration-200 ${openFaq === i ? "rotate-45" : ""}`}>
+                    +
+                  </span>
+                </button>
+                <div className={`grid transition-all duration-300 ${openFaq === i ? "grid-rows-[1fr] pb-4" : "grid-rows-[0fr]"}`}>
+                  <div className="overflow-hidden">
+                    <p className="text-[12px] leading-relaxed text-[#90B2BD]">{faq.answer}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="mt-4 h-50">
+            <img src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/73a7b6be-f52c-4654-74ee-8749e23d0a00/public" alt="FAQ Support" className="w-full h-full mx-auto object-cover rounded-xl" />
+          </div>
+          <div className="mt-5 text-start">
+            <p className="text-[26px] font-medium text-white">Live FAQ</p>
+            <p className="mt-1 text-[28px] font-bold text-white">Didn&apos;t find your answer?</p>
+
+            <Link href="/lets-connect" className="w-full justify-center mt-4 inline-flex items-center gap-2 rounded-full bg-[#1CE3F4] px-6 py-2.5 text-[18px] font-medium text-dark-bg active:opacity-80">
+              Talk to us
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ════════════════════════════════════════════════════════
+          +45 AI TOOLS — mobile scattered layout
+          ════════════════════════════════════════════════════════ */}
+      <section className="bg-light-bg py-10">
+        <div className="relative mx-auto w-full" style={{ height: "420px" }}>
+          {/* Center text */}
+          <div className="absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2 text-center">
+            <p className="whitespace-nowrap font-heading text-[28px] font-normal leading-none text-[#063746]">
+              +45 Ai Tools
+            </p>
+          </div>
+          {/* Scattered logos — repositioned for portrait mobile */}
+          {[
+            { src: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/5043405a-6e5f-4c14-6aaf-9ebf92610000/public", name: "OpenAI", top: "52%", right: "4%", size: 72 },
+            { src: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/cd8329ab-0c6e-4af4-6359-0f0b61658d00/public", name: "Midjourney", top: "4%", right: "10%", size: 68 },
+            { src: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/df711488-1e63-475f-dee3-decf21bf1b00/public", name: "Runway", top: "12%", left: "30%", size: 58 },
+            { src: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/43af238f-dd9a-4972-0cec-30c1574b5c00/public", name: "Gemini", top: "28%", right: "28%", size: 52 },
+            { src: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/18e03f8f-d739-4565-e211-e1cb4e564d00/public", name: "HeyGen", top: "60%", left: "38%", size: 56 },
+            { src: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/2ee2e61a-e270-4996-3f0c-1b6fa0b1b000/public", name: "Flux", top: "72%", left: "22%", size: 50 },
+            { src: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/3aacf09f-82e4-4124-2813-12e031176900/public", name: "Kling", top: "75%", right: "18%", size: 58 },
+            { src: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/26273e24-6117-4535-de64-3f1168a8b300/public", name: "Freepik", top: "30%", right: "5%", size: 64 },
+            { src: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/3e2eb0ae-118a-4733-e1cf-812e90934200/public", name: "Minimax", top: "32%", left: "8%", size: 72 },
+            { src: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/b00ee700-e432-4bc1-bde0-93196a4f2900/public", name: "Veo", top: "62%", left: "4%", size: 68 },
+            { src: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/50fb6339-c64b-468a-f30b-525f4ec61000/public", name: "Seedream", top: "6%", left: "5%", size: 72 },
+            { src: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/99fe4e74-0843-449e-9b8d-ead7ca7f3e00/public", name: "Mystic", top: "8%", left: "48%", size: 56 },
+          ].map((tool) => (
+            <Image
+              key={tool.name}
+              src={tool.src}
+              unoptimized
+              alt={tool.name}
+              height={tool.size}
+              width={tool.size}
+              className="absolute opacity-90"
+              style={{
+                top: tool.top,
+                right: (tool as any).right,
+                left: (tool as any).left,
+                width: tool.size,
+                height: tool.size,
+                objectFit: "contain",
+              }}
+            />
+          ))}
+        </div>
+      </section>
+
+      {/* ════════════════════════════════════════════════════════
+          CTA BAR — "Let's design what's next together."
+          Figma section 60: Gradient bar
+          ════════════════════════════════════════════════════════ */}
+      <section
+        className="bg-light-bg"
+        style={{
+          paddingLeft: "max(20px, env(safe-area-inset-left))",
+          paddingRight: "max(20px, env(safe-area-inset-right))",
+          paddingBottom: "max(64px, calc(16px + env(safe-area-inset-bottom)))",
+        }}
+      >
+        <div className="rounded-[20px] p-6 text-start" style={{ background: "linear-gradient(-90deg,#002834 0%,#129CAC 100%)" }}>
+          <p className="font-heading text-[22px] font-bold text-[#EBFFFF]">
             Let&apos;s design what&apos;s next together.
           </p>
-          <p className="mt-2 text-[13px] text-[#EBFFFF]/70">
-            Ready to build smart? Let&apos;s align creativity, AI and strategy into one unstoppable
-            system.
-          </p>
-          <Link
-            href="/start-project"
-            className="mt-5 inline-flex items-center gap-2 rounded-full bg-[#1CE3F4] px-6 py-3 text-[14px] font-medium text-[#002834]"
-          >
+          <Link href="/start-project" className="mt-5 inline-flex  w-full items-center justify-center gap-2 rounded-full bg-[#1CE3F4] px-6 py-3 text-[18px] font-medium text-dark-bg active:opacity-80">
             Begin Your Transformation
           </Link>
         </div>
       </section>
+
+      <InfluencerPopupModal
+        open={isInfluencerPopupOpen}
+        onClose={() => setIsInfluencerPopupOpen(false)}
+        influencer={selectedInfluencer}
+      />
     </>
   );
 }

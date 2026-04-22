@@ -1,5 +1,26 @@
 @import "tailwindcss";
 
+/* Hide scrollbar for webkit browsers */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+/* Horizontal scroll animation */
+@keyframes scroll-horizontal {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-50% - 16px));
+  }
+}
+
 /*
  * DDip AI — Design Tokens (from Figma inspection)
  * Source: design/design-tokens.md
@@ -213,4 +234,13 @@ h6 {
 /* Hide footer in list view on works page */
 body.hide-footer footer {
   display: none !important;
+}
+/* Hide scrollbar but keep scroll functionality */
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hidden {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;     /* Firefox */
 }

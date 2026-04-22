@@ -255,7 +255,7 @@ export default function AutomationPage() {
         <div className="flex items-center gap-16">
 
           {/* Left — Text */}
-          <div className="w-[40%] shrink-0">
+          <div className="w-[43%] shrink-0">
             <h2 className="font-heading text-[75px] font-bold uppercase leading-[1.0]" style={{ background: "linear-gradient(266.43deg, #063746 1.48%, #00BCCF 117.86%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
               Tailored<br />Workflows
             </h2>
@@ -284,7 +284,8 @@ export default function AutomationPage() {
               muted={true}
               loop={true}
               fillHeight={true}
-              className="w-full h-auto object-cover"
+              fillWidth={false}
+              className="w-[874px] h-auto object-cover"
             />
           </div>
         </div>

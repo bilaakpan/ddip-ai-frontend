@@ -298,7 +298,7 @@ export default function AICommercialPage() {
 
             <div className="flex flex-col gap-6 w-[50%] relative" style={{ alignItems: "end" }}>
 
-              <div className="absolute -top-[70px] left-[115px] z-10">
+              <div className="absolute -top-[70px] left-[60px] z-10">
                 <img src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/a6646f63-84e1-4a9b-820d-b7063f47cd00/public" className="w-[170px] h-[170px] object-contain" style={{ transform: "rotate(11.17deg)" }} />
               </div>
 

@@ -208,7 +208,7 @@ export default function WorksPage() {
 
         {activeTab === "grid" ? (
           /* Grid Tab Content - Original Marquee */
-          <Container key="grid-content">
+          <div key="grid-content">
             <div className="w-full overflow-hidden">
               <div className="flex w-max animate-marquee">
                 <h1 className="flex items-center whitespace-nowrap font-heading uppercase leading-none text-[#145365] text-[clamp(32px,6vw,64px)] sm:text-[clamp(36px,7vw,80px)] md:text-[clamp(48px,8vw,120px)]">
@@ -222,11 +222,10 @@ export default function WorksPage() {
                   <img src="/images/common/star.svg" alt="*" className="mx-4 sm:mx-6 md:mx-8 lg:mx-10 h-8 w-8 sm:h-12 sm:w-12 md:h-16 md:w-16 lg:h-18 lg:w-18 relative top-[0.08em]" />
                 </h1>
               </div>
+              
             </div>
-            <p className="mt-6 sm:mt-8 max-w-xs sm:max-w-md md:max-w-2xl text-left text-base sm:text-lg md:text-xl leading-[1.6] text-[#063746] px-4">
-              See how we partner with visionary teams to build brands that stand out and push the boundaries of innovation.
-            </p>
-          </Container>
+         
+          </div>
         ) : (
           /* List Tab Content — scroll-driven, items activate as they enter viewport */
           <Container key="list-content">
@@ -306,12 +305,16 @@ export default function WorksPage() {
         {/* Subtitle + CTAs */}
         {activeTab === "grid" ? (
           /* Grid view — filter left, buttons right */
-          <div className="mt-8 flex items-center justify-between px-4 sm:px-8 md:px-12 lg:px-15">
+          <div className=" px-4 sm:px-8 md:px-12 lg:px-15">
+               <p className="w-[1000px]  text-left text-[44px] pl-[60px] pb-[100px] text-[#063746] px-4" style={{lineHeight:"normal"}}>
+              See how we partner with visionary teams to build brands that stand out and push the boundaries of innovation.
+            </p>
             {/* Dropdown filter */}
+            <div className="flex items-center justify-between px-4 sm:px-8 md:px-12 lg:px-15">
             <div className="relative">
               <button
                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                className="inline-flex items-center gap-2 rounded-full text-[#063746] px-6 py-2.5 sm:px-8 sm:py-3 font-heading text-lg sm:text-2xl font-medium transition-colors hover:bg-[#1CE3F4]/80"
+                className="inline-flex items-center gap-2 bg-[#ffffff] rounded-full text-[#063746] px-6 py-2.5 sm:px-8 sm:py-3 font-heading text-lg sm:text-2xl font-medium transition-colors hover:bg-[#1CE3F4]/80"
               >
                 {activeFilter === "All" ? "All Projects" : activeFilter}
                 <svg
@@ -349,6 +352,7 @@ export default function WorksPage() {
               >
                 List
               </button>
+            </div>
             </div>
           </div>
         ) : null}

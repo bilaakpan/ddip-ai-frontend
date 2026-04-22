@@ -299,7 +299,7 @@ export default function HomePage() {
 
         {/* Hero content */}
         <div className="relative z-10 flex flex-col px-[60px] pt-28 max-md:px-5 max-md:pt-24">
-          <div className="pb-6">
+          <div className="pb-6 mt-[100px]">
             <div className="relative w-full">
               <h1
                 className="w-full text-center uppercase text-white"
@@ -538,14 +538,16 @@ export default function HomePage() {
           4. OUR AI SOLUTIONS — 4 horizontal cards (scrollable)
           Figma sections 25-26: White cards, rounded 33px, image+title+desc+tags
           ════════════════════════════════════════════════════════ */}
-      <div className="mt-16 overflow-hidden px-[60px]" ref={emblaRef}>
+      <div className="mt-16 overflow-hidden px-[60px]"
+       ref={emblaRef} 
+       >
         <div className="flex gap-[33px]">
           {cmsSolutions.map((solution) => (
             <Link
               key={solution.title}
               href={solution.href}
               className="group flex-shrink-0"
-              style={{ width: "clamp(600px, 48vw, 1074px)" }}
+              style={{ width: "980px" }}
             >
               <div className="overflow-hidden rounded-[33px] bg-white">
                 {/* Media area */}
@@ -1069,7 +1071,7 @@ export default function HomePage() {
           8. SMARTER WORKFLOWS, LIMITLESS POTENTIAL
           Figma sections 41-46
           ════════════════════════════════════════════════════════ */}
-      <section className="bg-light-bg py-24 lg:py-32">
+      <section className="bg-light-bg pt-24 pb-[30px]">
         <div className="px-[60px]">
           {/* Gradient headline */}
           <h2
@@ -1121,30 +1123,9 @@ export default function HomePage() {
                 <br />
                 ideas faster.
               </h3>
-            </div>
-            <div className="w-1/2">
-              <p
-                className="text-[26px] leading-[1.5] text-[#063746]"
-                style={{ fontFamily: "var(--font-body)" }}
-              >
-                They are designed to minimize human intervention where it is not
-                needed, allowing people to focus on what drives true value:
-                creativity, strategy, and innovation.
-              </p>
-              <p
-                className="mt-8 text-[26px] leading-[1.5] text-[#063746]"
-                style={{ fontFamily: "var(--font-body)" }}
-              >
-                With tailor-made integrations, DDIP automation unlocks new
-                opportunities for efficiency and creativity, no matter the field.
-              </p>
-            </div>
-          </div>
-
-          {/* CTA Button */}
-          <div className="mt-6">
+                  <div className="mt-[50px]">
             <Link
-              href="/ai-solutions"
+              href="/works"
               className="inline-flex items-center gap-[30px] rounded-full bg-[#063746] py-[8px] pl-[18px] pr-[12px] transition-opacity hover:opacity-90"
             >
               <span
@@ -1161,6 +1142,28 @@ export default function HomePage() {
               </span>
             </Link>
           </div>
+            </div>
+            <div className="w-1/2">
+              <p
+                className="text-[26px] leading-none text-[#063746]"
+                style={{ fontFamily: "var(--font-body)" }}
+              >
+                They are designed to minimize human intervention where it is not
+                needed, allowing people to focus on what drives true value:
+                creativity, strategy, and innovation.
+              </p>
+              <p
+                className="mt-15 text-[26px] leading-none text-[#063746]"
+                style={{ fontFamily: "var(--font-body)" }}
+              >
+                With tailor-made integrations, DDIP automation unlocks new
+                opportunities for efficiency and creativity, no matter the field.
+              </p>
+            </div>
+          </div>
+
+         
+      
         </div>
       </section>
 

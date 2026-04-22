@@ -24,15 +24,15 @@ export default function UseCaseCarousel({ items }: UseCaseCarouselProps) {
       <div className="flex">
         {[...items, ...items].map((item, i) => (
           <div key={i} className="shrink-0 flex flex-col" style={{ width: "370px", paddingRight: "20px" }}>
-            <div className="relative overflow-hidden rounded-[16px] bg-[#D9D9D9]" style={{ height: "520px" }}>
+            <div className="relative overflow-hidden rounded-2xl bg-[#D9D9D9]" style={{ height: "520px" }}>
               <HlsPlayer
                 src={item.video}
-                autoPlay={false}
+                autoPlay={true}
                 controls={false}
                 muted={true}
                 loop={true}
-                fillHeight={false}
-                className="w-full h-[520px] object-cover"
+                fillHeight={true}
+                className="w-full h-full object-cover"
               />
               <div className="absolute top-3 right-3 flex flex-wrap justify-end gap-1.5">
                 {item.tags.map((tag) => (

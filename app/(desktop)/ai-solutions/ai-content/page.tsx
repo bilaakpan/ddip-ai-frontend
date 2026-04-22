@@ -375,7 +375,7 @@ export default function AIContentPage() {
             </div>
 
             {/* ── connector: ddipicon1 → line → ddipicon2 ── */}
-            <div className="shrink-0 relative flex flex-col justify-center left-[-75px]" style={{ width: "100px", height: "490px" }}>
+            <div className="shrink-0 relative flex flex-col justify-center left-[-55px]" style={{ width: "100px", height: "490px" }}>
               <svg width="250" height="4" viewBox="0 0 250 4" fill="none">
   <line x1="10" y1="2" x2="240" y2="2" stroke="rgba(255,255,255,0.5)" strokeWidth="1.5" />
 </svg>
@@ -409,8 +409,8 @@ export default function AIContentPage() {
                         controls={false}
                         muted={true}
                         loop={true}
-                        fillHeight={true}
-                        className="h-full w-full object-cover"
+                        fillHeight={false}
+                        className="w-full object-cover h-[156px]"
                       />
                     </div>
                     <div className="relative h-[156px] w-[90px] overflow-hidden rounded-[8px]">
@@ -420,32 +420,32 @@ export default function AIContentPage() {
                         controls={false}
                         muted={true}
                         loop={true}
-                        fillHeight={true}
-                        className="h-full w-full object-cover"
+                        fillHeight={false}
+                        className="w-full object-cover h-[156px]"
                       />
                     </div>
                   </div>
                   <div className="flex flex-col gap-1.5">
-                    <div className="relative h-[156px] w-[90px] overflow-hidden rounded-[8px] mt-[30px]">
+                    <div className="relative h-[160px] w-[90px] overflow-hidden rounded-[8px] mt-[30px]">
                       <HlsPlayer
                         src="8ffbc4055a9b0210350a2748fcbb8ce4"
                         autoPlay={false}
                         controls={false}
                         muted={true}
                         loop={true}
-                        fillHeight={true}
-                        className="h-full w-full object-cover"
+                        fillHeight={false}
+                        className="h-[160px] w-full object-cover"
                       />
                     </div>
-                    <div className="relative h-[156px] w-[90px] overflow-hidden rounded-[8px]">
+                    <div className="relative h-[160px] w-[90px] overflow-hidden rounded-[8px]">
                       <HlsPlayer
                         src="2f4c298d7224c5140c18bc3c0f6faf22"
                         autoPlay={false}
                         controls={false}
                         muted={true}
                         loop={true}
-                        fillHeight={true}
-                        className="h-full w-full object-cover"
+                        fillHeight={false}
+                        className="h-[160px] w-full object-cover"
                       />
                     </div>
                   </div>
@@ -455,15 +455,8 @@ export default function AIContentPage() {
 
             {/* ── 5 lines → merge → ddipicon3 ── */}
             <div className="shrink-0 relative flex flex-col justify-center" style={{ width: "90px", height: "490px" }}>
-              {/* <svg width="90" height="196" viewBox="0 0 90 196" fill="none" className="relative">
-                <path d="M0 20  C40 20  40 98 65 98" stroke="rgba(255,255,255,0.5)" strokeWidth="1.5" fill="none" />
-                <path d="M0 59  C40 59  40 98 65 98" stroke="rgba(255,255,255,0.5)" strokeWidth="1.5" fill="none" />
-                <path d="M0 98  L65 98" stroke="rgba(255,255,255,0.5)" strokeWidth="1.5" fill="none" />
-                <path d="M0 137 C40 137 40 98 65 98" stroke="rgba(255,255,255,0.5)" strokeWidth="1.5" fill="none" />
-                <path d="M0 176 C40 176 40 98 65 98" stroke="rgba(255,255,255,0.5)" strokeWidth="1.5" fill="none" />
-                <line x1="65" y1="98" x2="90" y2="98" stroke="rgba(255,255,255,0.5)" strokeWidth="1.5" />
-              </svg> */}
-              <svg width="240" height="196" viewBox="-150 0 240 196" fill="none" className="relative left-[-80px]">
+           
+              {/* <svg width="240" height="196" viewBox="-150 0 240 196" fill="none" className="relative left-[-80px]">
   <path d="M-150 20 L0 20" stroke="rgba(255,255,255,0.5)" strokeWidth="1.5" fill="none" />
   <path d="M0 20  C40 20  40 98 65 98" stroke="rgba(255,255,255,0.5)" strokeWidth="1.5" fill="none" />
   
@@ -477,6 +470,24 @@ export default function AIContentPage() {
   <path d="M0 137 C40 137 40 98 65 98" stroke="rgba(255,255,255,0.5)" strokeWidth="1.5" fill="none" />
   
   <path d="M-150 176 L0 176" stroke="rgba(255,255,255,0.5)" strokeWidth="1.5" fill="none" />
+  <path d="M0 176 C40 176 40 98 65 98" stroke="rgba(255,255,255,0.5)" strokeWidth="1.5" fill="none" />
+  
+  <line x1="65" y1="98" x2="90" y2="98" stroke="rgba(255,255,255,0.5)" strokeWidth="1.5" />
+</svg> */}
+<svg width="240" height="196" viewBox="-150 0 240 196" fill="none" className="relative left-[-80px]">
+  <path d="M-120 20 L0 20" stroke="rgba(255,255,255,0.5)" strokeWidth="1.5" fill="none" />
+  <path d="M0 20  C40 20  40 98 65 98" stroke="rgba(255,255,255,0.5)" strokeWidth="1.5" fill="none" />
+  
+  <path d="M-120 59 L0 59" stroke="rgba(255,255,255,0.5)" strokeWidth="1.5" fill="none" />
+  <path d="M0 59  C40 59  40 98 65 98" stroke="rgba(255,255,255,0.5)" strokeWidth="1.5" fill="none" />
+  
+  <path d="M-120 98 L0 98" stroke="rgba(255,255,255,0.5)" strokeWidth="1.5" fill="none" />
+  <path d="M0 98  L65 98" stroke="rgba(255,255,255,0.5)" strokeWidth="1.5" fill="none" />
+  
+  <path d="M-120 137 L0 137" stroke="rgba(255,255,255,0.5)" strokeWidth="1.5" fill="none" />
+  <path d="M0 137 C40 137 40 98 65 98" stroke="rgba(255,255,255,0.5)" strokeWidth="1.5" fill="none" />
+  
+  <path d="M-120 176 L0 176" stroke="rgba(255,255,255,0.5)" strokeWidth="1.5" fill="none" />
   <path d="M0 176 C40 176 40 98 65 98" stroke="rgba(255,255,255,0.5)" strokeWidth="1.5" fill="none" />
   
   <line x1="65" y1="98" x2="90" y2="98" stroke="rgba(255,255,255,0.5)" strokeWidth="1.5" />

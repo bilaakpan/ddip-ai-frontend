@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Bricolage_Grotesque } from "next/font/google";
 import "./globals.css";
+import { DeviceProvider } from "@/components/DeviceProvider";
+import { ResponsiveRedirect } from "@/components/ResponsiveRedirect";
 
 const bricolageGrotesque = Bricolage_Grotesque({
   subsets: ["latin", "latin-ext"],
@@ -38,7 +40,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={bricolageGrotesque.variable}>
-      <body>{children}</body>
+      <body>
+        <DeviceProvider>
+          <ResponsiveRedirect />
+          {children}
+        </DeviceProvider>
+      </body>
     </html>
   );
 }
