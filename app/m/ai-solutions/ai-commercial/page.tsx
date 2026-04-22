@@ -430,6 +430,9 @@ export default function MobileAiCommercialPage() {
               </div>
             ))}
           </div>
+          <p className="text-[18px] text-[#FFFFFF] mt-[20px]">
+            The result is not just an automation - it's creative acceleration.
+          </p>
         </div>
       </section>
 
@@ -440,8 +443,8 @@ export default function MobileAiCommercialPage() {
         <h2 className="font-heading text-[34px] text-center font-medium uppercase leading-snug text-[#063746]">
           Use Cases
         </h2>
-        <p className="mt-2 text-[18px] leading-relaxed text-center text-[#063746]">
-          AI commercial production supports different creative needs, from always-on content to campaign launches.
+        <p className="mt-2 text-[18px] leading-none text-center text-[#063746]">
+          AI commercial production supports different campaign needs and storytelling goals.
         </p>
         <div className="mt-5 flex gap-3 overflow-x-auto pb-3 scrollbar-hidden w-[350px] h-24.25">
           {useCaseCards.map((item, i) => (

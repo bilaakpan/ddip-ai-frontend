@@ -135,7 +135,7 @@ export default function MobileGeoPage() {
               Ddip Geo Optimization ✦&nbsp;
             </span>
             <span aria-hidden className="shrink-0 pr-10 font-heading text-[87px] uppercase leading-none text-white">
-              Ddip Geo Optimization ✦&nbsp;
+              AI INFLUENCER ✦&nbsp;
             </span>
             <span aria-hidden className="shrink-0 pr-10 font-heading text-[87px]  uppercase leading-none text-white">
               Ddip Geo Optimization ✦&nbsp;
