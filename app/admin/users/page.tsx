@@ -50,8 +50,10 @@ export default function UsersPage() {
   const [selectedUser, setSelectedUser] = useState<AdminUser | null>(null);
   const [editRole, setEditRole] = useState<UserRole>("VIEWER");
   const [editActive, setEditActive] = useState(true);
+  const [editPassword, setEditPassword] = useState("");
   const [saving, setSaving] = useState(false);
   const [saveError, setSaveError] = useState("");
+  const [saveSuccess, setSaveSuccess] = useState("");
 
   // Create modal
   const [showCreate, setShowCreate] = useState(false);
@@ -141,31 +143,60 @@ export default function UsersPage() {
     setSelectedUser(user);
     setEditRole(user.role);
     setEditActive(user.isActive ?? true);
+    setEditPassword("");
     setSaveError("");
+    setSaveSuccess("");
   }
 
   function closeDetailModal() {
     setSelectedUser(null);
+    setEditPassword("");
     setSaveError("");
+    setSaveSuccess("");
   }
 
   async function handleSaveUser() {
     if (!selectedUser) return;
 
+    // Validate password if provided
+    if (editPassword && editPassword.length < 8) {
+      setSaveError("Password must be at least 8 characters.");
+      return;
+    }
+
     setSaving(true);
     setSaveError("");
+    setSaveSuccess("");
 
     try {
-      const response = await usersApi.update(selectedUser.id, {
+      const updateData: {
+        role: UserRole;
+        isActive: boolean;
+        password?: string;
+      } = {
         role: editRole,
         isActive: editActive,
-      });
+      };
+
+      // Only include password if user entered a new one
+      if (editPassword) {
+        updateData.password = editPassword;
+      }
+
+      const response = await usersApi.update(selectedUser.id, updateData);
 
       // Update list
       setUsers((prev) =>
         prev.map((u) => (u.id === selectedUser.id ? response.data : u))
       );
       setSelectedUser(response.data);
+      setEditPassword(""); // Clear password field after successful save
+
+      if (editPassword) {
+        setSaveSuccess("User updated and password changed successfully.");
+      } else {
+        setSaveSuccess("User updated successfully.");
+      }
     } catch (err: unknown) {
       const message =
         err instanceof Error ? err.message : "Failed to update user.";
@@ -401,6 +432,12 @@ export default function UsersPage() {
               </div>
             )}
 
+            {saveSuccess && (
+              <div className="mb-4 rounded-lg border border-green-500/20 bg-green-500/10 px-4 py-3 text-sm text-green-400">
+                {saveSuccess}
+              </div>
+            )}
+
             <div className="grid grid-cols-2 gap-x-6">
               <DetailField
                 label="First Name"
@@ -492,6 +529,25 @@ export default function UsersPage() {
                   {editActive ? "Active" : "Inactive"}
                 </span>
               </button>
+            </div>
+
+            {/* Change Password */}
+            <div className="py-2">
+              <label className="mb-1 block text-xs font-medium uppercase tracking-wider text-white/40">
+                Change Password
+              </label>
+              <input
+                type="password"
+                value={editPassword}
+                onChange={(e) => setEditPassword(e.target.value)}
+                placeholder="Leave blank to keep current password"
+                minLength={8}
+                autoComplete="new-password"
+                className={inputClasses}
+              />
+              <p className="mt-1.5 text-xs text-white/40">
+                Minimum 8 characters. Leave blank to keep the existing password.
+              </p>
             </div>
 
             <DetailField label="User ID" value={selectedUser.id} />

@@ -12,6 +12,7 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
+  // Skip files with extensions (fonts, images, etc.)
   if (/\.\w+$/.test(pathname)) {
     return NextResponse.next();
   }
