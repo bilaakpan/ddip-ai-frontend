@@ -199,7 +199,7 @@ export default function MobileAutomationPage() {
         <h2 className="font-heading text-[28px] font-bold leading-snug text-[#063746]">
           Automation Made Simple, Scalable, and Smart
         </h2>
-        <p className="mt-3 text-[14px] leading-relaxed text-[#063746]/70">
+        <p className="mt-3 text-[14px] leading-relaxed text-[#063746]">
           A library of intelligent, pre-built workflows to automate what slows teams down. From content creation to analytics and customer engagement, each template is designed to connect, perform, and evolve with your business.
         </p>
 
@@ -330,8 +330,8 @@ export default function MobileAutomationPage() {
         <h3 className="mt-4 font-heading text-[24px] font-bold leading-snug text-[#063746]">
           Custom Automation, Designed For Your Business
         </h3>
-        <p className="mt-2 text-[16px] leading-relaxed text-[#063746]/70">
-          When every process demands its own logic, our team designs AI workflows that align with your systems and goals.
+        <p className="mt-2 text-[16px] leading-relaxed text-[#063746]">
+          When every process demands its own logic, our team designs AI workflows that align with your systems and goals. From creative operations to enterprise data flows, every integration is built to enhance efficiency and understanding.
         </p>
 
         <div className="mt-5 overflow-hidden rounded-2xl" style={{ aspectRatio: "16/9" }}>
@@ -609,65 +609,156 @@ export default function MobileAutomationPage() {
       {/* ══════════════════════════════════════
           11. Form
       ══════════════════════════════════════ */}
-      <section className="bg-light-bg py-10" style={safePx}>
-        <h2 className="font-heading text-[32px] font-bold leading-[1.2]" style={{ color: "#039EB7" }}>
-          Let&apos;s Build What&apos;s Next, Together.
+      <section className="bg-light-bg py-8 px-4" style={safePx}>
+        {/* Heading */}
+        <h2
+          className="font-heading text-[30px] font-semibold leading-[1.15] tracking-[-0.5px]"
+          style={{ color: "#039EB7" }}
+        >
+          Let&apos;s Build What&apos;s Next, Together
         </h2>
-        <p className="mt-3 text-[14px] leading-relaxed text-[#063746]/70">
-          Whether you&apos;re exploring AI solutions or ready to start a custom project, our team is here to help you design intelligent systems that move your business forward.
+
+        {/* Description */}
+        <p className="mt-3 text-[12px] leading-[1.5] text-[#063746]/70 max-w-[320px]">
+          Whether you&apos;re exploring AI solutions or ready to start a custom project,
+          our team is here to help you design intelligent systems that move your business
+          forward.
         </p>
 
-        <div className="mt-8 flex flex-col gap-5">
+        {/* Form */}
+        <div className="mt-6 flex flex-col gap-4">
+          {/* Full Name */}
           <div>
-            <label className="block text-[13px] text-[#3F444E] mb-1.5">Full Name *</label>
-            <input type="text" placeholder="Your name and last name" className="w-full rounded-[8px] border border-[#063746]/15 px-4 py-3 text-[14px] text-[#063746] placeholder:text-[#BABABA] focus:border-[#1CE3F4] focus:outline-none" />
-          </div>
-          <div>
-            <label className="block text-[13px] text-[#3F444E] mb-1.5">Email Address *</label>
-            <input type="email" placeholder="example@domain.com" className="w-full rounded-[8px] border border-[#063746]/15 px-4 py-3 text-[14px] text-[#063746] placeholder:text-[#BABABA] focus:border-[#1CE3F4] focus:outline-none" />
-          </div>
-          <div>
-            <label className="block text-[13px] text-[#3F444E] mb-1.5">Company Name</label>
-            <input type="text" placeholder="Your employer's name" className="w-full rounded-[8px] border border-[#063746]/15 px-4 py-3 text-[14px] text-[#063746] placeholder:text-[#BABABA] focus:border-[#1CE3F4] focus:outline-none" />
-          </div>
-          <div>
-            <label className="block text-[13px] text-[#3F444E] mb-1.5">Country</label>
-            <input type="text" placeholder="Your country of residence" className="w-full rounded-[8px] border border-[#063746]/15 px-4 py-3 text-[14px] text-[#063746] placeholder:text-[#BABABA] focus:border-[#1CE3F4] focus:outline-none" />
-          </div>
-          <div>
-            <label className="block text-[13px] text-[#3F444E] mb-1.5">Industry</label>
-            <div className="relative">
-              <select className="w-full appearance-none rounded-[8px] border border-[#063746]/15 px-4 py-3 text-[14px] text-[#BABABA] focus:border-[#1CE3F4] focus:outline-none bg-white">
-                <option value="">Please select</option>
-                <option>Real Estate</option>
-                <option>Fashion</option>
-                <option>Food</option>
-                <option>Tech & Digital</option>
-                <option>Wellness</option>
-                <option>Consulting</option>
-              </select>
-              <svg className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 h-4 w-4 text-[#BABABA]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7" /></svg>
-            </div>
-          </div>
-          <div>
-            <label className="block text-[13px] text-[#3F444E] mb-1.5">Select Influencer *</label>
-            <div className="relative">
-              <select className="w-full appearance-none rounded-[8px] border border-[#063746]/15 px-4 py-3 text-[14px] text-[#BABABA] focus:border-[#1CE3F4] focus:outline-none bg-white">
-                <option value="">Please select</option>
-                <option>AI Brand Ambassador</option>
-                <option>AI Influencer</option>
-                <option>AI Blogger</option>
-                <option>AI Mascot</option>
-              </select>
-              <svg className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 h-4 w-4 text-[#BABABA]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7" /></svg>
-            </div>
-          </div>
-          <div>
-            <label className="block text-[13px] text-[#3F444E] mb-1.5">Details regarding your question, if any</label>
-            <textarea rows={5} className="w-full rounded-[8px] border border-[#063746]/15 px-4 py-3 text-[14px] text-[#063746] placeholder:text-[#BABABA] focus:border-[#1CE3F4] focus:outline-none resize-none" />
+            <label className="mb-1 block text-[11px] text-[#3F444E]">Full Name *</label>
+            <input
+              type="text"
+              placeholder="Your name and last name"
+              className="h-[38px] w-full rounded-[4px] border border-[#D8D8D8] px-3 text-[11px] text-[#063746] placeholder:text-[#B9B9B9] focus:border-[#1CE3F4] focus:outline-none"
+            />
           </div>
 
-          <button className="w-[60%] rounded-full py-4 font-heading text-[20px] text-white" style={{ backgroundColor: "#0A7D94" }}>
+          {/* Email */}
+          <div>
+            <label className="mb-1 block text-[11px] text-[#3F444E]">Email Address *</label>
+            <input
+              type="email"
+              placeholder="example@domain.com"
+              className="h-[38px] w-full rounded-[4px] border border-[#D8D8D8] px-3 text-[11px] text-[#063746] placeholder:text-[#B9B9B9] focus:border-[#1CE3F4] focus:outline-none"
+            />
+          </div>
+
+          {/* Company */}
+          <div>
+            <label className="mb-1 block text-[11px] text-[#3F444E]">Company Name</label>
+            <input
+              type="text"
+              placeholder="Your company's name"
+              className="h-[38px] w-full rounded-[4px] border border-[#D8D8D8] px-3 text-[11px] text-[#063746] placeholder:text-[#B9B9B9] focus:border-[#1CE3F4] focus:outline-none"
+            />
+          </div>
+
+          {/* Country */}
+          <div>
+            <label className="mb-1 block text-[11px] text-[#3F444E]">Country</label>
+            <input
+              type="text"
+              placeholder="Your country of residence"
+              className="h-[38px] w-full rounded-[4px] border border-[#D8D8D8] px-3 text-[11px] text-[#063746] placeholder:text-[#B9B9B9] focus:border-[#1CE3F4] focus:outline-none"
+            />
+          </div>
+
+          {/* Automation Type */}
+          <div>
+            <label className="mb-1 block text-[11px] text-[#3F444E]">Automation Type *</label>
+            <div className="relative">
+              <select className="h-[38px] w-full appearance-none rounded-[4px] border border-[#D8D8D8] px-3 text-[11px] text-[#9B9B9B] focus:border-[#1CE3F4] focus:outline-none bg-white">
+                <option>Please select</option>
+              </select>
+              <svg
+                className="pointer-events-none absolute right-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-[#9B9B9B]"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                viewBox="0 0 24 24"
+              >
+                <path d="M19 9l-7 7-7-7" />
+              </svg>
+            </div>
+          </div>
+
+          {/* Category */}
+          <div>
+            <label className="mb-1 block text-[11px] text-[#3F444E]">Category</label>
+            <div className="relative">
+              <select className="h-[38px] w-full appearance-none rounded-[4px] border border-[#D8D8D8] px-3 text-[11px] text-[#9B9B9B] focus:border-[#1CE3F4] focus:outline-none bg-white">
+                <option>Please select</option>
+              </select>
+              <svg
+                className="pointer-events-none absolute right-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-[#9B9B9B]"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                viewBox="0 0 24 24"
+              >
+                <path d="M19 9l-7 7-7-7" />
+              </svg>
+            </div>
+          </div>
+
+          {/* Platform */}
+          <div>
+            <label className="mb-1 block text-[11px] text-[#3F444E]">Platform</label>
+            <div className="relative">
+              <select className="h-[38px] w-full appearance-none rounded-[4px] border border-[#D8D8D8] px-3 text-[11px] text-[#9B9B9B] focus:border-[#1CE3F4] focus:outline-none bg-white">
+                <option>Please select</option>
+              </select>
+              <svg
+                className="pointer-events-none absolute right-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-[#9B9B9B]"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                viewBox="0 0 24 24"
+              >
+                <path d="M19 9l-7 7-7-7" />
+              </svg>
+            </div>
+          </div>
+
+          {/* Use Case */}
+          <div>
+            <label className="mb-1 block text-[11px] text-[#3F444E]">Use Case</label>
+            <div className="relative">
+              <select className="h-[38px] w-full appearance-none rounded-[4px] border border-[#D8D8D8] px-3 text-[11px] text-[#9B9B9B] focus:border-[#1CE3F4] focus:outline-none bg-white">
+                <option>Please select</option>
+              </select>
+              <svg
+                className="pointer-events-none absolute right-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-[#9B9B9B]"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                viewBox="0 0 24 24"
+              >
+                <path d="M19 9l-7 7-7-7" />
+              </svg>
+            </div>
+          </div>
+
+          {/* Details */}
+          <div>
+            <label className="mb-1 block text-[11px] text-[#3F444E]">
+              Details regarding your question, if any
+            </label>
+            <textarea
+              rows={4}
+              className="w-full rounded-[4px] border border-[#D8D8D8] px-3 py-2 text-[11px] text-[#063746] placeholder:text-[#B9B9B9] focus:border-[#1CE3F4] focus:outline-none resize-none"
+            />
+          </div>
+
+          {/* Button */}
+          <button
+            className="mx-auto mt-2 h-[34px] w-[68px] rounded-full text-[12px] font-medium text-white"
+            style={{ backgroundColor: "#0A7D94" }}
+          >
             Send
           </button>
         </div>

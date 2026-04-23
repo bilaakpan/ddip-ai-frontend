@@ -384,8 +384,8 @@ export default function MobileTheMindBehindPage() {
                 human <br />intentional
               </p>
             </div>
-           
-           
+
+
           </div>
         </div>
       </section>
@@ -496,12 +496,10 @@ export default function MobileTheMindBehindPage() {
         }}
       >
         <div className="rounded-[20px] p-6 text-center" style={{ background: "linear-gradient(-90deg,var(--color-dark-bg) 0%,#129CAC 100%)" }}>
-          <p className="font-heading text-[clamp(16px,4.5vw,20px)] font-bold text-[#EBFFFF]">
-            Ready to start your process?
+          <p className="font-heading text-[22px] font-medium text-[#EBFFFF] text-start">
+            Curious how this mindset turns into real systems?
           </p>
-          <p className="mt-2 text-[12px] leading-relaxed text-[#EBFFFF]/70">
-            Let&apos;s align creativity, AI and strategy into one unstoppable system.
-          </p>
+
           <div className="mt-5 flex flex-col gap-3">
             <Link href="/m/start-project" className="inline-flex items-center justify-center rounded-full bg-[#1CE3F4] px-6 py-3 text-[18px] font-medium text-dark-bg active:opacity-80">
               Start a Project

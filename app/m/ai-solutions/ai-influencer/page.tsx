@@ -122,19 +122,25 @@ const topInfluencer = [
 ];
 
 const influencerTypes = [
-  {
+ {
     title: "AI Persona",
     type: "Creation",
+    description:
+      "A fully digital persona designed to create content, engage audiences, and represent brands across social media with complete consistency.",
     image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/a6335ebb-a94d-49fe-f728-6034821b4500/public",
   },
   {
     title: "Investment",
     type: "Promotion",
+    description:
+      "A virtual brand representative that embodies your company's values and maintains a consistent presence across all touchpoints.",
     image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/3bb85d3d-0153-4afa-2959-adafcc4f1900/public",
   },
   {
     title: "Brand",
     type: "Storytelling",
+    description:
+      "An AI-powered content creator that produces written and visual blog content, driving SEO and organic engagement.",
     image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/995b7c78-e5e9-4a39-412f-9f183bbd0500/public",
   },
 ];
@@ -388,17 +394,59 @@ export default function MobileAIInfluencerPage() {
           className="mt-5 -mx-5 flex gap-3 overflow-x-auto pb-3"
           style={{ paddingLeft: "max(20px, env(safe-area-inset-left))", paddingRight: "max(20px, env(safe-area-inset-right))", scrollbarWidth: "none" }}
         >
-          {influencerTypes.map((type) => (
-            <div key={type.title} className="shrink-0 w-45">
-              <div className="relative aspect-3/4 overflow-hidden rounded-2xl">
-                <Image src={type.image} alt={type.title} fill className="object-cover" sizes="180px" />
-                <div className="absolute top-0 left-0 p-3">
-                  <p className="font-heading text-[16px] font-medium text-white leading-tight">{type.title}</p>
-                  <p className="text-[14px] text-white/80">{type.type}</p>
-                </div>
-              </div>
-            </div>
-          ))}
+    {influencerTypes.map((type) => (
+  <div key={type.title} className="shrink-0 w-45">
+    <div className="group relative aspect-[3/4] overflow-hidden rounded-2xl">
+      
+      {/* Background Image */}
+      <Image
+        src={type.image}
+        alt={type.title}
+        fill
+        className="object-cover"
+        sizes="180px"
+      />
+
+      {/* Default Text */}
+      <div className="absolute top-0 left-0 z-10 p-3 transition-opacity duration-300 group-hover:opacity-0">
+        <p className="font-heading text-[16px] font-medium leading-tight text-white">
+          {type.title}
+        </p>
+        <p className="text-[14px] text-white/80">
+          {type.type}
+        </p>
+      </div>
+
+      {/* Hover Overlay */}
+      <div
+        className="absolute inset-0 z-20 flex flex-col justify-between p-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+        style={{
+          backdropFilter: "blur(7px)",
+          WebkitBackdropFilter: "blur(7px)",
+          background: "rgba(6, 55, 70, 0.55)",
+        }}
+      >
+        {/* Hover Title */}
+        <div>
+          <h3 className="font-heading text-[18px] font-medium leading-[1.2] text-white">
+            {type.title}
+          </h3>
+          <p className="text-[16px] leading-[1.3] text-white">
+            {type.type}
+          </p>
+        </div>
+
+        {/* Hover Description */}
+        <p
+          className="text-[12px] leading-[1.4] text-white"
+          style={{ fontFamily: "var(--font-body)" }}
+        >
+          {type.description}
+        </p>
+      </div>
+    </div>
+  </div>
+))}
         </div>
       </section>
 

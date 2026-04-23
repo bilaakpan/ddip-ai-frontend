@@ -1019,7 +1019,7 @@ export default function HomePage() {
             <p className="mt-1 text-[28px] font-bold text-white">Didn&apos;t find your answer?</p>
 
             <Link href="/lets-connect" className="w-full justify-center mt-4 inline-flex items-center gap-2 rounded-full bg-[#1CE3F4] px-6 py-2.5 text-[18px] font-medium text-dark-bg active:opacity-80">
-              Talk to us
+              Talk to AI
             </Link>
           </div>
         </div>
