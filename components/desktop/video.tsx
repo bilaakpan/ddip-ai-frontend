@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, forwardRef } from "react";
 import Hls from "hls.js";
 
 const CLOUDFLARE_STREAM_BASE = "https://customer-avhhoygwtxxdpkyp.cloudflarestream.com";
@@ -17,7 +17,7 @@ interface HlsPlayerProps {
     hoverToPlay?: boolean;
 }
 
-export default function HlsPlayer({
+const HlsPlayer = forwardRef<HTMLVideoElement, HlsPlayerProps>(({
     src,
     className = "",
     autoPlay = false,
@@ -27,7 +27,7 @@ export default function HlsPlayer({
     fillHeight = true,
     fillWidth = true,
     hoverToPlay = true,
-}: HlsPlayerProps) {
+}, ref) => {
     const videoRef = useRef<HTMLVideoElement>(null);
     const containerRef = useRef<HTMLDivElement>(null);
     const [shouldFillHeight, setShouldFillHeight] = useState(false);
@@ -54,6 +54,17 @@ export default function HlsPlayer({
             if (hls) hls.destroy();
         };
     }, [fullSrc]);
+
+    // Forward ref to the video element
+    useEffect(() => {
+        if (ref && videoRef.current) {
+            if (typeof ref === 'function') {
+                ref(videoRef.current);
+            } else {
+                ref.current = videoRef.current;
+            }
+        }
+    }, [ref]);
 
     useEffect(() => {
         const video = videoRef.current;
@@ -127,4 +138,8 @@ ${className}`}
             />
         </div>
     );
-}
+});
+
+HlsPlayer.displayName = "HlsPlayer";
+
+export default HlsPlayer;

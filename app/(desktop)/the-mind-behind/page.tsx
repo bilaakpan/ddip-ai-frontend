@@ -189,7 +189,7 @@ export default function TheMindBehindPage() {
 
           {/* Description — bottom right */}
           <div className="flex justify-end">
-            <p className="max-w-sm" style={{ fontSize: "21px", color: "#002834" }}>
+            <p className="max-w-[625px]" style={{ fontSize: "34px", color: "#002834" }}>
               We don&apos;t use AI to automate creativity away — we use it to free creative minds from limitations, repetition, and inefficiency.
             </p>
           </div>
@@ -216,7 +216,7 @@ export default function TheMindBehindPage() {
                   <div className="relative overflow-hidden rounded-full" style={{ width: "230px", height: "230px" }}>
                     <Image src={card.image} alt={card.title} fill className="object-cover" sizes="230px" />
                   </div>
-                  <p className="mt-4 text-center text-[18px] text-[#063746]/70 max-w-[180px]" style={{ fontFamily: "var(--font-body)" }}>
+                  <p className="mt-4 text-center text-[28px] text-[#063746] max-w-[240px]" style={{ fontFamily: "var(--font-body)" }}>
                     {card.title}
                   </p>
                 </div>
@@ -254,10 +254,10 @@ export default function TheMindBehindPage() {
                 <h2 className="font-heading text-[36px] font-medium leading-[1.1] text-white">
                   Human + AI, By Design
                 </h2>
-                <p className="mt-2 text-[15px] text-white/60" style={{ fontFamily: "var(--font-body)" }}>
+                <p className="mt-2 text-[20px] text-[#EBFFFF]" style={{ fontFamily: "var(--font-body)" }}>
                   Our approach is intentionally hybrid.
                 </p>
-                <p className="mt-6 text-[13px] text-white/40" style={{ fontFamily: "var(--font-body)" }}>
+                <p className="mt-6 text-[20px] text-[#EBFFFF]" style={{ fontFamily: "var(--font-body)" }}>
                   Behind every AI-generated output, there is:
                 </p>
 
@@ -277,7 +277,7 @@ export default function TheMindBehindPage() {
                   ))}
                 </div>
 
-                <p className="mt-6 text-[13px] text-white/40" style={{ fontFamily: "var(--font-body)" }}>
+                <p className="mt-6 text-[24px] text-[#EBFFFF]" style={{ fontFamily: "var(--font-body)" }}>
                   AI works with our teams —<br />not instead of them.
                 </p>
               </div>
@@ -303,7 +303,7 @@ export default function TheMindBehindPage() {
                     </div>
                   </div>
                 ))}
-                <p className="mt-3 text-[13px] text-white" style={{ fontFamily: "var(--font-body)" }}>
+                <p className="mt-3 text-[20px] text-[#EBFFFF]" style={{ fontFamily: "var(--font-body)" }}>
                   This balance is what makes our work feel natural,<br />credible, and alive — not synthetic.
                 </p>
               </div>
@@ -602,10 +602,10 @@ export default function TheMindBehindPage() {
           </div>
           <div className="flex flex-col items-end mx-10 py-8">
             <div>
-              <p className="text-[#145365] font-heading text-[25px]">Human-led intelligence.</p>
-              <p className="text-[#145365] font-heading text-[25px]">System-driven creativity.</p>
-              <p className="text-[#145365] text-[25px]">Designed for brands that want more than</p>
-              <p className="text-[#145365] text-[25px]">outputs — they want impact.</p>
+              <p className="text-[#063746] font-heading text-[25px] font-medium ">Human-led intelligence.</p>
+              <p className="text-[#063746] font-heading text-[25px] font-medium ">System-driven creativity.</p>
+              <p className="text-[#063746] text-[25px] font-medium ">Designed for brands that want more than</p>
+              <p className="text-[#063746] text-[25px] font-medium ">outputs — they want impact.</p>
             </div>
           </div>
         </div>
@@ -623,7 +623,7 @@ export default function TheMindBehindPage() {
             Curious how this mindset turns into real systems?
           </h2>
           <div className="flex items-center gap-4">
-            <Link href="/ai-solutions" className="rounded-full border border-[#063746]/20 px-6 py-2.5 font-heading text-[14px] font-medium text-[#063746] transition bg-[#1CE3F4]">
+            <Link href="/ai-solutions/ai-influencer/templates" className="rounded-full border border-[#063746]/20 px-6 py-2.5 font-heading text-[14px] font-medium text-[#063746] transition bg-[#1CE3F4]">
               Explore our AI Solutions
             </Link>
             <Link href="/start-project" className="rounded-full border border-white px-6 py-2.5 font-heading text-[14px] font-medium text-white transition">

@@ -18,6 +18,38 @@ import InfluencerCarousel from "@/components/desktop/InfluencerCarousel";
 import { ChevronDown, ChevronUp } from "lucide-react";
 
 /* ─── Data ─── */
+const methodSteps = [
+  {
+    num: "01",
+    title: "Imagine It",
+    icon: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/01b5fee0-1a9b-4547-9780-99ad724e1e00/public",
+    rotate: "-18deg",
+    desc: "Start with a bold vision. We shape ideas into strategies that set the foundation for success.",
+    bg: "#E8E8E8",
+    textColor: "#221D1D",
+    y: "90px",
+  },
+  {
+    num: "02",
+    title: "Create It",
+    icon: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/717131ad-013b-4176-10f7-799df95ebf00/public",
+    rotate: "0deg",
+    desc: "Through design, styling, and iteration, our team brings your blueprint to life.",
+    bg: "#16C8DA",
+    textColor: "#FFFFFF",
+    y: "0px",
+  },
+  {
+    num: "03",
+    title: "Launch It",
+    icon: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/c2e3a539-3fba-4d5c-8f4d-f18617091d00/public",
+    rotate: "18deg",
+    desc: "Your AI-optimized solution goes live with seamless deployment and measurable results.",
+    bg: "#003E52",
+    textColor: "#FFFFFF",
+    y: "90px",
+  },
+];
 const items = [
   {
     title: "AI Brand Ambassador",
@@ -27,17 +59,17 @@ const items = [
   {
     title: "AI Influencer",
     content:
-      "A fully digital persona designed to create content, engage audiences, and represent brands across social media with complete consistency.",
+      "A fully developed persona that acts like a real creator. Perfect for product launches, collaborations, and social storytelling.",
   },
   {
     title: "AI Blogger",
     content:
-      "An AI-powered content creator that produces written and visual blog content, driving SEO and organic engagement.",
+      "A niche- driven content creator built for expertise and insight.Ideal for lifestyle, tech, wellness, or consulting brands looking to publish consistent, value - based storytelling at scale.",
   },
-  {
-    title: "AI Mascot",
-    content:
-      "A stylized character that represents your brand personality, designed for marketing campaigns and community engagement.",
+{
+  title: "AI Mascot",
+  content:
+  "A stylized digital character that adds creativity and familiarity to brand communication. From illustrated figures to 3D avatars, AI Mascots bring emotion and personality to campaigns, packaging, and digital spaces.",
   },
 ];
 
@@ -498,7 +530,7 @@ export default function AIInfluencerPage() {
         </div>
 
         {/* Subtitle + CTAs */}
-        <div className="mt-10 px-[100px]">
+        <div className="mt-4 px-[100px]">
           <p
             className="flex text-[60px] font-medium leading-[0.99] text-[#FFFFFF]"
             style={{ fontFamily: "var(--font-body)" }}
@@ -506,8 +538,8 @@ export default function AIInfluencerPage() {
             Designed to Represent. Powered by Intelligence.
           </p>
           <p
-            className="mt-10 text-[26px] leading-[1.2] font-regular font-normal text-[#FFFFFF]"
-            style={{ fontFamily: "var(--font-body)" }}
+            className="text-[26px] leading-[1.2] font-regular font-normal text-[#FFFFFF]"
+            style={{ fontFamily: "var(--font-body)", marginTop: "15px" }}
           >
             Discover intelligent, purposeful, and industry-ready AI influencers.
           </p>
@@ -584,19 +616,51 @@ export default function AIInfluencerPage() {
             {influencerTypes.map((type) => (
               <div key={type.title} className="group">
                 <div className="relative aspect-[3/4] overflow-hidden rounded-[20px]">
+
+                  {/* Background image */}
                   <Image
                     src={type.image}
                     alt={type.title}
                     fill
-                    className="object-cover transition-transform duration-500 "
+                    className="object-cover transition-transform duration-500"
                     sizes="25vw"
                   />
-                  <div className="absolute top-0 left-0 p-5">
+
+                  {/* Default title content */}
+                  <div className="absolute top-0 left-0 p-5 z-10 transition-opacity duration-300 group-hover:opacity-0">
                     <h3 className="font-heading leading-[1.2] text-[34px] font-medium text-[#FFFFFF]">
                       {type.title}
                     </h3>
                     <p className="text-[34px] leading-[1.4] text-[#FFFFFF]">
                       {type.type}
+                    </p>
+                  </div>
+
+                  {/* Hover overlay */}
+                  <div
+                    className="absolute inset-0 z-20 flex flex-col justify-between p-6 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                    style={{
+                      backdropFilter: "blur(7px)",
+                      WebkitBackdropFilter: "blur(7px)",
+                      background: "rgba(6, 55, 70, 0.55)",
+                    }}
+                  >
+                    {/* Title on hover */}
+                    <div>
+                      <h3 className="font-heading leading-[1.2] text-[34px] font-medium text-white">
+                        {type.title}
+                      </h3>
+                      <p className="text-[34px] leading-[1.4] text-white">
+                        {type.type}
+                      </p>
+                    </div>
+
+                    {/* Description */}
+                    <p
+                      className="text-[22px] leading-[1.5] text-white"
+                      style={{ fontFamily: "var(--font-body)" }}
+                    >
+                      {type.description}
                     </p>
                   </div>
                 </div>
@@ -946,7 +1010,117 @@ export default function AIInfluencerPage() {
       {/* ════════════════════════════════════════════════════════
           8. HOW IT WORKS — 3 steps with icon cards
           ════════════════════════════════════════════════════════ */}
-      <FourDMethodSection />
+      {/* <FourDMethodSection /> */}
+
+
+
+
+      <section className="py-24 px-[60px]" style={{ backgroundColor: "#F0F2EF", height: "1100px" }}>
+        <h2
+          className="text-center font-heading text-[48px] font-medium uppercase leading-[1.05] text-[#063746]"
+          style={{ fontFamily: "Bricolage Grotesque, sans-serif" }}
+        >
+          How it Works
+        </h2>
+
+        {/* Cards fan layout */}
+        <div
+          className="relative mx-auto mt-20 flex items-center justify-center gap-55"
+          style={{ height: "600px", maxWidth: "1600px" }}
+        >
+          {/* Connecting image */}
+          <img
+            src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/5b237882-4b7c-42ee-ed94-21743ef81d00/public"
+            alt="connecting line"
+            className="absolute top-[70%] left-[8%] right-[8%] z-0 w-[84%] object-cover -translate-y-1/2"
+          />
+
+          {methodSteps.map((step, i) => (
+            <div
+              key={step.title}
+              className="relative z-10 flex-shrink-0"
+              style={{
+                transform: `rotate(${step.rotate}) translateY(${i === 0 ? "124px" : i === 1 ? "20px" : i === 2 ? "124px" : "140px"})`,
+                marginLeft: i === 0 ? "0" : "-10px",
+              }}
+            >
+              <div
+                className="w-[510px] h-[670px] rounded-[24px] p-6 flex flex-col shadow-lg"
+                style={{ backgroundColor: step.bg }}
+              >
+                {/* Number */}
+                <span
+                  className="text-[32px] font-medium opacity-50 text-center"
+                  style={{ color: step.textColor, fontFamily: "var(--font-body)" }}
+                >
+                  {step.num}
+                </span>
+
+                {/* Icon */}
+                <div className="flex-1 flex items-center justify-center">
+                  <img
+                    src={step.icon}
+                    alt={step.title}
+                    className="w-18 h-18 opacity-80"
+                    style={{ transform: `rotate(${i === 0 ? "33deg" : i === 3 ? "-33deg" : "0deg"})` }}
+                  />
+                </div>
+
+                {/* Title */}
+                <h3
+                  className="text-[60px]  leading-tight mb-3 text-center"
+                  style={{ color: step.textColor, fontFamily: "Bricolage Grotesque, sans-serif" }}
+                >
+                  {step.title}
+                </h3>
+
+                {/* Description */}
+                <p
+                  className="text-[24px] leading-[1.5] opacity-70 text-center"
+                  style={{ color: step.textColor, fontFamily: "var(--font-body)" }}
+                >
+                  {step.desc}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
       {/* ════════════════════════════════════════════════════════
           9. USE CASES — scrollable cards with tabs
@@ -1004,7 +1178,7 @@ export default function AIInfluencerPage() {
       {/* ════════════════════════════════════════════════════════
           12. CTA — "Let's Build What's Next, Together."
           ════════════════════════════════════════════════════════ */}
-      <ContactFormSection />
+      <ContactFormSection variant="influencer" />
 
       {/* Influencer PopUp */}
       <InfluencerPopupModal

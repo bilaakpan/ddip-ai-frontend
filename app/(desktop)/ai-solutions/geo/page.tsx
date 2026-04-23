@@ -31,9 +31,9 @@ const whatGeoItems = [
 
 const optimizeItems = [
   { title: "Content Architecture and Hierarchy", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/60119b83-5024-4efc-edde-585a84dd2100/public" },
-  { title: "Semantic markup and metadata", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/147febb9-0d15-49f2-2408-71f7f29b6700/public" },
+  { title: "Semantic clarity and context", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/147febb9-0d15-49f2-2408-71f7f29b6700/public" },
   { title: "Multi-engine optimization", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/3c3064d9-09d8-4f0c-e06e-743e6ec4ca00/public" },
-  { title: "Image & media optimization", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/72b5f1dc-0fa3-45f3-a4ec-bbea9e339600/public" },
+  { title: "Page architecture and internal logic", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/72b5f1dc-0fa3-45f3-a4ec-bbea9e339600/public" },
 ];
 
 const methodSteps = [
@@ -279,18 +279,18 @@ export default function GeoPage() {
                 <img src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/81f155be-4acd-4ee4-f772-861a73198900/public" className="w-[500px] " />
               </div>
             </div>
-            <div className="space-y-4">
-              <p className="text-[20px] leading-[1.6] text-[#063746]" style={{ fontFamily: "var(--font-body)" }}>
+            <div className="space-y-4 w-[740px]">
+              <p className="text-[24px] leading-[1.6] text-[#063746]" style={{ fontFamily: "var(--font-body)" }}>
                 SEO has shaped how brands become visible online for years.
               </p>
-              <p className="text-[20px] leading-[1.6] text-[#063746]" style={{ fontFamily: "var(--font-body)" }}>
+              <p className="text-[24px] leading-[1.6] text-[#063746]" style={{ fontFamily: "var(--font-body)" }}>
                 But how people search for information is changing. <br />
                 Instead of scrolling through result pages, users increasingly ask questions and expect direct answers, often delivered by AI-powered search engines, chat interfaces, and answer systems
               </p>
-              <p className="text-[20px] leading-[1.6] text-[#063746]" style={{ fontFamily: "var(--font-body)" }}>
+              <p className="text-[24px] leading-[1.6] text-[#063746]" style={{ fontFamily: "var(--font-body)" }}>
                 In this new environment, ranking is only part of the equation. What matters more is whether your content is <b>understood, trusted, and referenced</b> by these systems.
               </p>
-              <p className="text-[20px] leading-[1.6] text-[#063746]" style={{ fontFamily: "var(--font-body)" }}>
+              <p className="text-[24px] leading-[1.6] text-[#063746]" style={{ fontFamily: "var(--font-body)" }}>
                 That's where GEO Optimization comes in.
               </p>
             </div>
@@ -500,10 +500,10 @@ export default function GeoPage() {
             Search is evolving into discovery.
           </p>
           <div className="mt-8 space-y-4 text-left">
-            <p className="text-[34px] leading-[1.7] text-[#145365]" >
+            <p className="text-[34px] leading-none text-[#145365]" >
               AI-powered systems don&apos;t just index pages, they analyze meaning, relationships, and relevance.
             </p>
-            <p className="text-[22px] leading-[1.7] text-[#145365]">
+            <p className="text-[22px] leading-[1.7] text-[#145365] mt-20">
               They look for clear signals, structured information, and authoritative context.
             </p>
             <p className="text-[22px] leading-[1.7] text-[#145365]">

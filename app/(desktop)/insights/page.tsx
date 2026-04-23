@@ -9,11 +9,12 @@ import { h1 } from "framer-motion/client";
 /* ─── Constants ─── */
 const CATEGORIES = [
   { id: "all", label: "All" },
-  { id: "topics", label: "Topics" },
-  { id: "ai", label: "AI & Automation" },
-  { id: "content", label: "Content" },
-  { id: "influencer", label: "Influencer" },
-  { id: "consulting", label: "Consulting" },
+  { id: "Real Estate", label: "Real Estate" },
+  { id: "Food", label: "Food" },
+  { id: "Fashion", label: "Fashion" },
+  { id: "Tech & Digital", label: "Tech & Digital" },
+  { id: "Wellness", label: "Wellness" },
+  { id: "Consulting", label: "Consulting" },
 ];
 /* ─── Page ─── */
 export default function InsightsPage() {
@@ -133,7 +134,7 @@ export default function InsightsPage() {
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [activeCategory, setActiveCategory] = useState("all");
-  
+
   // useEffect(() => {
   //   setLoading(true);
   //   cmsApi
@@ -149,7 +150,7 @@ export default function InsightsPage() {
   //     .catch(() => { })
   //     .finally(() => setLoading(false));
   // }, [page]);
-  
+
   const featuredArticle = articles[0];
   const gridArticles = articles; // Show all articles instead of slicing
   return (
@@ -174,6 +175,9 @@ export default function InsightsPage() {
             </h1>
           </div>
         </div>
+        <p className="mt-6 text-left text-[44px] max-w-[1287px] leading-none text-[#063746] px-30 font-{var(--font-heading)]">
+          Creative ideas, practical tips and insider info—the Ddip.ai blog helps your team get great design done at scale.
+        </p>
       </section>
 
 
@@ -183,7 +187,7 @@ export default function InsightsPage() {
       <section className="bg-light-bg py-12">
         <Container>
           {/* Category filter tabs */}
-          <div className="flex flex-wrap items-center gap-2 sm:gap-3 md:gap-4">
+          <div className="flex flex-wrap items-center jusstify-between gap-14">
             {CATEGORIES.map((cat) => {
               const isActive = activeCategory === cat.id;
               return (
@@ -202,77 +206,7 @@ export default function InsightsPage() {
               );
             })}
           </div>
-          {/* Featured Article */}
-          {/* {featuredArticle && (
-            <div className="mt-10">
-              <Link
-                href={`/insights/${featuredArticle.slug}`}
-                className="group block overflow-hidden rounded-[20px] border border-border-light bg-white transition-all hover:shadow-lg"
-              >
-                <div className="grid grid-cols-1 md:grid-cols-2">
-                
-                  <div className="relative aspect-[16/10] overflow-hidden">
-                    {featuredArticle.imageUrl ? (
-                      <Image
-                        src={featuredArticle.imageUrl}
-                        alt={featuredArticle.title}
-                        fill
-                        className="object-cover transition-transform duration-500 group-hover:scale-105"
-                        sizes="(min-width: 768px) 50vw, 100vw"
-                      />
-                    ) : (
-                      <div className="absolute inset-0 bg-gradient-to-br from-[#002834]/40 to-[#063746]/60" />
-                    )}
-                    <div className="absolute left-5 top-5">
-                      <span className="rounded-full bg-[#1CE3F4] px-4 py-1.5 text-[11px] font-semibold text-[#002834]">
-                        Featured
-                      </span>
-                    </div>
-                  </div>
-                 
-                  <div className="flex flex-col justify-center p-10">
-                    {featuredArticle.category && (
-                      <span className="text-[12px] font-medium uppercase tracking-wider text-[#1CE3F4]">
-                        {featuredArticle.category}
-                      </span>
-                    )}
-                    <h2 className="mt-3 font-heading text-[clamp(22px,2.5vw,36px)] font-medium leading-[1.2] text-light-text">
-                      {featuredArticle.title}
-                    </h2>
-                    <p className="mt-4 text-[14px] leading-[1.6] text-light-body line-clamp-3">
-                      {featuredArticle.seoDescription ||
-                        featuredArticle.body?.slice(0, 200)}
-                    </p>
-                    <div className="mt-5 text-[12px] text-light-body/60">
-                      {new Date(
-                        featuredArticle.publishedAt
-                      ).toLocaleDateString("en-US", {
-                        year: "numeric",
-                        month: "short",
-                        day: "numeric",
-                      })}
-                    </div>
-                    <div className="mt-6 flex items-center gap-2 text-[14px] font-medium text-[#1CE3F4] transition-colors group-hover:text-[#00b3c3]">
-                      <span>Read Article</span>
-                      <svg
-                        className="h-4 w-4 transition-transform group-hover:translate-x-1"
-                        viewBox="0 0 16 16"
-                        fill="none"
-                      >
-                        <path
-                          d="M3 8h10M9 4l4 4-4 4"
-                          stroke="currentColor"
-                          strokeWidth="1.5"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
-                    </div>
-                  </div>
-                </div>
-              </Link>
-            </div>
-          )} */}
+
           {/* Article Grid — 3 columns */}
           {gridArticles.length > 0 && (
             <div className="mt-8 sm:mt-10 lg:mt-12 grid grid-cols-1 gap-6 sm:gap-8 lg:grid-cols-3 xl:grid-cols-3">
@@ -380,6 +314,22 @@ export default function InsightsPage() {
           THE MIND BEHIND — Dark marquee section
           ════════════════════════════════════════════════════════ */}
       <section className="overflow-hidden bg-[#F6F9F2] py-16">
+        <Container>
+          <div className="w-full overflow-hidden">
+            <div className="flex w-max animate-marquee">
+              <h1 className="flex items-center whitespace-nowrap font-heading uppercase leading-none text-[#145365] text-[clamp(32px,6vw,64px)] sm:text-[clamp(36px,7vw,80px)] md:text-[clamp(48px,8vw,120px)]">
+                The Mind Behind
+                <img src="/images/common/star.svg" alt="*" className="mx-10 h-18 w-18 relative top-[0.08em]" />
+              </h1>
+              <h1 className="ml-10 flex items-center whitespace-nowrap font-heading uppercase leading-none text-[#145365] text-[clamp(32px,6vw,64px)] sm:text-[clamp(36px,7vw,80px)] md:text-[clamp(48px,8vw,120px)]">
+                The Mind Behind
+                <img src="/images/common/star.svg" alt="*" className="mx-10 w-18 h-18 relative top-[0.08em]" />
+                The Mind Behind
+                <img src="/images/common/star.svg" alt="*" className="mx-10 w-18 h-18 relative top-[0.08em]" />
+              </h1>
+            </div>
+          </div>
+        </Container>
         <Container>
           <div className="w-full overflow-hidden">
             <div className="flex w-max animate-marquee">

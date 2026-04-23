@@ -15,6 +15,13 @@ import HlsPlayer from "@/components/desktop/video";
 
 /* ─── Data ─── */
 
+type HeroMediaType = "image" | "video";
+
+interface HeroMedia {
+  src: string;
+  type: HeroMediaType;
+}
+
 const capabilities = [
   {
     title: "Strategic by Design",
@@ -148,18 +155,13 @@ const partners = [
 
 
 export default function HomePage() {
-
-  // Hero carousel
-  const heroImages = [
-    "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/668d2dbe-1430-43f2-d9d4-43fdd6b55f00/public",
-    "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/ca026e67-6810-45b1-4bf2-f1e8aeacd800/public",
-    "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/a14a9b12-bd23-450e-1009-79149e9d7f00/public",
-  ];
   const [heroSlide, setHeroSlide] = useState(0);
-  const [heroPlaying, setHeroPlaying] = useState(true);
+  const [heroPlaying, setHeroPlaying] = useState(false);
   const heroTimer = useRef<ReturnType<typeof setInterval> | null>(null);
+  const heroVideoRef = useRef<any>(null);
   const [isInfluencerPopupOpen, setIsInfluencerPopupOpen] = useState(false);
   const [selectedInfluencer, setSelectedInfluencer] = useState<PopupInfluencer | null>(null);
+  const [activeFilter, setActiveFilter] = useState("Influencer");
   const startHeroTimer = useCallback(() => {
     if (heroTimer.current) clearInterval(heroTimer.current);
     heroTimer.current = setInterval(() => {
@@ -169,12 +171,25 @@ export default function HomePage() {
 
   useEffect(() => {
     if (heroPlaying) {
-      startHeroTimer();
+      // Don't start timer when video is playing
+      // startHeroTimer();
     } else if (heroTimer.current) {
       clearInterval(heroTimer.current);
     }
     return () => { if (heroTimer.current) clearInterval(heroTimer.current); };
   }, [heroPlaying, startHeroTimer]);
+
+  // Control video playback
+  useEffect(() => {
+    const video = heroVideoRef.current;
+    if (!video) return;
+
+    if (heroPlaying && heroSlide === 0) {
+      video.play().catch(() => { });
+    } else {
+      video.pause();
+    }
+  }, [heroPlaying, heroSlide]);
 
   // CMS data state — initialized with fallback data, replaced when API responds
   const [cmsSolutions, setCmsSolutions] = useState(aiSolutions);
@@ -280,22 +295,24 @@ export default function HomePage() {
           1. HERO SECTION
           ════════════════════════════════════════════════════════ */}
       <section className="relative overflow-hidden bg-dark-bg" style={{ minHeight: '100vh' }}>
-        {/* Background image carousel */}
-        <div className="absolute inset-0 z-0" style={{ height: '100%' }}>
-          {heroImages.map((src, i) => (
-            <Image
-              key={src}
-              src={src}
-              unoptimized
-              alt="DDiP AI hero"
-              fill
-              priority={i === 0}
-              className={`object-cover object-top transition-opacity duration-1000 ${i === heroSlide ? "opacity-100" : "opacity-0"}`}
-              sizes="100vw"
+        {/* Background media carousel */}
+  
+          <div
+            className={`absolute inset-0 bg-[#0C0C06] transition-opacity duration-1000 ${heroSlide === 0 ? "opacity-100" : "opacity-0"}`}
+          >
+            <HlsPlayer
+              ref={heroVideoRef}
+              src={"1a3475f20aa2ad6346f9c1087f74d458"}
+              autoPlay={false}
+              controls={false}
+              muted={true}
+              loop={true}
+              fillHeight={false}
+              hoverToPlay={false}
+              className="absolute inset-0 h-[615px] w-[1410px] object-cover object-top ml-[430px] "
             />
-          ))}
-          <div className="absolute inset-0 bg-gradient-to-t from-dark-bg/70 via-transparent to-dark-bg/30" />
-        </div>
+          </div>
+      
 
         {/* Hero content */}
         <div className="relative z-10 flex flex-col px-[60px] pt-28 max-md:px-5 max-md:pt-24">
@@ -322,45 +339,45 @@ export default function HomePage() {
                   </span>
                   CREATE YOUR
                 </span>
-                <span style={{ fontSize: '120px', lineHeight: '1', display: 'block',marginRight:'280px' }}>&nbsp;&nbsp;OWN AI INFLUENCER</span>
+                <span style={{ fontSize: '120px', lineHeight: '1', display: 'block', marginRight: '280px' }}>&nbsp;&nbsp;OWN AI INFLUENCER</span>
                 <div className="flex row-flex justify-center  gap-[5px]">
-                <span style={{ fontSize: '155px', lineHeight: '1' }}>WITH US!</span>
-                 <div className="pt-[30px] max-w-[300px] text-left">
-                <p className="flex items-center gap-2 text-white"
-                  style={{
-                    fontFamily: 'SF Pro Display, sans-serif',
-                    fontWeight: 400,
-                    fontSize: '30px',
-                    lineHeight: '120%'
-                  }}
-                >
-                  <svg className="inline h-4 w-4" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="2">
-                    <line x1="24" y1="2" x2="24" y2="46" />
-                    <line x1="2" y1="24" x2="46" y2="24" />
-                    <line x1="7" y1="7" x2="41" y2="41" />
-                    <line x1="41" y1="7" x2="7" y2="41" />
-                  </svg>
-                  Problem:
-                </p>
-                <p
-                  className="ml-[25px] text-white/90"
-                  style={{
-                    fontFamily: 'SF Pro Display, sans-serif',
-                    fontWeight: 400,
-                    fontSize: '20px',
-                    lineHeight: '120%',
-                    textTransform:"lowercase",
-                    width:"400px"
-                  }}
-                >
-                  We need to promote our brand but the influencer prices are too high.
-                </p>
-              </div>
-              </div>
+                  <span style={{ fontSize: '155px', lineHeight: '1' }}>WITH US!</span>
+                  <div className="pt-[30px] max-w-[300px] text-left">
+                    <p className="flex items-center gap-2 text-white"
+                      style={{
+                        fontFamily: 'SF Pro Display, sans-serif',
+                        fontWeight: 400,
+                        fontSize: '30px',
+                        lineHeight: '120%'
+                      }}
+                    >
+                      <svg className="inline h-4 w-4" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="2">
+                        <line x1="24" y1="2" x2="24" y2="46" />
+                        <line x1="2" y1="24" x2="46" y2="24" />
+                        <line x1="7" y1="7" x2="41" y2="41" />
+                        <line x1="41" y1="7" x2="7" y2="41" />
+                      </svg>
+                      Problem:
+                    </p>
+                    <p
+                      className="ml-[25px] text-white/90"
+                      style={{
+                        fontFamily: 'SF Pro Display, sans-serif',
+                        fontWeight: 400,
+                        fontSize: '20px',
+                        lineHeight: '120%',
+                        textTransform: "lowercase",
+                        width: "400px"
+                      }}
+                    >
+                      We need to promote our brand but the influencer prices are too high.
+                    </p>
+                  </div>
+                </div>
               </h1>
 
               {/* Problem text — left side, aligned with heading area */}
-             
+
             </div>
           </div>
 
@@ -393,21 +410,27 @@ export default function HomePage() {
               >
                 Discover AI Solutions
               </a>
-              <div className="flex items-center gap-3">
-                <div className="flex items-center gap-2">
-                  {heroImages.map((_, i) => (
+              <div className="flex items-center gap-4">
+                {/* Indicator Capsule */}
+                <div className="flex items-center gap-4 px-8 py-4 rounded-full bg-[#2d2d2d]">
+                  {[0].map((_, i) => (
                     <button
                       key={i}
                       aria-label={`Go to slide ${i + 1}`}
                       onClick={() => setHeroSlide(i)}
-                      className={`h-2 rounded-full transition-all ${i === heroSlide ? "w-6 bg-white" : "w-2 bg-white/30"}`}
+                      className={`rounded-full transition-all duration-300 ${i === heroSlide
+                        ? "w-14 h-2 bg-white"
+                        : "w-2 h-2 bg-white"
+                        }`}
                     />
                   ))}
                 </div>
+
+                {/* Play Button */}
                 <button
                   aria-label={heroPlaying ? "Pause carousel" : "Play carousel"}
                   onClick={() => setHeroPlaying((p) => !p)}
-                  className="ml-1 flex h-6 w-6 items-center justify-center text-white/60 transition-colors hover:text-white"
+                  className="flex h-12 w-12 items-center justify-center rounded-full bg-[#2d2d2d] text-white"
                 >
                   {heroPlaying ? (
                     <svg className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
@@ -415,7 +438,7 @@ export default function HomePage() {
                       <rect x="14" y="5" width="4" height="14" />
                     </svg>
                   ) : (
-                    <svg className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
+                    <svg className="h-4 w-4 ml-[2px]" viewBox="0 0 24 24" fill="currentColor">
                       <path d="M8 5v14l11-7z" />
                     </svg>
                   )}
@@ -468,24 +491,24 @@ export default function HomePage() {
             }}
           >
             <span>
-            WE DON&apos;T JUST USE AI
+              WE DON&apos;T JUST USE AI
             </span>
             <br />
             <span>WE DESIGN{" "}
-            <span className="relative inline-block align-middle">
-              <span className="inline-flex h-[0.88em] w-[1.52em] items-center justify-center overflow-hidden rounded-lg">
-                <HlsPlayer
-                  src="9e3a0d22828697a21a65a4ea035f5c3d"
-                  autoPlay={false}
-                  controls={false}
-                  muted={true}
-                  loop={true}
-                  fillHeight={true}
-                  className="h-full w-full object-cover"
-                />
-              </span>
-            </span>{" "}
-            WITH IT.
+              <span className="relative inline-block align-middle">
+                <span className="inline-flex h-[0.88em] w-[1.52em] items-center justify-center overflow-hidden rounded-lg">
+                  <HlsPlayer
+                    src="9e3a0d22828697a21a65a4ea035f5c3d"
+                    autoPlay={false}
+                    controls={false}
+                    muted={true}
+                    loop={true}
+                    fillHeight={true}
+                    className="h-full w-full object-cover"
+                  />
+                </span>
+              </span>{" "}
+              WITH IT.
             </span>
           </h2>
         </div>
@@ -539,8 +562,8 @@ export default function HomePage() {
           Figma sections 25-26: White cards, rounded 33px, image+title+desc+tags
           ════════════════════════════════════════════════════════ */}
       <div className="mt-16 overflow-hidden px-[60px]"
-       ref={emblaRef} 
-       >
+        ref={emblaRef}
+      >
         <div className="flex gap-[33px]">
           {cmsSolutions.map((solution) => (
             <Link
@@ -812,258 +835,202 @@ export default function HomePage() {
             Our AI influencers represent the <span className="text-white">next step</span> in brand communication,
             combining expressiveness, adaptability, and visual intelligence.
           </p>
+          <div className="flex flex-row items-center justify-between px-8 mt-16">
+            {/* Filter tabs — centered */}
+            <div className=" flex items-center justify-center gap-3">
+              {/* Filter pills */}
+              <div className="flex flex-wrap items-center justify-center gap-3 rounded-full bg-white/90 px-6 py-5">
+                <button
+                  className={`rounded-full px-5 py-2 text-[16px] leading-[1.2] transition-colors ${
+                    activeFilter === "Influencer" 
+                      ? "bg-[#063746] text-[#EBFFFF]" 
+                      : "text-[#063746] hover:bg-[#063746]/10"
+                  }`}
+                  style={{ fontFamily: "var(--font-body)" }}
+                  onClick={() => setActiveFilter("Influencer")}
+                >
+                  Influencer
+                </button>
+                <button
+                  className={`rounded-full px-5 py-2 text-[16px] leading-[1.2] transition-colors ${
+                    activeFilter === "Ambassador" 
+                      ? "bg-[#063746] text-[#EBFFFF]" 
+                      : "text-[#063746] hover:bg-[#063746]/10"
+                  }`}
+                  style={{ fontFamily: "var(--font-body)" }}
+                  onClick={() => setActiveFilter("Ambassador")}
+                >
+                  Ambassador
+                </button>
+                <button
+                  className={`rounded-full px-5 py-2 text-[16px] leading-[1.2] transition-colors ${
+                    activeFilter === "Mascot" 
+                      ? "bg-[#063746] text-[#EBFFFF]" 
+                      : "text-[#063746] hover:bg-[#063746]/10"
+                  }`}
+                  style={{ fontFamily: "var(--font-body)" }}
+                  onClick={() => setActiveFilter("Mascot")}
+                >
+                  Mascot
+                </button>
+              </div>
+            </div>
 
-          {/* Filter tabs — centered */}
-          <div className="mt-16 flex items-center justify-center gap-3 px-[60px]">
-            {/* Filter pills */}
-            <div className="flex flex-wrap items-center justify-center gap-3 rounded-full bg-white/90 px-6 py-5">
-              <button
-                className="rounded-full bg-[#063746] px-5 py-2 text-[16px] leading-[1.2] text-[#EBFFFF]"
-                style={{ fontFamily: "var(--font-body)" }}
+            {/* Discover More link — centered below filters */}
+            <div className=" flex ">
+              <Link
+                href="/ai-solutions/ai-influencer"
+                className="group flex items-center gap-3"
               >
-                All Persona
-              </button>
-              <button
-                className="rounded-full px-5 py-2 text-[16px] leading-[1.2] text-[#063746] transition-colors hover:bg-[#063746]/10"
-                style={{ fontFamily: "var(--font-body)" }}
-              >
-                All Region
-              </button>
-              <button
-                className="rounded-full px-5 py-2 text-[16px] leading-[1.2] text-[#063746] transition-colors hover:bg-[#063746]/10"
-                style={{ fontFamily: "var(--font-body)" }}
-              >
-                All Language
-              </button>
-              <button
-                className="rounded-full px-5 py-2 text-[16px] leading-[1.2] text-[#063746] transition-colors hover:bg-[#063746]/10"
-                style={{ fontFamily: "var(--font-body)" }}
-              >
-                All Gender
-              </button>
-              <button
-                className="rounded-full px-5 py-2 text-[16px] leading-[1.2] text-[#063746] transition-colors hover:bg-[#063746]/10"
-                style={{ fontFamily: "var(--font-body)" }}
-              >
-                All Industry
-              </button>
+                <span className="font-heading text-[32px] font-normal leading-[1.2] text-white underline underline-offset-8 transition-colors group-hover:text-[#1CE3F4]">
+                  Discover More
+                </span>
+                <svg className="h-[16px] w-[24px] text-white transition-colors group-hover:text-[#1CE3F4]" viewBox="0 0 24 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M0 8h22M16 1l7 7-7 7" />
+                </svg>
+              </Link>
             </div>
           </div>
-
-          {/* Discover More link — centered below filters */}
-          <div className="mt-6 flex items-center justify-center">
-            <Link
-              href="/ai-solutions/ai-influencer"
-              className="group flex items-center gap-3"
-            >
-              <span className="font-heading text-[32px] font-normal leading-[1.2] text-white underline underline-offset-8 transition-colors group-hover:text-[#1CE3F4]">
-                Discover More
-              </span>
-              <svg className="h-[16px] w-[24px] text-white transition-colors group-hover:text-[#1CE3F4]" viewBox="0 0 24 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M0 8h22M16 1l7 7-7 7" />
-              </svg>
-            </Link>
-          </div>
-
-          {/* <div className="mt-10 overflow-hidden px-[60px]" ref={emblaRow1Ref}>
-            <div className="flex">
+ 
+          <div className="mt-10 overflow-hidden px-[60px]" ref={emblaRow1Ref}>
+            <div className="flex -ml-[25px]"> {/* negative margin trick */}
               {[...cmsInfluencers.row1, ...cmsInfluencers.row1].map((inf, idx) => (
-                <div key={`row1-${idx}`} className="w-[376px] flex-shrink-0 cursor-pointer ml-[25px]" onClick={() => { setSelectedInfluencer(inf); setIsInfluencerPopupOpen(true); }}>
-                  <div className="relative h-[518px] w-full overflow-hidden rounded-[20px] bg-[#EFEFEF]">
-                    <Image
-                      unoptimized
-                      src={inf.image}
-                      alt={inf.name}
-
-                      fill
-                      className="absolute inset-0 h-full w-full object-cover"
-                    />
-                    <div
-                      className="absolute right-[20px] top-[20px] rounded-full px-[18px] py-[9px]"
-                      style={{ backgroundColor: inf.color }}
-                    >
-                      <span
-                        className="text-[18px] uppercase leading-[1.2] text-black"
-                        style={{ fontFamily: "var(--font-body)" }}
+                <div
+                  key={`row1-${idx}`}
+                  className="flex-[0_0_376px] pl-[25px]" /* flex-shrink-0 ki jagah flex shorthand + padding */
+                  onClick={() => {
+                    setSelectedInfluencer(inf);
+                    setIsInfluencerPopupOpen(true);
+                  }}
+                >
+                  <div className="cursor-pointer"> {/* cursor yahan move kiya */}
+                    <div className="relative h-[518px] w-full overflow-hidden rounded-[20px] bg-[#EFEFEF]">
+                      <Image
+                        unoptimized
+                        src={inf.image}
+                        alt={inf.name}
+                        fill
+                        className="absolute inset-0 h-full w-full object-cover"
+                      />
+                      <div
+                        className="absolute right-[20px] top-[20px] rounded-full px-[18px] py-[9px]"
+                        style={{ backgroundColor: inf.color }}
                       >
-                        {inf.industry}
-                      </span>
-                    </div>
-                    <div className="absolute bottom-[20px] left-[20px] right-[20px] flex items-center justify-between">
-                      <div className="flex items-center gap-2 rounded-full bg-[#063746B2] px-[22px] py-[12px]">
-                        {inf.country && (
-                          <Image
-                            src={`https://flagcdn.com/w20/${inf.country.toLowerCase()}.png`}
-                            alt={inf.country}
-                            height={4}
-                            width={5}
-                            className="h-[14px] w-[20px] rounded-sm object-cover"
-                          />
-                        )}
                         <span
-                          className="text-[18px] leading-[1.2] text-white"
+                          className="text-[18px] uppercase leading-[1.2] text-black"
                           style={{ fontFamily: "var(--font-body)" }}
                         >
-                          {inf.name}
+                          {inf.industry}
                         </span>
                       </div>
-                      <div className="flex h-[48px] w-[48px] items-center justify-center rounded-full bg-white/80">
-                        <svg className="h-[30px] w-[30px] text-[#012F3B]" viewBox="0 0 30 30" fill="none" stroke="currentColor" strokeWidth="4">
-                          <line x1="15" y1="0" x2="15" y2="30" />
-                          <line x1="0" y1="15" x2="30" y2="15" />
-                        </svg>
+                      <div className="absolute bottom-[20px] left-[20px] right-[20px] flex items-center justify-between">
+                        <div className="flex items-center gap-2 rounded-full bg-[#063746B2] px-[22px] py-[12px]">
+                          {inf.country && (
+                            <Image
+                              src={`https://flagcdn.com/w20/${inf.country.toLowerCase()}.png`}
+                              alt={inf.country}
+                              height={4}
+                              width={5}
+                              className="h-[14px] w-[20px] rounded-sm object-cover"
+                            />
+                          )}
+                          <span
+                            className="text-[18px] leading-[1.2] text-white"
+                            style={{ fontFamily: "var(--font-body)" }}
+                          >
+                            {inf.name}
+                          </span>
+                        </div>
+                        <div className="flex h-[48px] w-[48px] items-center justify-center rounded-full bg-white/80">
+                          <svg className="h-[30px] w-[30px] text-[#012F3B]" viewBox="0 0 30 30" fill="none" stroke="currentColor" strokeWidth="4">
+                            <line x1="15" y1="0" x2="15" y2="30" />
+                            <line x1="0" y1="15" x2="30" y2="15" />
+                          </svg>
+                        </div>
                       </div>
                     </div>
+                    <p
+                      className="mt-4 text-[20px] leading-[1.2] text-[#90B2BD]"
+                      style={{ fontFamily: "var(--font-body)" }}
+                    >
+                      &ldquo;{inf.archetype}&rdquo;
+                    </p>
                   </div>
-                  <p
-                    className="mt-4 text-[20px] leading-[1.2] text-[#90B2BD]"
-                    style={{ fontFamily: "var(--font-body)" }}
-                  >
-                    &ldquo;{inf.archetype}&rdquo;
-                  </p>
                 </div>
               ))}
             </div>
-          </div> */}
-         <div className="mt-10 overflow-hidden px-[60px]" ref={emblaRow1Ref}>
-  <div className="flex -ml-[25px]"> {/* negative margin trick */}
-    {[...cmsInfluencers.row1, ...cmsInfluencers.row1].map((inf, idx) => (
-      <div 
-        key={`row1-${idx}`} 
-        className="flex-[0_0_376px] pl-[25px]" /* flex-shrink-0 ki jagah flex shorthand + padding */
-        onClick={() => { 
-          setSelectedInfluencer(inf); 
-          setIsInfluencerPopupOpen(true); 
-        }}
-      >
-        <div className="cursor-pointer"> {/* cursor yahan move kiya */}
-          <div className="relative h-[518px] w-full overflow-hidden rounded-[20px] bg-[#EFEFEF]">
-            <Image
-              unoptimized
-              src={inf.image}
-              alt={inf.name}
-              fill
-              className="absolute inset-0 h-full w-full object-cover"
-            />
-            <div
-              className="absolute right-[20px] top-[20px] rounded-full px-[18px] py-[9px]"
-              style={{ backgroundColor: inf.color }}
-            >
-              <span
-                className="text-[18px] uppercase leading-[1.2] text-black"
-                style={{ fontFamily: "var(--font-body)" }}
-              >
-                {inf.industry}
-              </span>
-            </div>
-            <div className="absolute bottom-[20px] left-[20px] right-[20px] flex items-center justify-between">
-              <div className="flex items-center gap-2 rounded-full bg-[#063746B2] px-[22px] py-[12px]">
-                {inf.country && (
-                  <Image
-                    src={`https://flagcdn.com/w20/${inf.country.toLowerCase()}.png`}
-                    alt={inf.country}
-                    height={4}
-                    width={5}
-                    className="h-[14px] w-[20px] rounded-sm object-cover"
-                  />
-                )}
-                <span
-                  className="text-[18px] leading-[1.2] text-white"
-                  style={{ fontFamily: "var(--font-body)" }}
-                >
-                  {inf.name}
-                </span>
-              </div>
-              <div className="flex h-[48px] w-[48px] items-center justify-center rounded-full bg-white/80">
-                <svg className="h-[30px] w-[30px] text-[#012F3B]" viewBox="0 0 30 30" fill="none" stroke="currentColor" strokeWidth="4">
-                  <line x1="15" y1="0" x2="15" y2="30" />
-                  <line x1="0" y1="15" x2="30" y2="15" />
-                </svg>
-              </div>
-            </div>
           </div>
-          <p
-            className="mt-4 text-[20px] leading-[1.2] text-[#90B2BD]"
-            style={{ fontFamily: "var(--font-body)" }}
-          >
-            &ldquo;{inf.archetype}&rdquo;
-          </p>
-        </div>
-      </div>
-    ))}
-  </div>
-</div>
 
           {/* Row 2 */}
-        <div className="mt-8 overflow-hidden px-[60px]" ref={emblaRow2Ref}>
-  <div className="flex -ml-[20px]"> {/* gap-5 = 20px, so negative margin */}
-    {[...cmsInfluencers.row2, ...cmsInfluencers.row2].map((inf, idx) => (
-      <div 
-        key={`row2-${idx}`} 
-        className="flex-[0_0_376px] pl-[20px]" /* flex basis + padding for gap */
-        onClick={() => { 
-          setSelectedInfluencer(inf); 
-          setIsInfluencerPopupOpen(true); 
-        }}
-      >
-        <div className="cursor-pointer">
-          <div className="relative h-[518px] w-full overflow-hidden rounded-[20px] bg-[#EFEFEF]">
-            <Image
-              src={inf.image}
-              alt={inf.name}
-              fill
-              unoptimized
-              className="absolute inset-0 h-full w-full object-cover"
-            />
-            <div
-              className="absolute right-[20px] top-[20px] rounded-full px-[18px] py-[9px]"
-              style={{ backgroundColor: inf.color }}
-            >
-              <span
-                className="text-[18px] uppercase leading-[1.2] text-black"
-                style={{ fontFamily: "var(--font-body)" }}
-              >
-                {inf.industry}
-              </span>
-            </div>
-            <div className="absolute bottom-[20px] left-[20px] right-[20px] flex items-center justify-between">
-              <div className="flex items-center gap-2 rounded-full bg-[#063746B2] px-[22px] py-[12px]">
-                {inf.country && (
-                  <Image
-                    src={`https://flagcdn.com/w20/${inf.country.toLowerCase()}.png`}
-                    alt={inf.country}
-                    height={4}
-                    width={5}
-                    unoptimized
-                    className="h-[14px] w-[20px] rounded-sm object-cover"
-                  />
-                )}
-                <span
-                  className="text-[18px] leading-[1.2] text-white"
-                  style={{ fontFamily: "var(--font-body)" }}
+          <div className="mt-8 overflow-hidden px-[60px]" ref={emblaRow2Ref}>
+            <div className="flex -ml-[20px]"> {/* gap-5 = 20px, so negative margin */}
+              {[...cmsInfluencers.row2, ...cmsInfluencers.row2].map((inf, idx) => (
+                <div
+                  key={`row2-${idx}`}
+                  className="flex-[0_0_376px] pl-[20px]" /* flex basis + padding for gap */
+                  onClick={() => {
+                    setSelectedInfluencer(inf);
+                    setIsInfluencerPopupOpen(true);
+                  }}
                 >
-                  {inf.name}
-                </span>
-              </div>
-              <div className="flex h-[48px] w-[48px] items-center justify-center rounded-full bg-white/80">
-                <svg className="h-[30px] w-[30px] text-[#012F3B]" viewBox="0 0 30 30" fill="none" stroke="currentColor" strokeWidth="4">
-                  <line x1="15" y1="0" x2="15" y2="30" />
-                  <line x1="0" y1="15" x2="30" y2="15" />
-                </svg>
-              </div>
+                  <div className="cursor-pointer">
+                    <div className="relative h-[518px] w-full overflow-hidden rounded-[20px] bg-[#EFEFEF]">
+                      <Image
+                        src={inf.image}
+                        alt={inf.name}
+                        fill
+                        unoptimized
+                        className="absolute inset-0 h-full w-full object-cover"
+                      />
+                      <div
+                        className="absolute right-[20px] top-[20px] rounded-full px-[18px] py-[9px]"
+                        style={{ backgroundColor: inf.color }}
+                      >
+                        <span
+                          className="text-[18px] uppercase leading-[1.2] text-black"
+                          style={{ fontFamily: "var(--font-body)" }}
+                        >
+                          {inf.industry}
+                        </span>
+                      </div>
+                      <div className="absolute bottom-[20px] left-[20px] right-[20px] flex items-center justify-between">
+                        <div className="flex items-center gap-2 rounded-full bg-[#063746B2] px-[22px] py-[12px]">
+                          {inf.country && (
+                            <Image
+                              src={`https://flagcdn.com/w20/${inf.country.toLowerCase()}.png`}
+                              alt={inf.country}
+                              height={4}
+                              width={5}
+                              unoptimized
+                              className="h-[14px] w-[20px] rounded-sm object-cover"
+                            />
+                          )}
+                          <span
+                            className="text-[18px] leading-[1.2] text-white"
+                            style={{ fontFamily: "var(--font-body)" }}
+                          >
+                            {inf.name}
+                          </span>
+                        </div>
+                        <div className="flex h-[48px] w-[48px] items-center justify-center rounded-full bg-white/80">
+                          <svg className="h-[30px] w-[30px] text-[#012F3B]" viewBox="0 0 30 30" fill="none" stroke="currentColor" strokeWidth="4">
+                            <line x1="15" y1="0" x2="15" y2="30" />
+                            <line x1="0" y1="15" x2="30" y2="15" />
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                    <p
+                      className="mt-4 text-[20px] leading-[1.2] text-[#90B2BD]"
+                      style={{ fontFamily: "var(--font-body)" }}
+                    >
+                      &ldquo;{inf.archetype}&rdquo;
+                    </p>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
-          <p
-            className="mt-4 text-[20px] leading-[1.2] text-[#90B2BD]"
-            style={{ fontFamily: "var(--font-body)" }}
-          >
-            &ldquo;{inf.archetype}&rdquo;
-          </p>
-        </div>
-      </div>
-    ))}
-  </div>
-</div>
         </div>
       </section>
 
@@ -1123,25 +1090,25 @@ export default function HomePage() {
                 <br />
                 ideas faster.
               </h3>
-                  <div className="mt-[50px]">
-            <Link
-              href="/works"
-              className="inline-flex items-center gap-[30px] rounded-full bg-[#063746] py-[8px] pl-[18px] pr-[12px] transition-opacity hover:opacity-90"
-            >
-              <span
-                className="text-[20px] leading-[1.2] text-white"
-                style={{ fontFamily: "var(--font-body)" }}
-              >
-                Explore Our Workflows
-              </span>
-              <span className="flex h-[37px] w-[37px] items-center justify-center rounded-full bg-[#039EB7]">
-                <svg className="h-[19px] w-[19px] text-white" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="3">
-                  <line x1="10" y1="1" x2="10" y2="19" />
-                  <line x1="1" y1="10" x2="19" y2="10" />
-                </svg>
-              </span>
-            </Link>
-          </div>
+              <div className="mt-[50px]">
+                <Link
+                  href="/works"
+                  className="inline-flex items-center gap-[30px] rounded-full bg-[#063746] py-[8px] pl-[18px] pr-[12px] transition-opacity hover:opacity-90"
+                >
+                  <span
+                    className="text-[20px] leading-[1.2] text-white"
+                    style={{ fontFamily: "var(--font-body)" }}
+                  >
+                    Explore Our Workflows
+                  </span>
+                  <span className="flex h-[37px] w-[37px] items-center justify-center rounded-full bg-[#039EB7]">
+                    <svg className="h-[19px] w-[19px] text-white" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="3">
+                      <line x1="10" y1="1" x2="10" y2="19" />
+                      <line x1="1" y1="10" x2="19" y2="10" />
+                    </svg>
+                  </span>
+                </Link>
+              </div>
             </div>
             <div className="w-1/2">
               <p
@@ -1162,8 +1129,8 @@ export default function HomePage() {
             </div>
           </div>
 
-         
-      
+
+
         </div>
       </section>
 

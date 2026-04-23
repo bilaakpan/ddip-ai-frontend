@@ -74,13 +74,13 @@ function MegaMenuCarousel({ cards }: { cards: { title: string; href: string; ima
   return (
     <div className="relative flex flex-col gap-3 w-[80%] ml-auto">
       {/* Left arrow */}
-      <button onClick={() => scroll("prev")} className="absolute -left-4 top-1/2 -translate-y-1/2 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-white/15 hover:bg-white/30 transition">
-        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M8 2L4 6L8 10" stroke="white" strokeWidth="1.5" strokeLinecap="round"/></svg>
+      <button onClick={() => scroll("prev")} className="absolute -left-9 top-1/2 -translate-y-1/2 z-10 flex h-8 w-8 items-center justify-center  transition">
+        <svg width="20" height="20" viewBox="0 0 12 12" fill="none"><path d="M8 2L4 6L8 10" stroke="white" strokeWidth="1.5" strokeLinecap="round"/></svg>
       </button>
 
       {/* Right arrow */}
-      <button onClick={() => scroll("next")} className="absolute -right-4 top-1/2 -translate-y-1/2 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-white/15 hover:bg-white/30 transition">
-        <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M4 2L8 6L4 10" stroke="white" strokeWidth="1.5" strokeLinecap="round"/></svg>
+      <button onClick={() => scroll("next")} className="absolute -right-7 top-1/2 -translate-y-1/2 z-10 flex h-8 w-8 items-center justify-center transition">
+        <svg width="20" height="20" viewBox="0 0 12 12" fill="none"><path d="M4 2L8 6L4 10" stroke="white" strokeWidth="1.5" strokeLinecap="round"/></svg>
       </button>
 
       {/* Carousel container */}
@@ -247,7 +247,7 @@ export function Navbar() {
                 >
                   <div
                     className="w-full p-6 shadow-2xl backdrop-blur-xl"
-                    style={{ background: "#424242", borderRadius: "40px" }}
+                    style={{ background: "#42424299", borderRadius: "40px" }}
                   >
                     <div className="grid grid-cols-[260px_1fr] gap-8 items-center">
 

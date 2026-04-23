@@ -40,9 +40,14 @@ export default function FaqSection({
                     className="flex w-full items-center justify-between py-[35px] text-left"
                     onClick={() => setOpenLeft(openLeft === i ? null : i)}
                   >
-                    <span className="pr-8 text-[20px] leading-[1.3] text-white" style={{ fontFamily: "var(--font-body)" }}>
-                      {leftQuestions[i]}
-                    </span>
+                    <div className="flex items-center gap-4">
+                      <span className="text-[20px] leading-[1.3] text-white" style={{ fontFamily: "var(--font-body)" }}>
+                        {i + 1}.
+                      </span>
+                      <span className="text-[20px] leading-[1.3] text-white" style={{ fontFamily: "var(--font-body)" }}>
+                        {leftQuestions[i]}
+                      </span>
+                    </div>
                     <span className={`shrink-0 text-[24px] leading-none text-white transition-transform duration-300 ${openLeft === i ? "rotate-45" : ""}`}>
                       +
                     </span>
@@ -64,9 +69,17 @@ export default function FaqSection({
                     className="flex w-full items-center justify-between py-[35px] text-left"
                     onClick={() => setOpenRight(openRight === i ? null : i)}
                   >
-                    <span className="pr-8 text-[20px] leading-[1.3] text-white" style={{ fontFamily: "var(--font-body)" }}>
-                      {rightQuestions[i]}
-                    </span>
+                    <div className="flex items-center gap-4">
+                      <span
+                        className="text-[20px] leading-[1.3] text-white"
+                        style={{ fontFamily: "var(--font-body)" }}
+                      >
+                        {leftQuestions.length + i + 1}.
+                      </span>
+                      <span className="text-[20px] leading-[1.3] text-white" style={{ fontFamily: "var(--font-body)" }}>
+                        {rightQuestions[i]}
+                      </span>
+                    </div>
                     <span className={`shrink-0 text-[24px] leading-none text-white transition-transform duration-300 ${openRight === i ? "rotate-45" : ""}`}>
                       +
                     </span>

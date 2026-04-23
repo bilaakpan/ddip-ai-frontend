@@ -646,8 +646,7 @@ export default function AIContentPage() {
           </div>
 
           {/* Tagline */}
-          <p className="mt-10 text-center text-[20px] font-medium"
-            style={{ fontFamily: "SF Pro Display", color: "#063746" }}>
+          <p className="mt-10 text-center text-[26px]  text-[#063746]">
             Each use case starts with intent, not output.
           </p>
 

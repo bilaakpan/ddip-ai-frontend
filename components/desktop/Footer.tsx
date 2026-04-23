@@ -31,7 +31,7 @@ export function Footer() {
         {/* ───────── TOP SECTION ───────── */}
         <div className="flex flex-col gap-10 md:flex-row md:items-center md:justify-between">
           {/* LEFT */}
-          <div className="max-w-[700px]">
+          <div className="max-w-[740px]">
             <p className="text-white text-lg md:text-xl lg:text-2xl font-heading">
               Got a project?
             </p>
@@ -135,7 +135,7 @@ export function Footer() {
               </a>
             </div>
             {/* VIDEO */}
-            <div className="w-full max-w-[420px] overflow-hidden rounded-md">
+            <div className="w-full max-w-[500px] overflow-hidden">
               <div className="relative aspect-video">
                 <HlsPlayer
                   src="9e3a0d22828697a21a65a4ea035f5c3d"
@@ -151,12 +151,12 @@ export function Footer() {
         </div>
         {/* ───────── BOTTOM ───────── */}
         <div className="mt-12 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-          <p className="text-white text-sm md:text-base">
+          <p className="text-white text-[20px]">
             © 2026 Ddip AI. All Rights Reserved
           </p>
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            className="text-white text-lg hover:text-[#1CE3F4] transition"
+            className="text-white text-[40px] hover:text-[#1CE3F4] transition"
           >
             Back to top ↑
           </button>

@@ -1019,7 +1019,7 @@ export default function StartProjectPage() {
                         "High operational cost",
                         "Scaling issues",
                       ].map((item) => (
-                        <label
+                        <div
                           key={item}
                           className="flex cursor-pointer items-center gap-3"
                           onClick={() => toggleArr("waAreas", item)}
@@ -1027,7 +1027,7 @@ export default function StartProjectPage() {
                           {/* Checkbox UI */}
                           <div
                             className={cn(
-                              "flex h-4.5 w-4.5 items-center justify-center rounded border transition-all",
+                              "flex h-4 w-4 shrink-0 items-center justify-center rounded border transition-all",
                               form.waAreas.includes(item)
                                 ? "bg-[#6D6A75] border-[#6D6A75]"
                                 : "border-gray-400 bg-white"
@@ -1035,7 +1035,7 @@ export default function StartProjectPage() {
                           >
                             {form.waAreas.includes(item) && (
                               <svg
-                                className="h-3 w-3 text-white"
+                                className="h-2.5 w-2.5 text-white"
                                 viewBox="0 0 20 20"
                                 fill="none"
                               >
@@ -1050,19 +1050,11 @@ export default function StartProjectPage() {
                             )}
                           </div>
 
-                          {/* Hidden input */}
-                          <input
-                            type="checkbox"
-                            className="hidden"
-                            checked={form.waAreas.includes(item)}
-                            readOnly
-                          />
-
                           {/* Label text */}
                           <span className="text-[18px] text-[#3F404D]">
                             {item}
                           </span>
-                        </label>
+                        </div>
                       ))}
                     </div>
 

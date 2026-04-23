@@ -131,7 +131,7 @@ export default function LetsConnectPage() {
               </h1>
             </div>
           </div>
-          <p className="mt-6 sm:mt-8 max-w-xs sm:max-w-md md:max-w-2xl text-left text-base sm:text-lg md:text-xl leading-[1.6] text-[#063746] px-4">
+          <p className="mt-6 text-left text-[44px] max-w-[1022px] leading-none text-[#063746] px-4">
             Use the form below to tell us about your project and book a vision
             call.
           </p>
@@ -349,33 +349,33 @@ export default function LetsConnectPage() {
             <div className="md:w-[60%] flex flex-col sm:flex-row gap-10 sm:gap-16">
               {/* PARIS */}
               <div className="flex-1">
-                <h3 className="text-[13px] font-semibold uppercase tracking-wide text-[#646464]">
+                <h3 className="text-[28px] font-semibold uppercase tracking-wide text-[#646464]">
                   DDIP - PARIS
                 </h3>
-                <p className="mt-3 text-[13px] leading-relaxed text-[#002834]">
+                <p className="mt-3 text-[26px] leading-relaxed text-[#002834]">
                   14 rue Pierre Demours <br />
                   75 017 PARIS / FRANCE
                 </p>
                 <div className="mt-5 space-y-1">
-                  <p className="text-[13px] text-[#002834]">info@ddip.co</p>
-                  <p className="text-[13px] text-[#002834]">
+                  <p className="text-[26px] text-[#002834]">info@ddip.co</p>
+                  <p className="text-[26px] text-[#002834]">
                     +33 (0)1 72 34 83 34
                   </p>
                 </div>
               </div>
               {/* ISTANBUL */}
               <div className="flex-1">
-                <h3 className="text-[13px] font-semibold uppercase tracking-wide text-[#646464]">
+                <h3 className="text-[28px] font-semibold uppercase tracking-wide text-[#646464]">
                   DDIP - ISTANBUL
                 </h3>
-                <p className="mt-3 text-[13px] leading-relaxed text-[#002834]">
+                <p className="mt-3 text-[26px] leading-relaxed text-[#002834]">
                   Gayrettepe Mah. Ayazma Deresi Sk. <br />
                   Ata Moray İş Merkezi No 3 D:34 <br />
                   Fulya/Beşiktaş · İSTANBUL, TURKEY
                 </p>
                 <div className="mt-5 space-y-1">
-                  <p className="text-[13px] text-[#002834]">info@ddip.co</p>
-                  <p className="text-[13px] text-[#002834]">
+                  <p className="text-[26px] text-[#002834]">info@ddip.co</p>
+                  <p className="text-[26px] text-[#002834]">
                     +90 (0) 212 216 11 26
                   </p>
                 </div>

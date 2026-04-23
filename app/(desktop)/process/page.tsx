@@ -373,7 +373,7 @@ export default function ProcessPage() {
                 <h3 className="mt-4 font-heading text-[24px] w-[200px] font-medium leading-[1.3] text-[#063746]">
                   {item.title}
                 </h3>
-                <p className="mt-2 text-[18px] leading-[1.6] text-[#063746]/60" style={{ fontFamily: "var(--font-body)" }}>
+                <p className="mt-2 text-[18px] leading-[1.6] text-[#5A5A5A]" style={{ fontFamily: "var(--font-body)" }}>
                   {item.desc}
                 </p>
               </div>
@@ -486,7 +486,7 @@ export default function ProcessPage() {
 
       {/* From Insight to Intelligent Impact */}
       <section className="bg-[#F6F9F2] py-16">
-        <h2 className="w-[300px] font-bold mb-5 ml-55" style={{ fontFamily: "Bricolage Grotesque", color: "#126478", fontSize: '30px' }}>From Insight to Intelligent Impact</h2>
+        <h2 className="w-[300px] font-medium mb-5 ml-55" style={{ fontFamily: "Bricolage Grotesque", color: "#063746", fontSize: '34px' }}>From Insight to Intelligent Impact</h2>
 
         <Container>
           <div className="rounded-[30px]  bg-[#ffffff] h-[700px] px-14 py-14 ">

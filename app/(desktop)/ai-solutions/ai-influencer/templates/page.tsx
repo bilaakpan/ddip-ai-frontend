@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import { cmsApi, type Faq } from "@/lib/api";
 import HeroPartnersSection from "@/components/desktop/HeroPartnersSection";
 import ContactFormSection from "@/components/desktop/ContactFormSection";
+import { InfluencerPopupModal, type PopupInfluencer } from "@/components/desktop/influencer-popUp";
 /* ─── Data ─── */
 const topInfluencer = [
   {
@@ -269,10 +270,11 @@ const showcaseFilters = [
 export default function WorkWithInfluencerPage() {
   const [openFaqLeft, setOpenFaqLeft] = useState<number | null>(null);
   const [openFaqRight, setOpenFaqRight] = useState<number | null>(null);
-
   const [cmsFaqLeft, setCmsFaqLeft] = useState(faqLeft);
   const [cmsFaqRight, setCmsFaqRight] = useState(faqRight);
   const [openFilter, setOpenFilter] = useState<number | null>(null);
+  const [popupOpen, setPopupOpen] = useState(false);
+  const [selectedInfluencer, setSelectedInfluencer] = useState<PopupInfluencer | null>(null);
   useEffect(() => {
     cmsApi
       .faqs("ai-influencer")
@@ -480,7 +482,7 @@ export default function WorkWithInfluencerPage() {
 
                     <div className="absolute bottom-4 left-4 right-4">
                       <div className="mb-3 flex items-center justify-between gap-2">
-                        <div className="flex items-center gap-3 rounded-full bg-[#2A5D6A] px-5 py-3 backdrop-blur-sm">
+                        <div className="flex items-center  gap-3 rounded-full bg-[#2A5D6A] px-5 py-3 backdrop-blur-sm">
                           <span className="truncate text-[15px] text-white">{item.name}</span>
                           <img
                             src="https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/8c6dfd82-c580-49a7-be40-a53090c65400/public"
@@ -490,8 +492,17 @@ export default function WorkWithInfluencerPage() {
                         </div>
                         <button
                           type="button"
-                          className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-[#E8F0F1] text-[#042B36]"
+                          className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#E8F0F1] text-[#042B36]"
                           aria-label={`Open ${item.name}`}
+                          onClick={() => {
+                            setSelectedInfluencer({
+                              name: item.name,
+                              archetype: item.archetype,
+                              industry: item.type,
+                              image: item.image,
+                            });
+                            setPopupOpen(true);
+                          }}
                         >
                           <svg
                             className="h-8 w-8"
@@ -507,7 +518,7 @@ export default function WorkWithInfluencerPage() {
                       </div>
 
                       <Link
-                        href="/work_with_influencer"
+                        href=""
                         className="flex h-[56px] w-full items-center justify-center gap-4 rounded-[16px] bg-[#0BB3D0] px-5 font-heading text-[14px] font-medium text-white transition-colors hover:bg-[#09a5c0]"
                       >
                         <span>Work With This Influencer</span>
@@ -530,7 +541,13 @@ export default function WorkWithInfluencerPage() {
       {/* ════════════════════════════════════════════════════════
           12. CTA — "Let's Build What's Next, Together."
           ════════════════════════════════════════════════════════ */}
-       <ContactFormSection />
+        <ContactFormSection variant="influencer" />
+
+      <InfluencerPopupModal
+        open={popupOpen}
+        onClose={() => setPopupOpen(false)}
+        influencer={selectedInfluencer}
+      />
     </>
   );
 }
