@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect, useMemo } from "react";
-import { cmsApi, type Faq, type Influencer } from "@/lib/api";
+import { cmsApi, type Faq, type Influencer, type UseCase, type FilterOption } from "@/lib/api";
 import HeroPartnersSection from "@/components/desktop/HeroPartnersSection";
 import InfluencerCard from "@/components/desktop/InfluenerCard";
 import FourDMethodSection from "@/components/desktop/FourDMethodSection";
@@ -360,6 +360,16 @@ export default function AIInfluencerPage() {
   const [showPopup, setShowPopup] = useState(false);
   const [selectedInfluencer, setSelectedInfluencer] = useState<typeof topInfluencer[0] | null>(null);
   const [cmsInfluencers, setCmsInfluencers] = useState<typeof topInfluencer>(topInfluencer);
+  const [cmsUseCases, setCmsUseCases] = useState(useCases);
+  const [cmsFilterOptions, setCmsFilterOptions] = useState(filterOptions);
+  // Default carousel items (used as fallback if CMS returns no data)
+  const defaultUseCaseCarousel = [
+    { title: "Vesta Global", video: "https://customer-avhhoygwtxxdpkyp.cloudflarestream.com/4efeb3daa0597c05c31d144beccea3f8/manifest/video.m3u8", tags: ["Visual Style Definition", "AI Model Selection & Optimization", "Use-Case Development", "Prompt Crafting"] },
+    { title: "Nadlan Star", video: "https://customer-avhhoygwtxxdpkyp.cloudflarestream.com/f87ff43c16d018cdafd6c1ce68423c67/manifest/video.m3u8", tags: ["Use-Case Development", "Prompt Crafting"] },
+    { title: "Vesta Global", video: "https://customer-avhhoygwtxxdpkyp.cloudflarestream.com/8a161380969c7a822ca6075723101fdb/manifest/video.m3u8", tags: ["Use-Case Development", "Prompt Crafting"] },
+    { title: "Nadlan Star", video: "https://customer-avhhoygwtxxdpkyp.cloudflarestream.com/557784e65cd48dfcc66ec4545dd50b2a/manifest/video.m3u8", tags: ["Visual Style Definition", "Prompt Crafting"] },
+  ];
+  const [cmsUseCaseCarousel, setCmsUseCaseCarousel] = useState(defaultUseCaseCarousel);
 
   useEffect(() => {
     // FAQs
@@ -373,6 +383,50 @@ export default function AIInfluencerPage() {
         }
       })
       .catch(() => { });
+
+    // Use cases for AI Influencer page
+    cmsApi
+      .useCases("ai-influencer")
+      .then((res) => {
+        if (res.data?.length) {
+          setCmsUseCases(
+            res.data.map((u: UseCase) => ({
+              title: u.brand,
+              image: u.mediaUrl || "",
+            }))
+          );
+          setCmsUseCaseCarousel(
+            res.data.map((u: UseCase) => ({
+              title: u.brand,
+              video: u.mediaUrl || "",
+              tags: u.tags?.map((t) => t.tag.name) || [],
+            }))
+          );
+        }
+      })
+      .catch(() => { });
+
+    // Filter options for influencer dropdowns - load all groups in parallel
+    Promise.all([
+      cmsApi.filterOptions("influencer_persona").catch(() => null),
+      cmsApi.filterOptions("influencer_region").catch(() => null),
+      cmsApi.filterOptions("influencer_language").catch(() => null),
+      cmsApi.filterOptions("influencer_gender").catch(() => null),
+      cmsApi.filterOptions("influencer_industry").catch(() => null),
+    ]).then(([persona, region, language, gender, industry]) => {
+      const groups = [persona, region, language, gender, industry];
+      const allLabels = ["All Persona", "All Region", "All Language", "All Gender", "All Industry"];
+
+      // Only update the groups that returned data; keep hardcoded fallback for others
+      const newOptions = filterOptions.map((defaultGroup, i) => {
+        const apiGroup = groups[i];
+        if (apiGroup?.data?.length) {
+          return [allLabels[i], ...apiGroup.data.map((opt: FilterOption) => opt.value)];
+        }
+        return defaultGroup;
+      });
+      setCmsFilterOptions(newOptions);
+    }).catch(() => { });
 
     // Influencers from CMS (filter to those marked for AI Influencer page)
     cmsApi
@@ -833,7 +887,7 @@ export default function AIInfluencerPage() {
                 {/* Dropdown */}
                 {openFilter === index && (
                   <div className="absolute left-0 mt-2 w-full bg-white rounded-2xl shadow-xl overflow-hidden">
-                    {filterOptions[index].map((option, i) => (
+                    {cmsFilterOptions[index].map((option, i) => (
                       <div
                         key={i}
                         className="px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer border-b last:border-none"
@@ -1183,16 +1237,7 @@ export default function AIInfluencerPage() {
           </div>
 
           {/* Embla auto-scroll carousel — component */}
-          <UseCaseCarousel items={[
-            { title: "Vesta Global", video: "https://customer-avhhoygwtxxdpkyp.cloudflarestream.com/4efeb3daa0597c05c31d144beccea3f8/manifest/video.m3u8", tags: ["Visual Style Definition", "AI Model Selection & Optimization", "Use-Case Development", "Prompt Crafting"] },
-            { title: "Nadlan Star", video: "https://customer-avhhoygwtxxdpkyp.cloudflarestream.com/f87ff43c16d018cdafd6c1ce68423c67/manifest/video.m3u8", tags: ["Use-Case Development", "Prompt Crafting"] },
-            { title: "Vesta Global", video: "https://customer-avhhoygwtxxdpkyp.cloudflarestream.com/8a161380969c7a822ca6075723101fdb/manifest/video.m3u8", tags: ["Use-Case Development", "Prompt Crafting"] },
-            { title: "Nadlan Star", video: "https://customer-avhhoygwtxxdpkyp.cloudflarestream.com/557784e65cd48dfcc66ec4545dd50b2a/manifest/video.m3u8", tags: ["Visual Style Definition", "Prompt Crafting"] },
-            { title: "Vesta Global", video: "https://customer-avhhoygwtxxdpkyp.cloudflarestream.com/4efeb3daa0597c05c31d144beccea3f8/manifest/video.m3u8", tags: ["Visual Style Definition", "AI Model Selection & Optimization", "Use-Case Development", "Prompt Crafting"] },
-            { title: "Nadlan Star", video: "https://customer-avhhoygwtxxdpkyp.cloudflarestream.com/f87ff43c16d018cdafd6c1ce68423c67/manifest/video.m3u8", tags: ["Use-Case Development", "Prompt Crafting"] },
-            { title: "Vesta Global", video: "https://customer-avhhoygwtxxdpkyp.cloudflarestream.com/8a161380969c7a822ca6075723101fdb/manifest/video.m3u8", tags: ["Use-Case Development", "Prompt Crafting"] },
-            { title: "Nadlan Star", video: "https://customer-avhhoygwtxxdpkyp.cloudflarestream.com/557784e65cd48dfcc66ec4545dd50b2a/manifest/video.m3u8", tags: ["Visual Style Definition", "Prompt Crafting"] },
-          ]} />
+          <UseCaseCarousel items={[...cmsUseCaseCarousel, ...cmsUseCaseCarousel]} />
 
         </div>
       </section>

@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import { cmsApi, type Faq } from "@/lib/api";
+import { cmsApi, type Faq, type UseCase } from "@/lib/api";
 import FaqSection from "@/components/desktop/FaqSection";
 import HeroPartnersSection from "@/components/desktop/HeroPartnersSection";
 import FourDMethodSection from "@/components/desktop/FourDMethodSection";
@@ -95,8 +95,28 @@ const faqRight = [
 export default function GeoPage() {
   const [cmsFaqLeft, setCmsFaqLeft] = useState(faqLeft);
   const [cmsFaqRight, setCmsFaqRight] = useState(faqRight);
+  const [cmsUseCases, setCmsUseCases] = useState(useCases);
 
   useEffect(() => {
+    // Use Cases for GEO page
+    cmsApi
+      .useCases("geo")
+      .then((res) => {
+        if (res.data?.length) {
+          // Map UseCase to GEO's expected shape: {title, desc, image}
+          // Brand → title; first tag → desc (fallback); mediaUrl → image
+          setCmsUseCases(
+            res.data.map((u: UseCase) => ({
+              title: u.brand,
+              desc: u.tags?.[0]?.tag?.name || "",
+              image: u.mediaUrl || "",
+            }))
+          );
+        }
+      })
+      .catch(() => { });
+
+    // FAQs
     cmsApi
       .faqs("geo")
       .then((res) => {
@@ -605,7 +625,7 @@ export default function GeoPage() {
             GEO Optimization supports:
           </p>
           <div className="mt-12 grid grid-cols-5 gap-4">
-            {useCases.map((item) => (
+            {cmsUseCases.map((item) => (
               <div key={item.title} className="group">
                 <div className="relative aspect-[4/5] overflow-hidden rounded-[16px] bg-[#D9D9D9]">
                   <Image src={item.image} alt={item.title} fill className="object-cover transition-transform duration-500 group-hover:scale-105" sizes="20vw" />

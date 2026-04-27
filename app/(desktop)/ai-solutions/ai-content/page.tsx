@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import AutoPlay from "embla-carousel-autoplay";
-import { cmsApi, type Faq } from "@/lib/api";
+import { cmsApi, type Faq, type UseCase } from "@/lib/api";
 import HeroPartnersSection from "@/components/desktop/HeroPartnersSection";
 import FourDMethodSection from "@/components/desktop/FourDMethodSection";
 import FaqSection from "@/components/desktop/FaqSection";
@@ -106,12 +106,21 @@ export default function AIContentPage() {
   const [openFaqRight, setOpenFaqRight] = useState<number | null>(null);
   const [cmsFaqLeft, setCmsFaqLeft] = useState(faqLeft);
   const [cmsFaqRight, setCmsFaqRight] = useState(faqRight);
+  // Default carousel items (used as fallback if CMS returns no data)
+  const defaultUseCaseCarousel = [
+    { title: "Vesta Global", video: "4efeb3daa0597c05c31d144beccea3f8", tags: ["Campaign Visuals", "Brand Identity"] },
+    { title: "Bizim Mutfak", video: "cec8f6e44f63bb833b4b9b71452d48cb", tags: ["Social Media", "Content Variations"] },
+    { title: "Realkom", video: "f9b719e86584fee5e05197a5e4c5e840", tags: ["Short-form Content", "Prompt Crafting"] },
+    { title: "Brother", video: "c6727f63163d214df0ef35997644d8d2", tags: ["Editorial Visuals", "Brand Campaigns"] },
+  ];
+  const [cmsUseCaseCarousel, setCmsUseCaseCarousel] = useState(defaultUseCaseCarousel);
 
   const [emblaRef] = useEmblaCarousel({ loop: true, dragFree: true, align: "start", containScroll: "trimSnaps" }, [
     AutoPlay({ delay: 3000, stopOnInteraction: false, stopOnMouseEnter: true }),
   ]);
 
   useEffect(() => {
+    // FAQs
     cmsApi
       .faqs("ai-content")
       .then((res) => {
@@ -119,6 +128,22 @@ export default function AIContentPage() {
           const mid = Math.ceil(res.data.length / 2);
           setCmsFaqLeft(res.data.slice(0, mid).map((f: Faq) => f.question));
           setCmsFaqRight(res.data.slice(mid).map((f: Faq) => f.question));
+        }
+      })
+      .catch(() => { });
+
+    // Use cases for AI Content page
+    cmsApi
+      .useCases("ai-content")
+      .then((res) => {
+        if (res.data?.length) {
+          setCmsUseCaseCarousel(
+            res.data.map((u: UseCase) => ({
+              title: u.brand,
+              video: u.mediaUrl || "",
+              tags: u.tags?.map((t) => t.tag.name) || [],
+            }))
+          );
         }
       })
       .catch(() => { });
@@ -652,16 +677,7 @@ export default function AIContentPage() {
 
           {/* Use Case Carousel */}
           <div className="mt-[100px]">
-            <UseCaseCarousel items={[
-              { title: "Vesta Global", video: "4efeb3daa0597c05c31d144beccea3f8", tags: ["Campaign Visuals", "Brand Identity"] },
-              { title: "Bizim Mutfak", video: "cec8f6e44f63bb833b4b9b71452d48cb", tags: ["Social Media", "Content Variations"] },
-              { title: "Realkom", video: "f9b719e86584fee5e05197a5e4c5e840", tags: ["Short-form Content", "Prompt Crafting"] },
-              { title: "Brother", video: "c6727f63163d214df0ef35997644d8d2", tags: ["Editorial Visuals", "Brand Campaigns"] },
-              { title: "Vesta Global", video: "4efeb3daa0597c05c31d144beccea3f8", tags: ["Campaign Visuals", "Brand Identity"] },
-              { title: "Bizim Mutfak", video: "cec8f6e44f63bb833b4b9b71452d48cb", tags: ["Social Media", "Content Variations"] },
-              { title: "Realkom", video: "f9b719e86584fee5e05197a5e4c5e840", tags: ["Short-form Content", "Prompt Crafting"] },
-              { title: "Brother", video: "c6727f63163d214df0ef35997644d8d2", tags: ["Editorial Visuals", "Brand Campaigns"] },
-            ]} />
+            <UseCaseCarousel items={[...cmsUseCaseCarousel, ...cmsUseCaseCarousel]} />
           </div>
 
         </div>

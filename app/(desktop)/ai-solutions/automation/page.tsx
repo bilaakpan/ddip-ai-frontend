@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import { cmsApi, type Faq } from "@/lib/api";
+import { cmsApi, type Faq, type Automation } from "@/lib/api";
 import HeroPartnersSection from "@/components/desktop/HeroPartnersSection";
 import FourDMethodSection from "@/components/desktop/FourDMethodSection";
 import FaqSection from "@/components/desktop/FaqSection";
@@ -66,8 +66,10 @@ const faqRight2 = [
 export default function AutomationPage() {
   const [cmsFaqLeft, setCmsFaqLeft] = useState(faqLeft);
   const [cmsFaqRight, setCmsFaqRight] = useState(faqRight);
+  const [cmsFeaturedAutomations, setCmsFeaturedAutomations] = useState(featuredAutomations);
 
   useEffect(() => {
+    // FAQs
     cmsApi
       .faqs("automation")
       .then((res) => {
@@ -75,6 +77,23 @@ export default function AutomationPage() {
           const mid = Math.ceil(res.data.length / 2);
           setCmsFaqLeft(res.data.slice(0, mid).map((f: Faq) => f.question));
           setCmsFaqRight(res.data.slice(mid).map((f: Faq) => f.question));
+        }
+      })
+      .catch(() => { });
+
+    // Featured automations
+    cmsApi
+      .automations(true)
+      .then((res) => {
+        if (res.data?.length) {
+          const fallbackImage = "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/68b2a656-a342-4c0b-9d44-d5c5ed4f4700/public";
+          setCmsFeaturedAutomations(
+            res.data.map((a: Automation) => ({
+              title: a.title,
+              image: a.icons?.[0]?.icon?.iconUrl || fallbackImage,
+              icon: "✨",
+            }))
+          );
         }
       })
       .catch(() => { });
@@ -196,7 +215,7 @@ export default function AutomationPage() {
         </div>
 
         <div className="grid grid-cols-4 gap-5">
-          {featuredAutomations.slice(0, 8).map((item) => (
+          {cmsFeaturedAutomations.slice(0, 8).map((item) => (
             <div
               key={item.title}
               className="rounded-[20px] h-[256px] p-[1.5px]"

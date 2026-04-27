@@ -7,7 +7,7 @@ import HlsPlayer from "@/components/desktop/video";
 import { useState, useEffect } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import AutoPlay from "embla-carousel-autoplay";
-import { cmsApi, type Faq } from "@/lib/api";
+import { cmsApi, type Faq, type UseCase } from "@/lib/api";
 import HeroPartnersSection from "@/components/desktop/HeroPartnersSection";
 import FourDMethodSection from "@/components/desktop/FourDMethodSection";
 import ContentAtScale from "@/components/desktop/ContentAtScale";
@@ -114,6 +114,13 @@ export default function AICommercialPage() {
   const [openFaqRight, setOpenFaqRight] = useState<number | null>(null);
   const [cmsFaqLeft, setCmsFaqLeft] = useState(faqLeft);
   const [cmsFaqRight, setCmsFaqRight] = useState(faqRight);
+  const defaultUseCaseCarousel = [
+    { title: "Vesta Global", video: "c6727f63163d214df0ef35997644d8d2", tags: ["Campaign Visuals", "Brand Identity"] },
+    { title: "Bizim Mutfak", video: "df994cb7f01eed564047b8323e82eb47", tags: ["Social Media", "Content Variations"] },
+    { title: "Realkom", video: "cec8f6e44f63bb833b4b9b71452d48cb", tags: ["Short-form Content", "Prompt Crafting"] },
+    { title: "Brother", video: "f9b719e86584fee5e05197a5e4c5e840", tags: ["Editorial Visuals", "Brand Campaigns"] },
+  ];
+  const [cmsUseCaseCarousel, setCmsUseCaseCarousel] = useState(defaultUseCaseCarousel);
 
   const [emblaRef] = useEmblaCarousel({ loop: true, dragFree: true }, [
     AutoPlay({ delay: 3000, stopOnInteraction: false, stopOnMouseEnter: true }),
@@ -121,6 +128,7 @@ export default function AICommercialPage() {
 
 
   useEffect(() => {
+    // FAQs
     cmsApi
       .faqs("ai-commercial")
       .then((res) => {
@@ -128,6 +136,22 @@ export default function AICommercialPage() {
           const mid = Math.ceil(res.data.length / 2);
           setCmsFaqLeft(res.data.slice(0, mid).map((f: Faq) => f.question));
           setCmsFaqRight(res.data.slice(mid).map((f: Faq) => f.question));
+        }
+      })
+      .catch(() => { });
+
+    // Use Cases
+    cmsApi
+      .useCases("ai-commercial")
+      .then((res) => {
+        if (res.data?.length) {
+          setCmsUseCaseCarousel(
+            res.data.map((u: UseCase) => ({
+              title: u.brand,
+              video: u.mediaUrl || "",
+              tags: u.tags?.map((t) => t.tag.name) || [],
+            }))
+          );
         }
       })
       .catch(() => { });
@@ -480,12 +504,7 @@ export default function AICommercialPage() {
             At DDIP.AI, each project starts with a story.
           </p>
           <div className="mt-[100px]">
-            <UseCaseCarousel items={[
-              { title: "Vesta Global", video: "c6727f63163d214df0ef35997644d8d2", tags: ["Campaign Visuals", "Brand Identity"] },
-              { title: "Bizim Mutfak", video: "df994cb7f01eed564047b8323e82eb47", tags: ["Social Media", "Content Variations"] },
-              { title: "Realkom", video: "cec8f6e44f63bb833b4b9b71452d48cb", tags: ["Short-form Content", "Prompt Crafting"] },
-              { title: "Brother", video: "f9b719e86584fee5e05197a5e4c5e840", tags: ["Editorial Visuals", "Brand Campaigns"] },
-            ]} />
+            <UseCaseCarousel items={cmsUseCaseCarousel} />
           </div>
         </div>
       </section>
