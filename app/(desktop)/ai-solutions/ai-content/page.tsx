@@ -89,31 +89,19 @@ const toolIcons = [
   "/images/ai-content/icon-09.svg",
 ];
 
-const faqLeft = [
-  "How fast can content be generated?",
-  "Is the content fully automated?",
-  "Can content match our brand identity?",
-];
-
-const faqRight = [
-  "Can you create content for multiple platforms at once?",
-  "Do you support multiple languages?",
-  "How do you ensure quality?",
-];
+// FAQ data is loaded from CMS API — no hardcoded fallback
+interface UseCaseCarouselItem {
+  title: string;
+  video: string;
+  tags: string[];
+}
 
 export default function AIContentPage() {
   const [openFaqLeft, setOpenFaqLeft] = useState<number | null>(null);
   const [openFaqRight, setOpenFaqRight] = useState<number | null>(null);
-  const [cmsFaqLeft, setCmsFaqLeft] = useState(faqLeft);
-  const [cmsFaqRight, setCmsFaqRight] = useState(faqRight);
-  // Default carousel items (used as fallback if CMS returns no data)
-  const defaultUseCaseCarousel = [
-    { title: "Vesta Global", video: "4efeb3daa0597c05c31d144beccea3f8", tags: ["Campaign Visuals", "Brand Identity"] },
-    { title: "Bizim Mutfak", video: "cec8f6e44f63bb833b4b9b71452d48cb", tags: ["Social Media", "Content Variations"] },
-    { title: "Realkom", video: "f9b719e86584fee5e05197a5e4c5e840", tags: ["Short-form Content", "Prompt Crafting"] },
-    { title: "Brother", video: "c6727f63163d214df0ef35997644d8d2", tags: ["Editorial Visuals", "Brand Campaigns"] },
-  ];
-  const [cmsUseCaseCarousel, setCmsUseCaseCarousel] = useState(defaultUseCaseCarousel);
+  const [cmsFaqLeft, setCmsFaqLeft] = useState<string[]>([]);
+  const [cmsFaqRight, setCmsFaqRight] = useState<string[]>([]);
+  const [cmsUseCaseCarousel, setCmsUseCaseCarousel] = useState<UseCaseCarouselItem[]>([]);
 
   const [emblaRef] = useEmblaCarousel({ loop: true, dragFree: true, align: "start", containScroll: "trimSnaps" }, [
     AutoPlay({ delay: 3000, stopOnInteraction: false, stopOnMouseEnter: true }),
@@ -124,29 +112,29 @@ export default function AIContentPage() {
     cmsApi
       .faqs("ai-content")
       .then((res) => {
-        if (res.data?.length) {
-          const mid = Math.ceil(res.data.length / 2);
-          setCmsFaqLeft(res.data.slice(0, mid).map((f: Faq) => f.question));
-          setCmsFaqRight(res.data.slice(mid).map((f: Faq) => f.question));
-        }
+        const list = res.data ?? [];
+        const mid = Math.ceil(list.length / 2);
+        setCmsFaqLeft(list.slice(0, mid).map((f: Faq) => f.question));
+        setCmsFaqRight(list.slice(mid).map((f: Faq) => f.question));
       })
-      .catch(() => { });
+      .catch(() => {
+        setCmsFaqLeft([]);
+        setCmsFaqRight([]);
+      });
 
     // Use cases for AI Content page
     cmsApi
       .useCases("ai-content")
       .then((res) => {
-        if (res.data?.length) {
-          setCmsUseCaseCarousel(
-            res.data.map((u: UseCase) => ({
-              title: u.brand,
-              video: u.mediaUrl || "",
-              tags: u.tags?.map((t) => t.tag.name) || [],
-            }))
-          );
-        }
+        setCmsUseCaseCarousel(
+          (res.data ?? []).map((u: UseCase) => ({
+            title: u.brand,
+            video: u.mediaUrl || "",
+            tags: u.tags?.map((t) => t.tag.name) || [],
+          }))
+        );
       })
-      .catch(() => { });
+      .catch(() => setCmsUseCaseCarousel([]));
   }, []);
 
   return (

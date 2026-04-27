@@ -5,117 +5,7 @@ import { useState, useEffect, useMemo } from "react";
 import { cmsApi, type Work } from "@/lib/api";
 import { Container } from "@/components/layout";
 import HlsPlayer from "@/components/desktop/video";
-/* ─── Fallback static projects (shown while CMS loads or if empty) ─── */
-const staticProjects = [
-  {
-    id: "1",
-    title: "Vesta Global",
-    field: "Real Estate",
-    categories: ["Visual Style Definition", "AI Model Selection & Optimization", "Use-Case Development", "Prompt Crafting"],
-    description: "Lorem Ipsum is simply",
-    image: "52d4f5fdd1335b2fbaba2f41798273f1",
-    mediaType: "video",
-  },
-  {
-    id: "2",
-    title: "Cesi Design",
-    field: "Real Estate",
-    categories: ["Visual Style Definition", "AI Model Selection & Optimization", "Use-Case Development", "Prompt Crafting"],
-    description: "Lorem Ipsum is simply",
-    image: "90b6c18df1bb19d1117f6d29f6859036",
-    mediaType: "video",
-  },
-  {
-    id: "3",
-    title: "Mediterra Group",
-    field: "Real Estate",
-    categories: ["Visual Style Definition", "AI Model Selection & Optimization", "Use-Case Development", "Prompt Crafting"],
-    description: "Lorem Ipsum is simply",
-    image: "8ffbc4055a9b0210350a2748fcbb8ce4",
-    mediaType: "video",
-  },
-  {
-    id: "4",
-    title: "Brother",
-    field: "Real Estate",
-    categories: ["Visual Style Definition", "AI Model Selection & Optimization", "Use-Case Development", "Prompt Crafting"],
-    description: "Lorem Ipsum is simply",
-    image: "52d4f5fdd1335b2fbaba2f41798273f1",
-    mediaType: "video",
-  },
-  {
-    id: "5",
-    title: "Vesta Global",
-    field: "Real Estate",
-    categories: ["Visual Style Definition", "AI Model Selection & Optimization", "Use-Case Development", "Prompt Crafting"],
-    description: "Lorem Ipsum is simply",
-    image: "90b6c18df1bb19d1117f6d29f6859036",
-    mediaType: "video",
-  },
-  {
-    id: "6",
-    title: "Cesi Design",
-    field: "Real Estate",
-    categories: ["Visual Style Definition", "AI Model Selection & Optimization", "Use-Case Development", "Prompt Crafting"],
-    description: "Lorem Ipsum is simply",
-    image: "8ffbc4055a9b0210350a2748fcbb8ce4",
-    mediaType: "video",
-  },
-  {
-    id: "7",
-    title: "Mediterra Group",
-    field: "Real Estate",
-    categories: ["Visual Style Definition", "AI Model Selection & Optimization", "Use-Case Development", "Prompt Crafting"],
-    description: "Lorem Ipsum is simply",
-    image: "52d4f5fdd1335b2fbaba2f41798273f1",
-    mediaType: "video",
-  },
-  {
-    id: "8",
-    title: "Vesta Global",
-    field: "Real Estate",
-    categories: ["Visual Style Definition", "AI Model Selection & Optimization", "Use-Case Development", "Prompt Crafting"],
-    description: "Lorem Ipsum is simply",
-    image: "90b6c18df1bb19d1117f6d29f6859036",
-    mediaType: "video",
-  },
-  {
-    id: "9",
-    title: "Cesi Design",
-    field: "Real Estate",
-    categories: ["Visual Style Definition", "AI Model Selection & Optimization", "Use-Case Development", "Prompt Crafting"],
-    description: "Lorem Ipsum is simply",
-    image: "8ffbc4055a9b0210350a2748fcbb8ce4",
-    mediaType: "video",
-  },
-  {
-    id: "10",
-    title: "Mediterra Group",
-    field: "Real Estate",
-    categories: ["Visual Style Definition", "AI Model Selection & Optimization", "Use-Case Development", "Prompt Crafting"],
-    description: "Lorem Ipsum is simply",
-    image: "52d4f5fdd1335b2fbaba2f41798273f1",
-    mediaType: "video",
-  },
-  {
-    id: "11",
-    title: "Brother",
-    field: "Real Estate",
-    categories: ["Visual Style Definition", "AI Model Selection & Optimization", "Use-Case Development", "Prompt Crafting"],
-    description: "Lorem Ipsum is simply",
-    image: "90b6c18df1bb19d1117f6d29f6859036",
-    mediaType: "video",
-  },
-  {
-    id: "12",
-    title: "Vesta Global",
-    field: "Real Estate",
-    categories: ["Visual Style Definition", "AI Model Selection & Optimization", "Use-Case Development", "Prompt Crafting"],
-    description: "Lorem Ipsum is simply",
-    image: "8ffbc4055a9b0210350a2748fcbb8ce4",
-    mediaType: "video",
-  },
-];
+/* Works data comes from CMS API only — no hardcoded fallback */
 const filterOptions = [
   "All",
   "Real Estate",
@@ -148,28 +38,26 @@ export default function WorksPage() {
     return () => document.body.classList.remove("hide-footer");
   }, []);
   useEffect(() => {
+    setLoading(true);
     cmsApi
       .works()
       .then((res) => {
-        if (res.data?.length) setWorks(res.data);
+        setWorks(res.data ?? []);
       })
-      .catch(() => { })
+      .catch(() => setWorks([]))
       .finally(() => setLoading(false));
   }, []);
-  /* Use CMS data if available, otherwise fall back to static */
+  /* Always map from CMS data — no fallback. Empty if API returns nothing. */
   const projects = useMemo(() => {
-    if (works.length > 0) {
-      return works.map((w) => ({
-        id: w.id,
-        title: w.title,
-        field: w.field || "",
-        categories: [w.field || ""].filter(Boolean),
-        description: "Lorem Ipsum is simply",
-        image: w.mediaUrl || "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/70a4b0fb-332f-4dc5-7877-c92a15e69d00/public",
-        mediaType: w.mediaType,
-      }));
-    }
-    return staticProjects;
+    return works.map((w) => ({
+      id: w.id,
+      title: w.title,
+      field: w.field || "",
+      categories: [w.field || ""].filter(Boolean),
+      description: w.body || "",
+      image: w.mediaUrl || "",
+      mediaType: w.mediaType || "image",
+    }));
   }, [works]);
   const filteredProjects =
     activeFilter === "All"

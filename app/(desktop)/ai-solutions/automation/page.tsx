@@ -21,18 +21,7 @@ const accordionItems = [
   { title: "Lead Solutions", description: "Automated lead capture, scoring, and nurturing workflows that convert prospects into customers.", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/0156ebdc-189b-4bce-808d-49f28c020200/public" },
 ];
 
-const featuredAutomations = [
-  { title: "Automated Video Creator", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/68b2a656-a342-4c0b-9d44-d5c5ed4f4700/public", icon: "🎬" },
-  { title: "Automated LinkedIn Posts", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/68b2a656-a342-4c0b-9d44-d5c5ed4f4700/public", icon: "💼" },
-  { title: "Trend Analyzer for Instagram", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/68b2a656-a342-4c0b-9d44-d5c5ed4f4700/public", icon: "📊" },
-  { title: "Trend Analyzer for YouTube", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/68b2a656-a342-4c0b-9d44-d5c5ed4f4700/public", icon: "📈" },
-  { title: "Lead Generation Bot", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/68b2a656-a342-4c0b-9d44-d5c5ed4f4700/public", icon: "🤖" },
-  { title: "Amazon Stock & Prize Tracker", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/68b2a656-a342-4c0b-9d44-d5c5ed4f4700/public", icon: "📦" },
-  { title: "Personal Assistant", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/68b2a656-a342-4c0b-9d44-d5c5ed4f4700/public", icon: "🧠" },
-  { title: "Meeting Assistant", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/68b2a656-a342-4c0b-9d44-d5c5ed4f4700/public", icon: "📅" },
-  { title: "Meta Ads Analyzer", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/68b2a656-a342-4c0b-9d44-d5c5ed4f4700/public", icon: "📱" },
-  { title: "WhatsApp Chatbot for Customer Support", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/68b2a656-a342-4c0b-9d44-d5c5ed4f4700/public", icon: "💬" },
-];
+// FAQs and featured automations come from CMS API only — no hardcoded fallback
 
 const methodSteps = [
   { title: "Define", icon: "/images/ai-content/icon-01.svg", rotate: "-8deg" },
@@ -43,64 +32,46 @@ const methodSteps = [
 
 const builtOnTools = ["zapier", "HubSpot", "n8n", "Claude"];
 
-const faqLeft = [
-  "What are automated workflows?",
-  "What's the difference between template-based and tailored workflows?",
-  "Do I need technical expertise to use these tools?",
-];
-
-const faqRight = [
-  "Which industries can benefit from DDiP's workflows?",
-  "How do integrations work?",
-  "How long does it take to launch a workflow?",
-];
-
-const faqLeft2 = [
-  "What makes DDiP workflows different from other automation tools?",
-];
-
-const faqRight2 = [
-  "Can my workflows be updated or expanded later?",
-];
+interface AutomationCardData {
+  title: string;
+  image: string;
+  icon: string;
+}
 
 export default function AutomationPage() {
-  const [cmsFaqLeft, setCmsFaqLeft] = useState(faqLeft);
-  const [cmsFaqRight, setCmsFaqRight] = useState(faqRight);
-  const [cmsFeaturedAutomations, setCmsFeaturedAutomations] = useState(featuredAutomations);
+  const [cmsFaqLeft, setCmsFaqLeft] = useState<string[]>([]);
+  const [cmsFaqRight, setCmsFaqRight] = useState<string[]>([]);
+  const [cmsFeaturedAutomations, setCmsFeaturedAutomations] = useState<AutomationCardData[]>([]);
 
   useEffect(() => {
     // FAQs
     cmsApi
       .faqs("automation")
       .then((res) => {
-        if (res.data?.length) {
-          const mid = Math.ceil(res.data.length / 2);
-          setCmsFaqLeft(res.data.slice(0, mid).map((f: Faq) => f.question));
-          setCmsFaqRight(res.data.slice(mid).map((f: Faq) => f.question));
-        }
+        const list = res.data ?? [];
+        const mid = Math.ceil(list.length / 2);
+        setCmsFaqLeft(list.slice(0, mid).map((f: Faq) => f.question));
+        setCmsFaqRight(list.slice(mid).map((f: Faq) => f.question));
       })
-      .catch(() => { });
+      .catch(() => {
+        setCmsFaqLeft([]);
+        setCmsFaqRight([]);
+      });
 
     // Featured automations
     cmsApi
       .automations(true)
       .then((res) => {
-        if (res.data?.length) {
-          const fallbackImage = "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/68b2a656-a342-4c0b-9d44-d5c5ed4f4700/public";
-          setCmsFeaturedAutomations(
-            res.data.map((a: Automation) => ({
-              title: a.title,
-              image: a.icons?.[0]?.icon?.iconUrl || fallbackImage,
-              icon: "✨",
-            }))
-          );
-        }
+        setCmsFeaturedAutomations(
+          (res.data ?? []).map((a: Automation) => ({
+            title: a.title,
+            image: a.icons?.[0]?.icon?.iconUrl || "",
+            icon: "",
+          }))
+        );
       })
-      .catch(() => { });
+      .catch(() => setCmsFeaturedAutomations([]));
   }, []);
-
-  const allFaqLeft = [...cmsFaqLeft, ...faqLeft2];
-  const allFaqRight = [...cmsFaqRight, ...faqRight2];
 
   return (
     <>
@@ -362,7 +333,7 @@ export default function AutomationPage() {
       {/* ════════════════════════════════════════════════════════
           8. FAQ
           ════════════════════════════════════════════════════════ */}
-      <FaqSection leftQuestions={allFaqLeft} rightQuestions={allFaqRight} />
+      <FaqSection leftQuestions={cmsFaqLeft} rightQuestions={cmsFaqRight} />
 
       {/* ════════════════════════════════════════════════════════
           9. LET'S BUILD + Contact Form

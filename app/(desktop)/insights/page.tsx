@@ -18,141 +18,30 @@ const CATEGORIES = [
 ];
 /* ─── Page ─── */
 export default function InsightsPage() {
-  // Mock data for testing
-  const mockArticles: Insight[] = [
-    {
-      id: "1",
-      title: "The Future of AI in Content Creation",
-      slug: "future-ai-content",
-      category: "Real Estate",
-      publishedAt: new Date().toISOString(),
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
-      seoDescription: "10 Best AI Ad Creative Generators & Tools in 2026 (Tested)",
-      body: "Detailed article content about AI and content creation...",
-      imageUrl: "/images/insights/article1.svg"
-    },
-    {
-      id: "2",
-      title: "Building Influencer Brands with AI",
-      slug: "ai-influencer-brands",
-      category: "Food",
-      publishedAt: new Date().toISOString(),
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
-      seoDescription: "12 AI Consulting Companies for Enterprises in 2026",
-      body: "Detailed article content about AI influencers...",
-      imageUrl: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/046c3680-7356-4294-690d-482d7d1c5700/public"
-    },
-    {
-      id: "3",
-      title: "Automated Workflow Solutions",
-      slug: "automated-workflows",
-      category: "Wellness",
-      publishedAt: new Date().toISOString(),
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
-      seoDescription: "15 Best AI Presentation Makers & Tools of 2026 (New Picks)",
-      body: "Detailed article content about workflow automation...",
-      imageUrl: "/images/insights/article3.svg"
-    },
-    {
-      id: "4",
-      title: "The Future of AI in Content Creation",
-      slug: "future-ai-content",
-      category: "Technology",
-      publishedAt: new Date().toISOString(),
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
-      seoDescription: "10 Best AI Ad Creative Generators & Tools in 2026 (Tested)",
-      body: "Detailed article content about AI and content creation...",
-      imageUrl: "/images/insights/article1.svg"
-    },
-    {
-      id: "5",
-      title: "Building Influencer Brands with AI",
-      slug: "ai-influencer-brands",
-      category: "Finance",
-      publishedAt: new Date().toISOString(),
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
-      seoDescription: "12 AI Consulting Companies for Enterprises in 2026",
-      body: "Detailed article content about AI influencers...",
-      imageUrl: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/046c3680-7356-4294-690d-482d7d1c5700/public"
-    },
-    {
-      id: "6",
-      title: "Automated Workflow Solutions",
-      slug: "automated-workflows",
-      category: "Education",
-      publishedAt: new Date().toISOString(),
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
-      seoDescription: "15 Best AI Presentation Makers & Tools of 2026 (New Picks)",
-      body: "Detailed article content about workflow automation...",
-      imageUrl: "/images/insights/article3.svg"
-    },
-    {
-      id: "7",
-      title: "The Future of AI in Content Creation",
-      slug: "future-ai-content",
-      category: "Healthcare",
-      publishedAt: new Date().toISOString(),
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
-      seoDescription: "10 Best AI Ad Creative Generators & Tools in 2026 (Tested)",
-      body: "Detailed article content about AI and content creation...",
-      imageUrl: "/images/insights/article1.svg"
-    },
-    {
-      id: "8",
-      title: "Building Influencer Brands with AI",
-      slug: "ai-influencer-brands",
-      category: "Marketing",
-      publishedAt: new Date().toISOString(),
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
-      seoDescription: "12 AI Consulting Companies for Enterprises in 2026",
-      body: "Detailed article content about AI influencers...",
-      imageUrl: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/046c3680-7356-4294-690d-482d7d1c5700/public"
-    },
-    {
-      id: "9",
-      title: "Automated Workflow Solutions",
-      slug: "automated-workflows",
-      category: "E-commerce",
-      publishedAt: new Date().toISOString(),
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
-      seoDescription: "15 Best AI Presentation Makers & Tools of 2026 (New Picks)",
-      body: "Detailed article content about workflow automation...",
-      imageUrl: "/images/insights/article3.svg"
-    }
-  ];
-  const [articles, setArticles] = useState<Insight[]>(mockArticles);
+  // Articles come from CMS API only — no mock fallback
+  const [articles, setArticles] = useState<Insight[]>([]);
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [activeCategory, setActiveCategory] = useState("all");
 
-  // ─── Load insights from CMS API ───
+  // ─── Load insights from CMS API (no fallback — empty if API returns nothing) ───
   useEffect(() => {
     setLoading(true);
     cmsApi
       .insights({ page, limit: 15 })
       .then((res) => {
-        if (res.data?.length) {
-          if (page === 1) {
-            setArticles(res.data);
-          } else {
-            setArticles((prev) => [...prev, ...res.data]);
-          }
-          if (res.pagination?.totalPages) {
-            setTotalPages(res.pagination.totalPages);
-          }
+        const list = res.data ?? [];
+        if (page === 1) {
+          setArticles(list);
+        } else {
+          setArticles((prev) => [...prev, ...list]);
         }
+        setTotalPages(res.pagination?.totalPages ?? 1);
       })
-      .catch(() => { })
+      .catch(() => {
+        if (page === 1) setArticles([]);
+      })
       .finally(() => setLoading(false));
   }, [page]);
 

@@ -45,105 +45,32 @@ const capabilities = [
   },
 ];
 
-const aiSolutions = [
-  {
-    title: "AI Content Generation",
-    href: "/ai-solutions/ai-content",
-    media: "4aca9b4110ceac3eb1d3bd087deb763e",
-    mediaType: "video" as const,
-    description:
-      "Design meets intelligence as we use specialized AI tools to transform moodboards into refined, design-driven campaigns.",
-    tags: ["Text Generation", "Visual Generation", "Video & Animation Generation", "Personalized Content"],
-  },
-  {
-    title: "Create Your Influencer with AI",
-    href: "/ai-solutions/ai-influencer",
-    media: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/846771a3-24bb-46b7-f265-45d58b267900/public",
-    mediaType: "image" as const,
-    description:
-      "AI influencers bring your brand to life with smart storytelling and real-time multilingual engagement.",
-    tags: ["AI Persona Creation", "Investment Promotion", "Brand Storytelling", "Explainer & Training Videos"],
-  },
-  {
-    title: "Automation with a Creative Touch",
-    href: "/ai-solutions",
-    media: "bdb805b635f8e3a865a3157336836136",
-    mediaType: "video" as const,
-    description:
-      "We design intelligent workflows that eliminate repetitive tasks, allowing your teams to focus on what truly drives value, creativity and strategy.",
-    tags: ["Automated Video Creator", "Automated LinkedIn Posts", "Amazon Stock & Price Tracker", "Personal Assistant"],
-  },
-  {
-    title: "GEO Solutions",
-    href: "/ai-solutions",
-    media: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/173463a6-4e3f-44fc-6fd4-61697f25d700/public",
-    mediaType: "image" as const,
-    description:
-      "Traditional SEO isn't enough; it must be supported with GEO. At ddip, we optimize for generative engines.",
-    tags: ["Featured Snippets Optimization", "Voice Search Optimization", "FAQ & Q&A Content Strategy", "NAP Consistency"],
-  },
-];
+// ─── Type definitions for CMS-driven sections ───
+interface SolutionCardData {
+  title: string;
+  href: string;
+  media: string;
+  mediaType: "video" | "image";
+  description: string;
+  tags: string[];
+}
 
-const selectedWork = [
-  {
-    title: "Vesta Global",
-    subtitle: "AI-powered real estate branding and visual identity",
-    category: "Real Estate",
-    video: "52d4f5fdd1335b2fbaba2f41798273f1",
-    tags: ["Visual Style Definition", "AI Model Selection & Optimization", "Use-Case Development", "Prompt Crafting"],
-  },
-  {
-    title: "Cesi Design",
-    subtitle: "Interior design showcase with AI-generated visuals",
-    category: "Interior Design",
-    video: "90b6c18df1bb19d1117f6d29f6859036",
-    tags: ["Enhanced Storytelling", "High-Impact Brand Moment", "Dynamic Interior Visuals"],
-  },
-  {
-    title: "Mediterra Group",
-    subtitle: "Premium real estate marketing with creative AI",
-    category: "Real Estate",
-    video: "8ffbc4055a9b0210350a2748fcbb8ce4",
-    tags: ["Refined Visual Storytelling", "Consistent Brand Identity", "Impactful Presentation Experience"],
-  },
-  {
-    title: "Brother",
-    subtitle: "Product campaign powered by AI production",
-    category: "Printer Solutions",
-    video: "2f4c298d7224c5140c18bc3c0f6faf22",
-    tags: ["Creative AI Integration", "Custom Character Creation", "Enhanced Campaign Impact"],
-  },
-];
+interface WorkCardData {
+  title: string;
+  subtitle: string;
+  category: string;
+  video: string;
+  tags: string[];
+}
 
-const influencersRow1 = [
-  { name: "Mina Özdemir", archetype: "Analytical Visionary", industry: "Real Estate", color: "#CDDBC0", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/81d25d40-2890-403e-93d7-49e36b06cd00/public", country: "TR" },
-  { name: "Mina Şen", archetype: "Color Story Weaver", industry: "Fashion", color: "#DBC0CD", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/56d8bb08-9c7d-49ca-e1ec-aa074fdf1600/public", country: "TR" },
-  { name: "Elif Doğan", archetype: "Market-to-Table Storyteller", industry: "Food", color: "#C0C2DB", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/e1fe1be8-8ca5-4eef-cf2a-925bae6f7300/public", country: "TR" },
-  { name: "Yasin El Fassi", archetype: "Heritage Remix Artist", industry: "Fashion", color: "#DBC0CD", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/259023e7-e8b0-4214-ee42-9f2b02a1a800/public", country: "MA" },
-  { name: "Aylin Demir", archetype: "Calm Change Navigator", industry: "Lifestyle", color: "#C0D7DB", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/57fe254b-21d7-4443-1476-6eccc458df00/public", country: "TR" },
-];
-
-const influencersRow2 = [
-  { name: "Laila Haddad", archetype: "People-First Strategist", industry: "HR", color: "#CDDBC0", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/8ebaf72d-1931-4412-d1ef-55f1feb9dd00/public", country: "AE" },
-  { name: "Deniz Akar", archetype: "Future-Forward Thinker", industry: "Tech", color: "#C0C2DB", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/923ba48c-8d17-4f6f-a974-09eae19dc300/public", country: "TR" },
-  { name: "Selin Kara", archetype: "Mindful Storyteller", industry: "Wellness", color: "#DBD8C0", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/ae712d05-13a0-46d1-c9e5-6f92fdeda700/public", country: "TR" },
-  { name: "Ece Yilmaz", archetype: "Cultural Bridge Builder", industry: "Fashion", color: "#DBC0CD", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/0c4bfad2-2109-4bbb-d78b-dcc73c1def00/public", country: "TR" },
-  { name: "Mina Şen", archetype: "Color Story Weaver", industry: "Fashion", color: "#DBC0CD", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/5dfe3b6d-e750-4279-3815-6dd960b62e00/public", country: "TR" },
-];
-
-const faqLeft = [
-  "What makes DDIP AI different from other AI agencies?",
-  "Do you develop your own AI tools?",
-  "How do your AI workflows improve efficiency?",
-  "What are AI Influencers, and how do they work?",
-];
-
-const faqRight = [
-  "How do you ensure the human element remains part of your AI-driven work?",
-  "Can non-creative or technical companies benefit from your workflow solutions?",
-  "How does DDIP stay up to date with evolving AI technologies?",
-  "What industries do you serve?",
-];
+interface InfluencerCardData {
+  name: string;
+  archetype: string;
+  industry: string;
+  color: string;
+  image: string;
+  country: string;
+}
 
 const partners = [
   { name: "Microsoft", image: "/images/partners/microsoft.svg" },
@@ -191,11 +118,11 @@ export default function HomePage() {
     }
   }, [heroPlaying, heroSlide]);
 
-  // CMS data state — initialized with fallback data, replaced when API responds
-  const [cmsSolutions, setCmsSolutions] = useState(aiSolutions);
-  const [cmsWorks, setCmsWorks] = useState(selectedWork);
-  const [cmsInfluencers, setCmsInfluencers] = useState({ row1: influencersRow1, row2: influencersRow2 });
-  const [cmsFaqs, setCmsFaqs] = useState({ left: faqLeft, right: faqRight });
+  // CMS data state — empty by default, populated from API. No hardcoded fallback.
+  const [cmsSolutions, setCmsSolutions] = useState<SolutionCardData[]>([]);
+  const [cmsWorks, setCmsWorks] = useState<WorkCardData[]>([]);
+  const [cmsInfluencers, setCmsInfluencers] = useState<{ row1: InfluencerCardData[]; row2: InfluencerCardData[] }>({ row1: [], row2: [] });
+  const [cmsFaqs, setCmsFaqs] = useState<{ left: string[]; right: string[] }>({ left: [], right: [] });
   const autoplayRow1 = useRef(Autoplay({ delay: 2000, stopOnInteraction: false, stopOnMouseEnter: false }));
   const autoplayRow2 = useRef(Autoplay({ delay: 2500, stopOnInteraction: false, stopOnMouseEnter: false }));
   const [emblaRow1Ref] = useEmblaCarousel({ loop: true, align: "start", dragFree: true }, [autoplayRow1.current]);
@@ -229,66 +156,59 @@ export default function HomePage() {
   };
 
 
-  // ─── Load CMS data from backend API ───
+  // ─── Load CMS data from backend API (no hardcoded fallback) ───
   useEffect(() => {
     // AI Solutions
     cmsApi.aiSolutions().then((res) => {
-      if (res.data?.length) {
-        setCmsSolutions(
-          res.data.map((s: AiSolution) => ({
-            title: s.title,
-            href: `/ai-solutions/${s.slug}`,
-            media: s.mediaUrl || "",
-            mediaType: (s.mediaType as "video" | "image") || "image",
-            description: s.body || "",
-            tags: s.tags?.map((t) => t.tag.name) || [],
-          }))
-        );
-      }
-    }).catch(() => { });
+      setCmsSolutions(
+        (res.data ?? []).map((s: AiSolution) => ({
+          title: s.title,
+          href: `/ai-solutions/${s.slug}`,
+          media: s.mediaUrl || "",
+          mediaType: (s.mediaType as "video" | "image") || "image",
+          description: s.body || "",
+          tags: s.tags?.map((t) => t.tag.name) || [],
+        }))
+      );
+    }).catch(() => setCmsSolutions([]));
 
     // Highlighted Works (Selected Work section)
     cmsApi.works(true).then((res) => {
-      if (res.data?.length) {
-        setCmsWorks(
-          res.data.map((w: Work) => ({
-            title: w.title,
-            subtitle: w.body || "",
-            category: w.field || "",
-            video: w.mediaUrl || "",
-            tags: w.tags?.map((t) => t.tag.name) || [],
-          }))
-        );
-      }
-    }).catch(() => { });
+      setCmsWorks(
+        (res.data ?? []).map((w: Work) => ({
+          title: w.title,
+          subtitle: w.body || "",
+          category: w.field || "",
+          video: w.mediaUrl || "",
+          tags: w.tags?.map((t) => t.tag.name) || [],
+        }))
+      );
+    }).catch(() => setCmsWorks([]));
 
     // Homepage Influencers
     cmsApi.influencers({ homepage: true }).then((res) => {
-      if (res.data?.length) {
-        const colors = ["#CDDBC0", "#DBC0CD", "#C0C2DB", "#C0D7DB", "#DBD8C0"];
-        const mapped = res.data.map((inf: Influencer, i: number) => ({
-          name: `${inf.name}${inf.surname ? ` ${inf.surname}` : ""}`,
-          archetype: inf.persona || "",
-          industry: inf.category || "Influencer",
-          color: colors[i % colors.length],
-          image: inf.imageUrl || "",
-          country: inf.countryCode || inf.country || "",
-        }));
-        const mid = Math.ceil(mapped.length / 2);
-        setCmsInfluencers({ row1: mapped.slice(0, mid), row2: mapped.slice(mid) });
-      }
-    }).catch(() => { });
+      const colors = ["#CDDBC0", "#DBC0CD", "#C0C2DB", "#C0D7DB", "#DBD8C0"];
+      const mapped = (res.data ?? []).map((inf: Influencer, i: number) => ({
+        name: `${inf.name}${inf.surname ? ` ${inf.surname}` : ""}`,
+        archetype: inf.persona || "",
+        industry: inf.category || "Influencer",
+        color: colors[i % colors.length],
+        image: inf.imageUrl || "",
+        country: inf.countryCode || inf.country || "",
+      }));
+      const mid = Math.ceil(mapped.length / 2);
+      setCmsInfluencers({ row1: mapped.slice(0, mid), row2: mapped.slice(mid) });
+    }).catch(() => setCmsInfluencers({ row1: [], row2: [] }));
 
     // Main page FAQs
     cmsApi.faqs("main").then((res) => {
-      if (res.data?.length) {
-        const mid = Math.ceil(res.data.length / 2);
-        setCmsFaqs({
-          left: res.data.slice(0, mid).map((f: Faq) => f.question),
-          right: res.data.slice(mid).map((f: Faq) => f.question),
-        });
-      }
-    }).catch(() => { });
+      const list = res.data ?? [];
+      const mid = Math.ceil(list.length / 2);
+      setCmsFaqs({
+        left: list.slice(0, mid).map((f: Faq) => f.question),
+        right: list.slice(mid).map((f: Faq) => f.question),
+      });
+    }).catch(() => setCmsFaqs({ left: [], right: [] }));
   }, []);
 
   return (

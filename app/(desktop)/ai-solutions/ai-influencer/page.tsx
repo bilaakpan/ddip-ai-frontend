@@ -73,104 +73,18 @@ const items = [
   },
 ];
 
-const topInfluencer = [
-  {
-    type: "Real Estate",
-    title: "AI Influencer",
-    name: "Mina Özdemir ",
-    region: "Turkey Market (TR)",
-    language: "Turkish (TR)",
-    gender: "Female",
-    archetype: "Analytical Visionary",
-    description:
-      "A fully digital persona designed to create content, engage audiences, and represent brands across social media with complete consistency.",
-    image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/81d25d40-2890-403e-93d7-49e36b06cd00/public",
-  },
-  {
-    type: "Fashion",
-    title: "Brand Ambassador",
-    name: "Mina Şen",
-    region: "European Market (EU)",
-    language: "English (EN)",
-    gender: "Female",
-    archetype: "Color Story Weaver",
-    description:
-      "A virtual brand representative that embodies your company's values and maintains a consistent presence across all touchpoints.",
-    image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/56d8bb08-9c7d-49ca-e1ec-aa074fdf1600/public",
-  },
-  {
-    type: "Food",
-    title: "AI Blogger",
-    name: "Elif Doğan",
-    region: "Turkey Market (TR)",
-    language: "Turkish (TR)",
-    gender: "Female",
-    archetype: "Market-to-Table Storyteller",
-    description:
-      "An AI-powered content creator that produces written and visual blog content, driving SEO and organic engagement.",
-    image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/5dfe3b6d-e750-4279-3815-6dd960b62e00/public",
-  },
-  {
-    type: "Fashion",
-    title: "Fashion",
-    name: "Yasin El Fassi",
-    region: "Middle East & North Africa",
-    language: "Arabic (AR)",
-    gender: "Male",
-    archetype: "Heritage Remix Artist",
-    description:
-      "A stylized character that represents your brand personality, designed for marketing campaigns and community engagement.",
-    image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/e1fe1be8-8ca5-4eef-cf2a-925bae6f7300/public",
-  },
-  {
-    type: "Lifestyle",
-    title: "Vesta Global",
-    name: "Hassan Al Qasimi",
-    region: "Middle East & North Africa",
-    language: "Arabic (AR)",
-    gender: "Male",
-    archetype: "Calm Change Navigator",
-    description:
-      "A stylized character that represents your brand personality, designed for marketing campaigns and community engagement.",
-    image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/259023e7-e8b0-4214-ee42-9f2b02a1a800/public",
-  },
-  {
-    type: "Real Estate",
-    title: "AI Influencer",
-    name: "Mina Özdemir ",
-    region: "Turkey Market (TR)",
-    language: "English (EN)",
-    gender: "Gender-Neutral",
-    archetype: "Gentle Routine Architect",
-    description:
-      "A fully digital persona designed to create content, engage audiences, and represent brands across social media with complete consistency.",
-    image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/923ba48c-8d17-4f6f-a974-09eae19dc300/public",
-  },
-  {
-    type: "Real Estate",
-    title: "AI Influencer",
-    name: "Mina Özdemir ",
-    region: "European Market (EU)",
-    language: "English (EN)",
-    gender: "Gender-Neutral",
-    archetype: "People-First Strategist",
-    description:
-      "A fully digital persona designed to create content, engage audiences, and represent brands across social media with complete consistency.",
-    image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/a6335ebb-a94d-49fe-f728-6034821b4500/public",
-  },
-  {
-    type: "Real Estate",
-    title: "AI Influencer",
-    name: "Mina Özdemir ",
-    region: "European Market (EU)",
-    language: "English (EN)",
-    gender: "Male",
-    archetype: "Digital Community Builder",
-    description:
-      "A fully digital persona designed to create content, engage audiences, and represent brands across social media with complete consistency.",
-    image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/8ebaf72d-1931-4412-d1ef-55f1feb9dd00/public",
-  },
-];
+// Influencer card shape — data comes from CMS API, no hardcoded fallback
+interface InfluencerCardData {
+  type: string;
+  title: string;
+  name: string;
+  region: string;
+  language: string;
+  gender: string;
+  archetype: string;
+  description: string;
+  image: string;
+}
 
 const influencerTypes = [
   {
@@ -254,30 +168,7 @@ const processSteps = [
   },
 ];
 
-const useCases = [
-  { title: "Vesta Global", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/81d25d40-2890-403e-93d7-49e36b06cd00/public" },
-  { title: "Fashion Style", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/56d8bb08-9c7d-49ca-e1ec-aa074fdf1600/public" },
-  { title: "Tech Expert", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/e1fe1be8-8ca5-4eef-cf2a-925bae6f7300/public" },
-  { title: "Vesta Global", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/259023e7-e8b0-4214-ee42-9f2b02a1a800/public" },
-  { title: "Brand Story", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/57fe254b-21d7-4443-1476-6eccc458df00/public" },
-  { title: "Community", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/8ebaf72d-1931-4412-d1ef-55f1feb9dd00/public" },
-  { title: "Lifestyle", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/923ba48c-8d17-4f6f-a974-09eae19dc300/public" },
-  { title: "Wellness", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/ae712d05-13a0-46d1-c9e5-6f92fdeda700/public" },
-  { title: "Education", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/0c4bfad2-2109-4bbb-d78b-dcc73c1def00/public" },
-  { title: "Innovation", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/5dfe3b6d-e750-4279-3815-6dd960b62e00/public" },
-];
-
-const faqLeft = [
-  "What exactly is an AI Influencer?",
-  "How do AI influencers content?",
-  "Can I customize an AI influencer for my brand?",
-];
-
-const faqRight = [
-  "How are AI influencers better than real ones?",
-  "Is AI influencer intelligence in content ethical?",
-  "How long does it take to create a model?",
-];
+// Use cases, FAQs come from CMS API only — no hardcoded fallback
 
 const bgColors = {
   "Real Estate": "bg-[#CDDBC0]",
@@ -288,6 +179,8 @@ const bgColors = {
   Finance: "bg-[#C0C2DB]",
   Consulting: "bg-[#DBD8C0]",
 };
+// `filters` is the currently selected filter UI state (the "All X" anchor labels
+// shown on each dropdown button). It's UI control, not list data — kept hardcoded.
 const filters = [
   "All Persona",
   "All Region",
@@ -296,41 +189,15 @@ const filters = [
   "All Industry",
 ];
 
-const filterOptions = [
-  [
-    "All Persona",
-    "AI Brand Ambassador",
-    "AI Influencer",
-    "AI Blogger",
-    "AI Mascot",
-  ],
-  [
-    "All Region",
-    "European Market (EU)",
-    "Turkey Market (TR)",
-    "Middle East & North Africa",
-  ],
-  [
-    "All Language",
-    "Turkish (TR)",
-    "English (EN)",
-    "Arabic (AR)",
-  ],
-  [
-    "All Gender",
-    "Female",
-    "Male",
-    "Gender-Neutral",
-  ],
-  [
-    "All Industry",
-    "Real Estate",
-    "Food",
-    "Fashion",
-    "Tech & Digital",
-    "Wellness",
-    "Consulting",
-  ],
+// Anchor "All X" labels for each filter group. Real options come from CMS API
+// (cmsApi.filterOptions) and are appended after these anchors. If API returns no
+// options, only the anchor "All X" label is shown.
+const filterAnchorLabels: string[][] = [
+  ["All Persona"],
+  ["All Region"],
+  ["All Language"],
+  ["All Gender"],
+  ["All Industry"],
 ];
 const heroPartners = ["VG", "Vestine", "Optimum", "Colorful"];
 
@@ -353,60 +220,51 @@ export default function AIInfluencerPage() {
   const [openFaqLeft, setOpenFaqLeft] = useState<number | null>(null);
   const [openFaqRight, setOpenFaqRight] = useState<number | null>(null);
   const [activeTab, setActiveTab] = useState(0);
-  const [cmsFaqLeft, setCmsFaqLeft] = useState(faqLeft);
-  const [cmsFaqRight, setCmsFaqRight] = useState(faqRight);
+  const [cmsFaqLeft, setCmsFaqLeft] = useState<string[]>([]);
+  const [cmsFaqRight, setCmsFaqRight] = useState<string[]>([]);
   const [openFilter, setOpenFilter] = useState<number | null>(null);
   const [selectedFilters, setSelectedFilters] = useState(filters);
   const [showPopup, setShowPopup] = useState(false);
-  const [selectedInfluencer, setSelectedInfluencer] = useState<typeof topInfluencer[0] | null>(null);
-  const [cmsInfluencers, setCmsInfluencers] = useState<typeof topInfluencer>(topInfluencer);
-  const [cmsUseCases, setCmsUseCases] = useState(useCases);
-  const [cmsFilterOptions, setCmsFilterOptions] = useState(filterOptions);
-  // Default carousel items (used as fallback if CMS returns no data)
-  const defaultUseCaseCarousel = [
-    { title: "Vesta Global", video: "https://customer-avhhoygwtxxdpkyp.cloudflarestream.com/4efeb3daa0597c05c31d144beccea3f8/manifest/video.m3u8", tags: ["Visual Style Definition", "AI Model Selection & Optimization", "Use-Case Development", "Prompt Crafting"] },
-    { title: "Nadlan Star", video: "https://customer-avhhoygwtxxdpkyp.cloudflarestream.com/f87ff43c16d018cdafd6c1ce68423c67/manifest/video.m3u8", tags: ["Use-Case Development", "Prompt Crafting"] },
-    { title: "Vesta Global", video: "https://customer-avhhoygwtxxdpkyp.cloudflarestream.com/8a161380969c7a822ca6075723101fdb/manifest/video.m3u8", tags: ["Use-Case Development", "Prompt Crafting"] },
-    { title: "Nadlan Star", video: "https://customer-avhhoygwtxxdpkyp.cloudflarestream.com/557784e65cd48dfcc66ec4545dd50b2a/manifest/video.m3u8", tags: ["Visual Style Definition", "Prompt Crafting"] },
-  ];
-  const [cmsUseCaseCarousel, setCmsUseCaseCarousel] = useState(defaultUseCaseCarousel);
+  const [selectedInfluencer, setSelectedInfluencer] = useState<InfluencerCardData | null>(null);
+  const [cmsInfluencers, setCmsInfluencers] = useState<InfluencerCardData[]>([]);
+  const [cmsUseCases, setCmsUseCases] = useState<{ title: string; image: string }[]>([]);
+  const [cmsFilterOptions, setCmsFilterOptions] = useState<string[][]>(filterAnchorLabels);
+  const [cmsUseCaseCarousel, setCmsUseCaseCarousel] = useState<{ title: string; video: string; tags: string[] }[]>([]);
 
   useEffect(() => {
-    // FAQs
+    // FAQs (no fallback — empty if API returns nothing)
     cmsApi
       .faqs("ai-influencer")
       .then((res) => {
-        if (res.data?.length) {
-          const mid = Math.ceil(res.data.length / 2);
-          setCmsFaqLeft(res.data.slice(0, mid).map((f: Faq) => f.question));
-          setCmsFaqRight(res.data.slice(mid).map((f: Faq) => f.question));
-        }
+        const list = res.data ?? [];
+        const mid = Math.ceil(list.length / 2);
+        setCmsFaqLeft(list.slice(0, mid).map((f: Faq) => f.question));
+        setCmsFaqRight(list.slice(mid).map((f: Faq) => f.question));
       })
-      .catch(() => { });
+      .catch(() => {
+        setCmsFaqLeft([]);
+        setCmsFaqRight([]);
+      });
 
-    // Use cases for AI Influencer page
+    // Use cases for AI Influencer page (no fallback)
     cmsApi
       .useCases("ai-influencer")
       .then((res) => {
-        if (res.data?.length) {
-          setCmsUseCases(
-            res.data.map((u: UseCase) => ({
-              title: u.brand,
-              image: u.mediaUrl || "",
-            }))
-          );
-          setCmsUseCaseCarousel(
-            res.data.map((u: UseCase) => ({
-              title: u.brand,
-              video: u.mediaUrl || "",
-              tags: u.tags?.map((t) => t.tag.name) || [],
-            }))
-          );
-        }
+        const list = res.data ?? [];
+        setCmsUseCases(list.map((u: UseCase) => ({ title: u.brand, image: u.mediaUrl || "" })));
+        setCmsUseCaseCarousel(list.map((u: UseCase) => ({
+          title: u.brand,
+          video: u.mediaUrl || "",
+          tags: u.tags?.map((t) => t.tag.name) || [],
+        })));
       })
-      .catch(() => { });
+      .catch(() => {
+        setCmsUseCases([]);
+        setCmsUseCaseCarousel([]);
+      });
 
-    // Filter options for influencer dropdowns - load all groups in parallel
+    // Filter options for influencer dropdowns — load all groups in parallel.
+    // Each group always shows its "All X" anchor label; API options append after.
     Promise.all([
       cmsApi.filterOptions("influencer_persona").catch(() => null),
       cmsApi.filterOptions("influencer_region").catch(() => null),
@@ -415,47 +273,37 @@ export default function AIInfluencerPage() {
       cmsApi.filterOptions("influencer_industry").catch(() => null),
     ]).then(([persona, region, language, gender, industry]) => {
       const groups = [persona, region, language, gender, industry];
-      const allLabels = ["All Persona", "All Region", "All Language", "All Gender", "All Industry"];
-
-      // Only update the groups that returned data; keep hardcoded fallback for others
-      const newOptions = filterOptions.map((defaultGroup, i) => {
+      const newOptions = filterAnchorLabels.map((anchor, i) => {
         const apiGroup = groups[i];
-        if (apiGroup?.data?.length) {
-          return [allLabels[i], ...apiGroup.data.map((opt: FilterOption) => opt.value)];
-        }
-        return defaultGroup;
+        const apiValues = apiGroup?.data?.map((opt: FilterOption) => opt.value) || [];
+        return [...anchor, ...apiValues];
       });
       setCmsFilterOptions(newOptions);
-    }).catch(() => { });
+    }).catch(() => setCmsFilterOptions(filterAnchorLabels));
 
-    // Influencers from CMS (filter to those marked for AI Influencer page)
+    // Influencers from CMS (filter to those marked for AI Influencer page).
+    // No hardcoded fallback values — empty fields stay empty.
     cmsApi
       .influencers()
       .then((res) => {
-        // Filter to only show influencers marked for AI Influencer page,
-        // OR all influencers if none have the flag set (graceful fallback)
-        const aiInfList = res.data?.filter((i: Influencer) => i.showOnAiinf) || [];
-        const list = aiInfList.length > 0 ? aiInfList : (res.data || []);
-        if (list.length) {
-          // Industry fallback values used when CMS doesn't provide them
-          const industries = ["Real Estate", "Fashion", "Food", "Fashion", "Lifestyle", "HR", "Tech", "Wellness", "Fashion", "Fashion"];
-          const titles = ["AI Influencer", "Brand Ambassador", "AI Blogger", "AI Mascot", "AI Influencer", "Brand Ambassador", "AI Blogger", "AI Mascot", "AI Influencer", "Brand Ambassador"];
-
-          const mapped = list.map((inf: Influencer, i: number) => ({
-            type: inf.category && inf.category !== "Influencer" ? inf.category : (industries[i % industries.length] || "Lifestyle"),
-            title: inf.title || titles[i % titles.length],
-            name: `${inf.name}${inf.surname ? ` ${inf.surname}` : ""}`,
-            region: inf.region || "Turkey Market (TR)",
-            language: inf.language || "Turkish (TR)",
-            gender: inf.gender || "Female",
-            archetype: inf.persona || "",
-            description: inf.summary || "",
-            image: inf.imageUrl || "",
-          }));
-          setCmsInfluencers(mapped);
-        }
+        const all = res.data ?? [];
+        const aiInfList = all.filter((i: Influencer) => i.showOnAiinf);
+        // If any influencers are flagged for this page use those; otherwise show all
+        const list = aiInfList.length > 0 ? aiInfList : all;
+        const mapped: InfluencerCardData[] = list.map((inf: Influencer) => ({
+          type: inf.category || "",
+          title: inf.title || "",
+          name: `${inf.name}${inf.surname ? ` ${inf.surname}` : ""}`,
+          region: inf.region || "",
+          language: inf.language || "",
+          gender: inf.gender || "",
+          archetype: inf.persona || "",
+          description: inf.summary || "",
+          image: inf.imageUrl || "",
+        }));
+        setCmsInfluencers(mapped);
       })
-      .catch(() => { });
+      .catch(() => setCmsInfluencers([]));
   }, []);
 
   const plusButton = () => {

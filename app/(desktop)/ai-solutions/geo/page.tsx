@@ -67,66 +67,49 @@ const whyGeoItems = [
   { image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/8e8c5d60-cc1f-493e-8353-2937c8047800/public" },
 ];
 
-const useCases = [
-  { title: "E-commerce", desc: "Corporate and service websites", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/b42d0e77-4b0b-4314-855a-50742215f400/public" },
-  { title: "SaaS", desc: "Thought leadership and editorial content", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/b6d8c2f0-639e-4be4-963e-3bcf48bd1400/public" },
-  { title: "Healthcare", desc: "Multi-region and multi-language platforms", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/e65d732c-ec5f-4775-5e9e-9842929fd300/public" },
-  { title: "Finance", desc: "AI-ready content hubs", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/b2122307-7cd1-4046-b85c-1d3c3029e800/public" },
-  { title: "Education", desc: "Brands preparing for AI-driven search visibility", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/4d210387-714f-4c9e-729d-11f757158700/public" },
-];
+// Use cases and FAQs come from CMS API only — no hardcoded fallback
 
-const faqLeft = [
-  "Is GEO the same as SEO?",
-  "Do I still need SEO?",
-  "Is GEO only about content?",
-  "How does GEO affect visibility in AI-generated results?",
-  "Does GEO work with time-based search results?",
-];
-
-const faqRight = [
-  "Is GEO a one-time optimization or an ongoing process?",
-  "Can GEO improve brand authority across similar traffic?",
-  "Is GEO limited for smaller sites or only large platforms?",
-  "How do you measure GEO performance?",
-  "Can GEO be applied to existing websites?",
-  "Is GEO aligned with future search trends?",
-];
+interface GeoUseCase {
+  title: string;
+  desc: string;
+  image: string;
+}
 
 export default function GeoPage() {
-  const [cmsFaqLeft, setCmsFaqLeft] = useState(faqLeft);
-  const [cmsFaqRight, setCmsFaqRight] = useState(faqRight);
-  const [cmsUseCases, setCmsUseCases] = useState(useCases);
+  const [cmsFaqLeft, setCmsFaqLeft] = useState<string[]>([]);
+  const [cmsFaqRight, setCmsFaqRight] = useState<string[]>([]);
+  const [cmsUseCases, setCmsUseCases] = useState<GeoUseCase[]>([]);
 
   useEffect(() => {
     // Use Cases for GEO page
     cmsApi
       .useCases("geo")
       .then((res) => {
-        if (res.data?.length) {
-          // Map UseCase to GEO's expected shape: {title, desc, image}
-          // Brand → title; first tag → desc (fallback); mediaUrl → image
-          setCmsUseCases(
-            res.data.map((u: UseCase) => ({
-              title: u.brand,
-              desc: u.tags?.[0]?.tag?.name || "",
-              image: u.mediaUrl || "",
-            }))
-          );
-        }
+        // Map UseCase to GEO's expected shape: {title, desc, image}
+        // Brand → title; first tag → desc; mediaUrl → image
+        setCmsUseCases(
+          (res.data ?? []).map((u: UseCase) => ({
+            title: u.brand,
+            desc: u.tags?.[0]?.tag?.name || "",
+            image: u.mediaUrl || "",
+          }))
+        );
       })
-      .catch(() => { });
+      .catch(() => setCmsUseCases([]));
 
     // FAQs
     cmsApi
       .faqs("geo")
       .then((res) => {
-        if (res.data?.length) {
-          const mid = Math.ceil(res.data.length / 2);
-          setCmsFaqLeft(res.data.slice(0, mid).map((f: Faq) => f.question));
-          setCmsFaqRight(res.data.slice(mid).map((f: Faq) => f.question));
-        }
+        const list = res.data ?? [];
+        const mid = Math.ceil(list.length / 2);
+        setCmsFaqLeft(list.slice(0, mid).map((f: Faq) => f.question));
+        setCmsFaqRight(list.slice(mid).map((f: Faq) => f.question));
       })
-      .catch(() => { });
+      .catch(() => {
+        setCmsFaqLeft([]);
+        setCmsFaqRight([]);
+      });
   }, []);
 
 
