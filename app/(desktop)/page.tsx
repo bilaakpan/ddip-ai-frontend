@@ -229,65 +229,67 @@ export default function HomePage() {
   };
 
 
-  // useEffect(() => {
-  //   cmsApi.aiSolutions().then((res) => {
-  //     if (res.data?.length) {
-  //       setCmsSolutions(
-  //         res.data.map((s: AiSolution) => ({
-  //           title: s.title,
-  //           href: `/ai-solutions/${s.slug}`,
-  //           media: s.mediaUrl || "",
-  //           mediaType: (s.mediaType as "video" | "image") || "image",
-  //           description: s.body || "",
-  //           tags: s.tags?.map((t) => t.tag.name) || [],
-  //         }))
-  //       );
-  //     }
-  //   }).catch(() => { });
+  // ─── Load CMS data from backend API ───
+  useEffect(() => {
+    // AI Solutions
+    cmsApi.aiSolutions().then((res) => {
+      if (res.data?.length) {
+        setCmsSolutions(
+          res.data.map((s: AiSolution) => ({
+            title: s.title,
+            href: `/ai-solutions/${s.slug}`,
+            media: s.mediaUrl || "",
+            mediaType: (s.mediaType as "video" | "image") || "image",
+            description: s.body || "",
+            tags: s.tags?.map((t) => t.tag.name) || [],
+          }))
+        );
+      }
+    }).catch(() => { });
 
-  //   cmsApi.works(true).then((res) => {
-  //     if (res.data?.length) {
-  //       setCmsWorks(
-  //         res.data.map((w: Work) => ({
-  //           title: w.title,
-  //           subtitle: w.body || "",
-  //           category: w.field || "",
-  //           video: w.mediaUrl || "",
-  //           tags: w.tags?.map((t) => t.tag.name) || [],
-  //         }))
-  //       );
-  //     }
-  //   }).catch(() => { });
+    // Highlighted Works (Selected Work section)
+    cmsApi.works(true).then((res) => {
+      if (res.data?.length) {
+        setCmsWorks(
+          res.data.map((w: Work) => ({
+            title: w.title,
+            subtitle: w.body || "",
+            category: w.field || "",
+            video: w.mediaUrl || "",
+            tags: w.tags?.map((t) => t.tag.name) || [],
+          }))
+        );
+      }
+    }).catch(() => { });
 
-  //   cmsApi.influencers({ homepage: true }).then((res) => {
-  //     if (res.data?.length) {
-  //       console.log("res.data?",res?.data)
-  //       const colors = ["#CDDBC0", "#DBC0CD", "#C0C2DB", "#C0D7DB", "#DBD8C0"];
-  //       // Use hardcoded sector data since CMS category field only has "Influencer"
-  //       const sectors = ["Real Estate", "Fashion", "Food", "Fashion", "Lifestyle", "HR", "Tech", "Wellness", "Fashion", "Fashion"];
-  //       const mapped = res.data.map((inf: Influencer, i: number) => ({
-  //         name: `${inf.name}${inf.surname ? ` ${inf.surname}` : ""}`,
-  //         archetype: inf.persona || "",
-  //         industry: sectors[i % sectors.length] || inf.category || "Influencer",
-  //         color: colors[i % colors.length],
-  //         image: inf.imageUrl || "",
-  //         country: inf.country || "",
-  //       }));
-  //       const mid = Math.ceil(mapped.length / 2);
-  //       setCmsInfluencers({ row1: mapped.slice(0, mid), row2: mapped.slice(mid) });
-  //     }
-  //   }).catch(() => { });
+    // Homepage Influencers
+    cmsApi.influencers({ homepage: true }).then((res) => {
+      if (res.data?.length) {
+        const colors = ["#CDDBC0", "#DBC0CD", "#C0C2DB", "#C0D7DB", "#DBD8C0"];
+        const mapped = res.data.map((inf: Influencer, i: number) => ({
+          name: `${inf.name}${inf.surname ? ` ${inf.surname}` : ""}`,
+          archetype: inf.persona || "",
+          industry: inf.category || "Influencer",
+          color: colors[i % colors.length],
+          image: inf.imageUrl || "",
+          country: inf.countryCode || inf.country || "",
+        }));
+        const mid = Math.ceil(mapped.length / 2);
+        setCmsInfluencers({ row1: mapped.slice(0, mid), row2: mapped.slice(mid) });
+      }
+    }).catch(() => { });
 
-  //   cmsApi.faqs("main").then((res) => {
-  //     if (res.data?.length) {
-  //       const mid = Math.ceil(res.data.length / 2);
-  //       setCmsFaqs({
-  //         left: res.data.slice(0, mid).map((f: Faq) => f.question),
-  //         right: res.data.slice(mid).map((f: Faq) => f.question),
-  //       });
-  //     }
-  //   }).catch(() => { });
-  // }, []);
+    // Main page FAQs
+    cmsApi.faqs("main").then((res) => {
+      if (res.data?.length) {
+        const mid = Math.ceil(res.data.length / 2);
+        setCmsFaqs({
+          left: res.data.slice(0, mid).map((f: Faq) => f.question),
+          right: res.data.slice(mid).map((f: Faq) => f.question),
+        });
+      }
+    }).catch(() => { });
+  }, []);
 
   return (
     <>

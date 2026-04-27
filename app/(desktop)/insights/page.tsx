@@ -135,21 +135,26 @@ export default function InsightsPage() {
   const [totalPages, setTotalPages] = useState(1);
   const [activeCategory, setActiveCategory] = useState("all");
 
-  // useEffect(() => {
-  //   setLoading(true);
-  //   cmsApi
-  //     .insights({ page, limit: 15 })
-  //     .then((res) => {
-  //       if (page === 1) {
-  //         setArticles(res.data);
-  //       } else {
-  //         setArticles((prev) => [...prev, ...res.data]);
-  //       }
-  //       setTotalPages(res.pagination.totalPages);
-  //     })
-  //     .catch(() => { })
-  //     .finally(() => setLoading(false));
-  // }, [page]);
+  // ─── Load insights from CMS API ───
+  useEffect(() => {
+    setLoading(true);
+    cmsApi
+      .insights({ page, limit: 15 })
+      .then((res) => {
+        if (res.data?.length) {
+          if (page === 1) {
+            setArticles(res.data);
+          } else {
+            setArticles((prev) => [...prev, ...res.data]);
+          }
+          if (res.pagination?.totalPages) {
+            setTotalPages(res.pagination.totalPages);
+          }
+        }
+      })
+      .catch(() => { })
+      .finally(() => setLoading(false));
+  }, [page]);
 
   const featuredArticle = articles[0];
   const gridArticles = articles; // Show all articles instead of slicing

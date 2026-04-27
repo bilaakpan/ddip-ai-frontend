@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect, useMemo } from "react";
-import { cmsApi, type Faq } from "@/lib/api";
+import { cmsApi, type Faq, type Influencer } from "@/lib/api";
 import HeroPartnersSection from "@/components/desktop/HeroPartnersSection";
 import InfluencerCard from "@/components/desktop/InfluenerCard";
 import FourDMethodSection from "@/components/desktop/FourDMethodSection";
@@ -359,7 +359,10 @@ export default function AIInfluencerPage() {
   const [selectedFilters, setSelectedFilters] = useState(filters);
   const [showPopup, setShowPopup] = useState(false);
   const [selectedInfluencer, setSelectedInfluencer] = useState<typeof topInfluencer[0] | null>(null);
+  const [cmsInfluencers, setCmsInfluencers] = useState<typeof topInfluencer>(topInfluencer);
+
   useEffect(() => {
+    // FAQs
     cmsApi
       .faqs("ai-influencer")
       .then((res) => {
@@ -367,6 +370,35 @@ export default function AIInfluencerPage() {
           const mid = Math.ceil(res.data.length / 2);
           setCmsFaqLeft(res.data.slice(0, mid).map((f: Faq) => f.question));
           setCmsFaqRight(res.data.slice(mid).map((f: Faq) => f.question));
+        }
+      })
+      .catch(() => { });
+
+    // Influencers from CMS (filter to those marked for AI Influencer page)
+    cmsApi
+      .influencers()
+      .then((res) => {
+        // Filter to only show influencers marked for AI Influencer page,
+        // OR all influencers if none have the flag set (graceful fallback)
+        const aiInfList = res.data?.filter((i: Influencer) => i.showOnAiinf) || [];
+        const list = aiInfList.length > 0 ? aiInfList : (res.data || []);
+        if (list.length) {
+          // Industry fallback values used when CMS doesn't provide them
+          const industries = ["Real Estate", "Fashion", "Food", "Fashion", "Lifestyle", "HR", "Tech", "Wellness", "Fashion", "Fashion"];
+          const titles = ["AI Influencer", "Brand Ambassador", "AI Blogger", "AI Mascot", "AI Influencer", "Brand Ambassador", "AI Blogger", "AI Mascot", "AI Influencer", "Brand Ambassador"];
+
+          const mapped = list.map((inf: Influencer, i: number) => ({
+            type: inf.category && inf.category !== "Influencer" ? inf.category : (industries[i % industries.length] || "Lifestyle"),
+            title: inf.title || titles[i % titles.length],
+            name: `${inf.name}${inf.surname ? ` ${inf.surname}` : ""}`,
+            region: inf.region || "Turkey Market (TR)",
+            language: inf.language || "Turkish (TR)",
+            gender: inf.gender || "Female",
+            archetype: inf.persona || "",
+            description: inf.summary || "",
+            image: inf.imageUrl || "",
+          }));
+          setCmsInfluencers(mapped);
         }
       })
       .catch(() => { });
@@ -395,7 +427,7 @@ export default function AIInfluencerPage() {
   };
 
   const filteredInfluencers = useMemo(() => {
-    return topInfluencer.filter((item) => {
+    return cmsInfluencers.filter((item) => {
       const [persona, region, language, gender, industry] = selectedFilters;
 
       if (persona !== "All Persona" && !matchesPersona(item.title, persona)) return false;
@@ -406,7 +438,7 @@ export default function AIInfluencerPage() {
 
       return true;
     });
-  }, [selectedFilters]);
+  }, [selectedFilters, cmsInfluencers]);
 
   return (
     <>
@@ -564,7 +596,7 @@ export default function AIInfluencerPage() {
           ════════════════════════════════════════════════════════ */}
         <div className="mt-16 overflow-hidden">
           <div className="flex w-max animate-marquee gap-6 whitespace-nowrap">
-            {[...topInfluencer, ...topInfluencer].map((type, idx) => (
+            {[...cmsInfluencers, ...cmsInfluencers].map((type, idx) => (
               <InfluencerCard
                 key={idx}
                 image={type.image}
