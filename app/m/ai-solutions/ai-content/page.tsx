@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import HlsPlayer from "@/components/desktop/video";
 import { useState, useEffect } from "react";
-import { cmsApi, type Faq } from "@/lib/api";
+import { cmsApi, type Faq, type UseCase } from "@/lib/api";
 import ToolEcosystem from "@/components/mobile/ToolEcosystem";
 
 /* ─── Data ─── */
@@ -89,49 +89,21 @@ const useCaseCards = [
   { icon: "/images/ai-content/icon-08.svg", label: "Event and announcement assets" },
   { icon: "/images/ai-content/icon-09.svg", label: "E-commerce and catalog visuals" },
 ];
-const useCaseItems = [
-  {
-    title: "Vesta Global",
-    subtitle: "AI-powered real estate branding and visual identity",
-    category: "Real Estate",
-    video: "52d4f5fdd1335b2fbaba2f41798273f1",
-    tags: ["Visual Style Definition", "AI Model Selection & Optimization", "Use-Case Development", "Prompt Crafting"],
-  },
-  {
-    title: "Cesi Design",
-    subtitle: "Interior design showcase with AI-generated visuals",
-    category: "Interior Design",
-    video: "90b6c18df1bb19d1117f6d29f6859036",
-    tags: ["Enhanced Storytelling", "High-Impact Brand Moment", "Dynamic Interior Visuals"],
-  },
-  {
-    title: "Mediterra Group",
-    subtitle: "Premium real estate marketing with creative AI",
-    category: "Real Estate",
-    video: "8ffbc4055a9b0210350a2748fcbb8ce4",
-    tags: ["Refined Visual Storytelling", "Consistent Brand Identity", "Impactful Presentation Experience"],
-  },
-  {
-    title: "Brother",
-    subtitle: "Product campaign powered by AI production",
-    category: "Printer Solutions",
-    video: "2f4c298d7224c5140c18bc3c0f6faf22",
-    tags: ["Creative AI Integration", "Custom Character Creation", "Enhanced Campaign Impact"],
-  },
-];
+// Use cases come from CMS API only
+
+interface UseCaseItem {
+  title: string;
+  subtitle: string;
+  category: string;
+  video: string;
+  tags: string[];
+}
 const scaleFeatures = [
   { icon: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/d79d8208-d108-4b58-d556-48855c230500/public", label: "Instagram, TikTok, LinkedIn, YouTube" },
   { icon: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/6f120319-2d8a-41b2-c5f5-d1d2e9588f00/public", label: "Multi-language adaptations" },
   { icon: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/5b8d9404-47b2-4933-b877-c179928f2c00/public", label: "Creative variations for testing and performance" },
 ];
-const faqFallback = [
-  { question: "How fast can content be generated?", answer: "Most content is generated within hours. Large-scale campaigns with multiple formats typically take 1–3 business days from brief to delivery." },
-  { question: "Is the content fully automated?", answer: "No. AI handles generation and iteration, but every piece goes through human creative review to ensure quality, brand alignment, and intent." },
-  { question: "Can content match our brand identity?", answer: "Yes. We train our AI workflows on your brand assets, color palettes, typography, and tone of voice to ensure consistent, on-brand output." },
-  { question: "Can you create content for multiple platforms at once?", answer: "Absolutely. Our pipeline produces platform-native formats simultaneously — from square Instagram posts to 16:9 YouTube thumbnails and vertical TikTok videos." },
-  { question: "Do you support multiple languages?", answer: "Yes. We support 30+ languages with native-level quality, adapting cultural references and idioms for each market." },
-  { question: "How do you ensure quality?", answer: "Every output is reviewed by our creative team before delivery. We also offer unlimited revisions until you're fully satisfied." },
-];
+// FAQs come from CMS API only
 const heroPartners = [
   { name: "Vesta Global", logo: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/df6e0710-2d50-486d-5f59-5e751559e900/public" },
   { name: "Brother", logo: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/86b61c21-9a9c-439a-317a-85b52a8e1200/public" },
@@ -149,16 +121,31 @@ const safePx: React.CSSProperties = {
 
 export default function MobileAiContentPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
-  const [cmsFaqs, setCmsFaqs] = useState(faqFallback);
+  const [cmsFaqs, setCmsFaqs] = useState<{ question: string; answer: string }[]>([]);
+  const [useCaseItems, setUseCaseItems] = useState<UseCaseItem[]>([]);
 
   useEffect(() => {
     cmsApi
       .faqs("ai-content")
       .then((res) => {
-        if (res.data?.length)
-          setCmsFaqs(res.data.map((f: Faq) => ({ question: f.question, answer: f.answer })));
+        setCmsFaqs((res.data ?? []).map((f: Faq) => ({ question: f.question, answer: f.answer ?? "" })));
       })
-      .catch(() => { });
+      .catch(() => setCmsFaqs([]));
+
+    cmsApi
+      .useCases("ai-content")
+      .then((res) => {
+        setUseCaseItems(
+          (res.data ?? []).map((u: UseCase) => ({
+            title: u.brand,
+            subtitle: "",
+            category: "",
+            video: u.mediaUrl || "",
+            tags: u.tags?.map((t) => t.tag.name) || [],
+          }))
+        );
+      })
+      .catch(() => setUseCaseItems([]));
   }, []);
 
   return (

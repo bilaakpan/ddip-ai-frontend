@@ -19,48 +19,11 @@ interface Insight {
     imageUrl: string;
 }
 
-const mockArticles: Insight[] = [
-    {
-        id: "1",
-        title: "The Future of AI in Content Creation",
-        slug: "future-ai-content",
-        category: "Real Estate",
-        publishedAt: new Date().toISOString(),
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
-        seoDescription: "10 Best AI Ad Creative Generators & Tools in 2026 (Tested)",
-        body: "Detailed article content about AI and content creation...",
-        imageUrl: "/images/insights/article1.svg"
-    },
-    {
-        id: "2",
-        title: "Building Influencer Brands with AI",
-        slug: "ai-influencer-brands",
-        category: "Food",
-        publishedAt: new Date().toISOString(),
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
-        seoDescription: "12 AI Consulting Companies for Enterprises in 2026",
-        body: "Detailed article content about AI influencers...",
-        imageUrl: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/046c3680-7356-4294-690d-482d7d1c5700/public"
-    },
-    {
-        id: "3",
-        title: "Automated Workflow Solutions",
-        slug: "automated-workflows",
-        category: "Wellness",
-        publishedAt: new Date().toISOString(),
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
-        seoDescription: "15 Best AI Presentation Makers & Tools of 2026 (New Picks)",
-        body: "Detailed article content about workflow automation...",
-        imageUrl: "/images/insights/article3.svg"
-    },
-
-];
+// Articles grid is empty by default — to be wired to CMS API by dev.
+// This page is currently a static stub showing a hardcoded article body.
 
 export default function ArticleHero() {
-    const gridArticles = mockArticles;
+    const gridArticles: Insight[] = [];
 
     const tocItems = [
         "Ask where AI can help in video creation",

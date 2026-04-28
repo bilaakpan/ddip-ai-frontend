@@ -2,7 +2,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect, useMemo } from "react";
-import { cmsApi, type Faq } from "@/lib/api";
+import { cmsApi, type Faq, type Influencer } from "@/lib/api";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { InfluencerPopupModal, type PopupInfluencer } from "@/components/mobile/influencer-popUp";
 
@@ -38,88 +38,17 @@ const partners = [
   { name: "Google AI", image: "/images/partners/google-ai.svg" },
 ];
 
-const topInfluencer = [
-  {
-    type: "Real Estate",
-    title: "AI Influencer",
-    name: "Mina Özdemir",
-    region: "Turkey Market (TR)",
-    language: "Turkish (TR)",
-    gender: "Female",
-    archetype: "Analytical Visionary",
-    image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/81d25d40-2890-403e-93d7-49e36b06cd00/public",
-  },
-  {
-    type: "Fashion",
-    title: "Brand Ambassador",
-    name: "Mina Şen",
-    region: "European Market (EU)",
-    language: "English (EN)",
-    gender: "Female",
-    archetype: "Color Story Weaver",
-    image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/56d8bb08-9c7d-49ca-e1ec-aa074fdf1600/public",
-  },
-  {
-    type: "Food",
-    title: "AI Blogger",
-    name: "Elif Doğan",
-    region: "Turkey Market (TR)",
-    language: "Turkish (TR)",
-    gender: "Female",
-    archetype: "Market-to-Table Storyteller",
-    image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/5dfe3b6d-e750-4279-3815-6dd960b62e00/public",
-  },
-  {
-    type: "Fashion",
-    title: "Fashion",
-    name: "Yasin El Fassi",
-    region: "Middle East & North Africa",
-    language: "Arabic (AR)",
-    gender: "Male",
-    archetype: "Heritage Remix Artist",
-    image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/e1fe1be8-8ca5-4eef-cf2a-925bae6f7300/public",
-  },
-  {
-    type: "Lifestyle",
-    title: "Vesta Global",
-    name: "Hassan Al Qasimi",
-    region: "Middle East & North Africa",
-    language: "Arabic (AR)",
-    gender: "Male",
-    archetype: "Calm Change Navigator",
-    image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/259023e7-e8b0-4214-ee42-9f2b02a1a800/public",
-  },
-  {
-    type: "Real Estate",
-    title: "AI Influencer",
-    name: "Mina Özdemir",
-    region: "Turkey Market (TR)",
-    language: "English (EN)",
-    gender: "Gender-Neutral",
-    archetype: "Gentle Routine Architect",
-    image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/923ba48c-8d17-4f6f-a974-09eae19dc300/public",
-  },
-  {
-    type: "Real Estate",
-    title: "AI Influencer",
-    name: "Mina Özdemir",
-    region: "European Market (EU)",
-    language: "English (EN)",
-    gender: "Gender-Neutral",
-    archetype: "People-First Strategist",
-    image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/a6335ebb-a94d-49fe-f728-6034821b4500/public",
-  },
-  {
-    type: "Real Estate",
-    title: "AI Influencer",
-    name: "Mina Özdemir",
-    region: "European Market (EU)",
-    language: "English (EN)",
-    gender: "Male",
-    archetype: "Digital Community Builder",
-    image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/8ebaf72d-1931-4412-d1ef-55f1feb9dd00/public",
-  },
-];
+// Influencer card shape — data comes from CMS API only
+interface MobileInfluencerCard {
+  type: string;
+  title: string;
+  name: string;
+  region: string;
+  language: string;
+  gender: string;
+  archetype: string;
+  image: string;
+}
 
 const influencerTypes = [
  {
@@ -171,14 +100,7 @@ const filterOptions = [
   ["All Industry", "Real Estate", "Food", "Fashion", "Tech & Digital", "Wellness", "Consulting"],
 ];
 
-const faqFallback = [
-  { question: "What exactly is an AI Influencer?", answer: "An AI Influencer is a fully digital persona powered by artificial intelligence, designed to create content, engage audiences, and represent brands across social media platforms." },
-  { question: "How do AI influencers create content?", answer: "They use generative AI tools to produce images, videos, and written content based on your brand guidelines and campaign objectives." },
-  { question: "Can I customize an AI influencer for my brand?", answer: "Yes. Every AI influencer we create is tailored to your brand's tone, visual identity, and target audience." },
-  { question: "How are AI influencers better than real ones?", answer: "They offer complete consistency, no scheduling conflicts, multilingual capability, and significantly lower long-term costs." },
-  { question: "Is AI influencer content ethical?", answer: "Yes. We follow industry transparency standards and ensure all AI-generated content is clearly positioned within ethical guidelines." },
-  { question: "How long does it take to create a model?", answer: "Typically 2–4 weeks from brief to first content delivery, depending on complexity and customization requirements." },
-];
+// FAQs come from CMS API only
 
 const normalizeIndustry = (value: string) => {
   if (value === "Tech & Digital") return "Tech";
@@ -233,20 +155,38 @@ const heroPartners = [
 export default function MobileAIInfluencerPage() {
   const [openIndex, setOpenIndex] = useState(0);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
-  const [cmsFaqs, setCmsFaqs] = useState(faqFallback);
+  const [cmsFaqs, setCmsFaqs] = useState<{ question: string; answer: string }[]>([]);
   const [openFilter, setOpenFilter] = useState<number | null>(null);
   const [selectedFilters, setSelectedFilters] = useState(filters);
   const [popupInfluencer, setPopupInfluencer] = useState<PopupInfluencer | null>(null);
+  const [topInfluencer, setTopInfluencer] = useState<MobileInfluencerCard[]>([]);
 
   useEffect(() => {
     cmsApi
       .faqs("ai-influencer")
       .then((res) => {
-        if (res.data?.length) {
-          setCmsFaqs(res.data.map((f: Faq) => ({ question: f.question, answer: f.answer ?? "" })));
-        }
+        setCmsFaqs((res.data ?? []).map((f: Faq) => ({ question: f.question, answer: f.answer ?? "" })));
       })
-      .catch(() => { });
+      .catch(() => setCmsFaqs([]));
+
+    cmsApi
+      .influencers()
+      .then((res) => {
+        const all = res.data ?? [];
+        const aiInfList = all.filter((i: Influencer) => i.showOnAiinf);
+        const list = aiInfList.length > 0 ? aiInfList : all;
+        setTopInfluencer(list.map((inf: Influencer) => ({
+          type: inf.category || "",
+          title: inf.title || "",
+          name: `${inf.name}${inf.surname ? ` ${inf.surname}` : ""}`,
+          region: inf.region || "",
+          language: inf.language || "",
+          gender: inf.gender || "",
+          archetype: inf.persona || "",
+          image: inf.imageUrl || "",
+        })));
+      })
+      .catch(() => setTopInfluencer([]));
   }, []);
 
   const handleFilterSelect = (filterIndex: number, option: string) => {
@@ -264,7 +204,7 @@ export default function MobileAIInfluencerPage() {
       if (industry !== "All Industry" && normalizeIndustry(item.type) !== normalizeIndustry(industry)) return false;
       return true;
     });
-  }, [selectedFilters]);
+  }, [selectedFilters, topInfluencer]);
 
   return (
     <>

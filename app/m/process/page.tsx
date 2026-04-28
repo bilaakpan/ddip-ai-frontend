@@ -41,13 +41,7 @@ const insightSteps = [
   { title: "Scale", subtitle: "Teams. Channels. Growth.", description: "We expand systems without losing control.", listHeading: "We scale:", bullets: ["Operations across teams and markets", "Reusable frameworks and templates", "Governance for brand safety", "Roadmaps for long-term evolution"], closing: "Scale with confidence, not chaos.", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/b17c4a07-5323-4e9a-e361-572649d78d00/public" },
 ];
 
-const faqFallback = [
-  { question: "How long does a typical project take?", answer: "A focused AI integration typically takes 4–6 weeks. Full-service engagements usually run 8–12 weeks. We provide a detailed timeline during the Discovery phase." },
-  { question: "What is the minimum budget for a project?", answer: "Projects typically start at $5,000 for focused AI integrations and $15,000+ for comprehensive engagements. We're transparent about pricing from the first conversation." },
-  { question: "Do you work with startups or only enterprise clients?", answer: "We work with businesses of all sizes — from ambitious startups to established enterprises. What matters most is alignment on goals and commitment to leveraging AI effectively." },
-  { question: "What happens after the project launches?", answer: "We offer ongoing support and optimization packages. Most clients opt for a monthly retainer that includes monitoring, minor updates, and strategic consultations." },
-  { question: "Can you work with our existing tech stack?", answer: "Absolutely. We're technology-agnostic and experienced with all major platforms, frameworks, and AI providers." },
-];
+// FAQs come from CMS API only
 
 const safePx: React.CSSProperties = {
   paddingLeft: "max(20px, env(safe-area-inset-left))",
@@ -57,13 +51,12 @@ const safePx: React.CSSProperties = {
 export default function MobileProcessPage() {
   const [activeStep, setActiveStep] = useState(0);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
-  const [cmsFaqs, setCmsFaqs] = useState(faqFallback);
+  const [cmsFaqs, setCmsFaqs] = useState<{ question: string; answer: string }[]>([]);
 
   useEffect(() => {
     cmsApi.faqs("process").then((res) => {
-      if (res.data?.length)
-        setCmsFaqs(res.data.map((f: Faq) => ({ question: f.question, answer: f.answer ?? "" })));
-    }).catch(() => { });
+      setCmsFaqs((res.data ?? []).map((f: Faq) => ({ question: f.question, answer: f.answer ?? "" })));
+    }).catch(() => setCmsFaqs([]));
 
     // Inject CSS animation
     const style = document.createElement('style');

@@ -5,16 +5,7 @@ import { useState, useEffect, useMemo } from "react";
 import { cmsApi, type Work } from "@/lib/api";
 import HlsPlayer from "@/components/desktop/video";
 
-/* ─── Static fallback ─── */
-const staticProjects = [
-  { id: "1", title: "Vesta Global", field: "Real Estate", categories: ["Visual Style Definition", "AI Model Selection & Optimization", "Use-Case Development", "Prompt Crafting"], image: "52d4f5fdd1335b2fbaba2f41798273f1", mediaType: "video" },
-  { id: "2", title: "Cesi Design", field: "Interior Design", categories: ["Enhanced Storytelling", "High-Impact Brand Moment", "Dynamic Interior Visuals"], image: "90b6c18df1bb19d1117f6d29f6859036", mediaType: "video" },
-  { id: "3", title: "Mediterra Group", field: "Real Estate", categories: ["Refined Visual Storytelling", "Consistent Brand Identity"], image: "8ffbc4055a9b0210350a2748fcbb8ce4", mediaType: "video" },
-  { id: "4", title: "Brother", field: "AI Solutions", categories: ["Creative AI Integration", "Custom Character Creation"], image: "2f4c298d7224c5140c18bc3c0f6faf22", mediaType: "video" },
-  { id: "5", title: "Vesta Global", field: "Real Estate", categories: ["Visual Style Definition", "Prompt Crafting"], image: "90b6c18df1bb19d1117f6d29f6859036", mediaType: "video" },
-  { id: "6", title: "Cesi Design", field: "Interior Design", categories: ["Dynamic Interior Visuals"], image: "8ffbc4055a9b0210350a2748fcbb8ce4", mediaType: "video" },
-];
-
+/* Works data comes from CMS API only — no hardcoded fallback */
 const filterOptions = ["All", "Real Estate", "Logo Design", "Interior Design", "AI Solutions", "Branding", "Strategy & Solutions"];
 
 const safePx: React.CSSProperties = {
@@ -29,23 +20,21 @@ export default function MobileWorksPage() {
   const [isOpen, setIsOpen] = useState(false);
   const [visibleCount, setVisibleCount] = useState(4);
   useEffect(() => {
+    setLoading(true);
     cmsApi.works().then((res) => {
-      if (res.data?.length) setWorks(res.data);
-    }).catch(() => { }).finally(() => setLoading(false));
+      setWorks(res.data ?? []);
+    }).catch(() => setWorks([])).finally(() => setLoading(false));
   }, []);
 
   const projects = useMemo(() => {
-    if (works.length > 0) {
-      return works.map((w) => ({
-        id: w.id,
-        title: w.title,
-        field: w.field || "",
-        categories: [w.field || ""].filter(Boolean),
-        image: w.mediaUrl || "",
-        mediaType: w.mediaType,
-      }));
-    }
-    return staticProjects;
+    return works.map((w) => ({
+      id: w.id,
+      title: w.title,
+      field: w.field || "",
+      categories: [w.field || ""].filter(Boolean),
+      image: w.mediaUrl || "",
+      mediaType: w.mediaType || "image",
+    }));
   }, [works]);
 
   const filtered = activeFilter === "All"

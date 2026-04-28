@@ -2,9 +2,9 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
-import type { Insight } from "@/lib/api";
+import { cmsApi, type Insight } from "@/lib/api";
 
 /* ─── Constants ─── */
 const CATEGORIES = [
@@ -16,17 +16,7 @@ const CATEGORIES = [
   { id: "consulting", label: "Consulting" },
 ];
 
-const mockArticles: Insight[] = [
-  { id: "1", title: "The Future of AI in Content Creation", slug: "future-ai-content", category: "Real Estate", publishedAt: new Date().toISOString(), createdAt: new Date().toISOString(), updatedAt: new Date().toISOString(), seoDescription: "10 Best AI Ad Creative Generators & Tools in 2026 (Tested)", body: "", imageUrl: "/images/insights/article1.svg" },
-  { id: "2", title: "Building Influencer Brands with AI", slug: "ai-influencer-brands", category: "Food", publishedAt: new Date().toISOString(), createdAt: new Date().toISOString(), updatedAt: new Date().toISOString(), seoDescription: "12 AI Consulting Companies for Enterprises in 2026", body: "", imageUrl: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/046c3680-7356-4294-690d-482d7d1c5700/public" },
-  { id: "3", title: "Automated Workflow Solutions", slug: "automated-workflows", category: "Wellness", publishedAt: new Date().toISOString(), createdAt: new Date().toISOString(), updatedAt: new Date().toISOString(), seoDescription: "15 Best AI Presentation Makers & Tools of 2026 (New Picks)", body: "", imageUrl: "/images/insights/article3.svg" },
-  { id: "4", title: "The Future of AI in Content Creation", slug: "future-ai-content", category: "Technology", publishedAt: new Date().toISOString(), createdAt: new Date().toISOString(), updatedAt: new Date().toISOString(), seoDescription: "10 Best AI Ad Creative Generators & Tools in 2026 (Tested)", body: "", imageUrl: "/images/insights/article1.svg" },
-  { id: "5", title: "Building Influencer Brands with AI", slug: "ai-influencer-brands", category: "Finance", publishedAt: new Date().toISOString(), createdAt: new Date().toISOString(), updatedAt: new Date().toISOString(), seoDescription: "12 AI Consulting Companies for Enterprises in 2026", body: "", imageUrl: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/046c3680-7356-4294-690d-482d7d1c5700/public" },
-  { id: "6", title: "Automated Workflow Solutions", slug: "automated-workflows", category: "Education", publishedAt: new Date().toISOString(), createdAt: new Date().toISOString(), updatedAt: new Date().toISOString(), seoDescription: "15 Best AI Presentation Makers & Tools of 2026 (New Picks)", body: "", imageUrl: "/images/insights/article3.svg" },
-  { id: "7", title: "The Future of AI in Content Creation", slug: "future-ai-content", category: "Healthcare", publishedAt: new Date().toISOString(), createdAt: new Date().toISOString(), updatedAt: new Date().toISOString(), seoDescription: "10 Best AI Ad Creative Generators & Tools in 2026 (Tested)", body: "", imageUrl: "/images/insights/article1.svg" },
-  { id: "8", title: "Building Influencer Brands with AI", slug: "ai-influencer-brands", category: "Marketing", publishedAt: new Date().toISOString(), createdAt: new Date().toISOString(), updatedAt: new Date().toISOString(), seoDescription: "12 AI Consulting Companies for Enterprises in 2026", body: "", imageUrl: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/046c3680-7356-4294-690d-482d7d1c5700/public" },
-  { id: "9", title: "Automated Workflow Solutions", slug: "automated-workflows", category: "E-commerce", publishedAt: new Date().toISOString(), createdAt: new Date().toISOString(), updatedAt: new Date().toISOString(), seoDescription: "15 Best AI Presentation Makers & Tools of 2026 (New Picks)", body: "", imageUrl: "/images/insights/article3.svg" },
-];
+// Articles come from CMS API only — no mock fallback
 
 const safePx: React.CSSProperties = {
   paddingLeft: "max(20px, env(safe-area-inset-left))",
@@ -34,9 +24,18 @@ const safePx: React.CSSProperties = {
 };
 
 export default function MobileInsightsPage() {
-  const [articles] = useState<Insight[]>(mockArticles);
-  const [loading] = useState(false);
+  const [articles, setArticles] = useState<Insight[]>([]);
+  const [loading, setLoading] = useState(false);
   const [activeCategory, setActiveCategory] = useState("all");
+
+  useEffect(() => {
+    setLoading(true);
+    cmsApi
+      .insights({ page: 1, limit: 50 })
+      .then((res) => setArticles(res.data ?? []))
+      .catch(() => setArticles([]))
+      .finally(() => setLoading(false));
+  }, []);
 
   return (
     <>

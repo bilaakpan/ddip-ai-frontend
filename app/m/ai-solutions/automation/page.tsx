@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import { cmsApi, type Faq } from "@/lib/api";
+import { cmsApi, type Faq, type Automation } from "@/lib/api";
 import HlsPlayer from "@/components/desktop/video";
 
 /* ─── Data ─── */
@@ -35,18 +35,12 @@ const methodSteps = [
     bg: "rgba(3, 158, 183, 1)", textColor: "#EBFFFF",
   },
 ];
-const featuredAutomations = [
-  { title: "Automated Video Creator", icon: "🎬" },
-  { title: "Automated LinkedIn Posts", icon: "💼" },
-  { title: "Trend Analyzer for Instagram", icon: "📊" },
-  { title: "Trend Analyzer for YouTube", icon: "📈" },
-  { title: "Lead Generation Bot", icon: "🤖" },
-  { title: "Amazon Stock & Price Tracker", icon: "📦" },
-  { title: "Personal Assistant", icon: "🧠" },
-  { title: "Meeting Assistant", icon: "📅" },
-  { title: "Meta Ads Analyzer", icon: "📱" },
-  { title: "WhatsApp Chatbot for Customer Support", icon: "💬" },
-];
+// Featured automations come from CMS API only
+
+interface AutomationCard {
+  title: string;
+  icon: string;
+}
 
 const processSteps = [
   { num: "01", title: "Define", desc: "We identify your workflow goals, pain points, and the systems that need to connect." },
@@ -63,14 +57,7 @@ const tools = [
   { name: "Claude", src: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/8c4688b8-29e5-46b9-7c32-574cfc737200/public" },
 ];
 
-const faqFallback = [
-  { question: "What are automated workflows?", answer: "Automated workflows are sequences of tasks that run automatically based on triggers, eliminating manual effort and reducing errors across your business processes." },
-  { question: "What's the difference between template-based and tailored workflows?", answer: "Templates are pre-built solutions ready to deploy quickly. Tailored workflows are custom-built to match your specific systems, logic, and business requirements." },
-  { question: "Do I need technical expertise to use these tools?", answer: "No. Our team handles the technical setup. You just need to understand your business process — we translate that into a working automation." },
-  { question: "Which industries can benefit from DDiP's workflows?", answer: "Any industry with repetitive processes — real estate, e-commerce, marketing, finance, hospitality, and more." },
-  { question: "How do integrations work?", answer: "We connect your existing tools (CRM, email, social, databases) using APIs and automation platforms like Zapier, n8n, and HubSpot." },
-  { question: "How long does it take to launch a workflow?", answer: "Template-based workflows can go live in 1–3 days. Custom workflows typically take 1–3 weeks depending on complexity." },
-];
+// FAQs come from CMS API only
 const heroPartners = [
   { name: "Vesta Global", logo: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/df6e0710-2d50-486d-5f59-5e751559e900/public" },
   { name: "Brother", logo: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/86b61c21-9a9c-439a-317a-85b52a8e1200/public" },
@@ -88,17 +75,28 @@ const safePx: React.CSSProperties = {
 export default function MobileAutomationPage() {
   const [openAccordion, setOpenAccordion] = useState<number | null>(0);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
-  const [cmsFaqs, setCmsFaqs] = useState(faqFallback);
+  const [cmsFaqs, setCmsFaqs] = useState<{ question: string; answer: string }[]>([]);
+  const [featuredAutomations, setFeaturedAutomations] = useState<AutomationCard[]>([]);
 
   useEffect(() => {
     cmsApi
       .faqs("automation")
       .then((res) => {
-        if (res.data?.length) {
-          setCmsFaqs(res.data.map((f: Faq) => ({ question: f.question, answer: f.answer ?? "" })));
-        }
+        setCmsFaqs((res.data ?? []).map((f: Faq) => ({ question: f.question, answer: f.answer ?? "" })));
       })
-      .catch(() => { });
+      .catch(() => setCmsFaqs([]));
+
+    cmsApi
+      .automations(true)
+      .then((res) => {
+        setFeaturedAutomations(
+          (res.data ?? []).map((a: Automation) => ({
+            title: a.title,
+            icon: a.icons?.[0]?.icon?.iconUrl || "",
+          }))
+        );
+      })
+      .catch(() => setFeaturedAutomations([]));
   }, []);
 
   return (

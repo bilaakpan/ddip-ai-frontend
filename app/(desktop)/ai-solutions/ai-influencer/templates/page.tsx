@@ -3,85 +3,19 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import { cmsApi, type Faq } from "@/lib/api";
+import { cmsApi, type Faq, type Influencer } from "@/lib/api";
 import HeroPartnersSection from "@/components/desktop/HeroPartnersSection";
 import ContactFormSection from "@/components/desktop/ContactFormSection";
 import { InfluencerPopupModal, type PopupInfluencer } from "@/components/desktop/influencer-popUp";
-/* ─── Data ─── */
-const topInfluencer = [
-  {
-    type: "Real Estate",
-    title: "AI Influencer",
-    name: "Mina Özdemir ",
-    archetype: "Analytical Visionary",
-    description:
-      "A fully digital persona designed to create content, engage audiences, and represent brands across social media with complete consistency.",
-    image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/81d25d40-2890-403e-93d7-49e36b06cd00/public",
-  },
-  {
-    type: "Fashion",
-    title: "Brand Ambassador",
-    name: "Mina Şen",
-    archetype: "Color Story Weaver",
-    description:
-      "A virtual brand representative that embodies your company's values and maintains a consistent presence across all touchpoints.",
-    image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/56d8bb08-9c7d-49ca-e1ec-aa074fdf1600/public",
-  },
-  {
-    type: "Food",
-    title: "AI Blogger",
-    name: "Elif Doğan",
-    archetype: "Market-to-Table Storyteller",
-    description:
-      "An AI-powered content creator that produces written and visual blog content, driving SEO and organic engagement.",
-    image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/5dfe3b6d-e750-4279-3815-6dd960b62e00/public",
-  },
-  {
-    type: "Fashion",
-    title: "Fashion",
-    name: "Yasin El Fassi",
-    archetype: "Heritage Remix Artist",
-    description:
-      "A stylized character that represents your brand personality, designed for marketing campaigns and community engagement.",
-    image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/e1fe1be8-8ca5-4eef-cf2a-925bae6f7300/public",
-  },
-  {
-    type: "Lifestyle",
-    title: "Vesta Global",
-    name: "Hassan Al Qasimi",
-    archetype: "Calm Change Navigator",
-    description:
-      "A stylized character that represents your brand personality, designed for marketing campaigns and community engagement.",
-    image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/259023e7-e8b0-4214-ee42-9f2b02a1a800/public",
-  },
-  {
-    type: "Real Estate",
-    title: "AI Influencer",
-    name: "Mina Özdemir ",
-    archetype: "Gentle Routine Architect",
-    description:
-      "A fully digital persona designed to create content, engage audiences, and represent brands across social media with complete consistency.",
-    image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/923ba48c-8d17-4f6f-a974-09eae19dc300/public",
-  },
-  {
-    type: "Real Estate",
-    title: "AI Influencer",
-    name: "Mina Özdemir ",
-    archetype: "People-First Strategist",
-    description:
-      "A fully digital persona designed to create content, engage audiences, and represent brands across social media with complete consistency.",
-    image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/a6335ebb-a94d-49fe-f728-6034821b4500/public",
-  },
-  {
-    type: "Real Estate",
-    title: "AI Influencer",
-    name: "Mina Özdemir ",
-    archetype: "Digital Community Builder",
-    description:
-      "A fully digital persona designed to create content, engage audiences, and represent brands across social media with complete consistency.",
-    image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/8ebaf72d-1931-4412-d1ef-55f1feb9dd00/public",
-  },
-];
+/* ─── Influencer card shape — data comes from CMS API only ─── */
+interface InfluencerTemplateCard {
+  type: string;
+  title: string;
+  name: string;
+  archetype: string;
+  description: string;
+  image: string;
+}
 
 const influencerTypes = [
   {
@@ -178,17 +112,7 @@ const useCases = [
   { title: "Innovation", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/5dfe3b6d-e750-4279-3815-6dd960b62e00/public" },
 ];
 
-const faqLeft = [
-  "What exactly is an AI Influencer?",
-  "How do AI influencers content?",
-  "Can I customize an AI influencer for my brand?",
-];
-
-const faqRight = [
-  "How are AI influencers better than real ones?",
-  "Is AI influencer intelligence in content ethical?",
-  "How long does it take to create a model?",
-];
+// FAQs come from CMS API only
 
 const bgColors = {
   "Real Estate": "bg-[#CDDBC0]",
@@ -270,22 +194,43 @@ const showcaseFilters = [
 export default function WorkWithInfluencerPage() {
   const [openFaqLeft, setOpenFaqLeft] = useState<number | null>(null);
   const [openFaqRight, setOpenFaqRight] = useState<number | null>(null);
-  const [cmsFaqLeft, setCmsFaqLeft] = useState(faqLeft);
-  const [cmsFaqRight, setCmsFaqRight] = useState(faqRight);
+  const [cmsFaqLeft, setCmsFaqLeft] = useState<string[]>([]);
+  const [cmsFaqRight, setCmsFaqRight] = useState<string[]>([]);
   const [openFilter, setOpenFilter] = useState<number | null>(null);
   const [popupOpen, setPopupOpen] = useState(false);
   const [selectedInfluencer, setSelectedInfluencer] = useState<PopupInfluencer | null>(null);
+  const [topInfluencer, setTopInfluencer] = useState<InfluencerTemplateCard[]>([]);
+
   useEffect(() => {
     cmsApi
       .faqs("ai-influencer")
       .then((res) => {
-        if (res.data?.length) {
-          const mid = Math.ceil(res.data.length / 2);
-          setCmsFaqLeft(res.data.slice(0, mid).map((f: Faq) => f.question));
-          setCmsFaqRight(res.data.slice(mid).map((f: Faq) => f.question));
-        }
+        const list = res.data ?? [];
+        const mid = Math.ceil(list.length / 2);
+        setCmsFaqLeft(list.slice(0, mid).map((f: Faq) => f.question));
+        setCmsFaqRight(list.slice(mid).map((f: Faq) => f.question));
       })
-      .catch(() => { });
+      .catch(() => {
+        setCmsFaqLeft([]);
+        setCmsFaqRight([]);
+      });
+
+    cmsApi
+      .influencers()
+      .then((res) => {
+        const all = res.data ?? [];
+        const aiInfList = all.filter((i: Influencer) => i.showOnAiinf);
+        const list = aiInfList.length > 0 ? aiInfList : all;
+        setTopInfluencer(list.map((inf: Influencer) => ({
+          type: inf.category || "",
+          title: inf.title || "",
+          name: `${inf.name}${inf.surname ? ` ${inf.surname}` : ""}`,
+          archetype: inf.persona || "",
+          description: inf.summary || "",
+          image: inf.imageUrl || "",
+        })));
+      })
+      .catch(() => setTopInfluencer([]));
   }, []);
 
   const plusButton = () => {

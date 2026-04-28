@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import { cmsApi, type Faq } from "@/lib/api";
+import { cmsApi, type Faq, type UseCase } from "@/lib/api";
 
 /* ─── Data ─── */
 const optimizeItems = [
@@ -27,22 +27,13 @@ const whyGeoItems = [
   { icon: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/ce41f3c8-b443-46a9-9dea-d946a6c6d100/public", text: "Content structure shapes AI discoverability" },
 ];
 
-const useCases = [
-  { title: "E-commerce", desc: "Corporate and service websites", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/b42d0e77-4b0b-4314-855a-50742215f400/public" },
-  { title: "SaaS", desc: "Thought leadership and editorial content", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/b6d8c2f0-639e-4be4-963e-3bcf48bd1400/public" },
-  { title: "Healthcare", desc: "Multi-region and multi-language platforms", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/e65d732c-ec5f-4775-5e9e-9842929fd300/public" },
-  { title: "Finance", desc: "AI-ready content hubs", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/b2122307-7cd1-4046-b85c-1d3c3029e800/public" },
-  { title: "Education", desc: "Brands preparing for AI-driven search visibility", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/4d210387-714f-4c9e-729d-11f757158700/public" },
-];
+// Use cases and FAQs come from CMS API only
 
-const faqFallback = [
-  { question: "Is GEO the same as SEO?", answer: "No. SEO focuses on ranking in traditional search engines. GEO (Generative Engine Optimization) focuses on making your content readable, trustworthy, and citable by AI-powered systems." },
-  { question: "Do I still need SEO?", answer: "Yes. GEO builds on SEO — it doesn't replace it. Both work together to maximize your visibility across traditional and AI-driven search." },
-  { question: "Is GEO only about content?", answer: "No. GEO covers content structure, semantic markup, metadata, multi-engine presence, and topic authority signals." },
-  { question: "How does GEO affect AI-generated results?", answer: "GEO helps your content become a trusted source that AI systems reference when generating answers, summaries, and recommendations." },
-  { question: "Is GEO a one-time optimization?", answer: "No. GEO is an ongoing process as AI systems evolve and new discovery patterns emerge." },
-  { question: "How do you measure GEO performance?", answer: "We track AI citation frequency, brand mention in AI answers, structured data coverage, and content discoverability across AI platforms." },
-];
+interface MobileGeoUseCase {
+  title: string;
+  desc: string;
+  image: string;
+}
 const heroPartners = [
   { name: "Vesta Global", logo: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/df6e0710-2d50-486d-5f59-5e751559e900/public" },
   { name: "Brother", logo: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/86b61c21-9a9c-439a-317a-85b52a8e1200/public" },
@@ -109,17 +100,29 @@ function FeatureCard({ iconSrc, text }: { iconSrc: string; text: string }) {
 
 export default function MobileGeoPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
-  const [cmsFaqs, setCmsFaqs] = useState(faqFallback);
+  const [cmsFaqs, setCmsFaqs] = useState<{ question: string; answer: string }[]>([]);
+  const [useCases, setUseCases] = useState<MobileGeoUseCase[]>([]);
 
   useEffect(() => {
     cmsApi
       .faqs("geo")
       .then((res) => {
-        if (res.data?.length) {
-          setCmsFaqs(res.data.map((f: Faq) => ({ question: f.question, answer: f.answer ?? "" })));
-        }
+        setCmsFaqs((res.data ?? []).map((f: Faq) => ({ question: f.question, answer: f.answer ?? "" })));
       })
-      .catch(() => { });
+      .catch(() => setCmsFaqs([]));
+
+    cmsApi
+      .useCases("geo")
+      .then((res) => {
+        setUseCases(
+          (res.data ?? []).map((u: UseCase) => ({
+            title: u.brand,
+            desc: u.tags?.[0]?.tag?.name || "",
+            image: u.mediaUrl || "",
+          }))
+        );
+      })
+      .catch(() => setUseCases([]));
   }, []);
 
   return (

@@ -2,76 +2,19 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Section } from "@/components/layout";
+import { cmsApi, type Influencer } from "@/lib/api";
 
-/* ─── Data ─── */
-const topInfluencer = [
-  {
-    type: "Real Estate",
-    name: "Mina Özdemir",
-    archetype: "Analytical Visionary",
-    image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/81d25d40-2890-403e-93d7-49e36b06cd00/public",
-    country: "TR",
-    tagColor: "#CDDBC0",
-  },
-  {
-    type: "Fashion",
-    name: "Mina Şen",
-    archetype: "Color Story Weaver",
-    image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/56d8bb08-9c7d-49ca-e1ec-aa074fdf1600/public",
-    country: "TR",
-    tagColor: "#DBC0CD",
-  },
-  {
-    type: "Food",
-    name: "Elif Doğan",
-    archetype: "Market-to-Table Storyteller",
-    image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/e1fe1be8-8ca5-4eef-cf2a-925bae6f7300/public",
-    country: "TR",
-    tagColor: "#C0C2DB",
-  },
-  {
-    type: "Fashion",
-    name: "Yasin El Fassi",
-    archetype: "Heritage Remix Artist",
-    image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/259023e7-e8b0-4214-ee42-9f2b02a1a800/public",
-    country: "MA",
-    tagColor: "#DBC0CD",
-  },
-  {
-    type: "Lifestyle",
-    name: "Aylin Demir",
-    archetype: "Calm Change Navigator",
-    image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/57fe254b-21d7-4443-1476-6eccc458df00/public",
-    country: "TR",
-    tagColor: "#C0D7DB",
-  },
-  {
-    type: "Tech",
-    name: "Deniz Akar",
-    archetype: "Future-Forward Thinker",
-    image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/923ba48c-8d17-4f6f-a974-09eae19dc300/public",
-    country: "TR",
-    tagColor: "#DBD8C0",
-  },
-  {
-    type: "HR",
-    name: "Laila Haddad",
-    archetype: "People-First Strategist",
-    image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/8ebaf72d-1931-4412-d1ef-55f1feb9dd00/public",
-    country: "AE",
-    tagColor: "#CDDBC0",
-  },
-  {
-    type: "Wellness",
-    name: "Selin Kara",
-    archetype: "Mindful Storyteller",
-    image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/ae712d05-13a0-46d1-c9e5-6f92fdeda700/public",
-    country: "TR",
-    tagColor: "#DBD8C0",
-  },
-];
+/* ─── Influencer card shape — data comes from CMS API only ─── */
+interface InfluencerCard {
+  type: string;
+  name: string;
+  archetype: string;
+  image: string;
+  country: string;
+  tagColor: string;
+}
 
 const showcaseFilters = [
   {
@@ -104,6 +47,28 @@ export default function InfluencerTemplatesPage() {
   const [activeFilters, setActiveFilters] = useState<Record<string, string>>(
     Object.fromEntries(showcaseFilters.map((f) => [f.label, "All"]))
   );
+  const [topInfluencer, setTopInfluencer] = useState<InfluencerCard[]>([]);
+
+  useEffect(() => {
+    cmsApi
+      .influencers()
+      .then((res) => {
+        const all = res.data ?? [];
+        const aiInfList = all.filter((i: Influencer) => i.showOnAiinf);
+        const list = aiInfList.length > 0 ? aiInfList : all;
+        const colors = ["#CDDBC0", "#DBC0CD", "#C0C2DB", "#DBC0CD", "#C0D7DB", "#DBD8C0", "#CDDBC0", "#DBD8C0"];
+        const mapped: InfluencerCard[] = list.map((inf: Influencer, i: number) => ({
+          type: inf.category || "",
+          name: `${inf.name}${inf.surname ? ` ${inf.surname}` : ""}`,
+          archetype: inf.persona || "",
+          image: inf.imageUrl || "",
+          country: inf.countryCode || inf.country || "",
+          tagColor: colors[i % colors.length],
+        }));
+        setTopInfluencer(mapped);
+      })
+      .catch(() => setTopInfluencer([]));
+  }, []);
 
   const toggleFilter = (label: string, option: string) => {
     setActiveFilters((prev) => ({ ...prev, [label]: option }));

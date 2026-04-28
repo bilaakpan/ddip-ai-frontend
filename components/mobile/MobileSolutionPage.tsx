@@ -91,22 +91,21 @@ export default function MobileSolutionPage({
   showPartners = true,
 }: MobileSolutionPageProps) {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
-  const [cmsFaqs, setCmsFaqs] = useState(faqItems);
+  // Always start empty — FAQs come from CMS API, no hardcoded fallback
+  const [cmsFaqs, setCmsFaqs] = useState<{ question: string; answer: string }[]>([]);
 
   useEffect(() => {
     cmsApi
       .faqs(pageSlug)
       .then((res) => {
-        if (res.data?.length) {
-          setCmsFaqs(
-            res.data.map((f: Faq) => ({
-              question: f.question,
-              answer: f.answer,
-            }))
-          );
-        }
+        setCmsFaqs(
+          (res.data ?? []).map((f: Faq) => ({
+            question: f.question,
+            answer: f.answer ?? "",
+          }))
+        );
       })
-      .catch(() => { });
+      .catch(() => setCmsFaqs([]));
   }, [pageSlug]);
 
   return (

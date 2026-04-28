@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import HlsPlayer from "@/components/desktop/video";
 import { useState, useEffect } from "react";
-import { cmsApi, type Faq } from "@/lib/api";
+import { cmsApi, type Faq, type UseCase } from "@/lib/api";
 import ToolEcosystem from "@/components/mobile/ToolEcosystem";
 import CTA from "@/components/mobile/CTA";
 /* ─── Data ─── */
@@ -53,36 +53,15 @@ const generateItems = [
   { title: "Hero videos for integrated campaigns", src: "24de38b44fb5a937655b4bb88d5feb37" },
 ];
 
-const useCaseItems = [
-  {
-    title: "Vesta Global",
-    subtitle: "AI-powered real estate branding and visual identity",
-    category: "Real Estate",
-    video: "52d4f5fdd1335b2fbaba2f41798273f1",
-    tags: ["Visual Style Definition", "AI Model Selection & Optimization", "Use-Case Development", "Prompt Crafting"],
-  },
-  {
-    title: "Cesi Design",
-    subtitle: "Interior design showcase with AI-generated visuals",
-    category: "Interior Design",
-    video: "90b6c18df1bb19d1117f6d29f6859036",
-    tags: ["Enhanced Storytelling", "High-Impact Brand Moment", "Dynamic Interior Visuals"],
-  },
-  {
-    title: "Mediterra Group",
-    subtitle: "Premium real estate marketing with creative AI",
-    category: "Real Estate",
-    video: "8ffbc4055a9b0210350a2748fcbb8ce4",
-    tags: ["Refined Visual Storytelling", "Consistent Brand Identity", "Impactful Presentation Experience"],
-  },
-  {
-    title: "Brother",
-    subtitle: "Product campaign powered by AI production",
-    category: "Printer Solutions",
-    video: "2f4c298d7224c5140c18bc3c0f6faf22",
-    tags: ["Creative AI Integration", "Custom Character Creation", "Enhanced Campaign Impact"],
-  },
-];
+// Use cases come from CMS API only
+
+interface CommercialUseCaseItem {
+  title: string;
+  subtitle: string;
+  category: string;
+  video: string;
+  tags: string[];
+}
 
 const features = [
   { icon: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/834b85e5-e315-4bb4-fca3-0287a4505000/public", label: "Faster pre-production and visualization" },
@@ -99,14 +78,7 @@ const useCaseCards = [
   { icon: "/images/ai-content/icon3.svg", label: "E-commerce and catalog visuals" },
 ];
 
-const faqFallback = [
-  { question: "How does AI commercial production work?", answer: "We use generative AI tools to handle pre-production, scene generation, and post-production — delivering broadcast-quality output faster and at lower cost than traditional shoots." },
-  { question: "What quality level can I expect?", answer: "Our AI pipeline produces 4K-ready assets that meet broadcast and digital advertising standards, indistinguishable from traditionally produced content." },
-  { question: "Can you match our brand guidelines?", answer: "Yes. We train our workflows on your brand assets, color palettes, and visual language to ensure every piece is perfectly on-brand." },
-  { question: "How long does production take?", answer: "Most projects are delivered in 1–2 weeks. Complex campaigns with multiple deliverables typically take 3–4 weeks from brief to final assets." },
-  { question: "Is AI-generated content legal to use?", answer: "Yes. All content we produce is commercially licensed and cleared for use across advertising, social media, and broadcast channels." },
-  { question: "How many revisions are included?", answer: "Unlimited revisions are included. Because AI production is iterative, changes are turned around in hours rather than days." },
-];
+// FAQs come from CMS API only
 
 const safePx: React.CSSProperties = {
   paddingLeft: "max(20px, env(safe-area-inset-left))",
@@ -115,16 +87,31 @@ const safePx: React.CSSProperties = {
 
 export default function MobileAiCommercialPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
-  const [cmsFaqs, setCmsFaqs] = useState(faqFallback);
+  const [cmsFaqs, setCmsFaqs] = useState<{ question: string; answer: string }[]>([]);
+  const [useCaseItems, setUseCaseItems] = useState<CommercialUseCaseItem[]>([]);
 
   useEffect(() => {
     cmsApi
       .faqs("ai-commercial")
       .then((res) => {
-        if (res.data?.length)
-          setCmsFaqs(res.data.map((f: Faq) => ({ question: f.question, answer: f.answer })));
+        setCmsFaqs((res.data ?? []).map((f: Faq) => ({ question: f.question, answer: f.answer ?? "" })));
       })
-      .catch(() => { });
+      .catch(() => setCmsFaqs([]));
+
+    cmsApi
+      .useCases("ai-commercial")
+      .then((res) => {
+        setUseCaseItems(
+          (res.data ?? []).map((u: UseCase) => ({
+            title: u.brand,
+            subtitle: "",
+            category: "",
+            video: u.mediaUrl || "",
+            tags: u.tags?.map((t) => t.tag.name) || [],
+          }))
+        );
+      })
+      .catch(() => setUseCaseItems([]));
   }, []);
 
   return (

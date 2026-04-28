@@ -1,24 +1,20 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { cmsApi, type Automation } from "@/lib/api";
 
-const allTemplates = [
-  { title: "Automated Video Creator", category: "Content Creation", platform: "YouTube", outputType: "Video", useCase: "Agency", language: "English (EN)" },
-  { title: "Automated LinkedIn Posts", category: "Social Media", platform: "LinkedIn", outputType: "Text / Copy", useCase: "Small Business", language: "English (EN)" },
-  { title: "Trend Analyzer for Instagram", category: "Analytics & Research", platform: "Instagram", outputType: "Reports & Data", useCase: "Solo Creator", language: "English (EN)" },
-  { title: "Lead Generation Bot", category: "Lead Generation", platform: "Email", outputType: "Notifications", useCase: "Enterprise", language: "English (EN)" },
-  { title: "Amazon Stock & Price Tracker", category: "E-Commerce", platform: "Amazon", outputType: "Reports & Data", useCase: "Small Business", language: "English (EN)" },
-  { title: "Personal Assistant", category: "Productivity", platform: "Telegram", outputType: "Notifications", useCase: "Solo Creator", language: "Turkish (TR)" },
-  { title: "Trend Analyzer for YouTube", category: "Analytics & Research", platform: "YouTube", outputType: "Reports & Data", useCase: "Agency", language: "English (EN)" },
-  { title: "WhatsApp Chatbot for Customer Support", category: "Lead Generation", platform: "Telegram", outputType: "Notifications", useCase: "Enterprise", language: "Arabic (AR)" },
-  { title: "Meta Ads Analyzer", category: "Analytics & Research", platform: "Instagram", outputType: "Reports & Data", useCase: "Agency", language: "English (EN)" },
-  { title: "Meeting Assistant", category: "Productivity", platform: "Email", outputType: "Text / Copy", useCase: "Small Business", language: "English (EN)" },
-  { title: "Automated Lead Call and CRM Integration", category: "Lead Generation", platform: "Email", outputType: "Notifications", useCase: "Enterprise", language: "English (EN)" },
-  { title: "Social Media Engagement Optimizer", category: "Social Media", platform: "Instagram", outputType: "Images", useCase: "Agency", language: "English (EN)" },
-];
+interface TemplateCard {
+  title: string;
+  category: string;
+  platform: string;
+  outputType: string;
+  useCase: string;
+  language: string;
+}
 
+// Filter groups remain hardcoded — UI control labels for the dropdowns
 const filterGroups = [
   { label: "Category", options: ["All", "Content Creation", "Social Media", "E-Commerce", "Analytics & Research", "Productivity", "Lead Generation"] },
   { label: "Platform", options: ["All", "Instagram", "LinkedIn", "YouTube", "Telegram", "Amazon", "Email"] },
@@ -33,6 +29,27 @@ export default function AutomationTemplatesPage() {
   const [activeFilters, setActiveFilters] = useState<Record<string, string>>(
     Object.fromEntries(filterGroups.map((f) => [f.label, "All"]))
   );
+  const [allTemplates, setAllTemplates] = useState<TemplateCard[]>([]);
+
+  useEffect(() => {
+    cmsApi
+      .automations()
+      .then((res) => {
+        // Map Automation API to TemplateCard shape. Most metadata fields don't
+        // exist on the Automation model yet, so they default to empty.
+        setAllTemplates(
+          (res.data ?? []).map((a: Automation) => ({
+            title: a.title,
+            category: "",
+            platform: "",
+            outputType: "",
+            useCase: "",
+            language: "",
+          }))
+        );
+      })
+      .catch(() => setAllTemplates([]));
+  }, []);
 
   const toggleFilter = (label: string, option: string) => {
     setActiveFilters((prev) => ({ ...prev, [label]: option }));

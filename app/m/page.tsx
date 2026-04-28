@@ -10,6 +10,39 @@ import PartnersSection from "@/components/desktop/PartnersSection";
 import { PopupInfluencer, } from "@/components/desktop/influencer-popUp";
 import HlsPlayer from "@/components/desktop/video";
 import { InfluencerPopupModal } from "@/components/mobile/influencer-popUp";
+import { cmsApi, type AiSolution, type Work, type Influencer, type Faq } from "@/lib/api";
+
+/* ─── CMS data shapes (used by state) ─── */
+interface SolutionCardData {
+  title: string;
+  href: string;
+  media: string;
+  mediaType: "video" | "image";
+  description: string;
+  tags: string[];
+}
+
+interface WorkCardData {
+  title: string;
+  subtitle: string;
+  category: string;
+  video: string;
+  tags: string[];
+}
+
+interface InfluencerCardData {
+  name: string;
+  archetype: string;
+  industry: string;
+  color: string;
+  image: string;
+  country: string;
+}
+
+interface FaqEntry {
+  question: string;
+  answer: string;
+}
 
 /* ─── Data ─── */
 
@@ -36,105 +69,7 @@ const capabilities = [
   },
 ];
 
-const aiSolutions = [
-  {
-    title: "AI Content Generation",
-    href: "/ai-solutions/ai-content",
-    media: "4aca9b4110ceac3eb1d3bd087deb763e",
-    mediaType: "video" as const,
-    description:
-      "Design meets intelligence as we use specialized AI tools to transform moodboards into refined, design-driven campaigns.",
-    tags: ["Text Generation", "Visual Generation", "Video & Animation Generation", "Personalized Content"],
-  },
-  {
-    title: "Create Your Influencer with AI",
-    href: "/ai-solutions/ai-influencer",
-    media: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/846771a3-24bb-46b7-f265-45d58b267900/public",
-    mediaType: "image" as const,
-    description:
-      "AI influencers bring your brand to life with smart storytelling and real-time multilingual engagement.",
-    tags: ["AI Persona Creation", "Investment Promotion", "Brand Storytelling", "Explainer & Training Videos"],
-  },
-  {
-    title: "Automation with a Creative Touch",
-    href: "/ai-solutions",
-    media: "bdb805b635f8e3a865a3157336836136",
-    mediaType: "video" as const,
-    description:
-      "We design intelligent workflows that eliminate repetitive tasks, allowing your teams to focus on what truly drives value, creativity and strategy.",
-    tags: ["Automated Video Creator", "Automated LinkedIn Posts", "Amazon Stock & Price Tracker", "Personal Assistant"],
-  },
-  {
-    title: "GEO Solutions",
-    href: "/ai-solutions",
-    media: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/173463a6-4e3f-44fc-6fd4-61697f25d700/public",
-    mediaType: "image" as const,
-    description:
-      "Traditional SEO isn't enough; it must be supported with GEO. At ddip, we optimize for generative engines.",
-    tags: ["Featured Snippets Optimization", "Voice Search Optimization", "FAQ & Q&A Content Strategy", "NAP Consistency"],
-  },
-];
-
-const selectedWork = [
-  {
-    title: "Vesta Global",
-    subtitle: "AI-powered real estate branding and visual identity",
-    category: "Real Estate",
-    video: "52d4f5fdd1335b2fbaba2f41798273f1",
-    tags: ["Visual Style Definition", "AI Model Selection & Optimization", "Use-Case Development", "Prompt Crafting"],
-  },
-  {
-    title: "Cesi Design",
-    subtitle: "Interior design showcase with AI-generated visuals",
-    category: "Interior Design",
-    video: "90b6c18df1bb19d1117f6d29f6859036",
-    tags: ["Enhanced Storytelling", "High-Impact Brand Moment", "Dynamic Interior Visuals"],
-  },
-  {
-    title: "Mediterra Group",
-    subtitle: "Premium real estate marketing with creative AI",
-    category: "Real Estate",
-    video: "8ffbc4055a9b0210350a2748fcbb8ce4",
-    tags: ["Refined Visual Storytelling", "Consistent Brand Identity", "Impactful Presentation Experience"],
-  },
-  {
-    title: "Brother",
-    subtitle: "Product campaign powered by AI production",
-    category: "Printer Solutions",
-    video: "2f4c298d7224c5140c18bc3c0f6faf22",
-    tags: ["Creative AI Integration", "Custom Character Creation", "Enhanced Campaign Impact"],
-  },
-];
-
-const influencersRow1 = [
-  { name: "Mina Özdemir", archetype: "Analytical Visionary", industry: "Real Estate", color: "#CDDBC0", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/81d25d40-2890-403e-93d7-49e36b06cd00/public", country: "TR" },
-  { name: "Mina Şen", archetype: "Color Story Weaver", industry: "Fashion", color: "#DBC0CD", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/56d8bb08-9c7d-49ca-e1ec-aa074fdf1600/public", country: "TR" },
-  { name: "Elif Doğan", archetype: "Market-to-Table Storyteller", industry: "Food", color: "#C0C2DB", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/e1fe1be8-8ca5-4eef-cf2a-925bae6f7300/public", country: "TR" },
-  { name: "Yasin El Fassi", archetype: "Heritage Remix Artist", industry: "Fashion", color: "#DBC0CD", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/259023e7-e8b0-4214-ee42-9f2b02a1a800/public", country: "MA" },
-  { name: "Aylin Demir", archetype: "Calm Change Navigator", industry: "Lifestyle", color: "#C0D7DB", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/57fe254b-21d7-4443-1476-6eccc458df00/public", country: "TR" },
-];
-
-const influencersRow2 = [
-  { name: "Laila Haddad", archetype: "People-First Strategist", industry: "HR", color: "#CDDBC0", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/8ebaf72d-1931-4412-d1ef-55f1feb9dd00/public", country: "AE" },
-  { name: "Deniz Akar", archetype: "Future-Forward Thinker", industry: "Tech", color: "#C0C2DB", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/923ba48c-8d17-4f6f-a974-09eae19dc300/public", country: "TR" },
-  { name: "Selin Kara", archetype: "Mindful Storyteller", industry: "Wellness", color: "#DBD8C0", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/ae712d05-13a0-46d1-c9e5-6f92fdeda700/public", country: "TR" },
-  { name: "Ece Yilmaz", archetype: "Cultural Bridge Builder", industry: "Fashion", color: "#DBC0CD", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/0c4bfad2-2109-4bbb-d78b-dcc73c1def00/public", country: "TR" },
-  { name: "Mina Şen", archetype: "Color Story Weaver", industry: "Fashion", color: "#DBC0CD", image: "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/5dfe3b6d-e750-4279-3815-6dd960b62e00/public", country: "TR" },
-];
-
-const faqLeft = [
-  "What makes DDIP AI different from other AI agencies?",
-  "Do you develop your own AI tools?",
-  "How do your AI workflows improve efficiency?",
-  "What are AI Influencers, and how do they work?",
-];
-
-const faqRight = [
-  "How do you ensure the human element remains part of your AI-driven work?",
-  "Can non-creative or technical companies benefit from your workflow solutions?",
-  "How does DDIP stay up to date with evolving AI technologies?",
-  "What industries do you serve?",
-];
+// AI Solutions, Selected Work, Influencers, FAQs all come from CMS API only
 
 const partners = [
   { name: "Microsoft", image: "/images/partners/microsoft.svg" },
@@ -149,14 +84,6 @@ const heroImages = [
   "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/ca026e67-6810-45b1-4bf2-f1e8aeacd800/public",
   "https://imagedelivery.net/TXnAFTBLPOOUP0nsDyzgiQ/a14a9b12-bd23-450e-1009-79149e9d7f00/public",
 ];
-const faqFallback = [
-  { question: "Is GEO the same as SEO?", answer: "No. SEO focuses on ranking in traditional search engines. GEO (Generative Engine Optimization) focuses on making your content readable, trustworthy, and citable by AI-powered systems." },
-  { question: "Do I still need SEO?", answer: "Yes. GEO builds on SEO — it doesn't replace it. Both work together to maximize your visibility across traditional and AI-driven search." },
-  { question: "Is GEO only about content?", answer: "No. GEO covers content structure, semantic markup, metadata, multi-engine presence, and topic authority signals." },
-  { question: "How does GEO affect AI-generated results?", answer: "GEO helps your content become a trusted source that AI systems reference when generating answers, summaries, and recommendations." },
-  { question: "Is GEO a one-time optimization?", answer: "No. GEO is an ongoing process as AI systems evolve and new discovery patterns emerge." },
-  { question: "How do you measure GEO performance?", answer: "We track AI citation frequency, brand mention in AI answers, structured data coverage, and content discoverability across AI platforms." },
-];
 const safePx: React.CSSProperties = {
   paddingLeft: "max(20px, env(safe-area-inset-left))",
   paddingRight: "max(20px, env(safe-area-inset-right))",
@@ -164,7 +91,7 @@ const safePx: React.CSSProperties = {
 
 export default function HomePage() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
-  const [cmsFaqs, setCmsFaqs] = useState(faqFallback);
+  const [cmsFaqs, setCmsFaqs] = useState<FaqEntry[]>([]);
 
   const [heroSlide, setHeroSlide] = useState(0);
   const [heroPlaying, setHeroPlaying] = useState(true);
@@ -187,10 +114,59 @@ export default function HomePage() {
     return () => { if (heroTimer.current) clearInterval(heroTimer.current); };
   }, [heroPlaying, startHeroTimer]);
 
-  // CMS data state — initialized with fallback data, replaced when API responds
-  const [cmsSolutions, setCmsSolutions] = useState(aiSolutions);
-  const [cmsWorks, setCmsWorks] = useState(selectedWork);
-  const [cmsInfluencers, setCmsInfluencers] = useState({ row1: influencersRow1, row2: influencersRow2 });
+  // CMS data state — empty by default, populated from API. No hardcoded fallback.
+  const [cmsSolutions, setCmsSolutions] = useState<SolutionCardData[]>([]);
+  const [cmsWorks, setCmsWorks] = useState<WorkCardData[]>([]);
+  const [cmsInfluencers, setCmsInfluencers] = useState<{ row1: InfluencerCardData[]; row2: InfluencerCardData[] }>({ row1: [], row2: [] });
+
+  // Load CMS data from backend API
+  useEffect(() => {
+    cmsApi.aiSolutions().then((res) => {
+      setCmsSolutions(
+        (res.data ?? []).map((s: AiSolution) => ({
+          title: s.title,
+          href: `/ai-solutions/${s.slug}`,
+          media: s.mediaUrl || "",
+          mediaType: (s.mediaType as "video" | "image") || "image",
+          description: s.body || "",
+          tags: s.tags?.map((t) => t.tag.name) || [],
+        }))
+      );
+    }).catch(() => setCmsSolutions([]));
+
+    cmsApi.works(true).then((res) => {
+      setCmsWorks(
+        (res.data ?? []).map((w: Work) => ({
+          title: w.title,
+          subtitle: w.body || "",
+          category: w.field || "",
+          video: w.mediaUrl || "",
+          tags: w.tags?.map((t) => t.tag.name) || [],
+        }))
+      );
+    }).catch(() => setCmsWorks([]));
+
+    cmsApi.influencers({ homepage: true }).then((res) => {
+      const colors = ["#CDDBC0", "#DBC0CD", "#C0C2DB", "#C0D7DB", "#DBD8C0"];
+      const mapped: InfluencerCardData[] = (res.data ?? []).map((inf: Influencer, i: number) => ({
+        name: `${inf.name}${inf.surname ? ` ${inf.surname}` : ""}`,
+        archetype: inf.persona || "",
+        industry: inf.category || "Influencer",
+        color: colors[i % colors.length],
+        image: inf.imageUrl || "",
+        country: inf.countryCode || inf.country || "",
+      }));
+      const mid = Math.ceil(mapped.length / 2);
+      setCmsInfluencers({ row1: mapped.slice(0, mid), row2: mapped.slice(mid) });
+    }).catch(() => setCmsInfluencers({ row1: [], row2: [] }));
+
+    cmsApi.faqs("main").then((res) => {
+      setCmsFaqs(
+        (res.data ?? []).map((f: Faq) => ({ question: f.question, answer: f.answer ?? "" }))
+      );
+    }).catch(() => setCmsFaqs([]));
+  }, []);
+
   const autoplayRow1 = useRef(Autoplay({ delay: 2000, stopOnInteraction: false, stopOnMouseEnter: false }));
   const autoplayRow2 = useRef(Autoplay({ delay: 2500, stopOnInteraction: false, stopOnMouseEnter: false }));
   const [emblaRow1Ref] = useEmblaCarousel({ loop: true, align: "start", dragFree: true }, [autoplayRow1.current]);
