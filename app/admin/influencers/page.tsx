@@ -179,6 +179,7 @@ function InfluencerForm({
     name: influencer?.name ?? "",
     surname: influencer?.surname ?? "",
     country: influencer?.country ?? "",
+    countryCode: influencer?.countryCode ?? "",
     region: influencer?.region ?? "",
     language: influencer?.language ?? "",
     category: influencer?.category ?? "Influencer",
@@ -238,10 +239,24 @@ function InfluencerForm({
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-3 gap-4">
             <div>
               <label className="mb-1 block text-sm font-medium text-white/60">Country</label>
-              <input type="text" value={form.country} onChange={(e) => setForm({ ...form, country: e.target.value })} className={inputClass} />
+              <input type="text" value={form.country} onChange={(e) => setForm({ ...form, country: e.target.value })} className={inputClass} placeholder="e.g., Turkey" />
+            </div>
+            <div>
+              <label className="mb-1 block text-sm font-medium text-white/60">
+                Country Code
+                <span className="ml-1 text-white/30">(ISO-2)</span>
+              </label>
+              <input
+                type="text"
+                value={form.countryCode}
+                onChange={(e) => setForm({ ...form, countryCode: e.target.value.toUpperCase().slice(0, 2) })}
+                maxLength={2}
+                className={inputClass}
+                placeholder="TR"
+              />
             </div>
             <div>
               <label className="mb-1 block text-sm font-medium text-white/60">Region</label>
