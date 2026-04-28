@@ -338,6 +338,7 @@ function InfluencerForm({
               accept="image/*"
               label="Profile Image"
               placeholder="Upload image or paste URL"
+              sizeHint="800×1000 portrait, JPG/PNG/WebP, max 5 MB"
             />
             <FileUpload
               value={form.videoUrl}
@@ -345,6 +346,7 @@ function InfluencerForm({
               accept="video/*"
               label="Video"
               placeholder="Upload video or paste URL"
+              sizeHint="MP4 H.264, 1080×1350, ≤30 s, max 25 MB"
             />
           </div>
 

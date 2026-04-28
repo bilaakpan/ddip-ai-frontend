@@ -288,6 +288,7 @@ function WorkForm({
               onChange={(url) => setForm({ ...form, mediaUrl: url })}
               label="Media File"
               placeholder="Upload or paste URL"
+              sizeHint={form.mediaType === "video" ? "MP4 1920×1080, ≤30 s, max 25 MB" : "1920×1080, JPG/PNG/WebP, max 5 MB"}
             />
             <div>
               <label className="mb-1 block text-sm font-medium text-white/60">

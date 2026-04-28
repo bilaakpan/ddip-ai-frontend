@@ -11,19 +11,33 @@ const PAGE_OPTIONS = [
   { value: "ai-commercial", label: "AI Commercial" },
 ];
 
+function describeError(err: unknown): string {
+  if (err instanceof Error) return err.message;
+  if (typeof err === "string") return err;
+  try {
+    return JSON.stringify(err);
+  } catch {
+    return "Unknown error";
+  }
+}
+
 export default function FaqsPage() {
   const [faqs, setFaqs] = useState<Faq[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedPage, setSelectedPage] = useState<string>("");
   const [editing, setEditing] = useState<Faq | null>(null);
   const [showForm, setShowForm] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const fetchFaqs = useCallback(async () => {
     try {
       const res = await faqsApi.list(selectedPage || undefined);
-      setFaqs(res.data);
-    } catch {
-      // Backend may not be running
+      setFaqs(res.data ?? []);
+      setError(null);
+    } catch (err) {
+      console.error("[admin/faqs] fetch failed:", err);
+      setError(`Failed to load FAQs: ${describeError(err)}`);
+      // Keep previous list on screen so admin sees what they had
     } finally {
       setLoading(false);
     }
@@ -38,9 +52,15 @@ export default function FaqsPage() {
     if (!confirm("Are you sure you want to delete this FAQ?")) return;
     try {
       await faqsApi.delete(id);
+      setError(null);
       fetchFaqs();
-    } catch {
-      alert("Failed to delete FAQ");
+    } catch (err) {
+      console.error("[admin/faqs] delete failed:", err);
+      const msg = describeError(err);
+      setError(`Delete failed: ${msg}`);
+      alert(`Failed to delete FAQ: ${msg}`);
+      // Re-fetch so we don't leave the list in a stale "card removed locally" state
+      fetchFaqs();
     }
   };
 
@@ -93,16 +113,42 @@ export default function FaqsPage() {
             Manage FAQ items per page section.
           </p>
         </div>
-        <button
-          onClick={() => {
-            setEditing(null);
-            setShowForm(true);
-          }}
-          className="rounded-lg bg-teal-500 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-teal-600"
-        >
-          + Add FAQ
-        </button>
+        <div className="flex gap-2">
+          <button
+            onClick={() => {
+              setLoading(true);
+              fetchFaqs();
+            }}
+            className="rounded-lg border border-border-dark bg-dark-surface px-4 py-2 text-sm font-medium text-white/70 transition-colors hover:bg-white/5 hover:text-white"
+          >
+            ↻ Refresh
+          </button>
+          <button
+            onClick={() => {
+              setEditing(null);
+              setShowForm(true);
+            }}
+            className="rounded-lg bg-teal-500 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-teal-600"
+          >
+            + Add FAQ
+          </button>
+        </div>
       </div>
+
+      {error && (
+        <div className="mt-4 rounded-lg border border-red-500/30 bg-red-500/10 p-3 text-sm text-red-300">
+          <div className="flex items-start justify-between gap-3">
+            <span className="break-words">{error}</span>
+            <button
+              onClick={() => setError(null)}
+              className="shrink-0 text-red-300/60 hover:text-red-300"
+              aria-label="Dismiss"
+            >
+              ✕
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* Page Filter */}
       <div className="mt-6 flex gap-2">
@@ -265,13 +311,13 @@ function FaqForm({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4">
+    <div className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto bg-black/60 p-4">
       <div className="w-full max-w-lg rounded-xl border border-border-dark bg-dark-surface p-6">
         <h2 className="font-heading text-lg font-medium text-white">
           {faq ? "Edit FAQ" : "Add FAQ"}
         </h2>
 
-        <form onSubmit={handleSubmit} className="mt-4 space-y-4">
+        <form onSubmit={handleSubmit} className="mt-4 max-h-[70vh] space-y-4 overflow-y-auto pr-2">
           <div>
             <label className="mb-1 block text-sm font-medium text-white/60">
               Page *

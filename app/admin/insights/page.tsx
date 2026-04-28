@@ -280,6 +280,7 @@ function InsightForm({
               accept="image/*"
               label="Featured Image"
               placeholder="Upload image or paste URL"
+              sizeHint="1600×900 (16:9), JPG/PNG/WebP, max 5 MB"
             />
           </div>
 

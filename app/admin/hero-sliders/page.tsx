@@ -242,13 +242,13 @@ function SliderForm({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4">
+    <div className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto bg-black/60 p-4">
       <div className="w-full max-w-lg rounded-xl border border-border-dark bg-dark-surface p-6">
         <h2 className="font-heading text-lg font-medium text-white">
           {slider ? "Edit Slider" : "Add Slider"}
         </h2>
 
-        <form onSubmit={handleSubmit} className="mt-4 space-y-4">
+        <form onSubmit={handleSubmit} className="mt-4 max-h-[70vh] space-y-4 overflow-y-auto pr-2">
           <div>
             <label className="mb-1 block text-sm font-medium text-white/60">
               Problem Statement *
@@ -283,6 +283,7 @@ function SliderForm({
             accept="video/*"
             label="Background Video"
             placeholder="Upload video or paste URL"
+            sizeHint="MP4 1920×1080 (16:9), ≤30 s, max 25 MB"
           />
 
           <div className="grid grid-cols-2 gap-4">

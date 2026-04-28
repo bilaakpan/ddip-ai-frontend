@@ -9,6 +9,17 @@ interface FileUploadProps {
   accept?: string;
   label?: string;
   placeholder?: string;
+  /**
+   * Recommended size hint shown under the label (e.g. "1920×1080, JPG/PNG/WebP, max 5 MB").
+   * Helps content editors upload correctly-sized assets.
+   */
+  sizeHint?: string;
+  /**
+   * Pixel dimensions to validate after the user selects a file.
+   * If set and the uploaded image does NOT match, the user gets a confirm
+   * prompt with the actual vs expected size before the upload proceeds.
+   */
+  recommendedDimensions?: { width: number; height: number };
 }
 
 const API_BASE_URL =
@@ -28,18 +39,61 @@ export default function FileUpload({
   accept = "image/*,video/*",
   label = "Media",
   placeholder = "Upload a file or paste URL",
+  sizeHint,
+  recommendedDimensions,
 }: FileUploadProps) {
   const [uploading, setUploading] = useState(false);
   const [dragOver, setDragOver] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
+  /** Read pixel dimensions for image files only; returns null for non-images. */
+  const getImageDimensions = (
+    file: File
+  ): Promise<{ width: number; height: number } | null> =>
+    new Promise((resolve) => {
+      if (!file.type.startsWith("image/")) {
+        resolve(null);
+        return;
+      }
+      const url = URL.createObjectURL(file);
+      const img = new window.Image();
+      img.onload = () => {
+        URL.revokeObjectURL(url);
+        resolve({ width: img.naturalWidth, height: img.naturalHeight });
+      };
+      img.onerror = () => {
+        URL.revokeObjectURL(url);
+        resolve(null);
+      };
+      img.src = url;
+    });
+
   const handleFile = async (file: File) => {
+    if (recommendedDimensions) {
+      const dims = await getImageDimensions(file);
+      if (
+        dims &&
+        (dims.width !== recommendedDimensions.width ||
+          dims.height !== recommendedDimensions.height)
+      ) {
+        const proceed = window.confirm(
+          `This image is ${dims.width}×${dims.height}.\n` +
+            `Recommended: ${recommendedDimensions.width}×${recommendedDimensions.height}.\n\n` +
+            `Upload anyway?`
+        );
+        if (!proceed) return;
+      }
+    }
+
     setUploading(true);
     try {
       const res = await uploadFile(file);
       onChange(res.data.url);
-    } catch {
-      alert("Upload failed. Please try again.");
+    } catch (err) {
+      console.error("[FileUpload] upload failed:", err);
+      const msg =
+        err instanceof Error ? err.message : "Please try again.";
+      alert(`Upload failed. ${msg}`);
     } finally {
       setUploading(false);
     }
@@ -64,6 +118,11 @@ export default function FileUpload({
     <div>
       <label className="mb-1 block text-sm font-medium text-white/60">
         {label}
+        {sizeHint && (
+          <span className="ml-2 text-xs font-normal text-white/30">
+            ({sizeHint})
+          </span>
+        )}
       </label>
 
       {/* Drop zone */}

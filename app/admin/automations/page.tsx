@@ -226,13 +226,13 @@ function AutomationForm({
     "w-full rounded-lg border border-border-dark bg-dark-bg px-3 py-2 text-sm text-white placeholder-white/30 focus:border-teal-500 focus:outline-none";
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4">
+    <div className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto bg-black/60 p-4">
       <div className="w-full max-w-lg rounded-xl border border-border-dark bg-dark-surface p-6">
         <h2 className="font-heading text-lg font-medium text-white">
           {automation ? "Edit Automation" : "Add Automation"}
         </h2>
 
-        <form onSubmit={handleSubmit} className="mt-4 space-y-4">
+        <form onSubmit={handleSubmit} className="mt-4 max-h-[70vh] space-y-4 overflow-y-auto pr-2">
           <div>
             <label className="mb-1 block text-sm font-medium text-white/60">Title *</label>
             <input type="text" value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} required className={inputClass} />
@@ -336,7 +336,7 @@ function IconManager({
     "w-full rounded-lg border border-border-dark bg-dark-bg px-3 py-2 text-sm text-white placeholder-white/30 focus:border-teal-500 focus:outline-none";
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4">
+    <div className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto bg-black/60 p-4">
       <div className="w-full max-w-lg rounded-xl border border-border-dark bg-dark-surface p-6">
         <h2 className="font-heading text-lg font-medium text-white">
           Manage Icons

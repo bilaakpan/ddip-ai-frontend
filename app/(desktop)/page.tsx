@@ -5,7 +5,7 @@ import Image from "next/image";
 import { Play, Pause } from "lucide-react";
 import { useState, useEffect, useRef, useCallback } from "react";
 import { Container } from "@/components/layout";
-import { cmsApi, type AiSolution, type Work, type Influencer, type Faq } from "@/lib/api";
+import { cmsApi, type AiSolution, type Work, type Influencer, type Faq, type HeroSlider } from "@/lib/api";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
 import FaqSection from "@/components/desktop/FaqSection";
@@ -123,6 +123,7 @@ export default function HomePage() {
   const [cmsWorks, setCmsWorks] = useState<WorkCardData[]>([]);
   const [cmsInfluencers, setCmsInfluencers] = useState<{ row1: InfluencerCardData[]; row2: InfluencerCardData[] }>({ row1: [], row2: [] });
   const [cmsFaqs, setCmsFaqs] = useState<{ left: string[]; right: string[] }>({ left: [], right: [] });
+  const [cmsHero, setCmsHero] = useState<HeroSlider | null>(null);
   const autoplayRow1 = useRef(Autoplay({ delay: 2000, stopOnInteraction: false, stopOnMouseEnter: false }));
   const autoplayRow2 = useRef(Autoplay({ delay: 2500, stopOnInteraction: false, stopOnMouseEnter: false }));
   const [emblaRow1Ref] = useEmblaCarousel({ loop: true, align: "start", dragFree: true }, [autoplayRow1.current]);
@@ -209,7 +210,26 @@ export default function HomePage() {
         right: list.slice(mid).map((f: Faq) => f.question),
       });
     }).catch(() => setCmsFaqs({ left: [], right: [] }));
+
+    // Hero Slider — first active slide drives the hero text + video.
+    // Falls back to hardcoded values if the API has no active slides
+    // (so the homepage never renders without a hero).
+    cmsApi.heroSliders().then((res) => {
+      const active = (res.data ?? []).filter((s) => s.isActive)
+        .sort((a, b) => a.sortOrder - b.sortOrder);
+      setCmsHero(active[0] ?? null);
+    }).catch(() => setCmsHero(null));
   }, []);
+
+  // Hero slider: derive video src — accept either a Cloudflare Stream ID (32 hex chars)
+  // or a full URL. Default to the original hardcoded Stream ID when no CMS slide is active.
+  const heroVideoSrc = (() => {
+    const v = cmsHero?.videoUrl?.trim();
+    if (!v) return "1a3475f20aa2ad6346f9c1087f74d458"; // hardcoded fallback Stream ID
+    return v;
+  })();
+  const heroProblemText = cmsHero?.problem?.trim() ||
+    "We need to promote our brand but the influencer prices are too high.";
 
   return (
     <>
@@ -224,7 +244,7 @@ export default function HomePage() {
           >
             <HlsPlayer
               ref={heroVideoRef}
-              src={"1a3475f20aa2ad6346f9c1087f74d458"}
+              src={heroVideoSrc}
               autoPlay={false}
               controls={false}
               muted={true}
@@ -292,7 +312,7 @@ export default function HomePage() {
                         width: "400px"
                       }}
                     >
-                      We need to promote our brand but the influencer prices are too high.
+                      {heroProblemText}
                     </p>
                   </div>
                 </div>
