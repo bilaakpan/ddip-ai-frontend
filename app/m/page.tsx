@@ -30,13 +30,18 @@ interface WorkCardData {
   tags: string[];
 }
 
-interface InfluencerCardData {
-  name: string;
-  archetype: string;
-  industry: string;
+// Mobile influencer card data extends the popup type — same shape as the
+// desktop homepage so the popup can be invoked with the same object.
+interface InfluencerCardData extends PopupInfluencer {
   color: string;
-  image: string;
-  country: string;
+}
+
+const DEFAULT_CARD_COLORS_M = ["#CDDBC0", "#DBC0CD", "#C0C2DB", "#C0D7DB", "#DBD8C0"];
+
+function pickFallbackColorM(id: string): string {
+  const slice = id.replace(/-/g, "").slice(0, 8) || "0";
+  const n = parseInt(slice, 16);
+  return DEFAULT_CARD_COLORS_M[(Number.isFinite(n) ? n : 0) % DEFAULT_CARD_COLORS_M.length];
 }
 
 interface FaqEntry {
@@ -146,15 +151,24 @@ export default function HomePage() {
       );
     }).catch(() => setCmsWorks([]));
 
+    // Same shape as the desktop homepage so the (mobile) popup gets every
+    // field it needs without falling back to hardcoded copy.
     cmsApi.influencers({ homepage: true }).then((res) => {
-      const colors = ["#CDDBC0", "#DBC0CD", "#C0C2DB", "#C0D7DB", "#DBD8C0"];
-      const mapped: InfluencerCardData[] = (res.data ?? []).map((inf: Influencer, i: number) => ({
+      const mapped: InfluencerCardData[] = (res.data ?? []).map((inf: Influencer) => ({
         name: `${inf.name}${inf.surname ? ` ${inf.surname}` : ""}`,
         archetype: inf.persona || "",
         industry: inf.category || "Influencer",
-        color: colors[i % colors.length],
+        color: inf.cardColor || pickFallbackColorM(inf.id),
         image: inf.imageUrl || "",
         country: inf.countryCode || inf.country || "",
+        title: inf.title || "",
+        age: inf.age,
+        summary: inf.summary || "",
+        profile: inf.profile || "",
+        contentFocus: inf.contentFocus || "",
+        visualStyle: inf.visualStyle || "",
+        tone: inf.tone || "",
+        brandFit: inf.brandFit || "",
       }));
       const mid = Math.ceil(mapped.length / 2);
       setCmsInfluencers({ row1: mapped.slice(0, mid), row2: mapped.slice(mid) });

@@ -101,6 +101,8 @@ export default function AIContentPage() {
   const [openFaqRight, setOpenFaqRight] = useState<number | null>(null);
   const [cmsFaqLeft, setCmsFaqLeft] = useState<string[]>([]);
   const [cmsFaqRight, setCmsFaqRight] = useState<string[]>([]);
+  const [cmsFaqLeftAnswers, setCmsFaqLeftAnswers] = useState<string[]>([]);
+  const [cmsFaqRightAnswers, setCmsFaqRightAnswers] = useState<string[]>([]);
   const [cmsUseCaseCarousel, setCmsUseCaseCarousel] = useState<UseCaseCarouselItem[]>([]);
 
   const [emblaRef] = useEmblaCarousel({ loop: true, dragFree: true, align: "start", containScroll: "trimSnaps" }, [
@@ -115,11 +117,15 @@ export default function AIContentPage() {
         const list = res.data ?? [];
         const mid = Math.ceil(list.length / 2);
         setCmsFaqLeft(list.slice(0, mid).map((f: Faq) => f.question));
+        setCmsFaqLeftAnswers(list.slice(0, mid).map((f: Faq) => f.answer));
         setCmsFaqRight(list.slice(mid).map((f: Faq) => f.question));
+        setCmsFaqRightAnswers(list.slice(mid).map((f: Faq) => f.answer));
       })
       .catch(() => {
         setCmsFaqLeft([]);
         setCmsFaqRight([]);
+        setCmsFaqLeftAnswers([]);
+        setCmsFaqRightAnswers([]);
       });
 
     // Use cases for AI Content page
@@ -714,7 +720,12 @@ export default function AIContentPage() {
       {/* ════════════════════════════════════════════════════════
           10. FAQ
           ════════════════════════════════════════════════════════ */}
-      <FaqSection leftQuestions={cmsFaqLeft} rightQuestions={cmsFaqRight} />
+      <FaqSection
+        leftQuestions={cmsFaqLeft}
+        rightQuestions={cmsFaqRight}
+        leftAnswers={cmsFaqLeftAnswers}
+        rightAnswers={cmsFaqRightAnswers}
+      />
 
       {/* ════════════════════════════════════════════════════════
           11. CTA

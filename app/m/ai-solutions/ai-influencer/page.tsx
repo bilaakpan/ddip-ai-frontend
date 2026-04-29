@@ -38,8 +38,10 @@ const partners = [
   { name: "Google AI", image: "/images/partners/google-ai.svg" },
 ];
 
-// Influencer card shape — data comes from CMS API only
+// Influencer card shape — data comes from CMS API only.
+// Includes every field the popup may display so we never drop info.
 interface MobileInfluencerCard {
+  id: string;
   type: string;
   title: string;
   name: string;
@@ -48,6 +50,15 @@ interface MobileInfluencerCard {
   gender: string;
   archetype: string;
   image: string;
+  age?: number;
+  country: string;
+  cardColor: string;
+  summary: string;
+  profile: string;
+  contentFocus: string;
+  visualStyle: string;
+  tone: string;
+  brandFit: string;
 }
 
 const influencerTypes = [
@@ -169,13 +180,21 @@ export default function MobileAIInfluencerPage() {
       })
       .catch(() => setCmsFaqs([]));
 
+    // Strict filter — when admin hides every influencer, the grid is empty.
+    // No "fall back to all" fallback (per the no-hardcoded-fallback rule).
     cmsApi
       .influencers()
       .then((res) => {
         const all = res.data ?? [];
         const aiInfList = all.filter((i: Influencer) => i.showOnAiinf);
-        const list = aiInfList.length > 0 ? aiInfList : all;
-        setTopInfluencer(list.map((inf: Influencer) => ({
+        const palette = ["#CDDBC0", "#DBC0CD", "#C0C2DB", "#C0D7DB", "#DBD8C0"];
+        const pickColor = (id: string) => {
+          const slice = id.replace(/-/g, "").slice(0, 8) || "0";
+          const n = parseInt(slice, 16);
+          return palette[(Number.isFinite(n) ? n : 0) % palette.length];
+        };
+        setTopInfluencer(aiInfList.map((inf: Influencer) => ({
+          id: inf.id,
           type: inf.category || "",
           title: inf.title || "",
           name: `${inf.name}${inf.surname ? ` ${inf.surname}` : ""}`,
@@ -184,6 +203,15 @@ export default function MobileAIInfluencerPage() {
           gender: inf.gender || "",
           archetype: inf.persona || "",
           image: inf.imageUrl || "",
+          age: inf.age,
+          country: inf.countryCode || inf.country || "",
+          cardColor: inf.cardColor || pickColor(inf.id),
+          summary: inf.summary || "",
+          profile: inf.profile || "",
+          contentFocus: inf.contentFocus || "",
+          visualStyle: inf.visualStyle || "",
+          tone: inf.tone || "",
+          brandFit: inf.brandFit || "",
         })));
       })
       .catch(() => setTopInfluencer([]));
@@ -267,7 +295,15 @@ export default function MobileAIInfluencerPage() {
                       archetype: inf.archetype,
                       industry: inf.type,
                       image: inf.image,
-                      country: "TR"
+                      country: inf.country,
+                      title: inf.title,
+                      age: inf.age,
+                      summary: inf.summary,
+                      profile: inf.profile,
+                      contentFocus: inf.contentFocus,
+                      visualStyle: inf.visualStyle,
+                      tone: inf.tone,
+                      brandFit: inf.brandFit,
                     })}
                   >
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#012F3B" strokeWidth="2">
@@ -541,7 +577,15 @@ export default function MobileAIInfluencerPage() {
                         archetype: item.archetype,
                         industry: item.type,
                         image: item.image,
-                        country: "TR"
+                        country: item.country,
+                        title: item.title,
+                        age: item.age,
+                        summary: item.summary,
+                        profile: item.profile,
+                        contentFocus: item.contentFocus,
+                        visualStyle: item.visualStyle,
+                        tone: item.tone,
+                        brandFit: item.brandFit,
                       })}
                     >
                       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#012F3B" strokeWidth="2">

@@ -147,14 +147,20 @@ const faqItems = [
 
 export default function ProcessPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  // Default to faqItems for the SSR pass; useEffect overwrites with API data
+  // (including cleared state when API returns []).
   const [cmsFaqs, setCmsFaqs] = useState(faqItems);
   const [activeInsightStep, setActiveInsightStep] = useState(0);
   const cmsFaqLeft = cmsFaqs.slice(0, Math.ceil(cmsFaqs.length / 2)).map(f => f.question);
   const cmsFaqRight = cmsFaqs.slice(Math.ceil(cmsFaqs.length / 2)).map(f => f.question);
+  const cmsFaqLeftAnswers = cmsFaqs.slice(0, Math.ceil(cmsFaqs.length / 2)).map(f => f.answer);
+  const cmsFaqRightAnswers = cmsFaqs.slice(Math.ceil(cmsFaqs.length / 2)).map(f => f.answer);
 
   useEffect(() => {
     cmsApi.faqs("process").then((res) => {
-      if (res.data?.length) setCmsFaqs(res.data.map((f: Faq) => ({ question: f.question, answer: f.answer })));
+      // Always overwrite state, even with an empty list, so admin deletions
+      // are reflected on the live page (no hardcoded fallback).
+      setCmsFaqs((res.data ?? []).map((f: Faq) => ({ question: f.question, answer: f.answer })));
     }).catch(() => { });
   }, []);
 
@@ -576,7 +582,12 @@ export default function ProcessPage() {
       </section>
 
       {/* ─── FAQ ─── */}
-      <FaqSection leftQuestions={cmsFaqLeft} rightQuestions={cmsFaqRight} />
+      <FaqSection
+        leftQuestions={cmsFaqLeft}
+        rightQuestions={cmsFaqRight}
+        leftAnswers={cmsFaqLeftAnswers}
+        rightAnswers={cmsFaqRightAnswers}
+      />
 
       {/* ─── CTA ─── */}
       <section className="bg-light-bg py-24">

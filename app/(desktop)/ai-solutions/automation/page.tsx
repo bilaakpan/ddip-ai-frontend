@@ -41,6 +41,8 @@ interface AutomationCardData {
 export default function AutomationPage() {
   const [cmsFaqLeft, setCmsFaqLeft] = useState<string[]>([]);
   const [cmsFaqRight, setCmsFaqRight] = useState<string[]>([]);
+  const [cmsFaqLeftAnswers, setCmsFaqLeftAnswers] = useState<string[]>([]);
+  const [cmsFaqRightAnswers, setCmsFaqRightAnswers] = useState<string[]>([]);
   const [cmsFeaturedAutomations, setCmsFeaturedAutomations] = useState<AutomationCardData[]>([]);
 
   useEffect(() => {
@@ -51,11 +53,15 @@ export default function AutomationPage() {
         const list = res.data ?? [];
         const mid = Math.ceil(list.length / 2);
         setCmsFaqLeft(list.slice(0, mid).map((f: Faq) => f.question));
+        setCmsFaqLeftAnswers(list.slice(0, mid).map((f: Faq) => f.answer));
         setCmsFaqRight(list.slice(mid).map((f: Faq) => f.question));
+        setCmsFaqRightAnswers(list.slice(mid).map((f: Faq) => f.answer));
       })
       .catch(() => {
         setCmsFaqLeft([]);
         setCmsFaqRight([]);
+        setCmsFaqLeftAnswers([]);
+        setCmsFaqRightAnswers([]);
       });
 
     // Featured automations
@@ -333,7 +339,12 @@ export default function AutomationPage() {
       {/* ════════════════════════════════════════════════════════
           8. FAQ
           ════════════════════════════════════════════════════════ */}
-      <FaqSection leftQuestions={cmsFaqLeft} rightQuestions={cmsFaqRight} />
+      <FaqSection
+        leftQuestions={cmsFaqLeft}
+        rightQuestions={cmsFaqRight}
+        leftAnswers={cmsFaqLeftAnswers}
+        rightAnswers={cmsFaqRightAnswers}
+      />
 
       {/* ════════════════════════════════════════════════════════
           9. LET'S BUILD + Contact Form

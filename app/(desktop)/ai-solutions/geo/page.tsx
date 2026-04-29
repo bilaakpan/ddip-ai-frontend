@@ -78,6 +78,8 @@ interface GeoUseCase {
 export default function GeoPage() {
   const [cmsFaqLeft, setCmsFaqLeft] = useState<string[]>([]);
   const [cmsFaqRight, setCmsFaqRight] = useState<string[]>([]);
+  const [cmsFaqLeftAnswers, setCmsFaqLeftAnswers] = useState<string[]>([]);
+  const [cmsFaqRightAnswers, setCmsFaqRightAnswers] = useState<string[]>([]);
   const [cmsUseCases, setCmsUseCases] = useState<GeoUseCase[]>([]);
 
   useEffect(() => {
@@ -104,11 +106,15 @@ export default function GeoPage() {
         const list = res.data ?? [];
         const mid = Math.ceil(list.length / 2);
         setCmsFaqLeft(list.slice(0, mid).map((f: Faq) => f.question));
+        setCmsFaqLeftAnswers(list.slice(0, mid).map((f: Faq) => f.answer));
         setCmsFaqRight(list.slice(mid).map((f: Faq) => f.question));
+        setCmsFaqRightAnswers(list.slice(mid).map((f: Faq) => f.answer));
       })
       .catch(() => {
         setCmsFaqLeft([]);
         setCmsFaqRight([]);
+        setCmsFaqLeftAnswers([]);
+        setCmsFaqRightAnswers([]);
       });
   }, []);
 
@@ -633,7 +639,12 @@ export default function GeoPage() {
       {/* ════════════════════════════════════════════════════════
           9. FAQ
           ════════════════════════════════════════════════════════ */}
-      <FaqSection leftQuestions={cmsFaqLeft} rightQuestions={cmsFaqRight} />
+      <FaqSection
+        leftQuestions={cmsFaqLeft}
+        rightQuestions={cmsFaqRight}
+        leftAnswers={cmsFaqLeftAnswers}
+        rightAnswers={cmsFaqRightAnswers}
+      />
 
       {/* ════════════════════════════════════════════════════════
           10. CTA

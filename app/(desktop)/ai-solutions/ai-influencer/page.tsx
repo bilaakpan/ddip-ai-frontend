@@ -73,17 +73,36 @@ const items = [
   },
 ];
 
-// Influencer card shape — data comes from CMS API, no hardcoded fallback
+// Influencer card shape — data comes from CMS API, no hardcoded fallback.
+// Includes every field the popup needs so we never drop info on the way
+// from `cmsInfluencers` → `<InfluencerPopupModal>`.
 interface InfluencerCardData {
-  type: string;
-  title: string;
+  id: string;
+  type: string;          // category (Influencer / Ambassador / Mascot)
+  title: string;         // job title (Coach / Mascot / etc) — popup subtitle
   name: string;
   region: string;
   language: string;
   gender: string;
-  archetype: string;
-  description: string;
+  archetype: string;     // persona
+  description: string;   // summary — popup body
   image: string;
+  age?: number;
+  country: string;
+  cardColor: string;
+  profile: string;
+  contentFocus: string;
+  visualStyle: string;
+  tone: string;
+  brandFit: string;
+}
+
+const AI_INF_FALLBACK_COLORS = ["#CDDBC0", "#DBC0CD", "#C0C2DB", "#C0D7DB", "#DBD8C0"];
+
+function pickAiInfFallbackColor(id: string): string {
+  const slice = id.replace(/-/g, "").slice(0, 8) || "0";
+  const n = parseInt(slice, 16);
+  return AI_INF_FALLBACK_COLORS[(Number.isFinite(n) ? n : 0) % AI_INF_FALLBACK_COLORS.length];
 }
 
 const influencerTypes = [
@@ -222,6 +241,8 @@ export default function AIInfluencerPage() {
   const [activeTab, setActiveTab] = useState(0);
   const [cmsFaqLeft, setCmsFaqLeft] = useState<string[]>([]);
   const [cmsFaqRight, setCmsFaqRight] = useState<string[]>([]);
+  const [cmsFaqLeftAnswers, setCmsFaqLeftAnswers] = useState<string[]>([]);
+  const [cmsFaqRightAnswers, setCmsFaqRightAnswers] = useState<string[]>([]);
   const [openFilter, setOpenFilter] = useState<number | null>(null);
   const [selectedFilters, setSelectedFilters] = useState(filters);
   const [showPopup, setShowPopup] = useState(false);
@@ -239,11 +260,15 @@ export default function AIInfluencerPage() {
         const list = res.data ?? [];
         const mid = Math.ceil(list.length / 2);
         setCmsFaqLeft(list.slice(0, mid).map((f: Faq) => f.question));
+        setCmsFaqLeftAnswers(list.slice(0, mid).map((f: Faq) => f.answer));
         setCmsFaqRight(list.slice(mid).map((f: Faq) => f.question));
+        setCmsFaqRightAnswers(list.slice(mid).map((f: Faq) => f.answer));
       })
       .catch(() => {
         setCmsFaqLeft([]);
         setCmsFaqRight([]);
+        setCmsFaqLeftAnswers([]);
+        setCmsFaqRightAnswers([]);
       });
 
     // Use cases for AI Influencer page (no fallback)
@@ -281,16 +306,16 @@ export default function AIInfluencerPage() {
       setCmsFilterOptions(newOptions);
     }).catch(() => setCmsFilterOptions(filterAnchorLabels));
 
-    // Influencers from CMS (filter to those marked for AI Influencer page).
-    // No hardcoded fallback values — empty fields stay empty.
+    // Influencers from CMS — strict filter to rows marked `showOnAiinf=true`.
+    // Per the user's "no fallback" rule: when admin hides every influencer
+    // the grid renders empty, NOT the entire roster.
     cmsApi
       .influencers()
       .then((res) => {
         const all = res.data ?? [];
         const aiInfList = all.filter((i: Influencer) => i.showOnAiinf);
-        // If any influencers are flagged for this page use those; otherwise show all
-        const list = aiInfList.length > 0 ? aiInfList : all;
-        const mapped: InfluencerCardData[] = list.map((inf: Influencer) => ({
+        const mapped: InfluencerCardData[] = aiInfList.map((inf: Influencer) => ({
+          id: inf.id,
           type: inf.category || "",
           title: inf.title || "",
           name: `${inf.name}${inf.surname ? ` ${inf.surname}` : ""}`,
@@ -300,6 +325,14 @@ export default function AIInfluencerPage() {
           archetype: inf.persona || "",
           description: inf.summary || "",
           image: inf.imageUrl || "",
+          age: inf.age,
+          country: inf.countryCode || inf.country || "",
+          cardColor: inf.cardColor || pickAiInfFallbackColor(inf.id),
+          profile: inf.profile || "",
+          contentFocus: inf.contentFocus || "",
+          visualStyle: inf.visualStyle || "",
+          tone: inf.tone || "",
+          brandFit: inf.brandFit || "",
         }));
         setCmsInfluencers(mapped);
       })
@@ -1098,14 +1131,20 @@ export default function AIInfluencerPage() {
       {/* ════════════════════════════════════════════════════════
           11. FAQ — Two-column accordion + Live FAQ
           ════════════════════════════════════════════════════════ */}
-      <FaqSection leftQuestions={cmsFaqLeft} rightQuestions={cmsFaqRight} />
+      <FaqSection
+        leftQuestions={cmsFaqLeft}
+        rightQuestions={cmsFaqRight}
+        leftAnswers={cmsFaqLeftAnswers}
+        rightAnswers={cmsFaqRightAnswers}
+      />
 
       {/* ════════════════════════════════════════════════════════
           12. CTA — "Let's Build What's Next, Together."
           ════════════════════════════════════════════════════════ */}
       <ContactFormSection variant="influencer" />
 
-      {/* Influencer PopUp */}
+      {/* Influencer PopUp — pass every field the popup may render so it
+          never falls back to hardcoded copy. */}
       <InfluencerPopupModal
         open={showPopup}
         influencer={selectedInfluencer ? {
@@ -1113,6 +1152,15 @@ export default function AIInfluencerPage() {
           archetype: selectedInfluencer.archetype,
           industry: selectedInfluencer.type,
           image: selectedInfluencer.image,
+          country: selectedInfluencer.country,
+          title: selectedInfluencer.title,
+          age: selectedInfluencer.age,
+          summary: selectedInfluencer.description,
+          profile: selectedInfluencer.profile,
+          contentFocus: selectedInfluencer.contentFocus,
+          visualStyle: selectedInfluencer.visualStyle,
+          tone: selectedInfluencer.tone,
+          brandFit: selectedInfluencer.brandFit,
         } : null}
         onClose={() => setShowPopup(false)}
       />

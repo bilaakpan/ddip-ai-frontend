@@ -5,7 +5,13 @@ import Image from "next/image";
 import useEmblaCarousel from "embla-carousel-react";
 import AutoPlay from "embla-carousel-autoplay";
 
-type Influencer = {
+/**
+ * Minimum shape this carousel reads off each row. Callers pass richer
+ * objects (e.g. the homepage's `InfluencerCardData` with popup fields);
+ * the generic preserves that richer type through `onSelect` so the parent
+ * isn't forced to re-map after the user clicks a card.
+ */
+type CarouselInfluencer = {
   type: string;
   title: string;
   name: string;
@@ -17,21 +23,21 @@ type Influencer = {
   image: string;
 };
 
-type Props = {
-  influencers: Influencer[];
+type Props<T extends CarouselInfluencer> = {
+  influencers: T[];
   bgColors: Record<string, string>;
-  onSelect: (item: Influencer) => void;
+  onSelect: (item: T) => void;
 };
 
-function CarouselRow({
+function CarouselRow<T extends CarouselInfluencer>({
   items,
   bgColors,
   onSelect,
   reverse = false,
 }: {
-  items: Influencer[];
+  items: T[];
   bgColors: Record<string, string>;
-  onSelect: (item: Influencer) => void;
+  onSelect: (item: T) => void;
   reverse?: boolean;
 }) {
   // Each row gets its own independent autoplay instance
@@ -120,7 +126,7 @@ function CarouselRow({
   );
 }
 
-export default function InfluencerCarousel({ influencers, bgColors, onSelect }: Props) {
+export default function InfluencerCarousel<T extends CarouselInfluencer>({ influencers, bgColors, onSelect }: Props<T>) {
   if (influencers.length === 0) {
     return (
       <p className="mt-8 text-center text-[20px] text-white/80" style={{ fontFamily: "var(--font-body)" }}>

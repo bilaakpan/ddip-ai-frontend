@@ -63,13 +63,27 @@ interface WorkCardData {
   tags: string[];
 }
 
-interface InfluencerCardData {
-  name: string;
-  archetype: string;
-  industry: string;
+// Card data for the homepage influencer carousel.
+// Extends `PopupInfluencer` with the carousel-only `color` so the same
+// object can drive both the card and the popup without re-mapping.
+interface InfluencerCardData extends PopupInfluencer {
   color: string;
-  image: string;
-  country: string;
+}
+
+/**
+ * Default fallback palette for influencer cards. Used only when an
+ * influencer row has no `cardColor` set — admins can override per row
+ * via the admin form. Picked deterministically by hashing the influencer
+ * id so the same row always shows the same color.
+ */
+const DEFAULT_CARD_COLORS = ["#CDDBC0", "#DBC0CD", "#C0C2DB", "#C0D7DB", "#DBD8C0"];
+
+/** Stable per-id index into `DEFAULT_CARD_COLORS`. */
+function pickFallbackColor(id: string): string {
+  // First 8 hex chars of a uuid → 32-bit int → modulo palette size.
+  const slice = id.replace(/-/g, "").slice(0, 8) || "0";
+  const n = parseInt(slice, 16);
+  return DEFAULT_CARD_COLORS[(Number.isFinite(n) ? n : 0) % DEFAULT_CARD_COLORS.length];
 }
 
 const partners = [
@@ -122,7 +136,10 @@ export default function HomePage() {
   const [cmsSolutions, setCmsSolutions] = useState<SolutionCardData[]>([]);
   const [cmsWorks, setCmsWorks] = useState<WorkCardData[]>([]);
   const [cmsInfluencers, setCmsInfluencers] = useState<{ row1: InfluencerCardData[]; row2: InfluencerCardData[] }>({ row1: [], row2: [] });
-  const [cmsFaqs, setCmsFaqs] = useState<{ left: string[]; right: string[] }>({ left: [], right: [] });
+  const [cmsFaqs, setCmsFaqs] = useState<{
+    left: string[]; right: string[];
+    leftAnswers: string[]; rightAnswers: string[];
+  }>({ left: [], right: [], leftAnswers: [], rightAnswers: [] });
   const [cmsHero, setCmsHero] = useState<HeroSlider | null>(null);
   const autoplayRow1 = useRef(Autoplay({ delay: 2000, stopOnInteraction: false, stopOnMouseEnter: false }));
   const autoplayRow2 = useRef(Autoplay({ delay: 2500, stopOnInteraction: false, stopOnMouseEnter: false }));
@@ -186,30 +203,43 @@ export default function HomePage() {
       );
     }).catch(() => setCmsWorks([]));
 
-    // Homepage Influencers
+    // Homepage Influencers — include every field the popup reads so the
+    // popup never has to fall back to hardcoded copy. Card color comes from
+    // admin (`cardColor`) when set, else a deterministic per-id pick from
+    // DEFAULT_CARD_COLORS so the same row always gets the same color.
     cmsApi.influencers({ homepage: true }).then((res) => {
-      const colors = ["#CDDBC0", "#DBC0CD", "#C0C2DB", "#C0D7DB", "#DBD8C0"];
-      const mapped = (res.data ?? []).map((inf: Influencer, i: number) => ({
+      const mapped: InfluencerCardData[] = (res.data ?? []).map((inf: Influencer) => ({
         name: `${inf.name}${inf.surname ? ` ${inf.surname}` : ""}`,
         archetype: inf.persona || "",
         industry: inf.category || "Influencer",
-        color: colors[i % colors.length],
+        color: inf.cardColor || pickFallbackColor(inf.id),
         image: inf.imageUrl || "",
         country: inf.countryCode || inf.country || "",
+        title: inf.title || "",
+        age: inf.age,
+        summary: inf.summary || "",
+        profile: inf.profile || "",
+        contentFocus: inf.contentFocus || "",
+        visualStyle: inf.visualStyle || "",
+        tone: inf.tone || "",
+        brandFit: inf.brandFit || "",
       }));
       const mid = Math.ceil(mapped.length / 2);
       setCmsInfluencers({ row1: mapped.slice(0, mid), row2: mapped.slice(mid) });
     }).catch(() => setCmsInfluencers({ row1: [], row2: [] }));
 
-    // Main page FAQs
+    // Main page FAQs — keep questions and answers aligned by index so the
+    // accordion can render the actual answer body, not a hardcoded blurb.
     cmsApi.faqs("main").then((res) => {
       const list = res.data ?? [];
       const mid = Math.ceil(list.length / 2);
       setCmsFaqs({
         left: list.slice(0, mid).map((f: Faq) => f.question),
+        leftAnswers: list.slice(0, mid).map((f: Faq) => f.answer),
         right: list.slice(mid).map((f: Faq) => f.question),
+        rightAnswers: list.slice(mid).map((f: Faq) => f.answer),
       });
-    }).catch(() => setCmsFaqs({ left: [], right: [] }));
+    }).catch(() => setCmsFaqs({ left: [], right: [], leftAnswers: [], rightAnswers: [] }));
 
     // Hero Slider — first active slide drives the hero text + video.
     // Falls back to hardcoded values if the API has no active slides
@@ -314,6 +344,44 @@ export default function HomePage() {
                     >
                       {heroProblemText}
                     </p>
+                    {/* Solution block — mirrors the Problem block above.
+                        Only renders when admin has set a solution on the
+                        active hero slider; the asterisk svg + typography
+                        match the Problem label so the visual rhythm holds. */}
+                    {cmsHero?.solution?.trim() && (
+                      <>
+                        <p
+                          className="mt-4 flex items-center gap-2 text-white"
+                          style={{
+                            fontFamily: 'SF Pro Display, sans-serif',
+                            fontWeight: 400,
+                            fontSize: '30px',
+                            lineHeight: '120%'
+                          }}
+                        >
+                          <svg className="inline h-4 w-4" viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="2">
+                            <line x1="24" y1="2" x2="24" y2="46" />
+                            <line x1="2" y1="24" x2="46" y2="24" />
+                            <line x1="7" y1="7" x2="41" y2="41" />
+                            <line x1="41" y1="7" x2="7" y2="41" />
+                          </svg>
+                          Solution:
+                        </p>
+                        <p
+                          className="ml-[25px] text-white/90"
+                          style={{
+                            fontFamily: 'SF Pro Display, sans-serif',
+                            fontWeight: 400,
+                            fontSize: '20px',
+                            lineHeight: '120%',
+                            textTransform: "lowercase",
+                            width: "400px"
+                          }}
+                        >
+                          {cmsHero.solution}
+                        </p>
+                      </>
+                    )}
                   </div>
                 </div>
               </h1>
@@ -1086,7 +1154,12 @@ export default function HomePage() {
           11. FAQ
           Figma section 58: Dark card #002834, 2-column FAQ, bottom CTA
           ════════════════════════════════════════════════════════ */}
-      <FaqSection leftQuestions={cmsFaqs.left} rightQuestions={cmsFaqs.right} />
+      <FaqSection
+        leftQuestions={cmsFaqs.left}
+        rightQuestions={cmsFaqs.right}
+        leftAnswers={cmsFaqs.leftAnswers}
+        rightAnswers={cmsFaqs.rightAnswers}
+      />
 
       {/* ════════════════════════════════════════════════════════
           +45 AI TOOLS (moved after FAQ per client feedback)

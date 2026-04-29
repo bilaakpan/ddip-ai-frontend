@@ -505,6 +505,7 @@ export interface Influencer {
   persona?: string;
   gender?: string;
   title?: string;
+  age?: number;
   summary?: string;
   profile?: string;
   contentFocus?: string;
@@ -514,6 +515,7 @@ export interface Influencer {
   imageUrl?: string;
   videoUrl?: string;
   textOnImage?: string;
+  cardColor?: string;
   showOnHomepage: boolean;
   showOnAiinf: boolean;
   sortOrder: number;

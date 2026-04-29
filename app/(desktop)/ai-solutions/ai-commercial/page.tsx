@@ -104,6 +104,8 @@ export default function AICommercialPage() {
   const [openFaqRight, setOpenFaqRight] = useState<number | null>(null);
   const [cmsFaqLeft, setCmsFaqLeft] = useState<string[]>([]);
   const [cmsFaqRight, setCmsFaqRight] = useState<string[]>([]);
+  const [cmsFaqLeftAnswers, setCmsFaqLeftAnswers] = useState<string[]>([]);
+  const [cmsFaqRightAnswers, setCmsFaqRightAnswers] = useState<string[]>([]);
   const [cmsUseCaseCarousel, setCmsUseCaseCarousel] = useState<{ title: string; video: string; tags: string[] }[]>([]);
 
   const [emblaRef] = useEmblaCarousel({ loop: true, dragFree: true }, [
@@ -119,11 +121,15 @@ export default function AICommercialPage() {
         const list = res.data ?? [];
         const mid = Math.ceil(list.length / 2);
         setCmsFaqLeft(list.slice(0, mid).map((f: Faq) => f.question));
+        setCmsFaqLeftAnswers(list.slice(0, mid).map((f: Faq) => f.answer));
         setCmsFaqRight(list.slice(mid).map((f: Faq) => f.question));
+        setCmsFaqRightAnswers(list.slice(mid).map((f: Faq) => f.answer));
       })
       .catch(() => {
         setCmsFaqLeft([]);
         setCmsFaqRight([]);
+        setCmsFaqLeftAnswers([]);
+        setCmsFaqRightAnswers([]);
       });
 
     // Use Cases
@@ -525,7 +531,12 @@ export default function AICommercialPage() {
       {/* ════════════════════════════════════════════════════════
           8. FAQ — Dark rounded card
           ════════════════════════════════════════════════════════ */}
-      <FaqSection leftQuestions={cmsFaqLeft} rightQuestions={cmsFaqRight} />
+      <FaqSection
+        leftQuestions={cmsFaqLeft}
+        rightQuestions={cmsFaqRight}
+        leftAnswers={cmsFaqLeftAnswers}
+        rightAnswers={cmsFaqRightAnswers}
+      />
 
       {/* ════════════════════════════════════════════════════════
           9. CTA

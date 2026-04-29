@@ -6,6 +6,14 @@ import Link from "next/link";
 interface FaqSectionProps {
   leftQuestions: string[];
   rightQuestions: string[];
+  /**
+   * Answer bodies aligned by index with the question arrays. Optional so
+   * existing callers compile, but the public-facing pages should pass them
+   * in — when omitted, the answer panel renders an empty paragraph rather
+   * than a hardcoded placeholder.
+   */
+  leftAnswers?: string[];
+  rightAnswers?: string[];
   ctaHref?: string;
   ctaLabel?: string;
 }
@@ -13,6 +21,8 @@ interface FaqSectionProps {
 export default function FaqSection({
   leftQuestions,
   rightQuestions,
+  leftAnswers = [],
+  rightAnswers = [],
   ctaHref = "/lets-connect",
   ctaLabel = "Talk to our AI",
 }: FaqSectionProps) {
@@ -55,8 +65,8 @@ export default function FaqSection({
                 )}
                 <div className={`grid transition-all duration-300 ${openLeft === i ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}>
                   <div className="overflow-hidden">
-                    <p className="pb-6 text-[15px] leading-relaxed text-[#90B2BD]" style={{ fontFamily: "var(--font-body)" }}>
-                      Our team will provide detailed information. Contact us to learn more.
+                    <p className="pb-6 text-[15px] leading-relaxed text-[#90B2BD] whitespace-pre-line" style={{ fontFamily: "var(--font-body)" }}>
+                      {leftAnswers[i] || ""}
                     </p>
                   </div>
                 </div>
@@ -87,8 +97,8 @@ export default function FaqSection({
                 )}
                 <div className={`grid transition-all duration-300 ${openRight === i ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}>
                   <div className="overflow-hidden">
-                    <p className="pb-6 text-[16px] leading-relaxed text-[#90B2BD]" style={{ fontFamily: "var(--font-body)" }}>
-                      Our team will provide detailed information. Contact us to learn more.
+                    <p className="pb-6 text-[16px] leading-relaxed text-[#90B2BD] whitespace-pre-line" style={{ fontFamily: "var(--font-body)" }}>
+                      {rightAnswers[i] || ""}
                     </p>
                   </div>
                 </div>

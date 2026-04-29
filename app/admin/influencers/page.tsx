@@ -186,6 +186,7 @@ function InfluencerForm({
     persona: influencer?.persona ?? "",
     gender: influencer?.gender ?? "",
     title: influencer?.title ?? "",
+    age: influencer?.age as number | undefined,
     summary: influencer?.summary ?? "",
     profile: influencer?.profile ?? "",
     contentFocus: influencer?.contentFocus ?? "",
@@ -195,6 +196,7 @@ function InfluencerForm({
     imageUrl: influencer?.imageUrl ?? "",
     videoUrl: influencer?.videoUrl ?? "",
     textOnImage: influencer?.textOnImage ?? "",
+    cardColor: influencer?.cardColor ?? "",
     showOnHomepage: influencer?.showOnHomepage ?? false,
     showOnAiinf: influencer?.showOnAiinf ?? true,
   });
@@ -295,7 +297,43 @@ function InfluencerForm({
             </div>
             <div>
               <label className="mb-1 block text-sm font-medium text-white/60">Title</label>
-              <input type="text" value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} className={inputClass} />
+              <input type="text" value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} className={inputClass} placeholder="e.g., Coach, Mascot" />
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label className="mb-1 block text-sm font-medium text-white/60">Age</label>
+              <input
+                type="number"
+                value={form.age ?? ""}
+                onChange={(e) => setForm({ ...form, age: e.target.value === "" ? undefined : Number(e.target.value) })}
+                min={0}
+                max={200}
+                className={inputClass}
+                placeholder="e.g., 24"
+              />
+            </div>
+            <div>
+              <label className="mb-1 block text-sm font-medium text-white/60">
+                Card Color
+                <span className="ml-1 text-white/30">(homepage card background)</span>
+              </label>
+              <div className="flex items-center gap-2">
+                <input
+                  type="color"
+                  value={form.cardColor || "#CDDBC0"}
+                  onChange={(e) => setForm({ ...form, cardColor: e.target.value })}
+                  className="h-10 w-16 cursor-pointer rounded-lg border border-border-dark bg-dark-bg"
+                />
+                <input
+                  type="text"
+                  value={form.cardColor}
+                  onChange={(e) => setForm({ ...form, cardColor: e.target.value })}
+                  className={inputClass}
+                  placeholder="#CDDBC0 — leave blank for auto"
+                />
+              </div>
             </div>
           </div>
 
